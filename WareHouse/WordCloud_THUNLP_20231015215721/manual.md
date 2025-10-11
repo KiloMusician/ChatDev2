@@ -29,7 +29,7 @@ You can customize the appearance of the word cloud by modifying the code in the 
 - The word cloud image is saved as a PNG file.
 - You can test the program with various input texts to verify that it generates meaningful word clouds.
 
-For more information, please refer to the `readme.md` file included in the program files.
+For more information, please refer to the `NuSyQ_Root_README.md` file included in the program files.
 
 ## Support
 If you encounter any issues or have any questions, please reach out to our support team at support@chatdev.com.

@@ -4,7 +4,7 @@
 
 ### 1. Install `ChatDev`:
 
-- Visit the [quickstart section](README.md#%EF%B8%8F-quickstart) of readme for installation instructions.
+- Visit the [quickstart section](NuSyQ_Root_README.md#%EF%B8%8F-quickstart) of readme for installation instructions.
 
 ### 2. Start building software in one command:
 
@@ -374,7 +374,7 @@ Detailed descriptions and experiment results about this Experiential Co-Evolving
 ├── visualizer # Visualizer Folder
 ├── run.py # Entry of ChatDev
 ├── requirements.txt
-├── README.md
+├── NuSyQ_Root_README.md
 └── wiki.md
 ```
 
@@ -450,3 +450,4 @@ Detailed descriptions and experiment results about this Experiential Co-Evolving
     If you add and commit the software log file under the software folder, there will be no ``Changes not staged for commit:``
   - Some phase executions may not change the code, and thereby there is no commit. For example, the software is tested without problems and there is no modification, so the test phase would leave no commit.
   
+

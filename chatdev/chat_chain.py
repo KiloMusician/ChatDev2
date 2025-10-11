@@ -226,8 +226,8 @@ class ChatChain:
                     shutil.copy2(source_file, target_file)
             self.chat_env._load_from_hardware(os.path.join(software_path, 'base'))
 
-        # write task prompt to software
-        with open(os.path.join(software_path, self.project_name + ".prompt"), "w") as f:
+        # write task prompt to software with UTF-8 encoding for ΞNuSyQ symbols
+        with open(os.path.join(software_path, self.project_name + ".prompt"), "w", encoding="utf-8") as f:
             f.write(self.task_prompt_raw)
 
         preprocess_msg = "**[Preprocessing]**\n\n"

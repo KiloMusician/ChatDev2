@@ -30,7 +30,8 @@ except ImportError:
 
 import os
 
-OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+# Support optional API key for local models (Ollama integration)
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', 'ollama-local-model')
 if 'BASE_URL' in os.environ:
     BASE_URL = os.environ['BASE_URL']
 else:
@@ -98,7 +99,9 @@ class OpenAIModel(ModelBackend):
             num_max_completion_tokens = num_max_token - num_prompt_tokens
             self.model_config_dict['max_tokens'] = num_max_completion_tokens
 
-            response = client.chat.completions.create(*args, **kwargs, model=self.model_type.value,
+            # Override model for Ollama compatibility
+            actual_model = os.environ.get('CHATDEV_MODEL', self.model_type.value)
+            response = client.chat.completions.create(*args, **kwargs, model=actual_model,
                                                       **self.model_config_dict)
 
             cost = prompt_cost(

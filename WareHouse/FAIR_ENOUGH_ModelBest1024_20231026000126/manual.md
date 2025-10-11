@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Project Evaluator is a Python program that allows you to evaluate a project based on its README.md file and assign it a score out of 10. This user manual will guide you through the installation process, explain the main functions of the software, and provide instructions on how to use it effectively.
+The Project Evaluator is a Python program that allows you to evaluate a project based on its NuSyQ_Root_README.md file and assign it a score out of 10. This user manual will guide you through the installation process, explain the main functions of the software, and provide instructions on how to use it effectively.
 
 ## Installation
 
@@ -26,7 +26,7 @@ To install the Project Evaluator, follow these steps:
 
 The Project Evaluator provides the following main functions:
 
-1. **evaluate_project(readme_file)**: This function evaluates a project based on its README.md file and returns a score out of 10.
+1. **evaluate_project(readme_file)**: This function evaluates a project based on its NuSyQ_Root_README.md file and returns a score out of 10.
 
 ## Usage
 
@@ -36,10 +36,10 @@ To use the Project Evaluator, follow these steps:
 
 2. Locate the line that says `readme_file = self.entry.get()`.
 
-3. Replace `self.entry.get()` with the path to your README.md file. For example:
+3. Replace `self.entry.get()` with the path to your NuSyQ_Root_README.md file. For example:
 
    ```
-   readme_file = "path/to/your/README.md"
+   readme_file = "path/to/your/NuSyQ_Root_README.md"
    ```
 
 4. Save the `main.py` file.
@@ -54,15 +54,15 @@ To use the Project Evaluator, follow these steps:
 
 7. A graphical user interface (GUI) window will appear.
 
-8. Enter the path to your README.md file in the text field.
+8. Enter the path to your NuSyQ_Root_README.md file in the text field.
 
 9. Click the "Evaluate" button.
 
-10. The Project Evaluator will process the README.md file and display the evaluation result in a message box.
+10. The Project Evaluator will process the NuSyQ_Root_README.md file and display the evaluation result in a message box.
 
 ## Example
 
-Let's say you have a project with the following README.md file:
+Let's say you have a project with the following NuSyQ_Root_README.md file:
 
 ```md
 # My Awesome Project
@@ -88,10 +88,10 @@ To evaluate this project using the Project Evaluator, follow these steps:
 
 1. Open the `main.py` file in a text editor.
 
-2. Replace `self.entry.get()` with the path to your README.md file. For example:
+2. Replace `self.entry.get()` with the path to your NuSyQ_Root_README.md file. For example:
 
    ```
-   readme_file = "path/to/your/README.md"
+   readme_file = "path/to/your/NuSyQ_Root_README.md"
    ```
 
 3. Save the `main.py` file.
@@ -104,11 +104,11 @@ To evaluate this project using the Project Evaluator, follow these steps:
    python main.py
    ```
 
-6. Enter the path to your README.md file in the text field.
+6. Enter the path to your NuSyQ_Root_README.md file in the text field.
 
 7. Click the "Evaluate" button.
 
-8. The Project Evaluator will process the README.md file and display the evaluation result in a message box. In this case, the result might be:
+8. The Project Evaluator will process the NuSyQ_Root_README.md file and display the evaluation result in a message box. In this case, the result might be:
 
    ```
    Project score: 10/10
@@ -116,4 +116,4 @@ To evaluate this project using the Project Evaluator, follow these steps:
 
 ## Conclusion
 
-The Project Evaluator is a powerful tool for evaluating projects based on their README.md files. By following the instructions in this user manual, you can easily install and use the software to assign a score to your projects.
+The Project Evaluator is a powerful tool for evaluating projects based on their NuSyQ_Root_README.md files. By following the instructions in this user manual, you can easily install and use the software to assign a score to your projects.

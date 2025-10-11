@@ -7,7 +7,7 @@
     【English   | <a href="readme/README-Chinese.md">Chinese</a> | <a href="readme/README-Japanese.md">Japanese</a> | <a href="readme/README-Korean.md">Korean</a> | <a href="readme/README-Filipino.md">Filipino</a> | <a href="readme/README-French.md">French</a> | <a href="readme/README-Slovak.md">Slovak</a> | <a href="readme/README-Portuguese.md">Portuguese</a> | <a href="readme/README-Spanish.md">Spanish</a> | <a href="readme/README-Dutch.md">Dutch</a> | <a href="readme/README-Turkish.md">Turkish</a> | <a href="readme/README-Hindi.md">Hindi</a> | <a href="readme/README-Bahasa-Indonesia.md">Bahasa Indonesia</a> | <a href="readme/README-Russian.md">Russian</a> | <a href="readme/README-Urdu.md">Urdu</a>】
 </p>
 <p align="center">
-    【<a href="../README.md">Inggris</a> | Bahasa Indonesia  | <a href="readme/README-Chinese.md">Cina</a> | <a href="readme/README-Japanese.md">Jepang</a> | <a href="readme/README-Korean.md">Korea</a> | <a href="readme/README-Filipino.md">Filipina</a> | <a href="readme/README-Prancis.md">Prancis</a> | <a href="readme/README-Slovak.md">Slovakia</a> | <a href="readme/README-Portugis.md">Portugis</a> | <a href="readme/README-Spanyol.md">Spanyol</a> | <a href="readme/README-Belanda.md">Belanda</a> | <a href="readme/README-Hindi.md">Hindi</a>】
+    【<a href="../NuSyQ_Root_README.md">Inggris</a> | Bahasa Indonesia  | <a href="readme/README-Chinese.md">Cina</a> | <a href="readme/README-Japanese.md">Jepang</a> | <a href="readme/README-Korean.md">Korea</a> | <a href="readme/README-Filipino.md">Filipina</a> | <a href="readme/README-Prancis.md">Prancis</a> | <a href="readme/README-Slovak.md">Slovakia</a> | <a href="readme/README-Portugis.md">Portugis</a> | <a href="readme/README-Spanyol.md">Spanyol</a> | <a href="readme/README-Belanda.md">Belanda</a> | <a href="readme/README-Hindi.md">Hindi</a>】
 </p>
 <p align="center">
     【📚 <a href="wiki.md">Wiki</a> | 🚀 <a href="wiki.md#demo-lokal">Demo Lokal</a> | 👥 <a href="Contribution.md">Perangkat Lunak Dibangun oleh Komunitas</a> | 🔧 <a href="wiki.md#penyesuaian">Penyesuaian</a>】
@@ -212,3 +212,4 @@ Dibuat dengan [contrib.rocks](https://contrib.rocks).
 ## 📬 Kontak
 
 Jika Anda memiliki pertanyaan, umpan balik, atau ingin menghubungi kami, jangan ragu untuk menghubungi kami melalui email di [qianc62@gmail.com](mailto:qianc62@gmail.com)
+

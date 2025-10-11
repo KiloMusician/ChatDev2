@@ -1,12 +1,12 @@
 # FAIR_ENOUGH
 
-FAIR_ENOUGH is a Python program designed to evaluate a project based on its README.md file and assign a score out of 10 points. This program aims to promote the importance of comprehensive and clear project documentation, helping developers and contributors understand the project easily.
+FAIR_ENOUGH is a Python program designed to evaluate a project based on its NuSyQ_Root_README.md file and assign a score out of 10 points. This program aims to promote the importance of comprehensive and clear project documentation, helping developers and contributors understand the project easily.
 
 ## Features
 
-- **Readability**: Evaluates the readability of the README.md file.
+- **Readability**: Evaluates the readability of the NuSyQ_Root_README.md file.
 - **Completeness**: Checks if all the essential sections are present.
-- **Clarity**: Assesses the clarity of the information provided in the README.md file.
+- **Clarity**: Assesses the clarity of the information provided in the NuSyQ_Root_README.md file.
 - **Formatting**: Evaluates the formatting and organization of the content.
 - **Relevance**: Checks if the content is relevant to the project.
 
@@ -35,9 +35,9 @@ After installation, you can run FAIR_ENOUGH by following these steps:
    ```
    python fair_enough.py <path-to-readme-file>
    ```
-   Replace `<path-to-readme-file>` with the path to the README.md file you want to evaluate.
+   Replace `<path-to-readme-file>` with the path to the NuSyQ_Root_README.md file you want to evaluate.
    
-2. The program will output the score of the README.md file along with a report on each evaluation criteria.
+2. The program will output the score of the NuSyQ_Root_README.md file along with a report on each evaluation criteria.
 
 ## Contributing
 
@@ -52,3 +52,4 @@ Contributions are welcome! If you would like to contribute, please follow these 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
