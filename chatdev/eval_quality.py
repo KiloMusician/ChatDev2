@@ -81,7 +81,7 @@ def get_executability(directory):
                     error_pattern = r'\w+Error:'
                     error_matches = re.findall(error_pattern, error_output)
                     error_type = error_matches[0].replace(":", "")
-                except:
+                except (IndexError, AttributeError, ValueError):
                     pass
                 if error_output:
                     if "Traceback".lower() in error_output.lower():
@@ -154,7 +154,7 @@ def get_consistency(directory):
     if len(files) == 0:
         print()
     filepath = files[0]
-    task = open(filepath).read().strip()
+    task = open(filepath, encoding='utf-8').read().strip()
     codes = get_code(directory)
     codes = remove_comments(codes)
 

@@ -155,7 +155,7 @@ class RoleNameGenerator:
                  user_role_names: Optional[List[str]] = None) -> None:
 
         if assistant_role_names is None:
-            with open(assistant_role_names_path, "r") as f:
+            with open(assistant_role_names_path,"r", encoding='utf-8') as f:
                 assistant_role_names_: List[str] = f.read().splitlines()
                 self.assistant_role_names = [
                     " ".join(name.split(" ")[1:])
@@ -165,7 +165,7 @@ class RoleNameGenerator:
             self.assistant_role_names = assistant_role_names
 
         if user_role_names is None:
-            with open(user_role_names_path, "r") as f:
+            with open(user_role_names_path,"r", encoding='utf-8') as f:
                 user_role_names_: List[str] = f.read().splitlines()
                 self.user_role_names = [
                     " ".join(name.split(" ")[1:]) for name in user_role_names_
@@ -223,7 +223,7 @@ class SingleTxtGenerator:
         text_file_path: str,
     ) -> None:
 
-        with open(text_file_path, "r") as f:
+        with open(text_file_path,"r", encoding='utf-8') as f:
             data_list: List[str] = f.read().splitlines()
             self.data_list = [
                 " ".join(name.split(" ")[1:]) for name in data_list

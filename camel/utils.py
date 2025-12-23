@@ -225,7 +225,7 @@ def download_tasks(task: TaskType, folder_path: str) -> None:
                             f"metadata/resolve/main/{task.value}_tasks.zip")
 
     # Save the zip file
-    with open(zip_file_path, "wb") as f:
+    with open(zip_file_path,"wb", encoding='utf-8') as f:
         f.write(response.content)
 
     with zipfile.ZipFile(zip_file_path, "r") as zip_ref:

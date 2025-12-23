@@ -83,7 +83,7 @@ def modal_trans(task_dsp):
         logit_bias={})
         result = response.choices[0].message.content
         print("web spider content:", result)
-    except:
+    except (OSError, ValueError, KeyError, AttributeError) as e:
         result = ''
-        print("the content is none")
+        print(f"the content is none: {e}")
     return result

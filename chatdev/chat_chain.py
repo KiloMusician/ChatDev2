@@ -318,9 +318,13 @@ class ChatChain:
         logging.shutdown()
         time.sleep(1)
 
-        shutil.move(self.log_filepath,
-                    os.path.join(root + "/WareHouse", "_".join([self.project_name, self.org_name, self.start_time]),
-                                 os.path.basename(self.log_filepath)))
+        # Move log file only if it exists (Ollama mode may skip log creation)
+        if os.path.exists(self.log_filepath):
+            shutil.move(self.log_filepath,
+                        os.path.join(root + "/WareHouse", "_".join([self.project_name, self.org_name, self.start_time]),
+                                     os.path.basename(self.log_filepath)))
+        else:
+            print(f"⚠️  Log file not found (Ollama mode): {os.path.basename(self.log_filepath)}")
 
     # @staticmethod
     def self_task_improve(self, task_prompt):

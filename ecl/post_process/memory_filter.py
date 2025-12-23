@@ -10,7 +10,7 @@ def filter_valuegain(directory, filtered_directory):
     directory -- the input directory of MemoryCards, like "./ecl/memory/MemoryCards.json"
     filtered_directory -- the output directory of filtered MemoryCards, like "./ecl/memory/MemoryCards.json"
     """
-    with open(directory) as file:
+    with open(directory, encoding='utf-8') as file:
         content = json.load(file)
         new_content = []
         for memorypiece in content:
@@ -30,7 +30,7 @@ def filter_valuegain(directory, filtered_directory):
             else:
                 new_content.append(memorypiece)
         file.close()
-    with open(filtered_directory, 'w') as file:
+    with open(filtered_directory,'w', encoding='utf-8') as file:
         json.dump(content, file)
         file.close()
 

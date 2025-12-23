@@ -23,7 +23,7 @@ class Application(tk.Tk):
     def upload_image(self):
         file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png *.jpg *.jpeg")])
         if file_path:
-            self.image = Image.open(file_path)
+            self.image = Image.open(file_path, encoding='utf-8')
             self.processed_image = self.image.copy()
             self.display_image(self.image)
     def remove_background(self):

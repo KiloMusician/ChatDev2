@@ -1,0 +1,33 @@
+Task:
+Implement House of Leaves debugging labyrinth system with 4 core modules: 1) maze_navigator.py - parse error logs to navigable maze with A* pathfinding and XP rewards, 2) minotaur_tracker.py - bug hunting with boss battles for complex issues, 3) environment_scanner.py - repo scanning with complexity metrics, 4) debugging_labyrinth.py - main orchestrator with quest generation from failed tests. Include OmniTag documentation, type hints, async/await patterns
+
+Config:
+ChatEnvConfig.with_memory: False
+ChatEnvConfig.clear_structure: True
+ChatEnvConfig.git_management: False
+ChatEnvConfig.gui_design: True
+ChatEnvConfig.incremental_develop: False
+ChatEnvConfig.background_prompt: NuSyQ ChatDev is a software company powered by multiple intelligent agents running on local Ollama models, with a multi-agent organizational structure focused on privacy-preserving AI-powered development using ΞNuSyQ symbolic framework.
+
+
+Roster:
+Chief Executive Officer, Counselor, Chief Human Resource Officer, Chief Product Officer, Chief Technology Officer, Programmer, Code Reviewer, Software Test Engineer, Chief Creative Officer
+
+Modality:
+[desktop application]
+
+Ideas:
+
+
+Language:
+ [Python]
+
+Code_Version:
+6.0
+
+Proposed_images:
+0
+
+Incorporated_images:
+0
+

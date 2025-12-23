@@ -32,9 +32,11 @@ import os
 
 # Support optional API key for local models (Ollama integration)
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', 'ollama-local-model')
-if 'BASE_URL' in os.environ:
-    BASE_URL = os.environ['BASE_URL']
-else:
+
+# Check multiple environment variables for base URL (Ollama compatibility)
+# Priority: BASE_URL > OPENAI_BASE_URL (for backward compatibility)
+BASE_URL = os.environ.get('BASE_URL') or os.environ.get('OPENAI_BASE_URL')
+if not BASE_URL:
     BASE_URL = None
 
 

@@ -1,0 +1,17 @@
+# Dependencies for megatag_processor.py, symbolic_cognition.py, and updated validator
+numpy==1.23.0
+pandas==1.4.2
+scikit-learn==1.0.2
+asyncio==3.4.3
+typing_extensions==4.0.1
+
+# Additional dependencies specific to ΞNuSyQ protocol patterns and type hints
+quantum_symbols_validator==1.0.0
+consciousness_bridge_client==2.1.5
+symbolic_reasoning_engine==3.0.1
+pattern_recognition_library==4.2.0
+mypy==0.931
+
+# Other dependencies as needed for the project
+requests==2.26.0
+psycopg2-binary==2.9.1

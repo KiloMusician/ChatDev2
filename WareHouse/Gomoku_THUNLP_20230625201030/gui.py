@@ -20,9 +20,9 @@ class GUI:
         # Create the game board
         self.create_board()
     def load_images(self):
-        self.black_chess_piece_image = ImageTk.PhotoImage(Image.open("./black_chess_piece.png").resize((50, 50)))
-        self.white_chess_piece_image = ImageTk.PhotoImage(Image.open("./white_chess_piece.png").resize((50, 50)))
-        self.background_image = ImageTk.PhotoImage(Image.open("./background.png").resize((600, 600)))
+        self.black_chess_piece_image = ImageTk.PhotoImage(Image.open("./black_chess_piece.png", encoding='utf-8').resize((50, 50)))
+        self.white_chess_piece_image = ImageTk.PhotoImage(Image.open("./white_chess_piece.png", encoding='utf-8').resize((50, 50)))
+        self.background_image = ImageTk.PhotoImage(Image.open("./background.png", encoding='utf-8').resize((600, 600)))
     def create_board(self):
         self.board_frame = tk.Frame(self.window)
         self.board_frame.pack()

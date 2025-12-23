@@ -37,13 +37,13 @@ class NotebookApp:
     def open_file(self):
         file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
         if file_path:
-            with open(file_path, 'r') as file:
+            with open(file_path,'r', encoding='utf-8') as file:
                 self.text_area.delete('1.0', 'end')
                 self.text_area.insert('1.0', file.read())
     def save_file(self):
         file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Files", "*.txt")])
         if file_path:
-            with open(file_path, 'w') as file:
+            with open(file_path,'w', encoding='utf-8') as file:
                 file.write(self.text_area.get('1.0', 'end-1c'))
     def exit_app(self):
         if messagebox.askokcancel("Exit", "Are you sure you want to exit?"):

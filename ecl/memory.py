@@ -31,10 +31,10 @@ class MemoryBase(ABC):
 
         self.content = None
         if os.path.exists(self.directory) and self.directory.endswith('.json'):
-            with open(self.directory) as file:
+            with open(self.directory, encoding='utf-8') as file:
                 self.content = json.load(file)
         elif os.path.exists(self.directory) is False:
-            with open(self.directory, 'w') as file:
+            with open(self.directory,'w', encoding='utf-8') as file:
                 json.dump({}, file)  # Create an empty JSON file
             file.close()
             print(f"Now the memory file '{self.directory}' is created")
@@ -70,7 +70,7 @@ class AllMemory(MemoryBase):
     # clear all memory
     def _memory_clear(self) ->None:
         if os.path.exists(self.directory) and self.directory.endswith('.json'):
-            with open(self.directory) as file:
+            with open(self.directory, encoding='utf-8') as file:
                 json.dump({},file)
                 file.close()
         self.content = None
@@ -345,7 +345,7 @@ class Memory:
     # upload experience into memory 
     def upload_from_experience(self, experience):
         self._set_embedding(experience)
-        with open(self.memory_data["All"].directory, 'w') as file:
+        with open(self.memory_data["All"].directory,'w', encoding='utf-8') as file:
             node_data,edge_data = experience.graph.to_dict()
             experience_data = experience.to_dict()
 
@@ -398,7 +398,7 @@ class Memory:
 
     # delete memory from index 
     def delete_memroy(self,idx:int):
-        with open(self.memory_data["All"].directory, 'w') as file:
+        with open(self.memory_data["All"].directory,'w', encoding='utf-8') as file:
             merged_dic = []
             index = 0
             previous_memory = []

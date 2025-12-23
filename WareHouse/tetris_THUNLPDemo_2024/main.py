@@ -188,14 +188,14 @@ class Tetris:
     def _load_high_score(self) -> int:
         try:
             if os.path.exists('highscore.txt'):
-                with open('highscore.txt', 'r') as f:
+                with open('highscore.txt', 'r', encoding='utf-8') as f:
                     return int(f.read())
-        except:
+        except (OSError, IOError, ValueError):
             pass
         return 0
 
     def _save_high_score(self):
-        with open('highscore.txt', 'w') as f:
+        with open('highscore.txt','w', encoding='utf-8') as f:
             f.write(str(self.high_score))
 
     def _get_random_piece(self) -> str:

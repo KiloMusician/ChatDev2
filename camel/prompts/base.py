@@ -197,7 +197,7 @@ class CodePrompt(TextPrompt):
             # If there was no error, return the output and local variables
             return output_str.read(), local_vars
 
-        except Exception:
+        except (RuntimeError, SyntaxError, ValueError, NameError, TypeError, AttributeError):
             import traceback
             traceback_str = traceback.format_exc()
             sys.stdout = sys.__stdout__

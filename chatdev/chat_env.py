@@ -76,7 +76,7 @@ class ChatEnv:
         if "ModuleNotFoundError" in test_reports:
             for match in re.finditer(r"No module named '(\S+)'", test_reports, re.DOTALL):
                 module = match.group(1)
-                subprocess.Popen("pip install {}".format(module), shell=True).wait()
+                subprocess.Popen("pip install {}".format(module, encoding='utf-8'), shell=True).wait()
                 log_visualize("**[CMD Execute]**\n\n[CMD] pip install {}".format(module))
 
     def set_directory(self, directory):
@@ -218,7 +218,7 @@ class ChatEnv:
             filepath = os.path.join(self.env_dict['directory'], file_name)
             if os.path.exists(filepath):
                 os.remove(filepath)
-            with open(filepath, "wb") as f:
+            with open(filepath,"wb", encoding='utf-8') as f:
                 f.write(r.content)
                 print("{} Downloaded".format(filepath))
 
@@ -261,7 +261,7 @@ class ChatEnv:
             filepath = os.path.join(self.env_dict['directory'], file_name)
             if os.path.exists(filepath):
                 os.remove(filepath)
-            with open(filepath, "wb") as f:
+            with open(filepath,"wb", encoding='utf-8') as f:
                 f.write(r.content)
                 print("{} Downloaded".format(filepath))
 

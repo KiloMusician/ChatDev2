@@ -11,5 +11,5 @@ class MarkdownMaker:
         md_article = md.convert(self.article)
         md_image = f"![Image]({self.image_url})"
         md_article = md_article.replace("\n", "\n\n" + md_image + "\n\n", 1)
-        with open('output.md', 'w') as file:
+        with open('output.md','w', encoding='utf-8') as file:
             file.write(md_article)

@@ -102,6 +102,11 @@ def get_info(dir, log_filepath):
                 code_lines += len([line for line in lines if len(line.strip()) > 0])
         # print("code_lines:", code_lines)
 
+        # Check if log file exists before attempting to read it
+        if not os.path.exists(log_filepath):
+            # Return minimal stats if log file doesn't exist yet
+            return f"\n📊 **Generated Code Statistics**:\n- Code Lines: {code_lines}\n- Files: {len([f for f in filenames if f.endswith('.py')])}\n\n⚠️ Log file not yet available for detailed statistics.\n"
+        
         lines = open(log_filepath, "r", encoding="utf8").read().split("\n")
         sublines = [line for line in lines if "| **model_type** |" in line]
         if len(sublines) > 0:
@@ -121,13 +126,13 @@ def get_info(dir, log_filepath):
                 model_type = "gpt-4o-mini"
             # print("model_type:", model_type)
 
-        lines = open(log_filepath, "r", encoding="utf8").read().split("\n")
+        # Re-use already loaded lines instead of re-reading file
         start_lines = [line for line in lines if "**[Start Chat]**" in line]
         chat_lines = [line for line in lines if "<->" in line]
         num_utterance = len(start_lines) + len(chat_lines)
         # print("num_utterance:", num_utterance)
 
-        lines = open(log_filepath, "r", encoding="utf8").read().split("\n")
+        # Re-use already loaded lines instead of re-reading file (3rd time!)
         sublines = [line for line in lines if line.startswith("prompt_tokens:")]
         if len(sublines) > 0:
             nums = [int(line.split(": ")[-1]) for line in sublines]
@@ -148,9 +153,7 @@ def get_info(dir, log_filepath):
             num_total_tokens = np.sum(nums)
             # print("num_total_tokens:", num_total_tokens)
 
-        lines = open(log_filepath, "r", encoding="utf8").read().split("\n")
-
-        lines = open(log_filepath, "r", encoding="utf8").read().split("\n")
+        # Re-use already loaded lines instead of re-reading file (4th and 5th time!)
         num_reflection = 0
         for line in lines:
             if "on : Reflection" in line:

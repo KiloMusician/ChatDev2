@@ -15,7 +15,7 @@ class ProjectEvaluator:
         score = self.calculate_score(project_name, project_description)
         return score
     def read_file(self, file_path):
-        with open(file_path, "r") as file:
+        with open(file_path,"r", encoding='utf-8') as file:
             content = file.read()
         return content
     def extract_project_name(self, readme_content):

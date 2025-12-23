@@ -36,7 +36,7 @@ def retrieve_eliminate(Path_directory,UsedMemory_directory,Evolved_directory):
             type = experiences_type[i]
             experiences_use.append((sourceMID,targetMID,type))
 
-    with open(UsedMemory_directory) as file:
+    with open(UsedMemory_directory, encoding='utf-8') as file:
         content1 = json.load(file)
         new_content = []
         for memorypiece in content1:
@@ -80,14 +80,14 @@ def retrieve_eliminate(Path_directory,UsedMemory_directory,Evolved_directory):
         memorypiece["experiences"] = retrieve_eliminated_experienceList
         new_content.append(memorypiece)
 
-    with open(Evolved_directory, 'w') as file:
+    with open(Evolved_directory,'w', encoding='utf-8') as file:
         json.dump(new_content, file)
 
 
 # Quality score gain Elimination
 def gain_eliminate(NewMemory_directory,Evolved_directory):
     content2 = []
-    with open(NewMemory_directory) as file:
+    with open(NewMemory_directory, encoding='utf-8') as file:
         content2 = json.load(file)
         new_content2 = []
         for memorypiece in content2:
@@ -108,21 +108,21 @@ def gain_eliminate(NewMemory_directory,Evolved_directory):
                 new_content2.append(memorypiece)
         file.close()
 
-    with open(Evolved_directory, 'r') as file:
+    with open(Evolved_directory,'r', encoding='utf-8') as file:
         new_content = json.load(file)
 
     new_content = new_content + new_content2
 
-    with open(Evolved_directory, 'w') as file:
+    with open(Evolved_directory,'w', encoding='utf-8') as file:
         json.dump(new_content, file)
 
 
 
 def recount_experience(Evolved_directory):
-    with open(Evolved_directory, 'r') as file:
+    with open(Evolved_directory,'r', encoding='utf-8') as file:
         content = json.load(file)
 
-    with open(Evolved_directory, 'w') as file:
+    with open(Evolved_directory,'w', encoding='utf-8') as file:
         i = 0
         for memorypiece in content:
             memorypiece["total"] = i

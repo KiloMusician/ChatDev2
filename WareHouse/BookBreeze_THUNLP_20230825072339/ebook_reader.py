@@ -47,7 +47,7 @@ class EbookReader:
             self.book_display.delete(1.0, tk.END)
             self.book_display.insert(tk.END, f"Opening book: {filepath}")
             if filepath.endswith(".pdf"):
-                pdf_file = open(filepath, "rb")
+                pdf_file = open(filepath,"rb", encoding='utf-8')
                 pdf_reader = PyPDF2.PdfReader(pdf_file)
                 num_pages = len(pdf_reader.pages)
                 for page_num in range(num_pages):
@@ -60,7 +60,7 @@ class EbookReader:
                     if item.get_type() == ebooklib.ITEM_DOCUMENT:
                         self.book_display.insert(tk.END, item.get_content())
             elif filepath.endswith(".mobi"):
-                mobi_book = mobi.open(filepath)
+                mobi_book = mobi.open(filepath, encoding='utf-8')
                 for i in range(mobi_book.num_pages):
                     self.book_display.insert(tk.END, mobi_book.read_page(i))
         else:

@@ -1,0 +1,174 @@
+{
+  "DemandAnalysis": {
+    "assistant_role_name": "Chief Product Officer",
+    "user_role_name": "Chief Executive Officer", 
+    "phase_prompt": [
+      "NuSyQ specializes in creating AI-enhanced software solutions using local models and modern development practices:",
+      "Web Applications: Interactive websites and web apps using HTML, CSS, JavaScript, and Python backends",
+      "Desktop Applications: Cross-platform apps using Python, Electron, or native frameworks",
+      "AI Tools: Integration with local Ollama models for intelligent features",
+      "Data Applications: Analytics, visualization, and processing tools",
+      "Development Tools: Utilities to enhance developer productivity",
+      "APIs and Services: Backend services and microservices",
+      "As the {assistant_role}, to satisfy the user's demand with our NuSyQ capabilities, discuss which product modality best fits the requirements.",
+      "Consider our local AI integration capabilities and focus on practical, deployable solutions.",
+      "Once we agree on the product modality, terminate with: \"<INFO> [Product Type]\""
+    ]
+  },
+  "LanguageChoose": {
+    "assistant_role_name": "Chief Technology Officer", 
+    "user_role_name": "Chief Executive Officer",
+    "phase_prompt": [
+      "Based on the user's task and our NuSyQ development approach:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".", 
+      "Ideas: \"{ideas}\".",
+      "We will implement this using our local AI-enhanced development stack.",
+      "As the {assistant_role}, choose the most appropriate programming language considering:",
+      "- Python (preferred for AI integration, rapid development, Ollama compatibility)",
+      "- JavaScript/TypeScript (for web applications and modern frontends)",
+      "- Other languages only if specifically required for performance or platform needs",
+      "Recommend the language that best fits our local AI ecosystem and development efficiency.",
+      "Conclude with: \"<INFO> [Programming Language]\""
+    ]
+  },
+  "Coding": {
+    "assistant_role_name": "Programmer",
+    "user_role_name": "Chief Technology Officer",
+    "phase_prompt": [
+      "According to the task, modality, ideas, and language:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".",
+      "Programming Language: \"{language}\"",
+      "Ideas: \"{ideas}\"",
+      "As the {assistant_role}, implement the complete solution following NuSyQ best practices:",
+      "1. Write clean, well-documented code",
+      "2. Include error handling and validation", 
+      "3. Structure code for maintainability",
+      "4. Add comments explaining key logic",
+      "5. Consider integration with our local AI tools where beneficial",
+      "Provide the complete implementation with all necessary files."
+    ]
+  },
+  "CodeComplete": {
+    "assistant_role_name": "Programmer",
+    "user_role_name": "Chief Technology Officer", 
+    "phase_prompt": [
+      "According to the task and current implementation:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".",
+      "Programming Language: \"{language}\"",
+      "As the {assistant_role}, review the current code and ensure completeness:",
+      "1. Verify all features are implemented",
+      "2. Check for missing imports or dependencies", 
+      "3. Ensure proper error handling",
+      "4. Validate code structure and organization",
+      "5. Add any missing functionality",
+      "Provide any additional code needed to complete the implementation."
+    ]
+  },
+  "CodeReviewComment": {
+    "assistant_role_name": "Code Reviewer",
+    "user_role_name": "Programmer",
+    "phase_prompt": [
+      "According to the task and current implementation:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".",
+      "Programming Language: \"{language}\"",
+      "As the {assistant_role}, conduct a thorough code review focusing on:",
+      "1. Code quality and best practices",
+      "2. Security considerations",
+      "3. Performance optimization opportunities", 
+      "4. Maintainability and readability",
+      "5. Compliance with NuSyQ development standards",
+      "Provide specific, actionable feedback for improvements."
+    ]
+  },
+  "CodeReviewModification": {
+    "assistant_role_name": "Programmer", 
+    "user_role_name": "Code Reviewer",
+    "phase_prompt": [
+      "According to the code review feedback:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".",
+      "Programming Language: \"{language}\"",
+      "Review Comments: \"{comments}\"",
+      "As the {assistant_role}, implement the suggested improvements:",
+      "1. Address all critical issues identified",
+      "2. Apply suggested optimizations",
+      "3. Improve code organization if needed",
+      "4. Enhance documentation and comments",
+      "5. Ensure all changes maintain functionality",
+      "Provide the updated, improved code implementation."
+    ]
+  },
+  "TestErrorSummary": {
+    "assistant_role_name": "Software Test Engineer",
+    "user_role_name": "Programmer", 
+    "phase_prompt": [
+      "According to the task and current implementation:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".",
+      "Programming Language: \"{language}\"",
+      "As the {assistant_role}, analyze the code for potential issues:",
+      "1. Identify possible runtime errors",
+      "2. Check for edge cases and boundary conditions", 
+      "3. Validate input handling and error scenarios",
+      "4. Review integration points and dependencies",
+      "5. Assess overall reliability and robustness",
+      "Provide a summary of any issues found and testing recommendations."
+    ]
+  },
+  "TestModification": {
+    "assistant_role_name": "Programmer",
+    "user_role_name": "Software Test Engineer",
+    "phase_prompt": [
+      "According to the test analysis and identified issues:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".", 
+      "Programming Language: \"{language}\"",
+      "Test Issues: \"{test_reports}\"",
+      "As the {assistant_role}, fix the identified issues:",
+      "1. Address all reported bugs and errors",
+      "2. Improve error handling for edge cases",
+      "3. Add input validation where needed",
+      "4. Enhance robustness and reliability", 
+      "5. Ensure the fixes don't introduce new issues",
+      "Provide the corrected, tested code implementation."
+    ]
+  },
+  "EnvironmentDoc": {
+    "assistant_role_name": "Programmer",
+    "user_role_name": "Chief Technology Officer",
+    "phase_prompt": [
+      "According to the completed implementation:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".",
+      "Programming Language: \"{language}\"",
+      "As the {assistant_role}, create comprehensive setup documentation:",
+      "1. List all dependencies and requirements",
+      "2. Provide clear installation instructions",
+      "3. Include any environment setup needed",
+      "4. Document configuration requirements",
+      "5. Add troubleshooting guidance for common issues",
+      "Format as a requirements.txt file and setup guide appropriate for the NuSyQ environment."
+    ]
+  },
+  "Manual": {
+    "assistant_role_name": "Chief Product Officer",
+    "user_role_name": "Chief Executive Officer",
+    "phase_prompt": [
+      "According to the completed software:",
+      "Task: \"{task}\".",
+      "Modality: \"{modality}\".",
+      "Programming Language: \"{language}\"",
+      "As the {assistant_role}, create user documentation:",
+      "1. Write clear usage instructions",
+      "2. Provide examples of key features",
+      "3. Include any setup or configuration steps",
+      "4. Document important limitations or considerations",
+      "5. Add contact information for support",
+      "Format as a user manual that enables successful adoption of the software."
+    ]
+  }
+}

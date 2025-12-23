@@ -1,0 +1,33 @@
+Task:
+Implement activate() and send_query() methods in copilot extensions: 1) async def activate() with proper initialization and API client setup, 2) async def send_query(query: str) with GitHub Copilot API integration, 3) Error handling for offline scenarios and network failures, 4) Response validation and parsing with type hints, 5) Add logging and metrics tracking for debugging, 6) Include retry logic with exponential backoff, 7) Add docstrings with usage examples. Target: Copilot extension stub methods for NuSyQ-Hub src/copilot/ integration.
+
+Config:
+ChatEnvConfig.with_memory: False
+ChatEnvConfig.clear_structure: True
+ChatEnvConfig.git_management: False
+ChatEnvConfig.gui_design: True
+ChatEnvConfig.incremental_develop: False
+ChatEnvConfig.background_prompt: NuSyQ ChatDev is a software company powered by multiple intelligent agents running on local Ollama models, with a multi-agent organizational structure focused on privacy-preserving AI-powered development using ΞNuSyQ symbolic framework.
+
+
+Roster:
+Chief Executive Officer, Counselor, Chief Human Resource Officer, Chief Product Officer, Chief Technology Officer, Programmer, Code Reviewer, Software Test Engineer, Chief Creative Officer
+
+Modality:
+[ai tools]
+
+Ideas:
+
+
+Language:
+ [Python]
+
+Code_Version:
+5.0
+
+Proposed_images:
+0
+
+Incorporated_images:
+0
+

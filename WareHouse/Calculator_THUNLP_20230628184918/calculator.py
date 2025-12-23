@@ -20,7 +20,7 @@ class Calculator:
         row = 1
         col = 0
         for button_text, image_file in buttons:
-            image = Image.open(image_file).resize((50, 50))
+            image = Image.open(image_file, encoding='utf-8').resize((50, 50))
             photo = ImageTk.PhotoImage(image)
             button = tk.Button(self.root, image=photo, command=lambda button_text=button_text: self.button_click(button_text))
             button.image = photo
@@ -36,7 +36,7 @@ class Calculator:
                 result = eval(current_value)
                 self.entry.delete(0, tk.END)
                 self.entry.insert(tk.END, str(result))
-            except:
+            except (SyntaxError, NameError, ZeroDivisionError, ValueError):
                 self.entry.delete(0, tk.END)
                 self.entry.insert(tk.END, "Error")
         else:

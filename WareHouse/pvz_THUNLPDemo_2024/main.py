@@ -79,17 +79,17 @@ class Game:
             self.font = pygame.font.Font("/System/Library/Fonts/PingFang.ttc", 36)
             self.large_font = pygame.font.Font("/System/Library/Fonts/PingFang.ttc", 74)
             self.small_font = pygame.font.Font("/System/Library/Fonts/PingFang.ttc", 24)
-        except:
+        except (OSError, IOError, FileNotFoundError):
             try:
                 self.font = pygame.font.Font("/System/Library/Fonts/STHeiti Light.ttc", 36)
                 self.large_font = pygame.font.Font("/System/Library/Fonts/STHeiti Light.ttc", 74)
                 self.small_font = pygame.font.Font("/System/Library/Fonts/STHeiti Light.ttc", 24)
-            except:
+            except (OSError, IOError, FileNotFoundError):
                 try:
                     self.font = pygame.font.Font("/System/Library/Fonts/Arial Unicode.ttf", 36)
                     self.large_font = pygame.font.Font("/System/Library/Fonts/Arial Unicode.ttf", 74)
                     self.small_font = pygame.font.Font("/System/Library/Fonts/Arial Unicode.ttf", 24)
-                except:
+                except (OSError, IOError, FileNotFoundError):
                     print("Warning: Could not load Chinese font, falling back to default font")
                     self.font = pygame.font.Font(None, 36)
                     self.large_font = pygame.font.Font(None, 74)
@@ -101,7 +101,7 @@ class Game:
             pygame.mixer.music.load("assets/music/bgm.mp3")
             pygame.mixer.music.set_volume(0.5)  # Set volume to 50%
             pygame.mixer.music.play(-1)  # -1 means loop indefinitely
-        except:
+        except (OSError, IOError, FileNotFoundError):
             print("Warning: Could not load background music")
 
     def reset_game(self):
@@ -179,17 +179,17 @@ class Game:
             self.font = pygame.font.Font("/System/Library/Fonts/PingFang.ttc", int(36 * scale))
             self.large_font = pygame.font.Font("/System/Library/Fonts/PingFang.ttc", int(74 * scale))
             self.small_font = pygame.font.Font("/System/Library/Fonts/PingFang.ttc", int(24 * scale))
-        except:
+        except (OSError, IOError, FileNotFoundError):
             try:
                 self.font = pygame.font.Font("/System/Library/Fonts/STHeiti Light.ttc", int(36 * scale))
                 self.large_font = pygame.font.Font("/System/Library/Fonts/STHeiti Light.ttc", int(74 * scale))
                 self.small_font = pygame.font.Font("/System/Library/Fonts/STHeiti Light.ttc", int(24 * scale))
-            except:
+            except (OSError, IOError, FileNotFoundError):
                 try:
                     self.font = pygame.font.Font("/System/Library/Fonts/Arial Unicode.ttf", int(36 * scale))
                     self.large_font = pygame.font.Font("/System/Library/Fonts/Arial Unicode.ttf", int(74 * scale))
                     self.small_font = pygame.font.Font("/System/Library/Fonts/Arial Unicode.ttf", int(24 * scale))
-                except:
+                except (OSError, IOError, FileNotFoundError):
                     self.font = pygame.font.Font(None, int(36 * scale))
                     self.large_font = pygame.font.Font(None, int(74 * scale))
                     self.small_font = pygame.font.Font(None, int(24 * scale))

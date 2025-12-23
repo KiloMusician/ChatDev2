@@ -19,7 +19,7 @@ def process_file(filename):
                 line = line.rstrip() + "  # " + generate_praise(line) + "\n"
         new_lines.append(line)
     try:
-        with open("praised_" + filename.split('/')[-1], "w", encoding="utf8") as file:
+        with open("praised_" + filename.split('/', encoding='utf-8')[-1], "w", encoding="utf8") as file:
             for line in new_lines:
                 file.write(line)
     except IOError as e:

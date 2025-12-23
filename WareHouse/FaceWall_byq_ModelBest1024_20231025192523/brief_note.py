@@ -31,7 +31,7 @@ class BriefNote(tk.Frame):
             file_name = self.get_user_file_name() 
             if file_name:
                 file_path = os.path.join(os.path.dirname(__file__), file_name)
-                with open(file_path, "w") as file:
+                with open(file_path,"w", encoding='utf-8') as file:
                     file.write(note)
                 self.note_text.delete(1.0, tk.END)  # 清空文本框内容
                 self.load_saved_files()
@@ -42,7 +42,7 @@ class BriefNote(tk.Frame):
         if selected_file:
             file_name = self.file_listbox.get(selected_file)
             file_path = os.path.join(os.path.dirname(__file__), file_name)
-            with open(file_path, "r") as file:
+            with open(file_path,"r", encoding='utf-8') as file:
                 note = file.read()
                 self.note_text.delete(1.0, tk.END)
                 self.note_text.insert(tk.END, note)

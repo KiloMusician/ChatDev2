@@ -1,0 +1,33 @@
+Task:
+Enhance Temple of Knowledge Floor 1 (Foundations) integration with Culture-Ship autonomous orchestrator. Create bidirectional knowledge sync between Temple memory system and Ship's persistent state. Implement knowledge-based unlock progression where Ship's health metrics unlock Temple floors. Reference: SimulatedVerse/src/temple/ and SimulatedVerse/modules/culture_ship/
+
+Config:
+ChatEnvConfig.with_memory: False
+ChatEnvConfig.clear_structure: True
+ChatEnvConfig.git_management: False
+ChatEnvConfig.gui_design: True
+ChatEnvConfig.incremental_develop: False
+ChatEnvConfig.background_prompt: NuSyQ ChatDev is a software company powered by multiple intelligent agents running on local Ollama models, with a multi-agent organizational structure focused on privacy-preserving AI-powered development using ΞNuSyQ symbolic framework.
+
+
+Roster:
+Chief Executive Officer, Counselor, Chief Human Resource Officer, Chief Product Officer, Chief Technology Officer, Programmer, Code Reviewer, Software Test Engineer, Chief Creative Officer
+
+Modality:
+[product type]
+
+Ideas:
+
+
+Language:
+ Python
+
+Code_Version:
+7.0
+
+Proposed_images:
+0
+
+Incorporated_images:
+0
+

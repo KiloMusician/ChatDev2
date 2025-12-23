@@ -1,0 +1,33 @@
+============================================================
+≡ƒñû ChatDev with Ollama Integration
+============================================================
+
+≡ƒöì Checking Ollama connection...
+Γ£à Connected to Ollama
+   Available models: 9
+Γ£à Environment configured:
+   Base URL: http://localhost:11434/v1
+   OpenAI Base URL: http://localhost:11434/v1
+   Model: qwen2.5-coder:14b
+
+Γ¥î Error during development: No module named 'tracing_setup'
+Traceback (most recent call last):
+  File "C:\Users\keath\NuSyQ\ChatDev\run_ollama.py", line 273, in main
+    run_chatdev(args)
+  File "C:\Users\keath\NuSyQ\ChatDev\run_ollama.py", line 140, in run_chatdev
+    from chatdev.chat_chain import ChatChain
+  File "C:\Users\keath\NuSyQ\ChatDev\chatdev\chat_chain.py", line 9, in <module>
+    from camel.agents import RolePlaying
+  File "C:\Users\keath\NuSyQ\ChatDev\camel\__init__.py", line 14, in <module>
+    import camel.agents
+  File "C:\Users\keath\NuSyQ\ChatDev\camel\agents\__init__.py", line 15, in <module>
+    from .chat_agent import ChatAgent
+  File "C:\Users\keath\NuSyQ\ChatDev\camel\agents\chat_agent.py", line 24, in <module>
+    from camel.model_backend import ModelBackend, ModelFactory
+  File "C:\Users\keath\NuSyQ\ChatDev\camel\model_backend.py", line 22, in <module>
+    from chatdev.utils import log_visualize
+  File "C:\Users\keath\NuSyQ\ChatDev\chatdev\utils.py", line 9, in <module>
+    from visualizer.app import send_msg
+  File "C:\Users\keath\NuSyQ\ChatDev\visualizer\app.py", line 4, in <module>
+    import tracing_setup as tracing
+ModuleNotFoundError: No module named 'tracing_setup'

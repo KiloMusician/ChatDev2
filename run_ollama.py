@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ChatDev with Ollama Integration
 ================================
@@ -29,6 +30,17 @@ Version: 1.0.0
 import argparse
 import os
 import sys
+
+# Fix Windows console encoding for Unicode emoji support
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except AttributeError:
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+import sys
 import requests
 import json
 from typing import Optional, List
@@ -46,13 +58,20 @@ class OllamaConfig:
         self.api_url = f"{base_url}/v1"  # OpenAI-compatible endpoint
         self.available_models: List[str] = []
 
+        # HTTP timeout configuration (seconds). If not set, default to 15s for health checks.
+        http_timeout = os.getenv('OLLAMA_HTTP_TIMEOUT_SECONDS')
+        try:
+            self.http_timeout = int(http_timeout) if http_timeout and http_timeout.isdigit() else 15
+        except (ValueError, TypeError):
+            self.http_timeout = 15
+
     def check_connection(self) -> bool:
         """Check if Ollama is running and accessible"""
         try:
-            # Increased from 5s to 15s - first call can be slow
+            # Use configured HTTP timeout for health checks
             response = requests.get(
                 f"{self.base_url}/api/tags",
-                timeout=15
+                timeout=self.http_timeout
             )
             if response.status_code == 200:
                 data = response.json()

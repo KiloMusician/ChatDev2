@@ -1,0 +1,1 @@
+Create comprehensive Ollama integration test suite: 1) Test connection to localhost:11434, 2) Validate model listing and availability, 3) Test model inference with qwen2.5-coder:7b, 4) Test streaming responses, 5) Add pytest fixtures for setup/teardown, 6) Include error handling for offline scenarios, 7) Add performance benchmarks. Use pytest framework with async support.

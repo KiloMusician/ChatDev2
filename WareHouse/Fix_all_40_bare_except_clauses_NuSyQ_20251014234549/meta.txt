@@ -1,0 +1,33 @@
+Task:
+Fix all 40 bare except clauses in NuSyQ-Hub codebase (c:\Users\keath\Desktop\Legacy\NuSyQ-Hub\). Replace with specific exception types (requests.RequestException, ConnectionError, TimeoutError, IOError, etc.), add timeout parameters where needed, and include proper logging. Generate a detailed report of all fixes.
+
+Config:
+ChatEnvConfig.with_memory: False
+ChatEnvConfig.clear_structure: True
+ChatEnvConfig.git_management: False
+ChatEnvConfig.gui_design: True
+ChatEnvConfig.incremental_develop: False
+ChatEnvConfig.background_prompt: NuSyQ ChatDev is a software company powered by multiple intelligent agents running on local Ollama models, with a multi-agent organizational structure focused on privacy-preserving AI-powered development using ΞNuSyQ symbolic framework.
+
+
+Roster:
+Chief Executive Officer, Counselor, Chief Human Resource Officer, Chief Product Officer, Chief Technology Officer, Programmer, Code Reviewer, Software Test Engineer, Chief Creative Officer
+
+Modality:
+[product type: development tools]
+
+Ideas:
+
+
+Language:
+ [Programming Language: Python]
+
+Code_Version:
+7.0
+
+Proposed_images:
+0
+
+Incorporated_images:
+0
+

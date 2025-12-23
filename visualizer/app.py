@@ -1,22 +1,36 @@
 import logging
-import requests
-import os
+import requests  # type: ignore[import-untyped]
 from flask import Flask, send_from_directory, request, jsonify
+import tracing_setup as tracing
 import argparse
+from typing import List, Dict
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, static_folder="static")
 app.logger.setLevel(logging.ERROR)
-log = logging.getLogger('werkzeug')
+log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
-messages = []
+messages: List[Dict[str, str]] = []  # type: ignore[assignment]
 port = [8000]
 
-def send_msg(role, text):
+# Initialize optional tracing for the visualizer (no-op if OTEL not installed)
+tracer = tracing.initialize_tracing(service_name="chatdev_visualizer")
+tracing.instrument_requests()
+tracing.instrument_flask(app)
+
+
+def send_msg(role: str, text: str) -> None:
+    """Send a message to the local visualization server with a safe timeout.
+
+    This function is best-effort; failures are logged but not raised.
+    """
     try:
-        data = {"role": role, "text": text}
-        response = requests.post(f"http://127.0.0.1:{port[-1]}/send_message", json=data)
-    except:
-        logging.info("flask app.py did not start for online log")
+        with tracing.start_span("send_msg", {"role": role}):
+            data = {"role": role, "text": text}
+            # Short timeout prevents indefinite hang if server not yet started.
+            post_url = f"http://127.0.0.1:{port[-1]}/send_message"
+            _ = requests.post(post_url, json=data, timeout=5)
+    except (OSError, requests.RequestException, ValueError) as e:
+        logging.warning("Visualization server not reachable: %s", e)
 
 
 @app.route("/")
@@ -41,28 +55,33 @@ def get_messages():
 
 @app.route("/send_message", methods=["POST"])
 def send_message():
-    data = request.get_json()
-    role = data.get("role")
-    text = data.get("text")
+    with tracing.start_span("send_message"):
+        data = request.get_json() or {}
+    role = data.get("role", "unknown")
+    text = data.get("text", "")
 
-    avatarUrl = find_avatar_url(role)
+    avatar_url = find_avatar_url(role)
 
-    message = {"role": role, "text": text, "avatarUrl": avatarUrl}
+    message = {"role": role, "text": text, "avatarUrl": avatar_url}
     messages.append(message)
     return jsonify(message)
 
 
-def find_avatar_url(role):
-    role = role.replace(" ", "%20")
-    avatar_filename = f"avatars/{role}.png"
-    avatar_url = f"/static/{avatar_filename}"
-    return avatar_url
+def find_avatar_url(role: str) -> str:
+    sanitized = role.replace(" ", "%20")
+    avatar_filename = f"avatars/{sanitized}.png"
+    return f"/static/{avatar_filename}"
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='argparse')
-    parser.add_argument('--port', type=int, default=8000, help="port")
+    parser = argparse.ArgumentParser(description="ChatDev Visualizer Server")
+    parser.add_argument(
+        "--port", type=int, default=8000, help="Serve port (default 8000)"
+    )
     args = parser.parse_args()
     port.append(args.port)
-    print(f"Please visit http://127.0.0.1:{port[-1]}/ for the front-end display page. \nIn the event of a port conflict, please modify the port argument (e.g., python3 app.py --port 8012).")
-    app.run(host='0.0.0.0', debug=False, port=port[-1])
+    logging.info(
+        "UI: http://127.0.0.1:%s/ (use --port for alt)",
+        port[-1],
+    )
+    app.run(host="0.0.0.0", debug=False, port=port[-1])

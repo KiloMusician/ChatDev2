@@ -54,7 +54,7 @@ class ImageEditor:
     def open_image(self):
         file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.jpg;*.jpeg;*.png;*.gif")])
         if file_path:
-            self.current_image = Image.open(file_path)
+            self.current_image = Image.open(file_path, encoding='utf-8')
             self.original_image = self.current_image.copy()
             self.display_image()
     def save_image(self):

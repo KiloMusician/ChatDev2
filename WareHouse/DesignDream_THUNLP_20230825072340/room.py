@@ -31,14 +31,14 @@ class Room:
     def save_design(self):
         # Save the current room design to a file
         # Serialize the room object and write to a file
-        with open("design.txt", "w") as file:
+        with open("design.txt","w", encoding='utf-8') as file:
             for furniture in self.furniture:
                 file.write(furniture.type + "," + str(furniture.x) + "," + str(furniture.y) + "\n")
     def load_design(self):
         # Load a saved room design from a file
         # Read the serialized room object from a file and deserialize
         self.furniture = []
-        with open("design.txt", "r") as file:
+        with open("design.txt","r", encoding='utf-8') as file:
             for line in file:
                 furniture_data = line.strip().split(",")
                 furniture_type = furniture_data[0]

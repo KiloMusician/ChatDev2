@@ -1,0 +1,1 @@
+Fix all 40 bare except clauses in NuSyQ-Hub codebase (c:\Users\keath\Desktop\Legacy\NuSyQ-Hub\). Replace with specific exception types (requests.RequestException, ConnectionError, TimeoutError, IOError, etc.), add timeout parameters where needed, and include proper logging. Generate a detailed report of all fixes.

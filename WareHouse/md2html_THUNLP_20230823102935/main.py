@@ -35,7 +35,7 @@ class MarkdownToHTMLConverter:
             html_output = html_generator.generate_html(parsed_content)
             save_path = filedialog.asksaveasfilename(defaultextension=".html", filetypes=[("HTML Files", "*.html")])
             if save_path:
-                with open(save_path, 'w') as file:
+                with open(save_path,'w', encoding='utf-8') as file:
                     file.write(html_output)
                 tk.messagebox.showinfo("Conversion Complete", "Markdown to HTML conversion successful!")
         else:

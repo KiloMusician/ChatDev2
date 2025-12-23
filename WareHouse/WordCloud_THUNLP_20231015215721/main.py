@@ -34,7 +34,7 @@ class WordCloudGenerator:
         plt.close()
         self.update_canvas(file_path)
     def update_canvas(self, image_path):
-        image = Image.open(image_path)
+        image = Image.open(image_path, encoding='utf-8')
         image = image.resize((400, 400), Image.ANTIALIAS)
         self.wordcloud_image = ImageTk.PhotoImage(image)
         self.canvas.create_image(0, 0, anchor=tk.NW, image=self.wordcloud_image)
