@@ -1,0 +1,36 @@
+name: Docker build & context check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image and capture output
+        run: |
+          set -o pipefail
+          docker build --progress=plain -t chatdev:ci . 2>&1 | tee build.log
+          CT=$(grep -Ei 'transferring context:|Sending build context to Docker daemon' build.log | tail -1 || true)
+          echo "CONTEXT_LINE=$CT"
+          if [ -n "$CT" ]; then
+            NUM=$(echo $CT | grep -Eo '[0-9]+\.?[0-9]*')
+            UNIT=$(echo $CT | grep -Eo '(GB|MB|kB)' || echo MB)
+            if [ "$UNIT" = "GB" ]; then
+              SIZE_MB=$(echo "$NUM * 1024" | bc)
+            elif [ "$UNIT" = "kB" ]; then
+              SIZE_MB=$(echo "$NUM / 1024" | bc)
+            else
+              SIZE_MB=$(echo "$NUM" | bc)
+            fi
+            echo "Build context size (MB): $SIZE_MB"
+            if [ $(echo "$SIZE_MB > 200" | bc) -eq 1 ]; then
+              echo "ERROR: Build context > 200 MB" >&2
+              exit 1
+            fi
+          fi

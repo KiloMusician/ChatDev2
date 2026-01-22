@@ -1,24 +1,21 @@
-# Start with a Python 3.9 base image
 FROM python:3.9-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Install system deps (minimal)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	python3-tk x11-apps ca-certificates && \
+	rm -rf /var/lib/apt/lists/*
 
-# Install necessary libraries for GUI support
-RUN apt-get update && apt-get install -y python3-tk x11-apps
-
-# Install the project dependencies
+# Copy and install Python requirements first to leverage caching
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set the environment variable for OpenAI API key
-# (you'll need to provide the actual key when running the container)
-ENV OPENAI_API_KEY=your_OpenAI_API_key
+# Copy only application source; rely on ChatDev/.dockerignore to omit large files
+COPY . /app
 
-# Expose the port for visualizer/app.py
+# Do not bake secrets into the image; set at runtime (do not declare ENV here)
+
 EXPOSE 8000
 
-# Set an entry point that runs a shell for interactive mode
 ENTRYPOINT ["/bin/bash"]

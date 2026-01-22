@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-01-08T12:56:10.254215",
+  "error_type": "ConnectionError",
+  "error_message": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/tags (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused\"))",
+  "file_location": "/usr/lib/python3/dist-packages/requests/adapters.py",
+  "line_number": 516,
+  "function_name": "send",
+  "full_traceback": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/connection.py\", line 204, in _new_conn\n    sock = connection.create_connection(\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/util/connection.py\", line 85, in create_connection\n    raise err\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/util/connection.py\", line 73, in create_connection\n    sock.connect(sa)\nConnectionRefusedError: [Errno 111] Connection refused\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py\", line 787, in urlopen\n    response = self._make_request(\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py\", line 493, in _make_request\n    conn.request(\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/connection.py\", line 500, in request\n    self.endheaders()\n  File \"/usr/lib/python3.10/http/client.py\", line 1278, in endheaders\n    self._send_output(message_body, encode_chunked=encode_chunked)\n  File \"/usr/lib/python3.10/http/client.py\", line 1038, in _send_output\n    self.send(msg)\n  File \"/usr/lib/python3.10/http/client.py\", line 976, in send\n    self.connect()\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/connection.py\", line 331, in connect\n    self.sock = self._new_conn()\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/connection.py\", line 219, in _new_conn\n    raise NewConnectionError(\nurllib3.exceptions.NewConnectionError: HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/requests/adapters.py\", line 439, in send\n    resp = conn.urlopen(\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py\", line 841, in urlopen\n    retries = retries.increment(\n  File \"/usr/local/lib/python3.10/dist-packages/urllib3/util/retry.py\", line 519, in increment\n    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]\nurllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/tags (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused\"))\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/mnt/c/Users/keath/NuSyQ/nusyq_chatdev.py\", line 946, in <module>\n    exit(main())\n  File \"/mnt/c/Users/keath/NuSyQ/nusyq_chatdev.py\", line 818, in main\n    setup_result = setup_ollama_for_chatdev()\n  File \"/mnt/c/Users/keath/NuSyQ/nusyq_chatdev.py\", line 431, in setup_ollama_for_chatdev\n    if not ollama.check_ollama_connection():\n  File \"/mnt/c/Users/keath/NuSyQ/nusyq_chatdev.py\", line 319, in check_ollama_connection\n    response = self.session.get(\n  File \"/usr/lib/python3/dist-packages/requests/sessions.py\", line 557, in get\n    return self.request('GET', url, **kwargs)\n  File \"/usr/lib/python3/dist-packages/requests/sessions.py\", line 544, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/usr/lib/python3/dist-packages/requests/sessions.py\", line 657, in send\n    r = adapter.send(request, **kwargs)\n  File \"/usr/lib/python3/dist-packages/requests/adapters.py\", line 516, in send\n    raise ConnectionError(e, request=request)\nrequests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/tags (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused\"))\n",
+  "expected_behavior": "ChatDev should complete task successfully with Ollama models",
+  "actual_behavior": "Execution failed with ConnectionError: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/tags (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=11434): Failed to establish a new connec",
+  "possible_causes": [
+    "\ud83d\udd0c Ollama service not running",
+    "\ud83c\udf10 Network/firewall blocking localhost:11434",
+    "\u23f1\ufe0f Service startup timeout"
+  ],
+  "suggested_fixes": [
+    "\ud83d\ude80 Start Ollama service: ollama serve",
+    "\ud83d\udd0c Check if Ollama is running: ollama list",
+    "\ud83c\udf10 Verify Ollama API endpoint: http://localhost:11434",
+    "\ud83d\udd12 Check firewall settings for port 11434",
+    "\ud83d\udcdd Check full log file for more details",
+    "\ud83d\udd0d Search GitHub issues for similar errors",
+    "\ud83d\udcac Enable debug mode for verbose output"
+  ],
+  "related_logs": [],
+  "system_state": {
+    "python_version": "3.10.12 (main, Nov  4 2025, 08:48:33) [GCC 11.4.0]",
+    "platform": "linux",
+    "cwd": "/mnt/c/Users/keath/NuSyQ",
+    "module": "nusyq_chatdev",
+    "function": "main",
+    "ollama_status": "Unable to check Ollama status"
+  },
+  "severity": "ERROR"
+}
