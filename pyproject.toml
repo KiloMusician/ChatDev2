@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chatdev"
+version = "0.0.1"
+description = "Minimal pyproject to allow editable installs for ChatDev during CI and local development."
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.urls]
+"Home" = "https://example.local/ChatDev"
