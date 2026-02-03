@@ -1,7 +1,10 @@
 import logging
 import requests  # type: ignore[import-untyped]
 from flask import Flask, send_from_directory, request, jsonify
-import telemetry.tracing_setup as tracing
+try:
+    import telemetry.tracing_setup as tracing
+except ModuleNotFoundError:
+    import tracing_setup as tracing
 import argparse
 from typing import List, Dict
 
