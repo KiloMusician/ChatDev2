@@ -1,7 +1,9 @@
 """
 Lightweight placeholder for NuSyQ ChatDev memory helpers.
 
-This stub mirrors the SimulatedVerse version to keep both repos aligned.
+This stub mirrors the SimulatedVerse version to keep both repos aligned and
+provides a minimal `Memory` class so ChatDev entrypoints can import it without
+crashing.
 """
 
 
@@ -18,3 +20,17 @@ def store_experience(data: dict[str, str]) -> None:
 def describe() -> str:
     """Explain the placeholder to auditing tools."""
     return "NuSyQ ChatDev memory placeholder (syntax cleared)."
+
+
+class Memory:
+    """Minimal in-memory placeholder to satisfy ChatDev imports."""
+
+    def __init__(self):
+        self._store: list[dict[str, str]] = []
+
+    def retrieve(self, query: str, limit: int = 1) -> list[str]:
+        return retrieve_experiences(query, limit)
+
+    def add(self, data: dict[str, str]) -> None:
+        self._store.append(data)
+        store_experience(data)
