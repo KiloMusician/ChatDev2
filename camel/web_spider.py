@@ -1,23 +1,18 @@
+import os
+import time
 import requests
 from bs4 import BeautifulSoup
 import openai
-from openai import OpenAI
 import wikipediaapi
-import os
-import time
 
-self_api_key = os.environ.get('OPENAI_API_KEY')
-BASE_URL = os.environ.get('BASE_URL')
 
-if BASE_URL:
-    client = openai.OpenAI(
-        api_key=self_api_key,
-        base_url=BASE_URL,
-    )
-else:
-    client = openai.OpenAI(
-        api_key=self_api_key
-    )
+def _get_client() -> openai.OpenAI | None:
+    """Lazily create an OpenAI client; return None if no API key is set."""
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        return None
+    base_url = os.environ.get("BASE_URL")
+    return openai.OpenAI(api_key=api_key, base_url=base_url) if base_url else openai.OpenAI(api_key=api_key)
 
 def get_baidu_baike_content(keyword):
     # design api by the baidubaike
@@ -54,6 +49,10 @@ def get_wiki_content(keyword):
 
 def modal_trans(task_dsp):
     try:
+        client = _get_client()
+        if client is None:
+            raise RuntimeError("OPENAI_API_KEY not set")
+
         task_in ="'" + task_dsp + \
                "'Just give me the most important keyword about this sentence without explaining it and your answer should be only one keyword."
         messages = [{"role": "user", "content": task_in}]
@@ -83,7 +82,7 @@ def modal_trans(task_dsp):
         logit_bias={})
         result = response.choices[0].message.content
         print("web spider content:", result)
-    except (OSError, ValueError, KeyError, AttributeError) as e:
+    except (OSError, ValueError, KeyError, AttributeError, RuntimeError) as e:
         result = ''
         print(f"the content is none: {e}")
     return result
