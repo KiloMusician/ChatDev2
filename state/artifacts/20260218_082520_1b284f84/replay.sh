@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+export CHATDEV_PATH="C:\Users\keath\NuSyQ\ChatDev"
+export CHATDEV_USE_OLLAMA="1"
+export BASE_URL="http://localhost:11434/v1"
+C:\Users\keath\AppData\Local\Programs\Python\Python312\python.exe C:\Users\keath\NuSyQ\ChatDev\run_ollama.py --task Create a Python function that calculates fibonacci numbers up to n. --name e2e_quick_fibonacci --model qwen2.5-coder:7b --org NuSyQ --config Default

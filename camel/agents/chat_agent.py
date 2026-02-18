@@ -104,8 +104,15 @@ class ChatAgent(BaseAgent):
         self.terminated: bool = False
         self.info: bool = False
         self.init_messages()
-        if memory !=None and self.role_name in["Code Reviewer","Programmer","Software Test Engineer"]:
-            self.memory = memory.memory_data.get("All")
+        if memory is not None and self.role_name in ["Code Reviewer", "Programmer", "Software Test Engineer"]:
+            memory_data = getattr(memory, "memory_data", None)
+            if isinstance(memory_data, dict):
+                self.memory = memory_data.get("All")
+            elif hasattr(memory, "memory_retrieval"):
+                # Compatibility path for alternate Memory object shapes.
+                self.memory = memory
+            else:
+                self.memory = None
         else:
             self.memory = None
 

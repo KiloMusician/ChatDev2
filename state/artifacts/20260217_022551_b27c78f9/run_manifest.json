@@ -1,0 +1,91 @@
+{
+  "task": "Create a Python function that calculates fibonacci numbers up to n. Include error handling for negative inputs.",
+  "name": "e2e_fibonacci_test",
+  "model": "qwen2.5-coder:7b",
+  "organization": "NuSyQ",
+  "config": "Default",
+  "git_mode": false,
+  "git_branch": null,
+  "use_ollama": true,
+  "runner": "/mnt/c/Users/keath/NuSyQ/ChatDev/run_ollama.py",
+  "sandbox": false,
+  "logs": {
+    "stdout": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/logs/chatdev/chatdev_stdout_20260217_022551.log",
+    "stderr": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/logs/chatdev/chatdev_stderr_20260217_022551.log"
+  },
+  "env": {
+    "CHATDEV_PATH": "/mnt/c/Users/keath/NuSyQ/ChatDev",
+    "BASE_URL": "http://localhost:11434/v1"
+  },
+  "plan_bundle": {
+    "high_level": [
+      {
+        "description": "Clarify requirements / acceptances",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Draft solution approach",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Implement core changes",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Run tests / lint",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Summarize & handoff",
+        "status": "pending",
+        "notes": ""
+      }
+    ],
+    "microplan": [
+      {
+        "description": "Identify affected modules/files",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Add/adjust tests (early)",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Code changes",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Run fast tests",
+        "status": "pending",
+        "notes": ""
+      },
+      {
+        "description": "Assess blast radius / costs",
+        "status": "pending",
+        "notes": ""
+      }
+    ],
+    "early_tests": [
+      "Add/verify unit covering new path",
+      "Run fast pytest subset",
+      "Optional: lint/ruff if cheap"
+    ],
+    "telemetry": {
+      "plan_started": 1771320351.2116702,
+      "cost_estimate": {
+        "tokens": 0,
+        "usd": 0
+      }
+    }
+  },
+  "timestamps": {
+    "created": 1771320351.211723
+  }
+}
