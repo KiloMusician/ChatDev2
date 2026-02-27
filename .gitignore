@@ -10,5 +10,7 @@ env/
 venv/
 # ChatDev WareHouse test outputs (Phase 1 validation & automated tests)
 # These are generated automatically by test runs and CI/CD
-WareHouse/*_NuSyQ_*.log
-WareHouse/*_NuSyQ_*/
+WareHouse/*.log
+WareHouse/*/
+# Transient run artifacts (do not track)
+state/artifacts/*/
