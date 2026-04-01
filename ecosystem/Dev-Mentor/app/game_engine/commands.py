@@ -32844,7 +32844,7 @@ class CommandRegistry:
                 except Exception:
                     pass
 
-            hub_url = _os.environ.get("NUSYQ_HUB_URL", "http://localhost:8000")
+            hub_url = _os.environ.get("NUSYQ_HUB_URL", "http://localhost:3003")
 
             out += [
                 _line("  ─── BRIDGE STATUS ───────────────────────────────────────────", "system"),

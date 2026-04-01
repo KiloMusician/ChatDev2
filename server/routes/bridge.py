@@ -424,20 +424,79 @@ def _cmd_serena_status(ctx):
 
 @_register_cmd("nusyq status")
 def _cmd_nusyq_status(ctx):
-    import urllib.request
-    probes = {
-        "chatdev": "http://localhost:6400/health",
-        "dev_mentor": "http://localhost:8008/api/manifest",
+    import urllib.request, concurrent.futures
+    # chatdev = self; probe it in a thread to avoid blocking the async event loop
+    ext_probes = {
+        "dev_mentor":      "http://localhost:8008/api/manifest",
+        "nusyq_hub":       "http://localhost:3003/api/status",
         "concept_samurai": "http://localhost:3002/",
     }
-    status = {}
-    for name, url in probes.items():
+    status = {"chatdev": {"online": True, "code": 200, "note": "self"}}
+
+    def _probe(name_url):
+        name, url = name_url
         try:
-            with urllib.request.urlopen(url, timeout=2) as r:
-                status[name] = {"online": True, "code": r.status}
+            with urllib.request.urlopen(url, timeout=3) as r:
+                return name, {"online": True, "code": r.status}
         except Exception as e:
-            status[name] = {"online": False, "error": str(e)[:40]}
-    return {"nusyq_status": status, "timestamp": time.time()}
+            return name, {"online": False, "error": str(e)[:60]}
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        for name, result in pool.map(_probe, ext_probes.items()):
+            status[name] = result
+
+    return {"nusyq_status": status, "timestamp": time.time(), "hub_port": 3003}
+
+
+@_register_cmd("gordon status")
+def _cmd_gordon_status(ctx):
+    """Fetch Gordon orchestrator status from Dev-Mentor."""
+    import urllib.request
+    try:
+        with urllib.request.urlopen("http://localhost:8008/api/gordon/status", timeout=3) as r:
+            import json as _json
+            data = _json.loads(r.read())
+            return {"gordon": data, "source": "dev_mentor"}
+    except Exception as e:
+        return {"gordon": {"ok": False, "error": str(e)}, "source": "dev_mentor"}
+
+
+@_register_cmd("gordon run")
+def _cmd_gordon_run(ctx):
+    """Trigger one Gordon orchestrator cycle (subprocess, non-blocking)."""
+    import subprocess, threading
+    gordon_script = _ECO / "Dev-Mentor" / "scripts" / "gordon_orchestrator.py"
+    if not gordon_script.exists():
+        return {"gordon_run": False, "error": "gordon_orchestrator.py not found"}
+
+    def _run():
+        subprocess.run(
+            [sys.executable, str(gordon_script), "--mode", "once"],
+            cwd=str(_ECO / "Dev-Mentor"),
+            capture_output=True, timeout=30,
+        )
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    log_action("gordon.run", "triggered", repo="Dev-Mentor", agent="bridge")
+    return {"gordon_run": True, "mode": "once", "note": "cycle started in background"}
+
+
+@_register_cmd("serena find")
+def _cmd_serena_find(ctx):
+    """Query Serena (Dev-Mentor) for symbol/function search."""
+    import urllib.request, json as _json
+    query = ctx.get("query", ctx.get("args", "bridge integration"))
+    try:
+        body = _json.dumps({"query": query, "limit": 8}).encode()
+        req = urllib.request.Request(
+            "http://localhost:8008/api/serena/ask", data=body,
+            headers={"Content-Type": "application/json"}, method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=5) as r:
+            return _json.loads(r.read())
+    except Exception as e:
+        return {"serena": "unreachable", "error": str(e)[:60]}
 
 
 @_register_cmd("agents")

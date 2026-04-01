@@ -2,6 +2,18 @@
 # Make ecoscan runnable from any terminal in this project
 chmod +x ecoscan 2>/dev/null || true
 
+# ── Terminal Depths universal launcher wiring ────────────────────────────────
+export TD_SERVER_URL=http://localhost:8008
+export NUSYQ_HUB_URL=http://localhost:3003
+# Make `td` available in PATH for this shell and child processes
+TD_BIN="/home/runner/workspace/ecosystem/Dev-Mentor"
+if [[ ":$PATH:" != *":$TD_BIN:"* ]]; then
+  export PATH="$TD_BIN:$PATH"
+fi
+# Also wire into ~/.local/bin for persistent sessions
+mkdir -p ~/.local/bin
+ln -sf "$TD_BIN/td" ~/.local/bin/td 2>/dev/null || true
+
 # Start backend in background on port 6400
 python server_main.py --host localhost --port 6400 &
 BACKEND_PID=$!

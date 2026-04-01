@@ -118,7 +118,7 @@ def _hr(char: str = "─", width: int = 72) -> None:
 
 
 # ── Server configuration ─────────────────────────────────────────────────────
-DEFAULT_PORTS = [5000, 7337, 8000]
+DEFAULT_PORTS = [5000, 8008, 7337, 8000]
 TD_SERVER_URL = os.getenv("TD_SERVER_URL", "")
 TD_SESSION_ID = os.getenv("TD_SESSION_ID", "td-launcher")
 TD_NO_BROWSER = os.getenv("TD_NO_BROWSER", "0") == "1"

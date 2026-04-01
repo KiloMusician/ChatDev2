@@ -47,9 +47,9 @@ Six repos cloned to `ecosystem/` and launched via `ecosystem/start_services.sh`:
 | Repo | Type | Port | Status |
 |------|------|------|--------|
 | Dev-Mentor | FastAPI (game engine, CHUG, ML) | 8008 | Auto-started |
-| CONCEPT_SAMURAI | Static docs server | 3001 | Auto-started |
+| CONCEPT_SAMURAI | Static docs server | 3002 | Auto-started |
 | SimulatedVerse | Node/RimWorld sim | 3000 | Heavy — not auto-started |
-| NuSyQ-Hub | CLI / health analysis | — | Snapshot on startup |
+| NuSyQ-Hub | FastAPI reactive API | 3003 | Auto-started |
 | NuSyQ_Ultimate | Python library | — | CLI/library mode |
 | awesome-vibe-coding | Docs/resources | — | Static reference |
 
@@ -204,6 +204,49 @@ WareHouse scan surface:
 - `GET /api/bridge/projects` — lists all 100+ WareHouse projects with file count, size, Python files, prompt preview, `api_key_available` flag
 - `GET /api/bridge/projects/{name}` — per-project file list with content previews
 - `projects` bridge command — available in `/api/bridge/command` router
+
+## Bridge Command Registry (full list)
+
+All commands available via `POST /api/bridge/command {"command":"..."}`:
+
+| Command | Description |
+|---|---|
+| `boot` | Bridge boot confirmation + cockpit URL |
+| `nusyq status` | Live probe of all 4 services (threaded, no deadlock) |
+| `gordon status` | Gordon orchestrator status from Dev-Mentor |
+| `gordon run` | Trigger one Gordon `--mode once` cycle in background |
+| `serena status` | Serena indexer status (chunks, files, functions) |
+| `serena find` | Query Serena semantic search (pass `query` in ctx) |
+| `quest sync` | Sync all 20 CTF quests into shared memory |
+| `integrate` | Full ecosystem integration snapshot |
+| `chug run` | Trigger CHUG orchestrator cycle |
+| `agents` | List all registered agents |
+| `tools` | List all registered tools |
+| `memory snapshot` | Dump shared memory KV store |
+| `repo list` | All repos from registry |
+| `repo status` | Live probe of all registered repos |
+| `projects` | WareHouse project count + first 20 |
+
+## Terminal Depths (`td`) CLI
+
+`ecosystem/Dev-Mentor/td` — universal CLI launcher wired to Dev-Mentor :8008.
+
+- **PATH**: `start.sh` adds `Dev-Mentor/` to `$PATH` and symlinks to `~/.local/bin/td`
+- **Env vars**: `TD_SERVER_URL=http://localhost:8008`, `NUSYQ_HUB_URL=http://localhost:3003` set in `start.sh`
+- **Usage**: `td status` / `td play` / `td surfaces` / `TD_SERVER_URL=http://localhost:8008 python3 scripts/td.py <cmd>`
+
+### Fixed Broken Links (session)
+
+1. `ecosystem/Dev-Mentor/scripts/td.py` line 121: `DEFAULT_PORTS` now includes `8008` → `[5000, 8008, 7337, 8000]`
+2. `ecosystem/Dev-Mentor/app/game_engine/commands.py` line 32847: `NUSYQ_HUB_URL` default now `http://localhost:3003` (was `:8000`)
+3. `server/routes/bridge.py` `nusyq status` command: fixed async event-loop deadlock by running external probes in `ThreadPoolExecutor`; ChatDev probes itself as `online:True` directly (no HTTP loop)
+
+## Gordon Orchestrator
+
+`ecosystem/Dev-Mentor/scripts/gordon_orchestrator.py` — god-mode conductor:
+- Launched as sidecar by Dev-Mentor on startup (`--mode once`)
+- Bridge commands: `gordon status` (live check), `gordon run` (trigger new cycle)
+- Health port: 3000; Game API: `POST http://localhost:5000/api/game/command`
 
 ## LLM Setup
 
