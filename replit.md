@@ -248,6 +248,33 @@ All commands available via `POST /api/bridge/command {"command":"..."}`:
 - Bridge commands: `gordon status` (live check), `gordon run` (trigger new cycle)
 - Health port: 3000; Game API: `POST http://localhost:5000/api/game/command`
 
+## Sync Steward (`ecosystem/sync_steward.py`)
+
+Cross-repo sync steward adapted from the PowerShell steward spec. Runs as a subprocess from bridge commands (avoids Replit's agent git-lock).
+
+### Bridge commands
+| Command | Mode | Git writes | Description |
+|---|---|---|---|
+| `sync steward status` | status | none | Read-only git snapshot + module inventory |
+| `sync steward hourly` | hourly | fetch only | Background: fetch + divergence log |
+| `sync steward full` | full | fetch+commit+push | Background: full reconcile cycle |
+| `sync steward dryrun` | dryrun | none | Full pipeline in dry-run — syntax validation + git state |
+
+### What it checks
+- Root workspace git: branch, ahead/behind upstream, recent log
+- All 6 ecosystem modules: Python file count, td_bridge presence, key files
+- Syntax validation: AST-parses up to 30 `.py` files per module in dryrun mode
+- Full validation (full mode only): runs `validate_all.py --quick` for Dev-Mentor, API probe for NuSyQ-Hub
+- Logs written to `ecosystem/logs/steward/` with timestamp suffix
+
+### Cadence (as per steward spec)
+- **Top of each hour**: `sync steward hourly` — fetch + inspect
+- **Every 3 hours**: `sync steward full` — full reconcile + commit + push
+- **On demand**: `sync steward status` or `sync steward dryrun`
+
+### Fixed by steward first run
+- `ecosystem/SimulatedVerse/agent/runtime.py` line 453: removed injected C-style comment `/* AUTO: handled TODO at line 263 */` (invalid Python syntax; found via dryrun syntax sweep)
+
 ## LLM Setup
 
 The app requires API keys to run workflows (OpenAI, Anthropic, Gemini). Set these as environment variables/secrets before use.

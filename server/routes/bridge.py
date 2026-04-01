@@ -36,6 +36,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
 
 _ECO = Path(__file__).resolve().parents[2] / "ecosystem"
+_WORKSPACE = _ECO.parent  # /home/runner/workspace
 if str(_ECO.parent) not in sys.path:
     sys.path.insert(0, str(_ECO.parent))
 
@@ -446,6 +447,82 @@ def _cmd_nusyq_status(ctx):
             status[name] = result
 
     return {"nusyq_status": status, "timestamp": time.time(), "hub_port": 3003}
+
+
+@_register_cmd("sync steward status")
+def _cmd_sync_status(ctx):
+    """Read-only ecosystem sync snapshot (no git writes)."""
+    import subprocess, threading
+    _ECO_STEWARD = _ECO / "sync_steward.py"
+    if not _ECO_STEWARD.exists():
+        return {"error": "sync_steward.py not found in ecosystem/"}
+    try:
+        r = subprocess.run(
+            [sys.executable, str(_ECO_STEWARD), "--mode", "status", "--json"],
+            capture_output=True, text=True, timeout=30,
+            cwd=str(_WORKSPACE),
+        )
+        import json as _json
+        return _json.loads(r.stdout) if r.returncode in (0, 1) else {"error": r.stderr[:200]}
+    except Exception as e:
+        return {"error": str(e)[:80]}
+
+
+@_register_cmd("sync steward hourly")
+def _cmd_sync_hourly(ctx):
+    """Lightweight catch-up: fetch + inspect divergence, no commit/push."""
+    import subprocess
+    _ECO_STEWARD = _ECO / "sync_steward.py"
+    if not _ECO_STEWARD.exists():
+        return {"error": "sync_steward.py not found"}
+
+    def _run():
+        subprocess.run(
+            [sys.executable, str(_ECO_STEWARD), "--mode", "hourly", "--log"],
+            cwd=str(_WORKSPACE), capture_output=True, timeout=60,
+        )
+
+    import threading
+    threading.Thread(target=_run, daemon=True).start()
+    log_action("sync.steward.hourly", "triggered", repo="ecosystem", agent="bridge")
+    return {"sync_steward": "hourly", "status": "started in background", "log_dir": "ecosystem/logs/steward/"}
+
+
+@_register_cmd("sync steward full")
+def _cmd_sync_full(ctx):
+    """Full steward cycle: fetch, rebase, validate, stage, commit, push."""
+    import subprocess
+    _ECO_STEWARD = _ECO / "sync_steward.py"
+    if not _ECO_STEWARD.exists():
+        return {"error": "sync_steward.py not found"}
+
+    def _run():
+        subprocess.run(
+            [sys.executable, str(_ECO_STEWARD), "--mode", "full", "--log"],
+            cwd=str(_WORKSPACE), capture_output=True, timeout=120,
+        )
+
+    import threading
+    threading.Thread(target=_run, daemon=True).start()
+    log_action("sync.steward.full", "triggered", repo="ecosystem", agent="bridge")
+    return {"sync_steward": "full", "status": "started in background", "log_dir": "ecosystem/logs/steward/"}
+
+
+@_register_cmd("sync steward dryrun")
+def _cmd_sync_dryrun(ctx):
+    """Full steward pipeline in dry-run mode — inspect only, zero writes."""
+    import subprocess, json as _json
+    _ECO_STEWARD = _ECO / "sync_steward.py"
+    if not _ECO_STEWARD.exists():
+        return {"error": "sync_steward.py not found"}
+    try:
+        r = subprocess.run(
+            [sys.executable, str(_ECO_STEWARD), "--mode", "full", "--dry-run", "--json"],
+            capture_output=True, text=True, timeout=60, cwd=str(_WORKSPACE),
+        )
+        return _json.loads(r.stdout) if r.returncode in (0, 1) else {"error": r.stderr[:200]}
+    except Exception as e:
+        return {"error": str(e)[:80]}
 
 
 @_register_cmd("gordon status")

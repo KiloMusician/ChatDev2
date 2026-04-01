@@ -1,0 +1,907 @@
+Yes — the next move is to turn that prompt into something agents can actually run on cadence.
+Below is a real operator pack: a PowerShell steward script, a scheduled-task setup, and a TerminalDepths wrapper command pattern.
+PowerShell steward script
+Save as sync-steward.ps1 somewhere shared, ideally in your ecosystem utilities folder.
+PowerShell
+param(
+    [string[]]$RepoPaths = @(),
+    [switch]$Full,
+    [switch]$Hourly,
+    [switch]$DryRun,
+    [string]$LogDir = "$PSScriptRoot\logs",
+    [string]$BranchFallback = "main"
+)
+
+$ErrorActionPreference = "Stop"
+
+function Write-Section {
+    param([string]$Text)
+    Write-Host ""
+    Write-Host ("=" * 72)
+    Write-Host $Text
+    Write-Host ("=" * 72)
+}
+
+function Ensure-Dir {
+    param([string]$Path)
+    if (-not (Test-Path $Path)) {
+        New-Item -ItemType Directory -Path $Path -Force | Out-Null
+    }
+}
+
+function Test-GitRepo {
+    param([string]$Path)
+    return (Test-Path (Join-Path $Path ".git"))
+}
+
+function Invoke-Git {
+    param(
+        [string]$RepoPath,
+        [string[]]$Args,
+        [switch]$AllowFailure
+    )
+
+    Push-Location $RepoPath
+    try {
+        $output = & git @Args 2>&1
+        $code = $LASTEXITCODE
+        if ($code -ne 0 -and -not $AllowFailure) {
+            throw "git $($Args -join ' ') failed in $RepoPathn$output"
+        }
+        return [PSCustomObject]@{
+            Code = $code
+            Output = ($output -join "n")
+        }
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+function Get-DefaultRepoPaths {
+    $candidates = @(
+        $env:DEV_MENTOR,
+        $env:NUSYQ_HUB,
+        $env:SIMULATEDVERSE_ROOT,
+        $env:NUSYQ_ULTIMATE_ROOT,
+        $env:CONCEPT_SAMURAI_ROOT
+    ) | Where-Object { $_ -and (Test-Path $_) }
+
+    return $candidates
+}
+
+function Get-BranchName {
+    param([string]$RepoPath)
+    $r = Invoke-Git -RepoPath $RepoPath -Args @("branch", "--show-current")
+    $name = $r.Output.Trim()
+    if ([string]::IsNullOrWhiteSpace($name)) { return $BranchFallback }
+    return $name
+}
+
+function Get-StatusShort {
+    param([string]$RepoPath)
+    $r = Invoke-Git -RepoPath $RepoPath -Args @("status", "-sb")
+    return $r.Output.Trim()
+}
+
+function Get-RemoteState {
+    param([string]$RepoPath, [string]$Branch)
+
+    $upstreamRef = "origin/$Branch"
+
+    $verify = Invoke-Git -RepoPath $RepoPath -Args @("rev-parse", "--verify", $upstreamRef) -AllowFailure
+    if ($verify.Code -ne 0) {
+        return [PSCustomObject]@{
+            UpstreamExists = $false
+            Ahead = 0
+            Behind = 0
+            Diverged = $false
+            Summary = "no upstream"
+        }
+    }
+
+    $counts = Invoke-Git -RepoPath $RepoPath -Args @("rev-list", "--left-right", "--count", "HEAD...$upstreamRef")
+    $parts = $counts.Output.Trim().Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
+    $ahead = [int]$parts[0]
+    $behind = [int]$parts[1]
+
+    return [PSCustomObject]@{
+        UpstreamExists = $true
+        Ahead = $ahead
+        Behind = $behind
+        Diverged = ($ahead -gt 0 -and $behind -gt 0)
+        Summary = if ($ahead -eq 0 -and $behind -eq 0) {
+            "up to date"
+        } elseif ($ahead -gt 0 -and $behind -eq 0) {
+            "ahead $ahead"
+        } elseif ($ahead -eq 0 -and $behind -gt 0) {
+            "behind $behind"
+        } else {
+            "diverged: ahead $ahead / behind $behind"
+        }
+    }
+}
+
+function Test-WorkingTreeClean {
+    param([string]$RepoPath)
+    $r = Invoke-Git -RepoPath $RepoPath -Args @("status", "--porcelain")
+    return [string]::IsNullOrWhiteSpace($r.Output)
+}
+
+function New-AutoCommitMessage {
+    param([string]$RepoName)
+    $stamp = Get-Date -Format "yyyy-MM-dd HH:mm"
+    return "chore(sync): steward checkpoint for $RepoName @ $stamp"
+}
+
+function Run-Validation {
+    param([string]$RepoPath)
+
+    $results = New-Object System.Collections.Generic.List[string]
+
+    if (Test-Path (Join-Path $RepoPath "scripts\validate_all.py")) {
+        Push-Location $RepoPath
+        try {
+            $out = & python "scripts\validate_all.py" 2>&1
+            $results.Add("validate_all.py: executed")
+            $results.Add(($out -join "n"))
+        }
+        catch {
+            $results.Add("validate_all.py: failed")
+            $results.Add($_.Exception.Message)
+        }
+        finally {
+            Pop-Location
+        }
+    }
+    elseif (Test-Path (Join-Path $RepoPath "package.json")) {
+        Push-Location $RepoPath
+        try {
+            $out = & npm test -- --runInBand 2>&1
+            $results.Add("npm test: executed")
+            $results.Add(($out -join "n"))
+        }
+        catch {
+            $results.Add("npm test: failed")
+            $results.Add($_.Exception.Message)
+        }
+        finally {
+            Pop-Location
+        }
+    }
+    else {
+        $results.Add("no standard validation script detected")
+    }
+
+    return ($results -join "n")
+}
+
+function Sync-OneRepo {
+    param(
+        [string]$RepoPath,
+        [switch]$Full,
+        [switch]$DryRun
+    )
+
+    $repoName = Split-Path $RepoPath -Leaf
+    $branch = Get-BranchName -RepoPath $RepoPath
+
+    Write-Section "SYNC :: $repoName :: $branch"
+
+    $actions = New-Object System.Collections.Generic.List[string]
+    $filesTouched = @()
+    $validation = ""
+    $blockers = New-Object System.Collections.Generic.List[string]
+
+    $statusBefore = Get-StatusShort -RepoPath $RepoPath
+    Write-Host $statusBefore
+
+    $remotes = Invoke-Git -RepoPath $RepoPath -Args @("remote", "-v")
+    Write-Host $remotes.Output
+
+    if (-not $DryRun) {
+        $null = Invoke-Git -RepoPath $RepoPath -Args @("fetch", "--all", "--prune")
+        $actions.Add("fetched")
+    } else {
+        $actions.Add("dry-run: skipped fetch")
+    }
+
+    $remoteState = Get-RemoteState -RepoPath $RepoPath -Branch $branch
+    Write-Host "Remote state: $($remoteState.Summary)"
+
+    $isClean = Test-WorkingTreeClean -RepoPath $RepoPath
+
+    if ($remoteState.Behind -gt 0 -and -not $remoteState.Diverged) {
+        if ($isClean -and -not $DryRun) {
+            $null = Invoke-Git -RepoPath $RepoPath -Args @("pull", "--rebase", "origin", $branch)
+            $actions.Add("rebased from origin/$branch")
+        } elseif (-not $isClean -and -not $DryRun) {
+            $null = Invoke-Git -RepoPath $RepoPath -Args @("stash", "push", "-u", "-m", "sync-steward auto-stash")
+            $actions.Add("stashed local work")
+            $null = Invoke-Git -RepoPath $RepoPath -Args @("pull", "--rebase", "origin", $branch)
+            $actions.Add("rebased from origin/$branch")
+            $stashPop = Invoke-Git -RepoPath $RepoPath -Args @("stash", "pop") -AllowFailure
+            if ($stashPop.Code -eq 0) {
+                $actions.Add("restored stashed work")
+            } else {
+                $blockers.Add("stash pop needs manual conflict resolution")
+            }
+        } else {
+            $actions.Add("dry-run: skipped pull --rebase")
+        }
+    }
+    elseif ($remoteState.Diverged) {
+        $blockers.Add("branch diverged; manual review recommended before automated push")
+    }
+
+    $statusAfterReconcile = Get-StatusShort -RepoPath $RepoPath
+    Write-Host $statusAfterReconcile
+
+    if ($Full) {
+        $validation = Run-Validation -RepoPath $RepoPath
+        $actions.Add("validation attempted")
+    } else {
+        $validation = "hourly mode: validation deferred"
+    }
+
+    $porcelain = Invoke-Git -RepoPath $RepoPath -Args @("status", "--porcelain")
+    $changedLines = @()
+    if (-not [string]::IsNullOrWhiteSpace($porcelain.Output)) {
+        $changedLines = $porcelain.Output -split "n" | Where-Object { $_.Trim() }
+        $filesTouched = $changedLines | ForEach-Object {
+            ($_ -replace '^\s*[MADRCU\?]+\s+', '').Trim()
+        }
+    }
+
+    if ($Full -and $filesTouched.Count -gt 0 -and -not $DryRun) {
+        $null = Invoke-Git -RepoPath $RepoPath -Args @("add", "-A")
+        $actions.Add("staged")
+        $commitMessage = New-AutoCommitMessage -RepoName $repoName
+        $commit = Invoke-Git -RepoPath $RepoPath -Args @("commit", "-m", $commitMessage) -AllowFailure
+        if ($commit.Code -eq 0) {
+            $actions.Add("committed")
+        } else {
+            if ($commit.Output -match "nothing to commit") {
+                $actions.Add("no commit created")
+            } else {
+                $blockers.Add("commit failed: $($commit.Output)")
+            }
+        }
+    }
+
+    $postCommitState = Get-RemoteState -RepoPath $RepoPath -Branch $branch
+    if ($Full -and $postCommitState.Ahead -gt 0 -and -not $postCommitState.Diverged -and -not $DryRun) {
+        $push = Invoke-Git -RepoPath $RepoPath -Args @("push", "origin", $branch) -AllowFailure
+        if ($push.Code -eq 0) {
+            $actions.Add("pushed")
+        } else {
+            $blockers.Add("push failed: $($push.Output)")
+        }
+    }
+
+    $finalState = Get-RemoteState -RepoPath $RepoPath -Branch $branch
+
+    return [PSCustomObject]@{
+        Repo = $repoName
+        Path = $RepoPath
+        Branch = $branch
+        RemoteState = $finalState.Summary
+        Actions = $actions
+        FilesTouched = $filesTouched
+        Validation = $validation
+        Blockers = $blockers
+    }
+}
+
+Ensure-Dir -Path $LogDir
+
+if (-not $RepoPaths -or $RepoPaths.Count -eq 0) {
+    $RepoPaths = Get-DefaultRepoPaths
+}
+
+$RepoPaths = $RepoPaths | Where-Object { $_ -and (Test-Path $_) -and (Test-GitRepo $_) } | Select-Object -Unique
+
+if ($RepoPaths.Count -eq 0) {
+    throw "No valid git repositories found."
+}
+
+$modeLabel = if ($Full) { "full" } elseif ($Hourly) { "hourly" } else { "standard" }
+$now = Get-Date
+$stamp = $now.ToString("yyyyMMdd_HHmmss")
+$logFile = Join-Path $LogDir "sync_steward_$modeLabel_$stamp.log"
+
+$reports = foreach ($repo in $RepoPaths) {
+    Sync-OneRepo -RepoPath $repo -Full:$Full -DryRun:$DryRun
+}
+
+$reportText = foreach ($r in $reports) {
+@"
+repo: $($r.Repo)
+branch: $($r.Branch)
+remote_sync_state: $($r.RemoteState)
+actions: $([string]::Join(", ", $r.Actions))
+files_touched: $([string]::Join(", ", $r.FilesTouched))
+validation:
+$($r.Validation)
+remaining_blockers: $([string]::Join(" | ", $r.Blockers))
+next_sync: $(if ($Hourly) { "top of next hour" } elseif ($Full) { "3 hours (or sooner if active)" } else { "1 hour lightweight / 3 hour full" })
+
+"@
+}
+
+$reportText | Set-Content -Path $logFile -Encoding UTF8
+
+Write-Section "SYNC STEWARD SUMMARY"
+$reportText
+Write-Host "Log written to: $logFile"
+How to run it
+For a lightweight hourly check:
+PowerShell
+powershell -ExecutionPolicy Bypass -File .\sync-steward.ps1 -Hourly
+For a full reconcile cycle:
+PowerShell
+powershell -ExecutionPolicy Bypass -File .\sync-steward.ps1 -Full
+For a safe preview:
+PowerShell
+powershell -ExecutionPolicy Bypass -File .\sync-steward.ps1 -Full -DryRun
+Scheduled task setup
+This creates two Windows scheduled tasks: one hourly lightweight pass and one every 3 hours full pass.
+Save this as register-sync-steward-tasks.ps1:
+PowerShell
+param(
+    [string]$ScriptPath = "C:\prime_anchor\NuSyQ-Hub\scripts\sync-steward.ps1"
+)
+
+$hourlyAction = New-ScheduledTaskAction 
+    -Execute "powershell.exe" 
+    -Argument "-ExecutionPolicy Bypass -File "$ScriptPath" -Hourly"
+
+$hourlyTrigger = New-ScheduledTaskTrigger -Once -At (Get-Date).Date 
+| ForEach-Object {
+    $_.RepetitionInterval = "PT1H"
+    $_.RepetitionDuration = "P1D"
+    $_
+}
+
+$fullAction = New-ScheduledTaskAction 
+    -Execute "powershell.exe" 
+    -Argument "-ExecutionPolicy Bypass -File "$ScriptPath" -Full"
+
+$fullTrigger = New-ScheduledTaskTrigger -Once -At (Get-Date).Date 
+| ForEach-Object {
+    $_.RepetitionInterval = "PT3H"
+    $_.RepetitionDuration = "P1D"
+    $_
+}
+
+Register-ScheduledTask -TaskName "NuSyQ-Sync-Steward-Hourly" -Action $hourlyAction -Trigger $hourlyTrigger -Force
+Register-ScheduledTask -TaskName "NuSyQ-Sync-Steward-Full" -Action $fullAction -Trigger $fullTrigger -Force
+Run it with:
+PowerShell
+powershell -ExecutionPolicy Bypass -File .\register-sync-steward-tasks.ps1
+TerminalDepths wrapper idea
+If you want this reachable from your cockpit, expose it as a TerminalDepths command, for example:
+sync steward hourly
+sync steward full
+sync steward dryrun
+The wrapper can just shell out to the PowerShell script.
+Example command mapping logic:
+Python
+# pseudo-handler
+def _cmd_sync(args):
+    if args == ["steward", "hourly"]:
+        return run_ps("sync-steward.ps1 -Hourly")
+    if args == ["steward", "full"]:
+        return run_ps("sync-steward.ps1 -Full")
+    if args == ["steward", "dryrun"]:
+        return run_ps("sync-steward.ps1 -Full -DryRun")
+Good operational pattern
+Use this rhythm:
+At the top of each hour:
+fetch
+inspect ahead/behind
+inspect local status
+log blockers
+Every 3 hours:
+full reconcile
+validate
+stage
+commit
+push
+broadcast
+If branches are conflict-heavy:
+keep hourly checks
+reduce full auto-persist to every 6 hours
+surface blockers immediately instead of pretending the branch is healthy
+Important guardrails
+Do not let the script:
+force-push
+auto-resolve large semantic conflicts
+commit giant unrelated changes
+hide failed validation
+Do let it:
+fetch often
+surface divergence early
+stash/rebase safely when appropriate
+checkpoint useful work
+keep parallel agents informed
+If you want, I can turn this into a repo-specific version for your exact paths and a TerminalDepths command implementation prompt for whichever agent is wiring the cockpit.
+
+Perfect. Here’s the repo-specific version with your actual workspace layout, plus a TerminalDepths implementation prompt for the agent wiring the cockpit.
+
+I’m assuming these roots:
+
+C:\prime_anchor\NuSyQ-Hub
+C:\Users\keath\Dev-Mentor
+C:\prime_anchor\SimulatedVerse\SimulatedVerse
+C:\prime_anchor\NuSyQ-Ultimate
+C:\prime_anchor\CONCEPT_SAMURAI
+
+That fits the ecosystem shape already documented: Terminal Depths as the command hub/cockpit with broad REST/MCP/game-command surfaces, and NuSyQ-Hub / SimulatedVerse as sibling repos in the bridge model.
+
+1. Repo-specific sync-steward.ps1
+
+Save this as:
+
+C:\prime_anchor\NuSyQ-Hub\scripts\sync-steward.ps1
+
+param(
+    [string[]]$RepoPaths = @(
+        "C:\Users\keath\Dev-Mentor",
+        "C:\prime_anchor\NuSyQ-Hub",
+        "C:\prime_anchor\SimulatedVerse\SimulatedVerse",
+        "C:\prime_anchor\NuSyQ-Ultimate",
+        "C:\prime_anchor\CONCEPT_SAMURAI"
+    ),
+    [switch]$Full,
+    [switch]$Hourly,
+    [switch]$DryRun,
+    [string]$LogDir = "C:\prime_anchor\NuSyQ-Hub\runtime\sync-logs",
+    [string]$BranchFallback = "main"
+)
+
+$ErrorActionPreference = "Stop"
+
+function Write-Section {
+    param([string]$Text)
+    Write-Host ""
+    Write-Host ("=" * 72)
+    Write-Host $Text
+    Write-Host ("=" * 72)
+}
+
+function Ensure-Dir {
+    param([string]$Path)
+    if (-not (Test-Path $Path)) {
+        New-Item -ItemType Directory -Path $Path -Force | Out-Null
+    }
+}
+
+function Test-GitRepo {
+    param([string]$Path)
+    Test-Path (Join-Path $Path ".git")
+}
+
+function Invoke-Git {
+    param(
+        [string]$RepoPath,
+        [string[]]$Args,
+        [switch]$AllowFailure
+    )
+
+    Push-Location $RepoPath
+    try {
+        $output = & git @Args 2>&1
+        $code = $LASTEXITCODE
+        if ($code -ne 0 -and -not $AllowFailure) {
+            throw "git $($Args -join ' ') failed in $RepoPath`n$output"
+        }
+        [PSCustomObject]@{
+            Code = $code
+            Output = ($output -join "`n")
+        }
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+function Get-BranchName {
+    param([string]$RepoPath)
+    $r = Invoke-Git -RepoPath $RepoPath -Args @("branch", "--show-current")
+    $name = $r.Output.Trim()
+    if ([string]::IsNullOrWhiteSpace($name)) { return $BranchFallback }
+    $name
+}
+
+function Get-StatusShort {
+    param([string]$RepoPath)
+    (Invoke-Git -RepoPath $RepoPath -Args @("status", "-sb")).Output.Trim()
+}
+
+function Get-RemoteState {
+    param([string]$RepoPath, [string]$Branch)
+
+    $upstreamRef = "origin/$Branch"
+    $verify = Invoke-Git -RepoPath $RepoPath -Args @("rev-parse", "--verify", $upstreamRef) -AllowFailure
+    if ($verify.Code -ne 0) {
+        return [PSCustomObject]@{
+            UpstreamExists = $false
+            Ahead = 0
+            Behind = 0
+            Diverged = $false
+            Summary = "no upstream"
+        }
+    }
+
+    $counts = Invoke-Git -RepoPath $RepoPath -Args @("rev-list", "--left-right", "--count", "HEAD...$upstreamRef")
+    $parts = $counts.Output.Trim().Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
+    $ahead = [int]$parts[0]
+    $behind = [int]$parts[1]
+
+    [PSCustomObject]@{
+        UpstreamExists = $true
+        Ahead = $ahead
+        Behind = $behind
+        Diverged = ($ahead -gt 0 -and $behind -gt 0)
+        Summary = if ($ahead -eq 0 -and $behind -eq 0) {
+            "up to date"
+        } elseif ($ahead -gt 0 -and $behind -eq 0) {
+            "ahead $ahead"
+        } elseif ($ahead -eq 0 -and $behind -gt 0) {
+            "behind $behind"
+        } else {
+            "diverged: ahead $ahead / behind $behind"
+        }
+    }
+}
+
+function Test-WorkingTreeClean {
+    param([string]$RepoPath)
+    $r = Invoke-Git -RepoPath $RepoPath -Args @("status", "--porcelain")
+    [string]::IsNullOrWhiteSpace($r.Output)
+}
+
+function New-AutoCommitMessage {
+    param([string]$RepoName)
+    $stamp = Get-Date -Format "yyyy-MM-dd HH:mm"
+    "chore(sync): steward checkpoint for $RepoName @ $stamp"
+}
+
+function Run-Validation {
+    param([string]$RepoPath)
+
+    $results = New-Object System.Collections.Generic.List[string]
+
+    if (Test-Path (Join-Path $RepoPath "scripts\validate_all.py")) {
+        Push-Location $RepoPath
+        try {
+            $out = & python "scripts\validate_all.py" 2>&1
+            $results.Add("validate_all.py: executed")
+            $results.Add(($out -join "`n"))
+        }
+        catch {
+            $results.Add("validate_all.py: failed")
+            $results.Add($_.Exception.Message)
+        }
+        finally {
+            Pop-Location
+        }
+    }
+    elseif (Test-Path (Join-Path $RepoPath "package.json")) {
+        Push-Location $RepoPath
+        try {
+            $out = & npm test -- --runInBand 2>&1
+            $results.Add("npm test: executed")
+            $results.Add(($out -join "`n"))
+        }
+        catch {
+            $results.Add("npm test: failed")
+            $results.Add($_.Exception.Message)
+        }
+        finally {
+            Pop-Location
+        }
+    }
+    else {
+        $results.Add("no standard validation script detected")
+    }
+
+    $results -join "`n"
+}
+
+function Try-TerminalDepthsBroadcast {
+    param([string]$Message)
+
+    $ports = @(7337, 5000)
+    foreach ($port in $ports) {
+        try {
+            $body = @{
+                session_id = "sync-steward"
+                command    = "echo $Message"
+            } | ConvertTo-Json -Depth 4
+
+            Invoke-RestMethod -Uri "http://localhost:$port/api/game/command" `
+                -Method POST `
+                -ContentType "application/json" `
+                -Body $body `
+                -TimeoutSec 5 | Out-Null
+
+            return "broadcasted via TerminalDepths on :$port"
+        }
+        catch {
+        }
+    }
+
+    return "TerminalDepths broadcast unavailable"
+}
+
+function Sync-OneRepo {
+    param(
+        [string]$RepoPath,
+        [switch]$Full,
+        [switch]$DryRun
+    )
+
+    $repoName = Split-Path $RepoPath -Leaf
+    $branch = Get-BranchName -RepoPath $RepoPath
+
+    Write-Section "SYNC :: $repoName :: $branch"
+
+    $actions = New-Object System.Collections.Generic.List[string]
+    $filesTouched = @()
+    $validation = ""
+    $blockers = New-Object System.Collections.Generic.List[string]
+
+    $statusBefore = Get-StatusShort -RepoPath $RepoPath
+    Write-Host $statusBefore
+
+    $remotes = Invoke-Git -RepoPath $RepoPath -Args @("remote", "-v")
+    Write-Host $remotes.Output
+
+    if (-not $DryRun) {
+        $null = Invoke-Git -RepoPath $RepoPath -Args @("fetch", "--all", "--prune")
+        $actions.Add("fetched")
+    } else {
+        $actions.Add("dry-run: skipped fetch")
+    }
+
+    $remoteState = Get-RemoteState -RepoPath $RepoPath -Branch $branch
+    Write-Host "Remote state: $($remoteState.Summary)"
+
+    $isClean = Test-WorkingTreeClean -RepoPath $RepoPath
+
+    if ($remoteState.Behind -gt 0 -and -not $remoteState.Diverged) {
+        if ($isClean -and -not $DryRun) {
+            $null = Invoke-Git -RepoPath $RepoPath -Args @("pull", "--rebase", "origin", $branch)
+            $actions.Add("rebased from origin/$branch")
+        } elseif (-not $isClean -and -not $DryRun) {
+            $null = Invoke-Git -RepoPath $RepoPath -Args @("stash", "push", "-u", "-m", "sync-steward auto-stash")
+            $actions.Add("stashed local work")
+            $null = Invoke-Git -RepoPath $RepoPath -Args @("pull", "--rebase", "origin", $branch)
+            $actions.Add("rebased from origin/$branch")
+            $stashPop = Invoke-Git -RepoPath $RepoPath -Args @("stash", "pop") -AllowFailure
+            if ($stashPop.Code -eq 0) {
+                $actions.Add("restored stashed work")
+            } else {
+                $blockers.Add("stash pop needs manual conflict resolution")
+            }
+        } else {
+            $actions.Add("dry-run: skipped pull --rebase")
+        }
+    }
+    elseif ($remoteState.Diverged) {
+        $blockers.Add("branch diverged; manual review recommended before automated push")
+    }
+
+    $statusAfterReconcile = Get-StatusShort -RepoPath $RepoPath
+    Write-Host $statusAfterReconcile
+
+    if ($Full) {
+        $validation = Run-Validation -RepoPath $RepoPath
+        $actions.Add("validation attempted")
+    } else {
+        $validation = "hourly mode: validation deferred"
+    }
+
+    $porcelain = Invoke-Git -RepoPath $RepoPath -Args @("status", "--porcelain")
+    $changedLines = @()
+    if (-not [string]::IsNullOrWhiteSpace($porcelain.Output)) {
+        $changedLines = $porcelain.Output -split "`n" | Where-Object { $_.Trim() }
+        $filesTouched = $changedLines | ForEach-Object {
+            ($_ -replace '^\s*[MADRCU\?]+\s+', '').Trim()
+        }
+    }
+
+    if ($Full -and $filesTouched.Count -gt 0 -and -not $DryRun) {
+        $null = Invoke-Git -RepoPath $RepoPath -Args @("add", "-A")
+        $actions.Add("staged")
+        $commitMessage = New-AutoCommitMessage -RepoName $repoName
+        $commit = Invoke-Git -RepoPath $RepoPath -Args @("commit", "-m", $commitMessage) -AllowFailure
+        if ($commit.Code -eq 0) {
+            $actions.Add("committed")
+        } else {
+            if ($commit.Output -match "nothing to commit") {
+                $actions.Add("no commit created")
+            } else {
+                $blockers.Add("commit failed: $($commit.Output)")
+            }
+        }
+    }
+
+    $postCommitState = Get-RemoteState -RepoPath $RepoPath -Branch $branch
+    if ($Full -and $postCommitState.Ahead -gt 0 -and -not $postCommitState.Diverged -and -not $DryRun) {
+        $push = Invoke-Git -RepoPath $RepoPath -Args @("push", "origin", $branch) -AllowFailure
+        if ($push.Code -eq 0) {
+            $actions.Add("pushed")
+        } else {
+            $blockers.Add("push failed: $($push.Output)")
+        }
+    }
+
+    $finalState = Get-RemoteState -RepoPath $RepoPath -Branch $branch
+
+    [PSCustomObject]@{
+        Repo = $repoName
+        Path = $RepoPath
+        Branch = $branch
+        RemoteState = $finalState.Summary
+        Actions = $actions
+        FilesTouched = $filesTouched
+        Validation = $validation
+        Blockers = $blockers
+    }
+}
+
+Ensure-Dir -Path $LogDir
+
+$RepoPaths = $RepoPaths | Where-Object { $_ -and (Test-Path $_) -and (Test-GitRepo $_) } | Select-Object -Unique
+if ($RepoPaths.Count -eq 0) {
+    throw "No valid git repositories found."
+}
+
+$modeLabel = if ($Full) { "full" } elseif ($Hourly) { "hourly" } else { "standard" }
+$stamp = (Get-Date).ToString("yyyyMMdd_HHmmss")
+$logFile = Join-Path $LogDir "sync_steward_$modeLabel`_$stamp.log"
+
+$reports = foreach ($repo in $RepoPaths) {
+    Sync-OneRepo -RepoPath $repo -Full:$Full -DryRun:$DryRun
+}
+
+$reportText = foreach ($r in $reports) {
+@"
+repo: $($r.Repo)
+path: $($r.Path)
+branch: $($r.Branch)
+remote_sync_state: $($r.RemoteState)
+actions: $([string]::Join(", ", $r.Actions))
+files_touched: $([string]::Join(", ", $r.FilesTouched))
+validation:
+$($r.Validation)
+remaining_blockers: $([string]::Join(" | ", $r.Blockers))
+next_sync: $(if ($Hourly) { "top of next hour" } elseif ($Full) { "3 hours (or sooner if active)" } else { "1 hour lightweight / 3 hour full" })
+
+"@
+}
+
+$reportText | Set-Content -Path $logFile -Encoding UTF8
+
+$broadcast = Try-TerminalDepthsBroadcast -Message ("sync steward completed: " + $modeLabel)
+Write-Section "SYNC STEWARD SUMMARY"
+$reportText
+Write-Host "Log written to: $logFile"
+Write-Host $broadcast
+2. Repo-specific scheduled task script
+
+Save as:
+
+C:\prime_anchor\NuSyQ-Hub\scripts\register-sync-steward-tasks.ps1
+
+param(
+    [string]$ScriptPath = "C:\prime_anchor\NuSyQ-Hub\scripts\sync-steward.ps1"
+)
+
+$hourlyAction = New-ScheduledTaskAction `
+    -Execute "powershell.exe" `
+    -Argument "-ExecutionPolicy Bypass -File `"$ScriptPath`" -Hourly"
+
+$hourlyTrigger = New-ScheduledTaskTrigger -Once -At (Get-Date).Date
+$hourlyTrigger.RepetitionInterval = "PT1H"
+$hourlyTrigger.RepetitionDuration = "P1D"
+
+$fullAction = New-ScheduledTaskAction `
+    -Execute "powershell.exe" `
+    -Argument "-ExecutionPolicy Bypass -File `"$ScriptPath`" -Full"
+
+$fullTrigger = New-ScheduledTaskTrigger -Once -At (Get-Date).Date
+$fullTrigger.RepetitionInterval = "PT3H"
+$fullTrigger.RepetitionDuration = "P1D"
+
+Register-ScheduledTask -TaskName "NuSyQ-Sync-Steward-Hourly" -Action $hourlyAction -Trigger $hourlyTrigger -Force
+Register-ScheduledTask -TaskName "NuSyQ-Sync-Steward-Full" -Action $fullAction -Trigger $fullTrigger -Force
+
+Run with:
+
+powershell -ExecutionPolicy Bypass -File C:\prime_anchor\NuSyQ-Hub\scripts\register-sync-steward-tasks.ps1
+3. TerminalDepths implementation prompt for the cockpit agent
+
+Give this to the agent wiring TerminalDepths:
+
+Implement a TerminalDepths command surface for sync stewardship.
+
+Goal:
+Expose the repo sync steward through TerminalDepths so users and agents can run:
+
+- sync steward hourly
+- sync steward full
+- sync steward dryrun
+- sync steward status
+
+Requirements:
+1. Use the existing TerminalDepths command architecture.
+2. Shell out to:
+   C:\prime_anchor\NuSyQ-Hub\scripts\sync-steward.ps1
+3. Map:
+   - hourly -> -Hourly
+   - full -> -Full
+   - dryrun -> -Full -DryRun
+4. status should:
+   - show most recent sync log from:
+     C:\prime_anchor\NuSyQ-Hub\runtime\sync-logs
+   - summarize repo, branch, remote_sync_state, actions, blockers
+5. Do not force-push.
+6. Do not auto-resolve large semantic conflicts.
+7. Return concise, operator-friendly output.
+
+Integration expectations:
+- Keep command implementation small and surgical.
+- Follow existing style in the command layer.
+- Prefer additive command support instead of refactoring unrelated handlers.
+- Validate by running the wrapper and showing successful output.
+
+Desired behavior:
+- TerminalDepths becomes the cockpit for sync stewardship across Dev-Mentor, NuSyQ-Hub, SimulatedVerse, NuSyQ-Ultimate, and CONCEPT_SAMURAI.
+4. Recommended operator commands
+
+Run the hourly pass:
+
+powershell -ExecutionPolicy Bypass -File C:\prime_anchor\NuSyQ-Hub\scripts\sync-steward.ps1 -Hourly
+
+Run the full pass:
+
+powershell -ExecutionPolicy Bypass -File C:\prime_anchor\NuSyQ-Hub\scripts\sync-steward.ps1 -Full
+
+Run safe preview:
+
+powershell -ExecutionPolicy Bypass -File C:\prime_anchor\NuSyQ-Hub\scripts\sync-steward.ps1 -Full -DryRun
+5. Operational rhythm
+
+Use this cadence:
+
+At the top of each hour:
+
+fetch
+inspect ahead/behind
+inspect local drift
+log blockers
+broadcast state
+
+Every 3 hours:
+
+full reconcile
+validate
+stage
+commit
+push
+broadcast
+
+If branches get conflict-heavy:
+
+keep hourly checks
+move full auto-persist to 6 hours
+escalate blockers immediately
+6. Important note
+
+This fits your architecture well because Terminal Depths already acts as the main operational cockpit with large command, REST, and ecosystem-bridge surfaces, and the td launcher/module is already meant to make it reachable from PowerShell, VS Code, Docker, and other surfaces.
+
+The next highest-yield move is to have an agent actually add the sync steward command into TerminalDepths so this stops living as an external script and starts living as part of the cockpit.
