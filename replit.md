@@ -126,6 +126,43 @@ Routes under `/api/orchestrator/`:
 - Tool registry with repo filtering
 - Execution log + shared memory inspector
 
+## Bridge HUD (Sidebar)
+
+`frontend/src/components/BridgeHUD.vue` — live ecosystem status strip embedded at the left side of the top nav bar:
+- Coloured dots for ChatDev :6400, Dev-Mentor :8008, and CONCEPT_SAMURAI :3002
+- Live event count badge fed by the SSE stream
+- SSE connection pulse indicator
+- Hover panel with per-service status, quest count, sessions, uptime, and 5 most-recent events
+- Links to Ecosystem and Orchestrator views
+
+## Bridge SSE Event Stream
+
+`GET /api/bridge/events` — long-lived `text/event-stream` response:
+- `ping` event every 5 s (keeps connection alive)
+- `log` events for new execution log entries
+- `health` snapshot every 30 s (probes Dev-Mentor, CONCEPT_SAMURAI, ChatDev)
+- `project` events (future: emitted when WareHouse projects complete)
+
+## Persistent Game State (`/api/nusyq/`)
+
+`server/routes/nusyq_bridge.py` — all game/sim state is persisted to the shared SQLite DB via the shared memory KV store (namespace `game_state`, key prefix `nusyq.`):
+
+| Endpoint | Method | Purpose |
+|---|---|---|
+| `/api/nusyq/game/state` | GET | Read game state (idle defaults) |
+| `/api/nusyq/game/state` | POST | Merge-update game state |
+| `/api/nusyq/colonist_state` | GET | Read colonist snapshot |
+| `/api/nusyq/colonist_state` | POST | Push colonist state from RimWorld |
+| `/api/nusyq/consciousness` | GET/POST | Persist consciousness metrics |
+| `/api/nusyq/sessions/{id}` | GET/POST | Per-session persistence |
+
+## ChatDev Project Results (`/api/bridge/projects`)
+
+WareHouse scan surface:
+- `GET /api/bridge/projects` — lists all 100+ WareHouse projects with file count, size, Python files, prompt preview, `api_key_available` flag
+- `GET /api/bridge/projects/{name}` — per-project file list with content previews
+- `projects` bridge command — available in `/api/bridge/command` router
+
 ## LLM Setup
 
 The app requires API keys to run workflows (OpenAI, Anthropic, Gemini). Set these as environment variables/secrets before use.

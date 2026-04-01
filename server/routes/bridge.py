@@ -31,7 +31,9 @@ import uuid
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+import asyncio
 from fastapi import APIRouter, Request
+from fastapi.responses import StreamingResponse
 
 _ECO = Path(__file__).resolve().parents[2] / "ecosystem"
 if str(_ECO.parent) not in sys.path:
@@ -179,6 +181,155 @@ async def manifest():
     }
 
 
+# ── SSE Event Stream ────────────────────────────────────────────────────────
+
+@router.get("/events")
+async def bridge_events(request: Request):
+    """
+    Server-Sent Events stream — aggregates events from all repos.
+    Event types: ping, log, health, project
+    """
+    from ecosystem.shared.execution_log import recent_logs
+
+    async def event_generator():
+        last_log_count = 0
+        last_health_check = 0.0
+
+        while True:
+            if await request.is_disconnected():
+                break
+
+            now = time.time()
+
+            # ── ping every 5s ─────────────────────────────────────────────
+            yield f"event: ping\ndata: {json.dumps({'t': round(now, 1)})}\n\n"
+
+            # ── new execution log entries ─────────────────────────────────
+            try:
+                logs = recent_logs(limit=50)
+                if len(logs) > last_log_count:
+                    for entry in logs[:len(logs) - last_log_count]:
+                        payload = json.dumps({
+                            "action": entry.get("action"),
+                            "repo": entry.get("repo"),
+                            "status": entry.get("status"),
+                            "ts": entry.get("started_at"),
+                        })
+                        yield f"event: log\ndata: {payload}\n\n"
+                    last_log_count = len(logs)
+            except Exception:
+                pass
+
+            # ── health snapshot every 30s ──────────────────────────────────
+            if now - last_health_check >= 30:
+                try:
+                    import urllib.request as _urllib
+                    probes = {
+                        "chatdev": "http://localhost:6400/health",
+                        "dev_mentor": "http://localhost:8008/api/manifest",
+                        "concept_samurai": "http://localhost:3002/",
+                    }
+                    online = []
+                    for name, url in probes.items():
+                        try:
+                            with _urllib.urlopen(url, timeout=1) as r:
+                                if r.status == 200:
+                                    online.append(name)
+                        except Exception:
+                            pass
+                    payload = json.dumps({"online": len(online), "services": online})
+                    yield f"event: health\ndata: {payload}\n\n"
+                    last_health_check = now
+                except Exception:
+                    pass
+
+            await asyncio.sleep(5)
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+            "Connection": "keep-alive",
+        },
+    )
+
+
+# ── Projects ────────────────────────────────────────────────────────────────
+
+_WAREHOUSE = Path(__file__).resolve().parents[2] / "WareHouse"
+
+
+def _list_projects() -> list:
+    """Scan WareHouse/ and return metadata for each project directory."""
+    if not _WAREHOUSE.exists():
+        return []
+    projects = []
+    for d in sorted(_WAREHOUSE.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True):
+        if not d.is_dir():
+            continue
+        files = list(d.iterdir())
+        py_files = [f.name for f in files if f.suffix == ".py"]
+        has_prompt = any(f.suffix == ".prompt" for f in files)
+        prompt_text = None
+        if has_prompt:
+            pf = next((f for f in files if f.suffix == ".prompt"), None)
+            try:
+                prompt_text = pf.read_text()[:500]
+            except Exception:
+                pass
+        size_kb = sum(f.stat().st_size for f in files if f.is_file()) // 1024
+        projects.append({
+            "name": d.name,
+            "file_count": len(files),
+            "has_code": bool(py_files),
+            "py_files": py_files[:10],
+            "has_prompt": has_prompt,
+            "prompt_preview": prompt_text,
+            "size_kb": size_kb,
+            "modified_at": d.stat().st_mtime,
+        })
+    return projects
+
+
+@router.get("/projects")
+async def projects_list():
+    """List all ChatDev WareHouse projects with metadata."""
+    import os
+    api_key_available = bool(os.environ.get("OPENAI_API_KEY") or os.environ.get("ANTHROPIC_API_KEY"))
+    projects = _list_projects()
+    return {
+        "total": len(projects),
+        "api_key_available": api_key_available,
+        "warehouse_path": str(_WAREHOUSE),
+        "projects": projects,
+    }
+
+
+@router.get("/projects/{name:path}")
+async def project_detail(name: str):
+    """Return detailed metadata for a specific WareHouse project."""
+    d = _WAREHOUSE / name
+    if not d.exists() or not d.is_dir():
+        return {"error": f"project '{name}' not found"}
+    files = list(d.iterdir())
+    file_list = []
+    for f in files:
+        if f.is_file():
+            try:
+                preview = f.read_text()[:300] if f.suffix in (".py", ".md", ".txt", ".prompt", ".html", ".js") else None
+            except Exception:
+                preview = None
+            file_list.append({"name": f.name, "size_bytes": f.stat().st_size, "preview": preview})
+    return {
+        "name": name,
+        "files": file_list,
+        "total_files": len(file_list),
+        "has_code": any(f["name"].endswith(".py") for f in file_list),
+    }
+
+
 # ── Quests ─────────────────────────────────────────────────────────────────
 
 @router.get("/quests")
@@ -308,6 +459,17 @@ def _cmd_boot(ctx):
         "cockpit": "http://localhost:5000",
         "orchestrator": "/orchestrator",
         "ecosystem": "/ecosystem",
+    }
+
+
+@_register_cmd("projects")
+def _cmd_projects(ctx):
+    import os
+    projects = _list_projects()
+    return {
+        "total": len(projects),
+        "api_key_available": bool(os.environ.get("OPENAI_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")),
+        "projects": [{k: v for k, v in p.items() if k != "prompt_preview"} for p in projects[:20]],
     }
 
 

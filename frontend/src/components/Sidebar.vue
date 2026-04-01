@@ -1,5 +1,6 @@
 <template>
     <div class="sidebar">
+        <BridgeHUD />
 
         <nav class="sidebar-nav">
             <router-link to="/">Home</router-link>
@@ -38,6 +39,7 @@
 import { RouterLink, useRoute } from 'vue-router'
 import { computed, ref } from 'vue'
 import SettingsModal from './SettingsModal.vue'
+import BridgeHUD from './BridgeHUD.vue'
 
 const showSettingsModal = ref(false)
 
