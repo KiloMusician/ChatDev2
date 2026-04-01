@@ -154,3 +154,51 @@ async def execution_logs(limit: int = 50, repo: str = None):
 async def is_running():
     """Check if a CHUG cycle is currently running."""
     return {"running": _cycle_lock.locked()}
+
+
+# ── CHUG Daemon control ───────────────────────────────────────────────────
+
+@router.get("/daemon/status")
+async def daemon_status():
+    """Get CHUG daemon state: running, interval, last/next run, cycle count."""
+    try:
+        from ecosystem.chug_daemon import get_state
+        return get_state()
+    except Exception as e:
+        return {"error": str(e), "running": False}
+
+
+@router.post("/daemon/start")
+async def daemon_start(body: dict = {}):
+    """Start the CHUG daemon. Optional: {\"interval_s\": 300}"""
+    from ecosystem.chug_daemon import start
+    interval = body.get("interval_s", 600)
+    return start(interval_s=int(interval))
+
+
+@router.post("/daemon/stop")
+async def daemon_stop():
+    """Stop the CHUG daemon."""
+    from ecosystem.chug_daemon import stop
+    return stop()
+
+
+@router.post("/daemon/config")
+async def daemon_config(body: dict):
+    """Update daemon interval without restarting: {\"interval_s\": 300}"""
+    from ecosystem.chug_daemon import set_interval
+    interval = body.get("interval_s")
+    if interval is None:
+        return {"error": "interval_s required"}
+    return set_interval(int(interval))
+
+
+@router.post("/daemon/run-now")
+async def daemon_run_now():
+    """Trigger an immediate CHUG cycle outside the daemon schedule."""
+    from ecosystem.chug_daemon import run_now_async
+    try:
+        report = await run_now_async()
+        return {"triggered": True, "cycle": report.get("cycle"), "status": "complete"}
+    except Exception as e:
+        return {"triggered": False, "error": str(e)}

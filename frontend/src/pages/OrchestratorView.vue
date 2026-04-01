@@ -43,6 +43,11 @@
         <span class="stat-label">Tasks (total)</span>
         <span class="stat-num">{{ taskStats.total }}</span>
       </div>
+      <div class="stat-pill" :class="daemon?.running ? 'daemon-on' : 'daemon-off'" v-if="daemon">
+        <span class="stat-dot"></span>
+        Daemon {{ daemon.running ? 'ON' : 'OFF' }}
+        <span v-if="daemon.running" class="stat-interval">· {{ formatInterval(daemon.interval_s) }}</span>
+      </div>
     </div>
 
     <div class="orch-grid">
@@ -95,6 +100,93 @@
               {{ c.status }}
             </div>
             <div class="cycle-time">{{ formatTime(c.started_at) }}</div>
+          </div>
+        </div>
+
+        <!-- CHUG Daemon Control -->
+        <div class="panel daemon-panel">
+          <h3 class="panel-title">
+            🔄 CHUG Daemon
+            <span class="daemon-badge" :class="daemon?.running ? 'badge-on' : 'badge-off'">
+              {{ daemon?.running ? 'RUNNING' : 'STOPPED' }}
+            </span>
+          </h3>
+
+          <!-- Stats row -->
+          <div class="daemon-stats" v-if="daemon">
+            <div class="ds-item">
+              <span class="ds-label">Interval</span>
+              <span class="ds-val">{{ formatInterval(daemon.interval_s) }}</span>
+            </div>
+            <div class="ds-item">
+              <span class="ds-label">Daemon cycles</span>
+              <span class="ds-val">{{ daemon.total_cycles ?? 0 }}</span>
+            </div>
+            <div class="ds-item">
+              <span class="ds-label">Errors</span>
+              <span class="ds-val" :class="daemon.errors ? 'val-err' : ''">{{ daemon.errors ?? 0 }}</span>
+            </div>
+          </div>
+
+          <!-- Last / Next run -->
+          <div class="daemon-times" v-if="daemon">
+            <div class="dt-row" v-if="daemon.last_run_at">
+              <span class="dt-label">Last run</span>
+              <span class="dt-val">{{ formatTime(daemon.last_run_at) }}</span>
+              <span class="dt-cycle" v-if="daemon.last_run_cycle">cycle #{{ daemon.last_run_cycle }}</span>
+            </div>
+            <div class="dt-row" v-if="daemon.next_run_at && daemon.running">
+              <span class="dt-label">Next run</span>
+              <span class="dt-val next-run">{{ formatTime(daemon.next_run_at) }}</span>
+              <span class="dt-countdown">{{ countdown }}</span>
+            </div>
+            <div class="dt-row" v-if="daemon.last_error">
+              <span class="dt-label err-label">Last error</span>
+              <span class="dt-val err-val">{{ daemon.last_error }}</span>
+            </div>
+          </div>
+
+          <!-- Interval slider -->
+          <div class="daemon-interval-ctrl">
+            <label class="interval-label">Interval: {{ formatInterval(intervalInput) }}</label>
+            <input
+              type="range"
+              min="60" max="3600" step="60"
+              v-model.number="intervalInput"
+              class="interval-slider"
+            />
+            <div class="interval-presets">
+              <button v-for="pre in intervalPresets" :key="pre.s"
+                class="preset-btn" :class="{ active: intervalInput === pre.s }"
+                @click="intervalInput = pre.s">{{ pre.label }}</button>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="daemon-btns">
+            <button
+              v-if="!daemon?.running"
+              class="dbtn dbtn-start"
+              @click="daemonStart"
+              :disabled="daemonBusy"
+            >▶ Start</button>
+            <button
+              v-if="daemon?.running"
+              class="dbtn dbtn-stop"
+              @click="daemonStop"
+              :disabled="daemonBusy"
+            >⏹ Stop</button>
+            <button
+              v-if="daemon?.running"
+              class="dbtn dbtn-cfg"
+              @click="daemonUpdateInterval"
+              :disabled="daemonBusy"
+            >⏱ Update Interval</button>
+            <button
+              class="dbtn dbtn-now"
+              @click="daemonRunNow"
+              :disabled="daemonBusy || cycleRunning"
+            >⚡ Run Now</button>
           </div>
         </div>
 
@@ -226,8 +318,21 @@ const toolFilter = ref(null)
 const scanning = ref(false)
 const triggering = ref(false)
 const cycleRunning = ref(false)
-
 const newTask = ref({ action: '', repo: 'ecosystem' })
+
+// Daemon state
+const daemon = ref(null)
+const daemonBusy = ref(false)
+const intervalInput = ref(600)
+const countdown = ref('')
+
+const intervalPresets = [
+  { label: '1 min',  s: 60 },
+  { label: '5 min',  s: 300 },
+  { label: '10 min', s: 600 },
+  { label: '30 min', s: 1800 },
+  { label: '1 hr',   s: 3600 },
+]
 
 let pollTimer = null
 
@@ -254,7 +359,7 @@ const filteredMemory = computed(() =>
 // ── Loaders ────────────────────────────────────────────────────────────────
 
 async function loadAll() {
-  await Promise.all([loadStatus(), loadCycles(), loadTasks(), loadAgents(), loadTools(), loadLogs(), checkRunning()])
+  await Promise.all([loadStatus(), loadCycles(), loadTasks(), loadAgents(), loadTools(), loadLogs(), checkRunning(), loadDaemon()])
 }
 
 async function loadStatus() {
@@ -358,6 +463,84 @@ async function enqueueTask() {
   await loadTasks()
 }
 
+// ── Daemon ─────────────────────────────────────────────────────────────────
+
+async function loadDaemon() {
+  try {
+    const r = await fetch('/api/orchestrator/daemon/status')
+    daemon.value = await r.json()
+    if (daemon.value?.interval_s && !daemonBusy.value) {
+      intervalInput.value = daemon.value.interval_s
+    }
+    updateCountdown()
+  } catch (e) { }
+}
+
+function updateCountdown() {
+  if (!daemon.value?.next_run_at || !daemon.value?.running) { countdown.value = ''; return }
+  const next = new Date(daemon.value.next_run_at + 'Z')
+  const diff = Math.max(0, Math.round((next - Date.now()) / 1000))
+  if (diff === 0) { countdown.value = 'now'; return }
+  const m = Math.floor(diff / 60), s = diff % 60
+  countdown.value = m > 0 ? `in ${m}m ${s}s` : `in ${s}s`
+}
+
+async function daemonStart() {
+  daemonBusy.value = true
+  try {
+    await fetch('/api/orchestrator/daemon/start', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ interval_s: intervalInput.value }),
+    })
+    await loadDaemon()
+  } finally { daemonBusy.value = false }
+}
+
+async function daemonStop() {
+  daemonBusy.value = true
+  try {
+    await fetch('/api/orchestrator/daemon/stop', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
+    })
+    await loadDaemon()
+  } finally { daemonBusy.value = false }
+}
+
+async function daemonUpdateInterval() {
+  daemonBusy.value = true
+  try {
+    await fetch('/api/orchestrator/daemon/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ interval_s: intervalInput.value }),
+    })
+    await loadDaemon()
+  } finally { daemonBusy.value = false }
+}
+
+async function daemonRunNow() {
+  daemonBusy.value = true
+  cycleRunning.value = true
+  try {
+    await fetch('/api/orchestrator/daemon/run-now', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
+    })
+    await loadAll()
+  } finally { daemonBusy.value = false; cycleRunning.value = false }
+}
+
+function formatInterval(s) {
+  if (!s) return '—'
+  if (s < 60) return `${s}s`
+  if (s < 3600) return `${Math.round(s / 60)}m`
+  return `${(s / 3600).toFixed(1)}h`
+}
+
 // ── Helpers ────────────────────────────────────────────────────────────────
 
 function parseCaps(caps) {
@@ -380,15 +563,22 @@ function phaseClass(phase) {
 
 // ── Lifecycle ──────────────────────────────────────────────────────────────
 
+let countdownTimer = null
+
 onMounted(() => {
   loadAll()
   pollTimer = setInterval(() => {
     checkRunning()
+    loadDaemon()
     if (cycleRunning.value) loadAll()
   }, 5000)
+  countdownTimer = setInterval(updateCountdown, 1000)
 })
 
-onUnmounted(() => clearInterval(pollTimer))
+onUnmounted(() => {
+  clearInterval(pollTimer)
+  clearInterval(countdownTimer)
+})
 </script>
 
 <style scoped>
@@ -618,4 +808,68 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 .mem-key  { color: #58a6ff; font-family: monospace; white-space: nowrap; flex-shrink: 0; min-width: 120px; }
 .mem-val  { color: #8b949e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Status-bar daemon pill ─────────────────────────────────────── */
+.daemon-on  { background: rgba(35,134,54,.20); border-color: #2ea043; color: #3fb950; }
+.daemon-off { background: rgba(248,81,73,.15); border-color: #f85149; color: #f85149; }
+.stat-dot   { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+              background: currentColor; margin-right: 4px; vertical-align: middle;
+              animation: pulse-dot 1.5s infinite; }
+@keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+.stat-interval { margin-left: 4px; opacity: .75; font-size: .78rem; }
+
+/* ── Daemon panel ──────────────────────────────────────────────── */
+.daemon-panel { border-color: #58a6ff44; }
+.daemon-badge {
+  font-size: 0.7rem; font-weight: 700; padding: 1px 7px; border-radius: 10px;
+  margin-left: 8px; vertical-align: middle; letter-spacing: 0.03em;
+}
+.badge-on  { background: rgba(35,134,54,.3); color: #3fb950; }
+.badge-off { background: rgba(248,81,73,.2); color: #f85149; }
+
+.daemon-stats  { display: flex; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.ds-item       { display: flex; flex-direction: column; gap: 2px; }
+.ds-label      { font-size: 0.68rem; color: #8b949e; text-transform: uppercase; }
+.ds-val        { font-size: 1rem; font-weight: 700; color: #e6edf3; }
+.val-err       { color: #f85149; }
+
+.daemon-times  { margin-bottom: 0.85rem; display: flex; flex-direction: column; gap: 4px; }
+.dt-row        { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+.dt-label      { color: #8b949e; min-width: 60px; }
+.dt-val        { color: #e6edf3; font-family: monospace; }
+.next-run      { color: #58a6ff; }
+.dt-countdown  { color: #58a6ff99; font-size: 0.75rem; }
+.dt-cycle      { color: #8b949e; font-size: 0.75rem; }
+.err-label     { color: #f85149; }
+.err-val       { color: #f85149; font-family: monospace; font-size: 0.75rem; }
+
+.daemon-interval-ctrl { margin-bottom: 0.85rem; }
+.interval-label { font-size: 0.78rem; color: #8b949e; display: block; margin-bottom: 4px; }
+.interval-slider {
+  width: 100%; accent-color: #58a6ff; cursor: pointer;
+  margin-bottom: 6px; display: block;
+}
+.interval-presets { display: flex; gap: 4px; flex-wrap: wrap; }
+.preset-btn {
+  font-size: 0.72rem; padding: 2px 9px; border-radius: 10px;
+  border: 1px solid #30363d; background: #161b22; color: #8b949e;
+  cursor: pointer; transition: all .15s;
+}
+.preset-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+.preset-btn.active { border-color: #58a6ff; background: rgba(88,166,255,.15); color: #58a6ff; }
+
+.daemon-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.dbtn {
+  font-size: 0.8rem; padding: 5px 14px; border-radius: 6px; cursor: pointer;
+  border: 1px solid; font-weight: 600; transition: all .15s;
+}
+.dbtn:disabled { opacity: 0.45; cursor: not-allowed; }
+.dbtn-start { border-color: #2ea043; background: rgba(35,134,54,.2); color: #3fb950; }
+.dbtn-start:hover:not(:disabled) { background: rgba(35,134,54,.35); }
+.dbtn-stop  { border-color: #f85149; background: rgba(248,81,73,.15); color: #f85149; }
+.dbtn-stop:hover:not(:disabled)  { background: rgba(248,81,73,.3); }
+.dbtn-cfg   { border-color: #58a6ff; background: rgba(88,166,255,.12); color: #58a6ff; }
+.dbtn-cfg:hover:not(:disabled)   { background: rgba(88,166,255,.25); }
+.dbtn-now   { border-color: #d29922; background: rgba(210,153,34,.12); color: #e3b341; }
+.dbtn-now:hover:not(:disabled)   { background: rgba(210,153,34,.28); }
 </style>
