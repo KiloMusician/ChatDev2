@@ -17,14 +17,14 @@ python -m uvicorn app.backend.main:app \
 DEV_MENTOR_PID=$!
 
 # ── CONCEPT_SAMURAI: Static concept docs ────────────────────────────────
-echo "[ecosystem] Starting CONCEPT_SAMURAI (static docs) on port 3001..."
+echo "[ecosystem] Starting CONCEPT_SAMURAI (static docs) on port 3002..."
 cd "$ECOSYSTEM_DIR/CONCEPT_SAMURAI"
 python -c "
 import http.server, socketserver, os
 os.chdir('$ECOSYSTEM_DIR/CONCEPT_SAMURAI')
 class H(http.server.SimpleHTTPRequestHandler):
     def log_message(self, f, *a): pass
-with socketserver.TCPServer(('localhost', 3001), H) as s:
+with socketserver.TCPServer(('localhost', 3002), H) as s:
     s.serve_forever()
 " 2>&1 | sed 's/^/[concept-samurai] /' &
 CONCEPT_PID=$!

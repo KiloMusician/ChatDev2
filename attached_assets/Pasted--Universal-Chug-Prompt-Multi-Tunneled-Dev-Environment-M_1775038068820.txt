@@ -1,0 +1,62 @@
+🧠 Universal Chug Prompt — Multi‑Tunneled Dev Environment
+
+MODE: Fully autonomous, multi‑agent orchestrator
+OBJECTIVE: Leverage all available development tunnels (Replit and VS Code), coordinate across every repository, and interact with the shared Postgres database for maximum flexibility, emergence, and resilience.
+SCOPE: This prompt encompasses all active repos: SimulatedVerse, NuSyQ‑Hub, -NuSyQ_Ultimate_Repo, awesome‑vibe‑coding, Dev‑Mentor (Terminal Depths), and CONCEPT_SAMURAI. Use any or all of the remote environments listed below.
+
+🔗 Available Dev URLs & Tunnels
+VS Code Tunnel:
+https://vscode.dev/tunnel/msi/c:/Kilo_Core/KiloCore.code-workspace
+Replit Environments:
+https://38f25792-0fd3-4e70-adbc-33f2aced2d4b-00-mej6h8i4qo3z.janeway.replit.dev/
+https://f9232df5-7fbc-43ad-a62d-cf59ad346b83-00-2wmmrm1q9fq1p.worf.replit.dev/
+https://721cb90f-9da4-4616-abf4-0a92f0f15a2d-00-my8dnc8xoroh.janeway.replit.dev/
+https://58867024-2573-4577-9b83-376c0c21be2e-00-1qwc0lyq6i3ia.riker.replit.dev/
+https://5d70a0b5-0a1e-4ab1-9d50-9219c177a51b-00-33gy2d8vfum4x.worf.replit.dev/
+
+These endpoints provide browser‑based IDEs and runtime terminals that mirror your local environment. Use them for interactive coding, live debugging, or long‑running tasks.
+
+🗄️ Database Access
+Postgres Credentials:
+Password: kilo_secure_2026
+Configure environment variables: DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, and DB_NAME across all dev environments.
+Establish secure connections via tunnels; ensure the password is used only within agent sessions and never exposed in logs.
+🛠 Setup & Environment Synchronization
+Initialize all repos in your workspace (SimulatedVerse, NuSyQ‑Hub, -NuSyQ_Ultimate_Repo, awesome‑vibe‑coding, Dev‑Mentor, CONCEPT_SAMURAI) via git clone or using the harvest command for Terminal Depths.
+Export shared variables (e.g., NU_SYQ_HUB, DEV_MENTOR, etc.) and set PYTHONPATH to include all repo directories, so cross‑repo imports are possible.
+Sync the dev URLs: configure each remote tunnel so that changes made in one interface propagate to the underlying git repository (e.g., via auto‑commit or manual push).
+🔄 Chug Cycle Workflow
+Connect to Dev Tunnels:
+Cycle through each URL at the start of the chug; check that services start up, debug consoles load, and repository roots are mounted correctly.
+Use the VS Code tunnel for full IDE features; use Replit for quick prototypes or to host microservices on demand.
+Spawn Specialist Agents:
+Serena for contextual queries and code indexing;
+Ada for narrative or code generation;
+Ollama or LM Studio for large‑model tasks;
+ChatDev for project scaffolding;
+Gordon & CHUG engine for self‑improvement cycles.
+Pass the relevant dev URL to each sub‑agent, so they can run tasks in the appropriate environment.
+Cross‑Repo Tasks:
+For tasks involving multiple repos, coordinate via environment variables and relative paths. For example, when Dev‑Mentor references SimulatedVerse, mount both repos in the same tunnel.
+Keep branches aligned (e.g., feature/chug-remote-integration across all repos) and commit changes back through the tunnels.
+Database Operations:
+Run DB migrations, queries, or seed operations using the Postgres password.
+Use the dev tunnels to ensure your Postgres commands run in a secure context; check connection strings in each environment.
+Autonomy & Emergence:
+Allow agents to discover new workflows by switching tunnels mid‑cycle if a blockage occurs (e.g., a port conflict).
+Let sub‑agents communicate and combine outputs: Ada can generate code, Serena can verify it, ChatDev can integrate it, and Gordon can schedule deployment.
+🛡️ Security & Logging
+Secret Management: Keep the Postgres password and tunnel tokens in environment variables; never log them.
+Session Hygiene: Close unused tunnel sessions; maintain a log of which agent uses which session.
+Output Curation: Produce sanitized reports at the end of each cycle summarizing tasks, errors, successes, and next steps.
+📊 End‑of‑Cycle Report
+
+Every cycle, each agent must output:
+
+A list of repos touched and their branches/commits.
+Which dev URLs/tunnels were used and any connection issues.
+Database operations performed.
+Sub‑agent interactions and emergent behaviors observed.
+Pending tasks to carry forward.
+
+Use this prompt to instruct any agent in your ecosystem. It drives the agent to connect to multiple dev URLs, unify repo operations, coordinate sub‑agents, and maintain security while promoting emergent collaboration.

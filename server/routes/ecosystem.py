@@ -39,8 +39,8 @@ SERVICES = [
         "id": "concept-samurai",
         "name": "CONCEPT_SAMURAI",
         "repo": "CONCEPT_SAMURAI",
-        "url": "http://localhost:3001/",
-        "port": 3001,
+        "url": "http://localhost:3002/",
+        "port": 3002,
         "type": "static",
         "description": "Concept docs, superpowers spec, and katana-keeper system orchestrator.",
     },
@@ -199,6 +199,64 @@ async def run_chug():
         return {"success": False, "error": "CHUG phase timed out after 30s"}
     except Exception as e:
         return {"success": False, "error": str(e)}
+
+
+REMOTE_SURFACES = [
+    {
+        "label": "Replit (primary — this instance)",
+        "url": "https://58867024-2573-4577-9b83-376c0c21be2e-00-1qwc0lyq6i3ia.riker.replit.dev/",
+        "type": "replit",
+    },
+    {
+        "label": "Replit (alt — Worf)",
+        "url": "https://5d70a0b5-0a1e-4ab1-9d50-9219c177a51b-00-33gy2d8vfum4x.worf.replit.dev/",
+        "type": "replit",
+    },
+    {
+        "label": "Replit (Janeway A)",
+        "url": "https://38f25792-0fd3-4e70-adbc-33f2aced2d4b-00-mej6h8i4qo3z.janeway.replit.dev/",
+        "type": "replit",
+    },
+    {
+        "label": "Replit (Worf B)",
+        "url": "https://f9232df5-7fbc-43ad-a62d-cf59ad346b83-00-2wmmrm1q9fq1p.worf.replit.dev/",
+        "type": "replit",
+    },
+    {
+        "label": "Replit (Janeway C)",
+        "url": "https://721cb90f-9da4-4616-abf4-0a92f0f15a2d-00-my8dnc8xoroh.janeway.replit.dev/",
+        "type": "replit",
+    },
+    {
+        "label": "VS Code Tunnel (KiloCore Workspace)",
+        "url": "https://vscode.dev/tunnel/msi/c:/Kilo_Core/KiloCore.code-workspace",
+        "type": "vscode",
+    },
+]
+
+
+@router.get("/remote-surfaces")
+async def remote_surfaces():
+    """List all known remote dev surfaces (Replit + VS Code tunnels)."""
+    return {"surfaces": REMOTE_SURFACES}
+
+
+@router.get("/chug-prompts")
+async def chug_prompts():
+    """Return CHUG prompt files from the ecosystem directory."""
+    prompts_dir = ECOSYSTEM_DIR / "chug_prompts"
+    prompts = []
+    if prompts_dir.exists():
+        for f in sorted(prompts_dir.glob("*.md")):
+            try:
+                prompts.append({
+                    "filename": f.name,
+                    "title": f.stem.replace("_", " ").title(),
+                    "content": f.read_text(),
+                })
+            except Exception:
+                pass
+    return {"prompts": prompts}
 
 
 @router.get("/repos")

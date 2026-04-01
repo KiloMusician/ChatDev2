@@ -117,6 +117,43 @@
       <pre v-if="chugResult.error" class="chug-pre error">{{ chugResult.error }}</pre>
     </div>
 
+    <!-- Remote Dev Surfaces -->
+    <div class="eco-section" v-if="surfaces.length">
+      <h3 class="section-title">Remote Dev Surfaces</h3>
+      <div class="surfaces-grid">
+        <a
+          v-for="s in surfaces"
+          :key="s.url"
+          :href="s.url"
+          target="_blank"
+          rel="noopener"
+          class="surface-card"
+          :class="s.type === 'vscode' ? 'surface-vscode' : 'surface-replit'"
+        >
+          <span class="surface-icon">{{ s.type === 'vscode' ? '⚡' : '🔁' }}</span>
+          <span class="surface-label">{{ s.label }}</span>
+          <span class="surface-link-icon">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- CHUG Prompts -->
+    <div class="eco-section" v-if="chugPrompts.length">
+      <h3 class="section-title">CHUG Prompts</h3>
+      <div class="prompts-tabs">
+        <button
+          v-for="p in chugPrompts"
+          :key="p.filename"
+          class="prompt-tab"
+          :class="{ active: activePrompt === p.filename }"
+          @click="activePrompt = p.filename"
+        >{{ p.title }}</button>
+      </div>
+      <div v-for="p in chugPrompts" :key="p.filename" v-show="activePrompt === p.filename" class="prompt-body">
+        <pre class="prompt-pre">{{ p.content }}</pre>
+      </div>
+    </div>
+
     <!-- Ecosystem diagram -->
     <div class="eco-diagram">
       <h3 class="diagram-title">Architecture</h3>
@@ -140,13 +177,16 @@ const status = ref(null)
 const loading = ref(false)
 const chugging = ref(false)
 const chugResult = ref(null)
+const surfaces = ref([])
+const chugPrompts = ref([])
+const activePrompt = ref('')
 
 const diagramNodes = [
   { id: 'dev-mentor', name: 'Dev-Mentor', port: 8008, cls: 'node-fastapi' },
   { id: 'nusyq-hub', name: 'NuSyQ-Hub', port: null, cls: 'node-cli' },
   { id: 'simulatedverse', name: 'SimulatedVerse', port: 3000, cls: 'node-node' },
   { id: 'nusyq-ultimate', name: 'NuSyQ Ultimate', port: null, cls: 'node-lib' },
-  { id: 'concept-samurai', name: 'CONCEPT_SAMURAI', port: 3001, cls: 'node-static' },
+  { id: 'concept-samurai', name: 'CONCEPT_SAMURAI', port: 3002, cls: 'node-static' },
 ]
 
 function getHost() {
@@ -190,7 +230,32 @@ async function runChug() {
   }
 }
 
-onMounted(loadStatus)
+async function loadSurfaces() {
+  try {
+    const r = await fetch('/api/ecosystem/remote-surfaces')
+    const data = await r.json()
+    surfaces.value = data.surfaces || []
+  } catch (e) {
+    console.error('Remote surfaces failed:', e)
+  }
+}
+
+async function loadChugPrompts() {
+  try {
+    const r = await fetch('/api/ecosystem/chug-prompts')
+    const data = await r.json()
+    chugPrompts.value = data.prompts || []
+    if (data.prompts?.length) activePrompt.value = data.prompts[0].filename
+  } catch (e) {
+    console.error('CHUG prompts failed:', e)
+  }
+}
+
+onMounted(() => {
+  loadStatus()
+  loadSurfaces()
+  loadChugPrompts()
+})
 </script>
 
 <style scoped>
@@ -580,4 +645,93 @@ button:disabled {
 .node-node    { background: #2ea04322; border: 1px solid #2ea043; color: #3fb950; }
 .node-lib     { background: #e3b34122; border: 1px solid #e3b341; color: #e3b341; }
 .node-static  { background: #f8514922; border: 1px solid #f85149; color: #ff7b72; }
+
+/* ── Shared section wrapper ── */
+.eco-section {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.section-title {
+  color: #e6edf3;
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+/* ── Remote Dev Surfaces ── */
+.surfaces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.6rem;
+}
+
+.surface-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: opacity 0.15s;
+}
+
+.surface-card:hover { opacity: 0.8; }
+
+.surface-replit {
+  background: #0d419d22;
+  border: 1px solid #1f6feb44;
+  color: #58a6ff;
+}
+
+.surface-vscode {
+  background: #8957e522;
+  border: 1px solid #8957e544;
+  color: #bc8cff;
+}
+
+.surface-icon { font-size: 1rem; flex-shrink: 0; }
+.surface-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.surface-link-icon { color: #30363d; font-size: 0.8rem; flex-shrink: 0; }
+
+/* ── CHUG Prompts ── */
+.prompts-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.prompt-tab {
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  border: 1px solid #30363d;
+  background: #21262d;
+  color: #8b949e;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.prompt-tab:hover { border-color: #58a6ff; color: #c9d1d9; }
+.prompt-tab.active { background: #1f6feb22; border-color: #1f6feb; color: #58a6ff; }
+
+.prompt-body { }
+
+.prompt-pre {
+  font-size: 0.73rem;
+  font-family: monospace;
+  background: #0d1117;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow: auto;
+  max-height: 400px;
+  color: #8b949e;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin: 0;
+}
 </style>
