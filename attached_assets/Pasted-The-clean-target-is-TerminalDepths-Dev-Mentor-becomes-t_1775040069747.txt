@@ -1,0 +1,336 @@
+The clean target is:
+
+TerminalDepths / Dev-Mentor becomes the universal command cockpit, while NuSyQ-Hub becomes the orchestration spine, and every repo gets a lightweight bridge back to TerminalDepths.
+
+Your own repo docs already point in that direction. AGENTS.md explicitly frames Terminal Depths as a cyberpunk terminal RPG, VS Code mentorship platform, multi-agent orchestration framework, RimWorld mod, and self-modifying codebase, all sharing one Python backend, and it places it as a node inside the NuSyQ-Hub ecosystem. It also already exposes a broad command/API/MCP surface and a sibling-repo bridge for NuSyQ-Hub and SimulatedVerse.
+
+And NuSyQ-Hub already contains the right launcher layer: a PowerShell td function that is meant to launch Terminal Depths “from anywhere,” plus a Python terminal_depths_launcher.py that is explicitly designed to run from PowerShell, cmd.exe, Git Bash, Docker, VS Code, Godot, and TouchDesigner. It also supports cli, web, repl, agent, and daemon modes, with surfaces for terminal, web, vscode, godot, and touchdesigner.
+
+So the next step is not inventing a new pattern. It is to finish the bridge pattern that is already implied.
+
+What to make true
+
+There are four rules to enforce across the ecosystem.
+
+1. TerminalDepths is the human and agent entrypoint
+
+Every shell should be able to start it with one command:
+
+PowerShell 7
+Windows PowerShell
+cmd
+VS Code terminal
+Docker shell
+
+That is already the intent of td and scripts.terminal_depths_launcher.py.
+
+2. NuSyQ-Hub is the shared service layer
+
+TerminalDepths should not directly hardcode every repo interaction. It should ask the Hub to:
+
+discover repos
+report health
+route tasks
+spawn agents
+expose manifests
+provide status for sibling repos
+
+That matches the existing “NuSyQ ecosystem bridge” and /api/nusyq/* surfaces in AGENTS.md.
+
+3. Every repo can call back into TerminalDepths
+
+SimulatedVerse, NuSyQ-Hub, CONCEPT-SAMURAI, and the Ultimate repo should be able to:
+
+send commands to TerminalDepths
+open a session
+query state
+post tasks
+read manifest/capabilities
+use agent bus / swarm / council where applicable
+
+This already aligns with the existing REST, MCP, game command, memory, swarm, and agent bus surfaces.
+
+4. Every repo knows where the others are
+
+No repo should assume a single fixed path. Use environment variables and one shared bootstrap script.
+
+The architecture I recommend
+Layer A: Shell bootstrap
+
+One cross-shell bootstrap per machine.
+
+Set canonical roots like:
+
+NUSYQ_HOME
+NUSYQ_HUB
+DEV_MENTOR
+TERMINAL_DEPTHS_ROOT
+SIMULATEDVERSE_ROOT
+NUSYQ_ULTIMATE_ROOT
+CONCEPT_SAMURAI_ROOT
+
+Then append them to:
+
+PYTHONPATH
+optionally Path for helper scripts
+Layer B: Repo registry
+
+Create one file that every repo can read, something like:
+
+C:\prime_anchor\.nusyq\repo_registry.json
+
+Example shape:
+
+{
+  "hub": "C:/prime_anchor/NuSyQ-Hub",
+  "dev_mentor": "C:/Users/keath/Dev-Mentor",
+  "terminal_depths": "C:/Users/keath/Dev-Mentor",
+  "simulatedverse": "C:/prime_anchor/SimulatedVerse/SimulatedVerse",
+  "ultimate": "C:/prime_anchor/NuSyQ-Ultimate",
+  "concept_samurai": "C:/prime_anchor/CONCEPT-SAMURAI"
+}
+
+Every repo should resolve siblings from this file first, env vars second, hardcoded fallback last.
+
+Layer C: TerminalDepths bridge API
+
+TerminalDepths should expose a tiny stable bridge surface above the huge game API.
+
+Add a small namespace like:
+
+/api/bridge/ping
+/api/bridge/manifest
+/api/bridge/session/open
+/api/bridge/session/state
+/api/bridge/command
+/api/bridge/task/add
+/api/bridge/repo/open
+/api/bridge/agent/dispatch
+
+Under the hood, these can call the existing APIs already documented in AGENTS.md, instead of forcing every external repo to know the full game command surface.
+
+Layer D: Hub registry and routing
+
+NuSyQ-Hub should own:
+
+health checks
+agent routing
+repo discovery
+repo status
+orchestration manifests
+task queues
+
+TerminalDepths remains the cockpit, Hub remains mission control.
+
+What to implement first
+
+Do these in order.
+
+1. Standardize the shell entrypoint
+
+Use the existing td PowerShell function as the primary launcher and make equivalent wrappers for cmd and bash. The PowerShell module already exists and already wraps python -m scripts.terminal_depths_launcher.
+
+Use this as the canonical PowerShell 7 command:
+
+Import-Module C:\prime_anchor\NuSyQ-Hub\scripts\TerminalDepths.psm1 -Force
+td -Mode cli -Surface terminal
+
+For agent mode:
+
+td -Mode agent -Agent Serena -Surface terminal
+
+For VS Code:
+
+td -Mode cli -Surface vscode
+
+For daemon mode:
+
+td -Mode daemon -Surface web -Port 7337
+2. Add cmd-compatible wrappers
+
+Create a td.cmd somewhere on Path:
+
+@echo off
+python -m scripts.terminal_depths_launcher %*
+
+And a PowerShell shim td.ps1:
+
+python -m scripts.terminal_depths_launcher @args
+
+That gives you one concept across all shells:
+
+td ...
+3. Add a machine bootstrap script
+
+Create one bootstrap script that:
+
+sets all repo paths
+exports PYTHONPATH
+imports the td module
+verifies repo existence
+writes repo_registry.json
+
+Suggested command to run after opening PowerShell:
+
+C:\prime_anchor\NuSyQ-Hub\scripts\bootstrap-ecosystem.ps1
+
+That script should also create helper commands like:
+
+cdhub
+cdtd
+cdverse
+cdultimate
+cdsamurai
+4. Build a tiny shared Python package
+
+Create something like:
+
+nusyq_surface/
+
+with:
+
+registry.py
+paths.py
+bridge_client.py
+hub_client.py
+env.py
+
+Every repo imports from this instead of reinventing path logic.
+
+5. Make TerminalDepths callable from every repo
+
+Each repo gets a minimal helper:
+
+from nusyq_surface.bridge_client import TerminalDepthsClient
+
+td = TerminalDepthsClient.from_env()
+td.open_session("simulatedverse-worker")
+td.command("status")
+6. Make TerminalDepths able to jump to every repo
+
+Add commands inside TerminalDepths like:
+
+repo list
+repo status
+repo open hub
+repo open verse
+repo open samurai
+repo open ultimate
+repo sync
+repo path <name>
+
+And:
+
+surface open vscode
+surface open godot
+surface open touchdesigner
+surface open web
+
+The launcher already understands surfaces conceptually; you just need the bridge commands to expose it cleanly.
+
+The exact sequence I would use
+Step 1: make TerminalDepths always reachable
+
+In PowerShell 7 profile:
+
+Import-Module C:\prime_anchor\NuSyQ-Hub\scripts\TerminalDepths.psm1 -Force
+$env:NUSYQ_HUB="C:\prime_anchor\NuSyQ-Hub"
+$env:DEV_MENTOR="C:\Users\keath\Dev-Mentor"
+$env:TERMINAL_DEPTHS_ROOT="C:\Users\keath\Dev-Mentor"
+$env:SIMULATEDVERSE_ROOT="C:\prime_anchor\SimulatedVerse\SimulatedVerse"
+$env:NUSYQ_ULTIMATE_ROOT="C:\prime_anchor\NuSyQ-Ultimate"
+$env:CONCEPT_SAMURAI_ROOT="C:\prime_anchor\CONCEPT-SAMURAI"
+$env:PYTHONPATH="$env:NUSYQ_HUB;$env:DEV_MENTOR;$env:SIMULATEDVERSE_ROOT;$env:NUSYQ_ULTIMATE_ROOT;$env:CONCEPT_SAMURAI_ROOT;$env:PYTHONPATH"
+Step 2: run TerminalDepths as daemon
+td -Mode daemon -Surface web -Port 7337
+Step 3: run Hub beside it
+
+From another shell:
+
+cd $env:NUSYQ_HUB
+python .\src\main.py --mode=health
+Step 4: validate bridge surfaces
+
+Use the existing live checks:
+
+curl http://localhost:7337/api/manifest
+curl http://localhost:7337/api/nusyq/status
+curl http://localhost:7337/api/system/autoboot
+curl http://localhost:7337/api/serena/status
+
+Those existing endpoints are already part of the documented live surface.
+
+Step 5: add repo bridge commands
+
+In TerminalDepths command layer, implement:
+
+repo list
+repo doctor
+repo status
+repo open <repo>
+repo exec <repo> <cmd>
+repo pythonpath
+repo manifest
+Step 6: make repo-to-TD calls easy
+
+In every repo root, create:
+
+td_bridge.py
+hub_bridge.py
+
+So any repo can do:
+
+from td_bridge import td_command
+td_command("boot")
+td_command("serena status")
+td_command("nusyq status")
+The important design choice
+
+Do not make every repo directly know every other repo’s internal structure.
+
+Instead:
+
+all repos know the registry
+all repos know the Hub
+all repos know the TerminalDepths bridge
+only the Hub needs deep topology knowledge
+
+That keeps the colony modular.
+
+Best concise target state
+
+When this is done, you should be able to open PowerShell 7 and type:
+
+td
+
+or:
+
+td -Mode agent -Agent Serena
+
+and from inside TerminalDepths run:
+
+repo list
+repo status
+nusyq status
+serena status
+surface open vscode
+repo open simulatedverse
+repo exec hub "python src/main.py --mode=health"
+
+And from another repo, you should be able to call TerminalDepths with a tiny client instead of hand-rolling HTTP.
+
+My recommendation
+
+Build these three files first:
+
+NuSyQ-Hub/scripts/bootstrap-ecosystem.ps1
+NuSyQ-Hub/src/nusyq_surface/registry.py
+Dev-Mentor/app/backend/routes/bridge.py
+
+That will give you:
+
+universal shell startup
+shared repo discovery
+a stable TerminalDepths bridge surface
+
+Then wire TerminalDepths commands on top of that.
