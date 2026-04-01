@@ -117,6 +117,75 @@
       <pre v-if="chugResult.error" class="chug-pre error">{{ chugResult.error }}</pre>
     </div>
 
+    <!-- Bridge Status Panel -->
+    <div class="bridge-panel" v-if="bridgeStatus">
+      <div class="bridge-header">
+        <div class="bridge-title-row">
+          <span class="bridge-icon">🌉</span>
+          <h3 class="bridge-title">Bridge Status</h3>
+          <span class="bridge-uptime">up {{ formatUptime(bridgeStatus.uptime_s) }}</span>
+        </div>
+        <button class="btn-bridge-sync" @click="syncQuests" :disabled="syncing">
+          {{ syncing ? 'Syncing...' : '⟳ Sync Quests' }}
+        </button>
+      </div>
+
+      <div class="bridge-grid">
+        <!-- Repos online/offline -->
+        <div class="bridge-card">
+          <div class="bc-label">Repos Online</div>
+          <div class="bc-val">
+            <span class="bc-num ok">{{ bridgeStatus.repos?.online?.length ?? 0 }}</span>
+            <span class="bc-sep">/</span>
+            <span class="bc-num">{{ bridgeStatus.repos?.total ?? 0 }}</span>
+          </div>
+          <div class="bc-detail" v-if="bridgeStatus.repos?.online?.length">
+            {{ bridgeStatus.repos.online.join(' · ') }}
+          </div>
+          <div class="bc-detail offline-list" v-if="bridgeStatus.repos?.offline?.length">
+            ✗ {{ bridgeStatus.repos.offline.join(', ') }}
+          </div>
+        </div>
+
+        <!-- Quests -->
+        <div class="bridge-card">
+          <div class="bc-label">Dev-Mentor Quests</div>
+          <div class="bc-val">
+            <span class="bc-num quest">{{ bridgeStatus.quests?.total ?? 0 }}</span>
+            <span class="bc-unit">quests</span>
+          </div>
+          <div class="bc-cats" v-if="bridgeStatus.quests?.categories?.length">
+            <span class="cat-chip" v-for="c in bridgeStatus.quests.categories" :key="c">{{ c }}</span>
+          </div>
+          <div class="bc-sync-state" :class="bridgeStatus.quests?.synced_to_memory ? 'sync-ok' : 'sync-pending'">
+            {{ bridgeStatus.quests?.synced_to_memory
+               ? `✓ ${bridgeStatus.quests.synced_count} synced to memory`
+               : '⚠ not yet synced to shared memory' }}
+          </div>
+        </div>
+
+        <!-- Sessions + commands -->
+        <div class="bridge-card">
+          <div class="bc-label">Sessions / Commands</div>
+          <div class="bc-val">
+            <span class="bc-num">{{ bridgeStatus.sessions_active ?? 0 }}</span>
+            <span class="bc-unit">sessions</span>
+          </div>
+          <div class="bc-cmds" v-if="bridgeStatus.commands_available?.length">
+            <span class="cmd-chip" v-for="c in bridgeStatus.commands_available" :key="c">{{ c }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sync-feedback" v-if="syncResult">
+        <span :class="syncResult.synced ? 'sync-ok' : 'sync-fail'">
+          {{ syncResult.synced
+            ? `✓ Synced ${syncResult.total} quests (${syncResult.total_xp} XP total)`
+            : '✗ Sync failed' }}
+        </span>
+      </div>
+    </div>
+
     <!-- Remote Dev Surfaces -->
     <div class="eco-section" v-if="surfaces.length">
       <h3 class="section-title">Remote Dev Surfaces</h3>
@@ -180,6 +249,9 @@ const chugResult = ref(null)
 const surfaces = ref([])
 const chugPrompts = ref([])
 const activePrompt = ref('')
+const bridgeStatus = ref(null)
+const syncing = ref(false)
+const syncResult = ref(null)
 
 const diagramNodes = [
   { id: 'dev-mentor', name: 'Dev-Mentor', port: 8008, cls: 'node-fastapi' },
@@ -251,10 +323,47 @@ async function loadChugPrompts() {
   }
 }
 
+async function loadBridge() {
+  try {
+    const r = await fetch('/api/bridge/status')
+    bridgeStatus.value = await r.json()
+  } catch (e) {
+    console.error('Bridge status failed:', e)
+  }
+}
+
+async function syncQuests() {
+  syncing.value = true
+  syncResult.value = null
+  try {
+    const r = await fetch('/api/bridge/quests/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
+    })
+    syncResult.value = await r.json()
+    await loadBridge()
+  } catch (e) {
+    syncResult.value = { synced: false, error: String(e) }
+  } finally {
+    syncing.value = false
+  }
+}
+
+function formatUptime(s) {
+  if (!s) return '—'
+  if (s < 60) return `${Math.round(s)}s`
+  if (s < 3600) return `${Math.round(s / 60)}m`
+  const h = Math.floor(s / 3600)
+  const m = Math.floor((s % 3600) / 60)
+  return `${h}h ${m}m`
+}
+
 onMounted(() => {
   loadStatus()
   loadSurfaces()
   loadChugPrompts()
+  loadBridge()
 })
 </script>
 
@@ -733,5 +842,128 @@ button:disabled {
   white-space: pre-wrap;
   line-height: 1.6;
   margin: 0;
+}
+
+/* ── Bridge Status Panel ───────────────────────────────────── */
+.bridge-panel {
+  background: #161b22;
+  border: 1px solid #58a6ff44;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.bridge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bridge-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bridge-icon { font-size: 1.2rem; }
+
+.bridge-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #58a6ff;
+}
+
+.bridge-uptime {
+  font-size: 0.75rem;
+  color: #8b949e;
+  margin-left: 4px;
+  font-family: monospace;
+}
+
+.btn-bridge-sync {
+  font-size: 0.8rem;
+  padding: 4px 14px;
+  border-radius: 6px;
+  border: 1px solid #58a6ff;
+  background: rgba(88,166,255,.1);
+  color: #58a6ff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .15s;
+}
+.btn-bridge-sync:hover:not(:disabled) { background: rgba(88,166,255,.25); }
+.btn-bridge-sync:disabled { opacity: .45; cursor: not-allowed; }
+
+.bridge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.bridge-card {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bc-label {
+  font-size: 0.68rem;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.bc-val { display: flex; align-items: baseline; gap: 4px; }
+.bc-num { font-size: 1.4rem; font-weight: 700; color: #e6edf3; }
+.bc-num.ok   { color: #3fb950; }
+.bc-num.quest{ color: #d29922; }
+.bc-unit     { font-size: 0.78rem; color: #8b949e; }
+.bc-sep      { color: #8b949e; font-size: 1rem; }
+
+.bc-detail { font-size: 0.75rem; color: #58a6ff; word-break: break-all; }
+.offline-list { color: #f85149; }
+
+.bc-cats { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+.cat-chip {
+  font-size: 0.67rem;
+  padding: 1px 7px;
+  background: rgba(210,153,34,.15);
+  border: 1px solid #d2992244;
+  border-radius: 8px;
+  color: #e3b341;
+}
+
+.bc-sync-state {
+  font-size: 0.73rem;
+  margin-top: 3px;
+}
+.sync-ok      { color: #3fb950; }
+.sync-pending { color: #e3b341; }
+.sync-fail    { color: #f85149; }
+
+.bc-cmds { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.cmd-chip {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  background: rgba(88,166,255,.1);
+  border: 1px solid #58a6ff33;
+  border-radius: 6px;
+  color: #58a6ff;
+  font-family: monospace;
+}
+
+.sync-feedback {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 </style>

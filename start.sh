@@ -1,4 +1,7 @@
 #!/bin/bash
+# Make ecoscan runnable from any terminal in this project
+chmod +x ecoscan 2>/dev/null || true
+
 # Start backend in background on port 6400
 python server_main.py --host localhost --port 6400 &
 BACKEND_PID=$!

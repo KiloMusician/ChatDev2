@@ -40,8 +40,47 @@ def bootstrap() -> dict:
     seed_agents()
     mem_write("orchestrator.started_at", datetime.utcnow().isoformat(), namespace="system")
     mem_write("orchestrator.version", "1.0.0", namespace="system")
+    # Sync Dev-Mentor quests into shared memory on every bootstrap
+    quests_synced = _sync_devmentor_quests()
     log_action("bootstrap", "success", repo="ChatDev", agent="orchestrator")
-    return {"status": "bootstrapped", "at": datetime.utcnow().isoformat()}
+    return {"status": "bootstrapped", "at": datetime.utcnow().isoformat(), "quests_synced": quests_synced}
+
+
+def _sync_devmentor_quests() -> int:
+    """Read Dev-Mentor CTF quests and write summary into shared memory."""
+    import json as _json
+    from pathlib import Path as _Path
+    quest_files = [
+        _Path(__file__).parent / "Dev-Mentor" / "challenges" / "ctf" / f
+        for f in ("crypto.json", "forensics.json", "network.json",
+                  "reverse_engineering.json", "web.json")
+    ]
+    all_quests: list = []
+    for p in quest_files:
+        if not p.exists():
+            continue
+        try:
+            raw = _json.loads(p.read_text())
+            if isinstance(raw, list):
+                all_quests.extend(raw)
+            elif isinstance(raw, dict):
+                all_quests.extend(raw.values())
+        except Exception:
+            pass
+    by_cat: Dict[str, int] = {}
+    total_xp = 0
+    for q in all_quests:
+        if isinstance(q, dict):
+            cat = q.get("category", "unknown")
+            by_cat[cat] = by_cat.get(cat, 0) + 1
+            total_xp += q.get("xp", 0)
+    mem_write("devmentor.quests.synced", str(len(all_quests)), namespace="bridge")
+    mem_write("devmentor.quests.summary", _json.dumps({
+        "total": len(all_quests), "by_category": by_cat,
+        "total_xp": total_xp, "synced_at": datetime.utcnow().isoformat(),
+    }), namespace="bridge")
+    log_action("quest.sync", "success", repo="Dev-Mentor", agent="orchestrator")
+    return len(all_quests)
 
 
 # ── CHUG Cycle ─────────────────────────────────────────────────────────────

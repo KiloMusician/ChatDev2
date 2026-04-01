@@ -52,9 +52,33 @@ Six repos cloned to `ecosystem/` and launched via `ecosystem/start_services.sh`:
 | NuSyQ_Ultimate | Python library | — | CLI/library mode |
 | awesome-vibe-coding | Docs/resources | — | Static reference |
 
-The **Ecosystem** page (`/ecosystem`) shows live health of all 6 repos. The **Orchestrator** page (`/orchestrator`) is the central control panel.
+The **Ecosystem** page (`/ecosystem`) shows live health of all 6 repos plus the Bridge Status panel. The **Orchestrator** page (`/orchestrator`) is the central control panel.
 
 Backend API: `GET /api/ecosystem/status`, `GET /api/ecosystem/repos`, `POST /api/ecosystem/chug`
+
+### Bridge API (`server/routes/bridge.py`)
+Routes under `/api/bridge/`:
+- `GET /ping` — Quick uptime ping
+- `GET /status` — Compact status (repos online/offline, quest counts, sessions)
+- `GET /manifest` — Full bridge manifest with capabilities and repo map
+- `GET /quests` — All 20 Dev-Mentor CTF quests (live from JSON files)
+- `POST /quests/sync` — Sync quest catalogue into shared memory
+- `POST /command` — Bridge command router (boot, integrate, quest sync, chug run, etc.)
+- `GET /repo/list` — All registered repos
+- `GET /repo/status[/{name}]` — Live health probe of repos
+- `POST /agent/dispatch` — Dispatch a task to a named agent
+- `POST /session/open` + `GET /session/state/{id}` — Session management
+
+### Dev-Mentor Quest Sync
+- 20 CTF quests across 5 categories (Crypto, Forensics, Network, Reverse Engineering, Web)
+- Auto-synced to shared memory on every `bootstrap()` call (server startup)
+- Also synced via `POST /api/bridge/quests/sync` or `POST /api/bridge/command` → `quest sync`
+- Stored in shared memory keys: `devmentor.quests.synced`, `devmentor.quests.summary`
+
+### ecoscan (Terminal Health Check)
+- `./ecoscan` — Quick health check of all NuSyQ ecosystem services from terminal
+- `./ecoscan --json` — Full bridge manifest as JSON
+- Probes: ChatDev :6400, Bridge, Orchestrator, Dev-Mentor :8008, CONCEPT_SAMURAI :3002, Quests
 
 ## NuSyQ Central Orchestrator (TOTAL SYSTEM ACTIVATION)
 

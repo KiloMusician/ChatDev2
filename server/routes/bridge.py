@@ -5,7 +5,10 @@ Stable bridge surface — all ecosystem repos call this, not the full game API.
 
 Surfaces:
   GET  /api/bridge/ping
+  GET  /api/bridge/status
   GET  /api/bridge/manifest
+  GET  /api/bridge/quests
+  POST /api/bridge/quests/sync
   POST /api/bridge/command
   POST /api/bridge/task/add
   GET  /api/bridge/repo/list
@@ -47,8 +50,52 @@ _sessions: Dict[str, Dict] = {}
 
 _BOOT_TIME = time.time()
 
+# ── Quest catalogue ─────────────────────────────────────────────────────────
+_QUEST_FILES = [
+    _ECO / "Dev-Mentor" / "challenges" / "ctf" / name
+    for name in ("crypto.json", "forensics.json", "network.json",
+                 "reverse_engineering.json", "web.json")
+]
 
-# ── Ping ───────────────────────────────────────────────────────────────────
+def _load_quests() -> list:
+    """Read all CTF quest JSON files from Dev-Mentor and return a flat list."""
+    all_quests: list = []
+    for path in _QUEST_FILES:
+        if not path.exists():
+            continue
+        try:
+            raw = json.loads(path.read_text())
+            if isinstance(raw, list):
+                all_quests.extend(raw)
+            elif isinstance(raw, dict):
+                all_quests.extend(raw.values())
+        except Exception:
+            pass
+    return all_quests
+
+def _sync_quests_to_memory(quests: list) -> dict:
+    """Write quest summary into shared memory and return stats."""
+    by_cat: Dict[str, int] = {}
+    total_xp = 0
+    for q in quests:
+        if isinstance(q, dict):
+            cat = q.get("category", "unknown")
+            by_cat[cat] = by_cat.get(cat, 0) + 1
+            total_xp += q.get("xp", 0)
+    summary = {
+        "total": len(quests),
+        "by_category": by_cat,
+        "categories": list(by_cat.keys()),
+        "total_xp": total_xp,
+        "synced_at": time.time(),
+    }
+    mem_write("devmentor.quests.summary", json.dumps(summary), namespace="bridge")
+    mem_write("devmentor.quests.synced", str(len(quests)), namespace="bridge")
+    log_action("quest.sync", "success", repo="Dev-Mentor", agent="bridge")
+    return summary
+
+
+# ── Ping / Status ──────────────────────────────────────────────────────────
 
 @router.get("/ping")
 async def ping():
@@ -56,6 +103,46 @@ async def ping():
         "status": "ok",
         "bridge": "chatdev",
         "uptime_s": round(time.time() - _BOOT_TIME, 1),
+        "timestamp": time.time(),
+    }
+
+
+@router.get("/status")
+async def bridge_status():
+    """Compact bridge status for UI panels — uptime, quest count, repo health."""
+    import urllib.request
+    quests = _load_quests()
+    cached_synced = mem_read("devmentor.quests.synced")
+
+    online_repos: list = []
+    offline_repos: list = []
+    for repo in list_repos():
+        health_url = repo.get("health") or repo.get("api")
+        reachable = False
+        if health_url:
+            try:
+                with urllib.request.urlopen(health_url, timeout=1) as r:
+                    reachable = r.status == 200
+            except Exception:
+                pass
+        (online_repos if reachable else offline_repos).append(repo["id"])
+
+    return {
+        "status": "online",
+        "uptime_s": round(time.time() - _BOOT_TIME, 1),
+        "sessions_active": len(_sessions),
+        "quests": {
+            "total": len(quests),
+            "categories": sorted({q.get("category", "?") for q in quests if isinstance(q, dict)}),
+            "synced_to_memory": cached_synced is not None,
+            "synced_count": int(cached_synced) if cached_synced and cached_synced.isdigit() else 0,
+        },
+        "repos": {
+            "online": online_repos,
+            "offline": offline_repos,
+            "total": len(list_repos()),
+        },
+        "commands_available": sorted(_COMMAND_HANDLERS.keys()),
         "timestamp": time.time(),
     }
 
@@ -90,6 +177,39 @@ async def manifest():
             "vuegraph": "/graph",
         },
     }
+
+
+# ── Quests ─────────────────────────────────────────────────────────────────
+
+@router.get("/quests")
+async def quests_list():
+    """Return all Dev-Mentor CTF quests, with memory-sync status."""
+    quests = _load_quests()
+    cached_synced = mem_read("devmentor.quests.synced")
+    by_cat: Dict[str, int] = {}
+    total_xp = 0
+    for q in quests:
+        if isinstance(q, dict):
+            cat = q.get("category", "unknown")
+            by_cat[cat] = by_cat.get(cat, 0) + 1
+            total_xp += q.get("xp", 0)
+    return {
+        "total": len(quests),
+        "total_xp": total_xp,
+        "categories": sorted(by_cat.keys()),
+        "by_category": by_cat,
+        "synced": cached_synced is not None,
+        "synced_count": int(cached_synced) if cached_synced and cached_synced.isdigit() else 0,
+        "quests": quests,
+    }
+
+
+@router.post("/quests/sync")
+async def quests_sync():
+    """Sync Dev-Mentor quest catalogue into shared memory and return stats."""
+    quests = _load_quests()
+    summary = _sync_quests_to_memory(quests)
+    return {"synced": True, **summary}
 
 
 # ── Command ────────────────────────────────────────────────────────────────
@@ -191,11 +311,21 @@ def _cmd_boot(ctx):
     }
 
 
+@_register_cmd("quest sync")
+def _cmd_quest_sync(ctx):
+    quests = _load_quests()
+    summary = _sync_quests_to_memory(quests)
+    return {"synced": True, **summary}
+
+
 @_register_cmd("integrate")
 def _cmd_integrate(ctx):
     from ecosystem.orchestrator import bootstrap
     result = bootstrap()
-    return {"integrated": True, "bootstrap": result}
+    # Auto-sync quests on every integrate
+    quests = _load_quests()
+    quest_summary = _sync_quests_to_memory(quests)
+    return {"integrated": True, "bootstrap": result, "quests_synced": quest_summary["total"], "quest_summary": quest_summary}
 
 
 @router.post("/command")
