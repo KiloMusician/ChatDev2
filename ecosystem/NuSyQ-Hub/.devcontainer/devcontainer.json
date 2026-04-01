@@ -1,0 +1,77 @@
+{
+  // ⚠️  STANDALONE FALLBACK — use KiloCore master for multi-project development.
+  //
+  //     Preferred:  Open C:\Kilo_Core in VS Code →
+  //                 Ctrl+Shift+P → "Dev Containers: Reopen in Container"
+  //
+  //     This file is kept as a standalone fallback for opening NuSyQ-Hub alone.
+  //     KiloCore master devcontainer has all three repos (NuSyQ-Hub, NuSyQ,
+  //     SimulatedVerse) plus Dev-Mentor with correct env-var-based paths.
+  // ─────────────────────────────────────────────────────────────────────────────
+  "name": "NuSyQ Tripartite Ecosystem (standalone)",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "workspaceFolder": "/workspaces/NuSyQ-Hub",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/NuSyQ-Hub,type=bind",
+  "remoteUser": "vscode",
+
+  "features": {
+    "ghcr.io/devcontainers/features/powershell:1": {}
+  },
+
+  "mounts": [
+    "source=${localEnv:USERPROFILE}\\NuSyQ,target=/workspaces/NuSyQ,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}\\Desktop\\SimulatedVerse\\SimulatedVerse,target=/workspaces/SimulatedVerse,type=bind,consistency=cached"
+  ],
+
+  "containerEnv": {
+    "NUSYQ_HUB_ROOT": "/workspaces/NuSyQ-Hub",
+    "NUSYQ_ROOT": "/workspaces/NuSyQ",
+    "SIMULATEDVERSE_ROOT": "/workspaces/SimulatedVerse",
+    "ECOSYSTEM_ROOT": "/workspaces/NuSyQ-Hub",
+    "IN_DEVCONTAINER": "true"
+  },
+
+  "postCreateCommand": "bash /workspaces/NuSyQ-Hub/.devcontainer/post-create.sh",
+  "postStartCommand": "echo '🚀 NuSyQ Tripartite Ecosystem ready! Run: python scripts/ecosystem_entrypoint.py doctor'",
+  "runArgs": ["--init"],
+  "shutdownAction": "stopContainer",
+
+  "forwardPorts": [11434, 3000, 5000, 8000, 9229],
+  "portsAttributes": {
+    "11434": { "label": "Ollama", "onAutoForward": "notify" },
+    "3000":  { "label": "SimulatedVerse", "onAutoForward": "openBrowser" },
+    "8000":  { "label": "NuSyQ-Hub API", "onAutoForward": "notify" }
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/usr/local/bin/python3",
+        "ollama.baseUrl": "http://localhost:11434",
+        "continue.models.default": "ollama/qwen2.5-coder:14b",
+        "continue.embeddingsProvider.provider": "ollama",
+        "powershell.powerShellExePath": "/usr/bin/pwsh",
+        "git.repositories": [
+          "/workspaces/NuSyQ-Hub",
+          "/workspaces/NuSyQ",
+          "/workspaces/SimulatedVerse"
+        ]
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "eamodio.gitlens",
+        "ms-vscode.powershell",
+        "continue.continue",
+        "warm3snow.vscode-ollama",
+        "10nates.ollama-autocoder",
+        "technovangelist.ollamamodelfile",
+        "fabiospampinato.vscode-terminals",
+        "adrianwilczynski.terminal-commands"
+      ]
+    }
+  }
+}

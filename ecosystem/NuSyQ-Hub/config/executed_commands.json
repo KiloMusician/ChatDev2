@@ -1,0 +1,5 @@
+[
+  "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force",
+  "python Transcendent_Spine\\kilo-foolish-transcendent-spine\\src\\spine\\civilization_orchestrator.py",
+  "python tools/classify_python_files.py"
+]

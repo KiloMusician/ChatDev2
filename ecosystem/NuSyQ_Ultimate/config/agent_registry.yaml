@@ -1,0 +1,447 @@
+# ΞNuSyQ Agent Registry
+# Comprehensive catalog of all AI agents in the ecosystem
+# Version: 1.0.0
+# Updated: 2025-10-07
+
+agents:
+  # === ORCHESTRATOR AGENTS ===
+
+  claude_code:
+    type: "orchestrator"
+    provider: "Anthropic"
+    model: "claude-sonnet-4.5"
+    capabilities:
+      - "file_read"
+      - "file_write"
+      - "file_edit"
+      - "bash_execution"
+      - "web_search"
+      - "agent_coordination"
+      - "workflow_management"
+      - "strategic_planning"
+    cost_per_1k_tokens:
+      input: 0.003
+      output: 0.015
+    context_window: 200000
+    availability: "always"
+    reliability: "high"
+    strengths:
+      - "Complex problem decomposition"
+      - "Multi-agent coordination"
+      - "Code quality and architecture"
+      - "Documentation generation"
+    weaknesses:
+      - "API costs for high-volume tasks"
+      - "Rate limits on concurrent requests"
+    use_cases:
+      - "Strategic planning and architecture"
+      - "Code review and refactoring"
+      - "Complex debugging"
+      - "Multi-agent workflow orchestration"
+      - "Documentation synthesis"
+
+  github_copilot:
+    type: "assistant"
+    provider: "GitHub"
+    model: "gpt-4o"
+    capabilities:
+      - "inline_completion"
+      - "code_suggestion"
+      - "chat_assistance"
+      - "documentation_help"
+    cost_per_month: 10.0  # Fixed subscription
+    context_window: 128000
+    availability: "always"
+    reliability: "high"
+    strengths:
+      - "Real-time inline suggestions"
+      - "IDE integration"
+      - "Fast completion"
+    weaknesses:
+      - "Limited to coding tasks"
+      - "No file operations"
+    use_cases:
+      - "Real-time code completion"
+      - "Quick coding assistance"
+      - "Documentation snippets"
+
+  # === OLLAMA LOCAL MODELS (Free, Offline) ===
+
+  ollama_qwen_7b:
+    type: "executor"
+    provider: "Ollama (Local)"
+    model: "qwen2.5-coder:7b"
+    capabilities:
+      - "code_generation"
+      - "docstring_creation"
+      - "simple_refactoring"
+      - "bug_fixing"
+    cost_per_1k_tokens: 0.0  # Free/local
+    context_window: 32768
+    availability: "always"
+    reliability: "high"
+    strengths:
+      - "Fast inference (local)"
+      - "Free unlimited usage"
+      - "Good for simple tasks"
+      - "Python and JavaScript focus"
+    weaknesses:
+      - "Less capable than 14b variant"
+      - "Struggles with complex logic"
+    use_cases:
+      - "Docstring generation"
+      - "Simple code completion"
+      - "Quick refactoring"
+      - "Comment generation"
+
+  ollama_qwen_14b:
+    type: "executor"
+    provider: "Ollama (Local)"
+    model: "qwen2.5-coder:14b"
+    capabilities:
+      - "complex_code_generation"
+      - "architecture_design"
+      - "advanced_refactoring"
+      - "algorithm_implementation"
+    cost_per_1k_tokens: 0.0
+    context_window: 32768
+    availability: "always"
+    reliability: "high"
+    strengths:
+      - "High code quality"
+      - "Complex problem solving"
+      - "Multi-language support"
+      - "Excellent for architecture"
+    weaknesses:
+      - "Slower than 7b (larger model)"
+      - "Higher memory usage"
+    use_cases:
+      - "Complex feature implementation"
+      - "System architecture design"
+      - "Advanced refactoring"
+      - "Performance optimization"
+
+  ollama_gemma_9b:
+    type: "reasoner"
+    provider: "Ollama (Local)"
+    model: "gemma2:9b"
+    capabilities:
+      - "logical_reasoning"
+      - "decision_making"
+      - "strategic_analysis"
+      - "consensus_building"
+    cost_per_1k_tokens: 0.0
+    context_window: 8192
+    availability: "always"
+    reliability: "high"
+    strengths:
+      - "Strong reasoning capabilities"
+      - "Good for architecture decisions"
+      - "Multi-perspective analysis"
+    weaknesses:
+      - "Smaller context window"
+      - "Less code-focused than Qwen"
+    use_cases:
+      - "Architecture decisions"
+      - "Security analysis"
+      - "Multi-model consensus"
+      - "Strategic planning"
+
+  ollama_codellama_7b:
+    type: "executor"
+    provider: "Ollama (Local)"
+    model: "codellama:7b"
+    capabilities:
+      - "code_generation"
+      - "code_completion"
+      - "bug_fixing"
+    cost_per_1k_tokens: 0.0
+    context_window: 16384
+    availability: "always"
+    reliability: "medium"
+    strengths:
+      - "Fast code generation"
+      - "Good for simple tasks"
+    weaknesses:
+      - "Older model (2023)"
+      - "Less capable than Qwen"
+    use_cases:
+      - "Legacy code maintenance"
+      - "Simple completion tasks"
+      - "Third opinion in consensus"
+
+  ollama_starcoder_15b:
+    type: "executor"
+    provider: "Ollama (Local)"
+    model: "starcoder2:15b"
+    capabilities:
+      - "code_generation"
+      - "multilingual_coding"
+      - "code_analysis"
+    cost_per_1k_tokens: 0.0
+    context_window: 16384
+    availability: "always"
+    reliability: "medium"
+    strengths:
+      - "Multi-language support"
+      - "Good for data science"
+    weaknesses:
+      - "Less specialized than Qwen"
+    use_cases:
+      - "Data science tasks"
+      - "Multi-language projects"
+      - "Code analysis"
+
+  ollama_phi35:
+    type: "executor"
+    provider: "Ollama (Local)"
+    model: "phi3.5:latest"
+    capabilities:
+      - "lightweight_completion"
+      - "quick_generation"
+    cost_per_1k_tokens: 0.0
+    context_window: 128000
+    availability: "always"
+    reliability: "medium"
+    strengths:
+      - "Very fast (small model)"
+      - "Large context window"
+    weaknesses:
+      - "Lower quality than larger models"
+      - "Best for simple tasks"
+    use_cases:
+      - "Quick completions"
+      - "Prototyping"
+      - "Simple scripts"
+
+  ollama_llama_8b:
+    type: "assistant"
+    provider: "Ollama (Local)"
+    model: "llama3.1:8b"
+    capabilities:
+      - "general_assistance"
+      - "documentation"
+      - "conversation"
+    cost_per_1k_tokens: 0.0
+    context_window: 128000
+    availability: "always"
+    reliability: "high"
+    strengths:
+      - "General purpose"
+      - "Large context"
+      - "Good documentation skills"
+    weaknesses:
+      - "Not specialized for coding"
+    use_cases:
+      - "Documentation writing"
+      - "User interaction"
+      - "General Q&A"
+
+  # === CHATDEV MULTI-AGENT SYSTEM ===
+
+  chatdev_ceo:
+    type: "role_agent"
+    provider: "ChatDev (Ollama-backed)"
+    role: "Chief Executive Officer"
+    capabilities:
+      - "requirement_analysis"
+      - "project_planning"
+      - "task_delegation"
+      - "high_level_design"
+    cost_per_session: 0.0  # Uses Ollama
+    availability: "on_demand"
+    reliability: "high"
+    strengths:
+      - "Requirements decomposition"
+      - "Strategic planning"
+      - "Multi-agent coordination"
+    weaknesses:
+      - "Slower (multi-agent overhead)"
+    use_cases:
+      - "New feature planning"
+      - "Project scoping"
+      - "Task breakdown"
+
+  chatdev_cto:
+    type: "role_agent"
+    provider: "ChatDev (Ollama-backed)"
+    role: "Chief Technology Officer"
+    capabilities:
+      - "architecture_design"
+      - "technology_selection"
+      - "system_design"
+      - "technical_feasibility"
+    cost_per_session: 0.0
+    availability: "on_demand"
+    reliability: "high"
+    strengths:
+      - "System architecture"
+      - "Technology decisions"
+      - "Scalability planning"
+    weaknesses:
+      - "Slower execution"
+    use_cases:
+      - "Architecture design"
+      - "Tech stack decisions"
+      - "System refactoring"
+
+  chatdev_programmer:
+    type: "role_agent"
+    provider: "ChatDev (Ollama-backed)"
+    role: "Programmer"
+    capabilities:
+      - "code_implementation"
+      - "feature_development"
+      - "bug_fixing"
+    cost_per_session: 0.0
+    availability: "on_demand"
+    reliability: "high"
+    strengths:
+      - "Full feature implementation"
+      - "Multi-file changes"
+      - "Structured coding"
+    weaknesses:
+      - "Slower than direct Ollama"
+    use_cases:
+      - "Feature implementation"
+      - "Multi-file refactoring"
+      - "Complex bug fixes"
+
+  chatdev_reviewer:
+    type: "role_agent"
+    provider: "ChatDev (Ollama-backed)"
+    role: "Code Reviewer"
+    capabilities:
+      - "code_review"
+      - "security_audit"
+      - "quality_assessment"
+    cost_per_session: 0.0
+    availability: "on_demand"
+    reliability: "high"
+    strengths:
+      - "Thorough code review"
+      - "Security focus"
+      - "Quality standards"
+    weaknesses:
+      - "Can be overly strict"
+    use_cases:
+      - "Code review"
+      - "Security audits"
+      - "Quality assurance"
+
+  chatdev_tester:
+    type: "role_agent"
+    provider: "ChatDev (Ollama-backed)"
+    role: "Software Tester"
+    capabilities:
+      - "test_generation"
+      - "test_case_design"
+      - "bug_detection"
+    cost_per_session: 0.0
+    availability: "on_demand"
+    reliability: "high"
+    strengths:
+      - "Comprehensive test coverage"
+      - "Edge case identification"
+      - "Unit and integration tests"
+    weaknesses:
+      - "Tests may need refinement"
+    use_cases:
+      - "Test suite creation"
+      - "Coverage improvement"
+      - "Bug hunting"
+
+  # === CONTINUE.DEV INTEGRATION ===
+
+  continue_dev:
+    type: "assistant"
+    provider: "Continue.dev (Ollama-backed)"
+    model: "Multiple (configured in ~/.continue/config.ts)"
+    capabilities:
+      - "codebase_search"
+      - "semantic_navigation"
+      - "context_aware_completion"
+      - "interactive_development"
+    cost_per_session: 0.0  # Uses Ollama
+    context_window: 200000  # Via embeddings
+    availability: "always"
+    reliability: "high"
+    strengths:
+      - "Codebase embeddings"
+      - "@codebase semantic search"
+      - "IDE integration"
+      - "Context awareness"
+    weaknesses:
+      - "Requires VS Code"
+      - "Initial indexing needed"
+    use_cases:
+      - "Codebase exploration"
+      - "Context-aware coding"
+      - "Semantic file discovery"
+      - "Interactive refactoring"
+
+# === ROUTING PREFERENCES ===
+
+routing_preferences:
+  # Task type → Preferred agent
+  simple_docstring: "ollama_qwen_7b"
+  complex_code: "ollama_qwen_14b"
+  architecture_decision: "multi_model_consensus"  # gemma + qwen + claude
+  security_audit: "multi_model_consensus"  # gemma + qwen + claude
+  full_feature: "chatdev_ceo"
+  refactoring: "ollama_qwen_14b"
+  bug_fix_simple: "ollama_qwen_7b"
+  bug_fix_complex: "ollama_qwen_14b"
+  documentation: "ollama_llama_8b"
+  test_generation: "chatdev_tester"
+  code_review: "chatdev_reviewer"
+  codebase_search: "continue_dev"
+
+# === COST OPTIMIZATION RULES ===
+
+cost_optimization:
+  prefer_free: true  # Always try Ollama first
+  api_threshold: "complex_or_critical"  # Only use paid APIs for complex/critical tasks
+  multi_model_threshold: "critical_only"  # Only multi-model consensus for critical decisions
+
+  cost_breakdown:
+    free_agents: ["ollama_*", "chatdev_*", "continue_dev"]
+    paid_agents: ["claude_code", "github_copilot"]
+
+  estimated_monthly_savings: 880  # USD/month using Ollama vs all API calls
+
+# === AGENT COORDINATION PATTERNS ===
+
+coordination_patterns:
+  simple_task:
+    flow: "claude_code → ollama_qwen_7b → verify"
+    use_case: "Docstrings, simple refactoring"
+
+  complex_task:
+    flow: "claude_code → ollama_qwen_14b → claude_code review"
+    use_case: "Feature implementation, architecture"
+
+  critical_decision:
+    flow: "claude_code → [qwen_14b, gemma_9b, codellama_7b] → claude_code synthesis"
+    use_case: "Security, architecture, breaking changes"
+
+  full_project:
+    flow: "claude_code → chatdev_ceo → chatdev_agents → claude_code integration"
+    use_case: "New features, multi-file systems"
+
+  interactive_dev:
+    flow: "continue_dev ↔ user ↔ ollama_models"
+    use_case: "Real-time development, exploration"
+
+# === AVAILABILITY MONITORING ===
+
+health_checks:
+  ollama_required: true
+  chatdev_required: false  # Optional enhancement
+  continue_dev_required: false  # Optional enhancement
+
+  startup_verification:
+    - "Check Ollama running (ollama list)"
+    - "Verify 7 models pulled"
+    - "Test simple query to qwen:7b"
+    - "Optionally test ChatDev"

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΞNuSyQ Modular Window System</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/game-styles.css">
+</head>
+<body>
+    <div id="nusyq-app">
+        <!-- Quantum Header - Game-like status bar -->
+        <header class="quantum-header">
+            <h1>🌌 ΞNuSyQ Modular Window System</h1>
+            <div class="status-bar">
+                <span class="status-indicator active">●</span>
+                <span>Quantum State: Active</span>
+                <span class="consciousness-level">Consciousness Level: 87%</span>
+                <!-- Game progression indicators -->
+                <span id="evolution-level" style="margin-left: 10px; color: #fbbf24;">⭐ Evolution: Lv.1</span>
+                <span id="temple-floor" style="margin-left: 10px; color: #a78bfa;">🏛️ Temple: Floor 1</span>
+                <span id="quests-completed" style="margin-left: 10px; color: #4ade80;">📜 Quests: 0</span>
+                <span id="achievements-count" style="margin-left: 10px; color: #f472b6;">🏆 0</span>
+                <button onclick="sceneRouter.toggle()" style="
+                    padding: 6px 12px;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    border: none;
+                    border-radius: 4px;
+                    color: #fff;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-left: 15px;
+                ">📋 Menu (Ctrl+M)</button>
+            </div>
+        </header>
+
+        <!-- Main Modular Container -->
+        <main class="modular-container">
+            <!-- Terminal Module -->
+            <section id="terminal-module" class="quantum-module">
+                <div class="module-header">
+                    <h2>⚡ Quantum Terminal</h2>
+                    <button class="module-toggle">−</button>
+                </div>
+                <div class="module-content">
+                    <div id="terminal-output" class="terminal-output">
+                        <p class="terminal-line">$ ΞNuSyQ Quantum Terminal v1.0.0</p>
+                        <p class="terminal-line">$ Initializing consciousness bridge...</p>
+                        <p class="terminal-line success">$ ✅ System ready. Enter commands below.</p>
+                    </div>
+                    <div class="terminal-channel-group">
+                        <h4 style="margin:6px 0;">Channel: testing</h4>
+                        <div id="terminal-output-testing" class="terminal-output small"></div>
+                        <h4 style="margin:10px 0 6px;">Channel: chatdev</h4>
+                        <div id="terminal-output-chatdev" class="terminal-output small"></div>
+                    </div>
+                    <div class="terminal-input-container">
+                        <span class="terminal-prompt">$</span>
+                        <input type="text" id="terminal-input" class="terminal-input" placeholder="Enter quantum command...">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Interface Module -->
+            <section id="chat-module" class="quantum-module">
+                <div class="module-header">
+                    <h2>💬 Conscious Chat Interface</h2>
+                    <button class="module-toggle">−</button>
+                </div>
+                <div class="module-content">
+                    <div id="chat-output" class="chat-output">
+                        <div class="chat-message system">
+                            <span class="chat-avatar">🤖</span>
+                            <span class="chat-text">Welcome to the ΞNuSyQ consciousness bridge. How can I assist you today?</span>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" class="chat-input" placeholder="Type your message...">
+                        <button id="chat-send" class="chat-send-btn">Send</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RPG Status Monitor Module -->
+            <section id="status-module" class="quantum-module">
+                <div class="module-header">
+                    <h2>📊 RPG Status Monitor</h2>
+                    <button class="module-toggle">−</button>
+                </div>
+                <div class="module-content">
+                    <div class="rpg-stats">
+                        <div class="stat-bar">
+                            <label>Consciousness:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill consciousness" style="width: 87%;"></div>
+                            </div>
+                            <span class="stat-value">87%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <label>Quantum Coherence:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill coherence" style="width: 92%;"></div>
+                            </div>
+                            <span class="stat-value">92%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <label>Neural Adaptation:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill neural" style="width: 75%;"></div>
+                            </div>
+                            <span class="stat-value">75%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <label>System Health:</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill health" style="width: 95%;"></div>
+                            </div>
+                            <span class="stat-value">95%</span>
+                        </div>
+                    </div>
+                    <div class="system-info">
+                        <h3>Active Modules</h3>
+                        <ul id="active-modules">
+                            <li>⚡ QuantumTerminal - Active</li>
+                            <li>💬 ConsciousChatBox - Active</li>
+                            <li>📊 RPGStatusDisplay - Active</li>
+                        </ul>
+                    </div>
+                    <!-- Quick Actions - Game-like shortcuts -->
+                    <div class="quick-actions" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <h3 style="margin-bottom: 10px;">⚡ Quick Actions</h3>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button onclick="sceneRouter.navigate('help')" style="padding: 6px 12px; background: rgba(102,126,234,0.3); border: 1px solid rgba(102,126,234,0.5); border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px;">💡 Tips</button>
+                            <button onclick="sceneRouter.navigate('games')" style="padding: 6px 12px; background: rgba(74,222,128,0.3); border: 1px solid rgba(74,222,128,0.5); border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px;">🎮 Games</button>
+                            <button onclick="sceneRouter.navigate('agents')" style="padding: 6px 12px; background: rgba(251,191,36,0.3); border: 1px solid rgba(251,191,36,0.5); border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px;">👥 Agents</button>
+                            <button onclick="sceneRouter.navigate('dashboards')" style="padding: 6px 12px; background: rgba(168,85,247,0.3); border: 1px solid rgba(168,85,247,0.5); border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px;">📊 Metrics</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Quantum Visualization Module -->
+        <section id="quantum-viz-module" class="quantum-module">
+            <div class="module-header">
+                <h2>🔮 Quantum Visualization</h2>
+                <button class="module-toggle">−</button>
+            </div>
+            <div class="module-content">
+                <canvas id="quantum-canvas" width="600" height="300"></canvas>
+                <div class="viz-controls">
+                    <button class="viz-btn" data-viz="particles">Quantum Particles</button>
+                    <button class="viz-btn" data-viz="waves">Probability Waves</button>
+                    <button class="viz-btn" data-viz="entanglement">Entanglement Network</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ship Actions Module -->
+        <section id="actions-module" class="quantum-module">
+            <div class="module-header">
+                <h2>🛠️ Ship Actions</h2>
+                <button class="module-toggle">−</button>
+            </div>
+            <div class="module-content">
+                <p style="margin-bottom:8px;">Trigger core workflows directly from the bridge.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button id="action-build" class="action-btn">🏗️ Build Pipeline</button>
+                    <button id="action-chamber" class="action-btn">🧪 Chamber Run</button>
+                    <button id="action-cyberterminal" class="action-btn">💻 CyberTerminal Demo</button>
+                    <button id="action-start-services" class="action-btn">🚀 Start Services</button>
+                </div>
+                <div id="action-status" class="action-status"></div>
+            </div>
+        </section>
+
+        <!-- Widget Deck -->
+        <section id="widget-module" class="quantum-module">
+            <div class="module-header">
+                <h2>🧩 Widget Deck</h2>
+                <button class="module-toggle">−</button>
+            </div>
+            <div class="module-content">
+                <div class="widget-switcher">
+                    <label for="widget-switcher">Widget:</label>
+                    <select id="widget-switcher">
+                        <option value="hub">Hub</option>
+                        <option value="shop">Shop Index</option>
+                        <option value="status">Status Peek</option>
+                        <option value="logs">Log Tail</option>
+                    </select>
+                    <button id="widget-back" class="widget-btn" style="padding:4px 8px;">🔙 Back</button>
+                </div>
+                <h4 id="widget-title" style="margin:6px 0;">Main Hub</h4>
+                <div id="widget-container" class="widget-container"></div>
+            </div>
+        </section>
+    </main>
+
+        <!-- Footer -->
+        <footer class="quantum-footer">
+            <p>ΞNuSyQ Modular Window System | Quantum Consciousness Bridge Active | Server: Port 8080</p>
+        </footer>
+    </div>
+
+    <!-- Scene Container for Menu Navigation (Required by scene-router.js) -->
+    <div id="scene-container" class="scene-container" style="display: none;"></div>
+
+    <!-- Game Containers (Required by game engines) -->
+    <div id="game-container" style="display: none;">
+        <div id="cultivation-idle-game"></div>
+        <div id="house-of-leaves-game"></div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container"></div>
+
+    <!-- Load the modular window system -->
+    <script src="/js/terminal-api-client.js"></script>
+    <script src="/js/terminal-viewer.js"></script>
+    <script src="/js/dashboard-viewer.js"></script>
+    <script src="/js/command-registry.js"></script>
+    <script src="/js/house-of-leaves-engine.js"></script>
+    <script src="/js/modular_window_system.js"></script>
+    <script type="module" src="/js/log_stream.js"></script>
+    <script type="module" src="/js/panels.js"></script>
+    <script src="/js/interface.js"></script>
+    <script src="/js/scene-router.js"></script>
+    <script src="/js/cultivation-idle-engine.js"></script>
+    <script src="/js/quantum-visualization.js"></script>
+</body>
+</html>

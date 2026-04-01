@@ -1,0 +1,33 @@
+pipelines:
+  - id: idler_feature
+    name: "Idler Feature: Prototype→Tests→Docs"
+    stages:
+      - { agentId: arch,  promptId: p_idler_design,  output: plan }
+      - { agentId: proto, promptId: p_code_scaffold, output: code }
+      - { agentId: test,  promptId: p_test_gen,     output: tests }
+      - { agentId: doc,   promptId: p_docs_snippet,  output: notes }
+
+  - id: godot_bridge
+    name: "Godot Bridge: SceneSense"
+    stages:
+      - { agentId: godot, promptId: p_godot_scene,   output: artifact }
+      - { agentId: refx,  promptId: p_refactor,      output: code }
+      - { agentId: test,  promptId: p_godot_tests,   output: tests }
+
+  - id: ascii_hud_enhance
+    name: "ASCII HUD Enhance: UX→ASCII"
+    stages:
+      - { agentId: ui,    promptId: p_hud_spec,      output: plan }
+      - { agentId: ascii, promptId: p_ascii_art,     output: artifact }
+
+  - id: lore_pack
+    name: "Lore Pack: Narrative + Tagging"
+    stages:
+      - { agentId: lore,  promptId: p_lore_world,    output: notes }
+      - { agentId: archivist, promptId: p_obsidian,  output: artifact }
+
+  - id: telemetry_analytics
+    name: "Telemetry→Pandas Notebook"
+    stages:
+      - { agentId: analyst, promptId: p_metrics,     output: artifact }
+      - { agentId: doc,     promptId: p_notebook_doc,output: notes }

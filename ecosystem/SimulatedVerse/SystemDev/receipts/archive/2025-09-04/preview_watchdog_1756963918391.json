@@ -1,0 +1,16 @@
+{
+  "timestamp": 1756963918221,
+  "operation": "preview_watchdog",
+  "success": false,
+  "checks_passed": 4,
+  "total_checks": 5,
+  "errors": [
+    "Build hash mismatch between header and content",
+    "Route /dev returned 500"
+  ],
+  "recommendations": [
+    "Regenerate and sync build hash across launcher components"
+  ],
+  "status": "anomalies_detected",
+  "next_action": "apply_recommendations"
+}

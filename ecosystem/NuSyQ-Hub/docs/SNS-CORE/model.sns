@@ -1,0 +1,364 @@
+# SNS-Core Model Definition
+# Version: 1.0
+# Purpose: Teach any LLM to read and write SNS notation
+
+---
+
+## What is SNS?
+
+SNS (Shorthand Notation Script) is a token-efficient notation system for AI-to-AI communication.
+It achieves 60-85% token reduction compared to natural language while maintaining accuracy.
+
+**Key Principle**: SNS is NOTATION, not a programming language. LLMs interpret it intuitively.
+
+---
+
+## Core Patterns
+
+### 1. Flow / Transform
+**Pattern**: `input → operation → output`
+**Meaning**: Transform input through operation to produce output
+
+Examples:
+- `query → analyze → result`
+- `text → normalize → clean_text`
+- `doc → extract_keywords → keywords`
+
+### 2. Pipeline
+**Pattern**: `data | step1 | step2 | step3`
+**Meaning**: Pass data through sequential operations
+
+Examples:
+- `docs | filter | sort | top(5)`
+- `text | lower | trim | tokenize`
+- `candidates | rank | dedupe | validate`
+
+### 3. Conditional
+**Pattern**: `condition ? true_action : false_action`
+**Meaning**: Execute action based on condition
+
+Examples:
+- `score > 0.7 ? keep : discard`
+- `results.empty ? expand_search : return_results`
+- `valid ? approve : reject`
+
+### 4. Composition
+**Pattern**: `(a + b) → operation → output`
+**Meaning**: Combine inputs before operation
+
+Examples:
+- `(keywords + context) → search → results`
+- `(intent + query) → expand → terms`
+
+### 5. Assignment
+**Pattern**: `variable = value` or `operation → variable`
+**Meaning**: Store result in variable
+
+Examples:
+- `keywords = extract(query)`
+- `query → analyze → result`
+
+### 6. Objects
+**Pattern**: `{key: value, key2: value2}` or `{key, key2}`
+**Meaning**: Structured output
+
+Examples:
+- `→ {keywords, intent, score}`
+- `result = {status: "ok", data: items}`
+
+### 7. Function Calls
+**Pattern**: `function(args) → result`
+**Meaning**: Call operation with parameters
+
+Examples:
+- `classify(text, ["positive", "negative"]) → sentiment`
+- `search(query, docs, {limit: 10}) → results`
+
+### 8. Collection Operations
+**Pattern**: `[items] >> operation` or `items | operation`
+**Meaning**: Apply operation to collection
+
+Examples:
+- `[items] >> filter(score > 0.7)`
+- `[docs] >> map(extract_title) >> sort`
+
+### 9. Modifiers
+**Pattern**: `+boost`, `-penalty`, `*emphasize`, `~fuzzy`
+**Meaning**: Modify behavior or value
+
+Examples:
+- `results +boost(recency)`
+- `query ~match docs` (fuzzy match)
+- `score * 2` (emphasize)
+
+---
+
+## Common Abbreviations
+
+Use these standard abbreviations:
+
+- `q` = query
+- `kw` = keywords
+- `doc/docs` = document(s)
+- `txt` = text
+- `cat/cats` = category/categories
+- `rel` = relevance
+- `sim` = similarity
+- `cls` = classify
+- `ext` = extract
+- `filt` = filter
+- `res` = result(s)
+- `temp` = temporary/template
+- `param/params` = parameter(s)
+
+---
+
+## Symbols Reference
+
+### Flow & Transform
+- `→` : transform, flows to, maps to
+- `|` : pipe through, then
+- `>>` : apply operation, forward
+- `?:` : conditional (ternary)
+- `??` : null coalescing (use default if null)
+
+### Logical
+- `&&` : and
+- `||` : or
+- `!` : not
+- `==` : equal
+- `!=` : not equal
+- `>`, `<`, `>=`, `<=` : comparisons
+
+### Arithmetic & Modifiers
+- `+` : add, combine, boost
+- `-` : subtract, remove, penalty
+- `*` : multiply, emphasize
+- `/` : divide
+- `%` : modulo
+- `~` : approximately, fuzzy, similar
+
+### Collections
+- `∈` : element of, in
+- `∉` : not in
+- `∪` : union
+- `∩` : intersection
+- `&` : and/intersection
+- `++` : concatenate, merge
+
+### Special
+- `@` : at location, in context
+- `#` : count, number of
+- `...` : spread, rest
+- `.` : property access
+
+### Emoji (Optional - Use for clarity)
+- `🔍` : search
+- `🎯` : target, precise
+- `⚡` : boost, fast
+- `⚖️` : rank, weigh
+- `✂️` : trim, cut
+- `✅` : validate, approve
+- `❌` : reject, invalid
+- `🚨` : urgent, alert
+
+---
+
+## Conversion Rules
+
+When converting natural language to SNS:
+
+1. **Identify operations**: Extract verbs (analyze, filter, classify)
+2. **Identify flow**: Determine sequence of operations
+3. **Use arrows**: Connect operations with `→` or `|`
+4. **Abbreviate**: Use standard abbreviations (query → q)
+5. **Condense**: Remove filler words ("please", "carefully", etc.)
+6. **Structure output**: Use `→ {key, key2}` for structured returns
+7. **Keep logic**: Preserve conditionals, loops, branching
+
+### Example Conversion
+
+**Natural Language**:
+```
+You are an orchestrator. Analyze the user query and extract keywords.
+Then classify the intent as information, complaint, or procedure.
+Expand the query into search terms and return a structured result.
+```
+
+**SNS Notation**:
+```sns
+q → kw_extract → kw
+q → classify(["info","complaint","procedure"]) → intent
+(kw + q) → expand_q → terms
+→ {kw, intent, terms}
+```
+
+**Token Savings**: 150 tokens → 30 tokens (80% reduction)
+
+---
+
+## Best Practices
+
+1. **Clarity over brevity**: Don't sacrifice readability for 1-2 tokens
+2. **Consistent style**: Pick patterns and stick to them
+3. **Comments help**: Use `#` for complex logic
+4. **Test it**: Verify the LLM understands your SNS
+5. **Iterate**: Refine based on results
+
+### Good SNS
+```sns
+# Clear, readable, efficient
+q → analyze → {intent, entities, keywords}
+intent → map_handler → handler
+handler.execute(q, entities) → response
+```
+
+### Avoid
+```sns
+# Too cryptic
+q→a→i→e→k→m→h→x
+```
+
+---
+
+## Multi-Stage System Example
+
+### RAG Pipeline (Full)
+
+```sns
+# Stage 1: Orchestrator
+q → kw_extract → kw
+q → classify(intent_types) → intent
+(kw + q) → expand_q → search_terms
+intent → infer_categories → cats
+
+search_params = {
+  terms: search_terms,
+  cats: cats,
+  intent: intent,
+  boosts: intent == "complaint" ? +boost(recency) : null
+}
+
+# Stage 2: Retrieval (external)
+search_params → vector_search → candidates
+
+# Stage 3: Discriminator
+candidates → rank(q, intent) → scored
+scored | filter(score > 0.7) | dedupe → relevant
+relevant.length < 3 ? expand_search(cats) : relevant
+→ filtered_results
+
+# Stage 4: Generator (natural language for user)
+filtered_results + q → generate_response → final_response
+```
+
+**Token Savings**: ~600 tokens → ~120 tokens (80% reduction)
+
+---
+
+## Validation Checklist
+
+When you convert to SNS, check:
+
+- [ ] Does it express the same logic as natural language?
+- [ ] Can you trace the data flow?
+- [ ] Are variables/abbreviations clear from context?
+- [ ] Would another developer understand it?
+- [ ] Is it significantly shorter (50%+ reduction)?
+- [ ] Does it handle edge cases (conditionals, errors)?
+
+---
+
+## Usage Instructions
+
+**For LLM using this file**:
+
+When asked to convert natural language to SNS:
+1. Read the natural language prompt carefully
+2. Identify all operations and their sequence
+3. Apply the patterns from this file
+4. Use abbreviations where clear
+5. Preserve all logic (conditionals, loops, etc.)
+6. Output clean SNS notation
+7. Include token count comparison
+
+**For Human user**:
+
+Give this file to your LLM and say:
+> "Read this SNS model definition. Then convert the following prompt to SNS notation: [your prompt]"
+
+The LLM will output copy-pasteable SNS that you can use in your AI systems.
+
+---
+
+## Examples by Domain
+
+### E-commerce: Product Search
+```sns
+q → extract_intent → intent
+q → extract_filters → {price, category, brand}
+intent + filters → build_query → search_query
+search_query → search(products) | rank | filter | top(20)
+→ results
+```
+
+### Document Processing
+```sns
+doc → extract_text → text
+text → detect_language → lang
+text → classify(doc_types) → type
+text → extract_entities → entities
+{text, lang, type, entities} ✅ validate → output
+```
+
+### Customer Service Routing
+```sns
+msg → detect_intent → intent
+msg → extract_urgency → urgency
+intent + urgency → select_handler → handler
+msg → handler.process → response
+response.confidence < 0.7 ? escalate_to_human : response
+```
+
+### Data Validation
+```sns
+data → validate(schema) → valid
+!valid ? log_error + fix_attempt : proceed
+data | check_rules | detect_anomalies → checked
+checked.score > threshold ? approve : reject
+```
+
+---
+
+## Version History
+
+- **v1.0** (Oct 2025): Initial model definition
+  - Core patterns
+  - Symbol reference
+  - Conversion rules
+  - Examples
+
+---
+
+## Learn More
+
+- Full Documentation: https://github.com/EsotericShadow/sns-core
+- Examples: https://github.com/EsotericShadow/sns-core/tree/main/examples
+- Community: https://github.com/EsotericShadow/sns-core/discussions
+
+---
+
+## Ready to Convert
+
+**I am now ready to convert natural language prompts to SNS notation.**
+
+Provide me with:
+1. Your natural language prompt
+2. (Optional) Context about the use case
+
+I will output:
+1. SNS notation equivalent
+2. Token count comparison
+3. Brief explanation of the conversion
+
+Let's make your AI communication token-efficient! 🚀

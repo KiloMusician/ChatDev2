@@ -1,0 +1,176 @@
+meta:
+  name: "NuSyQ AI Ecosystem Configuration"
+  version: "2.1.0"
+  last_updated: "2026-03-04"
+  description: "Comprehensive AI ecosystem integration and management"
+
+ai_extensions:
+  vscode:
+    # ─── PRIMARY AGENTS (always active) ─────────────────────────────────────
+    - id: "anthropic.claude-code"
+      name: "Claude Code"
+      status: "active"
+      type: "system_level"
+      capabilities: ["chat", "code_analysis", "file_editing", "terminal"]
+      priority: "high"
+      notes: "Primary agent for complex tasks, system prompts, multi-file edits"
+
+    - id: "github.copilot"
+      name: "GitHub Copilot"
+      status: "active"
+      type: "code_completion"
+      capabilities: ["inline_suggestions", "code_generation"]
+      priority: "high"
+      notes: "Best inline completion, low latency"
+
+    - id: "github.copilot-chat"
+      name: "GitHub Copilot Chat"
+      status: "active"
+      type: "chat_interface"
+      capabilities: ["conversational_ai", "code_explanation"]
+      priority: "medium"
+      notes: "Integrated chat, workspace context"
+
+    # ─── LOCAL MODEL BRIDGE ─────────────────────────────────────────────────
+    - id: "continue.continue"
+      name: "Continue.dev"
+      status: "active"
+      type: "local_model_bridge"
+      capabilities: ["ollama_integration", "lm_studio_integration", "custom_models"]
+      priority: "high"
+      notes: "Unified bridge for Ollama + LM Studio. Replaces 5 separate Ollama UIs"
+
+    # ─── OPTIONAL UTILITIES ─────────────────────────────────────────────────
+    - id: "kilocode.kilo-code"
+      name: "Kilo Code"
+      status: "optional"
+      type: "ai_assistance"
+      capabilities: ["code_analysis", "refactoring", "optimization"]
+      priority: "low"
+
+    - id: "haselerdev.aiquickfix"
+      name: "AI QuickFix"
+      status: "optional"
+      type: "auto_repair"
+      capabilities: ["error_fixes", "lint_fixes"]
+      priority: "low"
+
+  # ─── DEPRECATED (consolidated into Continue.dev) ──────────────────────────
+  deprecated:
+    - id: "10nates.ollama-autocoder"
+      reason: "Replaced by continue.continue"
+    - id: "chrisbunting.ollama-code-generator"
+      reason: "Replaced by continue.continue"
+    - id: "codeboss.ollama-ai-assistant"
+      reason: "Replaced by continue.continue"
+    - id: "desislavarashev.ollama-commit"
+      reason: "Replaced by continue.continue"
+    - id: "diegoomal.ollama-connection"
+      reason: "Replaced by continue.continue"
+    - id: "codeium.codeium"
+      reason: "Conflicts with Copilot"
+    - id: "bito.bito"
+      reason: "Conflicts with Copilot+Claude"
+    - id: "sourcegraph.cody-ai"
+      reason: "Conflicts with Copilot+Claude"
+
+local_models:
+  ollama:
+    base_url: "http://localhost:11434"
+    models:
+      - name: "qwen2.5-coder:7b"
+        type: "code_generation"
+        size: "4.7GB"
+        status: "ready"
+        capabilities: ["coding", "documentation", "debugging"]
+      - name: "llama3.1:8b"
+        type: "general_purpose"
+        size: "4.9GB"
+        status: "ready"
+        capabilities: ["general_chat", "reasoning", "analysis"]
+      - name: "codellama:7b"
+        type: "code_specialist"
+        size: "3.8GB"
+        status: "ready"
+        capabilities: ["code_completion", "refactoring", "optimization"]
+      - name: "phi3.5:latest"
+        type: "efficient_reasoning"
+        size: "2.2GB"
+        status: "ready"
+        capabilities: ["quick_responses", "lightweight_reasoning"]
+
+integration_points:
+  editor:
+    - type: "vscode_extensions"
+      description: "Direct editor integration"
+      status: "active"
+      features: ["real_time_assistance", "context_awareness"]
+
+  development:
+    - type: "jupyter_notebooks"
+      description: "Interactive development environment"
+      status: "active"
+      features: ["ai_testing", "model_comparison", "data_analysis"]
+
+  terminal:
+    - type: "cli_tools"
+      description: "Command-line AI interaction"
+      status: "active"
+      features: ["batch_processing", "automation", "scripting"]
+
+  api:
+    - type: "rest_endpoints"
+      description: "Programmatic access"
+      status: "planned"
+      features: ["external_integration", "webhook_support"]
+
+planned_integrations:
+  high_priority:
+    - id: "mcp_server"
+      name: "Model Context Protocol Server"
+      description: "Bridge Claude to local ecosystem"
+      status: "in_development"
+      timeline: "immediate"
+
+    - id: "git_automation"
+      name: "AI-assisted Git Management"
+      description: "Intelligent version control"
+      status: "planned"
+      timeline: "short_term"
+
+  medium_priority:
+    - id: "replit_integration"
+      name: "Cloud Development Environment"
+      description: "Remote development with AI"
+      status: "planned"
+      timeline: "medium_term"
+
+    - id: "agent_frameworks"
+      name: "Multi-agent Orchestration"
+      description: "Coordinated AI agent workflows"
+      status: "research"
+      timeline: "long_term"
+
+workflows:
+  development:
+    - name: "AI-Assisted Coding"
+      steps:
+        - "Use Copilot for inline suggestions"
+        - "Leverage Claude for complex analysis"
+        - "Test with Ollama models for verification"
+        - "Document with AI assistance"
+
+    - name: "Code Review Process"
+      steps:
+        - "Automated analysis with multiple AI models"
+        - "Cross-reference suggestions"
+        - "Generate improvement recommendations"
+        - "Create documentation updates"
+
+configuration:
+  auto_discovery: true
+  health_monitoring: true
+  fallback_models: ["qwen2.5-coder:7b", "llama3.1:8b"]
+  max_concurrent_requests: 5
+  timeout_seconds: 30
+  retry_attempts: 3

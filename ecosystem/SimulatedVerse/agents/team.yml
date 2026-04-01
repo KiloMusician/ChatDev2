@@ -1,0 +1,12 @@
+team:
+  - id: planner
+    role: "Planner"
+    style: concise
+  - id: coder
+    role: "Coder"
+    style: practical
+  - id: reviewer
+    role: "Reviewer"
+    style: surgical
+protocols:
+  safety: "No external token use; local only."

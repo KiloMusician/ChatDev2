@@ -1,0 +1,88 @@
+{
+  "settings": {
+    "automation": {
+      "idleThresholdSec": 1200,
+      "intervalMinutes": 5,
+      "modeWhenIdle": "balanced",
+      "modeWhenActiveDev": "coding"
+    },
+    "listener": {
+      "gameProfiles": [
+        {
+          "name": "Balatro Quiet Mode",
+          "appId": "2379780",
+          "onGameStart": "quiet",
+          "onGameExit": "restore"
+        },
+        {
+          "name": "Helldivers Gaming Mode",
+          "namePattern": "HELLDIVERS*",
+          "onGameStart": "gaming",
+          "onGameExit": "restore"
+        }
+      ]
+    },
+    "steam": {
+      "webApiKey": null,
+      "steamId": null
+    },
+    "processPatterns": {
+      "docker": [
+        "Docker*",
+        "com.docker.*",
+        "dockerd*"
+      ]
+    },
+    "updates": {
+      "allowPackageIds": [
+        "Docker.DockerDesktop"
+      ],
+      "allowNamePatterns": [],
+      "denyPackageIds": [
+        "Microsoft.VisualStudioCode",
+        "VSCodium.VSCodium",
+        "Codeium.Windsurf"
+      ],
+      "denyNamePatterns": [
+        "*Visual Studio Code*",
+        "Windsurf*"
+      ]
+    },
+    "launchers": {
+      "VSCode": {
+        "command": "code"
+      },
+      "DockerDesktop": {
+        "command": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"
+      }
+    }
+  },
+  "profiles": {
+    "gaming": {
+      "stopProcesses": [
+        "Code",
+        "Docker*",
+        "com.docker.*",
+        "dockerd*",
+        "python*",
+        "node*",
+        "jupyter*",
+        "ollama*",
+        "chrome",
+        "msedge"
+      ],
+      "stopServices": [
+        "WSearch"
+      ]
+    },
+    "coding": {
+      "startServices": [
+        "WSearch"
+      ],
+      "startLaunchers": [
+        "VSCode",
+        "DockerDesktop"
+      ]
+    }
+  }
+}

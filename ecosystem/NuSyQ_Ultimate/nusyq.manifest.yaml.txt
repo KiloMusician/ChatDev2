@@ -1,0 +1,100 @@
+meta:
+  name: NuSyQ Master Manifest
+  version: 2025-10-04
+  root_dir: "%USERPROFILE%/NuSyQ"
+  reports_dir: "%USERPROFILE%/NuSyQ/Reports"
+  logs_dir: "%USERPROFILE%/NuSyQ/Logs"
+  state_dir: "%USERPROFILE%/NuSyQ/State"
+
+env:
+  # optional environment variables you want persisted (User scope)
+  OLLAMA_MODELS: "D:/AI_Models/Ollama/models"   # change or remove if not needed
+
+folders:
+  - "%USERPROFILE%/NuSyQ"
+  - "%USERPROFILE%/NuSyQ/AI_Hub"
+  - "%USERPROFILE%/NuSyQ/ChatDev"
+  - "%USERPROFILE%/NuSyQ/GODOT"
+  - "%USERPROFILE%/NuSyQ/Jupyter"
+  - "%USERPROFILE%/NuSyQ/Logs"
+  - "%USERPROFILE%/NuSyQ/Reports"
+  - "%USERPROFILE%/NuSyQ/State"
+
+winget_packages:
+  # Each entry is Id + (optional) exact and notes. Script will 'winget show' (audit) before install.
+  - id: GodotEngine.Godot
+    exact: true
+    required: true
+  - id: Microsoft.PCManager
+    exact: true
+  - id: BleachBit.BleachBit
+    exact: true
+  # Optional utilities—toggle as needed
+  # - id: Microsoft.WindowsTerminal
+  #   exact: true
+  # - id: O&O.ShutUp10
+  #   exact: true
+
+pip_packages:
+  # Python-side tools
+  - notebook
+  - jupyterlab
+  - jupyterlab_vim
+  - ipykernel
+  - chatdev    # if this fails, we’ll log and you can swap to a repo-based install
+
+vscode_extensions:
+  # You already have anthropic.claude-code & kilocode.kilo-code; we persist a known-good set here.
+  - ms-vscode.powershell
+  - ms-python.python
+  - ms-python.vscode-pylance
+  - ms-toolsai.jupyter
+  - ms-azuretools.vscode-docker
+  - ms-vscode.remote-repositories
+  - ms-vscode-remote.remote-wsl
+  - eamodio.gitlens
+  - yzhang.markdown-all-in-one
+  - anthropic.claude-code
+  - kilocode.kilo-code
+
+ollama_models:
+  # Keep this list authoritative. The orchestrator pulls only what’s listed here.
+  - qwen2.5-coder:7b
+  - qwen2.5-coder:14b
+  - codellama:7b
+  - deepseek-coder:v2
+  - deepseek-coder-v3:35b-q4_K_M
+  - aixcoder-7b
+  - phi4
+  - starcoder2:15b
+  - gemma2:9b
+  - phi3.5
+
+post_install:
+  # Commands to run after packages are installed (idempotent-friendly).
+  # Add anything you want the system to do at the very end.
+  - "python -m ipykernel install --user --name \"Python3.12-NuSyQ\" --display-name \"Python 3.12 (NuSyQ)\""
+
+health_checks:
+  # Each check is a command + substring to expect; failures are logged.
+  - cmd: "git --version"
+    expect: "git version"
+  - cmd: "node --version"
+    expect: "v"
+  - cmd: "python --version"
+    expect: "Python 3"
+  - cmd: "dotnet --info"
+    expect: ".NET SDK"
+  - cmd: "ollama --version"
+    expect: "0."
+  - cmd: "code --list-extensions"
+    expect: "anthropic.claude-code"
+  - cmd: "ollama list"
+    expect: "qwen2.5-coder"
+
+reports:
+  # Extra reports the orchestrator will write
+  - type: "winget_export"     # winget export
+  - type: "vscode_extensions" # code --list-extensions --show-versions
+  - type: "ollama_models"     # ollama list
+  - type: "system_baseline"   # Get-ComputerInfo

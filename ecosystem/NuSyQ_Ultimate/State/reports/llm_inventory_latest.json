@@ -1,0 +1,254 @@
+{
+  "ollama": {
+    "base_url": "http://127.0.0.1:11434",
+    "models": [
+      {
+        "name": "gpt-3.5-turbo-16k:latest",
+        "raw": {
+          "name": "gpt-3.5-turbo-16k:latest",
+          "model": "gpt-3.5-turbo-16k:latest",
+          "modified_at": "2026-02-08T02:26:21.865575693-07:00",
+          "size": 8988124298,
+          "digest": "9ec8897f747e246e970bc5cfdda85d22f1123dc2e3d34978a010a75968716849",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen2",
+            "families": [
+              "qwen2"
+            ],
+            "parameter_size": "14.8B",
+            "quantization_level": "Q4_K_M"
+          }
+        },
+        "capabilities": [
+          "general_conversation"
+        ]
+      },
+      {
+        "name": "llama3.1:8b",
+        "raw": {
+          "name": "llama3.1:8b",
+          "model": "llama3.1:8b",
+          "modified_at": "2026-01-27T14:11:39.186906227-07:00",
+          "size": 4920753328,
+          "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "llama",
+            "families": [
+              "llama"
+            ],
+            "parameter_size": "8.0B",
+            "quantization_level": "Q4_K_M"
+          }
+        },
+        "capabilities": [
+          "general_conversation",
+          "creative"
+        ]
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "raw": {
+          "name": "nomic-embed-text:latest",
+          "model": "nomic-embed-text:latest",
+          "modified_at": "2026-01-27T14:07:42.058955847-07:00",
+          "size": 274302450,
+          "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "nomic-bert",
+            "families": [
+              "nomic-bert"
+            ],
+            "parameter_size": "137M",
+            "quantization_level": "F16"
+          }
+        },
+        "capabilities": [
+          "general_conversation"
+        ]
+      },
+      {
+        "name": "phi3.5:latest",
+        "raw": {
+          "name": "phi3.5:latest",
+          "model": "phi3.5:latest",
+          "modified_at": "2026-01-27T14:07:21.358745049-07:00",
+          "size": 2176178843,
+          "digest": "61819fb370a3c1a9be6694869331e5f85f867a079e9271d66cb223acb81d04ba",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "phi3",
+            "families": [
+              "phi3"
+            ],
+            "parameter_size": "3.8B",
+            "quantization_level": "Q4_0"
+          }
+        },
+        "capabilities": [
+          "general_conversation",
+          "creative",
+          "reasoning"
+        ]
+      },
+      {
+        "name": "starcoder2:15b",
+        "raw": {
+          "name": "starcoder2:15b",
+          "model": "starcoder2:15b",
+          "modified_at": "2026-01-27T14:05:33.139042942-07:00",
+          "size": 9065413313,
+          "digest": "21ae152d49e026b721a52cda94b32f95b3c9719d5eb71ea670e4fa60efde276b",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "starcoder2",
+            "families": [
+              "starcoder2"
+            ],
+            "parameter_size": "16B",
+            "quantization_level": "Q4_0"
+          }
+        },
+        "capabilities": [
+          "code_generation",
+          "debugging",
+          "code_review"
+        ]
+      },
+      {
+        "name": "deepseek-coder-v2:16b",
+        "raw": {
+          "name": "deepseek-coder-v2:16b",
+          "model": "deepseek-coder-v2:16b",
+          "modified_at": "2026-01-27T13:57:57.435174827-07:00",
+          "size": 8905126121,
+          "digest": "63fb193b3a9b4322a18e8c6b250ca2e70a5ff531e962dbf95ba089b2566f2fa5",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "deepseek2",
+            "families": [
+              "deepseek2"
+            ],
+            "parameter_size": "15.7B",
+            "quantization_level": "Q4_0"
+          }
+        },
+        "capabilities": [
+          "code_generation",
+          "debugging",
+          "code_review"
+        ]
+      },
+      {
+        "name": "codellama:7b",
+        "raw": {
+          "name": "codellama:7b",
+          "model": "codellama:7b",
+          "modified_at": "2026-01-27T13:50:28.958807195-07:00",
+          "size": 3825910662,
+          "digest": "8fdf8f752f6e80de33e82f381aba784c025982752cd1ae9377add66449d2225f",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "llama",
+            "families": null,
+            "parameter_size": "7B",
+            "quantization_level": "Q4_0"
+          }
+        },
+        "capabilities": [
+          "code_generation",
+          "debugging",
+          "code_review",
+          "general_conversation",
+          "creative"
+        ]
+      },
+      {
+        "name": "gemma2:9b",
+        "raw": {
+          "name": "gemma2:9b",
+          "model": "gemma2:9b",
+          "modified_at": "2026-01-08T13:20:16.705707596-07:00",
+          "size": 5443152417,
+          "digest": "ff02c3702f322b9e075e9568332d96c0a7028002f1a5a056e0a6784320a4db0b",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "gemma2",
+            "families": [
+              "gemma2"
+            ],
+            "parameter_size": "9.2B",
+            "quantization_level": "Q4_0"
+          }
+        },
+        "capabilities": [
+          "general_conversation"
+        ]
+      },
+      {
+        "name": "qwen2.5-coder:7b",
+        "raw": {
+          "name": "qwen2.5-coder:7b",
+          "model": "qwen2.5-coder:7b",
+          "modified_at": "2026-01-08T13:15:51.235073576-07:00",
+          "size": 4683087561,
+          "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen2",
+            "families": [
+              "qwen2"
+            ],
+            "parameter_size": "7.6B",
+            "quantization_level": "Q4_K_M"
+          }
+        },
+        "capabilities": [
+          "code_generation",
+          "debugging",
+          "code_review"
+        ]
+      },
+      {
+        "name": "qwen2.5-coder:14b",
+        "raw": {
+          "name": "qwen2.5-coder:14b",
+          "model": "qwen2.5-coder:14b",
+          "modified_at": "2026-01-08T13:14:07.534605362-07:00",
+          "size": 8988124298,
+          "digest": "9ec8897f747e246e970bc5cfdda85d22f1123dc2e3d34978a010a75968716849",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen2",
+            "families": [
+              "qwen2"
+            ],
+            "parameter_size": "14.8B",
+            "quantization_level": "Q4_K_M"
+          }
+        },
+        "capabilities": [
+          "code_generation",
+          "debugging",
+          "code_review"
+        ]
+      }
+    ]
+  },
+  "lmstudio": {
+    "base_url": "http://127.0.0.1:1234",
+    "models": []
+  }
+}

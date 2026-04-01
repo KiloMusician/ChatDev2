@@ -1,0 +1,224 @@
+# NuSyQ-Hub Multi-Language Configuration
+# Declarative definitions for supported programming languages
+#
+# Each language defines:
+#   - extensions: File extensions for this language
+#   - entry_file: Default entry point file name
+#   - dependency_file: Dependency manifest file (if applicable)
+#   - install_cmd: Command to install dependencies
+#   - run_cmd: Command to run the project ({entry_point} is substituted)
+#   - package_cmd: Command to package for distribution (optional)
+#   - code_fence: Markdown code fence identifier
+#   - providers: AI providers that support this language well
+#   - capabilities: Optional features this language supports
+
+languages:
+  python:
+    display_name: Python
+    extensions: [.py]
+    entry_file: main.py
+    dependency_file: requirements.txt
+    install_cmd: pip install -r requirements.txt
+    run_cmd: python {entry_point}
+    package_cmd: pyinstaller --onefile {entry_point}
+    code_fence: python
+    providers: [chatdev, ollama, claude, openai]
+    capabilities:
+      - async
+      - typing
+      - dataclasses
+      - packaging
+    comments:
+      single: "#"
+      multi_start: '"""'
+      multi_end: '"""'
+
+  javascript:
+    display_name: JavaScript
+    extensions: [.js, .mjs, .cjs]
+    entry_file: index.js
+    dependency_file: package.json
+    install_cmd: npm install
+    run_cmd: node {entry_point}
+    package_cmd: pkg {entry_point} --targets node18-win-x64
+    code_fence: javascript
+    providers: [ollama, claude, openai]
+    capabilities:
+      - async
+      - modules
+      - packaging
+    comments:
+      single: "//"
+      multi_start: "/*"
+      multi_end: "*/"
+
+  typescript:
+    display_name: TypeScript
+    extensions: [.ts, .tsx]
+    entry_file: src/index.ts
+    dependency_file: package.json
+    install_cmd: npm install
+    run_cmd: npx ts-node {entry_point}
+    build_cmd: npx tsc
+    package_cmd: npm run build && pkg dist/index.js
+    code_fence: typescript
+    providers: [ollama, claude, openai]
+    capabilities:
+      - async
+      - typing
+      - modules
+      - packaging
+    comments:
+      single: "//"
+      multi_start: "/*"
+      multi_end: "*/"
+
+  csharp:
+    display_name: "C#"
+    extensions: [.cs]
+    entry_file: Program.cs
+    dependency_file: "*.csproj"
+    install_cmd: dotnet restore
+    run_cmd: dotnet run
+    build_cmd: dotnet build
+    package_cmd: dotnet publish -c Release -r win-x64 --self-contained
+    code_fence: csharp
+    providers: [ollama, claude]
+    capabilities:
+      - async
+      - typing
+      - packaging
+      - unity
+    comments:
+      single: "//"
+      multi_start: "/*"
+      multi_end: "*/"
+
+  gdscript:
+    display_name: GDScript
+    extensions: [.gd]
+    entry_file: main.gd
+    dependency_file: project.godot
+    install_cmd: null  # Godot handles dependencies
+    run_cmd: godot --path . --script {entry_point}
+    package_cmd: godot --headless --export-release "Windows Desktop" game.exe
+    code_fence: gdscript
+    providers: [ollama]
+    capabilities:
+      - signals
+      - nodes
+      - scenes
+    comments:
+      single: "#"
+      multi_start: '"""'
+      multi_end: '"""'
+    notes: "GDScript is Godot Engine's native scripting language"
+
+  rust:
+    display_name: Rust
+    extensions: [.rs]
+    entry_file: src/main.rs
+    dependency_file: Cargo.toml
+    install_cmd: cargo build
+    run_cmd: cargo run
+    build_cmd: cargo build --release
+    package_cmd: cargo build --release
+    code_fence: rust
+    providers: [ollama, claude]
+    capabilities:
+      - async
+      - typing
+      - memory_safe
+      - packaging
+    comments:
+      single: "//"
+      multi_start: "/*"
+      multi_end: "*/"
+    notes: "Rust provides memory safety without garbage collection"
+
+  lua:
+    display_name: Lua
+    extensions: [.lua]
+    entry_file: main.lua
+    dependency_file: null  # Lua doesn't have a standard package manifest
+    install_cmd: null
+    run_cmd: lua {entry_point}
+    package_cmd: null  # Usually bundled with game engine
+    code_fence: lua
+    providers: [ollama]
+    capabilities:
+      - coroutines
+      - metatables
+      - embedding
+    comments:
+      single: "--"
+      multi_start: "--[["
+      multi_end: "]]"
+    notes: "Lua is commonly used as an embedded scripting language in games"
+
+  go:
+    display_name: Go
+    extensions: [.go]
+    entry_file: main.go
+    dependency_file: go.mod
+    install_cmd: go mod tidy
+    run_cmd: go run .
+    build_cmd: go build
+    package_cmd: go build -ldflags="-s -w" -o app.exe
+    code_fence: go
+    providers: [ollama, claude, openai]
+    capabilities:
+      - concurrency
+      - typing
+      - packaging
+    comments:
+      single: "//"
+      multi_start: "/*"
+      multi_end: "*/"
+
+# Provider capabilities reference
+# Defines what each AI provider excels at
+provider_notes:
+  chatdev:
+    description: "Multi-agent collaborative development"
+    strengths: [python, complex_projects, multi_file]
+    best_for: "Complete Python applications with multiple modules"
+
+  ollama:
+    description: "Local LLM inference"
+    strengths: [python, javascript, typescript, rust, go]
+    best_for: "General code generation, offline development"
+    models: [codestral, deepseek-coder-v2, qwen2.5-coder]
+
+  claude:
+    description: "Anthropic Claude API"
+    strengths: [python, javascript, typescript, csharp, rust, go]
+    best_for: "Complex logic, documentation, architectural decisions"
+
+  openai:
+    description: "OpenAI GPT API"
+    strengths: [python, javascript, typescript, go]
+    best_for: "General code generation, explanations"
+
+# Template language recommendations
+# Helps factory select appropriate language for template types
+template_recommendations:
+  game:
+    primary: python
+    alternatives: [gdscript, csharp, lua]
+    notes: "Python for prototyping, GDScript for Godot, C# for Unity"
+
+  cli:
+    primary: python
+    alternatives: [go, rust, javascript]
+    notes: "Python for quick scripts, Go/Rust for compiled binaries"
+
+  api:
+    primary: python
+    alternatives: [typescript, go]
+    notes: "Python (FastAPI/Flask), TypeScript (Express), Go (net/http)"
+
+  web:
+    primary: javascript
+    alternatives: [typescript]
+    notes: "JavaScript for browser, TypeScript for typed projects"

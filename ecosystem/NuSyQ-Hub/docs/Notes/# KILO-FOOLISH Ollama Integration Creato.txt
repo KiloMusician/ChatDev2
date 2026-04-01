@@ -1,0 +1,561 @@
+# KILO-FOOLISH Ollama Integration Creator
+
+Write-Host "🤖 Creating KILO-FOOLISH Ollama Integration..." -ForegroundColor Magenta
+
+# Create required directories
+$directories = @(
+    ".\src\core",
+    ".\data\ollama",
+    ".\data\logs"
+)
+
+foreach ($dir in $directories) {
+    if (!(Test-Path $dir)) {
+        New-Item -Path $dir -ItemType Directory -Force
+        Write-Host "✅ Created: $dir" -ForegroundColor Green
+    }
+}
+
+# Create OllamaHub.py
+$ollamaHubPy = @"
+"""
+KILO-FOOLISH Ollama Integration Hub
+Local AI intelligence for privacy-first operations
+"""
+
+import json
+import logging
+import sys
+import argparse
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Optional, Any
+
+# Add src to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+try:
+    from config.secrets import get_config
+except ImportError:
+    print("❌ Cannot import config - ensure secrets.py exists")
+    sys.exit(1)
+
+
+class KILOOllamaHub:
+    """KILO-FOOLISH Ollama Intelligence Hub"""
+
+    def __init__(self):
+        # Setup logging
+        logging.basicConfig(level=logging.INFO)
+        self.logger = logging.getLogger(__name__)
+
+        # Get configuration
+        try:
+            self.config = get_config()
+            self.client = self.config.get_ollama_client()
+            self.is_connected = True
+            self.logger.info("Ollama client initialized successfully")
+        except Exception as e:
+            self.logger.error(f"Failed to initialize Ollama: {e}")
+            self.is_connected = False
+            self.client = None
+
+        # Model preferences
+        self.model_preferences = {
+            "code_analysis": "codellama:7b",
+            "documentation": "llama2:7b",
+            "reasoning": "mistral:7b",
+            "default": "llama2:7b"
+        }
+
+        # Available models cache
+        self.available_models = {}
+        if self.is_connected:
+            self.discover_models()
+
+    def discover_models(self):
+        """Discover available models"""
+        try:
+            models_response = self.client.list()
+            self.available_models = {}
+
+            for model_info in models_response.get('models', []):
+                self.available_models[model_info['name']] = {
+                    'size': model_info.get('size', 0),
+                    'modified_at': model_info.get('modified_at', ''),
+                    'digest': model_info.get('digest', '')
+                }
+
+            self.logger.info(f"Discovered {len(self.available_models)} models")
+
+        except Exception as e:
+            self.logger.error(f"Model discovery failed: {e}")
+
+    def select_model(self, task_type: str = "default") -> str:
+        """Select appropriate model for task"""
+        preferred = self.model_preferences.get(task_type, "llama2:7b")
+
+        # Check if preferred model is available
+        if preferred in self.available_models:
+            return preferred
+
+        # Fallback to first available model
+        if self.available_models:
+            fallback = list(self.available_models.keys())[0]
+            self.logger.info(f"Using fallback model: {fallback}")
+            return fallback
+
+        # Default fallback
+        return "llama2:7b"
+
+    def chat(self, message: str, model: str = None) -> dict:
+        """Chat with Ollama"""
+        if not self.is_connected:
+            return {"error": "Ollama not connected"}
+
+        if not model:
+            model = self.select_model("default")
+
+        try:
+            response = self.client.chat(
+                model=model,
+                messages=[{"role": "user", "content": message}],
+                options={'temperature': 0.7}
+            )
+
+            return {
+                "success": True,
+                "message": response['message']['content'],
+                "model": model,
+                "timestamp": datetime.now().isoformat()
+            }
+
+        except Exception as e:
+            self.logger.error(f"Chat failed: {e}")
+            return {"error": str(e)}
+
+    def analyze_code(self, file_path: str) -> dict:
+        """Analyze code file"""
+        if not self.is_connected:
+            return {"error": "Ollama not connected"}
+
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                code_content = f.read()
+        except Exception as e:
+            return {"error": f"Cannot read file: {e}"}
+
+        analysis_prompt = f'''
+        Analyze this code and provide insights:
+
+        File: {file_path}
+
+        Code:
+        ```python
+        {code_content}
+        ```
+
+        Please provide:
+        1. Code quality assessment
+        2. Potential improvements
+        3. Security considerations
+        4. Best practices recommendations
+        '''
+
+        model = self.select_model("code_analysis")
+        return self.chat(analysis_prompt, model)
+
+    def generate_docs(self, code_snippet: str) -> dict:
+        """Generate documentation"""
+        if not self.is_connected:
+            return {"error": "Ollama not connected"}
+
+        doc_prompt = f'''
+        Generate comprehensive documentation for this code:
+
+        ```python
+        {code_snippet}
+        ```
+
+        Include:
+        - Purpose and functionality
+        - Parameters and return values
+        - Usage examples
+        - Important notes
+        '''
+
+        model = self.select_model("documentation")
+        return self.chat(doc_prompt, model)
+
+    def pull_model(self, model_name: str) -> dict:
+        """Pull a new model"""
+        if not self.is_connected:
+            return {"error": "Ollama not connected"}
+
+        try:
+            self.logger.info(f"Pulling model: {model_name}")
+            self.client.pull(model_name)
+
+            # Refresh models
+            self.discover_models()
+
+            return {"success": True, "message": f"Model {model_name} pulled successfully"}
+
+        except Exception as e:
+            return {"error": f"Failed to pull model: {e}"}
+
+    def get_status(self) -> dict:
+        """Get hub status"""
+        return {
+            "connection_status": "connected" if self.is_connected else "disconnected",
+            "available_models": len(self.available_models),
+            "model_list": list(self.available_models.keys()),
+            "model_preferences": self.model_preferences,
+            "timestamp": datetime.now().isoformat()
+        }
+
+
+def main():
+    parser = argparse.ArgumentParser(description="KILO-FOOLISH Ollama Hub")
+    parser.add_argument("--chat", help="Chat message")
+    parser.add_argument("--model", help="Specific model to use")
+    parser.add_argument("--analyze", help="Analyze code file")
+    parser.add_argument("--generate-docs", help="Generate documentation for code")
+    parser.add_argument("--pull", help="Pull model")
+    parser.add_argument("--status", action="store_true", help="Show status")
+    parser.add_argument("--models", action="store_true", help="List models")
+
+    args = parser.parse_args()
+
+    hub = KILOOllamaHub()
+
+    if args.status:
+        status = hub.get_status()
+        print(json.dumps(status, indent=2))
+
+    elif args.models:
+        if hub.available_models:
+            print("📦 Available Models:")
+            for model, info in hub.available_models.items():
+                size_mb = info['size'] / (1024 * 1024) if info['size'] else 0
+                print(f"  • {model} ({size_mb:.1f} MB)")
+        else:
+            print("No models available")
+
+    elif args.chat:
+        result = hub.chat(args.chat, args.model)
+        if result.get("success"):
+            print(f"🤖 [{result['model']}]: {result['message']}")
+        else:
+            print(f"❌ Error: {result.get('error', 'Unknown error')}")
+
+    elif args.analyze:
+        result = hub.analyze_code(args.analyze)
+        if result.get("success"):
+            print(f"🔍 Code Analysis [{result['model']}]:")
+            print("=" * 50)
+            print(result['message'])
+        else:
+            print(f"❌ Analysis failed: {result.get('error', 'Unknown error')}")
+
+    elif args.generate_docs:
+        result = hub.generate_docs(args.generate_docs)
+        if result.get("success"):
+            print(f"📝 Generated Documentation [{result['model']}]:")
+            print("=" * 50)
+            print(result['message'])
+        else:
+            print(f"❌ Documentation generation failed: {result.get('error', 'Unknown error')}")
+
+    elif args.pull:
+        result = hub.pull_model(args.pull)
+        if result.get("success"):
+            print(f"✅ {result['message']}")
+        else:
+            print(f"❌ {result.get('error', 'Unknown error')}")
+
+    else:
+        print("🤖 KILO-FOOLISH Ollama Hub")
+        print("Use --help for available commands")
+
+
+if __name__ == "__main__":
+    main()
+"@
+
+$ollamaHubPy | Out-File ".\src\core\OllamaHub.py" -Encoding UTF8
+Write-Host "✅ Created: .\src\core\OllamaHub.py" -ForegroundColor Green
+
+# Create OllamaHub.ps1
+$ollamaHubPs1 = @"
+# KILO-FOOLISH Ollama Integration Interface
+
+param(
+    [string]`$Chat,
+    [string]`$Model,
+    [string]`$AnalyzeFile,
+    [string]`$GenerateDocs,
+    [switch]`$Status,
+    [switch]`$Models,
+    [string]`$PullModel,
+    [switch]`$Stream,
+    [switch]`$Clear,
+    [switch]`$Export,
+    [switch]`$Help
+)
+
+function Write-OllamaLog {
+    param([string]`$Message, [string]`$Level = "INFO")
+
+    `$colors = @{
+        "ERROR" = "Red"; "WARNING" = "Yellow"; "SUCCESS" = "Green"
+        "INFO" = "Cyan"; "OLLAMA" = "Magenta"; "CHAT" = "White"
+    }
+
+    `$timestamp = Get-Date -Format "HH:mm:ss"
+    Write-Host "[`$timestamp] [OLLAMA] `$Message" -ForegroundColor `$colors[`$Level]
+}
+
+function Test-OllamaConnection {
+    try {
+        `$testResult = python ".\src\core\OllamaHub.py" --status 2>`$null
+        return `$LASTEXITCODE -eq 0
+    }
+    catch {
+        return `$false
+    }
+}
+
+function Start-OllamaChat {
+    param([string]`$Message, [string]`$Model = "")
+
+    Write-OllamaLog "🤖 Starting Ollama chat..." "OLLAMA"
+
+    if (!(Test-OllamaConnection)) {
+        Write-OllamaLog "❌ Ollama not connected. Make sure Ollama is running:" "ERROR"
+        Write-Host "   ollama serve" -ForegroundColor Yellow
+        return
+    }
+
+    try {
+        `$pythonArgs = @("--chat", `$Message)
+        if (`$Model) { `$pythonArgs += @("--model", `$Model) }
+
+        `$result = python ".\src\core\OllamaHub.py" @pythonArgs 2>&1
+
+        if (`$LASTEXITCODE -eq 0) {
+            Write-Host `$result -ForegroundColor White
+        } else {
+            Write-OllamaLog "❌ Chat failed: `$result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Chat error: `$_" "ERROR"
+    }
+}
+
+function Get-OllamaStatus {
+    Write-OllamaLog "📊 Getting Ollama hub status..." "INFO"
+
+    try {
+        `$result = python ".\src\core\OllamaHub.py" --status 2>&1
+
+        if (`$LASTEXITCODE -eq 0) {
+            `$status = `$result | ConvertFrom-Json
+
+            Write-Host "`n🤖 KILO Ollama Hub Status" -ForegroundColor Magenta
+            Write-Host "=" * 40 -ForegroundColor Magenta
+
+            `$connectionColor = if(`$status.connection_status -eq "connected") {"Green"} else {"Red"}
+            Write-Host "Connection: `$(`$status.connection_status)" -ForegroundColor `$connectionColor
+            Write-Host "Available Models: `$(`$status.available_models)" -ForegroundColor Cyan
+
+            if (`$status.model_list -and `$status.model_list.Count -gt 0) {
+                Write-Host "`n📦 Available Models:" -ForegroundColor Yellow
+                foreach (`$model in `$status.model_list) {
+                    Write-Host "  • `$model" -ForegroundColor White
+                }
+            } else {
+                Write-Host "`n⚠️ No models available - try pulling some models:" -ForegroundColor Yellow
+                Write-Host "  .\src\core\OllamaHub.ps1 -PullModel 'llama2:7b'" -ForegroundColor White
+            }
+
+            Write-Host "`n🎯 Model Preferences:" -ForegroundColor Cyan
+            foreach (`$pref in `$status.model_preferences.PSObject.Properties) {
+                Write-Host "  `$(`$pref.Name): `$(`$pref.Value)" -ForegroundColor Gray
+            }
+        } else {
+            Write-OllamaLog "❌ Status check failed: `$result" "ERROR"
+            Write-OllamaLog "💡 Make sure Ollama is running: ollama serve" "INFO"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Status error: `$_" "ERROR"
+    }
+}
+
+function Get-OllamaModels {
+    Write-OllamaLog "📦 Discovering available models..." "INFO"
+
+    try {
+        `$result = python ".\src\core\OllamaHub.py" --models 2>&1
+
+        if (`$LASTEXITCODE -eq 0) {
+            Write-Host `$result
+        } else {
+            Write-OllamaLog "❌ Model discovery failed: `$result" "ERROR"
+            Write-OllamaLog "💡 Try pulling a model first: .\src\core\OllamaHub.ps1 -PullModel 'llama2:7b'" "INFO"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Model discovery error: `$_" "ERROR"
+    }
+}
+
+function Install-OllamaModel {
+    param([string]`$ModelName)
+
+    if (!`$ModelName) {
+        Write-OllamaLog "❌ Model name required" "ERROR"
+        Write-Host "💡 Popular models:" -ForegroundColor Cyan
+        Write-Host "  • llama2:7b (General purpose, 4GB)" -ForegroundColor White
+        Write-Host "  • codellama:7b (Code analysis, 4GB)" -ForegroundColor White
+        Write-Host "  • mistral:7b (Fast reasoning, 4GB)" -ForegroundColor White
+        Write-Host "  • llama2:13b (Better quality, 8GB)" -ForegroundColor White
+        return
+    }
+
+    Write-OllamaLog "📥 Pulling model: `$ModelName (this may take a while)..." "INFO"
+
+    try {
+        `$result = python ".\src\core\OllamaHub.py" --pull `$ModelName 2>&1
+
+        if (`$LASTEXITCODE -eq 0) {
+            Write-OllamaLog "✅ Model pulled successfully: `$ModelName" "SUCCESS"
+        } else {
+            Write-OllamaLog "❌ Model pull failed: `$result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Model pull error: `$_" "ERROR"
+    }
+}
+
+function Start-CodeAnalysis {
+    param([string]`$FilePath)
+
+    if (!`$FilePath -or !(Test-Path `$FilePath)) {
+        Write-OllamaLog "❌ Valid file path required" "ERROR"
+        return
+    }
+
+    Write-OllamaLog "🔍 Analyzing code: `$FilePath..." "INFO"
+
+    try {
+        `$result = python ".\src\core\OllamaHub.py" --analyze `$FilePath 2>&1
+
+        if (`$LASTEXITCODE -eq 0) {
+            Write-Host `$result
+        } else {
+            Write-OllamaLog "❌ Code analysis failed: `$result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Analysis error: `$_" "ERROR"
+    }
+}
+
+function New-Documentation {
+    param([string]`$CodeSnippet)
+
+    if (!`$CodeSnippet) {
+        Write-OllamaLog "❌ Code snippet required" "ERROR"
+        return
+    }
+
+    Write-OllamaLog "📝 Generating documentation..." "INFO"
+
+    try {
+        `$result = python ".\src\core\OllamaHub.py" --generate-docs `$CodeSnippet 2>&1
+
+        if (`$LASTEXITCODE -eq 0) {
+            Write-Host `$result
+        } else {
+            Write-OllamaLog "❌ Documentation generation failed: `$result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Documentation error: `$_" "ERROR"
+    }
+}
+
+function Show-Help {
+    Write-Host "`n🤖 KILO-FOOLISH Ollama Intelligence Hub" -ForegroundColor Magenta
+    Write-Host "=" * 50 -ForegroundColor Magenta
+    Write-Host ""
+    Write-Host "📋 Available Commands:" -ForegroundColor Cyan
+    Write-Host "  -Chat 'message'        : Chat with Ollama AI" -ForegroundColor White
+    Write-Host "  -Status               : Show hub status and models" -ForegroundColor White
+    Write-Host "  -Models               : List available models" -ForegroundColor White
+    Write-Host "  -PullModel 'name'     : Install new model" -ForegroundColor White
+    Write-Host "  -AnalyzeFile 'path'   : Analyze code file with AI" -ForegroundColor White
+    Write-Host "  -GenerateDocs 'code'  : Generate documentation" -ForegroundColor White
+    Write-Host ""
+    Write-Host "🚀 Quick Examples:" -ForegroundColor Yellow
+    Write-Host "  .\src\core\OllamaHub.ps1 -Status" -ForegroundColor Gray
+    Write-Host "  .\src\core\OllamaHub.ps1 -PullModel 'llama2:7b'" -ForegroundColor Gray
+    Write-Host "  .\src\core\OllamaHub.ps1 -Chat 'Explain KILO architecture'" -ForegroundColor Gray
+    Write-Host "  .\src\core\OllamaHub.ps1 -AnalyzeFile '.\src\config\secrets.py'" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "🔧 Setup Steps:" -ForegroundColor Cyan
+    Write-Host "  1. Install Ollama: https://ollama.ai" -ForegroundColor White
+    Write-Host "  2. Start Ollama: ollama serve" -ForegroundColor White
+    Write-Host "  3. Pull a model: .\src\core\OllamaHub.ps1 -PullModel 'llama2:7b'" -ForegroundColor White
+    Write-Host "  4. Test: .\src\core\OllamaHub.ps1 -Status" -ForegroundColor White
+}
+
+# Main execution
+if (`$Help -or (!`$Chat -and !`$Status -and !`$Models -and !`$PullModel -and !`$AnalyzeFile -and !`$GenerateDocs)) {
+    Show-Help
+}
+elseif (`$Chat) {
+    Start-OllamaChat -Message `$Chat -Model `$Model
+}
+elseif (`$Status) {
+    Get-OllamaStatus
+}
+elseif (`$Models) {
+    Get-OllamaModels
+}
+elseif (`$PullModel) {
+    Install-OllamaModel -ModelName `$PullModel
+}
+elseif (`$AnalyzeFile) {
+    Start-CodeAnalysis -FilePath `$AnalyzeFile
+}
+elseif (`$GenerateDocs) {
+    New-Documentation -CodeSnippet `$GenerateDocs
+}
+"@
+
+$ollamaHubPs1 | Out-File ".\src\core\OllamaHub.ps1" -Encoding UTF8
+Write-Host "✅ Created: .\src\core\OllamaHub.ps1" -ForegroundColor Green
+
+Write-Host "`n🎉 Ollama Integration Created!" -ForegroundColor Green
+Write-Host "=" * 40 -ForegroundColor Green
+
+Write-Host "`n🔧 Setup Steps:" -ForegroundColor Cyan
+Write-Host "1. Install Ollama:" -ForegroundColor Yellow
+Write-Host "   Download from: https://ollama.ai" -ForegroundColor White
+Write-Host ""
+Write-Host "2. Start Ollama service:" -ForegroundColor Yellow
+Write-Host "   ollama serve" -ForegroundColor White
+Write-Host ""
+Write-Host "3. Pull a model:" -ForegroundColor Yellow
+Write-Host "   .\src\core\OllamaHub.ps1 -PullModel 'llama2:7b'" -ForegroundColor White
+Write-Host ""
+Write-Host "4. Test the integration:" -ForegroundColor Yellow
+Write-Host "   .\src\core\OllamaHub.ps1 -Status" -ForegroundColor White
+
+Write-Host "`n🚀 Now you can run:" -ForegroundColor Magenta
+Write-Host "   .\src\core\OllamaHub.ps1 -AnalyzeFile '.\src\config\secrets.py'" -ForegroundColor White

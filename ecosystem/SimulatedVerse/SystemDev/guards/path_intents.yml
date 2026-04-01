@@ -1,0 +1,256 @@
+# ΞNuSyQ Path-Intent Contracts
+# Skeletal system: Quadpartite layout enforcement
+# Immune system: Cross-namespace protection
+
+version: "1.0.0"
+organism: "ΞNuSyQ"
+enforcer: "Artificer + Zeta Checks"
+
+# Namespace definitions with intent contracts
+namespaces:
+  SystemDev:
+    path_pattern: "SystemDev/**"
+    intent: "infrastructure_operations"
+    description: "System operations, audits, receipts, breaths, provenance tools"
+    allowed_imports:
+      - "SystemDev/**"
+      - "shared/**" 
+      - "node_modules/**"
+    forbidden_imports:
+      - "ChatDev/agents/**"
+      - "GameDev/engine/**"
+      - "PreviewUI/web/**"
+    capabilities:
+      - "receipt_generation"
+      - "audit_execution"
+      - "provenance_tracking" 
+      - "file_movement"
+      - "import_rewriting"
+    guards:
+      - "no_direct_ui_dependency"
+      - "receipt_required_for_mutations"
+    
+  ChatDev:
+    path_pattern: "ChatDev/**"
+    intent: "agent_coordination"
+    description: "Agent orchestration, Msg⛛ directives, playbooks, council bus"
+    allowed_imports:
+      - "ChatDev/**"
+      - "SystemDev/reports/**"
+      - "SystemDev/receipts/**"
+      - "shared/**"
+      - "node_modules/**"
+    forbidden_imports:
+      - "GameDev/engine/internal/**"
+      - "PreviewUI/web/internal/**"
+    capabilities:
+      - "agent_coordination"
+      - "breath_orchestration"
+      - "work_order_generation"
+      - "council_bus_communication"
+    guards:
+      - "agent_budget_enforcement"
+      - "no_direct_game_manipulation"
+      
+  GameDev:
+    path_pattern: "GameDev/**"
+    intent: "game_logic_implementation"
+    description: "Game engine, gameplay systems, content, tests"
+    allowed_imports:
+      - "GameDev/**"
+      - "shared/**"
+      - "node_modules/**"
+    forbidden_imports:
+      - "SystemDev/scripts/internal/**"
+      - "ChatDev/agents/**"
+    capabilities:
+      - "game_logic_implementation"
+      - "content_management"
+      - "engine_integration"
+      - "gameplay_systems"
+    guards:
+      - "no_agent_direct_access"
+      - "api_boundary_enforcement"
+      
+  PreviewUI:
+    path_pattern: "PreviewUI/**"
+    intent: "ui_presentation"
+    description: "Mobile, web, HUDs, storyboards (live preview surface)"
+    allowed_imports:
+      - "PreviewUI/**"
+      - "GameDev/api/**"  # Only public API
+      - "shared/**"
+      - "node_modules/**"
+    forbidden_imports:
+      - "GameDev/engine/internal/**"
+      - "SystemDev/scripts/**"
+      - "ChatDev/agents/**"
+    capabilities:
+      - "ui_rendering"
+      - "user_interaction"
+      - "preview_coordination"
+      - "mobile_optimization"
+    guards:
+      - "api_only_game_access"
+      - "no_direct_system_access"
+
+  client:
+    path_pattern: "client/**"
+    intent: "application_client"
+    description: "React application with game integration"
+    allowed_imports:
+      - "client/**"
+      - "shared/**"
+      - "node_modules/**"
+    forbidden_imports:
+      - "server/**"
+      - "SystemDev/**"
+      - "ChatDev/**"
+    capabilities:
+      - "ui_components"
+      - "game_interaction"
+      - "state_management"
+    guards:
+      - "client_server_separation"
+      - "no_direct_system_access"
+
+  server:
+    path_pattern: "server/**"
+    intent: "application_server"
+    description: "Express server with API routes"
+    allowed_imports:
+      - "server/**"
+      - "shared/**"
+      - "SystemDev/scripts/patches/**"  # Limited system integration
+      - "node_modules/**"
+    forbidden_imports:
+      - "client/**"
+      - "ChatDev/agents/**"
+    capabilities:
+      - "api_endpoints"
+      - "database_access"
+      - "authentication"
+      - "game_api_integration"
+    guards:
+      - "client_server_separation"
+      - "limited_system_integration"
+
+# Cross-namespace interaction rules
+interaction_rules:
+  agent_to_game:
+    from: "ChatDev/agents/**"
+    to: "GameDev/**"
+    method: "council_bus_only"
+    rationale: "Agents communicate through event bus, not direct code access"
+    
+  ui_to_game:
+    from: "PreviewUI/**"
+    to: "GameDev/**"
+    method: "api_boundary_only"
+    rationale: "UI accesses game through defined API surface"
+    
+  system_to_any:
+    from: "SystemDev/**"
+    to: "**"
+    method: "receipt_documented"
+    rationale: "System operations must be auditable via receipts"
+
+# File movement rules
+movement_rules:
+  cross_namespace_move:
+    trigger: "file_move_across_namespaces"
+    requirements:
+      - "receipt_triangulation_ritual_completed"
+      - "import_rewrite_plan_generated"
+      - "rollback_plan_documented"
+      - "zeta_checks_pass"
+    executor: "Artificer"
+    guards:
+      - "path_alias_map_updated"
+      - "no_circular_dependencies"
+      
+  intra_namespace_move:
+    trigger: "file_move_within_namespace"
+    requirements:
+      - "import_impact_analysis"
+      - "simple_receipt_generated"
+    executor: "Janitor"
+    guards:
+      - "compilation_remains_valid"
+
+# Label taxonomy
+labels:
+  ownership:
+    - "ours.systemdev"
+    - "ours.chatdev" 
+    - "ours.gamedev"
+    - "ours.previewui"
+    - "ours.client"
+    - "ours.server"
+    - "ours.shared"
+    
+  external:
+    - "pkg.node"
+    - "pkg.godot"
+    - "pkg.react"
+    - "build.generated"
+    - "tools.development"
+    
+  status:
+    - "stable"
+    - "experimental"
+    - "deprecated"
+    - "quarantined"
+    
+  risk:
+    - "safe_to_move"
+    - "move_with_caution"
+    - "immutable"
+
+# Validation rules
+validation:
+  on_file_create:
+    - "assign_appropriate_label"
+    - "verify_namespace_intent_alignment"
+    - "check_import_compliance"
+    
+  on_file_move:
+    - "validate_target_namespace_allows_intent"
+    - "generate_import_rewrite_plan"
+    - "create_rollback_receipt"
+    
+  on_import_add:
+    - "verify_import_allowed_by_namespace_rules"
+    - "check_circular_dependency_introduction"
+    
+  on_cross_namespace_access:
+    - "verify_approved_interaction_method"
+    - "log_access_for_audit"
+
+# Enforcement actions
+enforcement:
+  violation_detected:
+    actions:
+      - "emit_anomaly_receipt"
+      - "notify_raven_agent"
+      - "queue_correction_task"
+      
+  repeated_violations:
+    actions:
+      - "escalate_to_issues_breath"
+      - "strengthen_guards"
+      - "update_path_intents"
+
+# Health metrics
+metrics:
+  namespace_purity:
+    description: "Percentage of files following namespace intent contracts"
+    target: "> 95%"
+    
+  cross_namespace_violations:
+    description: "Count of improper cross-namespace accesses"
+    target: "< 5 per day"
+    
+  import_compliance:
+    description: "Percentage of imports following allowed patterns"
+    target: "> 98%"

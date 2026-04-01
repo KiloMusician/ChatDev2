@@ -1,0 +1,31 @@
+
+# Copilot Orchestrator temporary files
+.orchestrator/
+.worktrees/
+
+# Continuity
+SESSION_HANDOFF.md
+.continuity/
+.copilot-cli/
+.github/instructions/orchestrator-*.instructions.md
+
+# Keeper local state
+config/machine.local.json
+state/
+sessions/
+incidents/
+
+# Generated local runtime
+.flowbaby/
+.codememory/
+.codex
+
+# Python build/runtime cache
+__pycache__/
+
+# Godot generated cache
+godot/**/.godot/
+
+# Pester test output artifacts
+testResults.xml
+*.NUnit.xml

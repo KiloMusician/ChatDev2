@@ -1,0 +1,67 @@
+{
+  "id": "proof_a9ff4058-4f3a-4481-b290-71b4ca5bfcb3",
+  "job_id": "a9ff4058-4f3a-4481-b290-71b4ca5bfcb3",
+  "actor": "content-seeder",
+  "kind": "file",
+  "path": "ops/proofs/proof_a9ff4058-4f3a-4481-b290-71b4ca5bfcb3.json",
+  "sha256": "9d01ccfcf5c52e7a54191855679069a6c5c132f53e27426668ee5a491144c9e8",
+  "size": 2101,
+  "created_at": "2025-09-01T09:06:46.500Z",
+  "checks": [
+    {
+      "name": "exists",
+      "ok": true
+    },
+    {
+      "name": "schema",
+      "ok": true
+    },
+    {
+      "name": "sha256",
+      "ok": true,
+      "detail": "content/generators/base.json:84fe5630ea957e4fd951364ad459a08ec1579b4f53a4de237826d82a445d8e10"
+    },
+    {
+      "name": "sha256",
+      "ok": true,
+      "detail": "content/tiers/tiers.json:f7c9558936f7d0f8865f0a5126e861457230b06da5d810a62bb86ed4061b8d43"
+    },
+    {
+      "name": "sha256",
+      "ok": true,
+      "detail": "content/upgrades/base.json:11839c7c0413adcaccff6e4d2b72c7f71bd85b46f4ac34d3df9d4bc018cab9d9"
+    },
+    {
+      "name": "nonempty",
+      "ok": true
+    }
+  ],
+  "verdict": "pass",
+  "proof": {
+    "job_id": "a9ff4058-4f3a-4481-b290-71b4ca5bfcb3",
+    "agent": "content-seeder",
+    "files": [
+      {
+        "path": "content/generators/base.json",
+        "sha256": "84fe5630ea957e4fd951364ad459a08ec1579b4f53a4de237826d82a445d8e10",
+        "size": 812
+      },
+      {
+        "path": "content/tiers/tiers.json",
+        "sha256": "f7c9558936f7d0f8865f0a5126e861457230b06da5d810a62bb86ed4061b8d43",
+        "size": 699
+      },
+      {
+        "path": "content/upgrades/base.json",
+        "sha256": "11839c7c0413adcaccff6e4d2b72c7f71bd85b46f4ac34d3df9d4bc018cab9d9",
+        "size": 643
+      }
+    ],
+    "created_at": "2025-09-01T09:06:46.500Z",
+    "runner_exit_code": 0,
+    "runner_stdout": "{\"ok\":true,\"job_id\":\"a9ff4058-4f3a-4481-b290-71b4ca5bfcb3\",\"agent\":\"content-seeder\",\"staged\":[\"content/tiers/tiers.json\",\"content/generators/base.json\",\"content/upgrades/base.json\"],\"summary\":\"Seeded missing tiers (-1,0,1), basic generators, and starter upgrades\",\"idempotent\":true}\n",
+    "runner_stderr": ""
+  },
+  "file_count": 3,
+  "total_bytes": 2154
+}

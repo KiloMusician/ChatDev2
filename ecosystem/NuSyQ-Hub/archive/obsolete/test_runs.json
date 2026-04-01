@@ -1,0 +1,222 @@
+{
+  "runs": [
+    {
+      "run_id": "test_run_20251230_004447",
+      "timestamp": "2025-12-30T00:44:47.009014",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 45.45,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 1,
+      "duplicate_of": null,
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_005920",
+      "timestamp": "2025-12-30T00:59:20.853786",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 127.6,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 2,
+      "duplicate_of": "test_run_20251230_004447",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_011451",
+      "timestamp": "2025-12-30T01:14:51.028275",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 202.98,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 2,
+      "duplicate_of": "test_run_20251230_005920",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_012208",
+      "timestamp": "2025-12-30T01:22:08.934696",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 190.87,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 3,
+      "duplicate_of": "test_run_20251230_011451",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_015023",
+      "timestamp": "2025-12-30T01:50:23.104700",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 261.88,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 2,
+      "duplicate_of": "test_run_20251230_012208",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_020233",
+      "timestamp": "2025-12-30T02:02:33.766433",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 246.42,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 2,
+      "duplicate_of": "test_run_20251230_015023",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_144351",
+      "timestamp": "2025-12-30T14:43:51.444840",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 149.24,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 1,
+      "duplicate_of": null,
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_144351",
+      "timestamp": "2025-12-30T14:43:51.454226",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 148.54,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 2,
+      "duplicate_of": "test_run_20251230_144351",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20251230_144522",
+      "timestamp": "2025-12-30T14:45:22.183432",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "cwd": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 100.77,
+      "command_key": "183e1fdb1503563ec4de5245299b8ce4a53a4ac4",
+      "run_count_window": 3,
+      "duplicate_of": "test_run_20251230_144351",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20260106_120007",
+      "timestamp": "2026-01-06T12:00:07.803205",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "--fast-suite"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 60.02,
+      "command_key": "57f52358147d31631b6de03e4619c6ff007864f5",
+      "run_count_window": 1,
+      "duplicate_of": null,
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    },
+    {
+      "run_id": "test_run_20260106_120135",
+      "timestamp": "2026-01-06T12:01:35.962605",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "--fast-suite"
+      ],
+      "cwd": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 34.84,
+      "command_key": "57f52358147d31631b6de03e4619c6ff007864f5",
+      "run_count_window": 2,
+      "duplicate_of": "test_run_20260106_120007",
+      "window_minutes": 30,
+      "source": "start_nusyq:test"
+    }
+  ]
+}

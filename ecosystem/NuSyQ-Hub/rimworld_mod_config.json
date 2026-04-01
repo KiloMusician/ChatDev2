@@ -1,0 +1,33 @@
+{
+  "name": "NuSyQ Colony Integration",
+  "description": "Replace RimWorld colonists with AI agents from the NuSyQ ecosystem",
+  "version": "1.0.0",
+  "author": "NuSyQ Development Team",
+  "agents": [
+    "gordon",
+    "serena",
+    "culture_ship",
+    "ada",
+    "raven"
+  ],
+  "features": [
+    "AI agent colonists with learned skills",
+    "Autonomous decision-making based on colony state",
+    "Integration with NuSyQ quest system for colony objectives",
+    "Terminal Depths hacking mini-games (Gordon)",
+    "Knowledge discovery through gameplay (Serena)",
+    "Democratic decision-making council (Culture Ship)",
+    "Mentoring system for new players (Ada)",
+    "Analytics and pattern recognition (Raven)",
+    "Dynamic trait generation based on experience",
+    "Achievement system unlocks colony upgrades"
+  ],
+  "complexity_mapping": {
+    "rimworld_events": "nusyq_quests",
+    "colonist_traits": "agent_learned_behaviors",
+    "relationships": "social_network_graph",
+    "work_schedules": "agent_task_scheduler",
+    "mental_state": "consciousness_metrics",
+    "trade_system": "resource_exchange_protocol"
+  }
+}

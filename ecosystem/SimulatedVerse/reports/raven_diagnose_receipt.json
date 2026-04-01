@@ -1,0 +1,13 @@
+{
+  "agent": "Raven",
+  "action": "diagnose",
+  "args": "ollama_connection",
+  "findings": {
+    "port_11434": "unreachable",
+    "daemon_status": "not_running_in_replit_context",
+    "network_policy": "container_isolation",
+    "workaround": "use_gateway_or_openai_fallback"
+  },
+  "receipt": "diagnose_complete",
+  "next_action": "gateway_health_check"
+}

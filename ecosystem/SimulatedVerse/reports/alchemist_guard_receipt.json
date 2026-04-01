@@ -1,0 +1,13 @@
+{
+  "agent": "Alchemist",
+  "action": "guard",
+  "args": "budget_manager",
+  "implemented": {
+    "rate_limiting": "3_requests_per_minute",
+    "circuit_breaker": "active_at_0_budget",
+    "backoff_exponential": "τ′ = τ·(1.15^k)",
+    "fallback_chain": "ollama → gateway → openai.once"
+  },
+  "receipt": "guard_complete",
+  "next_action": "tune_rate_limits"
+}

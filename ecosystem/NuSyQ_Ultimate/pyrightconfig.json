@@ -1,0 +1,33 @@
+{
+  "exclude": [
+    "**/__pycache__",
+    "**/.venv",
+    "**/venv",
+    "**/env",
+    "**/node_modules",
+    "ChatDev/**",
+    "ChatDev/camel/**",
+    "ChatDev/WareHouse/**",
+    "mcp_server/**",
+    "examples/**",
+    ".venv.bak/**",
+    "GODOT/**",
+    ".venv/**",
+    "venv/**",
+    "**/*.pyc",
+    "**/site-packages/**",
+    "**/dist-packages/**"
+  ],
+  "ignore": [
+    "ChatDev/**",
+    "ChatDev/camel/**",
+    "ChatDev/WareHouse/**",
+    "mcp_server/**",
+    "examples/**",
+    "GODOT/**"
+  ],
+  "reportMissingImports": "warning",
+  "reportMissingTypeStubs": false,
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic"
+}

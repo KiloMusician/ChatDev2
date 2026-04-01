@@ -1,0 +1,157 @@
+{
+  "gaming": {
+    "shutdownWsl": true,
+    "stopProcesses": [
+      "Docker*",
+      "com.docker.*",
+      "dockerd*"
+    ],
+    "stopServices": [
+      "WSearch"
+    ],
+    "setPowerPlan": "high_performance",
+    "setGameMode": true,
+    "startServices": [],
+    "startLaunchers": [],
+    "notes": [
+      "Safe default gaming profile: shut down WSL, close Docker, stop Windows Search indexing, switch to high-performance power plan, and enable Game Mode. VS Code is left running by default; set safety.killVSCode=true in machine.local.json or pass -KillCode to terminate it."
+    ]
+  },
+  "coding": {
+    "shutdownWsl": false,
+    "stopProcesses": [],
+    "stopServices": [],
+    "setPowerPlan": "balanced",
+    "setGameMode": false,
+    "startServices": [
+      "WSearch"
+    ],
+    "startLaunchers": [],
+    "notes": [
+      "Safe default coding profile: return to balanced power, disable Game Mode, and ensure Windows Search is available."
+    ]
+  },
+  "balanced": {
+    "shutdownWsl": false,
+    "stopProcesses": [],
+    "stopServices": [],
+    "setPowerPlan": "balanced",
+    "setGameMode": false,
+    "startServices": [
+      "WSearch"
+    ],
+    "startLaunchers": [],
+    "notes": [
+      "Balanced mode: neutral daily-use profile. Keep current apps running, return to balanced power, disable Game Mode, and ensure Windows Search is available."
+    ]
+  },
+  "diagnose": {
+    "shutdownWsl": false,
+    "stopProcesses": [],
+    "stopServices": [],
+    "setPowerPlan": "balanced",
+    "setGameMode": false,
+    "startServices": [],
+    "startLaunchers": [],
+    "notes": [
+      "Baseline-oriented diagnose profile for audio stutter testing without extra mode noise. Run doctor after switching to this mode."
+    ]
+  },
+  "quiet": {
+    "shutdownWsl": true,
+    "stopProcesses": [
+      "Docker*",
+      "com.docker.*",
+      "dockerd*",
+      "node",
+      "python",
+      "jupyter*",
+      "chrome",
+      "msedge",
+      "firefox"
+    ],
+    "stopServices": [
+      "WSearch"
+    ],
+    "setPowerPlan": "balanced",
+    "setGameMode": false,
+    "startServices": [],
+    "startLaunchers": [],
+    "notes": [
+      "Maximum-quiet profile: stops all dev workloads and browsers, shuts down WSL, keeps balanced power. Use for audio recording, video calls, or troubleshooting background noise."
+    ]
+  },
+  "audio-safe": {
+    "shutdownWsl": true,
+    "stopProcesses": [
+      "Docker*",
+      "com.docker.*",
+      "dockerd*",
+      "node",
+      "python",
+      "jupyter*",
+      "chrome",
+      "msedge",
+      "firefox"
+    ],
+    "stopServices": [
+      "WSearch"
+    ],
+    "setPowerPlan": "high_performance",
+    "setGameMode": false,
+    "startServices": [],
+    "startLaunchers": [],
+    "notes": [
+      "Audio-safe mode: kills all known audio-risk processes (Nahimic conflicts, browser GPU, dev workloads), shuts down WSL and Docker, sets high-performance power to avoid CPU parking. Use when experiencing audio stutter or before running LatencyMon."
+    ]
+  },
+  "rimworld-mod": {
+    "shutdownWsl": false,
+    "stopProcesses": [
+      "Docker*",
+      "com.docker.*",
+      "dockerd*"
+    ],
+    "stopServices": [],
+    "setPowerPlan": "balanced",
+    "setGameMode": false,
+    "startServices": [],
+    "startLaunchers": [],
+    "setPriorities": [
+      { "match": "RimWorld*", "priority": "AboveNormal" },
+      { "match": "Code",      "priority": "BelowNormal" },
+      { "match": "node",      "priority": "BelowNormal" },
+      { "match": "python*",   "priority": "BelowNormal" }
+    ],
+    "setGpuPreference": [],
+    "notes": [
+      "Hybrid dev+game profile for playing RimWorld while modding: stops Docker, keeps WSL and VS Code running, raises RimWorld CPU priority to AboveNormal, demotes heavy dev processes. Add your RimWorld.exe path to setGpuPreference in config/machine.local.json to also force the discrete GPU. Listener auto-detect: set listener.gameProfiles with namePattern RimWorld* and onGameStart rimworld-mod in machine.local.json."
+    ]
+  },
+  "heavy-gaming": {
+    "shutdownWsl": true,
+    "stopProcesses": [
+      "Docker*",
+      "com.docker.*",
+      "dockerd*"
+    ],
+    "stopServices": [
+      "WSearch"
+    ],
+    "setPowerPlan": "high_performance",
+    "setGameMode": true,
+    "startServices": [],
+    "startLaunchers": [],
+    "setPriorities": [],
+    "setGpuPreference": [],
+    "notes": [
+      "Full-performance profile for demanding titles (Elden Ring, Cyberpunk 2077): shuts down WSL and Docker, High Performance power plan, Game Mode enabled, Windows Search stopped. Configure setPriorities and setGpuPreference with your game executables in config/machine.local.json."
+    ]
+  },
+  "restore": {
+    "useRollback": true,
+    "notes": [
+      "Restore the last reversible changes recorded in state/rollback.json."
+    ]
+  }
+}

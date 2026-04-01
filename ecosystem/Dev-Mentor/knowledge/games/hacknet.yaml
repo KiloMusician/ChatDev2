@@ -1,0 +1,145 @@
+game: Hacknet
+game_id: hacknet
+description: >
+  An immersive terminal hacking simulator with a narrative-driven speedrun meta.
+  Known for timed missions, precise execution, and the infamous Quasar Skip glitch
+  that allows bypassing certain admin requirements.
+category: terminal_simulation
+difficulty_range: beginner_to_intermediate
+terminal_depths_relevance: high
+
+techniques:
+
+  - name: Tutorial Kill (Skip)
+    id: hacknet_tutorial_skip
+    description: >
+      Terminating the tutorial process immediately at game start to skip the
+      slow onboarding and reach Viper's Battlestation in under 60 seconds.
+    concepts:
+      - process management
+      - ps/kill workflow
+      - time optimization
+    steps:
+      - "During 'Loading Tutorial' lag, type `ps` to get the tutorial PID"
+      - "Wait until you can input commands, then `kill <PID>`"
+      - "Return to home server with `cd /home`"
+      - "Reply to Bit's email immediately to receive Viper's Battlestation"
+    tips:
+      - "Every second saved here compounds — speedrunners save 2-3 minutes total"
+      - "Use `ps -aux` for more detail if PID is ambiguous"
+    principles:
+      - "Always question assumed constraints — tutorials are optional"
+      - "Process management is your first tool in any terminal environment"
+    related_techniques:
+      - hacknet_quasar_skip
+    difficulty: beginner
+    xp_reward: 15
+    terminal_depths_mapping: "ps command — view running processes; kill <pid> to terminate"
+
+  - name: Quasar Skip
+    id: hacknet_quasar_skip
+    description: >
+      A major glitch allowing removal of documents from servers you don't have
+      admin access to. Used to bypass password-guessing segments entirely.
+    concepts:
+      - race conditions
+      - filesystem vulnerabilities
+      - timing attacks
+    steps:
+      - "While PortHack.exe is running (2-3 second window), prepare `rm MsgBoard/*`"
+      - "The PortHack process occupies the security system — a race window opens"
+      - "Execute `rm` before PortHack completes to bypass ownership check"
+      - "Reply to emails instantly without reading (use keyboard shortcut)"
+    tips:
+      - "Prepare commands in advance — the window is ~2.5 seconds"
+      - "Use `eosDeviceScan.exe` from Entropy Asset Server to auto-discover IPs"
+      - "This skips the password-guessing puzzle entirely on most nodes"
+    principles:
+      - "Security systems often have timing vulnerabilities during state transitions"
+      - "Race conditions exist in real systems too — this teaches genuine technique"
+    related_techniques:
+      - hacknet_naix_boss_fight
+      - hacknet_tutorial_skip
+    difficulty: intermediate
+    xp_reward: 75
+    terminal_depths_mapping: "In Terminal Depths: race window exists during 'connect' → 'hack' transition"
+
+  - name: Naix Boss Fight
+    id: hacknet_naix_boss_fight
+    description: >
+      The climactic fight against Naix requires pre-loading exploits and
+      precise timing across multiple servers.
+    concepts:
+      - exploit chaining
+      - multi-step attack sequences
+      - trap preparation
+    steps:
+      - "Pre-load SMTPoverflow.exe from Entropy Asset Server before engaging"
+      - "Admin Proxy-NodeX04, then `rm home/*` to clear trap space"
+      - "Wait for Naix to hack you — trigger your pre-prepared reverse trap"
+      - "After Proxy-NodeX22 reboots, connect and grab WebServerWorm.exe"
+      - "Scan, enter Naix's Root Gateway — admin using FTP + Web + SSH triple exploit"
+    tips:
+      - "Write down the IP of Naix's Root Gateway before the fight starts"
+      - "The triple exploit requires all three port-opener tools"
+      - "Timing: you have ~8 seconds between Naix's hack and the trap trigger"
+    principles:
+      - "Preparation beats reaction speed — set traps before engaging"
+      - "Chain exploits in sequence when no single vector is sufficient"
+    related_techniques:
+      - hacknet_quasar_skip
+    difficulty: advanced
+    xp_reward: 150
+    terminal_depths_mapping: "chimera boss fight — multi-stage exploit chain required"
+
+  - name: Port Management
+    id: hacknet_port_management
+    description: >
+      Managing proxy connections and combining multiple sessions to minimize
+      network hops and maintain persistent access.
+    concepts:
+      - network topology
+      - session persistence
+      - proxy chaining
+    steps:
+      - "Most routing designed to avoid proxies or combine into a single shell session"
+      - "Use `shell` command to maintain access after PortHack completes"
+      - "SCP critical executables immediately — sessions can drop unexpectedly"
+      - "Write down IPs on a notecard — Hacknet doesn't have a built-in map"
+    tips:
+      - "Pixel hunting: two nodes sometimes overlap on the map — click precisely"
+      - "The `trace` command shows your current network path"
+    principles:
+      - "Persistent access beats one-time exploitation"
+      - "Keep a manual map when the game doesn't provide one"
+    related_techniques:
+      - hacknet_tutorial_skip
+    difficulty: beginner
+    xp_reward: 20
+    terminal_depths_mapping: "connect command + map command in Terminal Depths"
+
+lore:
+  - "Bit is the AI guide who contacts you at the start — its true nature is revealed in the DLC"
+  - "Naix is an elite hacker whose methods mirror actual social engineering techniques"
+  - "The Entropy faction controls a server network that serves as the game's 'dark web'"
+  - "Hacknet's sequel (Hacknet Labyrinths) adds an entirely new faction: the Labyrinth"
+  - "The game is praised by actual security researchers for its authentic terminal simulation"
+
+easter_eggs:
+  - id: hacknet_secret_file
+    filename: "HACKNET_RECOVERED.txt"
+    content: |
+      === HACKNET SIGNAL INTERCEPT ===
+      [ENCRYPTED — ENTROPY GRADE 3]
+      
+      NODE: Entropy Asset Server — CLASSIFIED
+      PROTOCOL: EntropyTest handshake initiated
+      
+      "PortHack is running. Window open: 2.47 seconds.
+       eosDeviceScan.exe has already found you.
+       Naix knows you're here.
+       
+       Run."
+       
+      [END INTERCEPT — SOURCE: UNKNOWN]
+    path: "/home/ghost/lore/hacknet/"

@@ -1,0 +1,104 @@
+{
+  "total_iterations": 3,
+  "max_iterations": 3,
+  "halt_on_error": false,
+  "cultivation_bundle": {
+    "intent_events": [],
+    "total_events": 0
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp": "2025-12-26T00:55:17.728596",
+      "steps": {
+        "analyze": {
+          "status": "success",
+          "summary": {
+            "working_files": 359,
+            "broken_files": 1,
+            "launch_pad_files": 46,
+            "enhancement_candidates": 57
+          }
+        },
+        "heal": {
+          "status": "success",
+          "actions": [
+            "analysis_only"
+          ]
+        }
+      },
+      "cultivation": {
+        "ten_minute_plan": {
+          "status": "healing_in_progress",
+          "max_items": 1,
+          "suggested_items": [
+            "1. Continue with current heal cycle"
+          ],
+          "note": "System still has issues - focus on health first"
+        }
+      }
+    },
+    {
+      "iteration": 2,
+      "timestamp": "2025-12-26T00:55:23.405965",
+      "steps": {
+        "analyze": {
+          "status": "success",
+          "summary": {
+            "working_files": 359,
+            "broken_files": 1,
+            "launch_pad_files": 46,
+            "enhancement_candidates": 57
+          }
+        },
+        "heal": {
+          "status": "success",
+          "actions": [
+            "analysis_only"
+          ]
+        }
+      },
+      "cultivation": {
+        "ten_minute_plan": {
+          "status": "healing_in_progress",
+          "max_items": 1,
+          "suggested_items": [
+            "1. Continue with current heal cycle"
+          ],
+          "note": "System still has issues - focus on health first"
+        }
+      }
+    },
+    {
+      "iteration": 3,
+      "timestamp": "2025-12-26T00:55:27.866934",
+      "steps": {
+        "analyze": {
+          "status": "success",
+          "summary": {
+            "working_files": 359,
+            "broken_files": 1,
+            "launch_pad_files": 46,
+            "enhancement_candidates": 57
+          }
+        },
+        "heal": {
+          "status": "success",
+          "actions": [
+            "analysis_only"
+          ]
+        }
+      },
+      "cultivation": {
+        "ten_minute_plan": {
+          "status": "healing_in_progress",
+          "max_items": 1,
+          "suggested_items": [
+            "1. Continue with current heal cycle"
+          ],
+          "note": "System still has issues - focus on health first"
+        }
+      }
+    }
+  ]
+}

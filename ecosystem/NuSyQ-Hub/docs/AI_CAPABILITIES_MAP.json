@@ -1,0 +1,359 @@
+{
+  "version": "1.0.0",
+  "domains": {
+    "code_development": {
+      "description": "Code Development",
+      "workflows": []
+    },
+    "game_development": {
+      "description": "Game Development",
+      "workflows": [
+        {
+          "name": "Godot Game Development",
+          "domain": "game_development",
+          "capabilities": [
+            "code_generation",
+            "creative_generation",
+            "architecture"
+          ],
+          "steps": [
+            {
+              "action": "design_game",
+              "tool": "chatdev",
+              "timeout": "chatdev"
+            },
+            {
+              "action": "create_gdscript",
+              "tool": "ollama",
+              "timeout": "ollama"
+            },
+            {
+              "action": "design_levels",
+              "tool": "ollama",
+              "timeout": "ollama"
+            },
+            {
+              "action": "create_assets",
+              "tool": "chatdev",
+              "timeout": "chatdev"
+            },
+            {
+              "action": "integrate_systems",
+              "tool": "copilot",
+              "timeout": "http_general"
+            }
+          ],
+          "timeout_profile": "game_development",
+          "complexity": 2.0,
+          "requires_services": [
+            "ollama",
+            "chatdev"
+          ]
+        }
+      ]
+    },
+    "web_applications": {
+      "description": "Web Applications",
+      "workflows": [
+        {
+          "name": "Full-Stack Web Application",
+          "domain": "web_applications",
+          "capabilities": [
+            "code_generation",
+            "architecture",
+            "deployment"
+          ],
+          "steps": [
+            {
+              "action": "design_architecture",
+              "tool": "chatdev",
+              "timeout": "chatdev"
+            },
+            {
+              "action": "create_backend",
+              "tool": "chatdev",
+              "timeout": "chatdev"
+            },
+            {
+              "action": "create_frontend",
+              "tool": "chatdev",
+              "timeout": "chatdev"
+            },
+            {
+              "action": "setup_database",
+              "tool": "local",
+              "timeout": "http_general"
+            },
+            {
+              "action": "create_docker",
+              "tool": "copilot",
+              "timeout": "http_general"
+            },
+            {
+              "action": "deploy",
+              "tool": "local",
+              "timeout": "docker"
+            }
+          ],
+          "timeout_profile": "web_development",
+          "complexity": 2.0,
+          "requires_services": [
+            "chatdev",
+            "docker"
+          ]
+        }
+      ]
+    },
+    "package_creation": {
+      "description": "Package Creation",
+      "workflows": [
+        {
+          "name": "Python Package Creation",
+          "domain": "package_creation",
+          "capabilities": [
+            "code_generation",
+            "testing",
+            "documentation"
+          ],
+          "steps": [
+            {
+              "action": "generate_structure",
+              "tool": "chatdev",
+              "timeout": "chatdev"
+            },
+            {
+              "action": "write_code",
+              "tool": "copilot",
+              "timeout": "http_general"
+            },
+            {
+              "action": "create_tests",
+              "tool": "ollama",
+              "timeout": "ollama"
+            },
+            {
+              "action": "generate_docs",
+              "tool": "ollama",
+              "timeout": "ollama"
+            },
+            {
+              "action": "build_package",
+              "tool": "local",
+              "timeout": "http_general"
+            }
+          ],
+          "timeout_profile": "package_creation",
+          "complexity": 1.5,
+          "requires_services": [
+            "ollama",
+            "chatdev"
+          ]
+        }
+      ]
+    },
+    "quest_workflows": {
+      "description": "Quest Workflows",
+      "workflows": [
+        {
+          "name": "Quest-Based Development",
+          "domain": "quest_workflows",
+          "capabilities": [
+            "multi_agent_coordination",
+            "code_generation",
+            "testing"
+          ],
+          "steps": [
+            {
+              "action": "load_quest",
+              "tool": "quest_system",
+              "timeout": "http_general"
+            },
+            {
+              "action": "analyze_requirements",
+              "tool": "ollama",
+              "timeout": "ollama"
+            },
+            {
+              "action": "generate_solution",
+              "tool": "chatdev",
+              "timeout": "chatdev"
+            },
+            {
+              "action": "implement_code",
+              "tool": "copilot",
+              "timeout": "http_general"
+            },
+            {
+              "action": "test_solution",
+              "tool": "local",
+              "timeout": "http_general"
+            },
+            {
+              "action": "update_quest",
+              "tool": "quest_system",
+              "timeout": "http_general"
+            }
+          ],
+          "timeout_profile": "quest_workflow",
+          "complexity": 1.5,
+          "requires_services": [
+            "quest_system",
+            "ollama",
+            "chatdev"
+          ]
+        }
+      ]
+    },
+    "docker_deployment": {
+      "description": "Docker Deployment",
+      "workflows": [
+        {
+          "name": "Docker Multi-Service Deployment",
+          "domain": "docker_deployment",
+          "capabilities": [
+            "deployment",
+            "architecture",
+            "documentation"
+          ],
+          "steps": [
+            {
+              "action": "analyze_services",
+              "tool": "ollama",
+              "timeout": "ollama"
+            },
+            {
+              "action": "create_dockerfiles",
+              "tool": "copilot",
+              "timeout": "http_general"
+            },
+            {
+              "action": "create_compose",
+              "tool": "copilot",
+              "timeout": "http_general"
+            },
+            {
+              "action": "setup_networking",
+              "tool": "ollama",
+              "timeout": "ollama"
+            },
+            {
+              "action": "build_images",
+              "tool": "docker",
+              "timeout": "docker"
+            },
+            {
+              "action": "deploy_stack",
+              "tool": "docker",
+              "timeout": "docker"
+            }
+          ],
+          "timeout_profile": "docker_deployment",
+          "complexity": 1.8,
+          "requires_services": [
+            "docker",
+            "ollama"
+          ]
+        }
+      ]
+    },
+    "testing_qa": {
+      "description": "Testing Qa",
+      "workflows": []
+    },
+    "debugging": {
+      "description": "Debugging",
+      "workflows": []
+    },
+    "documentation": {
+      "description": "Documentation",
+      "workflows": []
+    }
+  },
+  "capabilities": {
+    "code_generation": {
+      "description": "Code Generation",
+      "workflows": [
+        "python_package_creation",
+        "web_app_fullstack",
+        "game_development_godot",
+        "quest_driven_development"
+      ]
+    },
+    "code_review": {
+      "description": "Code Review",
+      "workflows": []
+    },
+    "testing": {
+      "description": "Testing",
+      "workflows": [
+        "python_package_creation",
+        "quest_driven_development"
+      ]
+    },
+    "debugging": {
+      "description": "Debugging",
+      "workflows": []
+    },
+    "refactoring": {
+      "description": "Refactoring",
+      "workflows": []
+    },
+    "documentation": {
+      "description": "Documentation",
+      "workflows": [
+        "python_package_creation",
+        "docker_deployment"
+      ]
+    },
+    "architecture": {
+      "description": "Architecture",
+      "workflows": [
+        "web_app_fullstack",
+        "game_development_godot",
+        "docker_deployment"
+      ]
+    },
+    "deployment": {
+      "description": "Deployment",
+      "workflows": [
+        "web_app_fullstack",
+        "docker_deployment"
+      ]
+    },
+    "multi_agent_coordination": {
+      "description": "Multi Agent Coord",
+      "workflows": [
+        "quest_driven_development"
+      ]
+    },
+    "creative_generation": {
+      "description": "Creative Generation",
+      "workflows": [
+        "game_development_godot"
+      ]
+    }
+  },
+  "service_requirements": {
+    "python_package_creation": [
+      "ollama",
+      "chatdev"
+    ],
+    "web_app_fullstack": [
+      "chatdev",
+      "docker"
+    ],
+    "game_development_godot": [
+      "ollama",
+      "chatdev"
+    ],
+    "quest_driven_development": [
+      "quest_system",
+      "ollama",
+      "chatdev"
+    ],
+    "docker_deployment": [
+      "docker",
+      "ollama"
+    ]
+  }
+}

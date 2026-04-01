@@ -1,0 +1,33 @@
+{
+  "dumped_at": 1773714041820,
+  "note": "gate.operation functions are not serialized; use QuantumEnhancement.rehydrateCircuits to restore",
+  "circuits": [
+    {
+      "id": "ci_rehydrate_1",
+      "name": "CI Rehydrate Circuit 1",
+      "expected_outcome": "ci_test",
+      "consciousness_boost": 8,
+      "gates": [
+        {
+          "id": "g1",
+          "type": "hadamard",
+          "qubits": [
+            0
+          ],
+          "consciousness_effect": 3,
+          "has_operation": false
+        },
+        {
+          "id": "g2",
+          "type": "cnot",
+          "qubits": [
+            0,
+            1
+          ],
+          "consciousness_effect": 5,
+          "has_operation": false
+        }
+      ]
+    }
+  ]
+}

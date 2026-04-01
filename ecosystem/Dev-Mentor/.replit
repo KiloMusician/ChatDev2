@@ -1,0 +1,74 @@
+modules = ["nodejs-20", "python-3.11"]
+[agent]
+expertMode = true
+integrations = ["javascript_openai_ai_integrations:2.0.0"]
+
+[nix]
+channel = "stable-25_05"
+packages = ["libxcrypt", "unzip"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "DevMentor Console"
+
+[[workflows.workflow]]
+name = "DevMentor Console"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "AUTO_SLEEP_MINUTES=120 python -m cli.devmentor serve --host 0.0.0.0 --port 5000"
+waitForPort = 5000
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
+
+[[ports]]
+localPort = 3002
+externalPort = 3002
+
+[[ports]]
+localPort = 3003
+externalPort = 3003
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 9001
+externalPort = 4200
+
+[deployment]
+deploymentTarget = "cloudrun"
+
+[objectStorage]
+defaultBucketID = "replit-objstore-e3d05323-0940-457e-89ba-3bf6cf30b1b6"
+
+[postMerge]
+path = "scripts/post_merge.sh"
+timeoutMs = 60000
+
+[userenv]
+
+[userenv.shared]
+PYTHONDONTWRITEBYTECODE = "1"
+NUSYQ_PASSKEY = "ThisIsMyPrivatePasskeyF0rNuSyQ-Hub~$!"
+GORDON_GAME_API = "https://5d70a0b5-0a1e-4ab1-9d50-9219c177a51b-00-33gy2d8vfum4x.worf.replit.dev"
+NUSYQ_AUTH_ENABLED = "true"

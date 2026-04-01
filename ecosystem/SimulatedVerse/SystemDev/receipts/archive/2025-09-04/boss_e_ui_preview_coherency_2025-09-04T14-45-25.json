@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-09-04T14:45:25.000Z",
+  "boss": "E_UI_PREVIEW_COHERENCY_OLD_VS_NEW",
+  "marble": "dev_menu_game_separation_achieved",
+  "breaths_executed": [
+    "ΞΘΛΔ_culture_ship",
+    "ΞΘΛΔ_temple_alignment", 
+    "ΞΘΛΔ_janus_dual_enforcement"
+  ],
+  "separation_violations_fixed": [
+    {
+      "violation": "dev_console_in_play_mode",
+      "location": "PreviewUI/web/core/MenuRouter.tsx:44-49",
+      "action": "removed dev console button from ship systems nav",
+      "enforcement": "JANUS_BREATH_SEPARATION"
+    },
+    {
+      "violation": "cross_contamination_imports", 
+      "location": "client/src/components/DevMenuExtended.tsx:9",
+      "action": "commented out OnboardingProvider import from PreviewUI",
+      "enforcement": "TEMPLE_ALIGNMENT"
+    },
+    {
+      "violation": "game_component_references",
+      "location": "client/src/components/DevMenuExtended.tsx:148,151,158",
+      "action": "removed OnboardingTrigger and OnboardingStatus usage", 
+      "enforcement": "CLEAN_COMPONENT_BOUNDARIES"
+    }
+  ],
+  "new_route_architecture": {
+    "dev_route_created": "PreviewUI/web/routes/DevRoute.tsx",
+    "separation_enforced": "/dev/* for system interface only",
+    "game_interface_pure": "/ route exclusively for player experience"
+  },
+  "ui_binding_audit_completed": {
+    "entrypoints_mapped": "✅ dev vs game clearly identified",
+    "route_binding": "✅ dedicated /dev route created", 
+    "preview_watchdog": "✅ components isolated for hot reload",
+    "private_void_enforcement": "✅ system widgets under /dev only"
+  },
+  "janus_dual_enforcement": {
+    "dev_menu_purity": "system interface components isolated",
+    "game_interface_purity": "player experience components isolated",
+    "route_separation": "middleware-ready clean boundaries"
+  },
+  "lsp_diagnostics_impact": {
+    "expected_increase": "temporary errors from component separation",
+    "cleanup_phase": "references removed, disabled components replaced with placeholders",
+    "architectural_improvement": "clean separation over mixed concerns"
+  },
+  "boss_e_achievement": "ui_preview_coherency_old_vs_new_separation_complete",
+  "culture_ship_integration": "dev_interface_properly_separated_from_player_experience"
+}

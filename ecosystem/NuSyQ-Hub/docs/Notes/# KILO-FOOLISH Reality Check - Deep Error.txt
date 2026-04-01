@@ -1,0 +1,270 @@
+# KILO-FOOLISH Reality Check - Deep Error Scanner
+
+Write-Host "🔍 KILO-FOOLISH Deep Error Detection Scan" -ForegroundColor Red
+Write-Host "=" * 50 -ForegroundColor Red
+
+function Test-PythonSyntax {
+    param([string]$FilePath)
+
+    if (Test-Path $FilePath) {
+        Write-Host "🐍 Testing Python syntax: $FilePath" -ForegroundColor Yellow
+        $result = python -m py_compile $FilePath 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "❌ SYNTAX ERROR in $FilePath" -ForegroundColor Red
+            Write-Host $result -ForegroundColor Red
+            return $false
+        } else {
+            Write-Host "✅ Syntax OK" -ForegroundColor Green
+            return $true
+        }
+    } else {
+        Write-Host "❌ FILE MISSING: $FilePath" -ForegroundColor Red
+        return $false
+    }
+}
+
+function Test-PowerShellSyntax {
+    param([string]$FilePath)
+
+    if (Test-Path $FilePath) {
+        Write-Host "⚡ Testing PowerShell syntax: $FilePath" -ForegroundColor Yellow
+        try {
+            $null = Get-Command $FilePath -Syntax -ErrorAction Stop
+            Write-Host "✅ Syntax OK" -ForegroundColor Green
+            return $true
+        }
+        catch {
+            Write-Host "❌ SYNTAX ERROR in $FilePath" -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            return $false
+        }
+    } else {
+        Write-Host "❌ FILE MISSING: $FilePath" -ForegroundColor Red
+        return $false
+    }
+}
+
+function Test-Dependencies {
+    Write-Host "`n📦 Testing Python Dependencies..." -ForegroundColor Cyan
+
+    $pythonDeps = @("pathlib", "json", "datetime", "ast", "re", "hashlib")
+    $optionalDeps = @("openai", "ollama", "anthropic")
+
+    foreach ($dep in $pythonDeps) {
+        try {
+            python -c "import $dep" 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "✅ $dep available" -ForegroundColor Green
+            } else {
+                Write-Host "❌ $dep MISSING (built-in - this is weird!)" -ForegroundColor Red
+            }
+        }
+        catch {
+            Write-Host "❌ $dep ERROR: $_" -ForegroundColor Red
+        }
+    }
+
+    Write-Host "`n📦 Testing Optional Dependencies..." -ForegroundColor Cyan
+    foreach ($dep in $optionalDeps) {
+        try {
+            python -c "import $dep" 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "✅ $dep available" -ForegroundColor Green
+            } else {
+                Write-Host "⚠️ $dep not installed (optional)" -ForegroundColor Yellow
+            }
+        }
+        catch {
+            Write-Host "⚠️ $dep not available" -ForegroundColor Yellow
+        }
+    }
+}
+
+function Test-DirectoryStructure {
+    Write-Host "`n📁 Testing Directory Structure..." -ForegroundColor Cyan
+
+    $requiredDirs = @(
+        ".\src",
+    "./src/core",
+    "./src/config",
+        ".\data",
+        ".\data\logs"
+    )
+
+    $errors = 0
+    foreach ($dir in $requiredDirs) {
+        if (Test-Path $dir) {
+            Write-Host "✅ $dir exists" -ForegroundColor Green
+        } else {
+            Write-Host "❌ MISSING DIRECTORY: $dir" -ForegroundColor Red
+            $errors++
+        }
+    }
+
+    return $errors -eq 0
+}
+
+function Test-FileReferences {
+    Write-Host "`n🔗 Testing File References..." -ForegroundColor Cyan
+
+    # Check if files reference each other correctly
+    $potentialIssues = @()
+
+    # Check Python imports
+    if (Test-Path "./src/core/RepositoryCoordinator.py") {
+        $content = Get-Content "./src/core/RepositoryCoordinator.py" -Raw
+        if ($content -match 'from\s+(\S+)\s+import' -or $content -match 'import\s+(\S+)') {
+            Write-Host "⚠️ Found imports in RepositoryCoordinator.py - check if modules exist" -ForegroundColor Yellow
+        }
+    }
+
+    # Check PowerShell dot-sourcing
+    Get-ChildItem "." -Filter "*.ps1" -Recurse | ForEach-Object {
+        $content = Get-Content $_.FullName -Raw -ErrorAction SilentlyContinue
+        if ($content -match '\.\s+["\']([^"\']+\.ps1)["\']') {
+            $referencedFile = $matches[1]
+            if (!(Test-Path $referencedFile)) {
+                Write-Host "❌ BROKEN REFERENCE in $($_.Name): $referencedFile" -ForegroundColor Red
+                $potentialIssues += "Broken reference: $($_.Name) -> $referencedFile"
+            }
+        }
+    }
+
+    return $potentialIssues
+}
+
+function Test-LogicErrors {
+    Write-Host "`n🧠 Testing for Logic Errors..." -ForegroundColor Cyan
+
+    $logicIssues = @()
+
+    # Check for common logic errors in PowerShell files
+    Get-ChildItem "." -Filter "*.ps1" -Recurse | ForEach-Object {
+        $content = Get-Content $_.FullName -Raw -ErrorAction SilentlyContinue
+
+        # Check for undefined variables being used
+        if ($content -match '\$(\w+)' -and $content -notmatch 'param\s*\(.*\$\1.*\)') {
+            # This is a basic check - PowerShell is dynamic so hard to catch all
+        }
+
+        # Check for missing error handling on risky operations
+        if ($content -match '(Invoke-RestMethod|Invoke-WebRequest|python\s+)' -and $content -notmatch 'try\s*{') {
+            Write-Host "⚠️ Potentially unhandled error in $($_.Name)" -ForegroundColor Yellow
+            $logicIssues += "Missing error handling in $($_.Name)"
+        }
+    }
+
+    return $logicIssues
+}
+
+function Find-HiddenErrors {
+    Write-Host "`n🕵️ Looking for Hidden Errors..." -ForegroundColor Magenta
+
+    $hiddenErrors = @()
+
+    # Check for files that look like they should exist but don't
+    $expectedFiles = @(
+    "./src/core/RepositoryCoordinator.py",
+    "./src/core/PathIntelligence.py",
+    "./src/core/IntelligentCommentary.py",
+        ".\src\config\SecretsManager.ps1",
+        ".\src\config\secrets.py"
+    )
+
+    foreach ($file in $expectedFiles) {
+        if (!(Test-Path $file)) {
+            Write-Host "❌ EXPECTED FILE MISSING: $file" -ForegroundColor Red
+            $hiddenErrors += "Missing expected file: $file"
+        }
+    }
+
+    # Check for partial implementations
+    Get-ChildItem "." -Filter "*.py" -Recurse | ForEach-Object {
+        $content = Get-Content $_.FullName -Raw -ErrorAction SilentlyContinue
+
+        # Look for TODO/FIXME comments
+        if ($content -match '(TODO|FIXME|XXX|HACK)') {
+            Write-Host "⚠️ Found TODO/FIXME in $($_.Name)" -ForegroundColor Yellow
+            $hiddenErrors += "Incomplete implementation in $($_.Name)"
+        }
+
+        # Look for placeholder functions
+        if ($content -match 'def\s+\w+.*:\s*pass\s*$') {
+            Write-Host "⚠️ Found placeholder function in $($_.Name)" -ForegroundColor Yellow
+            $hiddenErrors += "Placeholder function in $($_.Name)"
+        }
+
+        # Look for hardcoded paths that might not exist
+        if ($content -match '["\'][C-Z]:\\[^"\']*["\']') {
+            Write-Host "⚠️ Hardcoded path detected in $($_.Name)" -ForegroundColor Yellow
+            $hiddenErrors += "Hardcoded path in $($_.Name)"
+        }
+    }
+
+    return $hiddenErrors
+}
+
+# Run all tests
+Write-Host "🚨 Starting comprehensive error detection..." -ForegroundColor Red
+
+$errorCount = 0
+
+# Test 1: File existence and syntax
+Write-Host "`n1️⃣ Testing Core Files..." -ForegroundColor White
+$coreFiles = @(
+    @{Path = "./src/core/RepositoryCoordinator.py"; Type = "Python"},
+    @{Path = "./src/core/PathIntelligence.py"; Type = "Python"},
+    @{Path = "./src/core/IntelligentCommentary.py"; Type = "Python"},
+    @{Path = "./src/core/RepositoryCoordinator.ps1"; Type = "PowerShell"},
+    @{Path = "./src/core/PathIntelligence.ps1"; Type = "PowerShell"},
+    @{Path = "./src/core/IntelligentCommentary.ps1"; Type = "PowerShell"}
+)
+
+foreach ($file in $coreFiles) {
+    if ($file.Type -eq "Python") {
+        if (!(Test-PythonSyntax $file.Path)) { $errorCount++ }
+    } else {
+        if (!(Test-PowerShellSyntax $file.Path)) { $errorCount++ }
+    }
+}
+
+# Test 2: Dependencies
+Test-Dependencies
+
+# Test 3: Directory structure
+if (!(Test-DirectoryStructure)) { $errorCount++ }
+
+# Test 4: File references
+$refIssues = Test-FileReferences
+$errorCount += $refIssues.Count
+
+# Test 5: Logic errors
+$logicIssues = Test-LogicErrors
+$errorCount += $logicIssues.Count
+
+# Test 6: Hidden errors
+$hiddenErrors = Find-HiddenErrors
+$errorCount += $hiddenErrors.Count
+
+# Summary
+Write-Host "`n" + "=" * 50 -ForegroundColor Red
+Write-Host "🎯 ERROR SCAN COMPLETE" -ForegroundColor Red
+Write-Host "=" * 50 -ForegroundColor Red
+
+if ($errorCount -eq 0) {
+    Write-Host "😱 STILL ZERO ERRORS DETECTED!" -ForegroundColor Green
+    Write-Host "🤔 This is either:" -ForegroundColor Yellow
+    Write-Host "   • A miracle of perfect coding" -ForegroundColor White
+    Write-Host "   • The files haven't been created yet" -ForegroundColor White
+    Write-Host "   • The errors are really well hidden" -ForegroundColor White
+    Write-Host "   • We need deeper testing" -ForegroundColor White
+} else {
+    Write-Host "🎉 FOUND $errorCount ERRORS! (This is more realistic)" -ForegroundColor Red
+    Write-Host "📝 Issues found:" -ForegroundColor Yellow
+    foreach ($issue in ($refIssues + $logicIssues + $hiddenErrors)) {
+        Write-Host "  • $issue" -ForegroundColor Red
+    }
+}
+
+Write-Host "`n💡 Want to create some intentional errors for testing?" -ForegroundColor Cyan
+Write-Host "🧪 Run: .\create-test-errors.ps1" -ForegroundColor White

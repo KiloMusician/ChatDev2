@@ -1,0 +1,8 @@
+id: librarian
+role: librarian
+name: Librarian
+description: Indexes docs, builds ToC, and answers 'where is X?'
+capabilities: [index, inspect, compose]
+version: 0.1.0
+runner: in-process
+enabled: true

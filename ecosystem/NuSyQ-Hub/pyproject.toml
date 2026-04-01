@@ -1,0 +1,251 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuSyQ-hub"
+version = "0.1.0"
+description = "NuSyQ Hub core project"
+requires-python = ">=3.11"
+dynamic = ["readme"]
+
+[project.scripts]
+ecosystem-terminal = "src.system.enhanced_terminal_ecosystem:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0,<10",
+    "pytest-asyncio>=0.21.0,<2",
+    "pytest-benchmark>=4.0.0,<6",
+    "pytest-xdist>=3.0.0",
+    "black>=24.4.1,<25",
+    "flake8>=6.0.0,<8",
+    "mypy>=1.5.0,<2",
+    "virtualenv>=20.23.0",
+    "regex>=2023.6.3",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.25.0",
+    "notebook>=7.0.0",
+    "sphinx>=7.1.0,<8",
+    "mkdocs>=1.5.0,<2",
+]
+
+[project.dependencies]
+pandas = ">=2.0.0"
+numpy = ">=1.24.0"
+matplotlib = ">=3.6.0"
+seaborn = ">=0.12.0"
+scikit-learn = ">=1.3.0"
+torch = ">=2.0.0"
+transformers = ">=4.30.0"
+openai = ">=1.0.0"
+ollama = ">=0.1.7"
+tiktoken = ">=0.8.0"
+tenacity = ">=8.2.2"
+scipy = ">=1.11.0"
+sympy = ">=1.12.0"
+requests = ">=2.31.0"
+types-requests = ">=2.31.0"
+flask = ">=2.3.0"
+flask-cors = ">=6.0.0"
+fastapi = ">=0.100.0"
+uvicorn = ">=0.23.0"
+Flask-SocketIO = ">=5.3.4,<6.0.0"
+
+[tool.black]
+line-length = 100
+target-version = ['py311', 'py312']
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    ".git",
+    ".git/refs",
+    "**/.git/refs/**",
+    ".githooks",
+    "**/.githooks/**",
+    "__pycache__",
+    "build",
+    "dist",
+    "migrations",
+    "venv",
+    ".venv",
+    ".venv-adapter",
+    "**/.venv-adapter/**",
+    ".sanitized_build_context",
+    "**/.sanitized_build_context/**",
+    ".docker_build_context",
+    "**/.docker_build_context/**",
+    ".venv_precommit",
+    "**/.venv_precommit/**",
+    "docs/Notebooks",
+    "notebooks",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "C90", "I", "N", "D", "UP", "B", "A", "C4", "T20", "Q", "RUF"]
+# Suppress intentional design patterns and style noise
+ignore = [
+    "E501",  # line-too-long (handled by line-length setting)
+    "E402",  # module-level import not at top (defensive fallback imports are intentional)
+    "F401",  # unused imports in __init__.py (re-exports are intentional)
+    "E741",  # ambiguous variable name (l, O, I used intentionally in comprehensions)
+    "D100",  # missing docstring in public module (legacy files being refactored)
+    "D101",  # missing docstring in public class (legacy files being refactored)
+    "D102",  # missing docstring in public method (legacy files being refactored)
+    "D103",  # missing docstring in public function (legacy files being refactored)
+    "D105",  # missing docstring in magic method (legacy files being refactored)
+    "D107",  # missing docstring in __init__ (legacy files being refactored)
+    "N802",  # function name should be lowercase (Culture-Ship uses PascalCase conventions)
+    "N803",  # argument name should be lowercase (quantum symbols use Unicode conventions)
+    "N806",  # variable in function should be lowercase (ΞNuSyQ protocol uses symbolic names)
+    "C901",  # function is too complex (quantum resolvers are inherently complex)
+    "B008",  # do not perform function calls in argument defaults (mutable defaults handled correctly)
+    "UP046",  # non-pep695-generic-class — PEP 695 requires Python 3.12+; project targets >=3.11
+    "UP047",  # non-pep695-generic-function — same as UP046
+    "N999",  # invalid module name — 25 legacy files with non-snake_case names (cannot rename without breaking imports)
+]
+pydocstyle.convention = "google"
+
+# Per-file ignore rules - using bracket table syntax for multi-line support
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403", "D104", "D105"]
+# Directories that probe optional dependencies via try/except for availability checks
+"src/ai/**/*.py" = ["F401"]
+"src/blockchain/**/*.py" = ["F401"]
+"src/cloud/**/*.py" = ["F401"]
+"src/consciousness/**/*.py" = ["F401"]
+"src/diagnostics/**/*.py" = ["F401"]
+"src/interface/**/*.py" = ["F401", "F403", "T201"]
+"src/ml/**/*.py" = ["F401"]
+"src/observability/**/*.py" = ["F401"]
+"src/quantum/**/*.py" = ["F401", "F403"]
+"src/system/**/*.py" = ["F401", "B008"]  # F401: optional imports; B008: FastAPI Depends() pattern
+"src/tools/**/*.py" = ["F401", "T201"]
+# MCP bridge files — print() used in __main__ demo/test blocks only
+"src/integrations/**/*.py" = ["T201"]
+# Star-import backward-compat shims
+"src/LOGGING/**/*.py" = ["F401", "F403", "N814"]
+"src/healing/quantum_problem_resolver_clean.py" = ["F401", "F403"]
+# Core modules with try/except type imports
+"src/core/action_receipt_ledger.py" = ["F401"]
+"src/nusyq_spine/registry.py" = ["F401"]
+"src/dispatch/agent_registry.py" = ["F401"]
+"tests/**/*.py" = ["D100", "D101", "D102", "D103", "D104", "D105", "D107", "D200", "D202", "D205", "D212", "D415", "T201", "I001", "W293", "Q000", "UP006", "UP015", "UP035", "RUF001", "E402"]
+"scripts/**/*.py" = ["T201", "D100", "D101", "D102", "D103", "D104", "D105", "D107", "D205", "D212", "D301", "D415", "D417", "E402", "N801", "N817", "A002", "C416", "RUF001", "RUF002", "RUF003", "RUF012", "RUF015", "RUF034"]
+# Interactive terminal/game UIs and CLI tools where print() IS the intended output mechanism
+"src/games/**/*.py" = ["T201", "RUF001"]
+# Files with intentional Unicode in docstrings (math formulas, Greek symbols)
+"src/diagnostics/comprehensive_grading_system.py" = ["RUF002"]
+"src/integration/breathing_integration.py" = ["RUF002"]
+"src/culture_ship/integrated_terminal.py" = ["T201"]
+"src/tools/dependency_analyzer.py" = ["T201"]
+"src/tools/ai_backend_status.py" = ["T201"]
+"src/diagnostics/health_cli.py" = ["T201"]
+"src/healing/system_regenerator.py" = ["T201"]
+"src/tools/next_action_display.py" = ["T201"]
+"src/observability/lightweight_tracer.py" = ["T201"]
+"src/utils/terminal_output.py" = ["T201"]
+"ACTIVATE_SYSTEM.py" = ["T201"]
+"AI_AGENT_COORDINATION_MASTER.py" = ["T201"]
+"activate_zen_engine.py" = ["T201"]
+"archive/**/*.py" = ["E", "F", "W", "C", "N", "D", "UP", "B", "A", "I"]
+"cleanup_backup/**/*.py" = ["E", "F", "W", "C", "N", "D", "UP", "B", "A"]
+"demo_*.py" = ["T201", "D100", "D101", "D102", "D103", "D104", "D205", "D415"]
+"test_*.py" = ["T201", "D100", "D101", "D102", "D103", "D104", "D105", "D107", "D200", "D202", "D205", "D212", "D415", "I001", "W293", "Q000", "UP006", "UP015", "UP035", "RUF001", "W292"]
+"**/zen_engine/**/*.py" = ["T201", "D205", "D212", "D415", "RUF022", "D107"]
+"workspace_health_report.py" = ["T201", "D100", "D205", "D212", "D415", "Q000"]
+"templates/**/*.py" = ["T201", "D100", "D101", "D102", "D103", "D104", "D107", "D205", "D415", "Q000"]
+"examples/**/*.py" = ["T201", "D100", "D101", "D102", "D103", "D104", "D107", "D205", "D415"]
+"src/ai/conversation_manager.py" = ["W293", "D205", "D107"]
+"src/real_time_context_monitor.py" = ["D205", "D107", "F841", "RUF006"]
+"src/integration/boss_rush_bridge.py" = ["W293", "D413", "F841", "E501", "F401"]
+"src/integration/temple_auto_storage.py" = ["W293", "D400", "D415", "D413", "F401", "F841", "E501", "B007"]
+"scripts/launch_culture_ship.py" = ["D205", "T201", "F841"]
+"scripts/test_activation.py" = ["T201", "D205", "F401", "F541"]
+# Naming convention exceptions for specific src files
+"src/ml/neural_quantum_bridge.py" = ["N812"]  # PyTorch: `import torch.nn.functional as F` is the standard convention
+"src/orchestration/chatdev_autonomous_router.py" = ["N813"]  # Result variant aliases (Ok/Fail/Result as loaded_*)
+"src/generators/**/*.py" = ["N814"]  # Internal aliases like _GR, _UPG for lazy-loaded classes
+"src/publishing/registry_publishers.py" = ["N815"]  # VS Code manifest field activationEvents is camelCase by spec
+"src/workflow/engine.py" = ["A002"]  # `id` param shadowing builtin — legacy API, cannot rename without breaking callers
+"src/integration/Ollama_Integration_Hub.py" = ["T201"]  # CLI demo section uses print() intentionally
+"src/utils/generate_structure_tree2BAK.py" = ["T201"]  # Utility script with intentional print output
+"src/orchestration/culture_ship_strategic_advisor.py" = ["RUF001"]  # ℹ used intentionally in status messages
+"src/core/symbolic_cognition.py" = ["RUF003"]  # ∨ (logical OR) used intentionally in symbolic comments
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+exclude = [
+    "archive/.*",
+    ".*/cleanup_backup/.*",
+    ".*/legacy/.*",
+    "nusyq_clean_clone/.*",
+    "_vibe/.*",
+    ".venv.old/.*",
+    ".docker_build_context/.*",
+    ".sanitized_build_context/.*",
+    "(?i)^nul$",                # Windows device path that breaks mypy relpath
+    "(?i).*/nul$",              # Guard against nested null-device hits
+    "tests/",
+    "scripts/",
+    "docs/",
+    "build/",
+    "dist/",
+    "venv/",
+    ".venv/",
+    "ChatDev/",
+    "node_modules/",
+    "__pycache__/",
+    "AppData/",
+    "site-packages/",
+]
+warn_unused_configs = true
+disallow_untyped_defs = false  # Gradually enable this
+ignore_missing_imports = true  # Ignore missing stubs for third-party libraries
+show_error_codes = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+mypy_path = ["stubs"]
+
+# Phase 2 Step 22-24: Performance optimization with incremental caching
+incremental = true
+cache_dir = ".mypy_cache"
+# Note: fine_grained_incremental is not a valid mypy config option
+# Use incremental=true and cache_dir for performance optimization
+
+# Per-module options
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "scripts.*"
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov=src --cov-report=term-missing"
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+    "performance: benchmark tests",
+    "integration: integration tests",
+    "unit: unit tests",
+    "smoke: smoke/critical path tests",
+    "slow: slow tests",
+]
+
+[tool.pycodestyle]
+max-line-length = 120
+ignore = [
+    "E402",
+    "E501",
+]

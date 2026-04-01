@@ -1,0 +1,124 @@
+{"id":"ZI-001","phase":"foundational","type":"InfraPU","priority":"critical","title":"Single-port Express server (SPA+API+SSE+WS) with PORT env; no extra processes"}
+{"id":"ZI-002","phase":"foundational","type":"UXPU","priority":"critical","title":"SPA fallback routing (no blank screens); index.html for non-API routes"}
+{"id":"ZI-003","phase":"foundational","type":"SafetyPU","priority":"critical","title":"Top-level crash boundaries (uncaughtException/unhandledRejection) → log + entropy counter + continue"}
+{"id":"ZI-004","phase":"foundational","type":"SafetyPU","priority":"critical","title":"/healthz and /readyz gates (seeds loaded + scheduler started) and block UI until ready"}
+{"id":"ZI-005","phase":"foundational","type":"InfraPU","priority":"high","title":"Compression + CORS + Helmet (CSP relaxed) + trust proxy for Replit ingress"}
+{"id":"ZI-006","phase":"foundational","type":"SchedulerPU","priority":"high","title":"Cooperative scheduler tick (1s) for all jobs; single process only"}
+{"id":"ZI-007","phase":"foundational","type":"PersistPU","priority":"high","title":"KV (Replit DB) + SQLite hybrid adapter behind one interface (feature-flag switch)"}
+{"id":"ZI-008","phase":"foundational","type":"PersistPU","priority":"high","title":"Snapshot on graceful shutdown + daily snapshot cron with retention (last 7)"}
+{"id":"ZI-009","phase":"foundational","type":"AuthPU","priority":"critical","title":"Admin bearer guard (ADMIN_TOKEN) for all mutating routes; reject unauthenticated writes"}
+{"id":"ZI-010","phase":"foundational","type":"PolicyPU","priority":"high","title":"Per-IP token-bucket rate limiter on write routes; bounded burst; hard cap"}
+{"id":"ZI-011","phase":"foundational","type":"LogsPU","priority":"high","title":"Pino logger (pretty dev / JSON prod); in-memory ring buffer ≤2MB → rotate to KV"}
+{"id":"ZI-012","phase":"foundational","type":"EntropyPU","priority":"high","title":"Entropy index (0..1) from error ratio & queue backlog; throttle when high"}
+{"id":"ZI-013","phase":"foundational","type":"BudgetPU","priority":"critical","title":"Budget module (daily allowance, per-job weights, warn@70%, hard@90% backoff)"}
+{"id":"ZI-014","phase":"foundational","type":"EventsPU","priority":"high","title":"SSE /events keepalive (15s) + compact frames; WS /ws hub with <1KB frames"}
+{"id":"ZI-015","phase":"foundational","type":"UXPU","priority":"high","title":"Degraded-mode banners (seed/build/budget) explain paused features; never blank"}
+{"id":"ZI-016","phase":"foundational","type":"BuildPU","priority":"high","title":"replit.nix pins Node 20, Python 3.11, sqlite, git; reproducible environment"}
+{"id":"ZI-017","phase":"foundational","type":"BuildPU","priority":"high","title":"TypeScript config (ES2020, bundler resolution, source maps, skipLibCheck)"}
+{"id":"ZI-018","phase":"foundational","type":"SchemaPU","priority":"critical","title":"Zod schemas: Directive, Anchor, Budget, Event, PU (Proposal Unit) with coercion"}
+{"id":"ZI-019","phase":"foundational","type":"SafetyPU","priority":"high","title":"Global JSON sanitizer + body limit (256KB) + timeouts on all routes"}
+{"id":"ZI-020","phase":"foundational","type":"UtilsPU","priority":"critical","title":"shared/format.ts: safeNumber, safeLocaleNumber, safePercent, safeJSON"}
+{"id":"ZI-021","phase":"foundational","type":"BuildPU","priority":"high","title":"Postinstall installs client deps; build script degrades to server-only if client fails"}
+{"id":"ZI-022","phase":"foundational","type":"DataPU","priority":"high","title":"scripts/seed.ts idempotent loader for Codex/Anchors/Budget from /data"}
+{"id":"ZI-023","phase":"foundational","type":"DataPU","priority":"high","title":"scripts/snapshot.ts & scripts/compact.ts to prune logs/events older than 24h"}
+{"id":"ZI-024","phase":"foundational","type":"OpsPU","priority":"critical","title":"/api/ops/queue accepts NDJSON PUs (Refactor/Test/Doc/Perf/UX/Feature/Seal)"}
+{"id":"ZI-025","phase":"foundational","type":"OpsPU","priority":"critical","title":"PU executor with budget-aware throttling + dry-run mode toggle"}
+{"id":"ZI-026","phase":"foundational","type":"OpsPU","priority":"high","title":"/api/ops/reindex rebuilds indices/caches; emits Msg⛛ summary frame"}
+{"id":"ZI-027","phase":"foundational","type":"OpsPU","priority":"high","title":"/api/export & /api/import (NDJSON) with automatic snapshot before import"}
+{"id":"ZI-028","phase":"foundational","type":"OpsPU","priority":"high","title":"/api/hints suggests low-hanging fruit from drift/budget/state inspections"}
+{"id":"ZI-029","phase":"foundational","type":"UI-PU","priority":"high","title":"Admin Console (hidden without token): seed/snapshot/compact/import/export/reindex"}
+{"id":"ZI-030","phase":"foundational","type":"MsgPU","priority":"high","title":"Msg⛛ event log (UTC, module, delta, rune id) shown in HUD footer"}
+{"id":"ZI-031","phase":"foundational","type":"GamePU","priority":"critical","title":"Fixed-timestep sim (e.g., 250ms); accumulate real time; absorb jitter deterministically"}
+{"id":"ZI-032","phase":"foundational","type":"GamePU","priority":"critical","title":"Global game clock (monotonic); pause; speed multipliers (1x/2x/5x)"}
+{"id":"ZI-033","phase":"foundational","type":"GamePU","priority":"high","title":"Deterministic RNG with per-run seed; reproducible tests and fixtures"}
+{"id":"ZI-034","phase":"foundational","type":"PersistPU","priority":"critical","title":"Save/Load snapshot with schema versioning; migration runner on boot"}
+{"id":"ZI-035","phase":"foundational","type":"UXPU","priority":"high","title":"Autosave every N ticks; manual save with checksum; UI indicator"}
+{"id":"ZI-036","phase":"expansion","type":"GamePU","priority":"critical","title":"Resource registry: id, label, baseCap, visibleWhen, tags"}
+{"id":"ZI-037","phase":"expansion","type":"GamePU","priority":"critical","title":"Production unit model: cost curve, outputs, upkeep, unlock gates"}
+{"id":"ZI-038","phase":"expansion","type":"GamePU","priority":"medium","title":"Optional clicker hook with fatigue curve anti-spam (QoL starter)"}
+{"id":"ZI-039","phase":"expansion","type":"GamePU","priority":"high","title":"Generators produce per tick; caps; overflow → waste log"}
+{"id":"ZI-040","phase":"expansion","type":"GamePU","priority":"high","title":"Sinks/consumers (crafting/processing) with FIFO/batch recipes"}
+{"id":"ZI-041","phase":"expansion","type":"GamePU","priority":"high","title":"Storage upgrades; soft cap past 90% with diminishing returns"}
+{"id":"ZI-042","phase":"expansion","type":"GamePU","priority":"high","title":"Unlock tree by totals/achievements; show next two hints only"}
+{"id":"ZI-043","phase":"expansion","type":"GamePU","priority":"high","title":"Automation flags: manual / semi / auto per unit; UI toggles"}
+{"id":"ZI-044","phase":"expansion","type":"GamePU","priority":"high","title":"Energy/heat budget layer bounding combinatorics; consumption model"}
+{"id":"ZI-045","phase":"expansion","type":"GamePU","priority":"high","title":"Idle-while-closed: approximate offline gains with cap and audit"}
+{"id":"ZI-046","phase":"expansion","type":"EconomyPU","priority":"high","title":"Cost escalator (poly/exponential hybrid) with anti-inflation clamps"}
+{"id":"ZI-047","phase":"expansion","type":"EconomyPU","priority":"high","title":"Global multipliers: research/artifacts/prestige; stacking rules"}
+{"id":"ZI-048","phase":"expansion","type":"EconomyPU","priority":"high","title":"Tiered resource bands (Tier-0→Tier-N); visible strata in UI"}
+{"id":"ZI-049","phase":"expansion","type":"EconomyPU","priority":"high","title":"Prestige loop: soft reset → meta-currency; clean preview & bookkeeping"}
+{"id":"ZI-050","phase":"expansion","type":"EconomyPU","priority":"high","title":"Prestige upgrades tree (permanent bonuses / QoL unlocks)"}
+{"id":"ZI-051","phase":"expansion","type":"EconomyPU","priority":"medium","title":"Achievements w/ score; minor multipliers or cosmetics"}
+{"id":"ZI-052","phase":"expansion","type":"UXPU","priority":"medium","title":"Time-to-next goal estimator; ETA chips near key buttons"}
+{"id":"ZI-053","phase":"expansion","type":"PolicyPU","priority":"medium","title":"Anti-grind floor: guarantee progress every X minutes at low states"}
+{"id":"ZI-054","phase":"expansion","type":"EconomyPU","priority":"medium","title":"Challenge mutators: higher reward, variant rules"}
+{"id":"ZI-055","phase":"expansion","type":"EconomyPU","priority":"medium","title":"Daily/weekly rituals producing meta-currency"}
+{"id":"ZI-056","phase":"expansion","type":"UI-PU","priority":"high","title":"Routes: / (HUD), /game, /agents, /ops, /anchors, /settings"}
+{"id":"ZI-057","phase":"expansion","type":"HUDPU","priority":"high","title":"ASCII Pantheon HUD: Stability/Entropy/Vibe/Last Msg⛛ + panes"}
+{"id":"ZI-058","phase":"expansion","type":"UI-PU","priority":"high","title":"Resource bar with caps, tick rates, trend arrows, tooltips"}
+{"id":"ZI-059","phase":"expansion","type":"UI-PU","priority":"high","title":"Buildings panel (buy/upgrade/auto), queue and receipts"}
+{"id":"ZI-060","phase":"expansion","type":"UI-PU","priority":"high","title":"Research tree (fog reveal), keyboard nav, zoom to node"}
+{"id":"ZI-061","phase":"expansion","type":"UI-PU","priority":"high","title":"Prestige screen with projection and irreversible confirm UX"}
+{"id":"ZI-062","phase":"expansion","type":"UI-PU","priority":"high","title":"Event log with filters (economy/system/agent/lore)"}
+{"id":"ZI-063","phase":"expansion","type":"A11yPU","priority":"high","title":"Accessibility AA+: contrast, focus rings, reduced motion toggle"}
+{"id":"ZI-064","phase":"expansion","type":"PerfPU","priority":"high","title":"Virtualized lists for 200+ rows; frame budget ≤250ms updates"}
+{"id":"ZI-065","phase":"expansion","type":"UXPU","priority":"high","title":"Tutorial overlay (coach marks) tied to unlocks and mistakes"}
+{"id":"ZI-066","phase":"cultivation","type":"AgentsPU","priority":"critical","title":"Agent bus (event-driven) reading deltas; propose game actions"}
+{"id":"ZI-067","phase":"cultivation","type":"AgentsPU","priority":"critical","title":"Self-play harness: policy hooks so game can play itself (bounded)"}
+{"id":"ZI-068","phase":"cultivation","type":"AgentsPU","priority":"critical","title":"Agent-plays-game macros (buy N, research X when feasible)"}
+{"id":"ZI-069","phase":"cultivation","type":"AgentsPU","priority":"high","title":"Game-plays-agents scenarios (cap-full, low-energy, misbalance)"}
+{"id":"ZI-070","phase":"cultivation","type":"CouncilPU","priority":"high","title":"Council registry (roles: Tinkerer/Archivist/Medic/…) with votes"}
+{"id":"ZI-071","phase":"cultivation","type":"OpsPU","priority":"high","title":"NDJSON GamePU translator: {action: BUY|RESEARCH, node: id}"}
+{"id":"ZI-072","phase":"cultivation","type":"IntegrationPU","priority":"high","title":"ChatDev profiles + launchers (scaffold/test/doc pipelines)"}
+{"id":"ZI-073","phase":"cultivation","type":"HintsPU","priority":"high","title":"Hints engine from metrics (stalls, wastes) → next best action"}
+{"id":"ZI-074","phase":"cultivation","type":"PolicyPU","priority":"high","title":"Sandbox branches agent/* for autonomous PRs (bounded) with countersign"}
+{"id":"ZI-075","phase":"cultivation","type":"SafetyPU","priority":"high","title":"Rate-limit agent actions per minute; cooldowns and audit"}
+{"id":"ZI-076","phase":"cultivation","type":"MetricsPU","priority":"high","title":"Telemetry counters: tick time, queue depth, FPS (local only)"}
+{"id":"ZI-077","phase":"cultivation","type":"AnalyticsPU","priority":"high","title":"Economy probe: yield/tick by unit/resource; CSV exporter"}
+{"id":"ZI-078","phase":"cultivation","type":"AnalyticsPU","priority":"high","title":"Balance snapshot (costs/outputs/caps) → notebooks_lab/"}
+{"id":"ZI-079","phase":"cultivation","type":"AnalyticsPU","priority":"high","title":"'Why stalled?' inspector: bottleneck (cap, prereq, energy)"}
+{"id":"ZI-080","phase":"cultivation","type":"AnalyticsPU","priority":"high","title":"Soft-cap & overflow dashboard; inefficiency heatmap"}
+{"id":"ZI-081","phase":"cultivation","type":"TestPU","priority":"high","title":"Offline gain estimator validation harness; error < 5%"}
+{"id":"ZI-082","phase":"cultivation","type":"TestPU","priority":"high","title":"Unit tests: resources, generators, sinks, escalator math"}
+{"id":"ZI-083","phase":"cultivation","type":"TestPU","priority":"high","title":"Integration: buy→produce→sink; e2e happy path"}
+{"id":"ZI-084","phase":"cultivation","type":"TestPU","priority":"high","title":"Determinism: fixed seed → identical outputs across runs"}
+{"id":"ZI-085","phase":"cultivation","type":"TestPU","priority":"high","title":"Chaos: crash mid-tick; restore consistent state"}
+{"id":"ZI-086","phase":"cultivation","type":"TestPU","priority":"high","title":"Load: 10 agents proposing PUs; no runaway CPU/mem"}
+{"id":"ZI-087","phase":"cultivation","type":"TestPU","priority":"high","title":"Prompt-regression harness if LLM bridge active"}
+{"id":"ZI-088","phase":"cultivation","type":"TestPU","priority":"high","title":"Save migration tests across 3 versions; no data loss"}
+{"id":"ZI-089","phase":"cultivation","type":"A11yPU","priority":"high","title":"UI keyboard-only traversal reaches all widgets"}
+{"id":"ZI-090","phase":"cultivation","type":"BudgetPU","priority":"high","title":"Budget tests: warn/hard thresholds trigger backoff"}
+{"id":"ZI-091","phase":"endurance","type":"ContentPU","priority":"high","title":"Content registry JSON → Zod schema → hot-reload (dev)"}
+{"id":"ZI-092","phase":"endurance","type":"NotebooksPU","priority":"high","title":"Jupyter notebooks for cost/yield curve fitting"}
+{"id":"ZI-093","phase":"endurance","type":"NotebooksPU","priority":"high","title":"Pandas analysis of pacing; plot time-to-feature curves"}
+{"id":"ZI-094","phase":"endurance","type":"ContentPU","priority":"high","title":"Export/import content packs (mods) with version lock"}
+{"id":"ZI-095","phase":"endurance","type":"DocsPU","priority":"high","title":"Obsidian vault sync for lore/ADRs/economy notes"}
+{"id":"ZI-096","phase":"endurance","type":"DocsPU","priority":"high","title":"README as Codex preamble (infra-first, single-port, degraded modes)"}
+{"id":"ZI-097","phase":"endurance","type":"DocsPU","priority":"high","title":"ARCH.md (single-port design, tick, persistence, agents)"}
+{"id":"ZI-098","phase":"endurance","type":"DocsPU","priority":"high","title":"API.md (curl examples, auth, caps, contracts)"}
+{"id":"ZI-099","phase":"endurance","type":"DocsPU","priority":"high","title":"RSEV_Rituals.md (bring-up, recovery, snapshots, budget tuning)"}
+{"id":"ZI-100","phase":"endurance","type":"DocsPU","priority":"high","title":"Roadmap.md (Foundational→Expansion→Cultivation→Endurance→Bloomwave)"}
+{"id":"ZI-101","phase":"endurance","type":"DocsPU","priority":"high","title":"FAQ.md (white screen, readyz, budget hard, import saves)"}
+{"id":"ZI-102","phase":"endurance","type":"UXPU","priority":"high","title":"In-app Help overlay (H) linking to docs sections"}
+{"id":"ZI-103","phase":"endurance","type":"DocsPU","priority":"medium","title":"Autogen summary of current unlocks → docs/progress.md"}
+{"id":"ZI-104","phase":"endurance","type":"DocsPU","priority":"medium","title":"How-to-mod primer: add a generator/resource + tests"}
+{"id":"ZI-105","phase":"endurance","type":"DocsPU","priority":"medium","title":"How agents help: capabilities, limits, safety rails"}
+{"id":"ZI-106","phase":"endurance","type":"PerfPU","priority":"high","title":"Frame budget monitor; heavy charts under idle callback"}
+{"id":"ZI-107","phase":"endurance","type":"PerfPU","priority":"high","title":"Virtualized ops/codex tables; sticky headers"}
+{"id":"ZI-108","phase":"endurance","type":"PerfPU","priority":"high","title":"Event coalescing: batch HUD frames to ≤4/sec under load"}
+{"id":"ZI-109","phase":"endurance","type":"PerfPU","priority":"high","title":"Memory cap enforcement: rotate old events/logs to persistence"}
+{"id":"ZI-110","phase":"endurance","type":"A11yPU","priority":"high","title":"Reduce motion, font scaling, colorblind palettes"}
+{"id":"ZI-111","phase":"bloomwave","type":"UXPU","priority":"medium","title":"Minimal SFX (buy/upgrade/prestige/achievement) with mute"}
+{"id":"ZI-112","phase":"bloomwave","type":"UXPU","priority":"low","title":"Tiny chiptune loop (low CPU), pause on unfocus (opt-in)"}
+{"id":"ZI-113","phase":"bloomwave","type":"UXPU","priority":"low","title":"Retro CRT/scanline CSS theme toggle without hurting readability"}
+{"id":"ZI-114","phase":"bloomwave","type":"UXPU","priority":"low","title":"Micro-animations via CSS transforms; idle-friendly"}
+{"id":"ZI-115","phase":"bloomwave","type":"GovernPU","priority":"high","title":"CONTRIBUTING.md (feat/fix/refactor/agent/docs lanes)"}
+{"id":"ZI-116","phase":"bloomwave","type":"GovernPU","priority":"high","title":"CHANGELOG.md from Missive-1 Genesis onward"}
+{"id":"ZI-117","phase":"bloomwave","type":"PolicyPU","priority":"high","title":"License allowlist + dependency pinning policy"}
+{"id":"ZI-118","phase":"bloomwave","type":"CI-PU","priority":"high","title":"CI (check script) fails on budget regressions"}
+{"id":"ZI-119","phase":"bloomwave","type":"ReleasePU","priority":"high","title":"Release ritual: semver, artifact zip, checksums"}
+{"id":"ZI-120","phase":"bloomwave","type":"PersistPU","priority":"medium","title":"Century Capsule snapshot + lore bundle at milestones"}
+{"id":"ZI-121","phase":"bloomwave","type":"IndexPU","priority":"critical","title":"Unify Anchors + Missives + Directives into recursive index on HUD"}
+{"id":"ZI-122","phase":"bloomwave","type":"CouncilPU","priority":"critical","title":"Council consensus pass: rank PU batches by impact/effort + budget forecast"}
+{"id":"ZI-123","phase":"bloomwave","type":"SealPU","priority":"critical","title":"Final ZETA seal: self-play 100 ticks + agent-play 25 cycles; no entropy growth; docs current → Msg⛛{123}"}
+{"title":"Infrastructure-First Pipeline Complete","phase":"foundation","type":"SystemPU","priority":"critical","id":"ZI-124"}

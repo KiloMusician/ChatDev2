@@ -1,0 +1,49 @@
+# DevMentor / Terminal Depths — Python Dependencies
+# Generated from pyproject.toml + runtime import scan
+# Install: pip install -r requirements.txt
+# Docker:  handled by pyproject.toml via uv/pip in container
+
+# ── Core Web Framework ─────────────────────────────────────────────────────
+fastapi>=0.128.0
+uvicorn[standard]>=0.40.0
+pydantic>=2.12.5
+aiofiles>=25.1.0
+websockets>=16.0
+wsproto>=1.3.2
+
+# ── HTTP Clients ──────────────────────────────────────────────────────────
+httpx>=0.27.0
+aiohttp>=3.9.0
+requests>=2.31.0
+
+# ── CLI / UI ──────────────────────────────────────────────────────────────
+rich>=14.2.0
+typer>=0.21.1
+
+# ── Auth / Security ───────────────────────────────────────────────────────
+PyJWT>=2.8.0
+itsdangerous>=2.1.0     # required by starlette.middleware.sessions.SessionMiddleware
+
+# ── Config / Serialization ────────────────────────────────────────────────
+pyyaml>=6.0.1
+
+# ── Async / Infrastructure ────────────────────────────────────────────────
+redis>=5.0.4
+
+# ── AI / LLM Backends (all optional — offline-first) ─────────────────────
+openai>=1.0.0           # OpenAI / Replit AI backend
+
+# ── Semantic Indexing ──────────────────────────────────────────────────────
+# cocoindex>=0.1.0       # Incremental AI pipeline + vector indexing
+#                        # Install: pip install cocoindex
+#                        # Repo:    https://github.com/cocoindex-io/cocoindex
+#                        # Used by: agents/serena/cocoindex_bridge.py
+#                        # MCP tools: cocoindex_search, cocoindex_ops
+#                        # NOTE: optional — bridge works without it (built-in pipeline)
+
+# ── Dev Tools (optional) ─────────────────────────────────────────────────
+# black>=24.0.0           # formatting: pip install black
+# pytest>=8.0.0           # testing:    pip install pytest pytest-asyncio
+# mypy>=1.8.0             # type check: pip install mypy
+numpy>=2.0.0             # RL Phase 3 (PPO), signal processing
+scipy>=1.10.0            # RL Phase 3, statistical analysis

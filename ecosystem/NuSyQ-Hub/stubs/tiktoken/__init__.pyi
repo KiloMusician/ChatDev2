@@ -1,0 +1,6 @@
+from typing import Any
+
+class Encoding:
+    def encode(self, text: str, **kwargs: Any) -> list[int]: ...
+
+def get_encoding(name: str) -> Encoding: ...

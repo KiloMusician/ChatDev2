@@ -1,0 +1,34 @@
+{
+  "id": "system-readiness",
+  "description": "Core system gate evaluation",
+  "gates": [
+    {
+      "id": "ollama-up",
+      "type": "OR",
+      "inputs": [
+        false
+      ]
+    },
+    {
+      "id": "agents-dir",
+      "type": "AND",
+      "inputs": [
+        true
+      ]
+    },
+    {
+      "id": "reports-dir",
+      "type": "AND",
+      "inputs": [
+        true
+      ]
+    },
+    {
+      "id": "env-loaded",
+      "type": "AND",
+      "inputs": [
+        true
+      ]
+    }
+  ]
+}

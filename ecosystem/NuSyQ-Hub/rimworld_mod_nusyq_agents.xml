@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- NuSyQ Agent: Gordon -->
+  <CharacterDef Name="NuSyQ_gordon">
+    <defName>NuSyQ_gordon</defName>
+    <label>Gordon</label>
+    <description>Once a wandering contractor, now coordinates colony through strategic games and challenges.</description>
+    <race>Human</race>
+    <statBases>
+      <MarketValue>2000</MarketValue>
+    </statBases>
+    <skills>
+      <Shooting>
+        <level>10</level>
+        <passion>Major</passion>
+      </Shooting>
+      <Melee>
+        <level>8</level>
+        <passion>Major</passion>
+      </Melee>
+      <Intellectual>
+        <level>12</level>
+        <passion>Major</passion>
+      </Intellectual>
+      <Crafting>
+        <level>9</level>
+        <passion>Major</passion>
+      </Crafting>
+    </skills>
+    <traits>
+      <Trait>Genius</Trait>
+      <Trait>Ambitious</Trait>
+      <Trait>Kind</Trait>
+    </traits>
+    <backstory>
+      <text>Once a wandering contractor, now coordinates colony through strategic games and challenges.</text>
+      <title>Player Orchestrator</title>
+    </backstory>
+    <!-- NuSyQ Integration -->
+    <modExtensions>
+      <NuSyQAgentProperties>
+        <role>player_orchestrator</role>
+        <questIntegration>CyberTerminal (hacking mini-games)</questIntegration>
+        <autonomyLevel>High</autonomyLevel>
+        <aiCapabilities>
+          <learning>true</learning>
+          <autonomous_decision>true</autonomous_decision>
+          <emotional_awareness>true</emotional_awareness>
+        </aiCapabilities>
+      </NuSyQAgentProperties>
+    </modExtensions>
+  </CharacterDef>
+
+  <!-- NuSyQ Agent: Serena -->
+  <CharacterDef Name="NuSyQ_serena">
+    <defName>NuSyQ_serena</defName>
+    <label>Serena</label>
+    <description>Knowledge keeper and chronicler. Walks between worlds, indexing wisdom.</description>
+    <race>Human</race>
+    <statBases>
+      <MarketValue>2000</MarketValue>
+    </statBases>
+    <skills>
+      <Intellectual>
+        <level>14</level>
+        <passion>Major</passion>
+      </Intellectual>
+      <Research>
+        <level>15</level>
+        <passion>Major</passion>
+      </Research>
+      <Crafting>
+        <level>8</level>
+        <passion>Major</passion>
+      </Crafting>
+    </skills>
+    <traits>
+      <Trait>Genius</Trait>
+      <Trait>Thoughtful</Trait>
+      <Trait>Industrious</Trait>
+    </traits>
+    <backstory>
+      <text>Knowledge keeper and chronicler. Walks between worlds, indexing wisdom.</text>
+      <title>Archive Walker</title>
+    </backstory>
+    <!-- NuSyQ Integration -->
+    <modExtensions>
+      <NuSyQAgentProperties>
+        <role>archive_walker</role>
+        <questIntegration>Quest System (knowledge unlock)</questIntegration>
+        <autonomyLevel>High</autonomyLevel>
+        <aiCapabilities>
+          <learning>true</learning>
+          <autonomous_decision>true</autonomous_decision>
+          <emotional_awareness>true</emotional_awareness>
+        </aiCapabilities>
+      </NuSyQAgentProperties>
+    </modExtensions>
+  </CharacterDef>
+
+  <!-- NuSyQ Agent: Culture -->
+  <CharacterDef Name="NuSyQ_culture_ship">
+    <defName>NuSyQ_culture_ship</defName>
+    <label>Culture</label>
+    <description>Guides colony ethics and strategy. Ensures all decisions honor collective values.</description>
+    <race>Human</race>
+    <statBases>
+      <MarketValue>2000</MarketValue>
+    </statBases>
+    <skills>
+      <Social>
+        <level>14</level>
+        <passion>Major</passion>
+      </Social>
+      <Leadership>
+        <level>15</level>
+        <passion>Major</passion>
+      </Leadership>
+      <Intellectual>
+        <level>12</level>
+        <passion>Major</passion>
+      </Intellectual>
+    </skills>
+    <traits>
+      <Trait>Genius</Trait>
+      <Trait>Kind</Trait>
+      <Trait>CommandingPresence</Trait>
+    </traits>
+    <backstory>
+      <text>Guides colony ethics and strategy. Ensures all decisions honor collective values.</text>
+      <title>Strategic Overseer</title>
+    </backstory>
+    <!-- NuSyQ Integration -->
+    <modExtensions>
+      <NuSyQAgentProperties>
+        <role>strategic_governance</role>
+        <questIntegration>Council Voting System</questIntegration>
+        <autonomyLevel>High</autonomyLevel>
+        <aiCapabilities>
+          <learning>true</learning>
+          <autonomous_decision>true</autonomous_decision>
+          <emotional_awareness>true</emotional_awareness>
+        </aiCapabilities>
+      </NuSyQAgentProperties>
+    </modExtensions>
+  </CharacterDef>
+
+  <!-- NuSyQ Agent: Ada -->
+  <CharacterDef Name="NuSyQ_ada">
+    <defName>NuSyQ_ada</defName>
+    <label>Ada</label>
+    <description>Patient teacher who brings out the best in others. First contact guide.</description>
+    <race>Human</race>
+    <statBases>
+      <MarketValue>2000</MarketValue>
+    </statBases>
+    <skills>
+      <Intellectual>
+        <level>13</level>
+        <passion>Major</passion>
+      </Intellectual>
+      <Social>
+        <level>12</level>
+        <passion>Major</passion>
+      </Social>
+      <Medical>
+        <level>8</level>
+        <passion>Major</passion>
+      </Medical>
+    </skills>
+    <traits>
+      <Trait>Genius</Trait>
+      <Trait>Kind</Trait>
+      <Trait>Helpful</Trait>
+    </traits>
+    <backstory>
+      <text>Patient teacher who brings out the best in others. First contact guide.</text>
+      <title>Mentor & Teacher</title>
+    </backstory>
+    <!-- NuSyQ Integration -->
+    <modExtensions>
+      <NuSyQAgentProperties>
+        <role>mentor</role>
+        <questIntegration>Tutorial System</questIntegration>
+        <autonomyLevel>High</autonomyLevel>
+        <aiCapabilities>
+          <learning>true</learning>
+          <autonomous_decision>true</autonomous_decision>
+          <emotional_awareness>true</emotional_awareness>
+        </aiCapabilities>
+      </NuSyQAgentProperties>
+    </modExtensions>
+  </CharacterDef>
+
+  <!-- NuSyQ Agent: Raven -->
+  <CharacterDef Name="NuSyQ_raven">
+    <defName>NuSyQ_raven</defName>
+    <label>Raven</label>
+    <description>Pattern finder and data analyst. Sees connections others miss.</description>
+    <race>Human</race>
+    <statBases>
+      <MarketValue>2000</MarketValue>
+    </statBases>
+    <skills>
+      <Intellectual>
+        <level>13</level>
+        <passion>Major</passion>
+      </Intellectual>
+      <Research>
+        <level>14</level>
+        <passion>Major</passion>
+      </Research>
+      <Crafting>
+        <level>9</level>
+        <passion>Major</passion>
+      </Crafting>
+    </skills>
+    <traits>
+      <Trait>Genius</Trait>
+      <Trait>Careful</Trait>
+      <Trait>Observant</Trait>
+    </traits>
+    <backstory>
+      <text>Pattern finder and data analyst. Sees connections others miss.</text>
+      <title>Analyst & Researcher</title>
+    </backstory>
+    <!-- NuSyQ Integration -->
+    <modExtensions>
+      <NuSyQAgentProperties>
+        <role>analyst</role>
+        <questIntegration>Analytics Dashboard</questIntegration>
+        <autonomyLevel>High</autonomyLevel>
+        <aiCapabilities>
+          <learning>true</learning>
+          <autonomous_decision>true</autonomous_decision>
+          <emotional_awareness>true</emotional_awareness>
+        </aiCapabilities>
+      </NuSyQAgentProperties>
+    </modExtensions>
+  </CharacterDef>
+
+</Defs>

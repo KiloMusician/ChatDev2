@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "description": "Event grammar and contract for all agent/surface interactions.",
+  "required": ["version", "event_types", "event_contract", "severity_levels", "action_budget"],
+  "event_contract_required_fields": ["event_id", "type", "timestamp", "source", "payload"],
+  "recommended_event_types": [
+    "session_started",
+    "state_refreshed",
+    "error_detected",
+    "task_created",
+    "task_assigned",
+    "patch_generated",
+    "patch_failed",
+    "test_passed",
+    "test_failed",
+    "approval_requested",
+    "action_executed",
+    "action_blocked",
+    "recovery_started",
+    "recovery_completed"
+  ]
+}

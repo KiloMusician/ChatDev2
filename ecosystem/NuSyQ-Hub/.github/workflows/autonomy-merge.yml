@@ -1,0 +1,325 @@
+name: Autonomy Auto-Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled]
+    branches: [master, main]
+  workflow_run:
+    workflows: ["Autonomy Gates - CI/CD Enforcement"]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  evaluate-merge:
+    runs-on: ubuntu-latest
+    name: Evaluate Auto-Merge Eligibility
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install autonomy dependencies
+        run: |
+          pip install pydantic requests
+
+      - name: Extract Autonomy Metadata
+        id: metadata
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              console.log('No PR context - skipping');
+              return;
+            }
+
+            // SECURITY: Do NOT parse risk metadata from pr.body — it is user-controlled
+            // and can be trivially spoofed (e.g. attacker writes "Risk Score: 0.1" in body).
+            // Only accept risk metadata from comments posted by github-actions[bot], whose
+            // identity is verified by GitHub and cannot be impersonated by PR authors.
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+            });
+
+            const botComments = comments.filter(c =>
+              c.user.login === 'github-actions[bot]' &&
+              c.body.includes('Risk Score:')
+            );
+
+            // Safe defaults: medium risk, manual review required
+            let riskScore = 0.5;
+            let riskLevel = 'MEDIUM';
+            let approvalPolicy = 'REVIEW';
+
+            if (botComments.length > 0) {
+              // Use the most recent authoritative bot comment
+              const latestBotComment = botComments[botComments.length - 1];
+              const body = latestBotComment.body;
+
+              const riskMatch = body.match(/Risk Score: ([\d.]+)/);
+              const riskLevelMatch = body.match(/Risk Level: (\w+)/);
+              const approvalMatch = body.match(/Approval Policy: (\w+)/);
+
+              riskScore = riskMatch ? parseFloat(riskMatch[1]) : 0.5;
+              riskLevel = riskLevelMatch ? riskLevelMatch[1] : 'MEDIUM';
+              approvalPolicy = approvalMatch ? approvalMatch[1] : 'REVIEW';
+
+              console.log('✅ Risk metadata sourced from github-actions[bot] comment (trusted source)');
+            } else {
+              console.log('⚠️  No trusted bot comment found — defaulting to MEDIUM/REVIEW (safe default)');
+              console.log('    PR body is NOT a trusted source for risk metadata.');
+            }
+
+            console.log(`Risk Score: ${riskScore}`);
+            console.log(`Risk Level: ${riskLevel}`);
+            console.log(`Approval Policy: ${approvalPolicy}`);
+
+            // Determine if eligible for auto-merge
+            const isLowRisk = riskScore < 0.3;
+            // SECURITY: Only trust PR author identity — do NOT use branch name.
+            // Branch names are user-controlled and trivially spoofable
+            // (e.g. a PR author names their branch "autonomy-malicious").
+            const isAutoBot = pr.user.login === 'github-actions[bot]';
+
+            core.setOutput('risk_score', riskScore.toString());
+            core.setOutput('risk_level', riskLevel);
+            core.setOutput('approval_policy', approvalPolicy);
+            core.setOutput('is_low_risk', isLowRisk.toString());
+            core.setOutput('is_auto_bot', isAutoBot.toString());
+
+      - name: Check All Status Checks
+        id: checks
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) return;
+            
+            const { data: checkRuns } = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: pr.head.sha,
+            });
+            
+            const requiredChecks = [
+              'autonomy-gates',
+              'Build',
+              'Test'
+            ];
+            
+            let allPassed = true;
+            let checkSummary = '';
+            
+            checkRuns.check_runs.forEach(run => {
+              const status = run.status === 'completed' && run.conclusion === 'success' ? '✅' : '❌';
+              checkSummary += `${status} ${run.name}\n`;
+              
+              if (requiredChecks.some(req => run.name.includes(req))) {
+                if (run.status !== 'completed' || run.conclusion !== 'success') {
+                  allPassed = false;
+                }
+              }
+            });
+            
+            core.setOutput('all_passed', allPassed.toString());
+            core.setOutput('check_summary', checkSummary);
+
+      - name: Evaluate Merge Eligibility
+        id: eligible
+        run: |
+          RISK_SCORE="${{ steps.metadata.outputs.risk_score }}"
+          IS_LOW_RISK="${{ steps.metadata.outputs.is_low_risk }}"
+          IS_AUTO_BOT="${{ steps.metadata.outputs.is_auto_bot }}"
+          ALL_CHECKS="${{ steps.checks.outputs.all_passed }}"
+          
+          # AUTO merge if:
+          # 1. Risk score < 0.3 (LOW)
+          # 2. All checks pass
+          # 3. Created by autonomy bot
+          
+          if [ "$IS_LOW_RISK" = "true" ] && [ "$ALL_CHECKS" = "true" ] && [ "$IS_AUTO_BOT" = "true" ]; then
+            echo "eligible=true" >> $GITHUB_OUTPUT
+            echo "reason=Low risk, all checks passed, created by autonomy bot" >> $GITHUB_OUTPUT
+          else
+            echo "eligible=false" >> $GITHUB_OUTPUT
+            echo "reason=Does not meet auto-merge criteria" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment Merge Decision
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const eligible = '${{ steps.eligible.outputs.eligible }}' === 'true';
+            const riskScore = '${{ steps.metadata.outputs.risk_score }}';
+            const riskLevel = '${{ steps.metadata.outputs.risk_level }}';
+            const reason = '${{ steps.eligible.outputs.reason }}';
+            
+            let comment = `## Autonomy Merge Decision\n\n`;
+            comment += `**Risk Score:** ${riskScore}\n`;
+            comment += `**Risk Level:** ${riskLevel}\n`;
+            comment += `**Decision:** ${eligible ? '✅ APPROVED FOR AUTO-MERGE' : '⏳ REQUIRES HUMAN REVIEW'}\n`;
+            comment += `**Reason:** ${reason}\n`;
+            
+            if (eligible) {
+              comment += `\nThis PR will be automatically merged once the workflow completes.\n`;
+            } else {
+              comment += `\n⚠️ This PR requires a human review before merging.\n`;
+              comment += `- Risk Level: ${riskLevel}\n`;
+              comment += `- Autonomy Bot: ${'${{ steps.metadata.outputs.is_auto_bot }}' === 'true' ? '✓' : '✗'}\n`;
+            }
+            
+            // Update or create comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const existing = comments.find(c => c.user.login === 'github-actions[bot]' && c.body.includes('Autonomy Merge Decision'));
+            
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+      - name: Perform Auto-Merge (if eligible)
+        if: steps.eligible.outputs.eligible == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              console.log('No PR context available');
+              return;
+            }
+            
+            try {
+              // Wait a bit for all checks to complete
+              await new Promise(resolve => setTimeout(resolve, 5000));
+              
+              // Get latest PR status
+              const { data: latestPR } = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+              });
+              
+              // Check if mergeable
+              if (latestPR.mergeable === false) {
+                console.log('PR has merge conflicts - cannot auto-merge');
+                return;
+              }
+              
+              if (latestPR.mergeable === null) {
+                console.log('Merge status unknown - waiting...');
+                return;
+              }
+              
+              // Attempt merge
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                merge_method: 'squash',
+                auto_merge: false
+              });
+              
+              console.log('✅ PR automatically merged');
+            } catch (error) {
+              console.log('Auto-merge failed:', error.message);
+              console.log('Manual merge may be required');
+            }
+
+  enforce-review-gates:
+    runs-on: ubuntu-latest
+    name: Enforce Review Gates for High-Risk
+    
+    steps:
+      - name: Check Risk Level
+        id: risk
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) return;
+
+            // SECURITY: Do NOT parse risk level from pr.body — user-controlled input.
+            // Only trust risk metadata from comments posted by github-actions[bot].
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+            });
+
+            const botComments = comments.filter(c =>
+              c.user.login === 'github-actions[bot]' &&
+              c.body.includes('Risk Level:')
+            );
+
+            // Safe default: HIGH — assume high risk when no trusted source is available.
+            // This ensures unclassified PRs always require human review.
+            let riskLevel = 'HIGH';
+            if (botComments.length > 0) {
+              const latestBotComment = botComments[botComments.length - 1];
+              const riskMatch = latestBotComment.body.match(/Risk Level: (\w+)/);
+              riskLevel = riskMatch ? riskMatch[1] : 'HIGH';
+              console.log('✅ Risk level sourced from github-actions[bot] comment (trusted source)');
+            } else {
+              console.log('⚠️  No trusted bot comment — defaulting to HIGH risk (requires review)');
+            }
+
+            // HIGH and CRITICAL risk require reviews
+            const needsReview = ['HIGH', 'CRITICAL'].includes(riskLevel);
+            core.setOutput('needs_review', needsReview.toString());
+            core.setOutput('risk_level', riskLevel);
+
+      - name: Require Approvals for High-Risk
+        if: steps.risk.outputs.needs_review == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) return;
+            
+            const riskLevel = '${{ steps.risk.outputs.risk_level }}';
+            
+            // Comment to flag high-risk PR
+            const comment = `⚠️ **HIGH-RISK PR - REQUIRES REVIEW**\n\nThis PR has been classified as ${riskLevel} risk.\n\nReview checklist:\n- [ ] Code review completed\n- [ ] Tests pass locally\n- [ ] Security implications understood\n- [ ] Performance impact assessed\n\n@${pr.user.login} Please wait for approval before merging.`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: comment
+            });
+
+      - name: Block Merge if Critical Risk
+        if: steps.risk.outputs.needs_review == 'true' && contains(steps.risk.outputs.risk_level, 'CRITICAL')
+        run: |
+          echo "❌ CRITICAL RISK - Merge blocked until approved"
+          exit 1

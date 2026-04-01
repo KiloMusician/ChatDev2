@@ -1,0 +1,373 @@
+{
+  "version": 3,
+  "generated": "2026-02-18T00:00:00",
+  "actions": {
+    "ai_status": {
+      "summary": "Collect AI system health (Ollama/ChatDev/Quantum)",
+      "cmd": "python scripts/start_nusyq.py ai_status --json",
+      "timeout_s": 30,
+      "probe_timeout_s": 30,
+      "safety_tier": "read_only",
+      "probe_enabled": true,
+      "probe_cmd": [
+        "python",
+        "scripts/start_nusyq.py",
+        "ai_status",
+        "--json"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "generated_at",
+          "services",
+          "quantum"
+        ]
+      },
+      "side_effects": {
+        "network": "optional_local",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "suggest": {
+      "summary": "Generate prioritized contextual suggestions",
+      "cmd": "python scripts/start_nusyq.py suggest --json",
+      "timeout_s": 120,
+      "probe_timeout_s": 120,
+      "safety_tier": "read_only",
+      "probe_enabled": true,
+      "probe_cmd": [
+        "python",
+        "scripts/start_nusyq.py",
+        "suggest",
+        "--json"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "generated_at",
+          "suggestions",
+          "total_suggestions"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "next_action": {
+      "summary": "Display current next-action queue",
+      "cmd": "python scripts/start_nusyq.py next_action --json",
+      "timeout_s": 45,
+      "probe_timeout_s": 45,
+      "safety_tier": "read_only",
+      "probe_enabled": true,
+      "probe_cmd": [
+        "python",
+        "scripts/start_nusyq.py",
+        "next_action",
+        "--json"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "generated_at",
+          "queue"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "doctor": {
+      "summary": "Submit doctor diagnostics as an async job",
+      "cmd": "python scripts/start_nusyq.py doctor --quick --async --json",
+      "timeout_s": 240,
+      "probe_timeout_s": 45,
+      "safety_tier": "read_only",
+      "probe_enabled": true,
+      "probe_cmd": [
+        "python",
+        "scripts/start_nusyq.py",
+        "doctor",
+        "--quick",
+        "--async",
+        "--json"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "job_id",
+          "pid",
+          "stdout_log",
+          "stderr_log",
+          "checkpoint_file"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": true,
+        "idempotent": false
+      }
+    },
+    "doctor_status": {
+      "summary": "Poll status for a doctor background job",
+      "cmd": "python scripts/start_nusyq.py doctor_status [job_id] --json",
+      "timeout_s": 45,
+      "safety_tier": "read_only",
+      "probe_enabled": false,
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "error_report": {
+      "aliases": [
+        "unified_error_report"
+      ],
+      "summary": "Submit quick unified error report as async job",
+      "cmd": "python scripts/start_nusyq.py error_report --quick --async --json",
+      "timeout_s": 900,
+      "probe_timeout_s": 60,
+      "safety_tier": "read_only",
+      "probe_enabled": true,
+      "probe_cmd": [
+        "python",
+        "scripts/start_nusyq.py",
+        "error_report",
+        "--quick",
+        "--async",
+        "--json"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "job_id",
+          "pid",
+          "stdout_log",
+          "stderr_log",
+          "checkpoint_file"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": true,
+        "idempotent": false
+      }
+    },
+    "error_report_status": {
+      "summary": "Poll status for an error_report background job",
+      "cmd": "python scripts/start_nusyq.py error_report_status [job_id] --json",
+      "timeout_s": 45,
+      "safety_tier": "read_only",
+      "probe_enabled": false,
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "system_complete": {
+      "summary": "Submit full completion gate as async job",
+      "cmd": "python scripts/start_nusyq.py system_complete --async --budget-s=600 --json",
+      "timeout_s": 2400,
+      "probe_timeout_s": 60,
+      "safety_tier": "read_only",
+      "probe_enabled": true,
+      "probe_cmd": [
+        "python",
+        "scripts/start_nusyq.py",
+        "system_complete",
+        "--async",
+        "--budget-s=600",
+        "--json"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "job_id",
+          "pid",
+          "stdout_log",
+          "stderr_log",
+          "checkpoint_file"
+        ]
+      },
+      "side_effects": {
+        "network": "optional_local",
+        "long_running": true,
+        "idempotent": false
+      }
+    },
+    "system_complete_status": {
+      "summary": "Poll status for a system_complete background job",
+      "cmd": "python scripts/start_nusyq.py system_complete_status [job_id] --json",
+      "timeout_s": 60,
+      "safety_tier": "read_only",
+      "probe_enabled": false,
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "openclaw_smoke": {
+      "summary": "Submit OpenClaw smoke validation as async job",
+      "cmd": "python scripts/start_nusyq.py openclaw_smoke --async --json",
+      "timeout_s": 180,
+      "probe_timeout_s": 45,
+      "safety_tier": "read_only",
+      "probe_enabled": true,
+      "probe_cmd": [
+        "python",
+        "scripts/start_nusyq.py",
+        "openclaw_smoke",
+        "--async",
+        "--json"
+      ],
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "job_id",
+          "pid",
+          "stdout_log",
+          "stderr_log",
+          "checkpoint_file"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": true,
+        "idempotent": false
+      }
+    },
+    "openclaw_smoke_status": {
+      "summary": "Poll status for an openclaw_smoke background job",
+      "cmd": "python scripts/start_nusyq.py openclaw_smoke_status [job_id] --json",
+      "timeout_s": 45,
+      "safety_tier": "read_only",
+      "probe_enabled": false,
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "problem_signal_snapshot": {
+      "aliases": [
+        "problem_signals",
+        "problem_snapshot"
+      ],
+      "summary": "Align VS Code problem totals with tool diagnostics",
+      "cmd": "python scripts/start_nusyq.py problem_signal_snapshot --json",
+      "timeout_s": 60,
+      "safety_tier": "read_only",
+      "probe_enabled": false,
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "generated_at"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    },
+    "vscode_diagnostics_bridge": {
+      "aliases": [
+        "vscode_counts"
+      ],
+      "summary": "Refresh VS Code-aligned diagnostics counts",
+      "cmd": "python scripts/start_nusyq.py vscode_diagnostics_bridge --json",
+      "timeout_s": 180,
+      "safety_tier": "read_only",
+      "probe_enabled": false,
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "generated_at"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    }
+    ,
+    "graph_learning": {
+
+      "summary": "Build graph-learning impact/topology report for the codebase",
+      "cmd": "python scripts/start_nusyq.py graph_learning --hub-only --json",
+      "timeout_s": 120,
+      "probe_timeout_s": 120,
+      "safety_tier": "read_only",
+      "probe_enabled": false,
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "action",
+          "status",
+          "generated_at"
+        ]
+      },
+      "side_effects": {
+        "network": "none",
+        "long_running": false,
+        "idempotent": true
+      }
+    }
+  },
+  "composites": {}
+}

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-app="NuSyQ" data-view="base">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>ΞNuSyQ — Responsive Shell</title>
+  <meta name="color-scheme" content="dark light" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Safe-area aware app frame -->
+  <div id="app" class="app">
+    <!-- Desktop Sidebar (auto-hidden on mobile) -->
+    <aside id="sidebar" class="sidebar" aria-label="Primary">
+      <div class="brand">ΞNuSyQ</div>
+      <nav class="nav">
+        <button class="nav-btn" data-view="base">🏗 Base</button>
+        <button class="nav-btn" data-view="map">🗺 Map</button>
+        <button class="nav-btn" data-view="colony">🏘 Colony</button>
+        <button class="nav-btn" data-view="defense">🛡 Defense</button>
+        <button class="nav-btn" data-view="logs">📜 Logs</button>
+      </nav>
+      <div class="spacer"></div>
+      <div class="panel">
+        <label class="row"><input type="checkbox" id="reduceMotion"> Reduce motion</label>
+        <label class="row"><input type="checkbox" id="highContrast"> High contrast</label>
+        <label class="row"><input type="checkbox" id="monospaceOnly"> Mono UI</label>
+        <div class="row sm">DPR: <span id="dpr"></span> • FPS: <span id="fps">—</span></div>
+      </div>
+    </aside>
+
+    <!-- Topbar (mobile) -->
+    <header id="topbar" class="topbar" aria-label="Top">
+      <button id="hamburger" aria-label="Menu" class="icon-btn">☰</button>
+      <div class="title">ΞNuSyQ</div>
+      <div class="right">
+        <button id="pause" class="icon-btn" title="Pause/Resume">⏸</button>
+      </div>
+    </header>
+
+    <!-- Mobile Tabbar -->
+    <footer id="tabbar" class="tabbar" aria-label="Tabs">
+      <button class="tab" data-view="base" aria-label="Base">🏗</button>
+      <button class="tab" data-view="map" aria-label="Map">🗺</button>
+      <button class="tab" data-view="colony" aria-label="Colony">🏘</button>
+      <button class="tab" data-view="defense" aria-label="Defense">🛡</button>
+      <button class="tab" data-view="logs" aria-label="Logs">📜</button>
+    </footer>
+
+    <!-- Main content -->
+    <main id="main" class="main" role="main">
+      <!-- ASCII Stage -->
+      <section id="stageWrap" class="stage-wrap">
+        <pre id="ascii" class="ascii" aria-live="polite"></pre>
+      </section>
+
+      <!-- Context HUD -->
+      <section id="hud" class="hud">
+        <div class="pill"><span id="viewLabel">View: Base</span></div>
+        <div class="pill">Mode: <span id="modeLabel">Auto</span></div>
+        <div class="pill">Perf: <span id="perfLabel">Adaptive</span></div>
+      </section>
+    </main>
+
+    <!-- Scrim for mobile drawer -->
+    <div id="scrim" class="scrim" hidden></div>
+  </div>
+
+  <!-- Theater Suppression System - MUST load first to override console -->
+  <script src="suppress-theater.js"></script>
+  <script defer src="main.js"></script>
+  <script defer src="asciiStage.js"></script>
+</body>
+</html>

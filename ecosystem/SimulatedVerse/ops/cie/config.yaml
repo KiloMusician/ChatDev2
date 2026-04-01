@@ -1,0 +1,24 @@
+horizons:
+  short:
+    max_runtime_s: 120
+    targets: [lint, types, todos, ui, models]
+  medium:
+    max_runtime_s: 420
+    targets: [depgraph, assets, packageAlign]
+  long:
+    max_runtime_s: 1800
+    targets: [testsScaffold]
+
+budgets:
+  parallel: 3
+  llm_tokens_in: 4096
+  llm_tokens_out: 1024
+
+thresholds:
+  ui_stale_s: 90
+  pu_idle_s: 60
+  dup_warn_groups: 200
+  large_file_mb: 50
+
+receipts_dir: reports/cie
+attic_dir: attic

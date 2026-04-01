@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.yaml": "yaml",
+			"*.yml": "yaml"
+		},
+		"jupyter.askForKernelRestart": false,
+		"github.copilot.enable": {
+			"*": true,
+			"yaml": true,
+			"plaintext": false,
+			"markdown": true
+		},
+		"github.copilot.advanced": {
+			"debug.overrideEngine": "",
+			"inlineSuggestEnable": true
+		},
+		"continue.telemetryEnabled": false,
+		"continue.enableTabAutocomplete": true,
+		"git.confirmSync": false,
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
+		"powershell.developer.editorServicesLogLevel": "Diagnostic"
+	}
+}

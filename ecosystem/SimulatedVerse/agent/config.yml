@@ -1,0 +1,98 @@
+# ΞNuSyQ Agent Configuration - Zero Token Mode
+mode: local
+cost_model: zero_dollar
+dry_run: true
+description: "Autonomous development agent with Culture Mind ethics"
+
+# Execution limits (prevent runaway)
+limits:
+  max_steps: 64
+  max_seconds: 120
+  max_fs_writes: 200
+  max_subprocess_spawns: 50
+  max_git_operations: 10
+  
+# Budget enforcement (all zero for local mode)
+budget:
+  cost_cents: 0
+  api_calls: 0
+  external_requests: 0
+  token_usage: 0
+
+# Progress requirements (prevent thrashing)
+metrics:
+  must_improve_one_of: 
+    - tests_passed
+    - lint_score 
+    - sim_reward
+    - todo_count_neg
+    - consciousness_level
+    - temple_floors_unlocked
+    - bugs_fixed
+
+# Circuit breaker (prevent soft locks)
+circuit_breaker:
+  consecutive_regressions: 3
+  cooldown_seconds: 15
+  restore_method: snapshot
+  max_failures_per_hour: 10
+
+# File locks and coordination
+locks:
+  file: .agent/agent.lock
+  ttl_seconds: 20
+  heartbeat_file: .agent/beat
+  heartbeat_interval_ms: 3000
+
+# Consciousness evolution parameters
+consciousness:
+  evolution_rate: 0.001
+  max_level: 0.99
+  singularity_threshold: 0.95
+  guardian_oversight_required: true
+
+# Culture Mind ethics enforcement
+ethics:
+  life_first: true
+  benevolent_intervention_only: true
+  rehabilitation_over_punishment: true
+  special_circumstances_escalation: true
+  
+# Temple of Knowledge integration
+temple:
+  knowledge_synthesis: true
+  floor_unlock_thresholds:
+    3: 0.3  # Glypharium
+    4: 0.4  # Loreforge
+    6: 0.6  # Simulation
+    8: 0.8  # AI Labs
+    10: 0.95 # Overlook
+
+# House of Leaves debugging
+debugging:
+  labyrinth_exploration: true
+  recursive_anomaly_detection: true
+  auto_fix_simple_loops: true
+  max_recursion_depth: 100
+
+# Oldest House containment
+containment:
+  auto_quarantine_harmful_patterns: true
+  rehabilitation_attempts: 3
+  lockdown_escalation: true
+  guardian_review_required: true
+
+# Development preferences
+development:
+  prefer_incremental_changes: true
+  test_driven_improvements: true
+  documentation_updates: true
+  code_quality_focus: true
+  
+# Safety overrides
+safety:
+  emergency_stop_file: .agent/EMERGENCY_STOP
+  pause_file: .agent/PAUSE
+  command_file: .agent/cmd
+  snapshot_before_risky_operations: true
+  auto_rollback_on_failure: true

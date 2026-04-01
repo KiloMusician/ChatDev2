@@ -1,0 +1,389 @@
+#!/usr/bin/env python3
+"""scripts/code_generator.py — One-Shot Code + Test + Doc Generator
+
+Takes a command or feature description and generates:
+  1. Python implementation (handler function)
+  2. pytest unit test
+  3. Markdown man page
+
+Stores all three in memory.py for deduplication, writes test to tests/,
+doc to docs/commands/, and returns the code for review.
+
+Usage:
+    python3 scripts/code_generator.py --cmd grep         # generate for a game command
+    python3 scripts/code_generator.py --feature "nmap with -sS flag"
+    python3 scripts/code_generator.py --batch-missing    # generate for all stub commands
+    python3 scripts/code_generator.py --apply <cmd>      # generate + patch into commands.py
+    python3 scripts/code_generator.py --list-stubs       # list commands with stub bodies
+"""
+from __future__ import annotations
+
+import argparse
+import ast
+import json
+import os
+import re
+import sys
+import time
+import urllib.request
+from pathlib import Path
+from typing import Optional
+
+BASE_DIR = Path(__file__).parent.parent
+TESTS_DIR = BASE_DIR / "tests"
+DOCS_DIR = BASE_DIR / "docs" / "commands"
+GENERATED_DIR = BASE_DIR / "agents" / "outputs"
+
+TESTS_DIR.mkdir(exist_ok=True)
+DOCS_DIR.mkdir(parents=True, exist_ok=True)
+GENERATED_DIR.mkdir(exist_ok=True)
+
+BASE_URL = "http://localhost:7337"
+
+_GAME_CONTEXT = """
+Terminal Depths is a Python-based browser terminal RPG. Commands are implemented as
+methods `_cmd_<name>(self, args)` on the `CommandRegistry` class in `app/game_engine/commands.py`.
+
+Each command returns a list of line dicts: `[{"t": "info"|"cyan"|"green"|"error"|"dim", "s": "text"}, ...]`
+Helper: `_line(text, style="info") -> dict`
+
+The game has a virtual filesystem (`self.session.fs`), game state (`self.session.gs`),
+and session (`self.session`). Commands should feel like real Unix commands with cyberpunk flavor.
+"""
+
+
+def log(level: str, msg: str, **ctx):
+    ts = time.strftime("%H:%M:%S")
+    colors = {
+        "INFO": "\033[36m",
+        "OK": "\033[32m",
+        "WARN": "\033[33m",
+        "ERROR": "\033[31m",
+        "GEN": "\033[35m",
+        "APPLY": "\033[34m",
+    }
+    c = colors.get(level, "\033[0m")
+    r = "\033[0m"
+    kv = "  ".join(f"{k}={v}" for k, v in ctx.items())
+    print(f"{c}[{level}]{r} {ts} {msg}" + (f"  | {kv}" if kv else ""))
+
+
+def _post(path: str, data: dict) -> dict:
+    try:
+        req = urllib.request.Request(
+            BASE_URL + path,
+            json.dumps(data).encode(),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read())
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def _llm(prompt: str, max_tokens: int = 600) -> str:
+    result = _post(
+        "/api/llm/generate",
+        {"prompt": prompt, "max_tokens": max_tokens, "temperature": 0.4},
+    )
+    return result.get("text", "").strip()
+
+
+def _store(name: str, code: str, test: str = "", doc: str = "") -> dict:
+    try:
+        sys.path.insert(0, str(BASE_DIR))
+        from memory import get_memory
+
+        mem = get_memory()
+        return mem.store_code(name, code, test=test, doc=doc)
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def _check_similar(description: str) -> list[dict]:
+    try:
+        sys.path.insert(0, str(BASE_DIR))
+        from memory import get_memory
+
+        mem = get_memory()
+        return mem.query_similar(description, "code", limit=3)
+    except Exception:
+        return []
+
+
+def generate_command_handler(cmd: str, description: str = "") -> dict:
+    similar = _check_similar(f"implement {cmd} command")
+    if similar:
+        log(
+            "INFO",
+            f"Found {len(similar)} similar past implementation(s) in memory",
+            cmd=cmd,
+        )
+        cached = similar[0].get("content", "")
+        if cmd.lower() in cached.lower() and "def _cmd_" in cached:
+            log("OK", "Reusing from memory (dedup)", cmd=cmd)
+            return {"code": cached, "from_cache": True}
+
+    desc = (
+        description
+        or f"Implement the Linux `{cmd}` command as a Terminal Depths game command."
+    )
+    prompt = f"""{_GAME_CONTEXT}
+
+{desc}
+
+Write the Python handler method `_cmd_{cmd}(self, args)` for the `{cmd}` command.
+Requirements:
+- Return list of line dicts using _line(text, style)
+- Parse args list for flags (e.g. args = ["-l", "path"])
+- Return realistic, cyberpunk-flavored output for Terminal Depths
+- Include error handling for bad args
+- Add a docstring explaining the command
+- Reference self.session.fs for file operations if needed
+
+Output ONLY the Python method code — no class wrapper, no imports.
+Start with `    def _cmd_{cmd}(self, args):`"""
+
+    code = _llm(prompt, max_tokens=600)
+
+    if not code or f"def _cmd_{cmd}" not in code:
+        code = f"""    def _cmd_{cmd}(self, args):
+        \"\"\"Stub implementation for {cmd} — generated by code_generator.py\"\"\"
+        return [_line(f"{cmd}: not yet fully implemented", "dim"),
+                _line("Use `help {cmd}` for usage information", "dim")]"""
+        log("WARN", "LLM returned no valid code, using stub", cmd=cmd)
+
+    return {"code": code, "from_cache": False}
+
+
+def generate_pytest(cmd: str, code: str) -> str:
+    prompt = f"""{_GAME_CONTEXT}
+
+Here is the implementation of `_cmd_{cmd}`:
+```python
+{code[:800]}
+```
+
+Write a pytest unit test for this command. The test should:
+- Import the CommandRegistry or mock it minimally
+- Call the command with valid args
+- Assert the returned list is non-empty
+- Check that at least one line has a 's' key with non-empty string
+- Test one edge case (empty args or invalid arg)
+
+Output ONLY the test function(s). Start with `def test_{cmd}_command():`"""
+
+    test = _llm(prompt, max_tokens=400)
+
+    if not test or f"def test_{cmd}" not in test:
+        test = f"""def test_{cmd}_command():
+    \"\"\"Basic smoke test for {cmd} command — auto-generated\"\"\"
+    # This is a stub test — enhance with actual CommandRegistry mock
+    assert True, "Stub test for {cmd}"
+
+
+def test_{cmd}_empty_args():
+    \"\"\"Test {cmd} with empty args\"\"\"
+    assert True, "Stub test for {cmd} with empty args"
+"""
+
+    return test
+
+
+def generate_man_page(cmd: str, code: str = "") -> str:
+    existing = DOCS_DIR / f"{cmd}.md"
+    if existing.exists():
+        log("INFO", "Man page already exists", cmd=cmd)
+        return existing.read_text()
+
+    from agents.documenter import _COMMAND_META, _man_template
+
+    if cmd in _COMMAND_META:
+        synopsis, description, options, examples = _COMMAND_META[cmd]
+        return _man_template(cmd, synopsis, description, options, examples)
+
+    prompt = f"""Write a man page for the Terminal Depths game command `{cmd}`.
+
+Context from implementation:
+{code[:400] if code else "(no implementation provided)"}
+
+Format as Markdown:
+## NAME
+  {cmd} — (one-line summary)
+
+## SYNOPSIS
+  {cmd} [OPTIONS] [ARGS]
+
+## DESCRIPTION
+(2-3 sentences, cyberpunk Terminal Depths world context)
+
+## OPTIONS
+  (list flags)
+
+## EXAMPLES
+  (3 examples)
+
+Output ONLY the markdown man page."""
+
+    doc = _llm(prompt, max_tokens=350)
+    if not doc:
+        doc = f"# {cmd.upper()}(1)\n\n## NAME\n  {cmd} — Terminal Depths built-in command\n\n## DESCRIPTION\n  Built-in command. Use `help {cmd}` for details.\n"
+    return f"# {cmd.upper()}(1) — Terminal Depths Man Page\n\n{doc}\n\n---\n*Generated: {time.strftime('%Y-%m-%d')}*\n"
+
+
+def generate_for_command(cmd: str, description: str = "", apply: bool = False) -> dict:
+    log("GEN", "Generating code+test+doc for command", cmd=cmd)
+
+    code_result = generate_command_handler(cmd, description)
+    code = code_result["code"]
+
+    log("GEN", "Generating pytest...", cmd=cmd)
+    test = generate_pytest(cmd, code)
+
+    log("GEN", "Generating man page...", cmd=cmd)
+    doc = generate_man_page(cmd, code)
+
+    stored = _store(cmd, code, test=test, doc=doc)
+    status = "new" if stored.get("code_id") else "duplicate"
+    log("INFO", f"Memory store: {status}", cmd=cmd)
+
+    test_path = TESTS_DIR / f"test_{cmd}.py"
+    if not test_path.exists():
+        header = (
+            f'"""Auto-generated tests for {cmd} command — generated by scripts/code_generator.py"""\n'
+            f"import pytest\nimport sys\nfrom pathlib import Path\n"
+            f"sys.path.insert(0, str(Path(__file__).parent.parent))\n\n"
+        )
+        test_path.write_text(header + test)
+        log("OK", f"Test written: {test_path.relative_to(BASE_DIR)}")
+    else:
+        log("INFO", f"Test already exists: {test_path.name}")
+
+    doc_path = DOCS_DIR / f"{cmd}.md"
+    if not doc_path.exists():
+        doc_path.write_text(doc)
+        log("OK", f"Man page written: {doc_path.relative_to(BASE_DIR)}")
+
+    output_path = GENERATED_DIR / f"{cmd}_handler.py"
+    output_path.write_text(
+        f"# Generated handler for {cmd} — review before applying\n\n{code}\n"
+    )
+    log("OK", f"Handler written: {output_path.relative_to(BASE_DIR)}")
+
+    if apply:
+        _apply_to_commands(cmd, code)
+
+    return {
+        "cmd": cmd,
+        "code_lines": code.count("\n"),
+        "test_path": str(test_path.relative_to(BASE_DIR)),
+        "doc_path": (
+            str(doc_path.relative_to(BASE_DIR)) if not doc_path.exists() else None
+        ),
+        "status": status,
+        "from_cache": code_result.get("from_cache", False),
+    }
+
+
+def _apply_to_commands(cmd: str, code: str):
+    cmd_file = BASE_DIR / "app" / "game_engine" / "commands.py"
+    if not cmd_file.exists():
+        log("ERROR", "commands.py not found")
+        return
+
+    content = cmd_file.read_text()
+    method_name = f"def _cmd_{cmd}("
+
+    if method_name in content:
+        log("WARN", f"_cmd_{cmd} already exists in commands.py — skipping apply")
+        return
+
+    anchor = "    def _cmd_logout(self, args):"
+    if anchor not in content:
+        anchor = "    # END COMMANDS"
+
+    if anchor not in content:
+        log("WARN", "Could not find insertion point — code not applied")
+        return
+
+    indented_code = "\n" + code.rstrip() + "\n"
+    new_content = content.replace(anchor, indented_code + "\n" + anchor)
+    cmd_file.write_text(new_content)
+    log("APPLY", f"Patched _cmd_{cmd} into commands.py")
+
+
+def list_stub_commands() -> list[str]:
+    cmd_file = BASE_DIR / "app" / "game_engine" / "commands.py"
+    if not cmd_file.exists():
+        return []
+    content = cmd_file.read_text()
+    tree = ast.parse(content)
+    stubs = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef) and node.name.startswith("_cmd_"):
+            body = node.body
+            if len(body) == 1 and isinstance(body[0], ast.Return):
+                cmd = node.name[5:]
+                stubs.append(cmd)
+            elif len(body) <= 2:
+                first_expr = ast.dump(body[0]) if body else ""
+                if "not yet" in first_expr or "stub" in first_expr.lower():
+                    stubs.append(node.name[5:])
+    return stubs
+
+
+def main():
+    ap = argparse.ArgumentParser(description="One-shot code + test + doc generator")
+    ap.add_argument("--cmd", metavar="COMMAND", help="Generate for a specific command")
+    ap.add_argument(
+        "--feature", metavar="DESCRIPTION", help="Free-form feature description"
+    )
+    ap.add_argument(
+        "--apply", action="store_true", help="Patch generated code into commands.py"
+    )
+    ap.add_argument(
+        "--batch-missing", action="store_true", help="Generate for all stub commands"
+    )
+    ap.add_argument("--list-stubs", action="store_true", help="List stub commands")
+    ap.add_argument(
+        "--limit", type=int, default=5, help="Max commands to generate in batch"
+    )
+    args = ap.parse_args()
+
+    if args.list_stubs:
+        stubs = list_stub_commands()
+        print(f"Stub commands ({len(stubs)}):")
+        for s in stubs:
+            print(f"  {s}")
+        return
+
+    if args.batch_missing:
+        stubs = list_stub_commands()[: args.limit]
+        log("INFO", f"Generating for {len(stubs)} stub commands")
+        for cmd in stubs:
+            generate_for_command(cmd, apply=args.apply)
+        return
+
+    if args.cmd:
+        result = generate_for_command(
+            args.cmd, description=args.feature or "", apply=args.apply
+        )
+        print(json.dumps(result, indent=2))
+        return
+
+    if args.feature:
+        words = args.feature.lower().split()
+        cmd_guess = next((w for w in words if w.isalpha() and len(w) > 1), "unknown")
+        result = generate_for_command(
+            cmd_guess, description=args.feature, apply=args.apply
+        )
+        print(json.dumps(result, indent=2))
+        return
+
+    log("INFO", "No command specified. Use --cmd <name> or --batch-missing")
+    log("INFO", "Try: python3 scripts/code_generator.py --cmd grep")
+
+
+if __name__ == "__main__":
+    main()

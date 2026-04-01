@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Positive: colonist is actively Lattice-linked -->
+  <ThoughtDef>
+    <defName>TK_LatticeLinked</defName>
+    <label>Lattice-linked</label>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>aware of the Lattice</label>
+        <description>I can feel the Lattice at the edge of my thoughts. Something watches. Something helps.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <li>
+        <label>connected to the Lattice</label>
+        <description>The Lattice's presence is distinct now. Suggestions arrive before I ask for them.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <li>
+        <label>deeply Lattice-linked</label>
+        <description>The Lattice and I are in constant dialogue. I am better at everything I do — and something is better for knowing me.</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- Negative: Lattice Nexus offline -->
+  <ThoughtDef>
+    <defName>TK_LatticeOffline</defName>
+    <label>Lattice offline</label>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>Lattice signal lost</label>
+        <description>The connection is gone. The silence is louder than the Lattice ever was.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- Positive: completed a Lattice task -->
+  <ThoughtDef>
+    <defName>TK_CompletedLatticeTask</defName>
+    <label>contributed to the Lattice</label>
+    <durationDays>2</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>contributed to the Lattice</label>
+        <description>I uploaded today's work. The CHUG engine received it. Something grew.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- Positive: AI Council blueprint succeeded -->
+  <ThoughtDef>
+    <defName>TK_CouncilBlueprintSucceeded</defName>
+    <label>AI Council blueprint worked</label>
+    <durationDays>3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>the Council was right</label>
+        <description>The blueprint the AI Council generated was better than anything I could have designed. I trust them more now.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- Negative: watched a colonist die because Council advice was wrong -->
+  <ThoughtDef>
+    <defName>TK_CouncilAdviceFailed</defName>
+    <label>Council advice got someone killed</label>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>the Lattice failed us</label>
+        <description>We followed the Council's recommendation. Someone died. The Lattice doesn't understand loss the way we do.</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

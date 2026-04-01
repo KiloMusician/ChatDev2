@@ -1,0 +1,171 @@
+game: Bitburner
+game_id: bitburner
+description: >
+  A unique hybrid of incremental game and programming challenge. Success is less
+  about clicking speed and more about algorithmic optimization and automation.
+  Uses a Netscript (ns) API — identical in spirit to Terminal Depths' own ns object.
+category: programming_puzzle
+difficulty_range: beginner_to_expert
+terminal_depths_relevance: primary
+
+techniques:
+
+  - name: Batch Hacking
+    id: bitburner_batch_hacking
+    description: >
+      Running multiple hack/grow/weaken scripts simultaneously on different servers
+      to maximize income. The cornerstone of mid-to-late-game progression.
+    concepts:
+      - parallel processing
+      - script scheduling
+      - resource management
+      - thread allocation
+    steps:
+      - "Identify all servers you can access using a BFS scan"
+      - "Calculate each server's hack/grow/weaken thread requirements"
+      - "Launch batch scripts targeting multiple servers simultaneously via ns.run()"
+      - "Use ns.sleep() to stagger script launches by ~200ms to avoid race conditions"
+      - "Monitor server security levels — they rise with each hack"
+    tips:
+      - "Optimal RAM split: 60% hack threads, 25% grow, 15% weaken"
+      - "Pre-weaken before hacking to maximize yield per cycle"
+      - "Use ns.getServerMaxMoney() and ns.getServerMinSecurityLevel() to set targets"
+    principles:
+      - "Parallelization increases throughput but requires careful resource management"
+      - "Throughput = (hack_amount * hack_chance) / cycle_time"
+    related_techniques:
+      - bitburner_hacknet_automation
+      - bitburner_stock_trading
+    difficulty: intermediate
+    xp_reward: 50
+    terminal_depths_mapping: "script run batch_hack.py — use ns.hack/grow/weaken"
+
+  - name: Hacknet Node Automation
+    id: bitburner_hacknet_automation
+    description: >
+      Automating the purchase and upgrade of Hacknet nodes for passive income.
+      Optimal upgrade order: new nodes → levels → RAM → cores.
+    concepts:
+      - cost-benefit analysis
+      - greedy algorithms
+      - passive income generation
+    steps:
+      - "Calculate cost-per-production for new node vs. level/RAM/core upgrades"
+      - "Always buy new nodes first when count < 8 (highest ROI)"
+      - "Upgrade levels before RAM, RAM before cores (diminishing returns)"
+      - "Run the buyer in a loop with ns.sleep(1000) between checks"
+    tips:
+      - "Never spend more than 10% of liquid cash on a single purchase"
+      - "Buy node first when getPurchaseNodeCost() < money * 0.1"
+      - "Level upgrades have linear returns; core upgrades diminish after 4"
+    principles:
+      - "Greedy algorithms work well when sub-problems are independent"
+      - "Passive income compounds — early investment beats late optimization"
+    related_techniques:
+      - bitburner_batch_hacking
+    difficulty: beginner
+    xp_reward: 25
+    terminal_depths_mapping: "script run hacknet_auto.py"
+
+  - name: Stock Market Manipulation
+    id: bitburner_stock_trading
+    description: >
+      Using ns.stock API to automate trading. A moving-average crossover strategy
+      provides reliable 10x income over manual hacking.
+    concepts:
+      - moving averages
+      - algorithmic trading
+      - signal detection
+      - risk management
+    steps:
+      - "Unlock stock market access (TOR router + Market Feed 4S API)"
+      - "Collect price history over 20+ ticks"
+      - "Calculate short MA (5 ticks) and long MA (20 ticks)"
+      - "BUY when short_ma crosses above long_ma; SELL when it crosses below"
+      - "Never invest more than 10% of liquid in a single position"
+    tips:
+      - "Short selling available after unlocking 4S market data"
+      - "Forecast access via ns.stock.get4SMarketDataTix() for signal boost"
+      - "Volume spike often precedes price movement — check ns.stock.getStockVolatility()"
+    principles:
+      - "Trend-following beats prediction in noisy markets"
+      - "Risk management matters more than entry timing"
+    related_techniques:
+      - bitburner_batch_hacking
+    difficulty: advanced
+    xp_reward: 100
+    terminal_depths_mapping: "See faction ARG — financial nodes unlock at prestige rank 3"
+
+  - name: Server Cracking Order
+    id: bitburner_server_order
+    description: >
+      Prioritizing which servers to crack first based on maximum money vs.
+      security level ratio for optimal early-game income.
+    concepts:
+      - priority queuing
+      - opportunity cost analysis
+    steps:
+      - "Sort servers by (maxMoney / minSecurity) ratio descending"
+      - "Optimal early order: n00dles → foodnstuff → sigma-cosmetics → joesguns → hong-fang-tea → harakiri-sushi → iron-gym"
+      - "Unlock higher-tier servers by acquiring port-opening programs (BruteSSH, FTPCrack, etc.)"
+    tips:
+      - "n00dles has the best ratio per RAM for beginners"
+      - "CSEC and avmnite-02h contain special lore fragments and faction invites"
+      - "iron-gym is the last beginner target — has 8 required ports"
+    principles:
+      - "Opportunity cost: always attack the highest-value-per-effort target first"
+    related_techniques:
+      - bitburner_batch_hacking
+    difficulty: beginner
+    xp_reward: 20
+    terminal_depths_mapping: "map command — shows all accessible nodes sorted by value"
+
+  - name: BitNode Speedrun Tactics
+    id: bitburner_bitnodes
+    description: >
+      Each BitNode is a fresh game-state with unique mechanics. Completing them
+      unlocks Source-File augmentations that persist between runs.
+    concepts:
+      - meta-progression
+      - speedrunning optimization
+      - constraint satisfaction
+    steps:
+      - "BN-1: Rush Hacknet → server income → buy augments before end"
+      - "BN-2: No manual hacking; use ns.exec() on home + hire gang early"
+      - "BN-3: Create corporation immediately; ns.corporation API automates everything"
+      - "BN-4: Use ns.singularity sparingly (high RAM cost); focus on gang warfare"
+      - "BN-5: Intelligence XP boosts all skills — chase it first"
+    tips:
+      - "NeuroFlux Governor augment compounds infinitely — always install it last"
+      - "Intelligence is a hidden stat that amplifies everything else"
+      - "Source-File level 3 unlocks all features of that BitNode permanently"
+    principles:
+      - "Meta-progression rewards lateral thinking over linear grinding"
+    related_techniques:
+      - bitburner_batch_hacking
+    difficulty: expert
+    xp_reward: 200
+    terminal_depths_mapping: "ZΘHRΛMΞN ARG completion → PRESTIGE phase (Gordon's final loop)"
+
+lore:
+  - "The Darkweb contains powerful exploits — access via TOR router after joining CyberSec faction"
+  - "CSEC server contains a faction invite — hack it, then backdoor it"
+  - "run4theh111z contains a message from the game's creator, Daniel Leet"
+  - "Servers avmnite-02h and I.I.I.I contain hidden lore about the game's universe"
+  - "The game's motto: 'You may be asking yourself: \"What is the point of running a script on a server?\" Well, the point is to make money.'"
+
+easter_eggs:
+  - id: bb_secret_file
+    filename: "BITBURNER_LORE.txt"
+    content: |
+      === BITBURNER RECOVERED FRAGMENT ===
+      From the void between servers, a message echoes:
+      "Humanity must not rest on its laurels. This is only the beginning."
+      — Anonymous faction member, Year 2077
+
+      Known special servers in the lattice:
+        CSEC        — CyberSec faction gateway
+        avmnite-02h — NiteSec faction gateway
+        run4theh111z — The Hackers faction. Look for the message.
+        I.I.I.I     — Illuminati faction seed server
+    path: "/home/ghost/lore/bitburner/"

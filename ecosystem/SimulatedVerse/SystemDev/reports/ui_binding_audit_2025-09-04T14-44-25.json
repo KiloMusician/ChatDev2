@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-09-04T14:44:25.000Z",
+  "audit": "UI_BINDING_COHERENCY_BOSS_E",
+  "scope": "dev_menu_vs_game_separation_analysis",
+  "entrypoints_mapped": {
+    "dev_menu_system_view": [
+      "PreviewUI/web/dev/DevMenu.tsx - Agent orchestration interface",
+      "client/src/components/DevMenuExtended.tsx - Enhanced dev interface"
+    ],
+    "game_player_view": [
+      "PreviewUI/web/core/GameShell.tsx - Main Culture-Ship container", 
+      "PreviewUI/web/core/MenuRouter.tsx - DEV/PLAY mode router",
+      "PreviewUI/web/panels/* - Ship system panels (CrashConsole, NanoFoundry, etc)"
+    ]
+  },
+  "separation_violations_detected": [
+    {
+      "issue": "cross_contamination_imports",
+      "location": "client/src/components/DevMenuExtended.tsx:9",
+      "violation": "imports OnboardingProvider from PreviewUI/web/components",
+      "severity": "high"
+    },
+    {
+      "issue": "dev_console_in_play_mode",
+      "location": "PreviewUI/web/core/MenuRouter.tsx:44-49", 
+      "violation": "Dev Console button accessible within Play mode",
+      "severity": "medium"
+    },
+    {
+      "issue": "mixed_routing_concerns",
+      "location": "PreviewUI/web/core/MenuRouter.tsx:29",
+      "violation": "DevMenuExtended rendered within game interface",
+      "severity": "high"
+    }
+  ],
+  "route_binding_analysis": {
+    "current_routes": {
+      "/": "GameShell → MenuRouter → DEV/PLAY split",
+      "/game": "direct game navigation from DevMenuExtended",
+      "/dev": "no dedicated dev route - mixed with main interface"
+    },
+    "required_separation": {
+      "/dev/*": "system_widgets_only - DevMenu, orchestration, receipts", 
+      "/": "game_interface_only - GameShell, ship systems, player experience"
+    }
+  },
+  "janus_breath_requirements": [
+    "Create dedicated /dev route for system interface",
+    "Remove dev console access from play mode",
+    "Eliminate cross-imports between dev and game components",
+    "Enforce route-level separation with middleware"
+  ],
+  "boss_e_action_plan": "implement_clean_separation_via_routing_and_component_boundaries"
+}

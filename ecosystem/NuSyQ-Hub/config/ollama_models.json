@@ -1,0 +1,67 @@
+{
+  "ollama": {
+    "base_url": "http://localhost:11434",
+    "models": {
+      "qwen2.5-coder-14b": {
+        "full_name": "qwen2.5-coder:14b",
+        "capabilities": ["code", "reasoning"],
+        "notes": "Primary coding model — best quality"
+      },
+      "qwen2.5-coder-7b": {
+        "full_name": "qwen2.5-coder:7b",
+        "capabilities": ["code", "autocomplete"],
+        "notes": "Used for tab autocomplete in Continue.dev"
+      },
+      "llama3.1-8b": {
+        "full_name": "llama3.1:8b",
+        "capabilities": ["chat", "instruction"],
+        "notes": "General chat and instruction following"
+      },
+      "llama3-8b": {
+        "full_name": "llama3:8b",
+        "capabilities": ["chat"],
+        "notes": "Base llama3 chat model"
+      },
+      "deepseek-coder-v2-16b": {
+        "full_name": "deepseek-coder-v2:16b",
+        "capabilities": ["code", "reasoning"],
+        "notes": "Strong code generation and analysis"
+      },
+      "nomic-embed-text": {
+        "full_name": "nomic-embed-text:latest",
+        "capabilities": ["embeddings"],
+        "notes": "Text embeddings for Continue.dev and semantic search"
+      },
+      "phi3-5": {
+        "full_name": "phi3.5:latest",
+        "capabilities": ["chat", "reasoning"],
+        "notes": "Microsoft Phi-3.5 — compact reasoning model"
+      },
+      "phi3-3b": {
+        "full_name": "phi3:3.8b",
+        "capabilities": ["chat", "fast"],
+        "notes": "Fast lightweight model for quick responses"
+      },
+      "starcoder2-15b": {
+        "full_name": "starcoder2:15b",
+        "capabilities": ["code"],
+        "notes": "BigCode Starcoder2 — specialized code completion"
+      },
+      "codellama-7b": {
+        "full_name": "codellama:7b",
+        "capabilities": ["code"],
+        "notes": "Meta CodeLlama — code generation and completion"
+      },
+      "gemma2-9b": {
+        "full_name": "gemma2:9b",
+        "capabilities": ["chat", "reasoning"],
+        "notes": "Google Gemma2 — general purpose"
+      },
+      "mistral": {
+        "full_name": "mistral:latest",
+        "capabilities": ["chat", "instruction"],
+        "notes": "Mistral 7B — general chat"
+      }
+    }
+  }
+}

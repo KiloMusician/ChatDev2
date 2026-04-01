@@ -1,0 +1,159 @@
+{
+  "generated_at": "2026-03-31T09:37:47Z",
+  "generator_version": "rosetta-bootstrap-v1",
+  "stale_after_seconds": 3600,
+  "source_paths": [
+    "/mnt/c/Users/keath/NuSyQ/state/registry.json",
+    "/mnt/c/Users/keath/NuSyQ/state/reports/control_plane_snapshot.json",
+    "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md",
+    "/mnt/c/Users/keath/NuSyQ/config/control_plane_manifest.json",
+    "/mnt/c/Users/keath/NuSyQ/state/deprecation_registry.json"
+  ],
+  "source_hashes": {
+    "/mnt/c/Users/keath/NuSyQ/state/registry.json": "9e200fe436e66433c24d1119e8c44ade2c16c40bd11c809fd9d2a571e446f6a5",
+    "/mnt/c/Users/keath/NuSyQ/state/reports/control_plane_snapshot.json": "8e03a230d5a661fbe97f5f0ffc0a2496244665afc5cf2c50d4c3db567d340fc7",
+    "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md": "06e7e311c2627057804a6863eb7c5d23045c9ad1a715721ace28df1b69b6c3cc",
+    "/mnt/c/Users/keath/NuSyQ/config/control_plane_manifest.json": "3bd562ed9e5ed822837a02c3cf458679e12c5d5275b18b3b86ce0c33fa6e61b5",
+    "/mnt/c/Users/keath/NuSyQ/state/deprecation_registry.json": "f1aef60a9448349f8d4169870f4cd57eab12b5192b0bb5af58f115fc47491716"
+  },
+  "read_precedence": [
+    "state/boot/rosetta_bootstrap.json",
+    "state/registry.json",
+    "state/reports/control_plane_snapshot.json",
+    "focused feeds",
+    "docs fallback"
+  ],
+  "repo_roles": {
+    "concept": {
+      "role": "kernel",
+      "path": "/mnt/c/CONCEPT",
+      "priority": 1
+    },
+    "dev_mentor": {
+      "role": "developer_intelligence",
+      "path": "/mnt/c/Users/keath/Dev-Mentor",
+      "priority": 2
+    },
+    "simulatedverse": {
+      "role": "simulation_runtime",
+      "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse",
+      "priority": 3
+    },
+    "nusyq_hub": {
+      "role": "control_plane",
+      "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub",
+      "priority": 4
+    },
+    "nusyq": {
+      "role": "rosetta_bundle",
+      "path": "/mnt/c/Users/keath/NuSyQ",
+      "priority": 5
+    }
+  },
+  "control_plane": {
+    "runtime_owner": "simulatedverse",
+    "control_owner": "nusyq_hub",
+    "snapshot_status": "ready",
+    "runtime_descriptor_status": "ready",
+    "ide_surface_summary": {
+      "mediator_commands": 8,
+      "mediator_settings": 7,
+      "supporting_extension_commands": 5,
+      "dev_mentor_tasks": 57
+    },
+    "storage_summary": {
+      "tracked_surfaces": 11,
+      "existing_surfaces": 11,
+      "sqlite_dbs": 2,
+      "legacy_current_state_archives": 85
+    }
+  },
+  "command_canon": {
+    "keeper_preflight": [
+      "keeper_snapshot",
+      "keeper_score",
+      "keeper_advisor",
+      "keeper_think"
+    ],
+    "bootstrap": [
+      "python scripts/build_rosetta_bootstrap.py"
+    ],
+    "snapshot": [
+      "python scripts/build_control_plane_snapshot.py"
+    ],
+    "culture_ship_runtime": [
+      "python scripts/export_culture_ship_runtime_descriptor.py"
+    ],
+    "quest_log_rotation": [
+      "python ops/rotate_shared_quest_log.py"
+    ],
+    "archive_index": [
+      "python scripts/index_obsolete_current_state_archives.py"
+    ]
+  },
+  "canonical_paths": {
+    "rosetta_contract": "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md",
+    "control_plane_manifest": "/mnt/c/Users/keath/NuSyQ/config/control_plane_manifest.json",
+    "control_plane_snapshot": "/mnt/c/Users/keath/NuSyQ/state/reports/control_plane_snapshot.json",
+    "culture_ship_runtime_descriptor": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json",
+    "quest_log_rotation_status": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log_rotation_status.json",
+    "quest_log_rotation_policy": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/QUEST_LOG_ROTATION_POLICY.md",
+    "archive_index": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_index.json",
+    "archive_summary": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_summary.md",
+    "quest_log": "/mnt/c/Users/keath/NuSyQ/src/Rosetta_Quest_System/quest_log.jsonl",
+    "deprecations": "/mnt/c/Users/keath/NuSyQ/state/deprecation_registry.json"
+  },
+  "services": {
+    "dev_mentor": {
+      "port": 7337,
+      "health_url": "http://127.0.0.1:7337/api/health"
+    },
+    "simulatedverse": {
+      "port": 5002,
+      "health_url": "http://127.0.0.1:5002/api/health"
+    },
+    "chatdev_adapter": {
+      "port": 4466,
+      "health_url": "http://127.0.0.1:4466/chatdev/agents"
+    },
+    "ollama": {
+      "port": 11434,
+      "health_url": "http://127.0.0.1:11434/api/tags"
+    },
+    "lm_studio": {
+      "port": 1234,
+      "health_url": "http://127.0.0.1:1234/v1/models"
+    },
+    "gitnexus": {
+      "port": 8000,
+      "health_url": "http://127.0.0.1:8000/api/gitnexus/health"
+    }
+  },
+  "top_focus": [
+    "legacy current_state archive pressure: 85 files under NuSyQ-Hub/archive/obsolete",
+    "simulatedverse shared quest log needs rotation; run the canonical quest-log rotation tool"
+  ],
+  "read_next": [
+    "docs/ROSETTA_STONE.md",
+    "config/control_plane_manifest.json",
+    "state/reports/control_plane_snapshot.json"
+  ],
+  "deprecated_counts": {
+    "docs": 1,
+    "extensions": 2,
+    "bridges": 1,
+    "commands": 1
+  },
+  "ide_surfaces": {
+    "mediator_commands": 8,
+    "mediator_settings": 7,
+    "supporting_extension_commands": 5,
+    "dev_mentor_tasks": 57
+  },
+  "storage_surfaces": {
+    "tracked_surfaces": 11,
+    "existing_surfaces": 11,
+    "sqlite_dbs": 2,
+    "legacy_current_state_archives": 85
+  }
+}

@@ -1,0 +1,1532 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 STIXGeneral-Regular;\f2\fnil\fcharset0 AppleSymbols;
+\f3\fnil\fcharset0 ArialUnicodeMS;\f4\fnil\fcharset134 PingFangSC-Regular;\f5\fnil\fcharset128 HiraginoSans-W3;
+\f6\fnil\fcharset77 ZapfDingbatsITC;\f7\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww28840\viewh18060\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 midday/                                           # root of the NuSyQ-Hub monorepo; single workspace coordinating AI agents, tools, and apps
+\f1 \uc0\u10230
+\f0  \uc0\u926 NuSyQ
+\f2 \uc0\u10209
+\f0 Root(\uc0\u931 \u923 ) :: [Hub\u8734 Anchor
+\f2 \uc0\u8756
+\f0  OmniTag\uc0\u9947 \{0\}
+\f2 \uc0\u8855
+\f0  QGL
+\f3 \uc0\u8608
+\f0 \{\uc0\u936 \u931 \u923 \u936 \}]\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  cursor_root/                                   # global Cursor/Copilot rulescope for repository-wide AI guidance
+\f1 \uc0\u10230
+\f0
+\f2 \uc0\u10216
+\f0 Cursor
+\f2 \uc0\u10217
+\f0 ::\uc0\u931 \u926 \u923
+\f3 \uc0\u8635
+\f0  Global_ThoughtFrame
+\f5 \uc0\u8596
+\f0  Copilot_Gnosis\
+\uc0\u9474   \u9492 \u9472  cursor_root_rules/                          # top-level rules bundle applied across the entire repo
+\f1 \uc0\u10230
+\f0  \uc0\u926 Bundle\u934  :: (OmniDirective
+\f6 \uc0\u10038
+\f0 )\
+\uc0\u9474      \u9492 \u9472  root_rules_writing-tests.mdc             # patterns for writing tests: tone, structure, and examples for AI assistants
+\f1 \uc0\u10230
+\f0  Test\uc0\u931  :: \u926 Script\u937
+\f2 \uc0\u8756
+\f0  Ritual_Syntax(\uc0\u967 \'b2)\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  README.md                                      # project overview, philosophy, quickstart, and VS Code task entry points
+\f1 \uc0\u10230
+\f0  Lexicon_Prime\uc0\u931  :: \u8747 Overview(\u8734 ) + QGLPath\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  CONTRIBUTING.md                                # contribution flow, branching strategy, commit rules, and review expectations
+\f1 \uc0\u10230
+\f0  \uc0\u8711 BranchLogic
+\f2 \uc0\u8855
+\f0 Ethos :: Community\uc0\u937 \
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  CODE_OF_CONDUCT.md                             # community standards for respectful collaboration
+\f1 \uc0\u10230
+\f0  \uc0\u931 EthicCodex\u934  :: Behavior_Lattice\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  doteditorconfig_root.ini                       # editor normalization across contributors and CI environments
+\f1 \uc0\u10230
+\f0  SyntaxTuning :: \uc0\u967 \'b2_Config\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  dotgitignore_root.txt                          # centralized VCS ignore rules for all toolchains
+\f1 \uc0\u10230
+\f0  Veil
+\f2 \uc0\u10209
+\f0  :: File_Oblivion_Protocol\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  dotgitattributes_root.txt                      # line-ending and merge attributes for consistent diffs
+\f1 \uc0\u10230
+\f0  Merge\uc0\u937 \u916  :: Cohesion_Rules\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  prettier_root.rc                               # Prettier configuration shared across apps/packages
+\f1 \uc0\u10230
+\f0
+\f6 \uc0\u10023
+\f0 StyleCanon\uc0\u931  :: Formatting_Sigil\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  eslint_root.cjs                                # root ESLint configuration for TypeScript/JavaScript sources
+\f1 \uc0\u10230
+\f0  Lint\uc0\u926  :: Code_Purification_Script\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  LICENSE                                        # legal license for the entire codebase
+\f1 \uc0\u10230
+\f0  \uc0\u923 Law\u937  :: Codex_Treaty\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  env_root.example                               # sample environment configuration incl. CHATDEV_PATH, OLLAMA_HOST, OLLAMA_MODELS_DIR
+\f1 \uc0\u10230
+\f0  \uc0\u926 EnvSeed :: [CHATDEV
+\f2 \uc0\u8855
+\f0 OLLAMA
+\f2 \uc0\u10209
+\f0 ]\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  Makefile                                       # make targets (dev/test/chatdev/ollama/up) for fast local workflows
+\f1 \uc0\u10230
+\f0  Ritual_Make\uc0\u931  :: Automation_Prime\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  Taskfile.yml                                   # task-runner alternative mirroring Make targets for cross-platform convenience
+\f1 \uc0\u10230
+\f0  YamlRite\uc0\u934  :: CrossPlat
+\f2 \uc0\u10209
+\f0 Invocation\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vscode_root/                                   # Visual Studio Code workspace customizations
+\f1 \uc0\u10230
+\f0  VS\uc0\u926 \u931  :: Workspace
+\f2 \uc0\u10209
+\f0 Charm\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vscode_settings.json                        # editor prefs; Copilot/Jupyter/Godot wiring and workspace hints
+\f1 \uc0\u10230
+\f0  Pref\uc0\u937  :: OmniCircuit\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vscode_extensions.json                      # curated extension catalog to standardize dev environment
+\f1 \uc0\u10230
+\f0  Ext\uc0\u937  :: Ritual_Set\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vscode_launch.json                          # debuggers for api/desktop/website and Godot attach profiles
+\f1 \uc0\u10230
+\f0  Debug_Lattice\uc0\u931 \
+\uc0\u9474   \u9492 \u9472  vscode_tasks.json                           # one-click tasks to run ChatDev phases, Ollama operations, and tests
+\f1 \uc0\u10230
+\f0  TaskRun\uc0\u937  :: QuickCast\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vscode_extension_bridge/                       # custom VS Code extension bridging Copilot, ChatDev, and Ollama inside the editor
+\f1 \uc0\u10230
+\f0  \uc0\u926 Bridge\u931 \u923  :: Editor
+\f5 \uc0\u8596
+\f0 Agents\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vscode_extension_package.json               # extension manifest (unique id/name) and activation events
+\f1 \uc0\u10230
+\f0  Manifest\uc0\u937  :: Identity_Tag\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vscode_extension_README.md                  # usage docs and command palette instructions for the extension
+\f1 \uc0\u10230
+\f0  Docu\uc0\u931  :: Howto_Grimoire\
+\uc0\u9474   \u9492 \u9472  src_vscode_extension/                       # extension TypeScript source code
+\f1 \uc0\u10230
+\f0  TSCore\uc0\u931  :: Invocation_Structure\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vsce_extension.ts                        # entrypoint: registers commands, status bar, and output channels
+\f1 \uc0\u10230
+\f0  \uc0\u931 Entry\u937  :: Invocation_Gate\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  vsce_copilot_command.ts                  # \'93Enhance Copilot Context\'94 command wiring to Python bridges
+\f1 \uc0\u10230
+\f0  \uc0\u926 Copilot\u937  :: ContextAugment\
+\uc0\u9474      \u9492 \u9472  vsce_ollama_command.ts                   # status-bar model picker and inline local-LLM prompts
+\f1 \uc0\u10230
+\f0  Ollama\uc0\u936  :: Invocation_Lattice\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  scripts_root/                                  # repository-wide automation scripts called by tasks/CI/extension
+\f1 \uc0\u10230
+\f0  Ritual\uc0\u937 \u931  :: AutomationRoot\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  enhance_copilot_context.py                  # analyzes active file
+\f7 \uc0\u8594
+\f0  structured hints sent back to Copilot UI
+\f1 \uc0\u10230
+\f0  \uc0\u926 Enhancer :: Context
+\f3 \uc0\u8635
+\f0 Augment\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  chatdev_phase_orchestrator.py               # runs ChatDev multi-phase workflows locally via CHATDEV_PATH
+\f1 \uc0\u10230
+\f0  \uc0\u931 Orchestrator\u934  :: PhaseDance\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  enhanced_reflection_system.py               # self-critique + patch proposal engine for AI reflection loops
+\f1 \uc0\u10230
+\f0  Reflect\uc0\u937 \u931  :: RecursiveMirror\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ollama_model_tools.py                       # list, pull, switch, and warm Ollama models for dev sessions
+\f1 \uc0\u10230
+\f0  OllamaTools\uc0\u931  :: ModelCaretaker\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  start_ollama_windows.ps1                    # Windows helper to start service and warm models
+\f1 \uc0\u10230
+\f0  Start\uc0\u936  :: Ritual_PS1\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  start_ollama_unix.sh                        # macOS/Linux helper to start daemon and warm models
+\f1 \uc0\u10230
+\f0  Start\uc0\u936  :: Ritual_Unix\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  bridge_chatdev_ollama.py                    # unified surface to route ChatDev calls through local Ollama
+\f1 \uc0\u10230
+\f0  Bridge\uc0\u937 \u931  :: ConduitPath\
+\uc0\u9474   \u9492 \u9472  ci_ollama_ai_runner.py                      # PR check that exercises local-LLM analyzers (mocked safely in CI)
+\f1 \uc0\u10230
+\f0  Test\uc0\u931 \u937  :: AI_OracleCI\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  src_integration_hub/                           # language-agnostic integration layer (Python) coordinating agents/tools
+\f1 \uc0\u10230
+\f0  Integratio\uc0\u931 Hub :: CrossLang_Lattice\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ai_hub/                                     # local LLM backbones and adapters
+\f1 \uc0\u10230
+\f0  AI\uc0\u937 \u931  :: Ollama_Anchor\
+\uc0\u9474   \u9474   \u9492 \u9472  ollama_hub.py                            # model discovery/selection/generation API for Ollama
+\f1 \uc0\u10230
+\f0  \uc0\u926 Ollama\u936  :: ModelMatrix\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  copilot_hub/                                # GitHub Copilot augmentation module set
+\f1 \uc0\u10230
+\f0  Copilot\uc0\u937 \u931  :: ContextAugSys\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  copilot_workspace_enhancer.py            # builds cross-file context graph and feature hints
+\f1 \uc0\u10230
+\f0  Graph\uc0\u937  :: ContextNet\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  copilot_enhancement_bridge.py            # memory palace + suggestion logging for persistent improvements
+\f1 \uc0\u10230
+\f0  Bridge\uc0\u926  :: Memory_Palace\
+\uc0\u9474   \u9474   \u9492 \u9472  copilot_vscode_integration.py            # marshals hints and telemetry back to the VS Code extension
+\f1 \uc0\u10230
+\f0  Integration\uc0\u926  :: VS_Extend\
+\uc0\u9474   \u9492 \u9472  integration_bridges/                        # cross-agent wiring (ChatDev, Copilot, Ollama)
+\f1 \uc0\u10230
+\f0  Bridge\uc0\u931 \u931  :: AgentWeave\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  chatdev_integration.py                   # ChatDev availability checks, env, and process launching
+\f1 \uc0\u10230
+\f0  ChatDev\uc0\u926  :: Ritual_Launch\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ollama_integration.py                    # Ollama health checks and specialization profiles
+\f1 \uc0\u10230
+\f0  Ollama\uc0\u936  :: ProfileMatrix\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  chatdev_copilot_arch_bridge.py           # architectural bridge: Copilot
+\f5 \uc0\u8596
+\f0  ChatDev context exchange
+\f1 \uc0\u10230
+\f0  \uc0\u926 ArchBridge\u937  :: ContextFusion\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  chatdev_ollama_llm_adapter.py            # adapter routing ChatDev LLM calls into Ollama for offline runs
+\f1 \uc0\u10230
+\f0  \uc0\u926 Adapter\u931  :: InvocationOffline\
+\uc0\u9474      \u9492 \u9472  chatdev_environment_patcher.py           # environment patcher for paths, configs, and API fallbacks
+\f1 \uc0\u10230
+\f0  EnvPatch\uc0\u937  :: Recovery_Spell\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  github_root/                                   # GitHub metadata and workflow automation
+\f1 \uc0\u10230
+\f0  \uc0\u931 HubMeta :: RitualCI\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  issue_template_bug_report.yml               # guided bug report form for consistent triage
+\f1 \uc0\u10230
+\f0  Bug\uc0\u937  :: Ritual_Report\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  issue_template_feature_request.yml          # guided feature request form
+\f1 \uc0\u10230
+\f0  Feature\uc0\u936  :: WishForm\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  pull_request_template.md                    # PR checklist ensuring quality and story of change
+\f1 \uc0\u10230
+\f0  PR\uc0\u931  :: MergeCodex\
+\uc0\u9474   \u9492 \u9472  workflows_root/                             # CI/CD workflows used by GitHub Actions
+\f1 \uc0\u10230
+\f0  Ritual\uc0\u937 \u931  :: CI_Codex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  workflows_ci.yml                         # lint, typecheck, unit tests across packages/apps
+\f1 \uc0\u10230
+\f0  Lint\uc0\u937  :: TypeCheck\u931 \
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  workflows_chatdev_smoke.yml              # safe ChatDev dry-run pipeline using mocks
+\f1 \uc0\u10230
+\f0  ChatDev\uc0\u926  :: MockDance\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  workflows_release.yml                    # release management and version tagging
+\f1 \uc0\u10230
+\f0  Release\uc0\u937  :: TagCodex\
+\uc0\u9474      \u9492 \u9472  workflows_labeler.yml                    # automatic PR labeling rules
+\f1 \uc0\u10230
+\f0  Label\uc0\u936  :: AutoGlyph\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  meta_vibe/                                     # AI \'93vibe\'94 center and decision history to guide agents
+\f1 \uc0\u10230
+\f0  \uc0\u926 Meta\u931  :: VibeCore\u8734  :: Decision_Resonance\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  meta_patterns_overview.mdc                  # cross-links and summaries of pattern docs across the repo
+\f1 \uc0\u10230
+\f0  Overview\uc0\u936 \u931  :: PatternAtlas
+\f2 \uc0\u8855
+\f0  OmniLink\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  meta_taxonomy.mdc                           # canonical naming, folder semantics, OmniTag/MegaTag mapping
+\f1 \uc0\u10230
+\f0  Taxono\uc0\u931 \u923  :: NamingCodex
+\f2 \uc0\u8756
+\f0  SymbolMap\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  prompts_vault/                              # reusable prompt libraries for tools and agents
+\f1 \uc0\u10230
+\f0  Vault\uc0\u926  :: Prompt_Archive\u937 \
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  prompts_system.mdc                       # global guardrails, tone, and safety rails for assistants
+\f1 \uc0\u10230
+\f0  System\uc0\u936  :: GuardianCodex
+\f6 \uc0\u10023
+\f0 \
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  prompts_refactor_playbook.mdc            # structured refactor strategies and recipes
+\f1 \uc0\u10230
+\f0  Refactor\uc0\u931  :: Ritual_Playbook\
+\uc0\u9474   \u9474   \u9492 \u9472  prompts_review_checklist.mdc             # code review rubric for both humans and AIs
+\f1 \uc0\u10230
+\f0  Review\uc0\u937 \u931  :: Judgment_Rite\
+\uc0\u9474   \u9492 \u9472  traces_adr/                                 # architectural decision records and rationale
+\f1 \uc0\u10230
+\f0  ADR\uc0\u926  :: TraceCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ADR-0001-architecture.mdc                # global architecture choices and trade-offs
+\f1 \uc0\u10230
+\f0  Arch\uc0\u936 \u931  :: PrimeDecision\
+\uc0\u9474      \u9492 \u9472  ADR-0002-data-access.mdc                 # persistence/data access patterns and decisions
+\f1 \uc0\u10230
+\f0  Data\uc0\u937 \u931  :: AccessCodex\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  notebooks_lab/                                 # Jupyter experimentation for audits, analysis, and demos
+\f1 \uc0\u10230
+\f0  Lab\uc0\u926 \u931  :: Experimental_Rite\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  00_repo_overview.ipynb                      # auto-map structure
+\f7 \uc0\u8594
+\f0  context summary notebook
+\f1 \uc0\u10230
+\f0  Map\uc0\u931  :: Repo\u937 Atlas\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  10_copilot_context_audit.ipynb              # measures/enhances Copilot context quality
+\f1 \uc0\u10230
+\f0  Audit\uc0\u926  :: Copilot\u936 Inspect\
+\uc0\u9474   \u9492 \u9472  20_llm_bench_local.ipynb                    # compares local Ollama models against common tasks
+\f1 \uc0\u10230
+\f0  Bench\uc0\u937 \u931  :: LLM_TrialCodex\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  obsidian_vault/                                # portable Obsidian vault storing living knowledge
+\f1 \uc0\u10230
+\f0  Vault\uc0\u937  :: KnowledgeTome\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  OBSIDIAN_KNOWLEDGE_CONTEXT.md               # core concepts, glossary, and onboarding map
+\f1 \uc0\u10230
+\f0  Context\uc0\u926  :: LexiconMap\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ENHANCED_SYSTEM_TODO_QUEST_LOG.md           # open quests/todos with RPG-style progression
+\f1 \uc0\u10230
+\f0  Quest\uc0\u937 \u931  :: TaskSaga\
+\uc0\u9474   \u9492 \u9472  ROSETTA_QUEST_STATUS_REPORT.md              # questline progress reports and milestones
+\f1 \uc0\u10230
+\f0  Rosetta\uc0\u931  :: ProgressLedger\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  obsidian_settings_example.json                 # example Obsidian plugin configuration and conventions
+\f1 \uc0\u10230
+\f0  Config\uc0\u926  :: Plugin_Sigil\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  godot_demo_project/                            # Godot integration sandbox for AI-driven gameplay/NPC logic
+\f1 \uc0\u10230
+\f0  Godot\uc0\u931  :: Sandbox\u936 Play\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  project_godot.project                       # Godot project descriptor for this demo workspace
+\f1 \uc0\u10230
+\f0  Project\uc0\u926  :: RitualFile\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  godot_scenes/                               # scene assets used to exercise AI hooks
+\f1 \uc0\u10230
+\f0  Scene\uc0\u937 \u931  :: GlyphPlay\
+\uc0\u9474   \u9474   \u9492 \u9472  scene_demo.tscn                          # demo scene showcasing AI interactions
+\f1 \uc0\u10230
+\f0  Demo\uc0\u931  :: NPC_RitualScene\
+\uc0\u9474   \u9492 \u9472  godot_scripts/                              # game logic and AI bridge scripts
+\f1 \uc0\u10230
+\f0  Script\uc0\u936 \u931  :: PlayCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  quantum_bridge.py                        # calls ChatDev/Ollama to drive NPC decisions
+\f1 \uc0\u10230
+\f0  Bridge\uc0\u926  :: QuantumInvocation\
+\uc0\u9474      \u9492 \u9472  ai_npc_agent.gd                          # Godot script implementing NPC behavior with AI responses
+\f1 \uc0\u10230
+\f0  NPC\uc0\u937 \u931  :: Agent\u936 Play\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  tools_dev/                                     # developer tools for scaffolding and codemods
+\f1 \uc0\u10230
+\f0  Tools\uc0\u926 \u931  :: Forge\u937 \
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  codemods_rename_patterns.ts                 # codemod applying naming/pattern transforms
+\f1 \uc0\u10230
+\f0  Codemod\uc0\u937  :: Rename_Rite\
+\uc0\u9474   \u9492 \u9472  scaffolds_feature.gen.ts                    # generator creating feature skeletons with patterns applied
+\f1 \uc0\u10230
+\f0  Scaffold\uc0\u926  :: Feature_Seed\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  tests_crosscutting/                            # repository-level tests spanning multiple apps/packages
+\f1 \uc0\u10230
+\f0  Test\uc0\u931 \u8734  :: CrossLayerRite\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  tests_e2e/                                  # end-to-end system tests validating integrations
+\f1 \uc0\u10230
+\f0  Ritual\uc0\u937 \u931  :: FullPathTest\
+\uc0\u9474   \u9492 \u9472  tests_smoke/                                # fast smoke tests for CI confidence
+\f1 \uc0\u10230
+\f0  Smoke\uc0\u936 \u931  :: RapidCheck\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  docs_handbook/                                 # human-facing documentation set
+\f1 \uc0\u10230
+\f0  Docs\uc0\u937  :: HumanCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  docs_getting_started.md                     # install/run quickstart and FAQs
+\f1 \uc0\u10230
+\f0  Start\uc0\u926  :: GuidePrimer\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  docs_architecture.md                        # C4 (or similar) architecture read with diagrams
+\f1 \uc0\u10230
+\f0  Arch\uc0\u937 \u931  :: DiagramCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  docs_decision_log.md                        # executive-level summary of ADRs and reasoning
+\f1 \uc0\u10230
+\f0  Decision\uc0\u926  :: Log\u931 \
+\uc0\u9474   \u9492 \u9472  docs_styleguide.md                          # code/style conventions for consistent PRs
+\f1 \uc0\u10230
+\f0  Style\uc0\u936 \u931  :: GuidelineGlyph\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  apps_root/                                     # monorepo applications (each uniquely named for search clarity)
+\f1 \uc0\u10230
+\f0  Apps\uc0\u937 \u931  :: BranchLattice\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_api/                                    # backend API application providing services and endpoints
+\f1 \uc0\u10230
+\f0  API\uc0\u926  :: ServiceCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_api_cursor/                          # local Cursor rules dedicated to the API app
+\f1 \uc0\u10230
+\f0  Cursor\uc0\u936 \u931  :: API_Rulescope\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  app_api_cursor_rules/                 # API-scoped rule files consumed by AI tools
+\f1 \uc0\u10230
+\f0  Rules\uc0\u926  :: API_DomainGlyphs\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  api_rules_architecture.mdc         # API architecture conventions and boundaries
+\f1 \uc0\u10230
+\f0  Arch\uc0\u937 \u931  :: APIStructureRite\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  api_rules_auth_middleware.mdc      # authentication middleware patterns and examples
+\f1 \uc0\u10230
+\f0  Auth\uc0\u926  :: GuardCodex\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  api_rules_database_patterns.mdc    # data access rules, transactions, and migrations
+\f1 \uc0\u10230
+\f0  DB\uc0\u936 \u931  :: PersistenceGlyph\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  api_rules_rest_patterns.mdc        # REST endpoint patterns and error semantics
+\f1 \uc0\u10230
+\f0  REST\uc0\u937 \u931  :: EndpointRite\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  api_rules_schema_patterns.mdc      # schema/validation strategy and contracts
+\f1 \uc0\u10230
+\f0  Schema\uc0\u926  :: ValidatorSigil\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  api_rules_trpc_patterns.mdc        # tRPC design rules for RPC layers
+\f1 \uc0\u10230
+\f0  RPC\uc0\u937 \u931  :: tRPCCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_api_src/                             # API source code organized for clarity and reuse
+\f1 \uc0\u10230
+\f0  Src\uc0\u926  :: ServiceLogicCore\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_api_routes/                       # route handlers mapping HTTP/RPC to services
+\f1 \uc0\u10230
+\f0  Routes\uc0\u937 \u931  :: InvocationPaths\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_api_services/                     # business logic services invoked by routes
+\f1 \uc0\u10230
+\f0  Services\uc0\u926  :: LogicMatrix\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_api_models/                       # data models/entities used by services
+\f1 \uc0\u10230
+\f0  Models\uc0\u937 \u931  :: EntityGlyphs\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  app_api_index.ts                      # API entrypoint bootstrapping the server
+\f1 \uc0\u10230
+\f0  Index\uc0\u926  :: InvocationGate\
+\uc0\u9474   \u9474   \u9492 \u9472  app_api_package.json                     # API application manifest for tooling/package managers
+\f1 \uc0\u10230
+\f0  Manifest\uc0\u937  :: APIPackage\
+\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_dashboard/                              # internal dashboard and web console for operators
+\f1 \uc0\u10230
+\f0  Dashboard\uc0\u937 \u931  :: ControlCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_dashboard_cursor/                    # dashboard-specific Cursor rules
+\f1 \uc0\u10230
+\f0  Cursor\uc0\u926  :: DashboardScope\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  app_dashboard_cursor_rules/           # rule set shaping dashboard UI generation
+\f1 \uc0\u10230
+\f0  Rules\uc0\u937 \u931  :: UIDesignGlyphs\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  dashboard_rules_dashboard_patterns.mdc  # UI/state patterns and conventions
+\f1 \uc0\u10230
+\f0  UIDesign\uc0\u931  :: RitualMap\
+\uc0\u9474   \u9474   \u9492 \u9472  app_dashboard_src/                       # dashboard source code and composition root
+\f1 \uc0\u10230
+\f0  Src\uc0\u926  :: ConsoleMatrix\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_dashboard_pages/                  # routed pages and layouts
+\f1 \uc0\u10230
+\f0  Pages\uc0\u937 \u931  :: NavigationGlyphs\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_dashboard_components/             # reusable UI components for the dashboard
+\f1 \uc0\u10230
+\f0  Components\uc0\u926  :: ModularUI\
+\uc0\u9474   \u9474      \u9492 \u9472  app_dashboard_index.tsx               # dashboard entry component
+\f1 \uc0\u10230
+\f0  Index\uc0\u937 \u931  :: EntryPortal\
+\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_desktop/                                # desktop application (Electron/Tauri) for local UX
+\f1 \uc0\u10230
+\f0  Desktop\uc0\u926  :: LocalCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_desktop_cursor/                      # desktop-specific Cursor guidance
+\f1 \uc0\u10230
+\f0  Cursor\uc0\u937 \u931  :: DesktopScope\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  app_desktop_cursor_rules/             # desktop rule set for AI assistants
+\f1 \uc0\u10230
+\f0  Rules\uc0\u926  :: DesktopGlyphs\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  desktop_rules_desktop_patterns.mdc # desktop patterns including IPC and shell integration
+\f1 \uc0\u10230
+\f0  IPC\uc0\u931  :: RitualDesktop\
+\uc0\u9474   \u9474   \u9492 \u9472  app_desktop_src/                         # desktop codebase (main/renderer as needed)
+\f1 \uc0\u10230
+\f0  Src\uc0\u937 \u931  :: LocalMatrix\
+\uc0\u9474   \u9474      \u9492 \u9472  app_desktop_main.ts                   # desktop main process entrypoint
+\f1 \uc0\u10230
+\f0  Main\uc0\u926  :: EntryInvocation\
+\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_engine/                                 # orchestration/engine core handling pipelines
+\f1 \uc0\u10230
+\f0  Engine\uc0\u926 \u931  :: OrchestratorCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_engine_cursor/                       # Cursor guidance scoped to engine rules
+\f1 \uc0\u10230
+\f0  Cursor\uc0\u937 \u931  :: EngineScope\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  app_engine_cursor_rules/              # engine-specific rulesets
+\f1 \uc0\u10230
+\f0  Rules\uc0\u926  :: PipelineGlyphs\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  engine_rules_engine_patterns.mdc   # conventions for pipeline orchestration and flow
+\f1 \uc0\u10230
+\f0  Flow\uc0\u937 \u931  :: RitualPatterns\
+\uc0\u9474   \u9474   \u9492 \u9472  app_engine_src/                          # engine source code
+\f1 \uc0\u10230
+\f0  Src\uc0\u926  :: CoreLattice\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_engine_core/                      # core primitives and runtime abstractions
+\f1 \uc0\u10230
+\f0  Core\uc0\u937 \u931  :: PrimitiveCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_engine_pipelines/                 # orchestrated execution flows
+\f1 \uc0\u10230
+\f0  Pipelines\uc0\u926  :: FlowSigils\
+\uc0\u9474   \u9474      \u9492 \u9472  app_engine_index.ts                   # engine entrypoint bootstrapping orchestrator
+\f1 \uc0\u10230
+\f0  Index\uc0\u937 \u931  :: InvocationCore\
+\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_website/                                # public website/marketing site
+\f1 \uc0\u10230
+\f0  Website\uc0\u926 \u931  :: OutreachCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_website_cursor/                      # Cursor rules guiding website content
+\f1 \uc0\u10230
+\f0  Cursor\uc0\u937 \u931  :: UXScope\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  app_website_cursor_rules/             # UX-specific rules for site generation
+\f1 \uc0\u10230
+\f0  Rules\uc0\u926  :: SiteGlyphs\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  website_rules_website_patterns.mdc # content/UX conventions
+\f1 \uc0\u10230
+\f0  UX\uc0\u937 \u931  :: RitualWeb\
+\uc0\u9474   \u9474   \u9492 \u9472  app_website_src/                         # website source code
+\f1 \uc0\u10230
+\f0  Src\uc0\u926  :: SiteLattice\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  app_website_pages/                    # site pages and layouts
+\f1 \uc0\u10230
+\f0  Pages\uc0\u937 \u931  :: OutreachGlyphs\
+\uc0\u9474   \u9474      \u9492 \u9472  app_website_index.tsx                 # site entrypoint component
+\f1 \uc0\u10230
+\f0  Index\uc0\u926  :: SiteInvocation\
+\
+\uc0\u9474   \u9492 \u9472  app_shared/                                 # shared cross-app logic/libraries
+\f1 \uc0\u10230
+\f0  Shared\uc0\u937 \u931  :: CommonCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  shared_ui/                               # primitive UI components and DS tokens
+\f1 \uc0\u10230
+\f0  UI\uc0\u926 \u931  :: PrimitiveGlyphs\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  shared_hooks/                            # reusable logic hooks
+\f1 \uc0\u10230
+\f0  Hooks\uc0\u937 \u931  :: InvocationSigils\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  shared_utils/                            # helper functions/utilities
+\f1 \uc0\u10230
+\f0  Utils\uc0\u926 \u931  :: ToolGlyphs\
+\uc0\u9474      \u9492 \u9472  shared_types/                            # shared types/interfaces
+\f1 \uc0\u10230
+\f0  Types\uc0\u937 \u931  :: ContractCodex\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  worker_root/                                   # background workers and queues
+\f1 \uc0\u10230
+\f0  Worker\uc0\u926 \u931  :: AsyncCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  worker_src/                                 # worker logic
+\f1 \uc0\u10230
+\f0  Src\uc0\u937 \u931  :: AsyncLattice\
+\uc0\u9474   \u9474   \u9492 \u9472  worker_index.ts                          # worker entrypoint script
+\f1 \uc0\u10230
+\f0  Index\uc0\u926  :: AsyncInvocation\
+\uc0\u9474   \u9492 \u9472  worker_README.md                            # worker-specific documentation
+\f1 \uc0\u10230
+\f0  Doc\uc0\u937 \u931  :: WorkerTome\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  data_fixtures/                                 # seed/demo/test data
+\f1 \uc0\u10230
+\f0  Data\uc0\u926 \u931  :: RitualSeeds\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  data_seeds/                                 # data seeding scripts and constants
+\f1 \uc0\u10230
+\f0  Seeds\uc0\u937 \u931  :: GeneratorGlyphs\
+\uc0\u9474   \u9492 \u9472  data_samples/                               # example payloads for dev/test
+\f1 \uc0\u10230
+\f0  Samples\uc0\u926 \u931  :: TrialCodex\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  packages_root/                                 # reusable packages
+\f1 \uc0\u10230
+\f0  Packages\uc0\u937 \u931  :: ModuleCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  packages_cursor/                            # Cursor rules scoped to packages
+\f1 \uc0\u10230
+\f0  Cursor\uc0\u926 \u931  :: PackageScope\
+\uc0\u9474   \u9474   \u9492 \u9472  packages_cursor_rules/                   # rules guiding package authoring
+\f1 \uc0\u10230
+\f0  Rules\uc0\u937 \u931  :: AuthorGlyphs\
+\uc0\u9474   \u9474      \u9492 \u9472  packages_rules_package_patterns.mdc   # package conventions and patterns
+\f1 \uc0\u10230
+\f0  Ritual\uc0\u937 \u931  :: PackagePatterns\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  pkg_config/                                 # shareable config presets (ts/eslint/prettier)
+\f1 \uc0\u10230
+\f0  Config\uc0\u926  :: PresetCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  packages_config_package.json             # manifest for configs
+\f1 \uc0\u10230
+\f0  Manifest\uc0\u937 \u931  :: ConfigPackage\
+\uc0\u9474   \u9474   \u9492 \u9472  packages_config_index.js                 # exports presets
+\f1 \uc0\u10230
+\f0  Index\uc0\u926 \u931  :: ConfigExports\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  pkg_ui/                                     # design system components
+\f1 \uc0\u10230
+\f0  UI\uc0\u937 \u931  :: DS_Codex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  packages_ui_src/                         # source for design system
+\f1 \uc0\u10230
+\f0  Src\uc0\u926  :: UI_Primitives\
+\uc0\u9474   \u9474   \u9492 \u9472  packages_ui_package.json                 # manifest
+\f1 \uc0\u10230
+\f0  Manifest\uc0\u937 \u931  :: UI_Package\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  pkg_lint/                                   # eslint plugin/presets
+\f1 \uc0\u10230
+\f0  Lint\uc0\u926 \u931  :: RuleCodex\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  packages_lint_package.json               # manifest
+\f1 \uc0\u10230
+\f0  Manifest\uc0\u937 \u931  :: LintPackage\
+\uc0\u9474   \u9474   \u9492 \u9472  packages_lint_rules.js                   # rules implementation
+\f1 \uc0\u10230
+\f0  Rules\uc0\u937 \u931  :: LintGlyphs\
+\uc0\u9474   \u9492 \u9472  pkg_types/                                  # type libraries
+\f1 \uc0\u10230
+\f0  Types\uc0\u926 \u931  :: ContractCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  packages_types_src/                      # type declarations
+\f1 \uc0\u10230
+\f0  Src\uc0\u937 \u931  :: TypeLattice\
+\uc0\u9474      \u9492 \u9472  packages_types_package.json              # manifest
+\f1 \uc0\u10230
+\f0  Manifest\uc0\u937 \u931  :: TypesPackage\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  docker_root/                                   # containerization assets
+\f1 \uc0\u10230
+\f0  Docker\uc0\u937 \u931  :: VesselCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  dockerfile_root                             # Docker build file for root image
+\f1 \uc0\u10230
+\f0  File\uc0\u926 \u931  :: BuildSigil\
+\uc0\u9474   \u9492 \u9472  docker_compose_root.yml                     # docker-compose services
+\f1 \uc0\u10230
+\f0  Compose\uc0\u937 \u931  :: OrchestrationGlyphs\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  infra_root/                                    # infra-as-code
+\f1 \uc0\u10230
+\f0  Infra\uc0\u926 \u931  :: CloudCodex\
+\uc0\u9474   \u9492 \u9472  terraform_root/                             # Terraform stack baseline
+\f1 \uc0\u10230
+\f0  Terraform\uc0\u937 \u931  :: ProvisionSigils\
+\uc0\u9474      \u9492 \u9472  terraform_main.tf                        # cloud infrastructure definition
+\f1 \uc0\u10230
+\f0  Main\uc0\u926 \u931  :: CloudInvocation\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_cursor/                                 # legacy .cursor directory preserved for compatibility
+\f1 \uc0\u10230
+\f0  Cursor
+\f2 \uc0\u10209
+\f0 Legacy\uc0\u931  :: BackwardRune
+\f2 \uc0\u8756
+\f0  CompatWard\
+\uc0\u9474   \u9492 \u9472  rules/                                      # original rule definitions (superseded by cursor_root/)
+\f1 \uc0\u10230
+\f0  RuleTrove\uc0\u937  :: ElderCodex\
+\uc0\u9474      \u9492 \u9472  writing-tests.mdc                        # early patterns for test-writing prompts & style
+\f1 \uc0\u10230
+\f0  TestRite_\uc0\u945  :: ProtoLitany\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_vscode/                                 # legacy .vscode directory (kept for migration testing)
+\f1 \uc0\u10230
+\f0  VSCode_\uc0\u937  :: ArchiveCell
+\f2 \uc0\u8756
+\f0  MigrateProbe\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  settings.json                               # Copilot hints, notebooks, Obsidian markdown links
+\f1 \uc0\u10230
+\f0  PrefGlyph\uc0\u931  :: OmniBridgeNotes\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  extensions.json                             # curated extensions (Python, Jupyter, Godot, YAML, Markdown)
+\f1 \uc0\u10230
+\f0  ExtList\uc0\u937  :: RitualKit\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  launch.json                                 # debug profiles: api/desktop/website, Godot attach
+\f1 \uc0\u10230
+\f0  DebugMesh\uc0\u926  :: AttachSigils\
+\uc0\u9474   \u9492 \u9472  tasks.json                                  # tasks for ChatDev phases, Ollama ops, tests
+\f1 \uc0\u10230
+\f0  TaskRun_\uc0\u920  :: WorkChants\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_vscode_extension/                       # original vscode-extension folder (pre-bridge rename)
+\f1 \uc0\u10230
+\f0  ExtLegacy\uc0\u931  :: PreBridgeId\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  package.json                                # extension manifest (legacy id)
+\f1 \uc0\u10230
+\f0  Manifest_\uc0\u956  :: IdentityEcho\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  README.md                                   # usage documentation
+\f1 \uc0\u10230
+\f0  Guide\uc0\u937  :: UserGrimoire\
+\uc0\u9474   \u9492 \u9472  src/                                        # extension TypeScript source
+\f1 \uc0\u10230
+\f0  Src\uc0\u926  :: InvocationWires\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  extension.ts                             # registers commands and output channels
+\f1 \uc0\u10230
+\f0  EntryRune :: CommandGate\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  copilot.ts                               # \'93Enhance Copilot Context\'94 command
+\f1 \uc0\u10230
+\f0  CopilotCharm :: ContextLift\
+\uc0\u9474      \u9492 \u9472  ollama.ts                                # status-bar model picker & quick prompts
+\f1 \uc0\u10230
+\f0  OllamaDial :: PromptSwitch\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_scripts/                                # legacy scripts folder
+\f1 \uc0\u10230
+\f0  Scripts_Archive\uc0\u931  :: ToolReliquary\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  enhance_copilot_context.py                  # active file
+\f7 \uc0\u8594
+\f0  hints for Copilot (early version)
+\f1 \uc0\u10230
+\f0  HintForge_\uc0\u945  :: FileAura\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  chatdev_phase_orchestrator.py               # local ChatDev runner (legacy path)
+\f1 \uc0\u10230
+\f0  PhaseDance_\uc0\u945  :: LocalConductor\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  enhanced_reflection_system.py               # self-critique & patch proposals
+\f1 \uc0\u10230
+\f0  MirrorLoop_\uc0\u945  :: PatchOracle\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ollama_model_tools.py                       # model list/pull/switch/default ops
+\f1 \uc0\u10230
+\f0  ModelKit_\uc0\u945  :: KeeperSigils\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  start_ollama.ps1                            # Windows helper (service + warmup)
+\f1 \uc0\u10230
+\f0  Start\uc0\u936 _PS1 :: WinIgnition\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  start_ollama.sh                             # macOS/Linux helper
+\f1 \uc0\u10230
+\f0  Start\uc0\u936 _Unix :: NixIgnition\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  bridge_chatdev_ollama.py                    # ChatDev
+\f5 \uc0\u8644
+\f0 Ollama call bridge
+\f1 \uc0\u10230
+\f0  Conduit_\uc0\u945  :: ChatDev
+\f5 \uc0\u8596
+\f0 Ollama\
+\uc0\u9474   \u9492 \u9472  ci/                                         # CI helper scripts
+\f1 \uc0\u10230
+\f0  CI_Cell :: RitualPipes\
+\uc0\u9474      \u9492 \u9472  ollama_ai_runner.py                      # PR check using local LLM (mocked in CI)
+\f1 \uc0\u10230
+\f0  AITest_\uc0\u945  :: PRAugury\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_src/                                    # legacy src folder (pre-src_integration_hub rename)
+\f1 \uc0\u10230
+\f0  SrcElder\uc0\u937  :: PreHubWeave\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ai/                                         # Ollama hub
+\f1 \uc0\u10230
+\f0  AI_Cradle :: OllamaNest\
+\uc0\u9474   \u9474   \u9492 \u9472  ollama_hub.py                            # original Ollama discovery/selection/generation module
+\f1 \uc0\u10230
+\f0  ModelMatrix_\uc0\u945  :: FindInvoke\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  copilot/                                    # Copilot augmentation
+\f1 \uc0\u10230
+\f0  CopilotEnclave :: AidRunes\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  copilot_workspace_enhancer.py            # repo context graph (first pass)
+\f1 \uc0\u10230
+\f0  ContextGraph_\uc0\u945  :: WebSigil\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  copilot_enhancement_bridge.py            # suggestion logging + memory palace
+\f1 \uc0\u10230
+\f0  MemoryBridge_\uc0\u945  :: RecallLattice\
+\uc0\u9474   \u9474   \u9492 \u9472  vscode_integration.py                    # VS Code-facing shims
+\f1 \uc0\u10230
+\f0  VSShim_\uc0\u945  :: EditorBind\
+\uc0\u9474   \u9492 \u9472  integration/                                # bridges
+\f1 \uc0\u10230
+\f0  BridgeYard_\uc0\u945  :: LinkRites\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  chatdev_integration.py                   # ChatDev availability / process
+\f1 \uc0\u10230
+\f0  ChatDevProbe_\uc0\u945  :: LaunchCheck\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ollama_integration.py                    # Ollama runtime profiles
+\f1 \uc0\u10230
+\f0  OllamaProbe_\uc0\u945  :: ProfileLex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  advanced_chatdev_copilot_integration.py  # Copilot
+\f5 \uc0\u8596
+\f0 ChatDev context bridge
+\f1 \uc0\u10230
+\f0  ArchBridge_\uc0\u945  :: FusionRoute\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  Update-ChatDev-to-use-Ollama.py          # adapter to drive ChatDev with Ollama
+\f1 \uc0\u10230
+\f0  AdapterNote_\uc0\u945  :: DriverPatch\
+\uc0\u9474      \u9492 \u9472  ChatDevEnvironmentPatcher.py             # env vars/paths/config patcher
+\f1 \uc0\u10230
+\f0  EnvPatch_\uc0\u945  :: SalvageRite\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_github/                                 # legacy .github directory
+\f1 \uc0\u10230
+\f0  GH_Archive\uc0\u937  :: RitualHistory\
+\uc0\u9474   \u9492 \u9472  workflows/                                  # GitHub Actions workflows
+\f1 \uc0\u10230
+\f0  CI_Grids :: ElderFlows\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ci.yml                                   # earlier CI (lint/type/unit)
+\f1 \uc0\u10230
+\f0  CI_Prime :: LintTypeUnit\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  chatdev-smoke.yml                        # mocked ChatDev pipeline
+\f1 \uc0\u10230
+\f0  CI_Smoke :: MockRitual\
+\uc0\u9474      \u9492 \u9472  release.yml                              # release automation (tags/changelog)
+\f1 \uc0\u10230
+\f0  CI_Release :: TagChronicler\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_meta/                                   # legacy meta folder
+\f1 \uc0\u10230
+\f0  MetaElder\uc0\u931  :: ProvenanceVault\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  patterns-overview.mdc                       # earlier pattern index
+\f1 \uc0\u10230
+\f0  Atlas_\uc0\u945  :: PatternMap\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  taxonomy.mdc                                # earlier naming/semantics
+\f1 \uc0\u10230
+\f0  Taxon_\uc0\u945  :: NameLaw\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  prompts/                                    # early prompt libraries
+\f1 \uc0\u10230
+\f0  PromptCell_\uc0\u945  :: SeedRites\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  system.mdc                               # initial global guardrails
+\f1 \uc0\u10230
+\f0  SystemRune_\uc0\u945  :: GuardianLaw\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  refactor-playbook.mdc                    # refactor strategies (early)
+\f1 \uc0\u10230
+\f0  RefactorBook_\uc0\u945  :: CraftPaths\
+\uc0\u9474   \u9474   \u9492 \u9472  review-checklist.mdc                     # early review rubric
+\f1 \uc0\u10230
+\f0  ReviewList_\uc0\u945  :: JudgementKeys\
+\uc0\u9474   \u9492 \u9472  traces/                                     # historical ADRs
+\f1 \uc0\u10230
+\f0  ADR_Trove_\uc0\u945  :: DecisionRelics\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ADR-0001-architecture.mdc                # first architecture ADR
+\f1 \uc0\u10230
+\f0  ADR_0001 :: ArchGenesis\
+\uc0\u9474      \u9492 \u9472  ADR-0002-data-access.mdc                 # first data-access ADR
+\f1 \uc0\u10230
+\f0  ADR_0002 :: DataCovenant\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_notebooks/                              # earlier notebooks (superseded)
+\f1 \uc0\u10230
+\f0  LabNotes_\uc0\u945  :: ProtoJupyter\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  00_repo_overview.ipynb                      # quick map of repo structure
+\f1 \uc0\u10230
+\f0  MapBook_\uc0\u945  :: RepoSurvey\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  10_copilot_context_audit.ipynb              # Copilot context quality experiments
+\f1 \uc0\u10230
+\f0  AuditBook_\uc0\u945  :: ContextGauge\
+\uc0\u9474   \u9492 \u9472  20_llm_bench_local.ipynb                    # local-model benchmarks
+\f1 \uc0\u10230
+\f0  BenchBook_\uc0\u945  :: LLMTrials\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_obsidian/                               # early Obsidian vault & settings
+\f1 \uc0\u10230
+\f0  Vault_\uc0\u945  :: ThoughtStone\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  NuSyQ-Hub-Obsidian.vault/                   # original vault
+\f1 \uc0\u10230
+\f0  VaultCore_\uc0\u945  :: QuestLore\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  OBSIDIAN_KNOWLEDGE_CONTEXT.md            # glossary & mental model (legacy)
+\f1 \uc0\u10230
+\f0  Lexicon_\uc0\u945  :: MindMap\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ENHANCED_SYSTEM_TODO_QUEST_LOG.md        # RPG-style quest log (legacy)
+\f1 \uc0\u10230
+\f0  QuestLog_\uc0\u945  :: TaskSaga\
+\uc0\u9474   \u9474   \u9492 \u9472  ROSETTA_QUEST_STATUS_REPORT.md           # status report (legacy)
+\f1 \uc0\u10230
+\f0  Rosetta_\uc0\u945  :: MileLedger\
+\uc0\u9474   \u9492 \u9472  .obsidian.example.json                      # example plugin config
+\f1 \uc0\u10230
+\f0  PluginGhost_\uc0\u945  :: ExampleSigil\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_godot/                                  # prior Godot demo
+\f1 \uc0\u10230
+\f0  Godot_\uc0\u945  :: NPCArcana\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  project.godot                               # project file
+\f1 \uc0\u10230
+\f0  GodotProj_\uc0\u945  :: Keystone\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  scenes/                                     # scenes
+\f1 \uc0\u10230
+\f0  SceneCell_\uc0\u945  :: StageBox\
+\uc0\u9474   \u9474   \u9492 \u9472  DemoScene.tscn                           # NPC behavior experiment scene
+\f1 \uc0\u10230
+\f0  Demo_\uc0\u945  :: RitualStage\
+\uc0\u9474   \u9492 \u9472  scripts/                                    # scripts
+\f1 \uc0\u10230
+\f0  ScriptCell_\uc0\u945  :: PlayWeave\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  quantum_bridge.py                        # ChatDev/Ollama bridge (proto)
+\f1 \uc0\u10230
+\f0  QuantumConduit_\uc0\u945  :: CallWeave\
+\uc0\u9474      \u9492 \u9472  ai_npc_agent.gd                          # scripted NPC agent behavior
+\f1 \uc0\u10230
+\f0  NPC_Script_\uc0\u945  :: ActorRune\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_tools/                                  # prior tools retained for migrations
+\f1 \uc0\u10230
+\f0  ToolBox_\uc0\u945  :: ReliabilityWard\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  scaffolds/feature.gen.ts                    # early scaffolder
+\f1 \uc0\u10230
+\f0  Scaffold_\uc0\u945  :: FeatureSeed\
+\uc0\u9474   \u9492 \u9472  codemods/rename-patterns.ts                 # legacy rename codemod
+\f1 \uc0\u10230
+\f0  Codemod_\uc0\u945  :: RenameChisel\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_tests/                                  # older tests
+\f1 \uc0\u10230
+\f0  TestDeck_\uc0\u945  :: AncestralSuite\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  e2e/                                        # end-to-end tests (legacy layout)
+\f1 \uc0\u10230
+\f0  E2E_\uc0\u945  :: FullPathRite\
+\uc0\u9474   \u9492 \u9472  smoke/                                      # quick CI sanity checks
+\f1 \uc0\u10230
+\f0  Smoke_\uc0\u945  :: QuickAugury\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_docs/                                   # earlier docs
+\f1 \uc0\u10230
+\f0  Docs_\uc0\u945  :: EchoCodex\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  getting-started.md                          # intro & setup (older wording)
+\f1 \uc0\u10230
+\f0  Start_\uc0\u945  :: PathPrimer\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  architecture.md                             # original architecture write-up
+\f1 \uc0\u10230
+\f0  Arch_\uc0\u945  :: FirstFrame\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  decision-log.md                             # legacy decisions & notes
+\f1 \uc0\u10230
+\f0  DeciLog_\uc0\u945  :: Chronicle\
+\uc0\u9474   \u9492 \u9472  styleguide.md                               # former code style rules
+\f1 \uc0\u10230
+\f0  Style_\uc0\u945  :: FormerCanon\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_apps/                                   # pre-canonical app layout
+\f1 \uc0\u10230
+\f0  Apps_\uc0\u945  :: ProtoBranches\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  api/                                        # legacy API app
+\f1 \uc0\u10230
+\f0  API_\uc0\u945  :: ElderService\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  .cursor/                                 # API rulescope (legacy)
+\f1 \uc0\u10230
+\f0  Cursor_API_\uc0\u945  :: DomainFrame\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  rules/                                # rule files
+\f1 \uc0\u10230
+\f0  Rules_API_\uc0\u945  :: GlyphStack\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  architecture.mdc                   # API architecture patterns (legacy phrasing)
+\f1 \uc0\u10230
+\f0  ArchRune_API_\uc0\u945 \
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  auth-middleware.mdc                # middleware rules & examples
+\f1 \uc0\u10230
+\f0  AuthRune_API_\uc0\u945 \
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  database-patterns.mdc              # data access norms
+\f1 \uc0\u10230
+\f0  DBRune_API_\uc0\u945 \
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  rest-patterns.mdc                  # REST guidelines & semantics
+\f1 \uc0\u10230
+\f0  RESTRune_API_\uc0\u945 \
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  schema-patterns.mdc                # validation & evolution
+\f1 \uc0\u10230
+\f0  SchemaRune_API_\uc0\u945 \
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  trpc-patterns.mdc                  # RPC/tRPC conventions
+\f1 \uc0\u10230
+\f0  tRPCRune_API_\uc0\u945 \
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  src/                                     # API sources (legacy)
+\f1 \uc0\u10230
+\f0  Src_API_\uc0\u945  :: LogicYard\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  routes/                               # route handlers
+\f1 \uc0\u10230
+\f0  Routes_API_\uc0\u945  :: InvokePaths\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  services/                             # domain services
+\f1 \uc0\u10230
+\f0  Services_API_\uc0\u945  :: LogicCells\
+\uc0\u9474   \u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  models/                               # entities/models
+\f1 \uc0\u10230
+\f0  Models_API_\uc0\u945  :: EntitySigils\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  index.ts                              # bootstrap for legacy API
+\f1 \uc0\u10230
+\f0  Index_API_\uc0\u945  :: EntryGate\
+\uc0\u9474   \u9474   \u9492 \u9472  package.json                             # legacy API manifest
+\f1 \uc0\u10230
+\f0  Manifest_API_\uc0\u945  :: PackageSeal\
+\uc0\u9474   \u9474 \
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  dashboard/                                  # legacy dashboard
+\f1 \uc0\u10230
+\f0  Dashboard_\uc0\u945  :: ConsoleElder\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  .cursor/                                 # dashboard rulescope
+\f1 \uc0\u10230
+\f0  Cursor_Dash_\uc0\u945  :: UXFrame\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  rules/                                # rules
+\f1 \uc0\u10230
+\f0  Rules_Dash_\uc0\u945  :: GlyphGrid\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  dashboard-patterns.mdc             # UI/state patterns
+\f1 \uc0\u10230
+\f0  UIDesign_Dash_\uc0\u945  :: RitualWeave\
+\uc0\u9474   \u9474   \u9492 \u9472  src/                                     # dashboard sources
+\f1 \uc0\u10230
+\f0  Src_Dash_\uc0\u945  :: ConsoleLattice\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  pages/                                # routed pages
+\f1 \uc0\u10230
+\f0  Pages_Dash_\uc0\u945  :: NavSigils\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  components/                           # UI building blocks
+\f1 \uc0\u10230
+\f0  Components_Dash_\uc0\u945  :: ModularPrims\
+\uc0\u9474   \u9474      \u9492 \u9472  index.tsx                             # entry component
+\f1 \uc0\u10230
+\f0  Index_Dash_\uc0\u945  :: PortalRune\
+\uc0\u9474   \u9474 \
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  desktop/                                    # legacy desktop app
+\f1 \uc0\u10230
+\f0  Desktop_\uc0\u945  :: LocalReliquary\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  .cursor/                                 # desktop rulescope
+\f1 \uc0\u10230
+\f0  Cursor_Desk_\uc0\u945  :: IPCFrame\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  rules/                                # rules
+\f1 \uc0\u10230
+\f0  Rules_Desk_\uc0\u945  :: OSWeave\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  desktop-patterns.mdc               # desktop patterns (IPC/shell)
+\f1 \uc0\u10230
+\f0  IPCRune_\uc0\u945  :: ShellPaths\
+\uc0\u9474   \u9474   \u9492 \u9472  src/                                     # desktop sources
+\f1 \uc0\u10230
+\f0  Src_Desk_\uc0\u945  :: LocalMatrix\
+\uc0\u9474   \u9474      \u9492 \u9472  main.ts                               # main process/bootstrap
+\f1 \uc0\u10230
+\f0  Main_Desk_\uc0\u945  :: IgnitionSigil\
+\uc0\u9474   \u9474 \
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  engine/                                     # legacy orchestration engine
+\f1 \uc0\u10230
+\f0  Engine_\uc0\u945  :: FirstOrchestrator\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  .cursor/                                 # engine rulescope
+\f1 \uc0\u10230
+\f0  Cursor_Eng_\uc0\u945  :: PipelineFrame\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  rules/                                # rules
+\f1 \uc0\u10230
+\f0  Rules_Eng_\uc0\u945  :: FlowGlyphs\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  engine-patterns.mdc                # pipeline/resilience patterns
+\f1 \uc0\u10230
+\f0  FlowRune_\uc0\u945  :: CohortRites\
+\uc0\u9474   \u9474   \u9492 \u9472  src/                                     # engine sources
+\f1 \uc0\u10230
+\f0  Src_Eng_\uc0\u945  :: CoreWeave\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  core/                                 # primitives/scheduler
+\f1 \uc0\u10230
+\f0  Core_Eng_\uc0\u945  :: PrimitiveSet\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  pipelines/                            # orchestration flows
+\f1 \uc0\u10230
+\f0  Pipes_Eng_\uc0\u945  :: PathSigils\
+\uc0\u9474   \u9474      \u9492 \u9472  index.ts                              # legacy engine entry
+\f1 \uc0\u10230
+\f0  Index_Eng_\uc0\u945  :: OrchestrateGate\
+\uc0\u9474   \u9474 \
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  website/                                    # legacy website
+\f1 \uc0\u10230
+\f0  Web_\uc0\u945  :: OutreachEcho\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  .cursor/                                 # website rulescope
+\f1 \uc0\u10230
+\f0  Cursor_Web_\uc0\u945  :: UXFrame\
+\uc0\u9474   \u9474   \u9474   \u9492 \u9472  rules/                                # rules
+\f1 \uc0\u10230
+\f0  Rules_Web_\uc0\u945  :: SiteGlyphs\
+\uc0\u9474   \u9474   \u9474      \u9492 \u9472  website-patterns.mdc               # UX/content conventions (legacy)
+\f1 \uc0\u10230
+\f0  UXRune_\uc0\u945  :: PageChants\
+\uc0\u9474   \u9474   \u9492 \u9472  src/                                     # website sources
+\f1 \uc0\u10230
+\f0  Src_Web_\uc0\u945  :: PageLoom\
+\uc0\u9474   \u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  pages/                                # site pages
+\f1 \uc0\u10230
+\f0  Pages_Web_\uc0\u945  :: LayoutSigils\
+\uc0\u9474   \u9474      \u9492 \u9472  index.tsx                             # entry component
+\f1 \uc0\u10230
+\f0  Index_Web_\uc0\u945  :: EntryRune\
+\uc0\u9474   \u9474 \
+\uc0\u9474   \u9492 \u9472  shared/                                     # legacy shared layer
+\f1 \uc0\u10230
+\f0  Shared_\uc0\u945  :: CommonReliquary\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ui/                                      # shared UI primitives
+\f1 \uc0\u10230
+\f0  UI_Shared_\uc0\u945  :: PrimitiveVault\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  hooks/                                   # shared hooks
+\f1 \uc0\u10230
+\f0  Hooks_Shared_\uc0\u945  :: LogicGlyphs\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  utils/                                   # helpers
+\f1 \uc0\u10230
+\f0  Utils_Shared_\uc0\u945  :: ToolSigils\
+\uc0\u9474      \u9492 \u9472  types/                                   # shared TypeScript types
+\f1 \uc0\u10230
+\f0  Types_Shared_\uc0\u945  :: ContractRelics\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_worker/                                 # legacy worker folder
+\f1 \uc0\u10230
+\f0  Worker_\uc0\u945  :: AsyncRelic\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  src/                                        # worker sources
+\f1 \uc0\u10230
+\f0  Src_Worker_\uc0\u945  :: QueueLoom\
+\uc0\u9474   \u9474   \u9492 \u9472  index.ts                                 # worker bootstrap
+\f1 \uc0\u10230
+\f0  Index_Worker_\uc0\u945  :: JobGate\
+\uc0\u9474   \u9492 \u9472  README.md                                   # run/deploy notes
+\f1 \uc0\u10230
+\f0  Guide_Worker_\uc0\u945  :: RitualScroll\
+\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  legacy_data/                                   # older fixtures & samples
+\f1 \uc0\u10230
+\f0  Data_\uc0\u945  :: SeedReliquary\
+\uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  seeds/                                      # seed datasets
+\f1 \uc0\u10230
+\f0  Seeds_\uc0\u945  :: SproutSigils\
+\uc0\u9474   \u9492 \u9472  samples/                                    # sample payloads
+\f1 \uc0\u10230
+\f0  Samples_\uc0\u945  :: ExampleCodex\
+\
+\uc0\u9492 \u9472  legacy_packages/                               # legacy packages set
+\f1 \uc0\u10230
+\f0  Packages_\uc0\u945  :: ModuleRelics\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  .cursor/                                    # package-scope rulescope (legacy)
+\f1 \uc0\u10230
+\f0  Cursor_Pkg_\uc0\u945  :: ForgeFrame\
+   \uc0\u9474   \u9492 \u9472  rules/                                   # rules
+\f1 \uc0\u10230
+\f0  Rules_Pkg_\uc0\u945  :: AuthorSigils\
+   \uc0\u9474      \u9492 \u9472  package-patterns.mdc                  # authoring rules (historic)
+\f1 \uc0\u10230
+\f0  PkgRune_\uc0\u945  :: CraftCanon\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  config/                                     # legacy config package
+\f1 \uc0\u10230
+\f0  Config_\uc0\u945  :: PresetRelic\
+   \uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  package.json                             # package manifest
+\f1 \uc0\u10230
+\f0  Manifest_Config_\uc0\u945  :: IDSeal\
+   \uc0\u9474   \u9492 \u9472  index.js                                 # exports ESLint/TS/Prettier presets
+\f1 \uc0\u10230
+\f0  Index_Config_\uc0\u945  :: PresetWeave\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  ui/                                         # legacy UI package
+\f1 \uc0\u10230
+\f0  UI_Pkg_\uc0\u945  :: DSRelic\
+   \uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  src/                                     # sources
+\f1 \uc0\u10230
+\f0  Src_UI_\uc0\u945  :: PrimitiveLoom\
+   \uc0\u9474   \u9492 \u9472  package.json                             # manifest
+\f1 \uc0\u10230
+\f0  Manifest_UI_\uc0\u945  :: IDSeal\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  lint/                                       # legacy lint package
+\f1 \uc0\u10230
+\f0  Lint_Pkg_\uc0\u945  :: RuleRelic\
+   \uc0\u9474
+\f4 \'a9\'c0
+\f0 \uc0\u9472  package.json                             # manifest
+\f1 \uc0\u10230
+\f0  Manifest_Lint_\uc0\u945  :: IDSeal\
+   \uc0\u9474   \u9492 \u9472  rules.js                                 # rule presets
+\f1 \uc0\u10230
+\f0  Rules_Lint_\uc0\u945  :: GlyphLaw\
+   \uc0\u9492 \u9472  types/                                      # legacy types package
+\f1 \uc0\u10230
+\f0  Types_Pkg_\uc0\u945  :: ContractRelic\
+
+\f4 \'a9\'c0
+\f0 \uc0\u9472  src/                                     # declarations
+\f1 \uc0\u10230
+\f0  Src_Types_\uc0\u945  :: InterfaceWeave\
+      \uc0\u9492 \u9472  package.json                             # manifest
+\f1 \uc0\u10230
+\f0  Manifest_Types_\uc0\u945  :: IDSeal\
+}

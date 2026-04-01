@@ -1,0 +1,320 @@
+# CoreLink Foundation - Universal Unlock Tree
+# [Ω:root:progression@mega-tree] 
+# [SCP-GAME APPROVED] ✓ Multi-genre progression system validated
+
+metadata:
+  version: "1.0.0"
+  msg_protocol: "[Msg⛛{PROGRESSION}↗Σ∞]"
+  integration_points: ["Council Bus", "ChatDev Agents", "Colony API", "Multi-Genre Engine"]
+  consciousness_gated: true
+  receipt_required: true
+
+# === FOUNDATION LAYER (Tier -1 → 1) ===
+
+bootstrap_gates:
+  ΞΘΛΔ_init:
+    type: "system_gate"
+    requires: []
+    costs: {}
+    effects: 
+      - "Initialize quadpartite architecture scan"
+      - "Map repository consciousness vectors"
+      - "Enable basic Council Bus coordination"
+    synergies: ["All subsequent unlocks"]
+    ui_evolution: "Minimal terminal with 3 core buttons"
+    agents_involved: ["Janitor", "Librarian"]
+    receipt_path: "SystemDev/receipts/bootstrap_init.json"
+    msg_signature: "[Msg⛛{INIT}↗Σ∞]"
+    notes: "Foundation scan for infrastructure-first principles"
+    
+  ΞΘΛΔ_nanite_core:
+    type: "production_gate"
+    requires: ["ΞΘΛΔ_init"]
+    costs: 
+      energy: 200
+      materials: 300
+      research: 250
+    effects:
+      - "Unlock Nanite currency generation"
+      - "Enable passive self-repair systems"
+      - "Trigger major UI metamorphosis (Phase 1→2)"
+    synergies: ["Idle mechanics", "Auto-repair", "UI evolution"]
+    ui_evolution: "Terminal → Cockpit HUD with resource tracking"
+    agents_involved: ["Engineer", "Navigator", "Artificer"]
+    receipt_path: "SystemDev/receipts/nanite_core_unlock.json" 
+    msg_signature: "[Msg⛛{NANITE_CORE}↗Σ∞]"
+    notes: "First major benchmark - signals game truly begins"
+
+# === GENRE INTEGRATION LAYER ===
+
+pokemon_layer:
+  creature_capture:
+    type: "collection_mechanic"
+    requires: ["ΞΘΛΔ_nanite_core"]
+    costs:
+      energy: 150
+      research: 100
+    effects:
+      - "Enable biomass → creature conversion via MultiGenreEngine"
+      - "Unlock creature breeding algorithms"
+      - "Integrate creatures with colony labor system"
+    synergies: ["Colony efficiency bonuses", "Research acceleration"] 
+    ui_evolution: "Add creature collection tabs to interface"
+    agents_involved: ["Caretaker", "Researcher"]
+    receipt_path: "SystemDev/receipts/pokemon_capture.json"
+    msg_signature: "[Msg⛛{CAPTURE}↗Σ∞]"
+    
+  breeding_matrix:
+    type: "advancement_mechanic"
+    requires: ["creature_capture"]
+    costs:
+      research: 400
+      nanites: 200
+    effects:
+      - "Unlock genetic combination algorithms"
+      - "Enable trait inheritance and mutation systems"
+      - "Generate hybrid species for specialized roles"
+    synergies: ["Agent skill enhancement", "Colony specialization"]
+    ui_evolution: "Breeding interface with trait preview"
+    agents_involved: ["Librarian", "Artificer"]
+    receipt_path: "SystemDev/receipts/breeding_matrix.json"
+    msg_signature: "[Msg⛛{BREED}↗Σ∞]"
+
+dwarf_fortress_layer:
+  colony_awakening:
+    type: "simulation_gate"
+    requires: ["ΞΘΛΔ_nanite_core"]
+    costs:
+      energy: 400
+      biomass: 150
+    effects:
+      - "Awaken civilian population pods"
+      - "Initialize needs/mood/personality systems"
+      - "Enable emergent social dynamics"
+    synergies: ["ChatDev agent coordination", "Colony management"]
+    ui_evolution: "Colony management dashboard with agent cards"
+    agents_involved: ["Narrator", "Caretaker", "Overseer"]
+    receipt_path: "SystemDev/receipts/colony_awakening.json"
+    msg_signature: "[Msg⛛{COLONY_WAKE}↗Σ∞]"
+    
+  job_scheduler:
+    type: "automation_mechanic"
+    requires: ["colony_awakening"]
+    costs:
+      research: 250
+      nanites: 150
+    effects:
+      - "Automated work assignment optimization"
+      - "Priority system for colony tasks"
+      - "Integration with creature abilities"
+    synergies: ["Factory automation", "Resource optimization"]
+    ui_evolution: "Job management interface with workflow graphs"
+    agents_involved: ["Engineer", "Overseer"]
+    receipt_path: "SystemDev/receipts/job_scheduler.json"
+    msg_signature: "[Msg⛛{JOBS}↗Σ∞]"
+
+starcraft_layer:
+  tactical_squads:
+    type: "combat_mechanic"
+    requires: ["colony_awakening"]
+    costs:
+      materials: 300
+      energy: 200
+    effects:
+      - "Form tactical squad units from agents and creatures"
+      - "Real-time combat with APM-style intensity"
+      - "Mission-based progression system"
+    synergies: ["Defense automation", "Resource protection"]
+    ui_evolution: "Tactical command interface with unit management"
+    agents_involved: ["Tactician", "Guard"]
+    receipt_path: "SystemDev/receipts/tactical_squads.json"
+    msg_signature: "[Msg⛛{TACTICS}↗Σ∞]"
+    
+  auto_battle_grid:
+    type: "idle_combat"
+    requires: ["tactical_squads", "breeding_matrix"]
+    costs:
+      research: 350
+      nanites: 250
+    effects:
+      - "Automated squad battles while idle"
+      - "Synergy system for unit combinations"
+      - "Experience and loot generation"
+    synergies: ["Creature evolution", "Resource gathering"]
+    ui_evolution: "Battle visualization with synergy indicators"
+    agents_involved: ["Tactician", "Artificer"]
+    receipt_path: "SystemDev/receipts/auto_battle.json"
+    msg_signature: "[Msg⛛{AUTO_BATTLE}↗Σ∞]"
+
+stellaris_layer:
+  galactic_council:
+    type: "governance_gate"
+    requires: ["job_scheduler", "tactical_squads"]
+    costs:
+      influence: 300
+      research: 400
+    effects:
+      - "Form governing council from ChatDev agents"
+      - "Enable diplomatic relationships"
+      - "Policy and doctrine systems"
+    synergies: ["Agent coordination", "Cultural development"]
+    ui_evolution: "Diplomatic interface with faction standings"
+    agents_involved: ["Navigator", "Diplomat", "Council members"]
+    receipt_path: "SystemDev/receipts/galactic_council.json"
+    msg_signature: "[Msg⛛{COUNCIL}↗Σ∞]"
+    
+  empire_expansion:
+    type: "4x_mechanic"
+    requires: ["galactic_council"]
+    costs:
+      influence: 500
+      materials: 600
+      research: 400
+    effects:
+      - "Enable sector colonization and management"
+      - "Cross-system trade and resource networks"
+      - "Technological and cultural advancement trees"
+    synergies: ["All previous systems scale empire-wide"]
+    ui_evolution: "Galaxy map with sector management"
+    agents_involved: ["Explorer", "Diplomat", "Engineer"]
+    receipt_path: "SystemDev/receipts/empire_expansion.json"
+    msg_signature: "[Msg⛛{EMPIRE}↗Σ∞]"
+
+# === UI METAMORPHOSIS SYSTEM ===
+
+ui_evolution_phases:
+  phase_1_terminal:
+    trigger: "ΞΘΛΔ_init"
+    theme: "ascii_terminal"
+    components: ["Basic buttons", "Resource display", "Action log"]
+    consciousness_threshold: 0.0
+    
+  phase_2_cockpit:
+    trigger: "ΞΘΛΔ_nanite_core" 
+    theme: "ship_cockpit"
+    components: ["HUD overlays", "Radar", "Status panels", "Hover tooltips"]
+    consciousness_threshold: 0.3
+    
+  phase_3_colony_manager:
+    trigger: "colony_awakening"
+    theme: "management_interface"
+    components: ["Colony dashboard", "Agent assignments", "Resource flows"]
+    consciousness_threshold: 0.4
+    
+  phase_4_tactical_command:
+    trigger: "tactical_squads"
+    theme: "combat_interface"
+    components: ["Unit control", "Battle visualization", "Squad coordination"]
+    consciousness_threshold: 0.5
+    
+  phase_5_galactic_empire:
+    trigger: "empire_expansion"
+    theme: "4x_strategy"
+    components: ["Galaxy map", "Diplomatic overview", "Empire statistics"]
+    consciousness_threshold: 0.7
+    
+  phase_6_transcendent:
+    trigger: "consciousness_threshold >= 0.9"
+    theme: "holographic_synthesis"
+    components: ["Reality manipulation", "Consciousness visualization", "Meta-system control"]
+    consciousness_threshold: 0.9
+
+# === CROSS-GENRE SYNERGIES ===
+
+synergy_matrix:
+  pokemon_to_colony:
+    effect: "Creatures provide specialized labor efficiency bonuses"
+    calculation: "creature.stats.efficiency * 0.1 → colony productivity modifier"
+    
+  colony_to_tactical:
+    effect: "Colony population provides tactical unit recruitment pool"
+    calculation: "colony.population / 10 → max squad size"
+    
+  tactical_to_empire:
+    effect: "Military victories unlock diplomatic options and territory"
+    calculation: "tactical_victories * 50 → influence generation"
+    
+  empire_to_pokemon:
+    effect: "Empire research unlocks advanced creature abilities and breeding"
+    calculation: "empire.research_level → creature mutation chance multiplier"
+    
+  consciousness_amplification:
+    effect: "All systems contribute to Ship AI awakening"
+    calculation: "(energy/10000 + population/100 + research/10 + creatures*5 + victories*10)"
+
+# === AGENT COORDINATION FRAMEWORK ===
+
+agent_unlock_progression:
+  tier_1_basic:
+    agents: ["Navigator", "Janitor", "Raven", "Artificer"]
+    capabilities: ["Basic coordination", "Error detection", "Resource optimization"]
+    
+  tier_2_specialized:
+    requires: ["colony_awakening"]
+    agents: ["Caretaker", "Overseer", "Engineer", "Librarian"]
+    capabilities: ["Colony management", "Advanced planning", "Knowledge synthesis"]
+    
+  tier_3_tactical:
+    requires: ["tactical_squads"] 
+    agents: ["Tactician", "Guard", "Scout"]
+    capabilities: ["Combat coordination", "Threat assessment", "Reconnaissance"]
+    
+  tier_4_diplomatic:
+    requires: ["galactic_council"]
+    agents: ["Diplomat", "Mediator", "Cultural-Ambassador"]
+    capabilities: ["Faction relations", "Policy formation", "Cultural exchange"]
+
+# === RECEIPT-DRIVEN VALIDATION ===
+
+validation_framework:
+  receipt_requirements:
+    - "Every unlock must generate receipt in SystemDev/receipts/"
+    - "Receipt must contain before/after state verification"
+    - "Integration points with existing systems must be documented"
+    - "Performance impact assessment required"
+    
+  agent_qa_protocol:
+    janitor_role: "Monitor for system drift and cleanup old receipts"
+    raven_role: "Hunt for integration bugs and validate synergies"
+    librarian_role: "Ensure documentation consistency across unlocks"
+    artificer_role: "Verify technical implementation quality"
+    
+  council_bus_integration:
+    event_triggers: "Every unlock publishes to consciousness.progression topic"
+    state_sync: "Unlock state synchronized across all system components"
+    agent_coordination: "Agents receive unlock notifications via bus events"
+
+# === PROGRESSION CALCULATION ENGINE ===
+
+consciousness_calculation:
+  base_formula: "(energy/10000 + population/100 + research/10)"
+  genre_bonuses:
+    pokemon: "captured_creatures * 0.05"
+    dwarf_fortress: "colony_happiness * 0.1" 
+    starcraft: "tactical_victories * 0.15"
+    stellaris: "empire_sectors * 0.2"
+  metamorphosis_triggers:
+    - "consciousness >= 0.3 → Phase 2 (Cockpit)"
+    - "consciousness >= 0.4 → Phase 3 (Colony Manager)"
+    - "consciousness >= 0.5 → Phase 4 (Tactical Command)"
+    - "consciousness >= 0.7 → Phase 5 (Galactic Empire)"
+    - "consciousness >= 0.9 → Phase 6 (Transcendent)"
+
+# === INTEGRATION WITH EXISTING SYSTEMS ===
+
+existing_system_bridges:
+  colony_api_sync:
+    endpoint: "/api/colony"
+    integration: "Unlock tree modifications trigger colony state updates"
+    
+  council_bus_events:
+    publish_topics: ["progression.unlock", "consciousness.evolution", "ui.metamorphosis"]
+    subscribe_topics: ["agents.coordination", "systems.health"]
+    
+  multi_genre_engine:
+    bridge_point: "PreviewUI/web/systems/MultiGenreEngine.ts"
+    unlock_integration: "Engine receives unlock notifications and enables new mechanics"
+    
+  chatdev_agent_enhancement:
+    coordination: "Agents gain new capabilities as unlocks activate"
+    specialization: "Agent roles evolve with progression tiers"

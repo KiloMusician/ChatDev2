@@ -1,0 +1,10 @@
+{"if":{"path":"**/*.py","contains":["TODO","FIXME"]},"then":["task:resolve_debt","ui:badge:🔥","quest:clean_todos"]}
+{"if":{"path":"**/*.py","contains":["console.log","print("]},"then":["task:cleanup_debug","ui:badge:🧹","priority":"low"]}
+{"if":{"path":"**/*.md","not_contains":["# Changelog"]},"then":["task:gen_changelog","ui:badge:📜","faction":"keepers"]}
+{"if":{"path":"**/*.py","contains":["@example","@demo"]},"then":["task:extract_snippets","build:doctest","faction":"builders"]}
+{"if":{"path":"protocol/**/*.md","contains":["SCP","Council"]},"then":["task:council_review","ui:badge:⚖️","faction":"council"]}
+{"if":{"path":"**/*.py","not_contains":["def test_","class Test"]},"then":["task:add_tests","ui:badge:🧪","faction":"watchers"]}
+{"if":{"path":"**/*.ts","contains":["any","unknown"]},"then":["task:improve_types","ui:badge:🎯","faction":"builders"]}
+{"if":{"path":"server/**/*.py","contains":["app.run","debug=True"]},"then":["task:production_ready","ui:badge:⚠️","priority":"high"]}
+{"if":{"path":"**/*.py","contains":["import os","import sys"]},"then":["task:env_check","ui:badge:🌍","faction":"keepers"]}
+{"if":{"path":"**/*","contains":["password","secret","key"]},"then":["task:security_audit","ui:badge:🔒","priority":"critical","faction":"watchers"]}

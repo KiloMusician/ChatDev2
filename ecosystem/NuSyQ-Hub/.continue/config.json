@@ -1,0 +1,143 @@
+{
+  "models": [
+    {
+      "title": "Claude Sonnet 3.5 (Anthropic API)",
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20241022",
+      "apiKey": "${ANTHROPIC_API_KEY}"
+    },
+    {
+      "title": "GPT-4o (OpenAI)",
+      "provider": "openai",
+      "model": "gpt-4o",
+      "apiKey": "${OPENAI_API_KEY}"
+    },
+    {
+      "title": "Ollama Qwen 2.5 Coder 14b (Local)",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:14b",
+      "apiBase": "http://127.0.0.1:11434"
+    },
+    {
+      "title": "Ollama Qwen 2.5 Coder 7b (Local)",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "apiBase": "http://127.0.0.1:11434"
+    },
+    {
+      "title": "Ollama DeepSeek Coder v2 (Local)",
+      "provider": "ollama",
+      "model": "deepseek-coder-v2:16b",
+      "apiBase": "http://127.0.0.1:11434"
+    },
+    {
+      "title": "LM Studio (Local HTTP)",
+      "provider": "lmstudio",
+      "model": "gpt-oss-20b",
+      "apiBase": "http://127.0.0.1:1234"
+    },
+    {
+      "title": "GitHub Copilot",
+      "provider": "github",
+      "model": "gpt-4o"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen 2.5 Coder (Autocomplete)",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:7b",
+    "apiBase": "http://127.0.0.1:11434"
+  },
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "apiBase": "http://127.0.0.1:11434"
+  },
+  "reranker": {
+    "name": "none"
+  },
+  "contextProviders": [
+    {
+      "name": "code",
+      "params": {}
+    },
+    {
+      "name": "docs",
+      "params": {}
+    },
+    {
+      "name": "diff",
+      "params": {}
+    },
+    {
+      "name": "terminal",
+      "params": {}
+    },
+    {
+      "name": "problems",
+      "params": {}
+    },
+    {
+      "name": "folder",
+      "params": {}
+    },
+    {
+      "name": "codebase",
+      "params": {}
+    }
+  ],
+  "slashCommands": [
+    {
+      "name": "edit",
+      "description": "Edit selected code"
+    },
+    {
+      "name": "comment",
+      "description": "Write comments for the selected code"
+    },
+    {
+      "name": "share",
+      "description": "Export this session as markdown"
+    },
+    {
+      "name": "cmd",
+      "description": "Generate a shell command"
+    },
+    {
+      "name": "commit",
+      "description": "Generate a commit message"
+    }
+  ],
+  "customCommands": [
+    {
+      "name": "nusyq-analyze",
+      "prompt": "Analyze this code in the context of the NuSyQ-Hub ecosystem. Consider: 1) Integration with existing orchestration patterns, 2) Compliance with FILE_PRESERVATION_MANDATE, 3) Observability (tracing/logging), 4) Test coverage needs. Provide specific, actionable recommendations.",
+      "description": "NuSyQ-specific code analysis"
+    },
+    {
+      "name": "doctrine-check",
+      "prompt": "Check if this code violates NuSyQ doctrine: 1) Edit-first (not creating new files unnecessarily), 2) No circular imports, 3) No blocking 'while True' without timeout, 4) Proper error handling, 5) Receipt discipline (deterministic outputs). Flag any violations.",
+      "description": "Validate against NuSyQ architectural doctrine"
+    },
+    {
+      "name": "wire-action",
+      "prompt": "Help me wire this functionality as a new action in scripts/start_nusyq.py. Generate: 1) Handler function (_handle_<action_name>), 2) Dispatch map entry, 3) Help text, 4) Entry in config/action_catalog.json, 5) Contract test in tests/test_start_nusyq.py.",
+      "description": "Wire new action into start_nusyq.py"
+    }
+  ],
+  "allowAnonymousTelemetry": false,
+  "docs": [
+    {
+      "title": "NuSyQ Hub Doctrine",
+      "startUrl": "https://github.com/KiloMusician/NuSyQ-Hub"
+    }
+  ],
+  "experimental": {
+    "modelRoles": {
+      "inlineEdit": "Claude Sonnet 3.5 (Anthropic API)",
+      "applyCodeBlock": "Claude Sonnet 3.5 (Anthropic API)",
+      "repoMapFileSelection": "Ollama Qwen 2.5 Coder 7b (Local)",
+      "summarize": "Ollama DeepSeek Coder v2 (Local)"
+    }
+  }
+}

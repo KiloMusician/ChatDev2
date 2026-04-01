@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756823600000,
+  "prime_truth_sources": [
+    {"file": "ops/prime-truth.yaml", "rank": 1, "reason": "Single source of truth"},
+    {"file": "shared/schema.ts", "rank": 2, "reason": "Database persistence layer"},
+    {"file": "server/routes.ts", "rank": 3, "reason": "Main API endpoints"},
+    {"file": "ops/sage/sage.ts", "rank": 4, "reason": "Autonomous loop coordinator"},
+    {"file": "packages/qgl/emit.ts", "rank": 5, "reason": "QGL receipts system"},
+    {"file": "ops/repo-auditor.config.json", "rank": 6, "reason": "Repo hygiene config"},
+    {"file": "packages/council/turn-engine.ts", "rank": 7, "reason": "Agent coordination"},
+    {"file": "packages/llm/budget-manager.ts", "rank": 8, "reason": "LLM rate limiting"},
+    {"file": "ops/sage/runtime.json", "rank": 9, "reason": "SAGE configuration"}
+  ],
+  "centrality_metrics": {
+    "import_density": "high",
+    "recent_activity": "high", 
+    "configuration_impact": "critical"
+  }
+}

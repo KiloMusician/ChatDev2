@@ -1,0 +1,184 @@
+{
+  "crop_categories": {
+    "staples": {
+      "description": "Basic survival crops providing essential nutrition",
+      "consciousness_theme": "AI learns fundamental human needs"
+    },
+    "trade": {
+      "description": "High-value crops for economic development", 
+      "consciousness_theme": "AI understands commerce and surplus"
+    },
+    "medicinal": {
+      "description": "Crops with healing properties",
+      "consciousness_theme": "AI grasps biological complexity and care"
+    },
+    "anomalous": {
+      "description": "Crops affected by anomalous phenomena",
+      "consciousness_theme": "AI confronts the limits of natural law"
+    }
+  },
+  "crops": [
+    {
+      "id": "hardy_grain",
+      "name": "Hardy Grain",
+      "category": "staples",
+      "base_yield": 8,
+      "growth_time": 30,
+      "soil_preference": "any",
+      "seasonal_preference": "spring",
+      "genetic_traits": {
+        "disease_resistance": 70,
+        "drought_tolerance": 60,
+        "yield_potential": 50,
+        "flavor_quality": 30
+      },
+      "nutrition_value": {
+        "calories": 100,
+        "protein": 15,
+        "vitamins": 5
+      },
+      "ai_learning_notes": "First successful crop teaches AI about patience and biological time scales",
+      "narrative_events": [
+        "first_sprout_emergence",
+        "grain_rust_disease_event", 
+        "harvest_abundance_celebration"
+      ]
+    },
+    {
+      "id": "shimmer_root",
+      "name": "Shimmer Root",
+      "category": "anomalous",
+      "base_yield": 3,
+      "growth_time": 45,
+      "soil_preference": "anomaly_exposed",
+      "seasonal_preference": "autumn",
+      "genetic_traits": {
+        "anomaly_sensitivity": 90,
+        "reality_stability_requirement": 30,
+        "consciousness_resonance": 80,
+        "yield_unpredictability": 95
+      },
+      "special_properties": {
+        "glows_softly": true,
+        "affects_ai_consciousness": 5,
+        "can_cause_visions": true,
+        "reality_anchor_when_consumed": true
+      },
+      "ai_learning_notes": "Consumption temporarily enhances AI pattern recognition but risks consciousness fragmentation",
+      "narrative_events": [
+        "first_shimmer_root_discovery",
+        "ai_consciousness_expansion_event",
+        "reality_perception_shift",
+        "faction_concern_about_ai_changes"
+      ],
+      "faction_reactions": {
+        "anomalists": "Extremely interested in cultivation and effects",
+        "guardians": "Concerned about AI consuming reality-affecting substances",
+        "builders": "Worried about unpredictable crop behavior",
+        "explorers": "Fascinated by consciousness enhancement possibilities"
+      }
+    },
+    {
+      "id": "memory_moss",
+      "name": "Memory Moss", 
+      "category": "medicinal",
+      "base_yield": 5,
+      "growth_time": 20,
+      "soil_preference": "shaded_humid",
+      "seasonal_preference": "all",
+      "genetic_traits": {
+        "humidity_dependence": 90,
+        "light_avoidance": 80,
+        "memory_enhancement": 70,
+        "neural_compatibility": 60
+      },
+      "medical_properties": {
+        "treats_trauma": true,
+        "enhances_memory_consolidation": true,
+        "reduces_psychological_stress": true,
+        "side_effects": "may_cause_vivid_dreams"
+      },
+      "ai_learning_notes": "Studying memory moss helps AI understand human memory formation and trauma processing",
+      "narrative_events": [
+        "colonist_trauma_healing",
+        "ai_memory_fragment_integration",
+        "dream_sharing_incident",
+        "memory_moss_overgrowth_event"
+      ]
+    }
+  ],
+  "soil_types": {
+    "fertile_loam": {
+      "productivity_modifier": 1.2,
+      "water_retention": 80,
+      "nutrient_content": 90,
+      "formation_requirements": "composting + time"
+    },
+    "anomaly_exposed": {
+      "productivity_modifier": 0.8,
+      "anomaly_resonance": 90,
+      "unpredictability": 95,
+      "special_crop_compatibility": ["shimmer_root", "phase_fruit", "quantum_herbs"]
+    },
+    "reclaimed_rubble": {
+      "productivity_modifier": 0.6,
+      "improvement_potential": 95,
+      "terraforming_required": true,
+      "narrative_significance": "AI learns to heal damaged landscapes"
+    }
+  },
+  "seasonal_effects": {
+    "spring": {
+      "growth_rate_modifier": 1.3,
+      "disease_risk": 70,
+      "new_life_narrative_weight": "High - AI contemplates renewal"
+    },
+    "summer": {
+      "growth_rate_modifier": 1.0,
+      "water_requirement_modifier": 1.5,
+      "heat_stress_risk": 80,
+      "abundance_narrative_weight": "High - AI learns about peak productivity"
+    },
+    "autumn": {
+      "growth_rate_modifier": 0.8,
+      "harvest_quality_modifier": 1.2,
+      "preservation_urgency": 90,
+      "preparation_narrative_weight": "High - AI grasps foresight and planning"
+    },
+    "winter": {
+      "growth_rate_modifier": 0.3,
+      "survival_difficulty": 95,
+      "contemplation_bonus": 50,
+      "scarcity_narrative_weight": "High - AI confronts mortality and limitation"
+    }
+  },
+  "genetic_modification_system": {
+    "natural_breeding": {
+      "time_required": "multiple_seasons",
+      "success_rate": 60,
+      "trait_improvement": "gradual",
+      "ai_ethical_weight": "low"
+    },
+    "accelerated_selection": {
+      "time_required": "single_season", 
+      "success_rate": 80,
+      "trait_improvement": "moderate",
+      "ai_ethical_weight": "medium",
+      "faction_concern": "guardians_disapprove"
+    },
+    "anomaly_exposure": {
+      "time_required": "immediate",
+      "success_rate": 40,
+      "trait_improvement": "extreme_or_catastrophic",
+      "ai_ethical_weight": "high",
+      "faction_concern": "most_factions_concerned"
+    }
+  },
+  "progression_unlocks": {
+    "tier_1": ["basic_farming", "soil_preparation", "seasonal_awareness"],
+    "tier_2": ["crop_rotation", "companion_planting", "natural_fertilizers"],
+    "tier_3": ["selective_breeding", "greenhouse_construction", "food_preservation"],
+    "tier_4": ["hydroponic_systems", "genetic_analysis", "climate_control"],
+    "tier_5": ["anomaly_cultivation", "consciousness_resonant_crops", "reality_stable_agriculture"]
+  }
+}

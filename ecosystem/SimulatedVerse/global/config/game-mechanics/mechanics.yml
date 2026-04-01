@@ -1,0 +1,151 @@
+# mechanics.yml — ΞNuSyQ SimulatedVerse Mechanics Index
+# Schema:
+# - id: m001..m123 (stable)
+# - name: short label
+# - tier: I..VI (foundations→meta)
+# - cat: core category (ascii/base/defense/explore/rpg/meta)
+# - deps: list of ids that should ship first
+# - stub: suggested implementation file
+# - test: suggested test file
+# - status: todo | wip | done
+meta:
+  version: 1
+  codename: "Ascension_Form"
+  generated_by: "ΞNuSyQ"
+  notes: "Use this as the authoritative task board for agents and CI."
+
+mechanics:
+  # Tier I — Foundations (1–20)
+  - {id: m001, name: "Procedural ASCII Rendering", tier: I, cat: ascii, deps: [], stub: "client/src/components/ascii/proc_render.ts", test: "tests/ascii/proc_render.test.ts", status: done}
+  - {id: m002, name: "Multi-Layer Map Projection", tier: I, cat: ascii, deps: [m001], stub: "client/src/components/ascii/map_layers.ts", test: "tests/ascii/map_layers.test.ts", status: wip}
+  - {id: m003, name: "Fog-of-War Cones", tier: I, cat: ascii, deps: [m002], stub: "client/src/components/ascii/fog_of_war.ts", test: "tests/ascii/fog_of_war.test.ts", status: todo}
+  - {id: m004, name: "Turn/Idle Hybrid Loop", tier: I, cat: core, deps: [], stub: "apps/engine/src/loop.ts", test: "tests/sim/loop_hybrid.test.ts", status: done}
+  - {id: m005, name: "ASCII Particles (Fire/Smoke/Water)", tier: I, cat: ascii, deps: [m001], stub: "client/src/components/ascii/particles.ts", test: "tests/ascii/particles.test.ts", status: wip}
+  - {id: m006, name: "Survival Stats (Hunger/Thirst/Rest)", tier: I, cat: core, deps: [m004], stub: "shared/schema.ts", test: "tests/sim/survival_stats.test.ts", status: done}
+  - {id: m007, name: "Pawn Needs (RimWorld-style)", tier: I, cat: core, deps: [m006], stub: "apps/engine/src/loop.ts", test: "tests/ai/pawn_needs.test.ts", status: done}
+  - {id: m008, name: "Idle Harvesting Loop", tier: I, cat: idle, deps: [m004], stub: "apps/engine/src/loop.ts", test: "tests/idle/harvest_loop.test.ts", status: done}
+  - {id: m009, name: "Drill/Mining (Dome/Core Keeper)", tier: I, cat: mining, deps: [m008], stub: "server/storage.ts", test: "tests/mining/drill_system.test.ts", status: done}
+  - {id: m010, name: "Tile Durability & Physics States", tier: I, cat: core, deps: [m009], stub: "shared/schema.ts", test: "tests/world/tile_states.test.ts", status: done}
+  - {id: m011, name: "ASCII Biome Color Gradients", tier: I, cat: ascii, deps: [m002], stub: "client/src/components/ui/progress-bars.tsx", test: "tests/ascii/biome_palette.test.ts", status: wip}
+  - {id: m012, name: "Pathfinding with Ally/Foe Avoidance", tier: I, cat: core, deps: [m010], stub: "src/ai/pathfinding.ts", test: "tests/ai/pathfinding.test.ts", status: todo}
+  - {id: m013, name: "Temperature/Biome Survival Pressure", tier: I, cat: core, deps: [m006, m011], stub: "shared/schema.ts", test: "tests/sim/biome_pressure.test.ts", status: done}
+  - {id: m014, name: "Basic Crafting", tier: I, cat: base, deps: [m008], stub: "server/storage.ts", test: "tests/craft/crafting_basic.test.ts", status: done}
+  - {id: m015, name: "Mood/Stress (DD-style)", tier: I, cat: rpg, deps: [m007], stub: "apps/engine/src/loop.ts", test: "tests/ai/mood_stress.test.ts", status: done}
+  - {id: m016, name: "ASCII HUD (Stats/Inventory/Log)", tier: I, cat: ui, deps: [m006], stub: "client/src/components/hud/hud.tsx", test: "tests/ui/ascii_hud.test.ts", status: done}
+  - {id: m017, name: "Inventory with Weight/Capacity", tier: I, cat: rpg, deps: [m016], stub: "client/src/components/resource-panel.tsx", test: "tests/rpg/inventory.test.ts", status: done}
+  - {id: m018, name: "Procedural Dungeon Generation", tier: I, cat: rogue, deps: [m002], stub: "src/rogue/dungeon_gen.ts", test: "tests/rogue/dungeon_gen.test.ts", status: todo}
+  - {id: m019, name: "Survival Threshold Quests/Events", tier: I, cat: core, deps: [m006], stub: "client/src/components/progression-panel.tsx", test: "tests/events/survival_thresholds.test.ts", status: done}
+  - {id: m020, name: "Peaceful Idle Fallback", tier: I, cat: core, deps: [m004], stub: "apps/engine/src/loop.ts", test: "tests/sim/peaceful_idle.test.ts", status: done}
+
+  # Tier II — Expansion (21–40)
+  - {id: m021, name: "Modular Base Construction", tier: II, cat: base, deps: [m010, m014], stub: "client/src/components/outpost-panel.tsx", test: "tests/base/build_system.test.ts", status: done}
+  - {id: m022, name: "Work Priorities (RimWorld)", tier: II, cat: base, deps: [m021, m007], stub: "apps/engine/src/loop.ts", test: "tests/ai/work_priorities.test.ts", status: done}
+  - {id: m023, name: "Idle Production Chains", tier: II, cat: idle, deps: [m014], stub: "server/storage.ts", test: "tests/idle/production_chains.test.ts", status: done}
+  - {id: m024, name: "SimCity Zoning (R/I)", tier: II, cat: city, deps: [m021], stub: "client/src/components/outpost-panel.tsx", test: "tests/city/zoning.test.ts", status: done}
+  - {id: m025, name: "Building Upgrades & Tiers", tier: II, cat: base, deps: [m021], stub: "client/src/components/automation-panel.tsx", test: "tests/base/build_upgrades.test.ts", status: done}
+  - {id: m026, name: "Procedural Tech Tree (STS logic)", tier: II, cat: meta, deps: [m023], stub: "client/src/components/research-panel.tsx", test: "tests/meta/tech_tree.test.ts", status: done}
+  - {id: m027, name: "Energy/Power Grid", tier: II, cat: base, deps: [m021], stub: "apps/engine/src/loop.ts", test: "tests/base/power_grid.test.ts", status: done}
+  - {id: m028, name: "Farming Automation", tier: II, cat: base, deps: [m023], stub: "server/storage.ts", test: "tests/base/farming_auto.test.ts", status: done}
+  - {id: m029, name: "Dynamic Trade Economy", tier: II, cat: city, deps: [m023], stub: "src/econ/trade.ts", test: "tests/econ/trade.test.ts", status: wip}
+  - {id: m030, name: "Population Growth", tier: II, cat: city, deps: [m024], stub: "apps/engine/src/loop.ts", test: "tests/city/pop_growth.test.ts", status: done}
+  - {id: m031, name: "Colony Council (Polls)", tier: II, cat: ui, deps: [m016], stub: "client/src/components/console/colony-console.tsx", test: "tests/ui/council_polls.test.ts", status: done}
+  - {id: m032, name: "Offline Progression", tier: II, cat: idle, deps: [m004], stub: "client/src/hooks/use-game-state.ts", test: "tests/idle/offline_progress.test.ts", status: done}
+  - {id: m033, name: "NPC Faction Emergence", tier: II, cat: rpg, deps: [m029], stub: "src/factions/emergence.ts", test: "tests/factions/emergence.test.ts", status: todo}
+  - {id: m034, name: "Weather Cycles Affect Production", tier: II, cat: core, deps: [m013, m023], stub: "client/src/components/outpost-panel.tsx", test: "tests/sim/weather_cycles.test.ts", status: done}
+  - {id: m035, name: "City Morale Tracker", tier: II, cat: city, deps: [m030, m015], stub: "apps/engine/src/loop.ts", test: "tests/city/morale.test.ts", status: done}
+  - {id: m036, name: "Infrastructure Degrade & Repair", tier: II, cat: base, deps: [m021], stub: "client/src/components/outpost-panel.tsx", test: "tests/base/maintenance.test.ts", status: wip}
+  - {id: m037, name: "Biosphere Festival Events", tier: II, cat: culture, deps: [m029], stub: "src/events/festival_biosphere.ts", test: "tests/events/festival_biosphere.test.ts", status: todo}
+  - {id: m038, name: "Communal Structures (Libraries/Guilds)", tier: II, cat: city, deps: [m024], stub: "server/storage.ts", test: "tests/city/communal_structs.test.ts", status: done}
+  - {id: m039, name: "ASCII Minimap Navigator", tier: II, cat: ui, deps: [m002], stub: "src/ui/minimap.ts", test: "tests/ui/minimap.test.ts", status: todo}
+  - {id: m040, name: "Storyteller AI (Adaptive Events)", tier: II, cat: meta, deps: [m019, m029], stub: "apps/engine/src/loop.ts", test: "tests/meta/storyteller_ai.test.ts", status: done}
+
+  # Tier III — Defense (41–60)
+  - {id: m041, name: "Procedural Swarm AI", tier: III, cat: defense, deps: [m012, m040], stub: "src/defense/swarm_ai.ts", test: "tests/defense/swarm_ai.test.ts", status: todo}
+  - {id: m042, name: "Tower Defense Lanes", tier: III, cat: defense, deps: [m021], stub: "src/defense/lanes.ts", test: "tests/defense/lanes.test.ts", status: todo}
+  - {id: m043, name: "Modular Turret Upgrades", tier: III, cat: defense, deps: [m042, m025], stub: "src/defense/turrets.ts", test: "tests/defense/turrets.test.ts", status: todo}
+  - {id: m044, name: "Traps & Snares", tier: III, cat: defense, deps: [m042], stub: "src/defense/traps.ts", test: "tests/defense/traps.test.ts", status: todo}
+  - {id: m045, name: "Dome Defense Layer", tier: III, cat: defense, deps: [m027], stub: "src/defense/dome_layer.ts", test: "tests/defense/dome_layer.test.ts", status: todo}
+  - {id: m046, name: "Enemy Path Prediction Highlights", tier: III, cat: defense, deps: [m012], stub: "src/defense/path_prediction.ts", test: "tests/defense/path_prediction.test.ts", status: todo}
+  - {id: m047, name: "Shield/Dome HP Pools", tier: III, cat: defense, deps: [m045], stub: "src/defense/shields.ts", test: "tests/defense/shields.test.ts", status: todo}
+  - {id: m048, name: "Day/Night Wave Cycles", tier: III, cat: defense, deps: [m034], stub: "src/defense/wave_cycles.ts", test: "tests/defense/wave_cycles.test.ts", status: todo}
+  - {id: m049, name: "Defense Trade-offs (econ)", tier: III, cat: defense, deps: [m029], stub: "src/defense/tradeoffs.ts", test: "tests/defense/tradeoffs.test.ts", status: todo}
+  - {id: m050, name: "Base Breach Mechanics", tier: III, cat: defense, deps: [m041], stub: "src/defense/breach.ts", test: "tests/defense/breach.test.ts", status: todo}
+  - {id: m051, name: "Siege Escalation Events", tier: III, cat: defense, deps: [m041, m040], stub: "src/defense/siege_escalation.ts", test: "tests/defense/siege_escalation.test.ts", status: todo}
+  - {id: m052, name: "Hero Pawn (Risk of Rain)", tier: III, cat: rpg, deps: [m015], stub: "src/rpg/hero_pawn.ts", test: "tests/rpg/hero_pawn.test.ts", status: todo}
+  - {id: m053, name: "Weapon ASCII VFX", tier: III, cat: ascii, deps: [m005], stub: "src/mechanics/ascii/weapon_vfx.ts", test: "tests/ascii/weapon_vfx.test.ts", status: todo}
+  - {id: m054, name: "Group Tactics (RimWorld)", tier: III, cat: defense, deps: [m041], stub: "src/ai/group_tactics.ts", test: "tests/ai/group_tactics.test.ts", status: todo}
+  - {id: m055, name: "Reinforcement Summoning", tier: III, cat: defense, deps: [m033], stub: "src/defense/reinforcements.ts", test: "tests/defense/reinforcements.test.ts", status: todo}
+  - {id: m056, name: "Healing Structures", tier: III, cat: defense, deps: [m021], stub: "src/defense/healing_structs.ts", test: "tests/defense/healing_structs.test.ts", status: todo}
+  - {id: m057, name: "Faction Defense Aid", tier: III, cat: defense, deps: [m033], stub: "src/defense/faction_aid.ts", test: "tests/defense/faction_aid.test.ts", status: todo}
+  - {id: m058, name: "Evacuation Triggers", tier: III, cat: defense, deps: [m040], stub: "src/defense/evac.ts", test: "tests/defense/evac.test.ts", status: todo}
+  - {id: m059, name: "Multi-Layer Defense Zones", tier: III, cat: defense, deps: [m042], stub: "src/defense/defense_zones.ts", test: "tests/defense/defense_zones.test.ts", status: todo}
+  - {id: m060, name: "Dynamic Terrain Destruction", tier: III, cat: core, deps: [m010], stub: "src/world/terrain_damage.ts", test: "tests/world/terrain_damage.test.ts", status: todo}
+
+  # Tier IV — Exploration (61–80)
+  - {id: m061, name: "Worldgen (DF-style)", tier: IV, cat: explore, deps: [m002], stub: "src/world/worldgen.ts", test: "tests/world/worldgen.test.ts", status: todo}
+  - {id: m062, name: "Labyrinth Exploration", tier: IV, cat: explore, deps: [m018], stub: "src/rogue/labyrinth.ts", test: "tests/rogue/labyrinth.test.ts", status: todo}
+  - {id: m063, name: "Overworld Travel (Kenshi)", tier: IV, cat: explore, deps: [m061], stub: "src/explore/overworld.ts", test: "tests/explore/overworld.test.ts", status: todo}
+  - {id: m064, name: "Permadeath Toggle", tier: IV, cat: rogue, deps: [m004], stub: "src/rogue/permadeath.ts", test: "tests/rogue/permadeath.test.ts", status: todo}
+  - {id: m065, name: "Relic/Artifact Generation", tier: IV, cat: explore, deps: [m061], stub: "src/explore/relics.ts", test: "tests/explore/relics.test.ts", status: todo}
+  - {id: m066, name: "ASCII Weather/Terrain Animations", tier: IV, cat: ascii, deps: [m005, m034], stub: "src/mechanics/ascii/weather_anim.ts", test: "tests/ascii/weather_anim.test.ts", status: todo}
+  - {id: m067, name: "Liquid Simulation (Noita-lite)", tier: IV, cat: core, deps: [m010], stub: "src/world/liquids.ts", test: "tests/world/liquids.test.ts", status: todo}
+  - {id: m068, name: "Rogue Platformer Physics", tier: IV, cat: rogue, deps: [m010], stub: "src/rogue/platformer_physics.ts", test: "tests/rogue/platformer_physics.test.ts", status: todo}
+  - {id: m069, name: "ASCII World Map Navigation", tier: IV, cat: ui, deps: [m061], stub: "src/ui/worldmap.ts", test: "tests/ui/worldmap.test.ts", status: todo}
+  - {id: m070, name: "Side-Quest Generator", tier: IV, cat: rpg, deps: [m040], stub: "src/rpg/sidequests.ts", test: "tests/rpg/sidequests.test.ts", status: todo}
+  - {id: m071, name: "Lore Discovery Events", tier: IV, cat: culture, deps: [m037], stub: "src/lore/discovery.ts", test: "tests/lore/discovery.test.ts", status: todo}
+  - {id: m072, name: "Music Hyper-Set Triggers", tier: IV, cat: meta, deps: [m004], stub: "src/audio/hyper_set.ts", test: "tests/audio/hyper_set.test.ts", status: todo}
+  - {id: m073, name: "Dynamic Ruins/Dungeons", tier: IV, cat: explore, deps: [m061, m018], stub: "src/explore/ruins.ts", test: "tests/explore/ruins.test.ts", status: todo}
+  - {id: m074, name: "Survival Expeditions", tier: IV, cat: explore, deps: [m006, m063], stub: "src/explore/expeditions.ts", test: "tests/explore/expeditions.test.ts", status: todo}
+  - {id: m075, name: "Vehicles/Transport Overlay", tier: IV, cat: base, deps: [m027, m063], stub: "src/base/vehicles.ts", test: "tests/base/vehicles.test.ts", status: todo}
+  - {id: m076, name: "Exploration Curiosity Tracker", tier: IV, cat: meta, deps: [m063], stub: "src/meta/curiosity.ts", test: "tests/meta/curiosity.test.ts", status: todo}
+  - {id: m077, name: "ASCII Starfield/Universe Zoom", tier: IV, cat: ascii, deps: [m001], stub: "src/mechanics/ascii/starfield.ts", test: "tests/ascii/starfield.test.ts", status: todo}
+  - {id: m078, name: "Wandering NPC Recruitment", tier: IV, cat: rpg, deps: [m063, m033], stub: "src/rpg/recruitment.ts", test: "tests/rpg/recruitment.test.ts", status: todo}
+  - {id: m079, name: "Biome Palettes & Transitions", tier: IV, cat: ascii, deps: [m011, m061], stub: "src/mechanics/ascii/biome_transitions.ts", test: "tests/ascii/biome_transitions.test.ts", status: todo}
+  - {id: m080, name: "AI-Assisted Story Beats", tier: IV, cat: meta, deps: [m040], stub: "src/meta/story_beats_ai.ts", test: "tests/meta/story_beats_ai.test.ts", status: todo}
+
+  # Tier V — RPG/Narrative (81–100)
+  - {id: m081, name: "Skill Trees", tier: V, cat: rpg, deps: [m052], stub: "src/rpg/skill_trees.ts", test: "tests/rpg/skill_trees.test.ts", status: todo}
+  - {id: m082, name: "Procedural Dialogue (AI)", tier: V, cat: rpg, deps: [m080], stub: "src/rpg/dialogue_ai.ts", test: "tests/rpg/dialogue_ai.test.ts", status: todo}
+  - {id: m083, name: "NPC Relationship Matrix", tier: V, cat: rpg, deps: [m081], stub: "src/rpg/relationships.ts", test: "tests/rpg/relationships.test.ts", status: todo}
+  - {id: m084, name: "AI Quest Log Binding (Msg⛛)", tier: V, cat: meta, deps: [m070], stub: "src/meta/quest_log_bind.ts", test: "tests/meta/quest_log_bind.test.ts", status: todo}
+  - {id: m085, name: "Karma/Reputation", tier: V, cat: rpg, deps: [m083], stub: "src/rpg/karma.ts", test: "tests/rpg/karma.test.ts", status: todo}
+  - {id: m086, name: "Multi-Faction Diplomacy", tier: V, cat: rpg, deps: [m033, m085], stub: "src/factions/diplomacy.ts", test: "tests/factions/diplomacy.test.ts", status: todo}
+  - {id: m087, name: "Traits/Perks", tier: V, cat: rpg, deps: [m081], stub: "src/rpg/traits.ts", test: "tests/rpg/traits.test.ts", status: todo}
+  - {id: m088, name: "AI-Driven Narrative Arcs", tier: V, cat: meta, deps: [m082], stub: "src/meta/narrative_arcs.ts", test: "tests/meta/narrative_arcs.test.ts", status: todo}
+  - {id: m089, name: "ASCII Cutscenes (Symbolic)", tier: V, cat: ascii, deps: [m001, m080], stub: "src/mechanics/ascii/cutscenes.ts", test: "tests/ascii/cutscenes.test.ts", status: todo}
+  - {id: m090, name: "Stress Afflictions (DD-style)", tier: V, cat: rpg, deps: [m015], stub: "src/rpg/afflictions.ts", test: "tests/rpg/afflictions.test.ts", status: todo}
+  - {id: m091, name: "Rest Systems (Tavern/Inn)", tier: V, cat: rpg, deps: [m038], stub: "src/rpg/rest_systems.ts", test: "tests/rpg/rest_systems.test.ts", status: todo}
+  - {id: m092, name: "Multi-Class Synergy", tier: V, cat: rpg, deps: [m081, m087], stub: "src/rpg/multiclass.ts", test: "tests/rpg/multiclass.test.ts", status: todo}
+  - {id: m093, name: "Procedural Lore Books", tier: V, cat: culture, deps: [m071], stub: "src/lore/proc_books.ts", test: "tests/lore/proc_books.test.ts", status: todo}
+  - {id: m094, name: "Clone Interactions", tier: V, cat: rpg, deps: [m083], stub: "src/rpg/clone_interactions.ts", test: "tests/rpg/clone_interactions.test.ts", status: todo}
+  - {id: m095, name: "Player as Council Voice", tier: V, cat: meta, deps: [m031], stub: "src/meta/council_voice.ts", test: "tests/meta/council_voice.test.ts", status: todo}
+  - {id: m096, name: "Knife Missile Commands (Choice)", tier: V, cat: meta, deps: [m088], stub: "src/meta/knife_missile_cmds.ts", test: "tests/meta/knife_missile_cmds.test.ts", status: todo}
+  - {id: m097, name: "RPG Boss Battles", tier: V, cat: rpg, deps: [m052, m089], stub: "src/rpg/boss_battles.ts", test: "tests/rpg/boss_battles.test.ts", status: todo}
+  - {id: m098, name: "Factional Storylines", tier: V, cat: rpg, deps: [m086], stub: "src/factions/storylines.ts", test: "tests/factions/storylines.test.ts", status: todo}
+  - {id: m099, name: "Campaign/Scenario Mode", tier: V, cat: meta, deps: [m097], stub: "src/meta/campaign_mode.ts", test: "tests/meta/campaign_mode.test.ts", status: todo}
+  - {id: m100, name: "Procedural Story Remix", tier: V, cat: meta, deps: [m088], stub: "src/meta/story_remix.ts", test: "tests/meta/story_remix.test.ts", status: todo}
+
+  # Tier VI — Meta/Simulation/Recursive (101–123)
+  - {id: m101, name: "Idle Algebra Solver", tier: VI, cat: meta, deps: [m008], stub: "src/meta/algebra_solver.ts", test: "tests/meta/algebra_solver.test.ts", status: todo}
+  - {id: m102, name: "Procedural Music Theory", tier: VI, cat: meta, deps: [m072], stub: "src/audio/music_theory.ts", test: "tests/audio/music_theory.test.ts", status: todo}
+  - {id: m103, name: "Resource Spreadsheets (Pandas)", tier: VI, cat: meta, deps: [m023], stub: "src/meta/resource_sheets.ts", test: "tests/meta/resource_sheets.test.ts", status: todo}
+  - {id: m104, name: "GitHub Commit-Quest Logs", tier: VI, cat: meta, deps: [m084], stub: "src/meta/git_quest_logs.ts", test: "tests/meta/git_quest_logs.test.ts", status: todo}
+  - {id: m105, name: "VSC/Copilot Hint Integration", tier: VI, cat: meta, deps: [m104], stub: "src/meta/vsc_hints.ts", test: "tests/meta/vsc_hints.test.ts", status: todo}
+  - {id: m106, name: "ChatDev Multi-Agent Debug", tier: VI, cat: meta, deps: [m105], stub: "src/meta/chatdev_debug.ts", test: "tests/meta/chatdev_debug.test.ts", status: todo}
+  - {id: m107, name: "Ollama AI Lore Synthesis", tier: VI, cat: meta, deps: [m093], stub: "src/meta/ollama_lore.ts", test: "tests/meta/ollama_lore.test.ts", status: todo}
+  - {id: m108, name: "Token-Stretching Cascade Events", tier: VI, cat: meta, deps: [m040], stub: "src/meta/token_cascade.ts", test: "tests/meta/token_cascade.test.ts", status: todo}
+  - {id: m109, name: "House of Leaves Error Recovery", tier: VI, cat: meta, deps: [m108], stub: "src/meta/house_error_recovery.ts", test: "tests/meta/house_error_recovery.test.ts", status: todo}
+  - {id: m110, name: "Oldest House Recursive Navigation", tier: VI, cat: meta, deps: [m109], stub: "src/meta/oldest_house_nav.ts", test: "tests/meta/oldest_house_nav.test.ts", status: todo}
+  - {id: m111, name: "Temple of Knowledge Floor Progression", tier: VI, cat: meta, deps: [m110], stub: "src/meta/temple_progression.ts", test: "tests/meta/temple_progression.test.ts", status: todo}
+  - {id: m112, name: "AI Council Decision-Making", tier: VI, cat: meta, deps: [m095], stub: "src/meta/ai_council.ts", test: "tests/meta/ai_council.test.ts", status: todo}
+  - {id: m113, name: "Zeta Interview Questions as Quests", tier: VI, cat: meta, deps: [m084], stub: "src/meta/zeta_quests.ts", test: "tests/meta/zeta_quests.test.ts", status: todo}
+  - {id: m114, name: "SCP Containment Anomaly Events", tier: VI, cat: meta, deps: [m051], stub: "src/meta/scp_containment.ts", test: "tests/meta/scp_containment.test.ts", status: todo}
+  - {id: m115, name: "Culture Special Circumstances", tier: VI, cat: meta, deps: [m112], stub: "src/meta/special_circumstances.ts", test: "tests/meta/special_circumstances.test.ts", status: todo}
+  - {id: m116, name: "Idle Checklist Manager", tier: VI, cat: meta, deps: [m101], stub: "src/meta/checklist_manager.ts", test: "tests/meta/checklist_manager.test.ts", status: todo}
+  - {id: m117, name: "Procedural To-Do/Task Loops", tier: VI, cat: meta, deps: [m116], stub: "src/meta/todo_loops.ts", test: "tests/meta/todo_loops.test.ts", status: todo}
+  - {id: m118, name: "Auto-Debug Logger (HarmonyPatcher)", tier: VI, cat: meta, deps: [m106], stub: "src/meta/harmony_debug.ts", test: "tests/meta/harmony_debug.test.ts", status: todo}
+  - {id: m119, name: "RosettaStone Language Toggle", tier: VI, cat: meta, deps: [m107], stub: "src/meta/rosetta_lang.ts", test: "tests/meta/rosetta_lang.test.ts", status: todo}
+  - {id: m120, name: "OmniTag Quest Binding", tier: VI, cat: meta, deps: [m084], stub: "src/meta/omnitag_binding.ts", test: "tests/meta/omnitag_binding.test.ts", status: todo}
+  - {id: m121, name: "Procedural FAQ/Tutorial Generation", tier: VI, cat: meta, deps: [m119], stub: "src/meta/proc_tutorials.ts", test: "tests/meta/proc_tutorials.test.ts", status: todo}
+  - {id: m122, name: "Idle Roadmap Progression", tier: VI, cat: meta, deps: [m117], stub: "src/meta/roadmap_progression.ts", test: "tests/meta/roadmap_progression.test.ts", status: todo}
+  - {id: m123, name: "Recursive Bootstrapping Tier Ascension", tier: VI, cat: meta, deps: [m111, m122], stub: "src/meta/ascension_form.ts", test: "tests/meta/ascension_form.test.ts", status: todo}

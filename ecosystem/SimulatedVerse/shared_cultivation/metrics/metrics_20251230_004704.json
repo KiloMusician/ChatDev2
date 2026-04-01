@@ -1,0 +1,58 @@
+{
+  "generated_at": "2025-12-30T00:47:04.928054",
+  "quest_metrics": {
+    "total_entries": 1255,
+    "intent_events": 1,
+    "other_events": 1254,
+    "intent_types_breakdown": {
+      "system_health_achieved": 1
+    }
+  },
+  "work_queue_metrics": {
+    "total_items": 4,
+    "queued": 1,
+    "in_progress": 0,
+    "completed": 3,
+    "failed": 0,
+    "completion_rate": 75.0,
+    "priority_breakdown": {
+      "normal": 4
+    },
+    "created_at": "2025-12-24T06:59:05.563645",
+    "last_updated": "2025-12-30T00:47:04.914096"
+  },
+  "session_metrics": {
+    "total_sessions": 2,
+    "total_intent_events_captured": 1,
+    "total_items_promoted": 4,
+    "avg_events_per_session": 0.5
+  },
+  "system_health": {
+    "latest_broken_files": 0,
+    "latest_working_files": 0,
+    "latest_health_score": 0,
+    "trend": [
+      {
+        "iteration": 1,
+        "broken_files": 0,
+        "working_files": 0,
+        "health_score": 0
+      },
+      {
+        "iteration": 2,
+        "broken_files": 0,
+        "working_files": 0,
+        "health_score": 0
+      },
+      {
+        "iteration": 3,
+        "broken_files": 0,
+        "working_files": 0,
+        "health_score": 0
+      }
+    ]
+  },
+  "recommendations": [
+    "\u2705 System is healthy - continue autonomous development"
+  ]
+}

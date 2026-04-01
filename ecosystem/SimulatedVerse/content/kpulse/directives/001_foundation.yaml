@@ -1,0 +1,15 @@
+id: "001_foundation"
+name: "CoreLink Foundation – Sidecar Link"
+tier: 8
+effects:
+  - kind: "unlock"
+    key: "foundation.ready"
+spawns:
+  - when: { energy_gte: 10 }
+    create:
+      id: "006_autonode"
+      name: "AutoNode: Seed"
+      tier: 8
+      effects:
+        - kind: "energy"
+          dE: 0.2

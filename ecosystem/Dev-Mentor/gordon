@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# gordon — Terminal Depths Lattice CLI wrapper
+# Place this at project root or on PATH.
+#
+# Usage:  ./gordon status
+#         ./gordon cascade start
+#         ./gordon ask ada "What's the colony status?"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+GORDON_CLI="$SCRIPT_DIR/scripts/gordon_cli.py"
+
+# Prefer the project venv if it exists
+if [ -f "$SCRIPT_DIR/.pythonlibs/bin/python3" ]; then
+    PYTHON="$SCRIPT_DIR/.pythonlibs/bin/python3"
+elif [ -f "$SCRIPT_DIR/venv/bin/python3" ]; then
+    PYTHON="$SCRIPT_DIR/venv/bin/python3"
+else
+    PYTHON="$(which python3 2>/dev/null || which python)"
+fi
+
+if [ -z "$PYTHON" ]; then
+    echo "[gordon] ERROR: Python not found on PATH"
+    exit 1
+fi
+
+exec "$PYTHON" "$GORDON_CLI" "$@"

@@ -1,0 +1,35 @@
+{
+  "name": "nusyq-agent-dashboard",
+  "displayName": "NuSyQ Agent Dashboard",
+  "description": "Real-time agent status, quest progress, and unified error reporting for NuSyQ-Hub.",
+  "version": "0.1.0",
+  "publisher": "kilo-musician",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "activationEvents": [
+    "onCommand:agentDashboard.open",
+    "onCommand:agentDashboard.refresh",
+    "onCommand:agentDashboard.runErrorReport",
+    "onStartupFinished"
+  ],
+  "main": "extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentDashboard.open",
+        "title": "Open Agent Dashboard"
+      },
+      {
+        "command": "agentDashboard.refresh",
+        "title": "Refresh Agent Dashboard"
+      },
+      {
+        "command": "agentDashboard.runErrorReport",
+        "title": "Run Unified Error Report"
+      }
+    ]
+  },
+  "repository": {},
+  "license": "MIT"
+}

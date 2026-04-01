@@ -1,0 +1,8 @@
+{"timestamp":0,"status":"initializing"}
+{"ts":1756819927301,"actor":"sage","action":"receipt_system_init","ok":true}
+{"ts":1756819927498,"actor":"sage-prime","action":"health_check","inputs":{"llm":{"ollama":false,"openai":false,"gateway_up":true,"timestamp":1756819927474},"ui_freshness":{"last":1756802700170.3672,"skew_s":17227.3246328125,"stale":true},"repo_growth":{"files_per_min":0.5,"bloat":false},"errors":{"count":0,"critical":0}},"ok":true}
+{"ts":1756819942698,"actor":"sage","action":"receipt_system_init","ok":true}
+{"ts":1756819943797,"actor":"sage","action":"receipt_system_init","ok":true}
+{"ts":1756819950014,"actor":"theater-audit","action":"generate_audit","inputs":{"files_scanned":0},"outputs":{"score":0,"matches":0},"ok":true}
+{"ts":1756819950763,"actor":"sage","action":"receipt_system_init","ok":true}
+{"ts":1756819950771,"actor":"ui-freshness","action":"nudge_provisioner","inputs":{"reason":"stale_ui"},"ok":true}

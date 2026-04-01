@@ -1,0 +1,174 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-12-26T04:55:00Z",
+  "description": "Ecosystem-wide configuration defaults for terminal orchestration, guild board, and system automation",
+
+  "terminal_orchestration": {
+    "top_outcomes": ["stability", "visibility", "auditability"],
+    "priority_visibility": ["claude", "copilot", "codex"],
+    "auto_tag_agent_ids": true,
+    "always_log_to_agent_terminals": [
+      "claude_orchestrator",
+      "copilot_enhancement_bridge",
+      "wizard_navigator",
+      "chatdev",
+      "agent_task_router"
+    ],
+    "routing_priority": "explicit_then_keyword",
+    "critical_lifecycle_services": [
+      "mcp_server",
+      "simverse_dev_server"
+    ],
+    "optional_services": [
+      "orchestrator",
+      "pu_queue",
+      "quest_log_sync",
+      "trace_service",
+      "guild_board_renderer"
+    ],
+    "missing_service_alerts": [],
+    "lifecycle_catalogs_separate": true,
+    "lifecycle_cadence_hours": 4,
+    "retention_count": 30,
+    "phase_8_note": "Updated 2026-02-12: Moved orchestrator, pu_queue, trace_service to optional (not blocking startup). System is operational with MCP + SimulatedVerse."
+  },
+
+  "wizard_navigator": {
+    "canonical_repo": "NuSyQ-Hub",
+    "auto_detect_roots": true,
+    "notes_scope": "per_repo",
+    "sync_notes_to_quest_log": false,
+    "snapshot_format": ["markdown", "json"],
+    "explain_priority": ["README", "SYSTEM_MAP", "docs"],
+    "surface_error_hotspots": true,
+    "quick_command_timeout_seconds": 60,
+    "lint_test_explicit_only": true,
+    "cross_repo_search_depth": "shallow",
+    "cross_repo_search_limit": 50,
+    "use_ripgrep_if_available": true,
+    "achievement_thresholds": {"bronze": 5, "silver": 25, "gold": 100},
+    "achievements_persistence": "separate_state",
+    "readiness_weights": {"tests": 0.4, "docs": 0.3, "config": 0.2, "coverage": 0.1},
+    "mandatory_readiness_signals": ["README", "tests", "config", "tasks"],
+    "quest_note_confirmation": false,
+    "exclude_from_scans": ["node_modules", ".venv", ".git", "dist", "build", "__pycache__", ".mypy_cache"],
+    "observability_granularity": 3,
+    "observability_include": ["metrics", "logs", "traces_if_present"]
+  },
+
+  "error_diagnostics": {
+    "vs_code_divergence_strategy": "prefer_ground_truth",
+    "auto_boss_rush_from_clusters": true,
+    "boss_rush_cluster_count": 10,
+    "auto_fix_types": ["F401", "F541", "I001", "W291", "W293", "UP", "RUF100"],
+    "error_reporting_cadence": "daily",
+    "include_remediation_status": true,
+    "priority_repo": "NuSyQ-Hub",
+    "mypy_grouping": "by_module",
+    "retry_pylint_timeouts": true,
+    "retry_count": 1,
+    "full_scan_timeout_seconds": 300,
+    "post_scan_automation": ["triage", "snapshot"],
+    "navigator_open_issue": true,
+    "external_services_allowed": []
+  },
+
+  "terminal_architecture": {
+    "centralized_group_config": true,
+    "per_message_audit_log": true,
+    "terminal_consciousness_owner": "terminal_manager_integration",
+    "show_active_groups_in_dashboard": true,
+    "terminal_naming_scheme": "TitleCase with emoji prefix",
+    "teleport_whitelist": ["NuSyQ-Hub", "SimulatedVerse", "NuSyQ"],
+    "daily_top_risks_report": true,
+    "next_cycle_priority": "error_fixes_first",
+    "most_under_wired_area": "guild_board_automation_and_agent_coordination"
+  },
+
+  "guild_board": {
+    "auto_heartbeat_agents": ["claude", "codex", "copilot", "chatdev", "ollama"],
+    "heartbeat_required_before_claim": true,
+    "default_agent_status": "observing",
+    "cross_repo_quests_enabled": true,
+    "quest_id_format": "quest_{timestamp}_{slug}",
+    "auto_tag_safety_tier": true,
+    "auto_attach_artifacts": ["receipts", "reports"],
+    "dependency_enforcement": "advisory",
+    "blocked_quest_notify": "guild_steward",
+    "recent_posts_window_size": 50,
+    "store_agent_xp": false,
+    "store_agent_status_only": true,
+    "party_concept_enabled": true,
+    "guild_post_supports_receipts": true,
+    "sync_guild_events_to_quest_log": false,
+    "daily_guild_rollup": true,
+    "render_on_write": false,
+    "render_on_demand": true,
+    "read_only_mode_supported": true,
+    "agents_allowed_to_close": ["claude", "codex", "copilot"],
+    "auto_archive_completed_days": 14,
+    "long_running_alert_hours": 24,
+    "signal_types": ["error", "drift", "dependency_missing", "service_down"],
+    "map_severity_to_tiers": true,
+    "mirror_to_simulated_verse": true,
+    "mirror_cadence": "daily",
+    "chatdev_auto_claim_chatdev_quests": true,
+    "backlog_sort_by_priority": true,
+    "quest_market_enabled": false,
+    "cross_repo_dependency_format": "{repo}:{quest_id}",
+    "guild_board_is_canonical": true,
+    "guild_steward_automation": true,
+    "throttle_posts_per_minute": 5,
+    "available_quests_filter": ["capabilities", "safety_tier"],
+    "quest_templates_enabled": true,
+    "writable_from_vscode_tasks": true,
+    "guild_updates_terminal_group": "zeta",
+    "auto_release_claim_timeout_minutes": 10,
+    "default_claim_timeout_minutes": 30,
+    "scoreboard_enabled": true,
+    "emit_receipt_per_action": true,
+    "validate_artifact_paths": "warn_only",
+    "human_approval_gate_for_risky": true,
+    "render_html_output": true,
+    "show_git_status_per_repo": true,
+    "integrate_with_zeta_progress": true,
+    "culture_ship_permissions": ["read", "write_signals"],
+    "sprint_field_enabled": true,
+    "non_exclusive_claims_default": false,
+    "events_rotation_size_mb": 25,
+    "compress_old_events_monthly": true,
+    "auto_convert_errors_to_quests": true,
+    "error_to_quest_cluster_count": 10,
+    "board_as_primary_assignment_truth": true
+  },
+
+  "safety_tiers": {
+    "safe": {
+      "requires_approval": false,
+      "auto_fix_allowed": true,
+      "description": "Reversible, low-risk operations"
+    },
+    "standard": {
+      "requires_approval": false,
+      "auto_fix_allowed": false,
+      "description": "Normal operations, validated by tests"
+    },
+    "risky": {
+      "requires_approval": true,
+      "auto_fix_allowed": false,
+      "description": "Significant changes, manual review required"
+    },
+    "experimental": {
+      "requires_approval": true,
+      "auto_fix_allowed": false,
+      "description": "Unproven approaches, high supervision"
+    }
+  },
+
+  "metadata": {
+    "applied_by": "claude",
+    "rationale": "Defaults proposed and accepted during guild activation session 2025-12-26",
+    "override_mechanism": "Edit this file or provide runtime config",
+    "documentation": "docs/GUILD_SYSTEM_ACTIVATED.md"
+  }
+}

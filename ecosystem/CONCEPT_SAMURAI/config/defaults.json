@@ -1,0 +1,169 @@
+{
+  "knownPowerPlans": {
+    "balanced": "SCHEME_BALANCED",
+    "high_performance": "SCHEME_MIN",
+    "power_saver": "SCHEME_MAX"
+  },
+  "watch": {
+    "sampleIntervalSec": 5,
+    "defaultDurationSec": 0,
+    "ringBufferSamples": 180
+  },
+  "processPatterns": {
+    "docker": [
+      "Docker*",
+      "com.docker.*",
+      "dockerd*"
+    ]
+  },
+  "recommendation": {
+    "preferBalancedWhenMixed": true,
+    "devProcessPatterns": [
+      "Code",
+      "Docker*",
+      "com.docker.*",
+      "dockerd*",
+      "python*",
+      "node*",
+      "jupyter*",
+      "ollama*",
+      "LM Studio*"
+    ]
+  },
+  "automation": {
+    "idleThresholdSec": 900,
+    "intervalMinutes": 5,
+    "taskName": "Keeper Auto Mode",
+    "modeWhenIdle": "balanced",
+    "modeWhenActiveDev": "coding",
+    "skipWhenGameRunning": true
+  },
+  "listener": {
+    "pollIntervalSec": 3,
+    "steamVdfPath": null,
+    "onGameStart": "gaming",
+    "onGameExit": "restore",
+    "gameProfiles": []
+  },
+  "updates": {
+    "wingetCommand": "%LOCALAPPDATA%\\Microsoft\\WindowsApps\\winget.exe",
+    "checkWindowsUpdateModule": true,
+    "allowPackageIds": [],
+    "allowNamePatterns": [],
+    "denyPackageIds": [
+      "Docker.DockerDesktop",
+      "Microsoft.VisualStudioCode",
+      "VSCodium.VSCodium",
+      "Codeium.Windsurf"
+    ],
+    "denyNamePatterns": [
+      "Docker*",
+      "*Visual Studio Code*",
+      "Windsurf*"
+    ]
+  },
+  "anomaly": {
+    "enabled": true,
+    "cpuSpikePercent": 80,
+    "spikeSustainSamples": 3,
+    "captureOnNahimicDetected": true,
+    "audioRiskNewProcesses": 2
+  },
+  "retention": {
+    "maxSessions": 30,
+    "incidentDays": 14
+  },
+  "doctor": {
+    "cpuWarningPercent": 60,
+    "nahimicServicePatterns": [
+      "Nahimic*"
+    ],
+    "nahimicProcessPatterns": [
+      "Nahimic*"
+    ],
+    "audioRiskProcessPatterns": [
+      "Code",
+      "Docker*",
+      "com.docker.*",
+      "dockerd*",
+      "python*",
+      "node*",
+      "jupyter*",
+      "ollama*",
+      "LM Studio*",
+      "chrome",
+      "msedge",
+      "firefox",
+      "Discord*",
+      "obs64"
+    ]
+  },
+  "launchers": {
+    "VSCode": {
+      "command": "code"
+    },
+    "DockerDesktop": {
+      "command": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"
+    }
+  },
+  "relaunchMappings": {
+    "Code": "VSCode",
+    "Docker Desktop": "DockerDesktop"
+  },
+  "logging": {
+    "enableActionLog": true,
+    "actionLogPath": "state\\action_log.jsonl",
+    "maxEntries": 1000
+  },
+  "safety": {
+    "killVSCode": false
+  },
+  "brain": {
+    "enabled": true,
+    "provider": "ollama",
+    "model": "qwen2.5-coder:14b",
+    "ollamaEndpoint": "http://localhost:11434",
+    "maxLogEntries": 80,
+    "weightDisk": 0.3,
+    "weightCpu": 0.25,
+    "weightRam": 0.25,
+    "weightContention": 0.2,
+    "contentionCeiling": 8,
+    "devProcessPatterns": [
+      "Code",
+      "node*",
+      "python*",
+      "jupyter*",
+      "ollama*",
+      "Docker*",
+      "com.docker.*",
+      "dockerd*"
+    ]
+  },
+  "maintenance": {
+    "enabled": true,
+    "autoRunOnIdle": false,
+    "idleMinutes": 15,
+    "maxCpuThreshold": 20,
+    "maxDiskBusy": 30,
+    "downloadsStaleAfterDays": 30,
+    "downloadsMinFileSizeGB": 0.5,
+    "denyModes": [
+      "gaming",
+      "heavy-gaming",
+      "rimworld-mod",
+      "audio-safe"
+    ],
+    "unknownLargeDirs": [
+      "C:\\prime_anchor"
+    ],
+    "actions": {
+      "clean-temp": true,
+      "docker-prune": true,
+      "clean-npm-cache": true,
+      "wsl-compact": false,
+      "downloads-report": true,
+      "prime-anchor-report": true
+    }
+  }
+}

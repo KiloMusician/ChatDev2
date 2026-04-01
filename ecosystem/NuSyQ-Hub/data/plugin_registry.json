@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Plugin Registry Manager",
+    "description": "Coordinates plugin metadata, wiring and discovery.",
+    "entrypoint": "scripts/placeholder_playbook.py",
+    "command": "python scripts/placeholder_playbook.py",
+    "repo": "NuSyQ-Hub",
+    "tags": [
+      "registry",
+      "ops",
+      "chug"
+    ],
+    "status": "wired",
+    "available": true,
+    "last_checked": "2026-01-10T21:33:35.856265"
+  },
+  {
+    "name": "Checklist Sync Plugin",
+    "description": "Promotes unchecked POST items into quests and feeds ZETA progress.",
+    "entrypoint": "scripts/checklist_to_quests.py",
+    "command": "python scripts/checklist_to_quests.py",
+    "repo": "NuSyQ-Hub",
+    "tags": [
+      "quest",
+      "automation"
+    ],
+    "status": "wired",
+    "available": true,
+    "last_checked": "2026-01-10T21:33:35.856265"
+  },
+  {
+    "name": "Health Assessor",
+    "description": "Synthesizes quick system analysis into a health report for diagnostics.",
+    "entrypoint": "src/diagnostics/system_health_assessor.py",
+    "command": "python src/diagnostics/system_health_assessor.py",
+    "repo": "NuSyQ-Hub",
+    "tags": [
+      "healing",
+      "diagnostics"
+    ],
+    "status": "wired",
+    "available": true,
+    "last_checked": "2026-01-10T21:33:35.856265"
+  }
+]

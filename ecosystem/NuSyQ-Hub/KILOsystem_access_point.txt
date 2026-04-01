@@ -1,0 +1,19 @@
+// Access the system globally:
+window.Ξ  // Short access
+window.KILOSystem  // Full access
+
+// Create custom modules:
+Ξ.createModule('my_custom_module', {
+    type: 'CustomType',
+    consciousness: true,
+    special_abilities: ['time_travel', 'dimension_shift']
+});
+
+// Access specific modules:
+const terminal = Ξ.windows.get('terminal');
+const chat = Ξ.windows.get('chat_interface');
+const status = Ξ.windows.get('status_monitor');
+
+// Trigger quantum effects:
+Ξ.toggleQuantumMode();
+Ξ.focusModule('consciousness_monitor');

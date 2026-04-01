@@ -1,0 +1,84 @@
+{
+  "directory_structure": {
+    "src/": {
+      "purpose": "Source code and main modules",
+      "allowed_extensions": [
+        ".py",
+        ".ps1",
+        ".psm1",
+        ".psd1"
+      ],
+      "subdirectories": {
+        "core/": "Core system components",
+        "config/": "Configuration and settings",
+        "ai/": "AI integration modules",
+        "utils/": "Utility functions and helpers",
+        "interfaces/": "External interfaces and APIs"
+      }
+    },
+    "docs/": {
+      "purpose": "Documentation and guides",
+      "allowed_extensions": [
+        ".md",
+        ".txt",
+        ".rst",
+        ".pdf"
+      ],
+      "subdirectories": {
+        "api/": "API documentation",
+        "guides/": "User and developer guides",
+        "architecture/": "System architecture docs"
+      }
+    },
+    "data/": {
+      "purpose": "Data storage and processing",
+      "allowed_extensions": [
+        ".json",
+        ".csv",
+        ".txt",
+        ".log"
+      ],
+      "subdirectories": {
+        "logs/": "System and application logs",
+        "cache/": "Temporary cache files",
+        "backups/": "Backup files"
+      }
+    },
+    "tests/": {
+      "purpose": "Testing and validation",
+      "allowed_extensions": [
+        ".py",
+        ".ps1"
+      ],
+      "subdirectories": {
+        "unit/": "Unit tests",
+        "integration/": "Integration tests",
+        "fixtures/": "Test data and fixtures"
+      }
+    },
+    "scripts/": {
+      "purpose": "Standalone scripts and utilities",
+      "allowed_extensions": [
+        ".py",
+        ".ps1",
+        ".sh",
+        ".bat"
+      ]
+    }
+  },
+  "file_naming_patterns": {
+    "python_modules": "^[a-z_][a-z0-9_]*\\.py$",
+    "powershell_scripts": "^[A-Z][a-zA-Z0-9]*\\.ps1$",
+    "config_files": "^[a-z_][a-z0-9_]*\\.(json|yaml|yml|ini|conf)$",
+    "documentation": "^[A-Z][a-zA-Z0-9_-]*\\.md$"
+  },
+  "duplicate_detection": {
+    "ignore_extensions": [
+      ".log",
+      ".tmp",
+      ".cache"
+    ],
+    "size_threshold_bytes": 1024,
+    "content_similarity_threshold": 0.95
+  }
+}

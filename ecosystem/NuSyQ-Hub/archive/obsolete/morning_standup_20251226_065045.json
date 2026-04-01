@@ -1,0 +1,133 @@
+{
+  "run_id": "20251226_065045",
+  "timestamp": "2025-12-26T06:52:10.343720",
+  "status": "fail",
+  "total_checks": 6,
+  "passed": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "check": "?? Quick Tests",
+      "exit_code": 1,
+      "duration_seconds": 2.5,
+      "details": "============================= test session starts ============================= | platform win32 -- Python 3.12.10, pytest-9.0.2, pluggy-1.6.0 | rootdir: C:\\...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/",
+        "-q",
+        "-x"
+      ]
+    },
+    {
+      "check": "?? Code Format",
+      "exit_code": 1,
+      "duration_seconds": 9.55,
+      "details": "Skipping .ipynb files as Jupyter dependencies are not installed. | You can fix this by running ``pip install \"black[jupyter]\"`` | would reformat C:\\Users\\kea...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "-m",
+        "black",
+        "src/",
+        "--check"
+      ]
+    },
+    {
+      "check": "?? Lint Check",
+      "exit_code": 1,
+      "duration_seconds": 0.14,
+      "details": "E501 Line too long (101 > 100) | --> src\\agents\\autonomous_development_agent.py:455:101 | | | 453 |             self.quest_engine.add_quest( | 454 |         ...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src/",
+        "--select=E,F"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "check": "?? System Health",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 24.84,
+      "details": "\ud83c\udfe5 NuSyQ Selfcheck Diagnostic | ================================================== | 1. Validating Python syntax... | 2. Checking required directories... | 3....",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "scripts/start_nusyq.py",
+        "selfcheck"
+      ]
+    },
+    {
+      "check": "?? Capabilities",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 23.39,
+      "details": "\ud83e\udde0 NuSyQ Comprehensive Capability Discovery | ====================================================================== | \ud83d\udcca System Snapshot | Total Capabilities:...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "scripts/start_nusyq.py",
+        "capabilities"
+      ]
+    },
+    {
+      "check": "?? Guild Status",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 24.73,
+      "details": "{ | \"timestamp\": \"2025-12-26T05:46:19.543262\", | \"agents_online\": 1, | \"quests_open\": 0, | \"quests_active\": 0, | \"quests_blocked\": 0, | \"critical_signals\": [...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "scripts/start_nusyq.py",
+        "guild_status"
+      ]
+    },
+    {
+      "check": "?? Quick Tests",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 2.5,
+      "details": "============================= test session starts ============================= | platform win32 -- Python 3.12.10, pytest-9.0.2, pluggy-1.6.0 | rootdir: C:\\...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/",
+        "-q",
+        "-x"
+      ]
+    },
+    {
+      "check": "?? Code Format",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 9.55,
+      "details": "Skipping .ipynb files as Jupyter dependencies are not installed. | You can fix this by running ``pip install \"black[jupyter]\"`` | would reformat C:\\Users\\kea...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "-m",
+        "black",
+        "src/",
+        "--check"
+      ]
+    },
+    {
+      "check": "?? Lint Check",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 0.14,
+      "details": "E501 Line too long (101 > 100) | --> src\\agents\\autonomous_development_agent.py:455:101 | | | 453 |             self.quest_engine.add_quest( | 454 |         ...",
+      "command": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src/",
+        "--select=E,F"
+      ]
+    }
+  ]
+}

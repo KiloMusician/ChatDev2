@@ -1,0 +1,133 @@
+# Git and version control
+.git
+.gitignore
+.gitattributes
+.githooks
+.github
+
+# Python cache and compiled files
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+dist
+build
+*.egg
+
+# Virtual environments
+.venv
+.venv-*
+.venv_precommit
+.venv-adapter
+venv
+env
+ENV
+.virtualenv
+
+# Temporary and backup directories
+nusyq_clean_clone
+nusyq_backup*
+*_backup
+*_clone
+
+# IDE and editor files
+.vscode
+.idea
+.vs
+.cursor
+.continue
+.copilot
+.copilot_kilo
+*.swp
+*.swo
+*.swn
+*~
+
+# Testing and coverage
+.pytest_cache
+.coverage
+.coverage.*
+htmlcov
+.tox
+.mypy_cache
+.ruff_cache
+.benchmarks
+
+# Documentation
+docs/
+*.md
+LICENSE
+CHANGELOG.md
+
+# CI/CD
+.github/workflows
+.travis.yml
+.circleci
+
+# Archives and snapshots
+.snapshots
+.archive
+.tmp_audit
+archive/
+cleanup_backup/
+
+# Development utilities
+scripts/
+tests/
+examples/
+
+# Large optional project directories
+projects/
+
+# Large data directories
+data/
+agent_output/
+Reports/
+state/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Package manager files
+node_modules/
+package-lock.json
+yarn.lock
+poetry.lock
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Build context sanitization
+.docker_build_context
+.sanitized_build_context
+
+# Windows-specific paths
+AppData/
+
+# Development containers
+.devcontainer/

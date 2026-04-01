@@ -1,0 +1,49 @@
+name: CI - Pester tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Pester tests
+        shell: pwsh
+        run: |
+          # Install Pester 5.x for the current user (non-interactive)
+          Install-Module -Name Pester -MinimumVersion 5.4.0 -Force -Scope CurrentUser -SkipPublisherCheck -AllowClobber
+          Import-Module Pester -MinimumVersion 5.4.0
+          Invoke-Pester -Path tests -Output Detailed
+
+  lint:
+    if: github.event_name == 'pull_request'
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser -SkipPublisherCheck -AllowClobber
+
+      - name: Run ScriptAnalyzer
+        shell: pwsh
+        run: |
+          $settings = ".vscode\PSScriptAnalyzerSettings.psd1"
+          Write-Host "Running Invoke-ScriptAnalyzer against 'lib' with settings: $settings"
+          $issues = Invoke-ScriptAnalyzer -Path lib -Recurse -SettingsPath $settings -ErrorAction SilentlyContinue
+          if ($null -ne $issues -and $issues.Count -gt 0) {
+            Write-Host "ScriptAnalyzer found issues:" 
+            $issues | Format-Table -AutoSize
+            exit 1
+          }
+          else {
+            Write-Host "No ScriptAnalyzer issues found."
+          }

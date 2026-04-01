@@ -1,0 +1,28 @@
+# Dockerfile.mcp — Custom MCP server for Terminal Depths Lattice
+# Exposes Terminal Depths game commands and Lattice search as MCP tools.
+#
+# Build:  docker build -t td-mcp -f Dockerfile.mcp .
+# Run:    docker run -e TERMINAL_DEPTHS_URL=http://host.docker.internal:5000 -p 9100:9100 td-mcp
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir fastapi uvicorn requests redis
+
+COPY scripts/mcp_server.py ./mcp_server.py
+COPY scripts/lattice_mcp.py ./lattice_mcp.py
+COPY app/lattice.py ./lattice.py
+RUN mkdir -p /app/state
+
+ARG MCP_MODULE=mcp_server
+ENV MCP_MODULE=${MCP_MODULE}
+ENV TERMINAL_DEPTHS_URL=http://localhost:5000
+ENV PORT=9100
+
+EXPOSE 9100
+
+HEALTHCHECK --interval=30s --timeout=5s \
+    CMD curl -f http://localhost:${PORT}/health || exit 1
+
+CMD ["sh", "-c", "python ${MCP_MODULE}.py"]

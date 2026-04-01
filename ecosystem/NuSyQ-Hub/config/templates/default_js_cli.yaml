@@ -1,0 +1,23 @@
+name: Default JS CLI
+type: cli
+language: javascript
+runtime_profile: native_terminal
+description: Default JavaScript CLI template for Node-based utilities.
+metadata: {}
+dependencies:
+  - commander
+  - chalk
+file_structure:
+  README.md: Project overview and usage examples
+  src/main.js: CLI entry point
+  src/commands/health.js: Health-check command implementation
+  tests/smoke.test.js: Basic smoke test
+complexity: 4
+requires_multifile: false
+entry_point: src/main.js
+cli_framework: commander
+packaging: pkg
+generation_hints:
+  - Use ESM imports/exports
+  - Parse command-line args with commander
+  - Keep command handlers modular and testable

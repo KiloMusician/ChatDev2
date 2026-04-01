@@ -1,0 +1,50 @@
+{
+  "task_id": "council_1773565225909",
+  "agent_id": "council",
+  "content": "Vote on PU priority and viability",
+  "metadata": {
+    "pu": {
+      "id": "PU-521-1773565225",
+      "type": "RefactorPU",
+      "title": "Remove console spam statements",
+      "description": "Remove 93 console.log/print statements cluttering output",
+      "source_repo": "nusyq-hub",
+      "priority": "medium",
+      "proof_criteria": [
+        "All spam statements removed",
+        "No functional code affected",
+        "Tests still pass"
+      ],
+      "metadata": {
+        "files_affected": 12,
+        "statements": 93
+      },
+      "status": "queued",
+      "created_at": "2026-03-15T03:00:25.795085",
+      "votes": {},
+      "assigned_agents": [],
+      "execution_results": {},
+      "completed_at": "",
+      "failed_at": "",
+      "last_error": "",
+      "associated_quest_id": "",
+      "background_task_id": "",
+      "dependencies": []
+    },
+    "vote_options": [
+      "approve",
+      "reject",
+      "defer"
+    ],
+    "criteria": [
+      "All spam statements removed",
+      "No functional code affected",
+      "Tests still pass"
+    ]
+  },
+  "t": 1773565225909,
+  "utc": 1773565225909,
+  "entropy": 0.5,
+  "budget": 0.95,
+  "submitted_at": "2026-03-15T03:00:25.909945"
+}

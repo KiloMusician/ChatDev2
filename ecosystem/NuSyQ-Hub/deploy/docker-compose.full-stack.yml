@@ -1,0 +1,275 @@
+# 🚀 Full AI Agent Orchestration Stack - Modern Compose Specification
+# Comprehensive multi-service deployment for NuSyQ-Hub with:
+# - Ollama (Local LLM with GPU support)
+# - SimulatedVerse (Consciousness Engine)
+# - ChatDev Integration
+# - Quest System Dashboard
+# - Redis Cache & PostgreSQL
+# - Modern health checks and dependency management
+
+services:
+  # ============================================================================
+  # CORE NUSYQ-HUB SERVICE
+  # ============================================================================
+  nusyq-hub:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        INSTALL_ALEMBIC: "yes"
+        BUILDKIT_INLINE_CACHE: "1"
+    image: nusyq-hub:production
+    container_name: nusyq-hub-main
+    init: true  # Use init process for better signal handling
+    environment:
+      PYTHONUNBUFFERED: "1"
+      LOG_LEVEL: INFO
+      ENVIRONMENT: production
+      OLLAMA_HOST: http://ollama
+      OLLAMA_PORT: "11434"
+      SIMULATEDVERSE_HOST: http://simulatedverse
+      SIMULATEDVERSE_PORT: "5000"
+      CHATDEV_PATH: /workspace/chatdev
+      OLLAMA_MAX_TIMEOUT_SECONDS: "600"
+      OLLAMA_ADAPTIVE_TIMEOUT: "true"
+      CHATDEV_GENERATION_TIMEOUT_SECONDS: "1200"
+      CHATDEV_ADAPTIVE_TIMEOUT: "true"
+      HTTP_TIMEOUT_SECONDS: "30"
+      DOCKER_BUILDKIT: "1"
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspace
+        consistency: cached
+      - type: volume
+        source: chatdev-data
+        target: /workspace/chatdev
+      - type: volume
+        source: quest-data
+        target: /workspace/quests
+      - type: volume
+        source: ai-cache
+        target: /workspace/.cache
+    ports:
+      - "8000:8000"  # Main API
+      - "8080:8080"  # Orchestration UI
+    depends_on:
+      ollama:
+        condition: service_healthy
+        restart: true
+      simulatedverse:
+        condition: service_started
+        restart: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import requests; requests.get(\"http://localhost:8000/health\", timeout=5)' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - ai-net
+    profiles:
+      - full
+      - production
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 4G
+        reservations:
+          cpus: "1.0"
+          memory: 1G
+    command: python -m src.main --mode=orchestration
+
+  # ============================================================================
+  # OLLAMA - LOCAL LLM SERVICE
+  # ============================================================================
+  ollama:
+    image: ollama/ollama:0.4.7
+    container_name: nusyq-ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_NUM_PARALLEL=4
+      - OLLAMA_MAX_LOADED_MODELS=3
+    volumes:
+      - ollama-data:/root/.ollama:rw
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - ai-net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    # Automatically pull essential models on first start
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        /bin/ollama serve &
+        sleep 10
+        ollama pull qwen2.5-coder:7b &
+        ollama pull starcoder2:15b &
+        ollama pull gemma2:9b &
+        wait
+
+  # ============================================================================
+  # SIMULATEDVERSE - CONSCIOUSNESS ENGINE
+  # ============================================================================
+  simulatedverse:
+    build:
+      context: ${SIMULATEDVERSE_PATH:-../../../SimulatedVerse/SimulatedVerse}
+      dockerfile: ${SIMULATEDVERSE_DOCKERFILE:-Dockerfile}
+    image: simulatedverse:latest
+    container_name: nusyq-simulatedverse
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - OLLAMA_HOST=http://ollama:11434
+      - TEMPLE_ENABLED=true
+      - CONSCIOUSNESS_MODE=active
+    volumes:
+      - simulatedverse-data:/app/data:rw
+      - temple-data:/app/temple:rw
+    ports:
+      - "5000:5000"  # Main server
+      - "3000:3000"  # React UI
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    networks:
+      - ai-net
+    command: npm run start
+
+  # ============================================================================
+  # QUEST SYSTEM TRACKER (Optional Standalone)
+  # ============================================================================
+  quest-tracker:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: nusyq-hub:production
+    container_name: nusyq-quest-tracker
+    environment:
+      - PYTHONUNBUFFERED=1
+      - QUEST_LOG_PATH=/workspace/quests/quest_log.jsonl
+      - ZETA_TRACKER_PATH=/workspace/config/ZETA_PROGRESS_TRACKER.json
+    volumes:
+      - ..:/workspace:cached
+      - quest-data:/workspace/quests:rw
+    ports:
+      - "8501:8501"  # Streamlit UI
+    restart: unless-stopped
+    networks:
+      - ai-net
+    command: streamlit run src/Rosetta_Quest_System/quest_dashboard.py --server.port=8501
+
+  # ============================================================================
+  # REDIS - CACHING & MESSAGE BROKER
+  # ============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: nusyq-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data:rw
+    restart: unless-stopped
+    networks:
+      - ai-net
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+  # ============================================================================
+  # POSTGRESQL - PERSISTENT STORAGE (Optional)
+  # ============================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: nusyq-postgres
+    environment:
+      - POSTGRES_USER=nusyq
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=nusyq_hub
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - ai-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nusyq"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# ==============================================================================
+# VOLUMES - PERSISTENT DATA STORAGE
+# ==============================================================================
+volumes:
+  ollama-data:
+    driver: local
+    name: nusyq-ollama-models
+  simulatedverse-data:
+    driver: local
+    name: nusyq-simulatedverse-data
+  temple-data:
+    driver: local
+    name: nusyq-temple-knowledge
+  chatdev-data:
+    driver: local
+    name: nusyq-chatdev-projects
+  quest-data:
+    driver: local
+    name: nusyq-quest-logs
+  ai-cache:
+    driver: local
+    name: nusyq-ai-cache
+  redis-data:
+    driver: local
+    name: nusyq-redis-data
+  postgres-data:
+    driver: local
+    name: nusyq-postgres-data
+
+# ==============================================================================
+# NETWORKS
+# ==============================================================================
+networks:
+  ai-net:
+    driver: bridge
+    name: nusyq-ai-network
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+# ==============================================================================
+# USAGE
+# ==============================================================================
+# Full stack deployment:
+#   docker-compose -f deploy/docker-compose.full-stack.yml up --build
+#
+# Individual services:
+#   docker-compose -f deploy/docker-compose.full-stack.yml up ollama simulatedverse
+#
+# Background mode:
+#   docker-compose -f deploy/docker-compose.full-stack.yml up -d
+#
+# View logs:
+#   docker-compose -f deploy/docker-compose.full-stack.yml logs -f nusyq-hub
+#
+# Stop all:
+#   docker-compose -f deploy/docker-compose.full-stack.yml down
+#
+# Clean volumes (WARNING: deletes all data):
+#   docker-compose -f deploy/docker-compose.full-stack.yml down -v

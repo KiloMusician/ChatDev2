@@ -1,0 +1,59 @@
+{
+  "timestamp": 1756821240000,
+  "implementation": "kernel_first_operating_mode",
+  "status": "✅ COMPLETE",
+  
+  "signal_vs_noise_results": {
+    "signal_files": 6629,
+    "total_tracked": 36777,
+    "noise_filtered": 30148,
+    "noise_percentage": "82%",
+    "typescript_files": 1829,
+    "efficiency_gain": "massive_vendor_noise_elimination"
+  },
+  
+  "files_created": {
+    "authoritative_targets": "ops/repo-targets.yaml",
+    "signal_scanner": "ops/only-repo.ts", 
+    "kernel_map": "ops/kernel-map.yaml",
+    "ignore_fences": [".rgignore", ".eslintignore", ".prettierignore"],
+    "ui_component": "client/src/components/RepoScopePane.tsx",
+    "editor_consistency": [".editorconfig", ".npmrc", "pip.conf"]
+  },
+  
+  "files_updated": {
+    "gitignore": "Added vendor noise patterns",
+    "repo_auditor": "Updated to use signal-only scanning",
+    "sage_effective": "Updated to monitor signal files only"
+  },
+  
+  "ready_to_use_commands": {
+    "signal_file_list": "tsx ops/only-repo.ts",
+    "git_tracked_search": "git ls-files | xargs -r grep 'TODO'",
+    "eslint_signal_only": "git ls-files '*.ts' '*.tsx' | xargs -r npx eslint",
+    "signal_file_count": "tsx ops/only-repo.ts | wc -l",
+    "typescript_only": "git ls-files '*.ts' '*.tsx'"
+  },
+  
+  "architectural_guardrails": {
+    "kernel_modules": [
+      "packages/core - domain primitives, schemas",
+      "packages/llm - llm gateway & cascade", 
+      "ops - orchestration (SAGE, watchdogs, auditor)",
+      "apps/web - UI (HUD, Admin, Console, Status)",
+      "apps/sim - Simulation/game loop"
+    ],
+    "import_rules": {
+      "allowed_roots": ["packages/core", "packages/llm", "ops/lib"],
+      "disallowed_edges": ["apps/web → ops/**", "apps/web → apps/sim/**"]
+    }
+  },
+  
+  "effectiveness": {
+    "vendor_noise_eliminated": "node_modules, .venv, build outputs, caches",
+    "scanner_stability": "tsx ops/only-repo.ts (with git ls-files fallback)",
+    "tool_consistency": "All scanners now use signal set only",
+    "ui_visibility": "RepoScopePane shows signal vs noise stats",
+    "never_chase_vendor_trees_again": true
+  }
+}

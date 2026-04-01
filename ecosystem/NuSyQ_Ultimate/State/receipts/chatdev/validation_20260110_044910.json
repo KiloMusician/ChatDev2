@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-01-10T04:49:10.921642",
+  "valid": false,
+  "chatdev_path": "C:\\Users\\keath\\NuSyQ\\ChatDev",
+  "checks": {
+    "run.py": {
+      "exists": true,
+      "description": "Main ChatDev runner",
+      "path": "C:\\Users\\keath\\NuSyQ\\ChatDev\\run.py"
+    },
+    "WareHouse": {
+      "exists": true,
+      "description": "Project output directory",
+      "path": "C:\\Users\\keath\\NuSyQ\\ChatDev\\WareHouse"
+    },
+    "camel": {
+      "exists": true,
+      "description": "CAMEL framework module",
+      "path": "C:\\Users\\keath\\NuSyQ\\ChatDev\\camel"
+    },
+    "config": {
+      "exists": false,
+      "description": "Configuration directory",
+      "path": null
+    }
+  },
+  "issues": [
+    "Missing critical file: WareHouse/README.md"
+  ],
+  "recommendations": []
+}

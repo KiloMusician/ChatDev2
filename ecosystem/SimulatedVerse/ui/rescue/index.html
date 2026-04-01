@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ΞNuSyQ Rescue HUD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Prefer locally-installed monospace; fall back to system monospace if fonts blocked -->
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">ΞNuSyQ Rescue HUD</div>
+    <nav class="nav">
+      <button id="btn-cascade" class="primary">BIG RED BUTTON</button>
+      <button id="btn-smoke">Smoke</button>
+      <button id="btn-enqueue">+ Task</button>
+      <button id="btn-sound">🔈</button>
+      <button id="btn-full">⛶</button>
+    </nav>
+  </header>
+
+  <main class="grid">
+    <section class="panel tall" id="panel-ascii">
+      <div class="panel-head">ASCII Viewport</div>
+      <canvas id="ascii"></canvas>
+      <div class="panel-foot">
+        <label><input type="checkbox" id="tick-anim" checked/> animate</label>
+        <label><input type="checkbox" id="tick-grid"/> grid</label>
+        <select id="sel-theme">
+          <option value="matrix">matrix</option>
+          <option value="amber">amber</option>
+          <option value="classic">classic</option>
+          <option value="cogmind">cogmind-ish</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-title">
+      <div class="panel-head">Title / Boot</div>
+      <div class="titlebox">
+        <h1>SimulatedVerse</h1>
+        <p class="subtitle">Infrastructure-First • Mobile-First • Culture-Ship Powered</p>
+        <div class="menu">
+          <button class="wide" id="btn-new">▶ New Game</button>
+          <button class="wide" id="btn-load">⟳ Load</button>
+          <button class="wide" id="btn-settings">⚙ Settings</button>
+          <button class="wide" id="btn-temple">🛕 Temple</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-queue">
+      <div class="panel-head">Task Queue</div>
+      <ul id="tasks"></ul>
+    </section>
+
+    <section class="panel" id="panel-logs">
+      <div class="panel-head">Logs</div>
+      <pre id="logs"></pre>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span id="hud-health">health: ...</span>
+    <span> • </span>
+    <span id="hud-msg">ready</span>
+  </footer>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

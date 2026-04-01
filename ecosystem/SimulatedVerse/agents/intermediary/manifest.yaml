@@ -1,0 +1,8 @@
+id: intermediary
+role: intermediary
+name: Intermediary
+description: Routes messages through the bus and manages communication
+capabilities: [route, act, compose]
+version: 0.1.0
+runner: in-process
+enabled: true

@@ -1,0 +1,29 @@
+{
+  "entrypoints": [
+    "scripts/",
+    "SystemDev/scripts",
+    "src/index.ts",
+    "SystemDev/interfaces",
+    "SystemDev/guards"
+  ],
+  "safe_move_roots": [
+    "SystemDev",
+    "src",
+    "scripts"
+  ],
+  "ignore": [
+    "**/node_modules/**",
+    "**/.godot/**", 
+    "**/dist/**",
+    "**/*.map",
+    "**/.cache/**",
+    "**/reports/**"
+  ],
+  "preferred_scanners": [
+    "targeted_provenance",
+    "index_repo", 
+    "dup_exact"
+  ],
+  "description": "SystemDev quadrant - system operations, scripts, infrastructure",
+  "quadrant": "SystemDev"
+}

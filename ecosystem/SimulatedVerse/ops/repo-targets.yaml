@@ -1,0 +1,72 @@
+# What counts as "the system" (everything else = noise)
+roots:
+  - apps/web
+  - apps/sim
+  - packages
+  - ops
+  - scripts
+  - content
+  - config
+  - docs
+  - tests
+
+# First-class code file globs
+include:
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.js"
+  - "**/*.jsx"
+  - "**/*.json"
+  - "**/*.yml"
+  - "**/*.yaml"
+  - "**/*.md"
+  - "**/*.py"
+  - "**/*.ipynb"
+  - "**/*.gd"
+  - "**/*.gdscript"
+  - "**/*.toml"
+  - "**/*.env.example"
+  - "replit.nix"
+  - "flake.nix"
+  - "shell.nix"
+
+# Explicit noise (always ignored by scanners/agents)
+exclude:
+  - "**/node_modules/**"
+  - "**/.pnpm/**"
+  - "**/.yarn/**"
+  - "**/.cache/**"
+  - "**/.parcel-cache/**"
+  - "**/.next/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/coverage/**"
+  - "**/.vite/**"
+  - "**/.turbo/**"
+  - "**/.vercel/**"
+  - "**/.wrangler/**"
+  - "**/.DS_Store"
+  - "**/.Trash/**"
+  - "**/*.log"
+  - "**/*.tmp"
+  - "**/*.swap"
+  - "**/.pytest_cache/**"
+  - "**/.mypy_cache/**"
+  - "**/.ruff_cache/**"
+  - "**/.ipynb_checkpoints/**"
+  - "**/.pythonlibs/**"
+  - "**/.venv/**"
+  - "**/venv/**"
+  - "**/__pycache__/**"
+  - "**/*.pyc"
+  - "**/*egg-info/**"
+  - "**/.git/**"
+  - "**/.git-*/**"
+  - "attic/**"          # quarantine/archival safe zone
+  - "reports/**"        # generated outputs
+  - "assets/big/**"     # large, non-source assets (opt-in when needed)
+
+# Optional opt-ins (comment out to include later)
+optional:
+  - "assets/**"
+  - "notebooks/**"

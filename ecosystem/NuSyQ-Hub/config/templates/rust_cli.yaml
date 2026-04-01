@@ -1,0 +1,36 @@
+name: Rust CLI Tool
+type: cli
+language: rust
+runtime_profile: native_terminal
+description: Fast, memory-safe CLI tool written in Rust.
+metadata:
+  edition: "2021"
+  rust_version: "1.70"
+dependencies:
+  - clap
+  - anyhow
+  - serde
+  - tokio
+file_structure:
+  README.md: Project overview and build instructions
+  Cargo.toml: Rust package manifest with dependencies
+  src/main.rs: Application entry point with argument parsing
+  src/commands/mod.rs: Commands module
+  src/commands/health.rs: Health check command
+  src/utils/mod.rs: Utilities module
+  src/utils/logger.rs: Logging utilities
+  tests/integration_test.rs: Integration tests
+complexity: 5
+requires_multifile: true
+entry_point: src/main.rs
+cli_framework: clap
+packaging: cargo build --release
+generation_hints:
+  - Use clap derive macros for CLI arguments
+  - Use anyhow for error handling
+  - Use Result<T, anyhow::Error> as return type
+  - Use async/await with tokio for I/O
+  - Follow Rust naming conventions (snake_case for functions/modules)
+  - Use modules for organization (mod.rs pattern)
+  - Write doc comments for public items
+  - Use #[derive(Debug, Clone)] for data structures

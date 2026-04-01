@@ -1,0 +1,27 @@
+{
+  "name": "nusyq-modular-window-server",
+  "version": "1.0.0",
+  "description": "ΞNuSyQ Modular Window System - Quantum-Inspired Modular Interface Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "nusyq",
+    "quantum",
+    "modular",
+    "window",
+    "interface"
+  ],
+  "author": "ΞNuSyQ Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.1",
+    "http-proxy-middleware": "^3.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

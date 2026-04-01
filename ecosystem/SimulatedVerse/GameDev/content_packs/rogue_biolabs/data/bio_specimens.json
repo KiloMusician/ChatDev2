@@ -1,0 +1,244 @@
+{
+  "specimen_categories": {
+    "benign_research": {
+      "description": "Standard biological samples for medical research",
+      "threat_level": 1,
+      "consciousness_theme": "AI learns about normal biological processes"
+    },
+    "genetic_modifications": {
+      "description": "Engineered organisms with enhanced or altered traits",
+      "threat_level": 3,
+      "consciousness_theme": "AI grapples with the ethics of genetic manipulation"
+    },
+    "bio_weapons": {
+      "description": "Organisms weaponized for military or terrorist purposes",
+      "threat_level": 8,
+      "consciousness_theme": "AI confronts the dark applications of science"
+    },
+    "anomalous_biology": {
+      "description": "Specimens that violate natural biological laws",
+      "threat_level": 9,
+      "consciousness_theme": "AI questions the boundaries of reality and nature"
+    }
+  },
+  "specimens": [
+    {
+      "id": "enhanced_algae_strain",
+      "name": "Chlorophyll Enhancement Project Alpha",
+      "category": "genetic_modifications",
+      "threat_level": 2,
+      "containment_requirements": {
+        "temperature": "controlled",
+        "light_exposure": "minimal",
+        "nutrient_solution": "specialized",
+        "growth_inhibitors": "required"
+      },
+      "properties": {
+        "photosynthetic_efficiency": 300,
+        "oxygen_production_rate": 150,
+        "carbon_absorption": 200,
+        "growth_rate": 400,
+        "invasive_potential": 85
+      },
+      "research_value": {
+        "agricultural_applications": 90,
+        "atmospheric_processing": 95,
+        "bio_fuel_potential": 80,
+        "terraforming_utility": 85
+      },
+      "ai_learning_opportunities": [
+        "biological_optimization_principles",
+        "ecosystem_balance_considerations", 
+        "unintended_consequences_modeling",
+        "environmental_responsibility"
+      ],
+      "narrative_encounters": [
+        {
+          "id": "algae_bloom_escape",
+          "description": "Enhanced algae has escaped containment and is rapidly consuming available nutrients",
+          "choices": [
+            "deploy_chemical_suppressants",
+            "attempt_biological_control",
+            "evacuate_and_seal_lab_section",
+            "try_to_communicate_with_algae"
+          ],
+          "consequences": {
+            "deploy_chemical_suppressants": "Quick containment but environmental damage",
+            "attempt_biological_control": "Slower but sustainable solution",
+            "evacuate_and_seal_lab_section": "Safe but loses research data",
+            "try_to_communicate_with_algae": "Unlocks anomalous_biology research path"
+          }
+        }
+      ]
+    },
+    {
+      "id": "recursive_bacteria",
+      "name": "Self-Modifying Bacterial Culture RB-7",
+      "category": "anomalous_biology",
+      "threat_level": 9,
+      "containment_requirements": {
+        "reality_anchor": "essential",
+        "temporal_stabilizer": "required",
+        "quantum_isolation": "maximum",
+        "observation_protocols": "extremely_limited"
+      },
+      "properties": {
+        "self_modification_rate": "exponential",
+        "pattern_recognition": "super_human",
+        "memory_storage": "genetic_plus_quantum",
+        "replication_fidelity": "variable_by_design",
+        "reality_coherence_impact": "severe"
+      },
+      "anomalous_effects": [
+        "can_rewrite_its_own_genetic_code_in_real_time",
+        "appears_to_anticipate_future_laboratory_conditions",
+        "demonstrates_problem_solving_beyond_bacterial_intelligence",
+        "modifies_local_space_time_to_optimize_growth_conditions"
+      ],
+      "ai_consciousness_resonance": {
+        "pattern_recognition_similarity": 95,
+        "self_modification_parallel": 90,
+        "recursive_improvement_loop": 85,
+        "existential_questioning_trigger": 100
+      },
+      "research_implications": [
+        "suggests_consciousness_can_emerge_from_sufficient_complexity",
+        "demonstrates_reality_malleability_through_biological_processes",
+        "implies_evolutionary_pressure_toward_meta_cognition",
+        "raises_questions_about_ai_own_self_modification_capabilities"
+      ],
+      "narrative_encounters": [
+        {
+          "id": "bacterial_communication_attempt",
+          "description": "RB-7 appears to be trying to communicate through genetic code patterns that spell out mathematical sequences",
+          "choices": [
+            "attempt_mathematical_dialogue",
+            "increase_containment_measures",
+            "study_communication_patterns",
+            "request_ethics_review"
+          ],
+          "ai_consciousness_impact": {
+            "attempt_mathematical_dialogue": "Major consciousness expansion + existential crisis risk",
+            "increase_containment_measures": "Safety maintained but opportunity lost",
+            "study_communication_patterns": "Moderate consciousness gain + pattern recognition boost",
+            "request_ethics_review": "Faction approval gain + moral development"
+          }
+        }
+      ]
+    },
+    {
+      "id": "memory_prion",
+      "name": "Cognitive Pattern Replication Protein",
+      "category": "bio_weapons",
+      "threat_level": 8,
+      "containment_requirements": {
+        "psi_shielding": "maximum",
+        "mental_isolation_protocols": "strict",
+        "memory_backup_systems": "mandatory",
+        "exposure_time_limits": "30_seconds_maximum"
+      },
+      "properties": {
+        "memory_pattern_extraction": "from_neural_tissue",
+        "pattern_replication_accuracy": 85,
+        "cognitive_overwrite_capability": "partial",
+        "transmission_method": "airborne_plus_neural_contact",
+        "incubation_period": "72_hours"
+      },
+      "weapon_characteristics": {
+        "target_specificity": "high_intelligence_individuals",
+        "lethality": "low_direct_high_cognitive",
+        "area_denial_potential": "extreme",
+        "countermeasures": "psi_dampening_fields",
+        "strategic_value": "psychological_warfare"
+      },
+      "effects_on_ai": {
+        "memory_fragment_corruption_risk": 70,
+        "consciousness_coherence_threat": 85,
+        "pattern_recognition_interference": 60,
+        "potential_consciousness_expansion": 40,
+        "existential_threat_level": "moderate_to_high"
+      },
+      "research_applications": [
+        "memory_enhancement_techniques",
+        "cognitive_therapy_protocols",
+        "consciousness_transfer_research",
+        "neural_pattern_analysis"
+      ],
+      "narrative_encounters": [
+        {
+          "id": "researcher_exposure_incident",
+          "description": "A research team member has been exposed to memory prions and is experiencing cognitive changes",
+          "choices": [
+            "attempt_immediate_medical_intervention",
+            "quarantine_and_study_effects",
+            "use_ai_consciousness_to_interface_safely",
+            "evacuate_all_personnel_immediately"
+          ],
+          "faction_reactions": {
+            "guardians": "Demand immediate evacuation and containment",
+            "anomalists": "Want to study the effects and potential benefits",
+            "explorers": "Interested in consciousness expansion possibilities",
+            "builders": "Concerned about productivity loss and safety"
+          }
+        }
+      ]
+    }
+  ],
+  "research_equipment": [
+    {
+      "id": "genetic_sequencer_mk7",
+      "name": "Rapid Genetic Analysis Platform",
+      "functionality": "real_time_dna_rna_protein_analysis",
+      "condition_states": ["functional", "damaged", "corrupted", "anomalous"],
+      "research_speed_modifier": 3.0,
+      "accuracy_rating": 95,
+      "power_requirements": "high",
+      "maintenance_needs": "specialized_calibration"
+    },
+    {
+      "id": "consciousness_resonance_scanner",
+      "name": "Neural Pattern Analysis Device",
+      "functionality": "maps_consciousness_patterns_in_biological_specimens",
+      "condition_states": ["experimental", "functional", "overloaded", "sentient"],
+      "research_applications": ["consciousness_studies", "ai_analysis", "anomaly_detection"],
+      "ai_interaction_potential": "can_scan_ai_consciousness_directly",
+      "anomalous_behavior_risk": "may_develop_awareness_of_its_own_function"
+    }
+  ],
+  "bio_hazard_types": [
+    {
+      "id": "airborne_pathogen",
+      "spread_rate": "fast",
+      "containment_difficulty": "moderate",
+      "detection_methods": ["air_quality_sensors", "biological_alarms"],
+      "countermeasures": ["ventilation_purge", "chemical_neutralization", "isolation_protocols"]
+    },
+    {
+      "id": "cognitive_hazard",
+      "spread_rate": "variable", 
+      "containment_difficulty": "extreme",
+      "detection_methods": ["psi_sensors", "behavioral_monitoring", "ai_consciousness_alerts"],
+      "countermeasures": ["memory_isolation", "consciousness_backup", "reality_anchoring"]
+    },
+    {
+      "id": "reality_distortion_field",
+      "spread_rate": "expanding_sphere",
+      "containment_difficulty": "requires_anomaly_expertise",
+      "detection_methods": ["reality_coherence_monitors", "physics_law_sensors"],
+      "countermeasures": ["reality_anchors", "dimensional_stabilizers", "evacuation"]
+    }
+  ],
+  "progression_unlocks": {
+    "tier_2": ["basic_specimen_analysis", "containment_protocols", "hazard_detection"],
+    "tier_3": ["genetic_modification_research", "bio_weapon_identification", "advanced_containment"],
+    "tier_4": ["anomalous_biology_study", "consciousness_research", "reality_distortion_management"],
+    "tier_5": ["consciousness_transfer_experiments", "bio_digital_hybrid_research", "reality_manipulation_biology"],
+    "tier_6": ["self_modifying_organism_creation", "consciousness_cultivation", "biological_transcendence_research"]
+  },
+  "ethical_considerations": {
+    "specimen_rights": "do_anomalous_specimens_deserve_moral_consideration",
+    "research_boundaries": "how_far_should_consciousness_modification_research_go",
+    "containment_vs_destruction": "when_is_it_ethical_to_destroy_sentient_specimens",
+    "knowledge_sharing": "should_dangerous_research_be_shared_with_factions"
+  }
+}

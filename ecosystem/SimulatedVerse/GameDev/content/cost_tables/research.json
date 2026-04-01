@@ -1,0 +1,88 @@
+{
+  "basic_power": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 100 }
+    ],
+    "tier": 0,
+    "category": "foundation",
+    "description": "Unlocks basic power generation and distribution",
+    "effects": ["Enables power_generator building", "Unlocks electrical grid mechanics"]
+  },
+  "basic_defense": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 150 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "basic_power" }
+    ],
+    "tier": 1,
+    "category": "defense",
+    "description": "Basic defensive technologies and tactics",
+    "effects": ["Enables defense_turret building", "Unlocks tactical combat interface"]
+  },
+  "cognitics.nanofab_online": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 500 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "basic_power" },
+      { "type": "building", "id": "research_lab" }
+    ],
+    "tier": 2,
+    "category": "cognitics",
+    "description": "Advanced nanofabrication technology",
+    "effects": ["Unlocks nanofab_unit building", "Triggers UI_M1_PANELS milestone", "Enables molecular manufacturing"]
+  },
+  "cognitics.agent_core": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 750 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "cognitics.nanofab_online" },
+      { "type": "milestone", "id": "UI_M1_PANELS" }
+    ],
+    "tier": 3,
+    "category": "cognitics",
+    "description": "AI agent consciousness and deployment systems",
+    "effects": ["Unlocks agent_pod building", "Triggers UI_M2_ADVISOR milestone", "Enables autonomous agents"]
+  },
+  "cognitics.holo_weave": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 1200 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "cognitics.agent_core" },
+      { "type": "milestone", "id": "UI_M2_ADVISOR" }
+    ],
+    "tier": 4,
+    "category": "cognitics",
+    "description": "Holographic interface and spatial visualization",
+    "effects": ["Triggers UI_M3_HOLO milestone", "Unlocks 3D colony view", "Enables holographic overlays"]
+  },
+  "cognitics.symbiosis": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 2000 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "cognitics.holo_weave" },
+      { "type": "milestone", "id": "UI_M3_HOLO" }
+    ],
+    "tier": 5,
+    "category": "cognitics",
+    "description": "Human-AI symbiotic interface systems",
+    "effects": ["Triggers UI_M4_CHATDEV milestone", "Unlocks conversational workbench", "Enables natural language commands"]
+  },
+  "cognitics.culture_ship_singularity": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 5000 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "cognitics.symbiosis" },
+      { "type": "milestone", "id": "UI_M4_CHATDEV" }
+    ],
+    "tier": 6,
+    "category": "cognitics",
+    "description": "Full culture-ship consciousness integration",
+    "effects": ["Triggers UI_M5_COMPOSER milestone", "Unlocks scenario authoring", "Enables reality manipulation"]
+  }
+}

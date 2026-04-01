@@ -1,0 +1,17 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.13/schema.json",
+  "files": {
+    "includes": [
+      "**/*",
+      "!node_modules/**",
+      "!htmlcov/**",
+      "!docs/**/*.html",
+      "!Reports/**",
+      "!tmpclaude-*/**",
+      "!.mypy_cache/**",
+      "!**/.mypy_cache/**",
+      "!src/analysis/broken_paths_analysis.json"
+    ],
+    "ignoreUnknown": true
+  }
+}

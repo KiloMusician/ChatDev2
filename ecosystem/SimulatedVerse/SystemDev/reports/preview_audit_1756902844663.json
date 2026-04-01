@@ -1,0 +1,148 @@
+{
+  "stage": "preview_audit",
+  "timestamp": "2025-09-03T12:34:04.663Z",
+  "entrypoints": [
+    {
+      "kind": "web",
+      "root": "PreviewUI/web",
+      "index": "/home/runner/workspace/PreviewUI/web/godot/mobile-safe/index.html",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 100
+    },
+    {
+      "kind": "web",
+      "root": "apps/web",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 100
+    },
+    {
+      "kind": "web",
+      "root": "docs",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 100
+    },
+    {
+      "kind": "web",
+      "root": "public",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 100
+    },
+    {
+      "kind": "mobile",
+      "root": "PreviewUI/mobile",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 60
+    },
+    {
+      "kind": "hud",
+      "root": "PreviewUI/huds",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 80
+    },
+    {
+      "kind": "storybook",
+      "root": "PreviewUI/storyboards",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 70
+    },
+    {
+      "kind": "godot",
+      "root": "GameDev/engine/godot",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 50
+    },
+    {
+      "kind": "static",
+      "root": "dist",
+      "index": "/home/runner/workspace/dist/public/index.html",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 40
+    },
+    {
+      "kind": "static",
+      "root": "build",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 40
+    },
+    {
+      "kind": "static",
+      "root": "public",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 40
+    },
+    {
+      "kind": "static",
+      "root": "docs",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 40
+    }
+  ],
+  "conflicts": [
+    {
+      "type": "index_shadowing",
+      "file": "PreviewUI/web/index.html",
+      "note": "Higher-priority web shadows dist"
+    }
+  ],
+  "service_workers": [],
+  "replit": [
+    {
+      "type": "replit_config",
+      "file": ".replit",
+      "note": "modules = [\"nodejs-20\", \"web\", \"postgresql-16\", \"python-3.11\", \"python3\"]\\nrun = \"npm run dev\"\\nhidden = [\".config\", \".git\", \"generated-icon.png\", \"node_modules\", \"dist\"]\\n\\n[nix]\\nchannel = \"stable-24_05\""
+    }
+  ],
+  "recommendation": {
+    "preferred": {
+      "kind": "web",
+      "root": "PreviewUI/web",
+      "index": "/home/runner/workspace/PreviewUI/web/godot/mobile-safe/index.html",
+      "scriptHints": [
+        "NODE_ENV=development tsx server/index.ts",
+        "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
+      ],
+      "weight": 100
+    },
+    "envSwitch": {
+      "var": "PREVIEW_FLAVOR",
+      "value": "web:PreviewUI/web",
+      "note": "Use switcher middleware to serve from this root without moving files."
+    }
+  }
+}

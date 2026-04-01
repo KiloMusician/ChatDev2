@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-12-25T15:45:41.985Z",
+  "source": "SimulatedVerse",
+  "mode": "zero-token",
+  "cost": 0,
+  "ecosystemStatus": {
+    "simverse": {
+      "online": true,
+      "zeroTokenEnabled": true,
+      "capabilities": 9,
+      "localPlanners": {
+        "ruleBasedDecision": true,
+        "heuristicProcessing": true,
+        "symbolicReasoning": true
+      }
+    },
+    "hub": {
+      "online": true,
+      "orchestrator": "start_nusyq.py",
+      "size": 126716,
+      "modified": "2025-12-25T15:43:19.240Z"
+    },
+    "nusyq": {
+      "online": true,
+      "knowledgeBase": "knowledge-base.yaml",
+      "size": 56794,
+      "modified": "2025-12-25T15:40:37.869Z"
+    }
+  }
+}

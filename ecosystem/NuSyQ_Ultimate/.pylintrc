@@ -1,0 +1,14 @@
+[MASTER]
+init-hook='import sys, os; _root=os.path.dirname(os.path.abspath(__file__)); sys.path.extend([_root, os.path.join(_root, "src")])'
+
+[MESSAGES CONTROL]
+disable=
+    import-error,
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    too-few-public-methods
+
+[IMPORT]
+# Allow external imports
+allow-wildcard-with-all=no

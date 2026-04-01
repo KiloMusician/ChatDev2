@@ -1,0 +1,29 @@
+
+  WARNING: You're running a globally installed dependency-cruiser.
+
+           We recommend to install and run it as a local devDependency in
+           your project instead. There it has your project's environment and
+           transpilers at its disposal. That will ensure it can find e.g.
+           TypeScript, Vue or Svelte modules and dependencies.
+
+strict digraph "dependency-cruiser output"{
+    rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    "child_process" [label=<child_process> tooltip="child_process" URL="https://nodejs.org/api/child_process.html" color="grey" fontcolor="grey"]
+    "fs" [label=<fs> tooltip="fs" URL="https://nodejs.org/api/fs.html" color="grey" fontcolor="grey"]
+    "http" [label=<http> tooltip="http" URL="https://nodejs.org/api/http.html" color="grey" fontcolor="grey"]
+    "path" [label=<path> tooltip="path" URL="https://nodejs.org/api/path.html" color="grey" fontcolor="grey"]
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/integration" {label="integration" subgraph "cluster_src/integration/vscode_extension" {label="vscode_extension" "src/integration/vscode_extension/extension.js" [label=<extension.js> tooltip="extension.js" URL="src/integration/vscode_extension/extension.js" ] } } }
+    "src/integration/vscode_extension/extension.js" -> "fs" [style="dashed" penwidth="1.0"]
+    "src/integration/vscode_extension/extension.js" -> "path" [style="dashed" penwidth="1.0"]
+    "src/integration/vscode_extension/extension.js" -> "vscode"
+    subgraph "cluster_src" {label="src" subgraph "cluster_src/vscode_mediator_extension" {label="vscode_mediator_extension" "src/vscode_mediator_extension/extension.js" [label=<extension.js> tooltip="extension.js" URL="src/vscode_mediator_extension/extension.js" ] } }
+    "src/vscode_mediator_extension/extension.js" -> "child_process" [style="dashed" penwidth="1.0"]
+    "src/vscode_mediator_extension/extension.js" -> "fs" [style="dashed" penwidth="1.0"]
+    "src/vscode_mediator_extension/extension.js" -> "http" [style="dashed" penwidth="1.0"]
+    "src/vscode_mediator_extension/extension.js" -> "path" [style="dashed" penwidth="1.0"]
+    "src/vscode_mediator_extension/extension.js" -> "vscode"
+    "vscode" [label=<vscode> tooltip="vscode" ]
+}

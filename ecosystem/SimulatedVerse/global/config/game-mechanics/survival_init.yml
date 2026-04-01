@@ -1,0 +1,90 @@
+# 🛡️ Survival Initialization Config
+# Defines food, water, shelter, drones for initial gameplay
+
+survival:
+  resources:
+    food:
+      base_amount: 30
+      consumption_rate: 1.0  # per hour
+      spoilage_rate: 0.1     # per day
+      critical_threshold: 5
+      
+    water:
+      base_amount: 40
+      consumption_rate: 1.5  # per hour
+      evaporation_rate: 0.05 # per day
+      critical_threshold: 8
+      
+    shelter:
+      integrity: 85
+      insulation: 60
+      power_consumption: 2.0 # per hour
+      repair_materials_needed: 10
+      
+    energy:
+      base_amount: 100
+      generation_rate: 5.0   # per hour (solar panels)
+      consumption_rate: 3.0  # base systems
+      battery_capacity: 150
+      
+  drones:
+    - id: "scout_01"
+      type: "reconnaissance"
+      battery: 80
+      status: "standby"
+      abilities: ["explore", "scan", "communicate"]
+      
+    - id: "worker_01"
+      type: "construction"
+      battery: 90
+      status: "standby"
+      abilities: ["build", "repair", "harvest"]
+      
+    - id: "medic_01"
+      type: "medical"
+      battery: 70
+      status: "standby"
+      abilities: ["heal", "analyze", "synthesize"]
+
+colonists:
+  awake: 1  # Player character
+  in_stasis: 12
+  total_capacity: 15
+  
+  traits:
+    - "curious"
+    - "resourceful"
+    - "empathetic"
+    - "technical"
+    - "diplomatic"
+    - "creative"
+    - "resilient"
+    - "analytical"
+
+environment:
+  planet_type: "temperate"
+  atmosphere: "breathable_marginal"
+  weather_variance: 0.3
+  day_cycle: 24  # hours
+  seasons: true
+  
+  hazards:
+    - type: "weather_storm"
+      frequency: 0.1  # per day
+      severity: "moderate"
+      
+    - type: "equipment_failure"
+      frequency: 0.05
+      severity: "minor"
+
+progression:
+  unlock_conditions:
+    tier_1:
+      food_stable: 7  # days
+      shelter_repaired: true
+      drone_operational: 2
+      
+    tier_2:
+      exploration_radius: 5  # map units
+      resources_surplus: 20
+      colonists_awake: 3

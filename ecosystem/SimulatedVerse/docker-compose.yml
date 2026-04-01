@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # ΞNuSyQ Culture-Ship consciousness engine
+  simulatedverse:
+    build: .
+    container_name: simulatedverse-app
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      DATABASE_URL: postgresql://sv_user:sv_pass@postgres:5432/simulatedverse
+      OLLAMA_HOST: http://ollama:11434
+      NUSYQ_HUB_API: http://nusyq:8081
+      RAVEN_ENABLED: "true"
+      CHATDEV_INTEGRATION_ENABLED: "true"
+      PU_QUEUE_ENABLED: "true"
+      PU_AUTO_PROCESSING: "false"
+    command: ["./startup_fallback.sh"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5000/healthz', r => process.exit(r.statusCode === 200 ? 0 : 1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - simulatedverse
+
+  # PostgreSQL database (optional but recommended for persistence)
+  postgres:
+    image: postgres:16-alpine
+    container_name: simulatedverse-db
+    environment:
+      POSTGRES_USER: sv_user
+      POSTGRES_PASSWORD: sv_pass
+      POSTGRES_DB: simulatedverse
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sv_user -d simulatedverse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - simulatedverse
+
+  # Ollama LLM provider (pulls models on first run)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: simulatedverse-ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+    # Models are pulled at runtime via /api/pull endpoint
+    # Start ollama in background and pull models:
+    #   docker exec simulatedverse-ollama ollama pull llama3.1:8b-instruct
+    #   docker exec simulatedverse-ollama ollama pull phi3.5:mini-instruct
+    restart: unless-stopped
+    networks:
+      - simulatedverse
+
+  # Optional: NuSyQ-Hub MCP bridge (if running separately)
+  # nusyq:
+  #   image: nusyq-hub:latest
+  #   container_name: simulatedverse-nusyq
+  #   ports:
+  #     - "8081:8081"
+  #   restart: unless-stopped
+  #   networks:
+  #     - simulatedverse
+
+volumes:
+  postgres_data:
+  ollama_data:
+
+networks:
+  simulatedverse:
+    driver: bridge

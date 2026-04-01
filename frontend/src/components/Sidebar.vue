@@ -10,6 +10,10 @@
             >Workflows</router-link>
             <router-link to="/launch" target="_blank" rel="noopener">Launch</router-link>
             <router-link to="/batch-run" target="_blank" rel="noopener">Labaratory</router-link>
+            <router-link
+                to="/ecosystem"
+                :class="{ active: isEcosystemActive }"
+            >Ecosystem</router-link>
         </nav>
         <div class="sidebar-actions">
             <button class="settings-nav-btn" @click="showSettingsModal = true" title="Settings">
@@ -35,6 +39,7 @@ const showSettingsModal = ref(false)
 
 const route = useRoute()
 const isWorkflowsActive = computed(() => route.path.startsWith('/workflows'))
+const isEcosystemActive = computed(() => route.path.startsWith('/ecosystem'))
 
 
 </script>

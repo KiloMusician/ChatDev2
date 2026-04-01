@@ -1,0 +1,32 @@
+{
+  "id": "proof_test_001",
+  "kind": "file",
+  "path": "connectome/proof_artifacts/test.ndjson",
+  "creator": "agent/discovery_agent",
+  "job_id": "test_001",
+  "sha256": "47d02114b2c10e31b56b5a97af8d2d95436e34fde37b85636fe28d8e50a50233",
+  "size": 21,
+  "created_at": "2025-09-05T05:47:21.131Z",
+  "checks": [
+    {
+      "name": "exists",
+      "ok": true
+    },
+    {
+      "name": "nonempty",
+      "ok": true,
+      "detail": "21 bytes"
+    },
+    {
+      "name": "schema",
+      "ok": true,
+      "detail": "ndjson:1/1 valid lines"
+    },
+    {
+      "name": "integrity",
+      "ok": true,
+      "detail": "sha256:47d02114..."
+    }
+  ],
+  "verdict": "pass"
+}

@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756839807,
+  "phase": "I_chatdev_wiring",
+  "end_to_end_lane": {
+    "spec_file": "reports/level_spec_test_1756839807.json",
+    "validation": "basic_parameters_valid",
+    "rot_js_integration": "needs_verification",
+    "path_invariant": "manual_check_required"
+  },
+  "tools_status": {
+    "found_count": 3,
+    "level_map_gen": "available",
+    "narrative": "available",
+    "audio": "available"
+  },
+  "qgl_path": "qgl://sim/map/v1/1756839807/1756839807",
+  "omni_tags": ["sim/map/v1", "chatdev/integration", "tool/verification"],
+  "proof_gate": "executable_tools_registered_in_council_chat_AND_end_to_end_lane_functional"
+}

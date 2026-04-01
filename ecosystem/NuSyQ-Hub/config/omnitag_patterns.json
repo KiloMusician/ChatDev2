@@ -1,0 +1,51 @@
+{
+  "omnitag_patterns": {
+    "patterns": [
+      {
+        "name": "Contextual Insight",
+        "description": "Tags that capture insights related to the context of conversations.",
+        "examples": [
+          "context:feature_request",
+          "context:bug_report",
+          "context:discussion"
+        ]
+      },
+      {
+        "name": "Semantic Connection",
+        "description": "Tags that denote semantic relationships between concepts.",
+        "examples": [
+          "relation:causes",
+          "relation:related_to",
+          "relation:depends_on"
+        ]
+      },
+      {
+        "name": "Cognitive Process",
+        "description": "Tags that represent cognitive processes or actions.",
+        "examples": [
+          "process:analyze",
+          "process:decide",
+          "process:reflect"
+        ]
+      },
+      {
+        "name": "Collaborative Interaction",
+        "description": "Tags that signify collaborative efforts or interactions.",
+        "examples": [
+          "collaboration:pair_programming",
+          "collaboration:brainstorming",
+          "collaboration:review"
+        ]
+      },
+      {
+        "name": "Temporal Context",
+        "description": "Tags that provide temporal context to events or actions.",
+        "examples": [
+          "time:immediate",
+          "time:upcoming",
+          "time:historical"
+        ]
+      }
+    ]
+  }
+}

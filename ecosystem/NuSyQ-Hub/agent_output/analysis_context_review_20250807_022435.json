@@ -1,0 +1,46 @@
+{
+  "action": "review",
+  "timestamp": "20250807_022435",
+  "target_files": [
+    "src/integration/chatdev_integration.py"
+  ],
+  "analyses": [
+    {
+      "path": "C:\\Users\\malik\\Desktop\\NuSyQ-Hub\\src\\integration\\chatdev_integration.py",
+      "language": "python",
+      "lines": 278,
+      "size": 10525,
+      "functions": [
+        "__init__",
+        "initialize_chatdev_integration",
+        "get_chatdev_launcher",
+        "launch_chatdev_session",
+        "setup_chatdev_environment",
+        "create_chatdev_task",
+        "validate_chatdev_integration",
+        "names preserved for backward compatibility"
+      ],
+      "classes": [
+        "ChatDevIntegrationManager"
+      ],
+      "imports": [
+        "import asyncio",
+        "import logging",
+        "import sys",
+        "from datetime import datetime",
+        "from pathlib import Path",
+        "from typing import Any, Dict, List, Optional",
+        "from chatdev_launcher import ChatDevLauncher",
+        "from .chatdev_launcher import ChatDevLauncher"
+      ]
+    }
+  ],
+  "summary": {
+    "total_files": 1,
+    "total_lines": 278,
+    "languages": [
+      "python"
+    ],
+    "total_functions": 8
+  }
+}

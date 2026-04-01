@@ -1,0 +1,20 @@
+# ── Line endings ─────────────────────────────────────────────────────────────
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# ── Binary assets ─────────────────────────────────────────────────────────────
+*.zip binary
+*.db  binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.woff2 binary
+
+# ── Merge strategies ──────────────────────────────────────────────────────────
+# NOTE: devlog.md and state/* are now gitignored — no merge strategy needed.
+
+# Workspace settings differ per-environment (VS Code path vs Replit path).
+# Each side keeps its own version on merge.
+.vscode/settings.json merge=ours

@@ -1,0 +1,102 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 36,
+      "row": 7
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\prioritized_error_scanner.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\r\nimport subprocess\r\nfrom collections import defaultdict\r\nfrom pathlib import Path\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 4
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 4
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "noqa_row": 4,
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 12,
+      "row": 5
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\prioritized_error_scanner.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 6
+          },
+          "location": {
+            "column": 1,
+            "row": 5
+          }
+        }
+      ],
+      "message": "Remove unused import: `json`"
+    },
+    "location": {
+      "column": 8,
+      "row": 5
+    },
+    "message": "`json` imported but unused",
+    "noqa_row": 5,
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "E741",
+    "end_location": {
+      "column": 26,
+      "row": 18
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\prioritized_error_scanner.py",
+    "fix": null,
+    "location": {
+      "column": 25,
+      "row": 18
+    },
+    "message": "Ambiguous variable name: `l`",
+    "noqa_row": 18,
+    "url": "https://docs.astral.sh/ruff/rules/ambiguous-variable-name"
+  },
+  {
+    "cell": null,
+    "code": "E722",
+    "end_location": {
+      "column": 11,
+      "row": 20
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\prioritized_error_scanner.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 20
+    },
+    "message": "Do not use bare `except`",
+    "noqa_row": 20,
+    "url": "https://docs.astral.sh/ruff/rules/bare-except"
+  }
+]

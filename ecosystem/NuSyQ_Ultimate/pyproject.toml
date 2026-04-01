@@ -1,0 +1,19 @@
+[project]
+name = "nusyq-root"
+version = "1.0.0"
+description = "NuSyQ Root - Multi-Agent AI Environment"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "I"]
+ignore = [
+    "E501",  # line-too-long (handled by line-length setting)
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]

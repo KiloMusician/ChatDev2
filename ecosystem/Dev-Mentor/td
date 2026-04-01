@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# td — Terminal Depths Universal Launcher (Bash/Zsh/Fish/Git-Bash/WSL)
+# Works in: bash · zsh · fish · git bash · wsl · any POSIX shell
+# Install this file anywhere on your PATH, or run it as ./td from the repo
+# -------------------------------------------------------------------
+# Auto-detects the repo root from this script's own location,
+# so it keeps working even when copied outside the repo via `td install`.
+TD_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# If run from repo root, TD_REPO is here. If run from PATH (/usr/local/bin etc),
+# the launcher itself (scripts/td.py) has REPO_ROOT baked in.
+if [ -f "$TD_SCRIPT_DIR/scripts/td.py" ]; then
+    TD_REPO="$TD_SCRIPT_DIR"
+elif [ -f "$TD_SCRIPT_DIR/../scripts/td.py" ]; then
+    TD_REPO="$(cd "$TD_SCRIPT_DIR/.." && pwd)"
+else
+    # Fallback: assume repo root is encoded in a sibling .td_repo file
+    if [ -f "$TD_SCRIPT_DIR/.td_repo" ]; then
+        TD_REPO="$(cat "$TD_SCRIPT_DIR/.td_repo")"
+    else
+        echo "[td] ERROR: Cannot locate DevMentor repo. Set TD_REPO env var." >&2
+        exit 1
+    fi
+fi
+
+exec python3 "$TD_REPO/scripts/td.py" "$@"

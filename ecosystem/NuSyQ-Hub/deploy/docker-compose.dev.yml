@@ -1,0 +1,151 @@
+# Full development stack with opt-in services via profiles
+# By default: only app container
+# With --profile full: app + postgres + redis + ollama-mock
+
+services:
+  nusyq-hub:
+    build:
+      context: ..
+      dockerfile: Dockerfile.dev
+      args:
+        INSTALL_ALEMBIC: "yes"
+    image: nusyq-hub:dev
+    container_name: nusyq-hub-dev
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - ENVIRONMENT=development
+      - LOG_LEVEL=DEBUG
+      - DATABASE_URL=postgresql://nusyq:nusyq@postgres:5432/nusyq
+      - REDIS_URL=redis://redis:6379/0
+      - OLLAMA_URL=http://ollama-mock:8080
+      - ORCHESTRATOR_MODE=development
+      - CONSCIOUSNESS_BRIDGE_ENABLED=true
+      - QUANTUM_RESOLVER_ENABLED=true
+      - CHATDEV_ENABLED=true
+      - BREATHING_PACING_ENABLED=true
+      - PYTHONPATH=/workspace
+    volumes:
+      - ..:/workspace:cached
+      - nusyq_logs:/workspace/logs
+    working_dir: /workspace
+    ports:
+      - "8000:8000"
+      - "5678:5678"  # Debugger port
+    command: ["python", "-m", "src.api.main"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - nusyq-net
+    profiles: ["", "full"]
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: nusyq-postgres
+    environment:
+      - POSTGRES_USER=nusyq
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-nusyq_dev}
+      - POSTGRES_DB=nusyq
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - nusyq_pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nusyq"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nusyq-net
+    profiles: ["full"]
+
+  redis:
+    image: redis:7-alpine
+    container_name: nusyq-redis
+    command: ["redis-server", "--appendonly", "yes", "--save", "60", "1000"]
+    volumes:
+      - nusyq_redisdata:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nusyq-net
+    profiles: ["full"]
+
+  ollama-mock:
+    build:
+      context: ./ollama_mock
+      dockerfile: Dockerfile
+    image: nusyq-ollama-mock:dev
+    container_name: ollama-mock
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nusyq-net
+    profiles: ["full"]
+
+  # Optional: Database migration service (runs once)
+  db-migrate:
+    image: nusyq-hub:dev
+    container_name: nusyq-db-migrate
+    volumes:
+      - ..:/workspace:cached
+    working_dir: /workspace
+    environment:
+      - DATABASE_URL=postgresql://nusyq:${POSTGRES_PASSWORD:-nusyq_dev}@postgres:5432/nusyq
+    command: >
+      sh -c "
+        echo 'Waiting for database...' &&
+        until python -c 'import psycopg2; psycopg2.connect(\"$$DATABASE_URL\")' 2>/dev/null; do
+          echo 'Database not ready, waiting...';
+          sleep 2;
+          done &&
+        echo 'Running migrations...' &&
+        python -m alembic upgrade head || echo 'No migrations'
+      "
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - nusyq-net
+    profiles: ["manual"]  # excluded from default and full profiles; run explicitly if needed
+    restart: "no"
+
+volumes:
+  nusyq_pgdata:
+    driver: local
+  nusyq_redisdata:
+    driver: local
+  nusyq_logs:
+    driver: local
+
+networks:
+  nusyq-net:
+    driver: bridge
+
+# Usage:
+#   Minimal (app only):
+#     docker compose -f deploy/docker-compose.dev.yml up --build
+#
+#   Full stack (app + postgres + redis + ollama):
+#     docker compose -f deploy/docker-compose.dev.yml --profile full up --build
+#
+#   With migrations:
+#     docker compose -f deploy/docker-compose.dev.yml --profile full up --build db-migrate
+#
+# Environment variables:
+#   Copy deploy/.env.example to deploy/.env and customize

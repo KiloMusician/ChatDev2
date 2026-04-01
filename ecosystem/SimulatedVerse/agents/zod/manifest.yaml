@@ -1,0 +1,8 @@
+id: zod
+role: zod
+name: Zod
+description: Validates schemas across data files and reports violations
+capabilities: [inspect, vote, patch]
+version: 0.1.0
+runner: in-process
+enabled: true

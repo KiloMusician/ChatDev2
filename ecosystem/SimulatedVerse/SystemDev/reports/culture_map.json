@@ -1,0 +1,81 @@
+{
+  "timestamp": "2025-09-04T13:45:35.000Z",
+  "canonical_locations": {
+    "dev_menu": {
+      "path": "PreviewUI/web/dev/DevMenu.tsx",
+      "alt_path": "client/src/components/DevMenuExtended.tsx",
+      "why_canonical": "DevMenuExtended is active implementation with system health, agent controls, UI switcher",
+      "status": "verified_active",
+      "imports": ["organism_status", "convergence_test", "switchToGame"]
+    },
+    "game_main": {
+      "path": "PreviewUI/web/core/GameShell.tsx", 
+      "alt_path": "client/src/components/GameShell.tsx",
+      "why_canonical": "UIMetamorphosisShell is Culture-Ship interface, ASCII GameShell is alternative",
+      "status": "dual_implementation",
+      "features": ["metamorphosis_machine", "consciousness_awakening", "holographic_theme"]
+    },
+    "router_entry": {
+      "path": "client/src/App.tsx",
+      "alt_router": "PreviewUI/web/core/MenuRouter.tsx", 
+      "why_canonical": "Main routing hub with wouter, 13 routes including /dev and /game",
+      "status": "verified_functional",
+      "routes": ["/", "/dev", "/game", "/game-simple", "/chatdev", "/agents"]
+    },
+    "style_theme": {
+      "path": "client/src/index.css",
+      "theme_system": "PreviewUI/web/core/GameShell.tsx holographic effects",
+      "why_canonical": "Root CSS with HSL variables, holographic gradients in GameShell",
+      "status": "culture_ship_themed"
+    },
+    "assets": {
+      "ascii": "client/src/ui/ascii/",
+      "pixel": "needs_verification",
+      "why_canonical": "ASCII engine with presets.ts, shaders, starfield/tunnel/lattice",
+      "status": "ascii_verified_pixel_unknown"
+    },
+    "chatdev_bridges": {
+      "council_bus": "server/index.ts (CouncilBus publishing)",
+      "agent_orchestrator": "server/services/culture-ship-orchestrator.ts",
+      "agent_hooks": "server/routes/agent_hooks.ts",
+      "why_canonical": "Real event publishing system with UIMilestone agents",
+      "status": "operational_publishing_events"
+    },
+    "agent_registry": {
+      "path": "ChatDev/agents/README.md",
+      "implementations": "distributed across server/services/ and server/routes/",
+      "why_canonical": "8 agents documented, council bus integration active",
+      "status": "documented_partially_implemented"
+    },
+    "breath_cycle": {
+      "path": "SystemDev/reports/breath_cycle.yml",
+      "scripts": "SystemDev/scripts/ infrastructure",
+      "why_canonical": "Created during River Engine Flow, schedules next 3 cycles",
+      "status": "recently_created_active"
+    },
+    "duplicate_provenance": {
+      "duplicate_scan": "SystemDev/scripts/duplicate_scan.ts",
+      "provenance": "SystemDev/scripts/targeted_provenance.ts", 
+      "outside_scope": "SystemDev/scripts/outside_scope_probe.ts",
+      "why_canonical": "Infrastructure scripts proven functional with receipts",
+      "status": "verified_working"
+    }
+  },
+  "quadpartite_mapping": {
+    "SystemDev": "infrastructure, scripts, reports, receipts",
+    "ChatDev": "agents, orchestration, offline operations", 
+    "GameDev": "engine, systems, gameplay, content",
+    "PreviewUI": "web interface, mobile, game shell, metamorphosis"
+  },
+  "path_alias_validation": {
+    "source": "SystemDev/scripts/path_alias_map.json",
+    "aliases_verified": ["@game", "@engine", "@sys", "@ui", "@chat"],
+    "migration_phase": "foundation_deployed"
+  },
+  "search_strategy_effectiveness": {
+    "receipts_backref": "successful",
+    "grep_targeted": "successful", 
+    "naive_find": "times_out_repo_too_large",
+    "index_json_fallback": "SystemDev/reports/index_2025-09-04T13-14-32-751Z.json"
+  }
+}

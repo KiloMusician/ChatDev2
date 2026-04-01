@@ -1,0 +1,33 @@
+{
+  "timestamp": 1756839698,
+  "phase": "E_llm_ollama_self_heal",
+  "current_issues": {
+    "ollama_status": "unreachable",
+    "openai_status": "429_rate_limited", 
+    "budget_recovered": "0/100",
+    "gateway_health": "failed"
+  },
+  "healing_strategy": {
+    "token_budget": {
+      "current": {"in": 4096, "out": 1024},
+      "reduced_60pct": {"in": 2457, "out": 614},
+      "reduced_80pct": {"in": 819, "out": 204}
+    },
+    "backoff_sequence": ["1s", "3s", "7s", "exponential"],
+    "chunk_windows": "reduce_content_size_progressive",
+    "model_fallback": "check_models_txt_availability",
+    "retry_reason": "overflow_timeout_budget_exceeded"
+  },
+  "immediate_actions": [
+    "reduce_token_budget_60_percent",
+    "implement_exponential_backoff_1_3_7s",
+    "chunk_large_content_requests",
+    "switch_to_available_models_only"
+  ],
+  "proof_gates": {
+    "ollama_health": "GET_11434_api_tags_returns_200",
+    "openai_health": "no_429_errors_for_60s",
+    "budget_recovery": "budget_above_50_percent",
+    "gateway_health": "GET_4455_llm_health_returns_200"
+  }
+}

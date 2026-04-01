@@ -1,0 +1,242 @@
+# ΞNuSyQ Organism Reflex Rules
+# Endocrine system: Breath triggers and cascade hooks
+# Format: trigger → action chains with guard proofs
+
+version: "1.0.0"
+organism: "ΞNuSyQ"
+nervous_system: "Council Bus + SAGE-PILOT cadence"
+
+# Core organism reflexes
+reflexes:
+  # Ritual: Six Clean Edits → Cascade Breath
+  six_clean_edits_cascade:
+    trigger:
+      type: "ritual_completion"
+      conditions:
+        - "receipt_count >= 6"
+        - "edit_errors == 0" 
+        - "all_receipts_valid == true"
+        - "no_active_conflicts == true"
+    action:
+      type: "enqueue_breath"
+      breath: "cascade"
+      priority: "high"
+      agents: ["navigator", "sage_pilot"]
+    guards:
+      - "prerequisite_completion"
+      - "agent_availability"
+    produces:
+      - "cascade_trigger_receipt"
+      - "throughput_budget_boost"
+    cooldown: 300 # seconds
+
+  # Preview Cache Miss → UI Launcher Patch
+  preview_cache_miss_fix:
+    trigger:
+      type: "anomaly_accumulation"
+      conditions:
+        - "cache_miss_count > 3"
+        - "route_game_missing == true"
+        - "devMenuSeen == true"
+    action:
+      type: "enqueue_patch"
+      patch: "preview_launcher"
+      priority: "urgent"
+      agents: ["raven", "sage_pilot"]
+    guards:
+      - "no_active_ui_work"
+      - "build_hash_available"
+    produces:
+      - "launcher_patch_receipt"
+      - "cache_headers_applied"
+    cooldown: 60
+
+  # Console Migration Threshold → Janitor Activation
+  console_migration_nudge:
+    trigger:
+      type: "health_threshold"
+      conditions:
+        - "console_usage_rate > migration_threshold"
+        - "logger_availability == true"
+    action:
+      type: "enqueue_agent"
+      agent: "janitor"
+      priority: "medium"
+      task: "console_migration"
+    guards:
+      - "budget_available"
+      - "no_destructive_ops"
+    produces:
+      - "migration_work_order"
+      - "hygiene_improvement"
+    cooldown: 1800
+
+  # Duplicate Detection → Alchemist Merge Planning
+  duplicate_threshold_merge:
+    trigger:
+      type: "analysis_threshold"
+      conditions:
+        - "duplicate_files > 10"
+        - "similarity_score > 0.82"
+        - "repo_stability == true"
+    action:
+      type: "enqueue_agent"
+      agent: "alchemist"
+      priority: "low"
+      task: "merge_planning"
+    guards:
+      - "merge_plan_validation"
+      - "test_coverage_adequate"
+    produces:
+      - "merge_candidates"
+      - "consolidation_plan"
+    cooldown: 3600
+
+  # Error Accumulation → Issues Breath
+  error_accumulation_response:
+    trigger:
+      type: "error_threshold"
+      conditions:
+        - "error_count > 5"
+        - "error_trend == 'increasing'"
+        - "last_resolution > 600" # 10 minutes
+    action:
+      type: "enqueue_breath"
+      breath: "issues"
+      priority: "high"
+      agents: ["raven", "janitor"]
+    guards:
+      - "severity_assessment"
+      - "resolution_capability"
+    produces:
+      - "issue_analysis"
+      - "resolution_plan"
+    cooldown: 120
+
+  # Receipt Triangulation → Artificer Unlock
+  receipt_triangulation_unlock:
+    trigger:
+      type: "ritual_completion"
+      conditions:
+        - "index_complete == true"
+        - "provenance_verified == true"
+        - "scope_validated == true"
+    action:
+      type: "unlock_capability"
+      capability: "file_moves"
+      agent: "artificer"
+      duration: 3600 # 1 hour
+    guards:
+      - "path_alias_map_available"
+      - "rollback_plan_generated"
+    produces:
+      - "artificer_unlock_receipt"
+      - "import_rewrite_permission"
+    cooldown: 1800
+
+  # Game Route Missing → Bootstrap Game API
+  game_route_bootstrap:
+    trigger:
+      type: "route_failure"
+      conditions:
+        - "game_route_404 == true"
+        - "dev_route_working == true"
+        - "bootstrap_allowed == true"
+    action:
+      type: "enqueue_system"
+      system: "game_api_bootstrap"
+      priority: "high"
+      components: ["colony_clock", "resource_api"]
+    guards:
+      - "api_dependencies_available"
+      - "no_route_conflicts"
+    produces:
+      - "game_api_ready"
+      - "colony_clock_active"
+    cooldown: 300
+
+# Organism health monitoring
+health_checks:
+  nervous_system:
+    metric: "council_bus_active"
+    threshold: "true"
+    action: "alert_navigator"
+    
+  circulatory_system:
+    metric: "receipts_flowing"
+    threshold: "> 0 per minute"
+    action: "verify_receipt_pipeline"
+    
+  endocrine_system:
+    metric: "breaths_coordinated"
+    threshold: "> 0 per 10 minutes"
+    action: "trigger_breath_cascade"
+    
+  immune_system:
+    metric: "zeta_checks_passing"
+    threshold: "> 90%"
+    action: "strengthen_validation"
+
+# Ritual definitions
+rituals:
+  six_clean_edits:
+    description: "Six successful edits with zero errors opens cascade breath"
+    requirements:
+      - "edit_count == 6"
+      - "error_count == 0"
+      - "all_receipts_valid == true"
+      - "compilation_success == true"
+    rewards:
+      - "cascade_breath_access"
+      - "throughput_budget_boost"
+      - "agent_coordination_unlock"
+    duration: "until_next_error"
+    
+  receipt_triangulation:
+    description: "index+provenance+outside-scope agreement enables file moves"
+    requirements:
+      - "index_repo_complete == true"
+      - "targeted_provenance_verified == true"
+      - "outside_scope_validated == true"
+      - "no_conflicts_detected == true"
+    rewards:
+      - "artificer_file_move_unlock"
+      - "import_rewrite_permission"
+      - "path_alias_authority"
+    duration: "per_move_operation"
+
+# Guard definitions
+guards:
+  prerequisite_completion:
+    check: "all_dependencies_satisfied"
+    failure_action: "queue_prerequisites"
+    
+  agent_availability:
+    check: "target_agents_not_busy"
+    failure_action: "schedule_when_available"
+    
+  budget_available:
+    check: "edit_budget_sufficient && time_budget_sufficient"
+    failure_action: "wait_for_budget_recovery"
+    
+  no_active_conflicts:
+    check: "merge_conflicts == 0 && compilation_errors == 0"
+    failure_action: "resolve_conflicts_first"
+
+# Measurement and feedback
+metrics:
+  reflex_response_time:
+    description: "Time from trigger to action start"
+    target: "< 5 seconds"
+    
+  ritual_completion_rate:
+    description: "Percentage of rituals completed successfully"
+    target: "> 80%"
+    
+  organism_health_score:
+    description: "Overall system health (0-100)"
+    target: "> 85"
+    
+  cascade_effectiveness:
+    description: "System improvements per cascade breath"
+    target: "> 3 improvements"

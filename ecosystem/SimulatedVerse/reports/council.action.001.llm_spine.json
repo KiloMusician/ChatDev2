@@ -1,0 +1,11 @@
+{
+  "id": "action.llm_spine_recovery",
+  "who": "Artificer",
+  "intent": "Restore LLM spine connectivity and reduce 429 errors",
+  "target": "LLM Gateway + Ollama service + Token budget management",
+  "proof_gate": "GET /llm/health returns 200 AND no 429s for 60s AND budget >50%",
+  "eta": "15 minutes",
+  "cooldown": "3.3s applied",
+  "priority": 1,
+  "blockers_addressed": ["ollama_unreachable", "openai_429", "budget_0"]
+}

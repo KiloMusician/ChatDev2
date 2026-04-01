@@ -1,0 +1,36 @@
+{
+  "id": "proof_culture-ship-1756710140310",
+  "job_id": "culture-ship-1756710140310",
+  "actor": "culture-ship",
+  "kind": "file",
+  "path": "ops/proofs/proof_culture-ship-1756710140310.json",
+  "sha256": "3d1eff3ce5bd9fcd1724d3c25a95afa6c5b5e44ae71c7799aac0b5cf12c8f146",
+  "size": 1014,
+  "created_at": "2025-09-01T07:02:20.370Z",
+  "checks": [
+    {
+      "name": "exists",
+      "ok": true
+    },
+    {
+      "name": "schema",
+      "ok": true
+    },
+    {
+      "name": "nonempty",
+      "ok": false
+    }
+  ],
+  "verdict": "fail",
+  "proof": {
+    "job_id": "culture-ship-1756710140310",
+    "agent": "culture-ship",
+    "files": [],
+    "created_at": "2025-09-01T07:02:20.369Z",
+    "runner_exit_code": 0,
+    "runner_stdout": "{\"ts\":\"2025-09-01T07:02:20.363Z\",\"event\":\"artifact\",\"job_id\":\"culture-ship-1756710140310\",\"artifact\":{\"kind\":\"file\",\"path\":\"ops/proofs/proof_591b86ba-de1d-47f9-add1-5f07facefff5.ndjson\",\"narrative_elements\":2,\"theme\":\"culture_ship_synthesis\"}}\n",
+    "runner_stderr": ""
+  },
+  "file_count": 0,
+  "total_bytes": 0
+}

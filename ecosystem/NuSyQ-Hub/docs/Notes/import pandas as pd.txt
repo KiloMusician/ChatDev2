@@ -1,0 +1,9 @@
+import pandas as pd
+import os
+
+def save_snapshot(df: pd.DataFrame, name: str = "snapshot.csv"):
+    os.makedirs(".snapshots", exist_ok=True)
+    df.to_csv(f".snapshots/{name}", index=False)
+
+def load_snapshot(name: str = "snapshot.csv") -> pd.DataFrame:
+    return pd.read_csv(f".snapshots/{name}")

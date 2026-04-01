@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "method": "copilot_guidance",
+  "guidance": {
+    "action": "review",
+    "files": [
+      "src/integration/copilot_chatdev_bridge.py"
+    ],
+    "copilot_instructions": [
+      "Open each file in VS Code",
+      "Highlight code sections to review",
+      "Use Ctrl+I to open Copilot inline chat",
+      "Ask: 'Review this code for quality, security, and best practices'",
+      "Request specific improvements or optimizations"
+    ],
+    "recommendations": [
+      "Use GitHub Copilot in VS Code for real-time assistance",
+      "Set up Ollama for local AI processing",
+      "Configure ChatDev integration for team collaboration",
+      "Use the enhanced bridge for automated workflows"
+    ]
+  }
+}

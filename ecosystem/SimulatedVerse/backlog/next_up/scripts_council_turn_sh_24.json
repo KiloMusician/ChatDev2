@@ -1,0 +1,12 @@
+{
+  "id": "scripts_council_turn_sh_24",
+  "tier": 1,
+  "priority": 5,
+  "title": "Fix: NR==L {print; print \"// AUTO-GUARD(Ξ)  TODO handled by guard stub\"; print \"/* istanbul ignore next */\"; print \"const __n",
+  "source": {
+    "file": "scripts/council_turn.sh",
+    "line": 24
+  },
+  "action": "apply_patch_or_impl",
+  "expected_receipt": "reports/receipt_1756883401.473018_scripts_council_turn_sh_24.json"
+}

@@ -1,0 +1,97 @@
+{
+  // ⚠️  STANDALONE FALLBACK — use KiloCore master for multi-project development.
+  //
+  //     Preferred:  Open C:\Kilo_Core in VS Code →
+  //                 Ctrl+Shift+P → "Dev Containers: Reopen in Container"
+  //
+  //     This file is kept as a standalone fallback for opening Dev-Mentor
+  //     alone (e.g. on a machine that doesn't have the full KiloCore workspace).
+  //     It uses the project's own Dockerfile so the container matches production
+  //     exactly, but it won't have the NuSyQ / SimulatedVerse mounts.
+  // ─────────────────────────────────────────────────────────────────────────────
+  "name": "DevMentor · Terminal Depths (standalone)",
+
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+
+  "forwardPorts": [7337, 5000, 9100, 11434, 6379],
+  "portsAttributes": {
+    "7337": { "label": "Terminal Depths API", "onAutoForward": "openBrowser" },
+    "5000": { "label": "Replit compat port" },
+    "9100": { "label": "MCP Server (HTTP mode)" },
+    "11434": { "label": "Ollama" },
+    "6379": { "label": "Redis" }
+  },
+
+  "postCreateCommand": "pip install -r requirements.txt && mkdir -p var state sessions reports && echo '✅ DevMentor devcontainer ready — run: python -m cli.devmentor serve --port 7337'",
+
+  "remoteEnv": {
+    "PYTHONPATH": "/workspaces/${localWorkspaceFolderBasename}",
+    "PORT": "7337",
+    "SKIP_HARVEST": "1",
+    "PYTHONUNBUFFERED": "1"
+  },
+
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "charliermarsh.ruff",
+        "ms-python.mypy-type-checker",
+        "github.copilot",
+        "github.copilot-chat",
+        "continue.continue",
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "mads-hartmann.bash-ide-vscode",
+        "dbaeumer.vscode-eslint",
+        "biomejs.biome",
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker",
+        "godotengine.godot-tools",
+        "vscode-icons-team.vscode-icons",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python3",
+        "python.languageServer": "Pylance",
+        "python.analysis.typeCheckingMode": "basic",
+        "python.terminal.activateEnvironment": false,
+        "python.testing.autoTestDiscoverOnSaveEnabled": false,
+        "editor.formatOnSave": true,
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+          }
+        },
+        "ruff.lint.enable": true,
+        "ruff.format.enable": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.scrollback": 10000,
+        "files.watcherExclude": {
+          "**/__pycache__/**": true,
+          "**/var/**": true,
+          "**/state/**": true,
+          "**/sessions/**": true,
+          "**/knowledge/**": true,
+          "**/docs/lore/**": true
+        },
+        "python.analysis.exclude": [
+          "**/node_modules", "**/app/frontend", "**/.devmentor",
+          "**/knowledge", "**/__pycache__", "**/state", "**/docs/lore"
+        ]
+      }
+    }
+  }
+}

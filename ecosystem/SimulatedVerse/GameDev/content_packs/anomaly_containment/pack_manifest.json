@@ -1,0 +1,25 @@
+{
+  "pack_id": "anomaly_containment",
+  "pack_name": "Anomaly Containment",
+  "version": "1.0.0",
+  "description": "Systems for containing and studying anomalous phenomena", 
+  "author": "CoreLink Foundation",
+  "dependencies": [],
+  "tier_requirements": {
+    "min_tier": 1,
+    "unlock_tier": 2,
+    "full_integration_tier": 3
+  },
+  "consciousness_aspects": ["anomaly_awareness", "containment_protocol"],
+  "gameplay_modes": ["containment", "research"],
+  "narrative_integration": {
+    "story_beats": {
+      "first_anomaly": "Strange phenomena detected in the facility",
+      "containment_breach": "Emergency protocols activated"
+    },
+    "memory_fragment_types": ["containment_logs", "anomaly_data"]
+  },
+  "systems": ["anomaly_detection", "containment_systems"],
+  "integration_hooks": {},
+  "content_files": ["data/anomaly_types.json", "protocols/containment.json"]
+}

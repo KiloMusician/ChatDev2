@@ -1,0 +1,241 @@
+{
+  "validation_timestamp": "2025-08-03T08:17:21.943501",
+  "validation_results": {
+    "secrets_management": {
+      "status": "success",
+      "details": {
+        "passed": true,
+        "errors": [
+          "Ollama connection failed: Failed to initialize Ollama client: module 'collections' has no attribute 'MutableMapping'"
+        ],
+        "details": {
+          "config_summary": {
+            "environment": "development",
+            "config_dir": "C:\\Users\\malik\\Desktop\\NuSyQ-Hub\\config",
+            "services_configured": [
+              "openai",
+              "ollama",
+              "anthropic",
+              "github",
+              "system"
+            ],
+            "total_secrets": 10,
+            "openai_keys": [
+              "api_key",
+              "organization",
+              "project"
+            ],
+            "ollama_keys": [
+              "host",
+              "api_key"
+            ],
+            "anthropic_keys": [
+              "api_key"
+            ],
+            "github_keys": [
+              "token",
+              "username"
+            ],
+            "system_keys": [
+              "debug",
+              "log_level"
+            ]
+          },
+          "environment": "development",
+          "openai_available": true,
+          "ollama_available": false
+        },
+        "message": "Secrets management operational (development env)"
+      },
+      "timestamp": "2025-08-03T08:17:34.278205"
+    },
+    "enhanced_bridge": {
+      "status": "failed",
+      "details": {
+        "passed": false,
+        "errors": [
+          "Enhanced bridge module not found: No module named 'copilot.omnitag_system'"
+        ],
+        "details": {},
+        "message": "Enhanced bridge not available"
+      },
+      "timestamp": "2025-08-03T08:17:34.294570"
+    },
+    "ai_coordinator": {
+      "status": "failed",
+      "details": {
+        "passed": false,
+        "errors": [
+          "AI coordinator validation failed: module 'collections' has no attribute 'MutableMapping'"
+        ],
+        "details": {},
+        "message": "AI coordinator validation failed"
+      },
+      "timestamp": "2025-08-03T08:17:34.395974"
+    },
+    "chatdev_adapter": {
+      "status": "failed",
+      "details": {
+        "passed": false,
+        "errors": [
+          "ChatDev adapter module not found: No module named 'src'"
+        ],
+        "details": {},
+        "message": "ChatDev adapter not available"
+      },
+      "timestamp": "2025-08-03T08:17:34.424926"
+    },
+    "consciousness_sync": {
+      "status": "failed",
+      "details": {
+        "passed": false,
+        "errors": [
+          "Consciousness sync module not found: No module named 'consciousness.consciousness_sync_manager'"
+        ],
+        "details": {},
+        "message": "Consciousness sync not available"
+      },
+      "timestamp": "2025-08-03T08:17:34.467458"
+    },
+    "orchestration_master": {
+      "status": "failed",
+      "details": {
+        "passed": false,
+        "errors": [
+          "Orchestration master validation failed: module 'collections' has no attribute 'MutableMapping'"
+        ],
+        "details": {},
+        "message": "Orchestration master validation failed"
+      },
+      "timestamp": "2025-08-03T08:17:34.662047"
+    },
+    "copilot_integration": {
+      "status": "success",
+      "details": {
+        "passed": true,
+        "errors": [],
+        "details": {
+          "integration_initialized": true
+        },
+        "message": "Copilot integration operational"
+      },
+      "timestamp": "2025-08-03T08:17:34.915353"
+    },
+    "logging_system": {
+      "status": "success",
+      "details": {
+        "passed": true,
+        "errors": [],
+        "details": {
+          "modular_logging_available": true,
+          "logs_directory_exists": true,
+          "log_files_count": 0
+        },
+        "message": "Logging system available with 0 log files"
+      },
+      "timestamp": "2025-08-03T08:17:34.981308"
+    },
+    "configuration_integrity": {
+      "status": "success",
+      "details": {
+        "passed": true,
+        "errors": [],
+        "details": {
+          "configuration_files": {
+            "bridge_config.yaml": {
+              "exists": true,
+              "description": "Bridge configuration"
+            },
+            "quantum_states.toml": {
+              "exists": true,
+              "description": "Quantum states"
+            },
+            "megatag_schemas.json": {
+              "exists": true,
+              "description": "MegaTag schemas"
+            },
+            "omnitag_patterns.json": {
+              "exists": true,
+              "description": "OmniTag patterns"
+            },
+            "workspace.json": {
+              "exists": true,
+              "description": "Workspace configuration"
+            }
+          }
+        },
+        "message": "Configuration integrity: 5/5 files found"
+      },
+      "timestamp": "2025-08-03T08:17:35.011476"
+    },
+    "file_structure": {
+      "status": "success",
+      "details": {
+        "passed": true,
+        "errors": [],
+        "details": {
+          "directory_structure": {
+            "src": {
+              "exists": true,
+              "is_directory": true
+            },
+            "src/ai": {
+              "exists": true,
+              "is_directory": true
+            },
+            "src/copilot": {
+              "exists": true,
+              "is_directory": true
+            },
+            "src/integration": {
+              "exists": true,
+              "is_directory": true
+            },
+            "src/orchestration": {
+              "exists": true,
+              "is_directory": true
+            },
+            "src/consciousness": {
+              "exists": true,
+              "is_directory": true
+            },
+            "src/setup": {
+              "exists": true,
+              "is_directory": true
+            },
+            "src/diagnostics": {
+              "exists": true,
+              "is_directory": true
+            },
+            "config": {
+              "exists": true,
+              "is_directory": true
+            },
+            "LOGGING": {
+              "exists": true,
+              "is_directory": true
+            },
+            "data": {
+              "exists": true,
+              "is_directory": true
+            },
+            "docs": {
+              "exists": true,
+              "is_directory": true
+            }
+          }
+        },
+        "message": "File structure: 12/12 directories found"
+      },
+      "timestamp": "2025-08-03T08:17:35.044310"
+    }
+  },
+  "summary": {
+    "total_tests": 10,
+    "passed_tests": 5,
+    "failed_tests": 5,
+    "error_tests": 0,
+    "success_rate": 50.0,
+    "overall_health": "needs_attention"
+  }
+}

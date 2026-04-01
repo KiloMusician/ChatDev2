@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PU",
+  "type": "object",
+  "required": ["id", "kind", "summary", "priority", "source"],
+  "properties": {
+    "id": { "type": "string" },
+    "kind": { 
+      "type": "string", 
+      "enum": ["fix", "refactor", "ui", "sim", "infra", "ml", "integration", "audit", "ops", "godot"]
+    },
+    "summary": { "type": "string" },
+    "details": { "type": "string" },
+    "priority": { "type": "integer", "minimum": 0, "maximum": 10 },
+    "owner": { "type": "string" },
+    "source": { 
+      "type": "string",
+      "enum": ["auditor", "human", "agent", "watchdog", "chug", "skeptic"]
+    },
+    "status": { 
+      "type": "string", 
+      "enum": ["queued", "running", "blocked", "done", "failed", "theater_detected"]
+    },
+    "proofs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "properties": {
+          "kind": { 
+            "type": "string",
+            "enum": ["test_pass", "file_exists", "hash", "report_ok", "lsp_clean", "service_up", "ui_loads"]
+          },
+          "path": { "type": "string" },
+          "hash_sha256": { "type": "string" },
+          "report_key": { "type": "string" },
+          "service_url": { "type": "string" },
+          "expected": {}
+        }
+      }
+    },
+    "artifacts": { 
+      "type": "array", 
+      "items": { "type": "string" } 
+    },
+    "theater_score": { 
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "0=real work, 1=sophisticated theater"
+    },
+    "created_at": { "type": "number" },
+    "updated_at": { "type": "number" },
+    "completed_at": { "type": "number" },
+    "failure_count": { "type": "integer", "default": 0 }
+  }
+}

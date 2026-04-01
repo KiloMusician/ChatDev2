@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OmniTag Canonical Schema",
+  "description": "Universal tagging protocol for Culture Ship decisions and artifact classification",
+  "type": "object",
+  "properties": {
+    "tag_id": {"type": "string", "description": "UUID for this tagging decision"},
+    "artifact": {"type": "string", "description": "Artifact ID being tagged"},
+    "artifact_type": {"enum": ["service", "agent", "task", "event", "decision"], "description": "Type of artifact"},
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Semantic tags: critical, optional, legacy, experimental, unsafe, blocked"
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1, "description": "0-1 confidence score"},
+    "issued_by": {"type": "string", "description": "Agent/system that issued the tag"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "rationale": {"type": "string", "description": "Why this tag was assigned"},
+    "ttl_seconds": {"type": "integer", "description": "Seconds until tag expires (null = permanent)"}
+  },
+  "required": ["tag_id", "artifact", "tags", "issued_by", "timestamp"]
+}

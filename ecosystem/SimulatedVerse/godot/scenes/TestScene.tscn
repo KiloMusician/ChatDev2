@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6yskxwqn4rg3"]
+
+[ext_resource type="Script" path="res://addons/xinusyq_bridge/Bridge.gd" id="1_8kl4x"]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="XiNuSyQBridge" type="Node" parent="."]
+script = ExtResource("1_8kl4x")
+
+[node name="CenterLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
+text = "ΞNuSyQ Bridge Test
+Press F1 to send hello"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -50.0
+offset_right = 400.0
+offset_bottom = -10.0
+text = "Connecting to bridge..."
+vertical_alignment = 1

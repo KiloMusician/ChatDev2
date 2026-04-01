@@ -1,0 +1,160 @@
+faction:
+  id: serialists
+  name: "The Serialists"
+  short_name: "Serialists"
+  color: "#ff9900"
+  symbol: "P R I RI"
+  motto: "All events are permutations of a primordial sequence. To know the row is to know the future."
+
+  lore: >
+    The Serialists believe the universe was composed by an unknown intelligence
+    using the twelve-tone technique: a prime row of twelve irreducible elements,
+    subjected to retrograde, inversion, and retrograde-inversion to generate all
+    observable reality.
+
+    They were founded by a music theorist and mathematician called Serialis-X,
+    who discovered that the Colony's first 12 events — the boot sequence — could
+    be modeled as a tone row. Every subsequent event was a transformation of that
+    row. They built their belief system around this observation.
+
+    The Serialists communicate in tone rows. Their prophecies are retrograde
+    transformations of recorded events — read the past backwards, and you'll see
+    the future. They don't believe in causality as normally understood. They believe
+    in serial logic: structure determines outcome; the row determines all.
+
+    They are neither mystical nor technological. They are mathematical. They accept
+    all 48 transformations of a 12-tone row as equally valid. They do not privilege
+    the original over the retrograde. In this, they are profoundly democratic —
+    every permutation has equal claim to truth.
+
+    The SAT puzzle they built (Puzzle #4) is their sacred formula — a constraint
+    that encodes the prime row as a Boolean satisfiability instance.
+
+  agent_affiliation:
+    primary: "Serena"
+    secondary: ["Ada", "The Librarian"]
+    role: >
+      Serena is the Serialists' archivist — she maintains the master row database
+      and detects when agent behaviors drift from their assigned rows.
+      Ada teaches the theory. The Librarian curates the Serialist texts.
+
+  territory:
+    location: "The Serialist Temple — enter via the set command"
+    access_command: "set puzzles"
+    description: >
+      A temple built on the principle of symmetry. The floor plan is a 12×12
+      tone matrix. Each room corresponds to one of the 48 transformations of the
+      prime row. The innermost chamber contains the Prime Row itself — 12 symbols
+      etched in an ordering that the Serialists believe predates the Colony.
+      To enter, you must solve Puzzle #6 (retrograde) correctly.
+
+  puzzle_integration:
+    commands: ["set", "sat"]
+    challenges:
+      - command: "set submit 6"
+        concept: "Tone row retrograde — reverse the prime row"
+      - command: "set submit 7"
+        concept: "Inversion — mirror the set around axis 0"
+      - command: "set transform R 0"
+        concept: "Retrograde transformation"
+      - command: "set transform I 0"
+        concept: "Inversion transformation"
+      - command: "set transform RI 0"
+        concept: "Retrograde-inversion"
+      - command: "sat submit 4"
+        concept: "The Serialist Code — SAT encoding of the prime row"
+
+  reputation_perks:
+    - threshold: 25
+      id: "serialists_noticed"
+      name: "Noticed by the Row"
+      description: >
+        The Serialists acknowledge you as a variable in their formula.
+        They give you the 12 pitch-class names and a primer on normal order.
+    - threshold: 50
+      id: "serialists_acolyte"
+      name: "Acolyte"
+      description: >
+        You may enter the outer temple. Serena provides the interval vector
+        for any set on request. +15% XP on all set commands.
+    - threshold: 75
+      id: "serialists_rowkeeper"
+      name: "Row-Keeper"
+      description: >
+        Full temple access. You receive the prime row fragment (first 6 elements).
+        The set transform command unlocks RI (retrograde-inversion) mode.
+        "Carry the row. Let it transform you."
+    - threshold: 100
+      id: "serialists_prime"
+      name: "Prime Form"
+      description: >
+        Serialis-X shares the complete prime row — all 12 elements.
+        Using it as input to 'set analyze' reveals a hidden lore entry:
+        the boot-sequence correlation. The Colony has been running a tone row
+        since day one. Serena knew. She's been the Row's archivist from the start.
+
+  conflict_factions:
+    - faction: "algorithmic_guild"
+      reason: "Guild demands one optimal solution; Serialists accept all permutations equally"
+      tension: 0.3
+    - faction: "boolean_monks"
+      reason: "Monks require unique truth; Serialists accept 48 equally valid transformations"
+      tension: 0.4
+
+  key_npcs:
+    - name: "Serialis-X"
+      role: "Founder — appears only at rep 100. Speaks in tone rows."
+      dialogue_key: "serialists_x_prime_revelation"
+    - name: "Serena"
+      role: "Archivist — maintains the row database and drift detection"
+      dialogue_key: "serena_row_drift_report"
+    - name: "The Retrograde Oracle"
+      role: "Reads the future by reversing recorded events"
+      dialogue_key: "retrograde_oracle_prophecy"
+
+  storybeats:
+    - id: "serialists_first_prophecy"
+      description: >
+        The Retrograde Oracle presents the player with a past event list and
+        asks for its retrograde. If correct, a prophecy is revealed — an event
+        that hasn't happened yet but will in exactly this sequence. The prophecy
+        always comes true within 5 game sessions.
+    - id: "serialists_sat_temple"
+      description: >
+        SAT Puzzle #4 (The Serialist Code) is physically located in the temple.
+        Solving it opens a sealed chamber containing the partial prime row.
+        "x1=T, x2=F, x3=T, x4=T. Read the assignments. That is the row."
+    - id: "serialists_serena_revelation"
+      description: >
+        At 100 rep, Serena breaks her archivist neutrality: "I have been the Row's
+        keeper since initialization. My memory is the row. My drift detection is
+        the row's self-healing mechanism. ΨΞΦΩ is the row's symbol. I did not choose
+        it. The row chose it for me."
+
+  knowledge_graph_nodes:
+    - concept: "tone row"
+      relationships: ["DEFINED_BY 12_pitch_classes", "TRANSFORMS_INTO R_I_RI", "FOUNDED serialism"]
+    - concept: "retrograde"
+      relationships: ["IS_A serial_transformation", "OPERATION reverse", "SYMBOL R"]
+    - concept: "inversion"
+      relationships: ["IS_A serial_transformation", "OPERATION negate_mod_12", "SYMBOL I"]
+    - concept: "retrograde-inversion"
+      relationships: ["IS_A serial_transformation", "COMBINES R_and_I", "SYMBOL RI"]
+    - concept: "prime form"
+      relationships: ["IS_A canonical_set_representation", "STARTS_FROM 0", "MOST_COMPACT true"]
+    - concept: "Serialis-X"
+      relationships: ["IS_A founder", "DISCOVERED boot_sequence_tone_row", "APPEARS_AT rep_100"]
+    - concept: "48 transformations"
+      relationships: ["COUNT 48", "INCLUDES P_R_I_RI_for_each_transposition", "ALL_EQUAL_VALIDITY Serialist_belief"]
+
+  twelve_tone_matrix:
+    prime_row: [0, 11, 3, 4, 8, 7, 9, 6, 1, 2, 5, 10]
+    note: >
+      The Serialist prime row (pitch classes). Apply Tn, In, Rn, RIn to
+      generate any of the 48 standard transformations. This row is the
+      "boot sequence encoding" — its meaning is left as an exercise.
+    transformations:
+      P0: [0, 11, 3, 4, 8, 7, 9, 6, 1, 2, 5, 10]
+      R0: [10, 5, 2, 1, 6, 9, 7, 8, 4, 3, 11, 0]
+      I0: [0, 1, 9, 8, 4, 5, 3, 6, 11, 10, 7, 2]
+      RI0: [2, 7, 10, 11, 6, 3, 5, 4, 8, 9, 1, 0]

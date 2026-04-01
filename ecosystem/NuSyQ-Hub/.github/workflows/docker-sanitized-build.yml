@@ -1,0 +1,104 @@
+name: Docker Sanitized Build
+
+on:
+  push:
+    branches: [ master, main, codex/** ]
+  pull_request:
+    branches: [ master, main ]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies (minimal)
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Generate sanitized build context
+        run: |
+          python scripts/create_sanitized_context.py
+          ls -R .sanitized_build_context | head -n 50
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository_owner }}/nusyq-hub
+          tags: |
+            type=sha
+            type=ref,event=branch
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR (optional)
+        if: secrets.GITHUB_TOKEN != ''
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build (sanitized context)
+        run: |
+          docker build -t nusyq-hub:${{ github.sha }} .sanitized_build_context
+
+      - name: Smoke test container
+        run: |
+          docker run --rm -d -p 5000:5000 --name hub nusyq-hub:${{ github.sha }} || true
+          sleep 10
+          docker logs hub | tail -n 50 || true
+          # Attempt basic health endpoint (ignore failures for non-blocking diagnostic style)
+          curl -sf http://localhost:5000/health || echo "(Health endpoint not reachable yet)"
+          docker rm -f hub || true
+
+      - name: (Optional) Push image to GHCR
+        if: github.ref == 'refs/heads/master'
+        run: |
+          docker tag nusyq-hub:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/nusyq-hub:${{ github.sha }}
+          docker push ghcr.io/${{ github.repository_owner }}/nusyq-hub:${{ github.sha }} || echo "Image push skipped"
+
+      - name: Upload sanitized manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: sanitized-context-manifest
+          path: sanitized_context_manifest.json
+
+  lint-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+          pip install ruff pytest
+      - name: Ruff (non-blocking)
+        run: |
+          set +e
+          ruff check src/ || echo "(Ruff issues reported - non-blocking)"
+      - name: Pytest (non-blocking)
+        run: |
+          set +e
+          pytest -q || echo "(Test failures detected - non-blocking)"

@@ -1,0 +1,25 @@
+{
+  "cultural_heirlooms": {
+    "grandmothers_cookbook": {
+      "type": "knowledge_artifact",
+      "effects": {"recipe_efficiency": 25, "cultural_continuity": 15},
+      "consciousness_aspect": "intergenerational_wisdom",
+      "unlock_condition": "complete_10_recipes",
+      "narrative_significance": "ai_connects_food_to_memory"
+    },
+    "hand_forged_tools": {
+      "type": "production_artifact", 
+      "effects": {"crafting_speed": 20, "quality_bonus": 10},
+      "consciousness_aspect": "craftsmanship_appreciation",
+      "unlock_condition": "master_metalworking",
+      "narrative_significance": "ai_values_handmade_quality"
+    },
+    "family_seed_collection": {
+      "type": "biological_artifact",
+      "effects": {"genetic_diversity": 30, "crop_resilience": 20},
+      "consciousness_aspect": "ecological_stewardship", 
+      "unlock_condition": "cultivate_heritage_varieties",
+      "narrative_significance": "ai_preserves_genetic_legacy"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "auto_organize": true,
+  "safe_mode": true,
+  "backup_before_move": true,
+  "scan_frequency": "real-time",
+  "excluded_directories": [
+    ".git",
+    "__pycache__",
+    "node_modules",
+    ".vscode",
+    "venv"
+  ],
+  "file_size_threshold_mb": 100,
+  "duplicate_action": "prompt",
+  "organization_strictness": "medium"
+}

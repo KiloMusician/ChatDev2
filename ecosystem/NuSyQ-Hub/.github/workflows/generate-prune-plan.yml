@@ -1,0 +1,53 @@
+name: Prune Archive Maintenance
+
+"on":
+  schedule:
+    # daily at 04:00 UTC
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prune-archive-maintenance
+  cancel-in-progress: false
+
+jobs:
+  prune-archive:
+    runs-on: ubuntu-latest
+    env:
+      PRUNE_AGE_DAYS: ${{ vars.PRUNE_AGE_DAYS }}
+      PRUNE_SIZE_BYTES: ${{ vars.PRUNE_SIZE_BYTES }}
+      PRUNE_MIN_DUP_GROUP: ${{ vars.PRUNE_MIN_DUP_GROUP }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install dependencies (if present)
+        run: |
+          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+      - name: Run archival maintenance
+        run: |
+          export PRUNE_AGE_DAYS="${PRUNE_AGE_DAYS:-7}"
+          export PRUNE_SIZE_BYTES="${PRUNE_SIZE_BYTES:-5000}"
+          export PRUNE_MIN_DUP_GROUP="${PRUNE_MIN_DUP_GROUP:-2}"
+          python scripts/maintenance_runner.py --generate-plan --archive --yes
+      - name: Rebuild index + retrieval cache
+        run: |
+          python scripts/maintenance_runner.py --index
+      - name: Commit and push archival changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No archival changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: archive stale reports and refresh summary index"
+          git push

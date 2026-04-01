@@ -1,0 +1,8 @@
+id: redstone
+role: redstone
+name: Redstone
+description: Evaluates boolean networks and logic graphs
+capabilities: [inspect, act, vote]
+version: 0.1.0
+runner: in-process
+enabled: true

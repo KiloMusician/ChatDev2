@@ -1,0 +1,32 @@
+{
+  "roots": ["."],
+  "ignoreGlobs": [
+    "node_modules/**",
+    ".venv/**",
+    ".pythonlibs/**",
+    "lib/python*/**",
+    "lib64/python*/**",
+    "dist/**",
+    "build/**",
+    ".next/**",
+    ".cache/**",
+    "attic/**",
+    "coverage/**",
+    "**/*.min.js.map",
+    "**/*.min.css.map"
+  ],
+  "spamGlobs": [
+    "reports/**/*.txt",
+    "analysis/**/*.txt", 
+    "**/*_dump_*.log",
+    "**/debug*.log"
+  ],
+  "classify": {
+    "system": ["ops/**", "packages/**", "server/**", "shared/**"],
+    "ui": ["apps/web/**", "apps/cli/**", "ascii/**", "client/**"],
+    "simulation": ["apps/sim/**", "sim-workers/**", "game/**"],
+    "knowledge": ["docs/**", "notebooks/**", "vault/**", "content/**"]
+  },
+  "signal_files_target": 12871,
+  "theater_threshold": 0.2
+}

@@ -1,0 +1,2163 @@
+{
+  "timestamp": "2026-02-10T05:37:52.466775",
+  "repo_root": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub",
+  "vscode_logs_root": "/mnt/c/Users/keath/AppData/Roaming/Code/logs",
+  "latest_vscode_session": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334",
+  "summary": {
+    "total_records": 177,
+    "total_channels": 153,
+    "source_type_counts": {
+      "nusyq_terminal_log": 31,
+      "terminal_watcher_script": 23,
+      "terminal_watcher_task": 16,
+      "vscode_output_channel": 41,
+      "vscode_extension_log": 47,
+      "vscode_core_log": 9,
+      "vscode_window_log": 10
+    },
+    "expected_count": 97,
+    "expected_found": 86,
+    "expected_missing": 11
+  },
+  "channels": {
+    ".NET Install Tool": {
+      "channel": ".NET Install Tool",
+      "canonical": "netinstalltool",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/2-.NET Install Tool.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/2-.NET Install Tool.log",
+      "latest_modified": "2026-02-10T11:03:41.058016+00:00",
+      "total_bytes": 0
+    },
+    ".NET Test Log": {
+      "channel": ".NET Test Log",
+      "canonical": "nettestlog",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/7-.NET Test Log.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/7-.NET Test Log.log",
+      "latest_modified": "2026-02-10T11:03:49.147407+00:00",
+      "total_bytes": 0
+    },
+    "activatesystem": {
+      "channel": "activatesystem",
+      "canonical": "activatesystem",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/activatesystem.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/activatesystem.log",
+      "latest_modified": "2026-02-06T11:39:50.528158+00:00",
+      "total_bytes": 24677
+    },
+    "agents": {
+      "channel": "agents",
+      "canonical": "agents",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/agents.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_agents_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/agents.log",
+      "latest_modified": "2026-02-10T12:34:52.457199+00:00",
+      "total_bytes": 3471
+    },
+    "Agents": {
+      "channel": "Agents",
+      "canonical": "agents",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "AI Toolkit": {
+      "channel": "AI Toolkit",
+      "canonical": "aitoolkit",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-windows-ai-studio.windows-ai-studio/AI Toolkit.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-windows-ai-studio.windows-ai-studio/AI Toolkit.log",
+      "latest_modified": "2026-02-10T11:05:16.859875+00:00",
+      "total_bytes": 54
+    },
+    "AI Toolkit Tracing": {
+      "channel": "AI Toolkit Tracing",
+      "canonical": "aitoolkittracing",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-windows-ai-studio.windows-ai-studio/AI Toolkit Tracing.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-windows-ai-studio.windows-ai-studio/AI Toolkit Tracing.log",
+      "latest_modified": "2026-02-10T12:37:40.985066+00:00",
+      "total_bytes": 42104
+    },
+    "ai_agent_coordinator": {
+      "channel": "ai_agent_coordinator",
+      "canonical": "aiagentcoordinator",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_agent_coordinator.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_agent_coordinator.log",
+      "latest_modified": "2026-02-06T11:39:50.529149+00:00",
+      "total_bytes": 25109
+    },
+    "ai_council": {
+      "channel": "ai_council",
+      "canonical": "aicouncil",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_council.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_ai_council_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_council.log",
+      "latest_modified": "2026-02-10T12:34:52.296532+00:00",
+      "total_bytes": 3497
+    },
+    "Ai_Council": {
+      "channel": "Ai_Council",
+      "canonical": "aicouncil",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "anomalies": {
+      "channel": "anomalies",
+      "canonical": "anomalies",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/anomalies.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_anomalies_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/anomalies.log",
+      "latest_modified": "2026-02-10T12:34:52.722098+00:00",
+      "total_bytes": 3893
+    },
+    "Anomalies": {
+      "channel": "Anomalies",
+      "canonical": "anomalies",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "Auto Rename Tag": {
+      "channel": "Auto Rename Tag",
+      "canonical": "autorenametag",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/8-Auto Rename Tag.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/8-Auto Rename Tag.log",
+      "latest_modified": "2026-02-10T11:04:09.053146+00:00",
+      "total_bytes": 38
+    },
+    "autoDocstring": {
+      "channel": "autoDocstring",
+      "canonical": "autodocstring",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/18-autoDocstring.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/18-autoDocstring.log",
+      "latest_modified": "2026-02-10T11:04:12.278151+00:00",
+      "total_bytes": 48
+    },
+    "Biome": {
+      "channel": "Biome",
+      "canonical": "biome",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome.log",
+      "latest_modified": "2026-02-10T11:05:24.741031+00:00",
+      "total_bytes": 503
+    },
+    "Biome (NuSyQ)": {
+      "channel": "Biome (NuSyQ)",
+      "canonical": "biomenusyq",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (NuSyQ).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (NuSyQ).log",
+      "latest_modified": "2026-02-10T11:05:20.858776+00:00",
+      "total_bytes": 323
+    },
+    "Biome (NuSyQ-Hub)": {
+      "channel": "Biome (NuSyQ-Hub)",
+      "canonical": "biomenusyqhub",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (NuSyQ-Hub).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (NuSyQ-Hub).log",
+      "latest_modified": "2026-02-10T11:05:17.732629+00:00",
+      "total_bytes": 323
+    },
+    "Biome (prime_anchor)": {
+      "channel": "Biome (prime_anchor)",
+      "canonical": "biomeprimeanchor",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (prime_anchor).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (prime_anchor).log",
+      "latest_modified": "2026-02-10T11:05:24.741031+00:00",
+      "total_bytes": 323
+    },
+    "Biome (SimulatedVerse)": {
+      "channel": "Biome (SimulatedVerse)",
+      "canonical": "biomesimulatedverse",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (SimulatedVerse).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/biomejs.biome/Biome (SimulatedVerse).log",
+      "latest_modified": "2026-02-10T11:05:22.558420+00:00",
+      "total_bytes": 323
+    },
+    "Black Formatter": {
+      "channel": "Black Formatter",
+      "canonical": "blackformatter",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.black-formatter/Black Formatter.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.black-formatter/Black Formatter.log",
+      "latest_modified": "2026-02-10T11:03:50.880937+00:00",
+      "total_bytes": 11650
+    },
+    "C#": {
+      "channel": "C#",
+      "canonical": "c",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-dotnettools.csharp/C#.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-dotnettools.csharp/C#.log",
+      "latest_modified": "2026-02-10T11:03:55.974998+00:00",
+      "total_bytes": 1358
+    },
+    "C# LSP Trace Logs": {
+      "channel": "C# LSP Trace Logs",
+      "canonical": "clsptracelogs",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-dotnettools.csharp/C# LSP Trace Logs.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-dotnettools.csharp/C# LSP Trace Logs.log",
+      "latest_modified": "2026-02-10T11:03:41.160831+00:00",
+      "total_bytes": 0
+    },
+    "chatdev": {
+      "channel": "chatdev",
+      "canonical": "chatdev",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatdev.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_chatdev_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatdev.log",
+      "latest_modified": "2026-02-10T12:34:52.284923+00:00",
+      "total_bytes": 3492
+    },
+    "Chatdev": {
+      "channel": "Chatdev",
+      "canonical": "chatdev",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "chatgpt_bridge": {
+      "channel": "chatgpt_bridge",
+      "canonical": "chatgptbridge",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatgpt_bridge.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_chatgpt_bridge_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatgpt_bridge.log",
+      "latest_modified": "2026-02-10T12:34:52.531435+00:00",
+      "total_bytes": 3393370
+    },
+    "claude": {
+      "channel": "claude",
+      "canonical": "claude",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/claude.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_claude_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/claude.log",
+      "latest_modified": "2026-02-10T12:34:52.213951+00:00",
+      "total_bytes": 3974
+    },
+    "Claude": {
+      "channel": "Claude",
+      "canonical": "claude",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "Claude VSCode": {
+      "channel": "Claude VSCode",
+      "canonical": "claudevscode",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/Anthropic.claude-code/Claude VSCode.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/Anthropic.claude-code/Claude VSCode.log",
+      "latest_modified": "2026-02-10T11:04:20.827254+00:00",
+      "total_bytes": 151
+    },
+    "Code": {
+      "channel": "Code",
+      "canonical": "code",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/22-Code.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/22-Code.log",
+      "latest_modified": "2026-02-10T11:04:14.467347+00:00",
+      "total_bytes": 0
+    },
+    "Code Spell Checker": {
+      "channel": "Code Spell Checker",
+      "canonical": "codespellchecker",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/streetsidesoftware.code-spell-checker/Code Spell Checker.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/streetsidesoftware.code-spell-checker/Code Spell Checker.log",
+      "latest_modified": "2026-02-10T11:27:34.795206+00:00",
+      "total_bytes": 262
+    },
+    "codex": {
+      "channel": "codex",
+      "canonical": "codex",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/codex.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_codex_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/codex.log",
+      "latest_modified": "2026-02-10T12:34:52.265186+00:00",
+      "total_bytes": 3446
+    },
+    "Codex": {
+      "channel": "Codex",
+      "canonical": "codex",
+      "source_types": [
+        "terminal_watcher_task",
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/openai.chatgpt/Codex.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/openai.chatgpt/Codex.log",
+      "latest_modified": "2026-02-10T12:37:49.582714+00:00",
+      "total_bytes": 2943030
+    },
+    "Cody by Sourcegraph": {
+      "channel": "Cody by Sourcegraph",
+      "canonical": "codybysourcegraph",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/sourcegraph.cody-ai/Cody by Sourcegraph.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/sourcegraph.cody-ai/Cody by Sourcegraph.log",
+      "latest_modified": "2026-02-10T12:33:43.333569+00:00",
+      "total_bytes": 901
+    },
+    "Cody Network": {
+      "channel": "Cody Network",
+      "canonical": "codynetwork",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/sourcegraph.cody-ai/Cody Network.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/sourcegraph.cody-ai/Cody Network.log",
+      "latest_modified": "2026-02-10T11:04:12.201135+00:00",
+      "total_bytes": 0
+    },
+    "copilot": {
+      "channel": "copilot",
+      "canonical": "copilot",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/copilot.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_copilot_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/copilot.log",
+      "latest_modified": "2026-02-10T12:34:52.241631+00:00",
+      "total_bytes": 31005
+    },
+    "Copilot": {
+      "channel": "Copilot",
+      "canonical": "copilot",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "coverage-gutters": {
+      "channel": "coverage-gutters",
+      "canonical": "coveragegutters",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/23-coverage-gutters.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/23-coverage-gutters.log",
+      "latest_modified": "2026-02-10T11:04:14.470195+00:00",
+      "total_bytes": 47
+    },
+    "culture_ship": {
+      "channel": "culture_ship",
+      "canonical": "cultureship",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/culture_ship.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_culture_ship_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/culture_ship.log",
+      "latest_modified": "2026-02-10T12:34:52.600075+00:00",
+      "total_bytes": 2274
+    },
+    "Database Client": {
+      "channel": "Database Client",
+      "canonical": "databaseclient",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/20-Database Client.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/20-Database Client.log",
+      "latest_modified": "2026-02-10T11:04:14.469087+00:00",
+      "total_bytes": 65
+    },
+    "Docker Labs AI": {
+      "channel": "Docker Labs AI",
+      "canonical": "dockerlabsai",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/12-Docker Labs AI.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/12-Docker Labs AI.log",
+      "latest_modified": "2026-02-10T11:04:09.055160+00:00",
+      "total_bytes": 0
+    },
+    "Docker LSP (Markdown)": {
+      "channel": "Docker LSP (Markdown)",
+      "canonical": "dockerlspmarkdown",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/11-Docker LSP (Markdown).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/11-Docker LSP (Markdown).log",
+      "latest_modified": "2026-02-10T12:35:43.642873+00:00",
+      "total_bytes": 33697
+    },
+    "EditorConfig": {
+      "channel": "EditorConfig",
+      "canonical": "editorconfig",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/21-EditorConfig.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/21-EditorConfig.log",
+      "latest_modified": "2026-02-10T12:35:10.028886+00:00",
+      "total_bytes": 2638
+    },
+    "editSessions": {
+      "channel": "editSessions",
+      "canonical": "editsessions",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/editSessions.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/editSessions.log",
+      "latest_modified": "2026-02-10T11:03:42.337404+00:00",
+      "total_bytes": 132
+    },
+    "errors": {
+      "channel": "errors",
+      "canonical": "errors",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/errors.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_errors_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/errors.log",
+      "latest_modified": "2026-02-10T12:34:52.709429+00:00",
+      "total_bytes": 491486
+    },
+    "Errors": {
+      "channel": "Errors",
+      "canonical": "errors",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "ESLint": {
+      "channel": "ESLint",
+      "canonical": "eslint",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/dbaeumer.vscode-eslint/ESLint.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/dbaeumer.vscode-eslint/ESLint.log",
+      "latest_modified": "2026-02-10T11:04:20.830922+00:00",
+      "total_bytes": 188
+    },
+    "Flake8": {
+      "channel": "Flake8",
+      "canonical": "flake8",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.flake8/Flake8.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.flake8/Flake8.log",
+      "latest_modified": "2026-02-10T11:55:57.933209+00:00",
+      "total_bytes": 22659
+    },
+    "future": {
+      "channel": "future",
+      "canonical": "future",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/future.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_future_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/future.log",
+      "latest_modified": "2026-02-10T12:34:52.439131+00:00",
+      "total_bytes": 3462
+    },
+    "Future": {
+      "channel": "Future",
+      "canonical": "future",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "Git": {
+      "channel": "Git",
+      "canonical": "git",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.git/Git.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.git/Git.log",
+      "latest_modified": "2026-02-10T12:37:31.905956+00:00",
+      "total_bytes": 286958
+    },
+    "Git Graph": {
+      "channel": "Git Graph",
+      "canonical": "gitgraph",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/9-Git Graph.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/9-Git Graph.log",
+      "latest_modified": "2026-02-10T11:04:25.694445+00:00",
+      "total_bytes": 1088
+    },
+    "GitHub": {
+      "channel": "GitHub",
+      "canonical": "github",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.github/GitHub.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.github/GitHub.log",
+      "latest_modified": "2026-02-10T11:04:20.835525+00:00",
+      "total_bytes": 48
+    },
+    "GitHub Actions": {
+      "channel": "GitHub Actions",
+      "canonical": "githubactions",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/14-GitHub Actions.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/14-GitHub Actions.log",
+      "latest_modified": "2026-02-10T11:12:26.769167+00:00",
+      "total_bytes": 54
+    },
+    "GitHub Authentication": {
+      "channel": "GitHub Authentication",
+      "canonical": "githubauthentication",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.github-authentication/GitHub Authentication.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.github-authentication/GitHub Authentication.log",
+      "latest_modified": "2026-02-10T12:28:26.595586+00:00",
+      "total_bytes": 18921
+    },
+    "GitHub Copilot Chat": {
+      "channel": "GitHub Copilot Chat",
+      "canonical": "githubcopilotchat",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/GitHub.copilot-chat/GitHub Copilot Chat.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/GitHub.copilot-chat/GitHub Copilot Chat.log",
+      "latest_modified": "2026-02-10T12:22:42.049227+00:00",
+      "total_bytes": 27767
+    },
+    "GitHub Copilot Log (Code References)": {
+      "channel": "GitHub Copilot Log (Code References)",
+      "canonical": "githubcopilotlogcodereferences",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/11-GitHub Copilot Log (Code References).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/11-GitHub Copilot Log (Code References).log",
+      "latest_modified": "2026-02-10T11:04:16.568122+00:00",
+      "total_bytes": 0
+    },
+    "GitLens": {
+      "channel": "GitLens",
+      "canonical": "gitlens",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/eamodio.gitlens/GitLens.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/eamodio.gitlens/GitLens.log",
+      "latest_modified": "2026-02-10T11:17:35.242820+00:00",
+      "total_bytes": 4795
+    },
+    "GitLens (Git)": {
+      "channel": "GitLens (Git)",
+      "canonical": "gitlensgit",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/eamodio.gitlens/GitLens (Git).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/eamodio.gitlens/GitLens (Git).log",
+      "latest_modified": "2026-02-10T11:05:31.650859+00:00",
+      "total_bytes": 1378
+    },
+    "GritQL Token Provider": {
+      "channel": "GritQL Token Provider",
+      "canonical": "gritqltokenprovider",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/15-GritQL Token Provider.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/15-GritQL Token Provider.log",
+      "latest_modified": "2026-02-10T11:05:24.749675+00:00",
+      "total_bytes": 226
+    },
+    "Helm": {
+      "channel": "Helm",
+      "canonical": "helm",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/25-Helm.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/25-Helm.log",
+      "latest_modified": "2026-02-10T11:04:16.370322+00:00",
+      "total_bytes": 0
+    },
+    "HTML Language Server": {
+      "channel": "HTML Language Server",
+      "canonical": "htmllanguageserver",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.html-language-features/HTML Language Server.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.html-language-features/HTML Language Server.log",
+      "latest_modified": "2026-02-10T11:04:22.788328+00:00",
+      "total_bytes": 0
+    },
+    "ILSpy Backend": {
+      "channel": "ILSpy Backend",
+      "canonical": "ilspybackend",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/8-ILSpy Backend.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/8-ILSpy Backend.log",
+      "latest_modified": "2026-02-10T11:03:53.248997+00:00",
+      "total_bytes": 50
+    },
+    "ILSpy Extension": {
+      "channel": "ILSpy Extension",
+      "canonical": "ilspyextension",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/5-ILSpy Extension.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/5-ILSpy Extension.log",
+      "latest_modified": "2026-02-10T11:03:53.192281+00:00",
+      "total_bytes": 894
+    },
+    "importcheck": {
+      "channel": "importcheck",
+      "canonical": "importcheck",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/importcheck.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/importcheck.log",
+      "latest_modified": "2026-02-10T11:11:14.486553+00:00",
+      "total_bytes": 2555264
+    },
+    "intermediary": {
+      "channel": "intermediary",
+      "canonical": "intermediary",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/intermediary.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_intermediary_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/intermediary.log",
+      "latest_modified": "2026-02-10T12:34:52.308128+00:00",
+      "total_bytes": 3503
+    },
+    "Intermediary": {
+      "channel": "Intermediary",
+      "canonical": "intermediary",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "isort": {
+      "channel": "isort",
+      "canonical": "isort",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.isort/isort.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.isort/isort.log",
+      "latest_modified": "2026-02-10T12:35:23.623795+00:00",
+      "total_bytes": 27984
+    },
+    "JSON Language Server": {
+      "channel": "JSON Language Server",
+      "canonical": "jsonlanguageserver",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.json-language-features/JSON Language Server.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.json-language-features/JSON Language Server.log",
+      "latest_modified": "2026-02-10T11:04:19.312292+00:00",
+      "total_bytes": 0
+    },
+    "Jupyter": {
+      "channel": "Jupyter",
+      "canonical": "jupyter",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/9-Jupyter.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/9-Jupyter.log",
+      "latest_modified": "2026-02-10T11:03:55.066168+00:00",
+      "total_bytes": 487
+    },
+    "Jupyter Server Console": {
+      "channel": "Jupyter Server Console",
+      "canonical": "jupyterserverconsole",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/10-Jupyter Server Console.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/10-Jupyter Server Console.log",
+      "latest_modified": "2026-02-10T11:03:55.065641+00:00",
+      "total_bytes": 0
+    },
+    "Kilo-Code": {
+      "channel": "Kilo-Code",
+      "canonical": "kilocode",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/1-Kilo-Code.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/1-Kilo-Code.log",
+      "latest_modified": "2026-02-10T11:04:48.002568+00:00",
+      "total_bytes": 1357
+    },
+    "Kubernetes": {
+      "channel": "Kubernetes",
+      "canonical": "kubernetes",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/24-Kubernetes.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/24-Kubernetes.log",
+      "latest_modified": "2026-02-10T11:04:16.370322+00:00",
+      "total_bytes": 0
+    },
+    "lm_studio": {
+      "channel": "lm_studio",
+      "canonical": "lmstudio",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/lm_studio.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/lm_studio.log",
+      "latest_modified": "2026-02-10T12:34:52.585563+00:00",
+      "total_bytes": 296
+    },
+    "lmstudio": {
+      "channel": "lmstudio",
+      "canonical": "lmstudio",
+      "source_types": [
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_lmstudio_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_lmstudio_terminal.ps1",
+      "latest_modified": "2026-02-05T16:41:53.602254+00:00",
+      "total_bytes": 1930
+    },
+    "main": {
+      "channel": "main",
+      "canonical": "main",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script",
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/main.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/main.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_main_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/main.log",
+      "latest_modified": "2026-02-10T12:34:52.752040+00:00",
+      "total_bytes": 4622
+    },
+    "Main": {
+      "channel": "Main",
+      "canonical": "main",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "Makefile tools": {
+      "channel": "Makefile tools",
+      "canonical": "makefiletools",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/16-Makefile tools.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/16-Makefile tools.log",
+      "latest_modified": "2026-02-10T11:04:28.589081+00:00",
+      "total_bytes": 4262
+    },
+    "mcpServer.eamodio.gitlensGitKraken": {
+      "channel": "mcpServer.eamodio.gitlensGitKraken",
+      "canonical": "mcpservereamodiogitlensgitkraken",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.eamodio.gitlensGitKraken.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.eamodio.gitlensGitKraken.log",
+      "latest_modified": "2026-02-10T11:03:40.615543+00:00",
+      "total_bytes": 0
+    },
+    "mcpServer.github.copilot-chatGitHub": {
+      "channel": "mcpServer.github.copilot-chatGitHub",
+      "canonical": "mcpservergithubcopilotchatgithub",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.github.copilot-chatGitHub.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.github.copilot-chatGitHub.log",
+      "latest_modified": "2026-02-10T11:03:40.614136+00:00",
+      "total_bytes": 0
+    },
+    "mcpServer.mcp.config.usrlocal.chromedevtoolschrome-devtools-mcp": {
+      "channel": "mcpServer.mcp.config.usrlocal.chromedevtoolschrome-devtools-mcp",
+      "canonical": "mcpservermcpconfigusrlocalchromedevtoolschromedevtoolsmcp",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.mcp.config.usrlocal.chromedevtoolschrome-devtools-mcp.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.mcp.config.usrlocal.chromedevtoolschrome-devtools-mcp.log",
+      "latest_modified": "2026-02-10T11:03:40.615543+00:00",
+      "total_bytes": 0
+    },
+    "mcpServer.mcp.config.usrlocal.evalstatehf-mcp-server": {
+      "channel": "mcpServer.mcp.config.usrlocal.evalstatehf-mcp-server",
+      "canonical": "mcpservermcpconfigusrlocalevalstatehfmcpserver",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.mcp.config.usrlocal.evalstatehf-mcp-server.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.mcp.config.usrlocal.evalstatehf-mcp-server.log",
+      "latest_modified": "2026-02-10T11:03:40.618225+00:00",
+      "total_bytes": 0
+    },
+    "mcpServer.mcp.config.usrlocal.githubgithub-mcp-server": {
+      "channel": "mcpServer.mcp.config.usrlocal.githubgithub-mcp-server",
+      "canonical": "mcpservermcpconfigusrlocalgithubgithubmcpserver",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.mcp.config.usrlocal.githubgithub-mcp-server.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/mcpServer.mcp.config.usrlocal.githubgithub-mcp-server.log",
+      "latest_modified": "2026-02-10T11:03:40.616671+00:00",
+      "total_bytes": 0
+    },
+    "metrics": {
+      "channel": "metrics",
+      "canonical": "metrics",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/metrics.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_metrics_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/metrics.log",
+      "latest_modified": "2026-02-10T12:34:52.670337+00:00",
+      "total_bytes": 468683
+    },
+    "Metrics": {
+      "channel": "Metrics",
+      "canonical": "metrics",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "Microsoft Authentication": {
+      "channel": "Microsoft Authentication",
+      "canonical": "microsoftauthentication",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.microsoft-authentication/Microsoft Authentication.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.microsoft-authentication/Microsoft Authentication.log",
+      "latest_modified": "2026-02-10T12:22:41.524946+00:00",
+      "total_bytes": 10223
+    },
+    "moderator": {
+      "channel": "moderator",
+      "canonical": "moderator",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/moderator.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_moderator_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/moderator.log",
+      "latest_modified": "2026-02-10T12:34:52.513890+00:00",
+      "total_bytes": 2240
+    },
+    "MSBuild Project Tools": {
+      "channel": "MSBuild Project Tools",
+      "canonical": "msbuildprojecttools",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/3-MSBuild Project Tools.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/3-MSBuild Project Tools.log",
+      "latest_modified": "2026-02-10T11:03:46.981712+00:00",
+      "total_bytes": 107
+    },
+    "Mypy Type Checker": {
+      "channel": "Mypy Type Checker",
+      "canonical": "mypytypechecker",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.mypy-type-checker/Mypy Type Checker.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.mypy-type-checker/Mypy Type Checker.log",
+      "latest_modified": "2026-02-10T11:57:25.676567+00:00",
+      "total_bytes": 85733
+    },
+    "network": {
+      "channel": "network",
+      "canonical": "network",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/network.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/network.log",
+      "latest_modified": "2026-02-10T11:03:35.347336+00:00",
+      "total_bytes": 0
+    },
+    "network-shared": {
+      "channel": "network-shared",
+      "canonical": "networkshared",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/network-shared.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/network-shared.log",
+      "latest_modified": "2026-02-10T11:03:35.390663+00:00",
+      "total_bytes": 0
+    },
+    "notebook.rendering": {
+      "channel": "notebook.rendering",
+      "canonical": "notebookrendering",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/notebook.rendering.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/notebook.rendering.log",
+      "latest_modified": "2026-02-10T11:03:35.361579+00:00",
+      "total_bytes": 0
+    },
+    "nusyq_activate_ecosystem": {
+      "channel": "nusyq_activate_ecosystem",
+      "canonical": "nusyqactivateecosystem",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/nusyq_activate_ecosystem.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/nusyq_activate_ecosystem.log",
+      "latest_modified": "2026-02-10T12:34:52.049252+00:00",
+      "total_bytes": 0
+    },
+    "ollama": {
+      "channel": "ollama",
+      "canonical": "ollama",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ollama.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_ollama_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ollama.log",
+      "latest_modified": "2026-02-10T12:34:52.570546+00:00",
+      "total_bytes": 2212
+    },
+    "OpenAPI (Swagger) Editor": {
+      "channel": "OpenAPI (Swagger) Editor",
+      "canonical": "openapiswaggereditor",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/42Crunch.vscode-openapi/OpenAPI (Swagger) Editor.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/42Crunch.vscode-openapi/OpenAPI (Swagger) Editor.log",
+      "latest_modified": "2026-02-10T11:04:16.372520+00:00",
+      "total_bytes": 0
+    },
+    "OpenCtx": {
+      "channel": "OpenCtx",
+      "canonical": "openctx",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/4-OpenCtx.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/4-OpenCtx.log",
+      "latest_modified": "2026-02-10T11:04:09.047604+00:00",
+      "total_bytes": 0
+    },
+    "Peacock": {
+      "channel": "Peacock",
+      "canonical": "peacock",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/5-Peacock.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/5-Peacock.log",
+      "latest_modified": "2026-02-10T11:04:09.050120+00:00",
+      "total_bytes": 163
+    },
+    "PowerShell": {
+      "channel": "PowerShell",
+      "canonical": "powershell",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-vscode.powershell/PowerShell.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-vscode.powershell/PowerShell.log",
+      "latest_modified": "2026-02-10T11:04:43.986488+00:00",
+      "total_bytes": 438
+    },
+    "powershell_extension": {
+      "channel": "powershell_extension",
+      "canonical": "powershellextension",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/powershell_extension.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/powershell_extension.log",
+      "latest_modified": "2026-02-10T12:34:52.057760+00:00",
+      "total_bytes": 0
+    },
+    "Prettier": {
+      "channel": "Prettier",
+      "canonical": "prettier",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/27-Prettier.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/27-Prettier.log",
+      "latest_modified": "2026-02-10T11:04:20.826739+00:00",
+      "total_bytes": 111
+    },
+    "ptyhost": {
+      "channel": "ptyhost",
+      "canonical": "ptyhost",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/ptyhost.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/ptyhost.log",
+      "latest_modified": "2026-02-10T11:03:46.477117+00:00",
+      "total_bytes": 11405
+    },
+    "pwsh": {
+      "channel": "pwsh",
+      "canonical": "pwsh",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/pwsh.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/pwsh.log",
+      "latest_modified": "2026-02-10T12:34:52.065850+00:00",
+      "total_bytes": 0
+    },
+    "PyHover": {
+      "channel": "PyHover",
+      "canonical": "pyhover",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/17-PyHover.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/17-PyHover.log",
+      "latest_modified": "2026-02-10T11:04:12.277624+00:00",
+      "total_bytes": 228
+    },
+    "Pylint": {
+      "channel": "Pylint",
+      "canonical": "pylint",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.pylint/Pylint.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.pylint/Pylint.log",
+      "latest_modified": "2026-02-10T11:56:01.784734+00:00",
+      "total_bytes": 245541
+    },
+    "Python": {
+      "channel": "Python",
+      "canonical": "python",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.python/Python.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.python/Python.log",
+      "latest_modified": "2026-02-10T11:04:44.785151+00:00",
+      "total_bytes": 3731
+    },
+    "Python Debugger": {
+      "channel": "Python Debugger",
+      "canonical": "pythondebugger",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.debugpy/Python Debugger.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.debugpy/Python Debugger.log",
+      "latest_modified": "2026-02-10T11:03:44.082137+00:00",
+      "total_bytes": 0
+    },
+    "Python Language Server": {
+      "channel": "Python Language Server",
+      "canonical": "pythonlanguageserver",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.python/Python Language Server.log",
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.vscode-pylance/Python Language Server.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.vscode-pylance/Python Language Server.log",
+      "latest_modified": "2026-02-10T11:10:32.177148+00:00",
+      "total_bytes": 10135
+    },
+    "Python Locator": {
+      "channel": "Python Locator",
+      "canonical": "pythonlocator",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.python/Python Locator.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-python.python/Python Locator.log",
+      "latest_modified": "2026-02-10T12:35:18.347083+00:00",
+      "total_bytes": 5451
+    },
+    "Python Test Adapter Log": {
+      "channel": "Python Test Adapter Log",
+      "canonical": "pythontestadapterlog",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/6-Python Test Adapter Log.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/6-Python Test Adapter Log.log",
+      "latest_modified": "2026-02-10T11:55:57.605875+00:00",
+      "total_bytes": 30824
+    },
+    "rainbow_csv_debug_channel": {
+      "channel": "rainbow_csv_debug_channel",
+      "canonical": "rainbowcsvdebugchannel",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/mechatroner.rainbow-csv/rainbow_csv_debug_channel.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/mechatroner.rainbow-csv/rainbow_csv_debug_channel.log",
+      "latest_modified": "2026-02-10T11:04:09.047100+00:00",
+      "total_bytes": 0
+    },
+    "Razor Log": {
+      "channel": "Razor Log",
+      "canonical": "razorlog",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-dotnettools.csharp/Razor Log.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-dotnettools.csharp/Razor Log.log",
+      "latest_modified": "2026-02-10T11:03:50.231422+00:00",
+      "total_bytes": 1051
+    },
+    "remoteContainers-2026-02-10T11-03-51.819Z": {
+      "channel": "remoteContainers-2026-02-10T11-03-51.819Z",
+      "canonical": "remotecontainers20260210t110351819z",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-vscode-remote.remote-containers/remoteContainers-2026-02-10T11-03-51.819Z.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-vscode-remote.remote-containers/remoteContainers-2026-02-10T11-03-51.819Z.log",
+      "latest_modified": "2026-02-10T11:05:26.480675+00:00",
+      "total_bytes": 3104
+    },
+    "remoteTunnelService": {
+      "channel": "remoteTunnelService",
+      "canonical": "remotetunnelservice",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/remoteTunnelService.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/remoteTunnelService.log",
+      "latest_modified": "2026-02-10T11:03:43.054977+00:00",
+      "total_bytes": 56
+    },
+    "renderer": {
+      "channel": "renderer",
+      "canonical": "renderer",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/renderer.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/renderer.log",
+      "latest_modified": "2026-02-10T12:28:27.600434+00:00",
+      "total_bytes": 299925
+    },
+    "REST": {
+      "channel": "REST",
+      "canonical": "rest",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/26-REST.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/26-REST.log",
+      "latest_modified": "2026-02-10T11:04:16.370898+00:00",
+      "total_bytes": 0
+    },
+    "Roo-Code": {
+      "channel": "Roo-Code",
+      "canonical": "roocode",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/2-Roo-Code.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/2-Roo-Code.log",
+      "latest_modified": "2026-02-10T11:04:14.426975+00:00",
+      "total_bytes": 625
+    },
+    "Ruff": {
+      "channel": "Ruff",
+      "canonical": "ruff",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/charliermarsh.ruff/Ruff.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/charliermarsh.ruff/Ruff.log",
+      "latest_modified": "2026-02-10T11:03:43.441040+00:00",
+      "total_bytes": 6898
+    },
+    "Ruff Language Server": {
+      "channel": "Ruff Language Server",
+      "canonical": "rufflanguageserver",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/4-Ruff Language Server.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/4-Ruff Language Server.log",
+      "latest_modified": "2026-02-10T11:03:44.540935+00:00",
+      "total_bytes": 483
+    },
+    "Semgrep (Client)": {
+      "channel": "Semgrep (Client)",
+      "canonical": "semgrepclient",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/1-Semgrep (Client).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/1-Semgrep (Client).log",
+      "latest_modified": "2026-02-10T11:03:40.277600+00:00",
+      "total_bytes": 0
+    },
+    "Semgrep (Server)": {
+      "channel": "Semgrep (Server)",
+      "canonical": "semgrepserver",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/2-Semgrep (Server).log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/2-Semgrep (Server).log",
+      "latest_modified": "2026-02-10T11:59:48.997979+00:00",
+      "total_bytes": 335
+    },
+    "service_watch": {
+      "channel": "service_watch",
+      "canonical": "servicewatch",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/service_watch.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/service_watch.log",
+      "latest_modified": "2026-02-03T02:53:56.447716+00:00",
+      "total_bytes": 1146
+    },
+    "sharedprocess": {
+      "channel": "sharedprocess",
+      "canonical": "sharedprocess",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/sharedprocess.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/sharedprocess.log",
+      "latest_modified": "2026-02-10T12:35:22.847311+00:00",
+      "total_bytes": 16555
+    },
+    "simulated_verse": {
+      "channel": "simulated_verse",
+      "canonical": "simulatedverse",
+      "source_types": [
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_simulated_verse_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_simulated_verse_terminal.ps1",
+      "latest_modified": "2026-02-05T16:41:53.599188+00:00",
+      "total_bytes": 1966
+    },
+    "simulatedverse": {
+      "channel": "simulatedverse",
+      "canonical": "simulatedverse",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/simulatedverse.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/simulatedverse.log",
+      "latest_modified": "2026-02-10T12:34:52.552018+00:00",
+      "total_bytes": 327
+    },
+    "Sixth": {
+      "channel": "Sixth",
+      "canonical": "sixth",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/3-Sixth.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/3-Sixth.log",
+      "latest_modified": "2026-02-10T11:04:09.049114+00:00",
+      "total_bytes": 92
+    },
+    "SonarQube for IDE": {
+      "channel": "SonarQube for IDE",
+      "canonical": "sonarqubeforide",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/SonarSource.sonarlint-vscode/SonarQube for IDE.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/SonarSource.sonarlint-vscode/SonarQube for IDE.log",
+      "latest_modified": "2026-02-10T12:13:59.474004+00:00",
+      "total_bytes": 174343
+    },
+    "SQLTools": {
+      "channel": "SQLTools",
+      "canonical": "sqltools",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/6-SQLTools.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/6-SQLTools.log",
+      "latest_modified": "2026-02-10T12:35:23.627309+00:00",
+      "total_bytes": 37766
+    },
+    "StartEditorServices-12524": {
+      "channel": "StartEditorServices-12524",
+      "canonical": "starteditorservices12524",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-vscode.powershell/StartEditorServices-12524.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/ms-vscode.powershell/StartEditorServices-12524.log",
+      "latest_modified": "2026-02-10T11:04:28.031312+00:00",
+      "total_bytes": 3
+    },
+    "suggestions": {
+      "channel": "suggestions",
+      "canonical": "suggestions",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/suggestions.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_suggestions_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/suggestions.log",
+      "latest_modified": "2026-02-10T12:34:52.634293+00:00",
+      "total_bytes": 3938
+    },
+    "Suggestions": {
+      "channel": "Suggestions",
+      "canonical": "suggestions",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "system": {
+      "channel": "system",
+      "canonical": "system",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/system.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_system_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/system.log",
+      "latest_modified": "2026-02-10T12:34:52.489760+00:00",
+      "total_bytes": 4382
+    },
+    "Tailwind CSS IntelliSense": {
+      "channel": "Tailwind CSS IntelliSense",
+      "canonical": "tailwindcssintellisense",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/19-Tailwind CSS IntelliSense.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/19-Tailwind CSS IntelliSense.log",
+      "latest_modified": "2026-02-10T11:38:38.418194+00:00",
+      "total_bytes": 13079
+    },
+    "tasks": {
+      "channel": "tasks",
+      "canonical": "tasks",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tasks.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_tasks_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tasks.log",
+      "latest_modified": "2026-02-10T12:34:52.654828+00:00",
+      "total_bytes": 3659
+    },
+    "Tasks": {
+      "channel": "Tasks",
+      "canonical": "tasks",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "telemetry": {
+      "channel": "telemetry",
+      "canonical": "telemetry",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/telemetry.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/telemetry.log",
+      "latest_modified": "2026-02-10T11:03:35.390663+00:00",
+      "total_bytes": 0
+    },
+    "terminal": {
+      "channel": "terminal",
+      "canonical": "terminal",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/terminal.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/terminal.log",
+      "latest_modified": "2026-02-10T11:54:06.736801+00:00",
+      "total_bytes": 3337
+    },
+    "Test Explorer": {
+      "channel": "Test Explorer",
+      "canonical": "testexplorer",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/1-Test Explorer.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/1-Test Explorer.log",
+      "latest_modified": "2026-02-10T11:03:41.059531+00:00",
+      "total_bytes": 0
+    },
+    "testing": {
+      "channel": "testing",
+      "canonical": "testing",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/testing.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/testing.log",
+      "latest_modified": "2026-02-02T14:17:50.781137+00:00",
+      "total_bytes": 119
+    },
+    "tests": {
+      "channel": "tests",
+      "canonical": "tests",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tests.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_tests_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tests.log",
+      "latest_modified": "2026-02-10T12:34:52.661828+00:00",
+      "total_bytes": 4158
+    },
+    "Tests": {
+      "channel": "Tests",
+      "canonical": "tests",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "textModelChanges": {
+      "channel": "textModelChanges",
+      "canonical": "textmodelchanges",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/textModelChanges.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/textModelChanges.log",
+      "latest_modified": "2026-02-10T11:04:52.598128+00:00",
+      "total_bytes": 0
+    },
+    "TodoHighlight": {
+      "channel": "TodoHighlight",
+      "canonical": "todohighlight",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/10-TodoHighlight.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/10-TodoHighlight.log",
+      "latest_modified": "2026-02-10T11:04:09.054656+00:00",
+      "total_bytes": 0
+    },
+    "TypeScript": {
+      "channel": "TypeScript",
+      "canonical": "typescript",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.typescript-language-features/TypeScript.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/vscode.typescript-language-features/TypeScript.log",
+      "latest_modified": "2026-02-10T11:04:19.313330+00:00",
+      "total_bytes": 676
+    },
+    "userDataSync": {
+      "channel": "userDataSync",
+      "canonical": "userdatasync",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/userDataSync.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/userDataSync.log",
+      "latest_modified": "2026-02-10T12:35:22.908138+00:00",
+      "total_bytes": 39176
+    },
+    "VersionLens": {
+      "channel": "VersionLens",
+      "canonical": "versionlens",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/pflannery.vscode-versionlens/VersionLens.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/pflannery.vscode-versionlens/VersionLens.log",
+      "latest_modified": "2026-02-10T11:04:14.469601+00:00",
+      "total_bytes": 596
+    },
+    "views": {
+      "channel": "views",
+      "canonical": "views",
+      "source_types": [
+        "vscode_window_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/views.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/views.log",
+      "latest_modified": "2026-02-10T11:03:34.850285+00:00",
+      "total_bytes": 0
+    },
+    "Vitest": {
+      "channel": "Vitest",
+      "canonical": "vitest",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/13-Vitest.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/13-Vitest.log",
+      "latest_modified": "2026-02-10T12:25:16.605561+00:00",
+      "total_bytes": 1158
+    },
+    "vscode-shiki-bridge": {
+      "channel": "vscode-shiki-bridge",
+      "canonical": "vscodeshikibridge",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/YoavBls.pretty-ts-errors/vscode-shiki-bridge.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/YoavBls.pretty-ts-errors/vscode-shiki-bridge.log",
+      "latest_modified": "2026-02-10T11:04:20.827787+00:00",
+      "total_bytes": 0
+    },
+    "Windsurf": {
+      "channel": "Windsurf",
+      "canonical": "windsurf",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/1-Windsurf.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040337/1-Windsurf.log",
+      "latest_modified": "2026-02-10T11:03:44.739893+00:00",
+      "total_bytes": 3588
+    },
+    "workerexthost": {
+      "channel": "workerexthost",
+      "canonical": "workerexthost",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/webWorker/workerexthost.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/webWorker/workerexthost.log",
+      "latest_modified": "2026-02-10T11:03:39.601365+00:00",
+      "total_bytes": 114
+    },
+    "workerExtHostTelemetry": {
+      "channel": "workerExtHostTelemetry",
+      "canonical": "workerexthosttelemetry",
+      "source_types": [
+        "vscode_extension_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/webWorker/workerExtHostTelemetry.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/webWorker/workerExtHostTelemetry.log",
+      "latest_modified": "2026-02-10T11:03:38.437240+00:00",
+      "total_bytes": 0
+    },
+    "YAML Support": {
+      "channel": "YAML Support",
+      "canonical": "yamlsupport",
+      "source_types": [
+        "vscode_output_channel"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/7-YAML Support.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T040334/window1/exthost/output_logging_20260210T040336/7-YAML Support.log",
+      "latest_modified": "2026-02-10T11:04:09.050627+00:00",
+      "total_bytes": 0
+    },
+    "zeta": {
+      "channel": "zeta",
+      "canonical": "zeta",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/zeta.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_zeta_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/zeta.log",
+      "latest_modified": "2026-02-10T12:34:52.405556+00:00",
+      "total_bytes": 3456
+    },
+    "Zeta": {
+      "channel": "Zeta",
+      "canonical": "zeta",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    }
+  },
+  "expected": {
+    "found": [
+      ".NET Install Tool",
+      ".NET Test Log",
+      "AI Toolkit",
+      "AI Toolkit Tracing",
+      "Auto Rename Tag",
+      "Biome",
+      "Biome (NuSyQ)",
+      "Biome (NuSyQ-Hub)",
+      "Biome (Prime_anchor)",
+      "Biome (SimulatedVerse)",
+      "Black Formatter",
+      "C#",
+      "C# LSP Trace Logs",
+      "Claude VSCode",
+      "Code",
+      "Code Spell Checker",
+      "Codex",
+      "Cody by SourceGraph",
+      "Cody: Network",
+      "Docker LSP (Markdown)",
+      "Docker Labs AI",
+      "ESLint",
+      "EditorConfig",
+      "Flake8",
+      "Git",
+      "Git Graph",
+      "GitHub",
+      "GitHub Actions",
+      "GitHub Authentication",
+      "GitHub Copilot Log (Code References)",
+      "GitHub Copilot chat",
+      "GitLens",
+      "GitLens (Git)",
+      "GritQL Token Provider",
+      "Helm",
+      "ILSpy Backend",
+      "ILSpy Extension",
+      "JSON Language Server",
+      "Jupyter",
+      "Jupyter Server Console",
+      "Kilo-Code",
+      "Kubernetes",
+      "MSBuild Project Tools",
+      "Main",
+      "Makefile Tools",
+      "Microsoft Authentication",
+      "Mypy Type Checker",
+      "OpenAPI Swagger Editor",
+      "OpenCtx",
+      "Peacock",
+      "PowerShell",
+      "Prettier",
+      "Pty Host",
+      "PyHover",
+      "Pylint",
+      "Python",
+      "Python Debugger",
+      "Python Locator",
+      "Python Test Adapter Log",
+      "REST",
+      "Razor Log",
+      "Remote Tunnel Service",
+      "Roo-Code",
+      "Ruff",
+      "Ruff Language Server",
+      "SQLTools",
+      "Semgrep (Client)",
+      "Semgrep (Server)",
+      "Sixth",
+      "SonarQube for IDE",
+      "Tailwind CSS IntelliSense",
+      "Tasks",
+      "Terminal",
+      "Test Explorer",
+      "Todohighlight",
+      "TypeScript",
+      "VersionLens",
+      "ViTest",
+      "Windsurf",
+      "YAML Support",
+      "autoDocstring",
+      "coverage-gutters",
+      "database Client",
+      "isort",
+      "rainbow_csv_debug+channel",
+      "vscode-shiki-bridge"
+    ],
+    "missing": [
+      "Agent Sessions",
+      "Even Better TOML",
+      "Even Better TOML LSP",
+      "Extension Host",
+      "Extension Host (Worker)",
+      "Markdown",
+      "Python Language Service",
+      "Settings Sync",
+      "Shared",
+      "Text Model Changes Reason",
+      "Window"
+    ]
+  }
+}

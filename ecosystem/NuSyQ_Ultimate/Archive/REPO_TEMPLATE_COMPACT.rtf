@@ -1,0 +1,773 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset134 PingFangSC-Regular;\f2\fnil\fcharset0 ArialUnicodeMS;
+\f3\fnil\fcharset0 AppleSymbols;\f4\fnil\fcharset0 AppleColorEmoji;\f5\fnil\fcharset0 STIXGeneral-Regular;
+\f6\fnil\fcharset0 NotoSansGlagolitic;\f7\fnil\fcharset0 NotoSansRunic;\f8\fnil\fcharset129 AppleSDGothicNeo-Regular;
+\f9\fnil\fcharset0 LucidaGrande;\f10\fnil\fcharset77 ZapfDingbatsITC;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww23380\viewh16000\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 REPO_TEMPLATE_COMPACT/\
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  cursor_root/
+\f1 \'a1\'be
+\f0 25\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  cursor_root_rules/
+\f1 \'a1\'be
+\f0 25\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  root_rules_writing-tests.mdc \'96 patterns for writing tests: tone, structure, and examples for AI assistants (retained for provenance)
+\f1 \'a1\'be
+\f0 25\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  meta_patterns_overview.mdc \'96 cross-links and summaries connecting pattern docs across the repo
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  meta_taxonomy.mdc \'96 canonical naming and classification taxonomy for tools and agents
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  prompts_system.mdc \'96 global guardrails and assistant tone guidelines (initial version)
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  prompts_refactor_playbook.mdc \'96 structured refactor strategies and recipes (earlier reference)
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474        \u9492 \u9472 \u9472  prompts_review_checklist.mdc \'96 code review rubric for both humans and AI (kept for reference)
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  README.md \'96 project overview, philosophy, quickstart, and VS Code task entry points
+\f1 \'a1\'be
+\f0 25\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  CONTRIBUTING.md \'96 contribution flow, branching strategy, commit rules, and review expectations
+\f1 \'a1\'be
+\f0 25\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  CODE_OF_CONDUCT.md \'96 community standards for respectful collaboration
+\f1 \'a1\'be
+\f0 25\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  doteditorconfig_root.ini \'96 editor configuration to normalize environments across contributors and CI
+\f1 \'a1\'be
+\f0 26\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  dotgitignore_root.txt \'96 centralized VCS ignore rules for all toolchains
+\f1 \'a1\'be
+\f0 26\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  dotgitattributes_root.txt \'96 line-ending and merge attributes for consistent diffs
+\f1 \'a1\'be
+\f0 26\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  prettier_root.rc \'96 Prettier configuration shared across apps/packages
+\f1 \'a1\'be
+\f0 26\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  eslint_root.cjs \'96 root ESLint configuration for TypeScript/JavaScript sources
+\f1 \'a1\'be
+\f0 35\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  LICENSE \'96 license for the entire codebase (MIT)
+\f1 \'a1\'be
+\f0 35\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  env_root.example \'96 sample environment variables (CHATDEV_PATH, OLLAMA settings)
+\f1 \'a1\'be
+\f0 35\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  Makefile \'96 make targets (dev/test/chatdev/ollama/up) for quick local workflows
+\f1 \'a1\'be
+\f0 35\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  Taskfile.yml \'96 cross-platform task runner mirroring Makefile targets
+\f1 \'a1\'be
+\f0 35\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  vscode_root/
+\f1 \'a1\'be
+\f0 36\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 37\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  vscode_settings.json \'96 workspace settings (Copilot, Jupyter, Godot integration)
+\f1 \'a1\'be
+\f0 36\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  vscode_extensions.json \'96 recommended VSCode extensions list for development
+\f1 \'a1\'be
+\f0 36\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 37\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  vscode_launch.json \'96 debug configurations for API, desktop app, website, and Godot
+\f1 \'a1\'be
+\f0 37\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  vscode_tasks.json \'96 one-click tasks for ChatDev pipeline phases
+\f1 \'a1\'be
+\f0 38\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  github_root/
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  issue_template_bug_report.yml \'96 guided bug report issue template for GitHub
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  issue_template_feature_request.yml \'96 guided feature request issue template
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  workflows_ci.yml \'96 CI pipeline (lint, typecheck, unit tests)
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  workflows_chatdev_smoke.yml \'96 ChatDev dry-run pipeline using mocked LLM calls
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  workflows_release.yml \'96 release pipeline (versioning, tagging, publishing)
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  workflows_labeler.yml \'96 automatic PR labeling rules
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  Dockerfile \'96 container definition for building the workspace environment
+\f1 \'a1\'be
+\f0 47\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  docker_compose_root.yml \'96 Docker Compose stack for dev environment (superseded by devcontainer)
+\f1 \'a1\'be
+\f0 45\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 47\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  docs/
+\f1 \'a1\'be
+\f0 39\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 59\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  README.md \'96 main documentation hub (user guide, features, usage)
+\f1 \'a1\'be
+\f0 59\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  architecture.md \'96 system architecture overview and diagrams
+\f1 \'a1\'be
+\f0 59\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  api_reference.md \'96 API endpoints and usage reference
+\f1 \'a1\'be
+\f0 59\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  user_guide.md \'96 end-user guide and tutorials
+\f1 \'a1\'be
+\f0 59\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  getting-started.md \'96 intro and environment setup (legacy guide)
+\f1 \'a1\'be
+\f0 39\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  architecture.mdc \'96 global architecture choices and trade-offs (earlier draft)
+\f1 \'a1\'be
+\f0 41\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 42\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  ADR-0001-architecture.mdc \'96 first architecture decision record (structure & trade-offs)
+\f1 \'a1\'be
+\f0 42\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  ADR-0002-data-access.mdc \'96 first data-access decision record (persistence patterns)
+\f1 \'a1\'be
+\f0 42\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  services/
+\f1 \'a1\'be
+\f0 60\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  app_api_models/
+\f1 \'a1\'be
+\f0 60\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  app_api_index.ts \'96 API entrypoint bootstrapping the server
+\f1 \'a1\'be
+\f0 60\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 61\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9474    \u9492 \u9472 \u9472  app_api_package.json \'96 API service manifest (package metadata)
+\f1 \'a1\'be
+\f0 60\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 61\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  app_dashboard/
+\f1 \'a1\'be
+\f0 61\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 64\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9474    \u9492 \u9472 \u9472  app_dashboard_cursor/ \'96 dashboard-specific Cursor rules (patterns now centralized in .cursor/)
+\f1 \'a1\'be
+\f0 64\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  app_engine/
+\f1 \'a1\'be
+\f0 80\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474        \u9492 \u9472 \u9472  app_engine_cursor/ \'96 engine-specific Cursor rules (patterns now centralized in .cursor/)
+\f1 \'a1\'be
+\f0 81\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  apps/
+\f1 \'a1\'be
+\f0 74\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 75\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  app_desktop/
+\f1 \'a1\'be
+\f0 74\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9474    \u9492 \u9472 \u9472  app_desktop_cursor/ \'96 desktop-specific Cursor rules (patterns now centralized in .cursor/)
+\f1 \'a1\'be
+\f0 74\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  app_website/
+\f1 \'a1\'be
+\f0 75\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474        \u9492 \u9472 \u9472  app_website_cursor/ \'96 website-specific Cursor rules (patterns now centralized in .cursor/)
+\f1 \'a1\'be
+\f0 75\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  packages/ \'96 common libraries and modules (for reuse across apps and services)
+\f1 \'a1\'be
+\f0 27\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  tools/
+\f1 \'a1\'be
+\f0 50\'86
+\f1 \'a1\'bf\'a1\'be
+\f0 51\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  enhance_copilot_context.py \'96 analyzes active file context and provides structured hints to CoPilot
+\f1 \'a1\'be
+\f0 50\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  start_ollama_unix.sh \'96 Unix script to launch local Ollama LLM service (Mac/Linux)
+\f1 \'a1\'be
+\f0 51\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  start_ollama_windows.ps1 \'96 Windows PowerShell script to launch local Ollama LLM service
+\f1 \'a1\'be
+\f0 52\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  .cursor/
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474    \u9492 \u9472 \u9472  rules/\
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  architecture.mdc \'96 system architecture patterns and guidelines
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  auth-middleware.mdc \'96 authentication middleware rules and examples
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  database-patterns.mdc \'96 database access patterns, transactions, and migration best practices
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  rest-patterns.mdc \'96 REST API design conventions and error semantics
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  schema-patterns.mdc \'96 data schema validation and evolution strategies
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  trpc-patterns.mdc \'96 tRPC communication design conventions for RPC layers
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  dashboard-patterns.mdc \'96 UI and state management patterns for the dashboard module
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  desktop-patterns.mdc \'96 desktop application integration and IPC patterns
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  engine-patterns.mdc \'96 pipeline scheduling and resilience patterns for the engine service
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  website-patterns.mdc \'96 website UX/content patterns and deployment rules
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474        \u9492 \u9472 \u9472  package-patterns.mdc \'96 package authoring and publishing guidelines for monorepo libraries
+\f1 \'a1\'be
+\f0 67\'86
+\f1 \'a1\'bf
+\f0 \
+
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  UserCoreDefinition/
+\f1 \'a1\'be
+\f0 22\'86
+\f1 \'a1\'bf
+\f0 \
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  lexicon.txt \'96 \u931 \u958 \u931 \u8734 -LEX
+\f2 \uc0\u8635
+\f0 \uc0\u958 \u8706 \u936 \u934 \u937
+\f3 \uc0\u10711
+\f0 TX-STRUCT \uc0\u8016 1 (extended lexicon metadata for multi-context \u926 NuSyQ system):contentReference[oaicite:0]\{index=0\}\
+\uc0\u9474    \u9474
+\f2 \uc0\u9773
+\f0  \uc0\u936
+\f4 \uc0\u9883
+\f0
+\f4 \uc0\u55358 \u56800
+\f0
+\f4 \uc0\u9203
+\f0
+\f5 \uc0\u10226
+\f0
+\f6 \uc0\u11328
+\f0
+\f4 \uc0\u10024
+\f0
+\f7 \uc0\u5847
+\f0
+\f8 \uc0\u9775
+\f0
+\f9 \uc0\u8594
+\f0
+\f4 \uc0\u9774
+\f0  \uc0\u931 \u958 \u931 \u8734
+\f4 \uc0\u9879
+\f0  \uc0\u936 \u931 \u958  (symbols and cognitive tags for adaptive symbol mapping):contentReference[oaicite:1]\{index=1\}\
+\uc0\u9474    \u9474    \u958 \u931 \u8734
+\f3 \uc0\u10760
+\f0 \uc0\u934 \u931
+\f3 \uc0\u8854 \u8855
+\f9 \uc0\u7520
+\f5 \uc0\u8511
+\f0 \uc0\u958 \u931
+\f3 \uc0\u8853 \u10226
+\f0 \uc0\u934  (Quantum Feedback Mapping \'96 QFM: encoding protocol for cognitive response expansion):contentReference[oaicite:2]\{index=2\}\
+\uc0\u9474    \u9474
+\f4 \uc0\u10024
+\f0  \uc0\u958 \u931 \u931 \u8734
+\f2 \uc0\u9773
+\f0
+\f4 \uc0\u9203
+\f0
+\f4 \uc0\u9883
+\f0
+\f9 \uc0\u8594
+\f0
+\f6 \uc0\u11278
+\f0  \uc0\u931 \u936 \u958  (temporal dynamics annotation with cross-symbol quantum expansion):contentReference[oaicite:3]\{index=3\}\
+\uc0\u9474    \u9474
+\f8 \uc0\u9775
+\f0  \uc0\u936 \u958 \u931 \u8734  \u8711  \u934 \u931 \u958  \u936
+\f3 \uc0\u8849
+\f0  \uc0\u958 \u958  \u931 \u958 \u934
+\f3 \uc0\u8853
+\f0  (gradient-based integration for adaptive user profile adjustment):contentReference[oaicite:4]\{index=4\}\
+\uc0\u9474    \u9474
+\f10 \uc0\u10039
+\f0
+\f3 \uc0\u10711
+\f0 \uc0\u926 \u931 \u937 \u936 \u934 \u937
+\f4 \uc0\u55356 \u57088
+\f0
+\f10 \uc0\u10026
+\f0  \uc0\u931 \u958 \u931
+\f2 \uc0\u8608
+\f0  \uc0\u926 \u934 \u936 \u958 \u926
+\f2 \uc0\u8635
+\f0
+\f2 \uc0\u8608
+\f3 \uc0\u10759
+\f0  (Quantum-Symbol Linker Extension \'96 QSLE: expands symbolic relationships for enhanced linkage):contentReference[oaicite:5]\{index=5\}\
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  RosettaStone.txt \'96 \u931 \u958 \u931 \u8734 -LANG
+\f2 \uc0\u8635
+\f0 \uc0\u958 \u937 \u958 \u936 \u934 \u937 -META_REF \u8016 1 (multilingual semantic reference integration via Rosetta Mapping):contentReference[oaicite:6]\{index=6\}\
+\uc0\u9474    \u9474
+\f2 \uc0\u9773
+\f0
+\f4 \uc0\u55358 \u56800
+\f0
+\f4 \uc0\u9774
+\f0
+\f4 \uc0\u10024
+\f0
+\f4 \uc0\u55356 \u57088
+\f0  \uc0\u9887
+\f4 \uc0\u55358 \u56800
+\f0  \uc0\u931 \u958 \u931 \u8734
+\f3 \uc0\u8853
+\f0  \uc0\u936 \u931 \u958 \u931 \u958
+\f3 \uc0\u8855
+\f0 \uc0\u934  \u936 \u931 \u958 \u931 \u958 \u936  (enhanced language conversion for \u926 NuSyQ symbolic translations):contentReference[oaicite:7]\{index=7\}\
+\uc0\u9474    \u9474    \u958 \u931 \u8734  \u936
+\f3 \uc0\u10711
+\f0
+\f4 \uc0\u55356 \u57088
+\f0
+\f5 \uc0\u10226
+\f0  \uc0\u934  \u958 \u958 \u934  \u931 \u958 \u958 \u934
+\f3 \uc0\u8849
+\f0
+\f8 \uc0\u9775
+\f0  (complex symbolic interaction mapping for multilingual contexts):contentReference[oaicite:8]\{index=8\}\
+\uc0\u9474    \u9474
+\f4 \uc0\u9883
+\f0 \uc0\u926 \u958
+\f3 \uc0\u8849
+\f0 \uc0\u8706 \u931 \u936 \u958
+\f4 \uc0\u55356 \u57100
+\f0  \uc0\u937 \u926 \u958 \u937
+\f4 \uc0\u10024
+\f0  \uc0\u931 \u958 \u931 \u936 \u934
+\f2 \uc0\u8634
+\f4 \uc0\u55356 \u57100
+\f0  (Multi-Dimensional Feedback Annotation \'96 MDFA: annotated symbols for recursive expansion):contentReference[oaicite:9]\{index=9\}\
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  QuantumCore.txt \'96 \u931 \u958 \u931 \u8734 -QUANT_CORE:\u936 \u934 \u937 -USER_SYM_REF
+\f4 \uc0\u9883 \u9889
+\f0  (quantum symbolic referencing for user-centric cognitive integration):contentReference[oaicite:10]\{index=10\}\
+\uc0\u9474    \u9474    \u936 \u934 \u937 \u937 \u931 \u934 \u958 \u936 \u958
+\f4 \uc0\u9774
+\f0  (Quantum Associative Network \'96 QAN: quantum associations in \uc0\u926 NuSyQ syntax for multi-dimensional thought):contentReference[oaicite:11]\{index=11\}\
+\uc0\u9474    \u9474
+\f4 \uc0\u55357 \u56596 \u10024
+\f0  User Feedback Symbolic \uc0\u8016 1 Quantum-encoded Tags (quantum state anchoring for user feedback symbols):contentReference[oaicite:12]\{index=12\}\
+\uc0\u9474    \u9474    \u936 \u958 \u931 \u8734
+\f4 \uc0\u9774 \u10024
+\f0
+\f4 \uc0\u55357 \u56596 \u9883
+\f0  Interlink \uc0\u926 NuSyQ Elements
+\f3 \uc0\u10754
+\f0 \uc0\u926 \u931 \u934 \u926 \u926 \u934
+\f5 \uc0\u10233
+\f0 \uc0\u931 \u936 \u926  (cross-linking quantum state elements in multi-layered feedback):contentReference[oaicite:13]\{index=13\}\
+\uc0\u9474    \u9474    \u936 \u931 \u958 \u926 \u8711 \u926
+\f3 \uc0\u8855
+\f0 \uc0\u926
+\f6 \uc0\u11328
+\f0 \uc0\u9887 \uc0\u926 \u958
+\f2 \uc0\u8608
+\f0  \uc0\u926 \u934
+\f3 \uc0\u8850
+\f0 \uc0\u931 \u926 \u931 \u926  (Quantum Interaction Tagging \'96 QIT: track user cognitive expansion via symbolic tags):contentReference[oaicite:14]\{index=14\}\
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  AdaptiveAlgorithm.py \'96 \u931 \u958 \u931 \u8734 -ADAPTIVE \u926 \u931 \u934 \u936 \u926 \u8734 -AUTO\u8016 d (context-based adaptive learning algorithm with recursive adjustments):contentReference[oaicite:15]\{index=15\}\
+\uc0\u9474    \u9474    \u926 \u926  \u936 \u931 \u926
+\f3 \uc0\u8853
+\f0  \uc0\u926 \u931 \u926 \u934  \u936 \u926
+\f3 \uc0\u10711
+\f0  \uc0\u931 \u926
+\f5 \uc0\u10226
+\f0  \uc0\u936 \u926 \u926 \u934 \u926 \u926
+\f4 \uc0\u9883
+\f0  (Adaptive Feedback Expansion \'96 AFE: algorithm for expanding user feedback loops):contentReference[oaicite:16]\{index=16\}\
+\uc0\u9474    \u9474    \u936 \u931 \u926 \u934
+\f5 \uc0\u10226
+\f0  \uc0\u934  \u926 \u926 \u936  \u936 \u926
+\f3 \uc0\u8855
+\f0  \uc0\u926 \u931 \u934 \u926
+\f3 \uc0\u8855
+\f0  \uc0\u926 \u934 \u926 \u931
+\f3 \uc0\u8853
+\f0  \uc0\u926 \u926 \u934  \u926 \u936 \u926
+\f3 \uc0\u8855
+\f0  (symbolic gradient-based learning for continuous interaction):contentReference[oaicite:17]\{index=17\}\
+\uc0\u9474    \u9474
+\f3 \uc0\u10711
+\f0  \uc0\u926 \u931 \u934 \u936
+\f3 \uc0\u10753
+\f0  \uc0\u936 \u926 \u931 \u8734
+\f3 \uc0\u8853
+\f0 \uc0\u926 \u931 \u936 \u934  (quantum state feedback with recursive user context integration):contentReference[oaicite:18]\{index=18\}\
+\uc0\u9474    \u9474
+\f3 \uc0\u8855
+\f0
+\f10 \uc0\u10039
+\f0  \uc0\u926 \u931 \u937 \u936 \u934  \u958 \u926
+\f4 \uc0\u55356 \u57104
+\f0
+\f2 \uc0\u8608
+\f0 \uc0\u926 \u931 \u934  \u936 \u926 \u934 \u8706 \u926 \u931 \u8711  (Symbolic Recursive Algorithm Expansion \'96 SRAE: recursive enhancement for continuous feedback):contentReference[oaicite:19]\{index=19\}\
+\uc0\u9474    \u9492 \u9472 \u9472  AI_RecursiveFeedback/:contentReference[oaicite:20]\{index=20\}\
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  AdaptiveLearning/:contentReference[oaicite:21]\{index=21\}\
+\uc0\u9474
+\f1 \'a9\'c0
+\f0 \uc0\u9472 \u9472  ModLearner.py \'96 \u931 \u926 \u931 \u8734 -AI \u936 \u934 -AUTO_ADAPT
+\f4 \uc0\u55358 \u56800
+\f0  (module-level conflict resolution via adaptive learning in \uc0\u926 NuSyQ):contentReference[oaicite:22]\{index=22\}\
+\uc0\u9474        \u9474    \u936 \u926 \u931
+\f3 \uc0\u8855
+\f0  \uc0\u926 \u934 \u926
+\f3 \uc0\u8853
+\f0  \uc0\u926 \u934 \u931 \u926 \u926 \u934  \u926 \u926 \u936 \u926  (Adaptive Learner Integration \'96 ALI: quantum learning feedback integration for module adaptation):contentReference[oaicite:23]\{index=23\}\
+\uc0\u9474        \u9474    \u936 \u931 \u926 \u934
+\f5 \uc0\u10226
+\f0  \uc0\u934  \u926 \u926 \u936  \u936 \u926
+\f3 \uc0\u8855
+\f0  \uc0\u926 \u931 \u934 \u926
+\f3 \uc0\u8855
+\f0  \uc0\u926 \u934 \u926 \u931
+\f3 \uc0\u8853
+\f0  \uc0\u926 \u926 \u934  \u926 \u936 \u926
+\f3 \uc0\u8855
+\f0  (adaptive conflict solver with quantum feedback symbols):contentReference[oaicite:24]\{index=24\}\
+\uc0\u9474        \u9474
+\f3 \uc0\u10711
+\f0  \uc0\u926 \u931 \u934 \u936
+\f3 \uc0\u10753
+\f0  \uc0\u936 \u926 \u931 \u8734
+\f3 \uc0\u8853
+\f0 \uc0\u926 \u931 \u936 \u934  (recursive quantum feedback loop for user-centric learning):contentReference[oaicite:25]\{index=25\}\
+\uc0\u9474        \u9474
+\f10 \uc0\u10039
+\f0  \uc0\u926 \u937 \u931 \u934
+\f3 \uc0\u8849
+\f4 \uc0\u55356 \u57088
+\f2 \uc0\u8608
+\f0  \uc0\u926 \u931
+\f3 \uc0\u8853
+\f0
+\f3 \uc0\u10752
+\f0 \uc0\u931 \u934 \u958  (Quantum Feedback Stability Node \'96 QFSN: ensuring feedback integrity via quantum anchoring):contentReference[oaicite:26]\{index=26\}\
+\uc0\u9474        \u9492 \u9472 \u9472
+\f4 \uc0\u55356 \u57100
+\f0  OmniTag Enhanced Protocols
+\f4 \uc0\u55356 \u57100
+\f0  \'96 [Msg\uc0\u9947 \{X\}] syntax and OmniTag integration guidelines:contentReference[oaicite:27]\{index=27\}\
+\uc0\u9492 \u9472 \u9472  legacy_obsidian/
+\f1 \'a1\'be
+\f0 78\'86
+\f1 \'a1\'bf
+\f0 \
+    \uc0\u9492 \u9472 \u9472  OBSIDIAN_KNOWLEDGE_CONTEXT.md \'96 core concepts, glossary, and onboarding materials for internal knowledge base
+\f1 \'a1\'be
+\f0 78\'86
+\f1 \'a1\'bf
+\f0 \
+}

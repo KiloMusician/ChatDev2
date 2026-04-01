@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KPulse Directive Schema",
+  "description": "Schema for self-spawning game directives in the KPulse ecosystem",
+  "type": "object",
+  "required": ["id", "kind", "tier", "unlock", "effects", "metadata"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the directive",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["building", "upgrade", "subsystem", "event", "colonist"],
+      "description": "Type of directive"
+    },
+    "tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 19,
+      "description": "Civilization tier requirement"
+    },
+    "unlock": {
+      "type": "object",
+      "description": "Conditions required to activate this directive",
+      "properties": {
+        "tier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 19
+        },
+        "resources": {
+          "type": "object",
+          "properties": {
+            "metal": { "type": "number", "minimum": 0 },
+            "power": { "type": "number", "minimum": 0 },
+            "food": { "type": "number", "minimum": 0 },
+            "knowledge": { "type": "number", "minimum": 0 },
+            "exotic": { "type": "number", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "buildings": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Required buildings"
+        },
+        "research": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Required research completions"
+        },
+        "time": {
+          "type": "integer",
+          "description": "Unix timestamp when directive becomes available"
+        }
+      },
+      "additionalProperties": false
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "target", "value"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["multiplier", "additive", "unlock", "spawn", "modify"],
+            "description": "Effect type"
+          },
+          "target": {
+            "type": "string",
+            "description": "What the effect targets"
+          },
+          "value": {
+            "oneOf": [
+              { "type": "number" },
+              { "type": "string" }
+            ],
+            "description": "Effect value"
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Effect duration in milliseconds (0 = permanent)"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["spawned", "validated", "active"],
+      "properties": {
+        "spawned": {
+          "type": "integer",
+          "description": "Unix timestamp when directive was spawned"
+        },
+        "validated": {
+          "type": "boolean",
+          "description": "Whether directive passed validation"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether directive is currently active"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Categorization tags"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,94 @@
+redis_url: "${REDIS_URL:-redis://localhost:6379}"
+
+services:
+  llm:
+    description: "Unified text generation and chat with retries, fallbacks, caching, and circuit breakers."
+    default_endpoint: "ollama"
+    cache_ttl: 300
+    action_routing:
+      generate: ["replit_ai", "ollama", "lmstudio", "openai", "claude"]
+      chat: ["replit_ai", "ollama", "lmstudio", "openai", "claude"]
+      code: ["replit_ai", "ollama", "openai", "claude"]
+    endpoints:
+      replit_ai:
+        provider: "openai"
+        enabled_if_env: "AI_INTEGRATIONS_OPENAI_BASE_URL"
+        url: "${AI_INTEGRATIONS_OPENAI_BASE_URL:-}"
+        auth: "bearer"
+        auth_env: "AI_INTEGRATIONS_OPENAI_API_KEY"
+        default_model: "${REPLIT_AI_MODEL:-gpt-4o-mini}"
+        timeout: 60
+        retry:
+          attempts: 2
+          backoff: 1.25
+          jitter: 0.15
+        circuit_breaker:
+          failure_threshold: 3
+          recovery_timeout: 30
+        rate_limit:
+          window_seconds: 60
+          max_requests: 120
+      ollama:
+        provider: "ollama"
+        url: "${OLLAMA_HOST:-http://localhost:11434}"
+        default_model: "${OLLAMA_MODEL:-qwen2.5-coder:14b}"
+        models:
+          - "${OLLAMA_MODEL:-qwen2.5-coder:14b}"
+          - "qwen2.5-coder:7b"
+          - "llama3.1:8b"
+        timeout: 240
+        retry:
+          attempts: 2
+          backoff: 1.5
+          jitter: 0.2
+        circuit_breaker:
+          failure_threshold: 5
+          recovery_timeout: 60
+        rate_limit:
+          window_seconds: 60
+          max_requests: 240
+        paths:
+          generate: "/api/generate"
+          chat: "/api/chat"
+      lmstudio:
+        provider: "lmstudio"
+        url: "${LMSTUDIO_OPENAI_URL:-http://localhost:1234/v1/chat/completions}"
+        default_model: "${LMSTUDIO_MODEL:-openai/gpt-oss-20b}"
+        timeout: 60
+        retry:
+          attempts: 2
+          backoff: 1.5
+          jitter: 0.15
+        circuit_breaker:
+          failure_threshold: 3
+          recovery_timeout: 30
+      openai:
+        provider: "openai"
+        enabled_if_env: "OPENAI_API_KEY"
+        url: "${OPENAI_BASE_URL:-https://api.openai.com/v1/chat/completions}"
+        auth: "bearer"
+        auth_env: "OPENAI_API_KEY"
+        default_model: "${OPENAI_MODEL:-gpt-4o-mini}"
+        timeout: 60
+        retry:
+          attempts: 2
+          backoff: 2.0
+          jitter: 0.2
+        circuit_breaker:
+          failure_threshold: 3
+          recovery_timeout: 45
+      claude:
+        provider: "anthropic"
+        enabled_if_env: "ANTHROPIC_API_KEY"
+        url: "${ANTHROPIC_BASE_URL:-https://api.anthropic.com/v1/messages}"
+        auth: "anthropic"
+        auth_env: "ANTHROPIC_API_KEY"
+        default_model: "${ANTHROPIC_MODEL:-claude-3-5-sonnet-latest}"
+        timeout: 60
+        retry:
+          attempts: 2
+          backoff: 2.0
+          jitter: 0.2
+        circuit_breaker:
+          failure_threshold: 3
+          recovery_timeout: 45

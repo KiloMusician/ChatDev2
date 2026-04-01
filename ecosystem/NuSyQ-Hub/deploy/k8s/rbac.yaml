@@ -1,0 +1,76 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nusyq-hub
+  namespace: nusyq-hub
+  labels:
+    app: nusyq-hub
+automountServiceAccountToken: false
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: nusyq-hub
+  namespace: nusyq-hub
+  labels:
+    app: nusyq-hub
+rules:
+# Allow reading ConfigMaps and Secrets
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+# Allow reading pods for health checks
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+# Allow creating events for logging
+- apiGroups: [""]
+  resources: ["events"]
+  verbs: ["create", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: nusyq-hub
+  namespace: nusyq-hub
+  labels:
+    app: nusyq-hub
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: nusyq-hub
+subjects:
+- kind: ServiceAccount
+  name: nusyq-hub
+  namespace: nusyq-hub
+---
+# ServiceAccount for Ollama
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ollama
+  namespace: nusyq-hub
+  labels:
+    app: ollama
+automountServiceAccountToken: false
+---
+# ServiceAccount for PostgreSQL
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: postgres
+  namespace: nusyq-hub
+  labels:
+    app: postgres
+automountServiceAccountToken: false
+---
+# ServiceAccount for Redis
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: redis
+  namespace: nusyq-hub
+  labels:
+    app: redis
+automountServiceAccountToken: false

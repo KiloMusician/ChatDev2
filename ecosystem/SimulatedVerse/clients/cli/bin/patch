@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# KPulse CLI - Code Patch Generator
+# Usage: ./patch "Add power efficiency building"
+
+set -e
+
+REPOPILOT_URL="${REPOPILOT_URL:-http://localhost:7411}"
+GOAL="$*"
+
+if [ -z "$GOAL" ]; then
+    echo "Usage: patch \"description of change to implement\""
+    echo ""
+    echo "Examples:"
+    echo "  patch \"Add quantum reactor building type\""
+    echo "  patch \"Implement colonist mood events\""
+    echo "  patch \"Fix resource calculation bug\""
+    exit 1
+fi
+
+echo "🛠️  Generating patch for: $GOAL"
+echo ""
+
+# Check if RepoPilot is running
+if ! curl -s "$REPOPILOT_URL/health" > /dev/null 2>&1; then
+    echo "❌ RepoPilot server not running on $REPOPILOT_URL"
+    echo "Start it with: make dev"
+    exit 1
+fi
+
+# Make the request
+RESPONSE=$(curl -s "$REPOPILOT_URL/patch" \
+    -H "Content-Type: application/json" \
+    -d "{\"goal\":\"$GOAL\"}" \
+    2>/dev/null)
+
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to connect to RepoPilot"
+    exit 1
+fi
+
+# Extract diff
+DIFF=$(echo "$RESPONSE" | sed -n 's/.*"diff":"\([^"]*\)".*/\1/p' | sed 's/\\n/\n/g' | sed 's/\\"/"/g')
+
+if [ -z "$DIFF" ]; then
+    echo "❌ Failed to generate patch"
+    echo "Raw response: $RESPONSE"
+    exit 1
+fi
+
+echo "$DIFF"
+echo ""
+echo "📝 Review the diff above before applying changes"
+echo "💡 Save to file: ./patch \"goal\" > change.diff"

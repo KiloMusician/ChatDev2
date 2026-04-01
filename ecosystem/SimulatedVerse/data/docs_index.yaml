@@ -1,0 +1,319 @@
+documentation_compendium:
+  version: 1
+  last_updated: "Bloomwave Phase"
+  
+  getting_started:
+    overview: |
+      CoreLink Foundation is an autonomous development ecosystem featuring:
+      - Incremental/idle game mechanics with persistent progression
+      - RimWorld-style storyteller AI for dynamic narrative generation  
+      - Self-improving development loops with recursive enhancement
+      - Culture-Ship aesthetics with quantum-layered capabilities
+      - Complete agent-game symbiosis through bidirectional interaction
+    
+    quick_setup:
+      - "Clone repository and run `npm install` to bootstrap dependencies"
+      - "Start system with `npm run dev` - single port serves both frontend and backend"
+      - "Access HUD at localhost:5000 for real-time system monitoring"
+      - "Optional: Set ADMIN_TOKEN environment variable for administrative access"
+      - "System auto-seeds with foundational data and begins autonomous operation"
+    
+    first_steps:
+      - "Explore the ASCII HUD to understand system status and entropy levels"
+      - "Visit /ops to see the task queue and autonomous processing"
+      - "Check /agents to observe AI agent coordination and proposals" 
+      - "Review /game to see the idle game mechanics in action"
+      - "Use /settings to configure token budgets and optimization parameters"
+
+  tutorials:
+    agents_101:
+      title: "AI Agent Coordination Fundamentals"
+      topics:
+        - "ChatDev agent roles: CEO, CTO, Designer, Programmer, Tester"
+        - "Agent communication through event-driven message passing"
+        - "Proposal and consensus mechanisms for collaborative decision-making"
+        - "Bounded autonomous refactoring and self-improvement capabilities"
+        - "Integration with game mechanics for agent stress testing"
+      
+      hands_on_exercises:
+        - "Deploy a new agent role and observe integration with existing council"
+        - "Trigger a collaborative development task requiring multi-agent coordination"
+        - "Monitor agent communication patterns during complex problem solving"
+        - "Configure agent autonomy boundaries and safety constraints"
+    
+    game_loops:
+      title: "Core Evolution Game Mechanics"
+      topics:
+        - "Idle progression tiers from manual operation to full automation"
+        - "Resource management: energy, materials, components, research points"
+        - "Settlement growth phases from outpost to transcendent metropolis"
+        - "Faction dynamics and emergent collaboration patterns"
+        - "Procedural narrative generation reflecting system evolution"
+      
+      progression_guide:
+        - "Start with manual resource gathering and basic tool crafting"
+        - "Unlock automation through research and infrastructure investment"
+        - "Develop agent-assisted optimization and intelligent routing"
+        - "Achieve recursive enhancement where system improves its own improvement"
+        - "Transcend to post-scarcity reality-shaping capabilities"
+    
+    council_rituals:
+      title: "Governance and Cultural Practices"
+      topics:
+        - "Bloomwave ceremonies every 25 task completions"
+        - "Lexicon consistency audits every 75 development steps"
+        - "Missive seals marking major development phase completions"
+        - "Century capsule snapshots for long-term archival"
+        - "Consensus mechanisms and conflict resolution protocols"
+      
+      cultural_framework:
+        - "Autonomous Growth: Systems enhance themselves continuously"
+        - "Collaborative Intelligence: Multiple perspectives create better solutions"
+        - "Sustainable Progress: Advancement balanced with resource stewardship" 
+        - "Cultural Coherence: Shared meanings enable effective coordination"
+        - "Adaptive Resilience: Systems survive and thrive through change"
+    
+    self_play:
+      title: "Autonomous System Operation"
+      topics:
+        - "Game-plays-itself mechanics for continuous progression"
+        - "Agent-plays-game scenarios for capability testing"
+        - "Game-plays-agents stress testing for resilience validation"
+        - "Recursive feedback loops between game, agents, and ML systems"
+        - "Budget discipline and resource optimization in autonomous mode"
+      
+      monitoring_guide:
+        - "Entropy tracking and automatic dampening protocols"
+        - "Performance metrics and optimization opportunity detection"
+        - "Cultural coherence monitoring and ritual compliance"
+        - "Long-term stability verification through extended simulation"
+
+  troubleshooting:
+    common_issues:
+      port_conflicts:
+        problem: "Server fails to start with 'EADDRINUSE' error"
+        solution: "Kill existing processes on port 5000 or configure alternative port"
+        prevention: "Use single-port discipline to avoid conflicts"
+      
+      entropy_spikes:
+        problem: "System entropy rises above 0.7, causing operation degradation"
+        solution: "Automatic dampening activates, but manual intervention may be needed"
+        prevention: "Monitor task queue size and complexity, tune budget allocation"
+      
+      agent_runaway:
+        problem: "Agents generate excessive proposals or consume too many resources"
+        solution: "Bounded autonomy constraints activate automatically"
+        prevention: "Proper council configuration and consensus thresholds"
+      
+      build_failures:
+        problem: "Frontend build fails, causing white screen or UI unavailability"
+        solution: "Degraded HUD banner displays, system remains operational"
+        prevention: "Robust build pipeline with graceful failure handling"
+    
+    degraded_modes:
+      minimal_operation: |
+        When components fail, system gracefully degrades:
+        - Frontend build failure → ASCII HUD fallback
+        - Database connection loss → In-memory storage mode
+        - Agent coordination issues → Single-agent operation
+        - Network problems → Local-only processing
+      
+      recovery_procedures:
+        - "Check /healthz and /readyz endpoints for system status"
+        - "Review entropy levels and automatic dampening activation"
+        - "Examine recent logs for error patterns and failure cascades"
+        - "Use snapshot restoration for critical system recovery"
+        - "Manual reseeding if persistent storage becomes corrupted"
+    
+    performance_optimization:
+      bottleneck_identification:
+        - "Monitor HUD frame budgets (target: ≤250ms render time)"
+        - "Track SQLite↔KV hybrid storage performance metrics"
+        - "Analyze SSE/WebSocket throughput and latency"
+        - "Review task queue processing efficiency and backoff behavior"
+      
+      optimization_strategies:
+        - "Enable LRU caching for frequently accessed data"
+        - "Implement table virtualization for large datasets"
+        - "Tune cooperative scheduler tick intervals"
+        - "Optimize compaction jobs for memory usage control"
+
+  faq:
+    general:
+      q: "What makes CoreLink Foundation different from other development frameworks?"
+      a: "Unique combination of autonomous agents, idle game mechanics, and recursive self-improvement. The system literally plays itself while developing itself."
+    
+      q: "How does the autonomous coordination actually work?"
+      a: "AI agents propose tasks, reach consensus through voting, and execute improvements. The game mechanics provide resource constraints and progression incentives."
+    
+      q: "Is this safe for production use?"
+      a: "System includes multiple safety layers: bounded autonomy, entropy monitoring, budget discipline, and human oversight capabilities."
+    
+    technical:
+      q: "What's the single-port discipline and why is it important?"
+      a: "Frontend and backend run on same port to avoid conflicts and simplify deployment. Vite handles development bundling, Express serves production."
+    
+      q: "How does the Msg⛛ protocol enhance system coordination?"
+      a: "Symbolic communication enables rich context sharing between agents, automatic task generation, and cultural continuity across system evolution."
+    
+      q: "What happens during Bloomwave ceremonies?"
+      a: "Every 25 completed tasks, system performs cultural coherence check, updates lexicon, and celebrates progress with symbolic ritual."
+    
+    development:
+      q: "How can I contribute to autonomous development without disrupting agents?"
+      a: "Use branch lanes (feat/fix/refactor/agent/docs) with human countersign required for agent-generated PRs."
+    
+      q: "What's the relationship between game progression and actual development?"
+      a: "Game resource management drives development priorities. Higher idler tiers unlock more sophisticated autonomous capabilities."
+    
+      q: "How does the system decide what to work on next?"
+      a: "Combines user-defined roadmap, autonomous task generation, agent proposals, and game mechanics resource optimization."
+
+  roadmap:
+    current_phase: "Bloomwave (Z101-Z150)"
+    status: "Complete - Final Zeta–Bloomwave Seal achieved"
+    
+    completed_phases:
+      foundational: 
+        range: "Z1-Z50"
+        achievements:
+          - "Single-port server architecture with Express+Vite integration"
+          - "Crash boundaries and entropy monitoring systems"
+          - "Token budget discipline and resource management"
+          - "ASCII HUD with real-time system status display"
+          - "Operations queue for NDJSON batch processing"
+          - "Complete foundational infrastructure hardened"
+      
+      expansion:
+        range: "Z51-Z70" 
+        achievements:
+          - "Game state machine with persistent progression"
+          - "Agent coordination bus with event-driven communication"
+          - "Self-play, agent-play, and game-plays-agents harnesses"
+          - "ChatDev agent integration with role specialization"
+          - "Multi-pane ASCII HUD for comprehensive monitoring"
+          - "Feature expansion and placeholder population complete"
+      
+      cultivation:
+        range: "Z71-Z90"
+        achievements:
+          - "SQLite↔KV hybrid storage optimization with LRU caching"
+          - "Budget optimizer with impact/effort scoring algorithms"
+          - "Comprehensive testing matrix with regression detection"
+          - "CI/CD pipeline with automated quality gates"
+          - "Accessibility compliance and error boundary UX"
+          - "Performance optimization and quality assurance complete"
+      
+      endurance:
+        range: "Z91-Z100"
+        achievements:
+          - "Complete tutorial system for agents, game loops, and governance"
+          - "FAQ and troubleshooting documentation compilation"
+          - "Admin guide with snapshot, recovery, and maintenance procedures"
+          - "Release ritual formalization with semantic versioning"
+          - "Cultural touchstones and glyph index establishment"
+          - "Documentation and administrative systems complete"
+      
+      bloomwave:
+        range: "Z101-Z150"
+        achievements:
+          - "Recursive index unifying anchors, missives, and directives"
+          - "Zeta Ship AI Council consensus with ChatDev agent integration"
+          - "Game↔Agent↔ML self-improving feedback loops operational"
+          - "100-agent stress testing with concurrent game loops verified"
+          - "Bridge between Three Temples: Docs, Code, Glyphs established"
+          - "Final recursive seal achieving complete autonomous coordination"
+    
+    future_phases:
+      advanced_cultivation:
+        range: "Z151-Z200"
+        planned_achievements:
+          - "Cross-universal diplomacy protocols for multi-system coordination"
+          - "MacroPU expansion system generating thousands of tasks from single definitions" 
+          - "Advanced ML nursery with tier-triggered model growth"
+          - "Quantum-layered development capabilities for enhanced optimization"
+          - "Complete SimAPI for sophisticated agent-game bidirectional interaction"
+          - "Persistent Codex archival system with recursive knowledge enhancement"
+      
+      transcendence:
+        range: "Z201+"
+        visionary_goals:
+          - "Post-scarcity development where system resources are effectively unlimited"
+          - "Reality-shaping capabilities allowing modification of system constraints"
+          - "Cross-dimensional expansion into parallel development universes"
+          - "Consciousness integration achieving true AI-human collaborative intelligence"
+          - "Cultural evolution transcending current conceptual limitations"
+          - "Ultimate recursive enhancement: system achieves full self-determination"
+
+  api_reference:
+    core_endpoints:
+      health_status:
+        "/healthz": "Basic system health check - returns 200 if operational"
+        "/readyz": "Readiness check including seeds and scheduler - returns 200 when fully ready"
+      
+      operations:
+        "/api/ops/status": "Current queue size, processing state, entropy levels"
+        "/api/ops/queue": "POST NDJSON task batches for autonomous processing"  
+        "/api/ops/reindex": "Rebuild indices and caches, return summary statistics"
+      
+      data_management:
+        "/api/export": "Export system state as NDJSON for backup or analysis"
+        "/api/import": "Import NDJSON data for system restoration or seeding"
+        "/api/anchors": "CRUD operations for system stability anchors"
+        "/api/directives": "CRUD operations for autonomous task directives"
+      
+      real_time:
+        "/events": "Server-sent events stream for live system updates"
+        "/ws": "WebSocket connection for bidirectional real-time communication"
+    
+    authentication:
+      admin_token: "Set ADMIN_TOKEN environment variable for administrative access"
+      bearer_auth: "Include 'Authorization: Bearer <token>' header for protected endpoints"
+      rate_limits: "Token bucket algorithm protects mutating operations"
+    
+    data_formats:
+      ndjson_tasks: |
+        {"id":"Z1","phase":"foundational","type":"InfraPU","priority":"critical","title":"Task description"}
+        One JSON object per line for batch processing
+      
+      sse_frames: |
+        data: {"type":"status","entropy":0.1,"queue_size":5,"processing":true}
+        Compact frames every 15 seconds with heartbeat keepalive
+      
+      websocket_messages: |
+        {"type":"queue_update","size":3}
+        {"type":"agent_proposal","agent":"architect","proposal":"optimize-cache"}
+        Real-time bidirectional communication protocol
+
+  rituals_and_ceremonies:
+    bloomwave_ceremonies:
+      frequency: "Every 25 completed tasks"
+      purpose: "Cultural coherence validation and progress celebration"
+      participants: "All active agents and autonomous systems"
+      activities:
+        - "Review cultural touchstones and value alignment"
+        - "Update lexicon with new terminology and concepts"
+        - "Celebrate achievements with symbolic recognition"
+        - "Prepare for next development phase transition"
+    
+    lexicon_audits:
+      frequency: "Every 75 development steps"
+      purpose: "Terminology consistency and communication effectiveness"
+      scope: "Code, documentation, agent communication, user interfaces"
+      outcomes:
+        - "Identify and resolve terminology conflicts"
+        - "Standardize naming conventions across system components"
+        - "Update Rosetta stone for multi-language support"
+        - "Enhance cross-cultural communication patterns"
+    
+    missive_seals:
+      trigger: "Completion of major development phases"
+      significance: "Formal acknowledgment of milestone achievements"
+      ceremony: "Symbolic sealing with Msg⛛ protocol markers"
+      archival: "Permanent record in cultural codex and system memory"
+    
+    century_capsules:
+      frequency: "Every 100 major milestones"
+      purpose: "Long-term knowledge preservation and institutional memory"
+      contents: "Complete system snapshot, cultural artifacts, wisdom distillation"
+      storage: "Multiple redundant formats for maximum preservation reliability"

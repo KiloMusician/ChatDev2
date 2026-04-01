@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "budgets": {
+    "daily_token_limit": 120000,
+    "per_task_soft_cap": 2500,
+    "per_task_hard_cap": 5000,
+    "api_escalation_min_conf": 0.62,
+    "api_escalation_min_info_gain": 0.18
+  },
+  "models": {
+    "local_primary": "ollama://qwen2.5:7b-instruct-q4_K_M",
+    "local_judge": "ollama://llama3.1:8b-instruct-q4_K_M",
+    "distilled_aux": "ollama://phi3:mini-instruct",
+    "paid_fallback": "openai://gpt-4o-mini"
+  },
+  "caching": {
+    "semantic_cache_ttl_min": 240,
+    "tool_cache_ttl_min": 60,
+    "key_normalizer": ["lower", "strip", "dedupe_ws", "hash_sha256"]
+  },
+  "retry_policy": {
+    "max_retries": 2,
+    "backoff_ms": [150, 400]
+  },
+  "routing": {
+    "allow_symbolic_planner": true,
+    "planner_conf_threshold": 0.55,
+    "max_context_tokens": 2200
+  },
+  "storyteller": {
+    "narrative_steps": 16,
+    "style_profiles": ["banks_culture", "asimov_foundation", "dry_humor", "grim_resolve"],
+    "temperature": 0.5,
+    "force_json_events": true
+  },
+  "cost_containment": {
+    "budget_mode": "soft",
+    "trace_sampling": 0.1,
+    "context_max": 2200,
+    "cache_only": false
+  }
+}

@@ -1,0 +1,36 @@
+name: Query-Quest
+on: [push, pull_request]
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: 
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: pip install ruff mypy bandit radon deptry
+      - run: npm install -g eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+      - run: sudo apt-get update && sudo apt-get install -y ripgrep fd-find && sudo ln -s `which fdfind` /usr/local/bin/fd
+      - run: bash tools/qquest.sh .
+      - name: Check for critical issues
+        run: |
+          # Fail CI if critical issues found
+          if [ -s .qquest/loops.txt ]; then
+            echo "❌ Infinite loops detected:"
+            cat .qquest/loops.txt
+            exit 1
+          fi
+          if [ -s .qquest/affordances_without_actions.txt ]; then
+            echo "❌ Interactive elements without handlers:"
+            cat .qquest/affordances_without_actions.txt
+            exit 1
+          fi
+          echo "✅ No critical issues found"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: qquest-reports
+          path: .qquest/

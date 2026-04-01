@@ -1,0 +1,28 @@
+{
+  "entrypoints": [
+    "ChatDev/agents",
+    "ChatDev/directives", 
+    "ChatDev/bridges",
+    "src/agents",
+    "agent"
+  ],
+  "safe_move_roots": [
+    "ChatDev",
+    "src/agents",
+    "agent"
+  ],
+  "ignore": [
+    "**/node_modules/**",
+    "**/.godot/**",
+    "**/dist/**", 
+    "**/*.map",
+    "**/.cache/**"
+  ],
+  "preferred_scanners": [
+    "agent_registry",
+    "directive_scan",
+    "targeted_provenance"
+  ],
+  "description": "ChatDev quadrant - AI agents, directives, conversation bridges",
+  "quadrant": "ChatDev"
+}

@@ -1,0 +1,25 @@
+id: culture-ship
+name: Culture-Class Infrastructure Vessel
+version: 0.1.0
+entry: ./ship.ts
+capabilities:
+  - planning.cascade
+  - analyze.duplicates
+  - analyze.imports
+  - analyze.softlocks
+  - surgeon.rename_rewire
+  - ui.ascii_hud
+policies:
+  token_default: off
+  token_budget_file: config/token_policy.yml
+temples:
+  - temple_of_knowledge
+  - house_of_leaves
+  - oldest_house
+hooks:
+  boot: ship.boot
+  after:test: ship.cascade
+  after:commit: ship.cascade
+infrastructure_first: true
+reversible: true
+local_first: true

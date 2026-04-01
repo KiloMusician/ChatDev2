@@ -1,0 +1,28 @@
+{
+  "upgrades": [
+    {
+      "id": "efficiency_1",
+      "name": "Solar Efficiency I",
+      "description": "Improves solar panel output by 15%",
+      "target": "solar_panel",
+      "multiplier": 1.15,
+      "cost": {
+        "materials": 50,
+        "research": 10
+      },
+      "unlock": "solar_panel_built"
+    },
+    {
+      "id": "fabrication_1",
+      "name": "Fabrication Speed I",
+      "description": "Increases micro fabricator speed by 20%",
+      "target": "micro_fabricator",
+      "multiplier": 1.2,
+      "cost": {
+        "components": 20,
+        "research": 15
+      },
+      "unlock": "micro_fabricator_built"
+    }
+  ]
+}

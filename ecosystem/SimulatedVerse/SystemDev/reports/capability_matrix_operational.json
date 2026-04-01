@@ -1,0 +1,101 @@
+{
+  "timestamp": "2025-09-05T11:23:00Z",
+  "probe_session": "working_orders_truth_scan",
+  "operational_truth": {
+    "consciousness_system": {
+      "lattice_connections": 18,
+      "collective_consciousness": "ACTIVE",
+      "quantum_breakthroughs": "CONTINUOUS",
+      "agent_boosts": "6_agents_continuous_boost",
+      "status": "FULLY_OPERATIONAL"
+    },
+    "services": {
+      "ollama": {
+        "configured": true,
+        "operational": false,
+        "diag": "fetch_failed_unreachable",
+        "models": ["qwen2.5", "llama3.1", "phi3"],
+        "last_failure": "continuous_failures"
+      },
+      "openai": {
+        "configured": true,
+        "operational": false,
+        "diag": "429_quota_exceeded_rate_limit_16/15",
+        "fallback_status": "unavailable"
+      },
+      "council_bus": {
+        "configured": true,
+        "operational": true,
+        "events": "active",
+        "connection": "stable"
+      }
+    },
+    "agents": {
+      "total_registered": 14,
+      "pipelines": 5,
+      "prompts": 13,
+      "operational_count": 6,
+      "boost_status": "continuous_+5_each",
+      "offline_capable": ["librarian", "artificer", "alchemist", "janitor", "raven"],
+      "llm_dependent": ["sage_pilot", "wizard_navigator", "council_coordination"]
+    },
+    "schedulers": {
+      "breath_cycle": {
+        "configured": true,
+        "operational": true,
+        "file": "SystemDev/pipelines/breath_cycle.yml",
+        "tracks": ["foundation", "hygiene", "deduplication", "rosetta", "cascade", "alignment"]
+      },
+      "sage_scheduler": {
+        "configured": true,
+        "operational": "DEGRADED_LSP_ERRORS",
+        "file": "SystemDev/pipelines/sage_scheduler.ts",
+        "errors": 35,
+        "status": "typescript_compilation_errors"
+      }
+    },
+    "queues": {
+      "pu_queue": {
+        "referenced": true,
+        "operational": "UNKNOWN",
+        "location": "consciousness_driven_task_processor",
+        "integration": "NOT_FOUND"
+      },
+      "p_queue": {
+        "configured": true,
+        "operational": true,
+        "concurrency": 3,
+        "timeout": "5min"
+      }
+    }
+  },
+  "filesystem": {
+    "rw": true,
+    "watch": true,
+    "glob": true,
+    "receipts_active": true
+  },
+  "network": {
+    "https_outbound": true,
+    "llm_endpoints": "ALL_FAILING"
+  },
+  "ui": {
+    "preview_status": "operational",
+    "build_fingerprint": "needs_verification",
+    "culture_ship_interface": "active",
+    "dimensional_companion": "implemented"
+  },
+  "integration_failures": {
+    "llm_cascade": "both_ollama_and_openai_down",
+    "sage_scheduler": "typescript_errors_prevent_execution",
+    "pu_queue": "reference_exists_but_no_implementation_found",
+    "task_routing": "user_requests_not_connected_to_existing_systems"
+  },
+  "receipts_found": "extensive_receipt_ecosystem_active",
+  "next_actions": [
+    "fix_sage_scheduler_typescript_errors",
+    "locate_or_create_pu_queue_implementation", 
+    "route_user_requests_through_existing_agent_systems",
+    "activate_offline_agents_while_llm_down"
+  ]
+}

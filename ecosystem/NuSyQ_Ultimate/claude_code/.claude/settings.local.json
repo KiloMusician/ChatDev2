@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe scripts/theater_audit.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe scripts/vacuum_scanner.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe config/breathing_pacing.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe config/proof_verification.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe -c \"\nwith open(''State/repository_state_updated.yaml'', ''w'') as f:\n    f.write(''''''# ΞNuSyQ Repository State Tracker - INTEGRATION COMPLETE\n# Last Updated: 2025-10-08T07:45:00Z\n\nmeta:\n  version: 2.0.0\n  last_updated: 2025-10-08T07:45:00Z\n  major_update: SimulatedVerse + Legacy integration complete\n\nsystem:\n  status: operational_enhanced\n  integrations_complete: 3\n  tools_harnessed: 49\n  harness_percentage: 78\n\nnew_modules:\n  - breathing_pacing.py - Adaptive work cycles\n  - proof_verification.py - Anti-theater gates\n  - vacuum_scanner.py - Theater detection\n\ntheater_detection:\n  files_scanned: 176\n  issues_found: 6238\n  status: monitoring_active\n\nreports_generated:\n  - SIMULATEDVERSE_INTEGRATION_ANALYSIS.md (28KB)\n  - HARNESS_CAPABILITIES_ANALYSIS.md (42KB)\n  - INTEGRATION_COMPLETE.md (35KB)\n\nsuccess_metrics:\n  tools_target: 30\n  tools_achieved: 49\n  achievement_rate: 163_percent\n  overall: HIGHLY_SUCCESSFUL\n'''''')\nprint(''[OK] Created State/repository_state_updated.yaml'')\n\")",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe -m py_compile config/*.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe src/diagnostics/broken_paths_analyzer.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe scripts/fix_utf8_encoding.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe -m py_compile mcp_server/*.py mcp_server/src/*.py)",
+      "Bash(for f in scripts/*.py)",
+      "Bash(do python -m py_compile \"$f\")",
+      "Bash(echo \"[OK] $f\")",
+      "Bash(echo:*)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe -m py_compile nusyq_chatdev.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe -m py_compile analyze_problems.py)",
+      "Bash(C:/Users/keath/NuSyQ/.venv/Scripts/python.exe -m py_compile deep_analysis.py)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

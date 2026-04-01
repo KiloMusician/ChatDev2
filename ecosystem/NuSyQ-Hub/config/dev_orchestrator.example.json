@@ -1,0 +1,44 @@
+{
+  "root": ".",
+  "context": {
+    "project": "NuSyQ-Hub",
+    "env": "development"
+  },
+  "watch_dirs": ["./src", "./docs"],
+  "debounce_seconds": 1.0,
+  "concurrency_limit": 2,
+  "tasks": [
+    {
+      "name": "lint",
+      "plugin": "python",
+      "script": "scripts/run_lint.py",
+      "args": [],
+      "triggers": ["src/**/*.py"],
+      "always": false
+    },
+    {
+      "name": "unit_tests",
+      "plugin": "python",
+      "script": "scripts/run_tests.py",
+      "args": [],
+      "triggers": ["src/**/*.py"],
+      "always": false
+    },
+    {
+      "name": "build_ui",
+      "plugin": "node",
+      "script": "scripts/build_ui.ts",
+      "args": [],
+      "triggers": ["ui/src/**/*.ts", "ui/src/**/*.tsx"],
+      "always": false
+    },
+    {
+      "name": "snapshot_sync",
+      "plugin": "python",
+      "script": "scripts/start_nusyq.py",
+      "args": [],
+      "triggers": [],
+      "always": true
+    }
+  ]
+}

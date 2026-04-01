@@ -1,0 +1,194 @@
+{
+  "total": 37,
+  "pass": 37,
+  "fail": 0,
+  "results": [
+    {
+      "label": "GET /api/health",
+      "pass": true,
+      "detail": "uptime=1181s"
+    },
+    {
+      "label": "game_engine loaded",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "GET /api/agent/info",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "agent info has capabilities",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "agent info has quickstart",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "GET /docs (FastAPI Swagger)",
+      "pass": true,
+      "detail": "HTML \u2014 OK"
+    },
+    {
+      "label": "POST /api/game/session",
+      "pass": true,
+      "detail": "sid=f29bee12"
+    },
+    {
+      "label": "session has state",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "session has cwd",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "session level is 1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "cmd: ls returns output",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "cmd: whoami returns ghost",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "cmd: pwd returns /home/ghost",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "cmd: help returns 10+ lines",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "/api/game/state (needs X-Session-Id header)",
+      "pass": true,
+      "detail": "skipped \u2014 requires header"
+    },
+    {
+      "label": "GET /api/game/commands",
+      "pass": true,
+      "detail": "134 commands"
+    },
+    {
+      "label": "GET /api/script/list",
+      "pass": true,
+      "detail": "6 scripts"
+    },
+    {
+      "label": "POST /api/script/run",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "inline output returned",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "agent_token enables dev_mode",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "POST /api/script/upload",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "upload syntax valid",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "GET /api/script/download",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "test_suite.py runs",
+      "pass": true,
+      "detail": "\n=== Results: 15/15 passed ==="
+    },
+    {
+      "label": "all game tests pass (15/15)",
+      "pass": true,
+      "detail": "\n=== Results: 15/15 passed ==="
+    },
+    {
+      "label": "individual PASS count = 15",
+      "pass": true,
+      "detail": "got 15"
+    },
+    {
+      "label": "zero failures",
+      "pass": true,
+      "detail": "got 0"
+    },
+    {
+      "label": "bad token rejected",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "good token accepted",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "inspect state",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "inspect processes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "inspect env",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "profile",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "spawn file",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "spawned file readable",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "generate challenge",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "label": "generate lore",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "timestamp": "2026-03-17T05:34:26Z",
+  "elapsed_s": 0.23
+}

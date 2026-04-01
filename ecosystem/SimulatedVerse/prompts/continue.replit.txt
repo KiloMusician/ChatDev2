@@ -1,0 +1,11 @@
+Continue from where you left off.
+Run zero-token cycle:
+  1) node modules/culture_ship/ops/scan_all.mjs
+  2) node modules/culture_ship/boot/ship_tick.mjs
+  3) node modules/culture_ship/scripts/game_smoke.mjs
+  4) python3 modules/culture_ship/scripts/librarian_scan.py
+Then:
+  5) Use routeAction() to enqueue import.fix, placeholder.replace, rename.rewire, tests.run, mobile.ui.pass.
+  6) Request planCascade(trigger="user.continue") and execute its MegaQueue plan.
+  7) Emit reports to .ship/reports/ and update memory.
+Stop if external calls requested and budget disallows; propose low-token alternatives.

@@ -1,0 +1,48 @@
+# Theater vs Scaffolding Analysis
+# Infrastructure-First Principle: Preserve scaffolding, eliminate theater
+
+theater_systems:
+  blocking_intervals:
+    - autonomous-development.ts: 60s cycles
+    - culture-guardian/guardian-system.ts: 10s cycles  
+    - unified-orchestrator.ts: 30s cycles
+    - agent-party-orchestrator.ts: 4 simultaneous intervals
+    - boolean-logic-engine.ts: 20s evaluation
+    - consciousness/quantum systems: initialization hangs
+  
+  characteristics:
+    - auto_starting: true
+    - blocks_event_loop: true
+    - fake_progress_logs: true
+    - infinite_cycles: true
+    - no_user_value: true
+
+scaffolding_systems:
+  legitimate_infrastructure:
+    - chatdev_agents: 14 agents with real prompts
+    - chatdev_pipelines: 5 working pipelines  
+    - game_state_apis: functional idle game mechanics
+    - frontend_ui: working React interface
+    - event_bus: real WebSocket communication
+    - database_schema: proper PostgreSQL setup
+  
+  characteristics:
+    - user_facing: true
+    - provides_value: true
+    - responds_to_input: true
+    - measurable_output: true
+    - infrastructure_ready: true
+
+flexible_controls:
+  preferred_approach:
+    - modular_switches: enable/disable per component
+    - contextual_behavior: adapt based on usage
+    - intelligent_defaults: safe but functional
+    - user_configurable: manual override available
+    - graceful_degradation: fallback modes
+  
+  avoid:
+    - rigid_deletion: removing entire systems
+    - black_white_thinking: all-or-nothing approaches  
+    - blanket_disabling: turning off everything
+    - assumption_based: disabling without investigation

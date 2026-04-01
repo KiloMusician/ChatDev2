@@ -1,0 +1,9 @@
+{
+  "id": "task_20260320_serena_connection_hardening",
+  "title": "Refactor Serena connection lifecycle beyond timeout-based lock mitigation",
+  "agent": "implementer.py",
+  "details": "The immediate SQLite lock issue was mitigated with busy_timeout and longer timeouts, but Serena still creates new agent/database instances per API request and writes during read paths. Design and implement a safer long-term concurrency model: either connection lifecycle control, agent caching with thread-safe DB access, or batched walk commits.",
+  "priority": 8,
+  "status": "pending",
+  "created_at": "2026-03-20T10:24:30Z"
+}

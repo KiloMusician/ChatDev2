@@ -1,0 +1,340 @@
+{
+  "requires_outside": [
+    {
+      "from": "scripts/audit_ui_desync.ts",
+      "spec": "glob",
+      "resolved": "/home/runner/workspace/node_modules/glob/dist/commonjs/index.js"
+    },
+    {
+      "from": "scripts/breaths/build_shadow_scan.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/breaths/ui_route_analysis.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/build_audit.ts",
+      "spec": "glob",
+      "resolved": "/home/runner/workspace/node_modules/glob/dist/commonjs/index.js"
+    },
+    {
+      "from": "scripts/check-imports.mjs",
+      "spec": "glob",
+      "resolved": "/home/runner/workspace/node_modules/glob/dist/commonjs/index.js"
+    },
+    {
+      "from": "scripts/council.graph.ts",
+      "spec": "@langchain/langgraph",
+      "resolved": "/home/runner/workspace/node_modules/@langchain/langgraph/index.cjs"
+    },
+    {
+      "from": "scripts/council.graph.ts",
+      "spec": "p-queue",
+      "resolved": "/home/runner/workspace/node_modules/p-queue/dist/index.js"
+    },
+    {
+      "from": "scripts/council.graph.ts",
+      "spec": "zod",
+      "resolved": "/home/runner/workspace/node_modules/zod/index.cjs"
+    },
+    {
+      "from": "scripts/council.graph.ts",
+      "spec": "pino",
+      "resolved": "/home/runner/workspace/node_modules/pino/pino.js"
+    },
+    {
+      "from": "scripts/culture_ship_scan.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/culture_ship_scan.ts",
+      "spec": "fs-extra",
+      "resolved": "/home/runner/workspace/node_modules/fs-extra/lib/index.js"
+    },
+    {
+      "from": "scripts/culture_ship_scan.ts",
+      "spec": "minisearch",
+      "resolved": "/home/runner/workspace/node_modules/minisearch/dist/cjs/index.cjs"
+    },
+    {
+      "from": "scripts/culture_ship_scan.ts",
+      "spec": "graphology",
+      "resolved": "/home/runner/workspace/node_modules/graphology/dist/graphology.cjs.js"
+    },
+    {
+      "from": "scripts/dedupe_analyzer.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/dedupe_analyzer.ts",
+      "spec": "fs-extra",
+      "resolved": "/home/runner/workspace/node_modules/fs-extra/lib/index.js"
+    },
+    {
+      "from": "scripts/dedupe_analyzer.ts",
+      "spec": "string-similarity",
+      "resolved": "/home/runner/workspace/node_modules/string-similarity/src/index.js"
+    },
+    {
+      "from": "scripts/edge_counts.ts",
+      "spec": "better-sqlite3",
+      "resolved": "/home/runner/workspace/node_modules/better-sqlite3/lib/index.js"
+    },
+    {
+      "from": "scripts/edge_counts.ts",
+      "spec": "chalk",
+      "resolved": "/home/runner/workspace/node_modules/chalk/source/index.js"
+    },
+    {
+      "from": "scripts/edge_dedupe.ts",
+      "spec": "better-sqlite3",
+      "resolved": "/home/runner/workspace/node_modules/better-sqlite3/lib/index.js"
+    },
+    {
+      "from": "scripts/edge_dedupe.ts",
+      "spec": "commander",
+      "resolved": "/home/runner/workspace/node_modules/commander/index.js"
+    },
+    {
+      "from": "scripts/edge_dedupe.ts",
+      "spec": "chalk",
+      "resolved": "/home/runner/workspace/node_modules/chalk/source/index.js"
+    },
+    {
+      "from": "scripts/edge_import_rewrite.ts",
+      "spec": "ts-morph",
+      "resolved": "/home/runner/workspace/node_modules/ts-morph/dist/ts-morph.js"
+    },
+    {
+      "from": "scripts/edge_import_rewrite.ts",
+      "spec": "commander",
+      "resolved": "/home/runner/workspace/node_modules/commander/index.js"
+    },
+    {
+      "from": "scripts/edge_import_rewrite.ts",
+      "spec": "chalk",
+      "resolved": "/home/runner/workspace/node_modules/chalk/source/index.js"
+    },
+    {
+      "from": "scripts/edge_index.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/edge_index.ts",
+      "spec": "better-sqlite3",
+      "resolved": "/home/runner/workspace/node_modules/better-sqlite3/lib/index.js"
+    },
+    {
+      "from": "scripts/edge_index.ts",
+      "spec": "xxhash-wasm",
+      "resolved": "/home/runner/workspace/node_modules/xxhash-wasm/cjs/xxhash-wasm.cjs"
+    },
+    {
+      "from": "scripts/edge_index.ts",
+      "spec": "commander",
+      "resolved": "/home/runner/workspace/node_modules/commander/index.js"
+    },
+    {
+      "from": "scripts/edge_index.ts",
+      "spec": "ignore",
+      "resolved": "/home/runner/workspace/node_modules/ignore/index.js"
+    },
+    {
+      "from": "scripts/edge_index.ts",
+      "spec": "chalk",
+      "resolved": "/home/runner/workspace/node_modules/chalk/source/index.js"
+    },
+    {
+      "from": "scripts/edge_overlay.ts",
+      "spec": "better-sqlite3",
+      "resolved": "/home/runner/workspace/node_modules/better-sqlite3/lib/index.js"
+    },
+    {
+      "from": "scripts/edge_overlay.ts",
+      "spec": "commander",
+      "resolved": "/home/runner/workspace/node_modules/commander/index.js"
+    },
+    {
+      "from": "scripts/edge_overlay.ts",
+      "spec": "chalk",
+      "resolved": "/home/runner/workspace/node_modules/chalk/source/index.js"
+    },
+    {
+      "from": "scripts/edge_query.ts",
+      "spec": "better-sqlite3",
+      "resolved": "/home/runner/workspace/node_modules/better-sqlite3/lib/index.js"
+    },
+    {
+      "from": "scripts/edge_query.ts",
+      "spec": "commander",
+      "resolved": "/home/runner/workspace/node_modules/commander/index.js"
+    },
+    {
+      "from": "scripts/edge_query.ts",
+      "spec": "chalk",
+      "resolved": "/home/runner/workspace/node_modules/chalk/source/index.js"
+    },
+    {
+      "from": "scripts/embedder.ts",
+      "spec": "pino",
+      "resolved": "/home/runner/workspace/node_modules/pino/pino.js"
+    },
+    {
+      "from": "scripts/find-duplicates.mjs",
+      "spec": "glob",
+      "resolved": "/home/runner/workspace/node_modules/glob/dist/commonjs/index.js"
+    },
+    {
+      "from": "scripts/fix-imports.mjs",
+      "spec": "glob",
+      "resolved": "/home/runner/workspace/node_modules/glob/dist/commonjs/index.js"
+    },
+    {
+      "from": "scripts/game_api_bootstrap.ts",
+      "spec": "express",
+      "resolved": "/home/runner/workspace/node_modules/express/index.js"
+    },
+    {
+      "from": "scripts/game_api_bootstrap.ts",
+      "spec": "nanoid",
+      "resolved": "/home/runner/workspace/node_modules/nanoid/index.js"
+    },
+    {
+      "from": "scripts/import_rewriter.ts",
+      "spec": "ts-morph",
+      "resolved": "/home/runner/workspace/node_modules/ts-morph/dist/ts-morph.js"
+    },
+    {
+      "from": "scripts/import_rewriter.ts",
+      "spec": "fs-extra",
+      "resolved": "/home/runner/workspace/node_modules/fs-extra/lib/index.js"
+    },
+    {
+      "from": "scripts/import_rewriter.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/label_backfill.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/patches/preview_launcher.ts",
+      "spec": "express",
+      "resolved": "/home/runner/workspace/node_modules/express/index.js"
+    },
+    {
+      "from": "scripts/patches/preview_launcher.ts",
+      "spec": "nanoid",
+      "resolved": "/home/runner/workspace/node_modules/nanoid/index.js"
+    },
+    {
+      "from": "scripts/preview_orchestrator.ts",
+      "spec": "fastify",
+      "resolved": "/home/runner/workspace/node_modules/fastify/fastify.js"
+    },
+    {
+      "from": "scripts/preview_orchestrator.ts",
+      "spec": "@fastify/static",
+      "resolved": "/home/runner/workspace/node_modules/@fastify/static/index.js"
+    },
+    {
+      "from": "scripts/preview_orchestrator.ts",
+      "spec": "@fastify/http-proxy",
+      "resolved": "/home/runner/workspace/node_modules/@fastify/http-proxy/index.js"
+    },
+    {
+      "from": "scripts/repo.graph.ts",
+      "spec": "ts-morph",
+      "resolved": "/home/runner/workspace/node_modules/ts-morph/dist/ts-morph.js"
+    },
+    {
+      "from": "scripts/repo.graph.ts",
+      "spec": "pino",
+      "resolved": "/home/runner/workspace/node_modules/pino/pino.js"
+    },
+    {
+      "from": "scripts/repo_intelligence.ts",
+      "spec": "ts-morph",
+      "resolved": "/home/runner/workspace/node_modules/ts-morph/dist/ts-morph.js"
+    },
+    {
+      "from": "scripts/repo_intelligence.ts",
+      "spec": "madge",
+      "resolved": "/home/runner/workspace/node_modules/madge/lib/api.js"
+    },
+    {
+      "from": "scripts/repo_intelligence.ts",
+      "spec": "fast-glob",
+      "resolved": "/home/runner/workspace/node_modules/fast-glob/out/index.js"
+    },
+    {
+      "from": "scripts/repo_intelligence.ts",
+      "spec": "depcheck",
+      "resolved": "/home/runner/workspace/node_modules/depcheck/dist/index.js"
+    },
+    {
+      "from": "scripts/rlci_integration_test.ts",
+      "spec": "../../ChatDev/bridges/replit/adapter",
+      "resolved": "/home/runner/workspace/ChatDev/bridges/replit/adapter.ts"
+    },
+    {
+      "from": "scripts/scan-imports.mjs",
+      "spec": "glob",
+      "resolved": "/home/runner/workspace/node_modules/glob/dist/commonjs/index.js"
+    },
+    {
+      "from": "scripts/schema-validate.js",
+      "spec": "yaml",
+      "resolved": "/home/runner/workspace/node_modules/yaml/dist/index.js"
+    },
+    {
+      "from": "scripts/schema-validate.js",
+      "spec": "ajv",
+      "resolved": "/home/runner/workspace/node_modules/ajv/dist/ajv.js"
+    },
+    {
+      "from": "scripts/schema-validate.js",
+      "spec": "ajv-formats",
+      "resolved": "/home/runner/workspace/node_modules/ajv-formats/dist/index.js"
+    },
+    {
+      "from": "scripts/simple_preview.ts",
+      "spec": "express",
+      "resolved": "/home/runner/workspace/node_modules/express/index.js"
+    },
+    {
+      "from": "scripts/simple_preview.ts",
+      "spec": "http-proxy-middleware",
+      "resolved": "/home/runner/workspace/node_modules/http-proxy-middleware/dist/index.js"
+    },
+    {
+      "from": "scripts/ui-index.mjs",
+      "spec": "glob",
+      "resolved": "/home/runner/workspace/node_modules/glob/dist/commonjs/index.js"
+    },
+    {
+      "from": "scripts/watchdog_preview.ts",
+      "spec": "node-fetch",
+      "resolved": "/home/runner/workspace/node_modules/node-fetch/src/index.js"
+    },
+    {
+      "from": "scripts/watchdog_preview.ts",
+      "spec": "jsdom",
+      "resolved": "/home/runner/workspace/node_modules/jsdom/lib/api.js"
+    },
+    {
+      "from": "scripts/wire_routes.mjs",
+      "spec": "express",
+      "resolved": "/home/runner/workspace/node_modules/express/index.js"
+    }
+  ],
+  "symlinks": []
+}

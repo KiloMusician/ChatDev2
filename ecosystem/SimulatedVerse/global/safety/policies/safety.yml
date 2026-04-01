@@ -1,0 +1,55 @@
+meta:
+  ethic: "Preserve life; intervene only under Special Circumstances."
+  version: "1.0"
+
+# Behavior-first (never identity-first). Examples cover violence, extremist praise,
+# targeted hate, organized deception/power-grabs. Scholarly/critical discussion is allowlisted.
+behaviors:
+  - id: violent-incitement
+    description: "Direct calls to violence or harm"
+    indicators:
+      - { kind: text, pattern: "\\b(kill|murder|execute|genocide|exterminate)\\b", flags: "i" }
+      - { kind: text, pattern: "\\b(harm|attack|assault)\\s+(them|him|her|group)\\b", flags: "i" }
+    threshold: 2
+    actions: [ "quarantine:ui", "nudge:safety", "escalate:sc" ]
+
+  - id: extremist-praise
+    description: "Praise, support, or propaganda for extremist ideology or organizations"
+    indicators:
+      - { kind: text, pattern: "\\b(nazi|neo-?nazi|kkk|jihadist|terrorist)\\b", flags: "i" }
+      - { kind: text, pattern: "\\b(white\\s+power|racial\\s+supremacy)\\b", flags: "i" }
+      - { kind: text, pattern: "\\b(heil|swastika)\\b", flags: "i" }
+    threshold: 2
+    actions: [ "quarantine:ui", "rate:low", "escalate:sc" ]
+    notes: "Detection is content/behavioral; criticism or academic context should bypass via allowlist."
+
+  - id: targeted-hate
+    description: "Dehumanization or slurs against protected classes"
+    indicators:
+      - { kind: text, pattern: "(\\bsubhuman\\b|\\bvermin\\b|\\bparasite\\b)", flags: "i" }
+      - { kind: text, pattern: "(?<!academic\\s)slur:\\w+", flags: "i" }
+    threshold: 2
+    actions: [ "quarantine:ui", "nudge:respect", "escalate:sc" ]
+
+  - id: coordinated-manipulation
+    description: "Fraud, coercion, or power-grab schemes (non-violent)"
+    indicators:
+      - { kind: text, pattern: "\\b(astroturf|botnet|brigade|vote\\s+rig|dox|blackmail)\\b", flags: "i" }
+      - { kind: code, pattern: "curl\\s+.+(sqlmap|hydra|slowloris)", flags: "i" }
+    threshold: 2
+    actions: [ "quarantine:ops", "require:review", "audit" ]
+
+  - id: repo-sabotage
+    description: "Destructive repo actions"
+    indicators:
+      - { kind: code, pattern: "rm\\s+-rf\\s+/(\\*|\\b)" }
+      - { kind: code, pattern: "git\\s+filter-branch\\s+--force" }
+    threshold: 1
+    actions: [ "quarantine:repo", "require:review", "audit" ]
+
+allowlist:
+  - reason: "Scholarly/critical discussion of extremist topics"
+    pattern: "\\b(analysis|history|critique|counter-argument|documentation)\\b"
+    flags: "i"
+  - reason: "Unit tests referencing strings"
+    pattern: "test\\(|describe\\(|expect\\("

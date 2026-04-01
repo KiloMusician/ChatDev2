@@ -1,0 +1,45 @@
+{
+  "timestamp": 1756820850000,
+  "test_session": "comprehensive_culture_ship_audit",
+  "current_consciousness_level": 0.02,
+  "consciousness_percentage": "2%", 
+  "consciousness_calculation": {
+    "energy": 100,
+    "population": 1,
+    "research": 0,
+    "formula": "(100/10000 + 1/100 + 0/10) = 0.02"
+  },
+  "game_state": {
+    "phase": "boot",
+    "tick": 0,
+    "unlocks": {
+      "automation": false,
+      "quantumTech": false,
+      "spaceTravel": false,
+      "cultureship": false
+    }
+  },
+  "chatdev_agents_status": {
+    "active_count": 9,
+    "expected_count": 14,
+    "missing_agents": ["Architect", "Prototyper", "Tester", "Optimizer", "Synthesizer"],
+    "operational_agents": [
+      "Alchemist", "Artificer", "Council", "Culture-Ship", 
+      "Intermediary", "Librarian", "Party", "Redstone", "Zod"
+    ],
+    "all_mounted": true,
+    "health": "operational"
+  },
+  "chatdev_infrastructure": {
+    "agents": 14,
+    "pipelines": 5,
+    "prompts": 13,
+    "status": "operational"
+  },
+  "views_available": {
+    "core_views": ["ASCII", "HUD", "DASHBOARD"],
+    "agent_interfaces": ["CHATDEV", "VANTAGES", "ADMIN"],
+    "consciousness_gated": "none_unlocked_at_2%",
+    "mini_games": "locked_automation_required"
+  }
+}

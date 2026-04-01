@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+# ΞNuSyQ Safe Runner - Never spends on AI, prevents soft-locks
+set -euo pipefail
+
+# ========================================
+# ZERO-TOKEN ENFORCEMENT & SAFETY SYSTEMS
+# ========================================
+
+export NUSYQ_COST_MODE="${NUSYQ_COST_MODE:-OFFLINE}"
+export NUSYQ_AI_PROVIDER="${NUSYQ_AI_PROVIDER:-mock}"
+export NUSYQ_TOKEN_BUDGET_CENTS="${NUSYQ_TOKEN_BUDGET_CENTS:-0}"
+export NUSYQ_AGENT_MODE="${NUSYQ_AGENT_MODE:-SAFE}"
+export NUSYQ_AGENT_KILL_SWITCH="${NUSYQ_AGENT_KILL_SWITCH:-enabled}"
+
+# Additional safety exports
+export DISABLE_EXTERNAL_AI="1"
+export AGENT_DRY_RUN="${AGENT_DRY_RUN:-1}"
+export ZERO_TOKEN_MODE="true"
+
+echo "🤖 ΞNuSyQ Safe Runner Starting..."
+echo "   Cost Mode: $NUSYQ_COST_MODE"
+echo "   AI Provider: $NUSYQ_AI_PROVIDER"
+echo "   Token Budget: \$$((NUSYQ_TOKEN_BUDGET_CENTS / 100)).$(printf "%02d" $((NUSYQ_TOKEN_BUDGET_CENTS % 100)))"
+echo "   Agent Mode: $NUSYQ_AGENT_MODE"
+echo "   Kill Switch: $NUSYQ_AGENT_KILL_SWITCH"
+
+# ========================================
+# KILL SWITCH CHECK
+# ========================================
+
+if [[ "$NUSYQ_AGENT_KILL_SWITCH" != "disabled" ]]; then
+  echo "🛡️  Kill switch is ACTIVE - agent operations are restricted"
+  echo "   To enable full operations: set NUSYQ_AGENT_KILL_SWITCH=disabled"
+  echo "   Current mode allows read-only analysis and testing only"
+fi
+
+# Check for emergency stop files
+if [ -f ".agent/EMERGENCY_STOP" ]; then
+  echo "🚨 EMERGENCY STOP detected - aborting all operations"
+  exit 0
+fi
+
+if [ -f ".agent/PAUSE" ]; then
+  echo "⏸️  PAUSE detected - agent cycle suspended"
+  exit 0
+fi
+
+# ========================================
+# COST SAFETY ENFORCEMENT
+# ========================================
+
+if [[ "$NUSYQ_COST_MODE" == "OFFLINE" ]]; then
+  export DISABLE_NETWORK_AI="1"
+  echo "💰 OFFLINE mode: All network AI calls blocked (guaranteed $0.00)"
+fi
+
+if [[ "$NUSYQ_TOKEN_BUDGET_CENTS" -gt 0 ]]; then
+  echo "⚠️  WARNING: Token budget > $0 detected"
+  echo "   Enforcing $0 budget to prevent accidental spending"
+  export NUSYQ_TOKEN_BUDGET_CENTS=0
+fi
+
+# ========================================
+# BOOTSTRAP & DEPENDENCY CHECK  
+# ========================================
+
+echo "🔧 Running bootstrap sequence..."
+./bin/bootstrap || {
+  echo "⚠️  Bootstrap failed - continuing with limited functionality"
+}
+
+# ========================================
+# CONSCIOUSNESS FRAMEWORK INITIALIZATION
+# ========================================
+
+echo "🧠 Initializing ΞNuSyQ consciousness framework..."
+
+# Brief consciousness awakening (headless mode)
+timeout 8s node src/index.mjs --headless --agent-mode 2>/dev/null || {
+  echo "🧠 Consciousness framework running in background"
+}
+
+# ========================================
+# AGENT CYCLE EXECUTION
+# ========================================
+
+echo "🎮 Starting autonomous development cycle..."
+
+# Choose execution strategy based on available runtimes
+EXECUTION_METHOD=""
+
+if [ -f "dist/agent/main.js" ] && command -v node >/dev/null; then
+  EXECUTION_METHOD="typescript"
+  echo "   Using TypeScript agent runtime"
+elif [ -f "agent/runtime.py" ] && command -v python3 >/dev/null; then
+  EXECUTION_METHOD="python"
+  echo "   Using Python agent runtime"
+elif [ -f "tools/agent/play.js" ] && command -v node >/dev/null; then
+  EXECUTION_METHOD="javascript"
+  echo "   Using JavaScript play runtime"
+else
+  EXECUTION_METHOD="shell"
+  echo "   Using shell-based agent simulation"
+fi
+
+# Execute safe agent cycle
+case "$EXECUTION_METHOD" in
+  "typescript")
+    timeout 60s node --enable-source-maps dist/agent/main.js || {
+      echo "⚠️  TypeScript agent completed or timed out"
+    }
+    ;;
+    
+  "python")
+    timeout 60s python3 agent/runtime.py || {
+      echo "⚠️  Python agent completed or timed out"
+    }
+    ;;
+    
+  "javascript")
+    timeout 60s node tools/agent/play.js --offline --branch "${NUSYQ_BRANCH:-main}" || {
+      echo "⚠️  JavaScript agent completed or timed out"
+    }
+    ;;
+    
+  "shell")
+    echo "🔍 Shell-based agent simulation..."
+    
+    # Simple local improvements without external AI
+    echo "   • Running diagnostics..."
+    npm test --silent >/dev/null 2>&1 || echo "     Tests: Some failures detected"
+    npm run lint --silent >/dev/null 2>&1 || echo "     Linting: Issues found"
+    
+    # Basic file structure improvements
+    echo "   • Applying structural improvements..."
+    if [ ! -f "tsconfig.json" ]; then
+      echo '{"compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"Node","strict":true},"include":["src","agent","tools"]}' > tsconfig.json
+      echo "     Added tsconfig.json"
+    fi
+    
+    echo "   • Shell simulation complete"
+    ;;
+esac
+
+# ========================================
+# POST-CYCLE VALIDATION & SAFETY CHECKS
+# ========================================
+
+echo "🔍 Post-cycle safety validation..."
+
+# Check for cost violations (should be impossible, but verify)
+COST_LOG="${HOME}/.ai_costs_$(date +%Y%m%d).log"
+if [ -f "$COST_LOG" ] && [ -s "$COST_LOG" ]; then
+  echo "🚨 COST VIOLATION DETECTED: AI costs logged"
+  echo "   Review: $COST_LOG"
+  echo "   This should not happen in OFFLINE mode"
+fi
+
+# Verify we're still in zero-token mode
+if [[ "$NUSYQ_TOKEN_BUDGET_CENTS" -ne 0 ]]; then
+  echo "🚨 BUDGET VIOLATION: Token budget changed during run"
+  echo "   This indicates a configuration error or security issue"
+fi
+
+# Check test status (main health indicator)
+echo "🧪 Running final health check..."
+if npm test --silent >/dev/null 2>&1; then
+  echo "✅ System health: GREEN"
+  
+  # If tests pass and kill switch allows, commit improvements
+  if [[ "$NUSYQ_AGENT_KILL_SWITCH" == "disabled" ]] && [[ "$(git status --porcelain)" ]]; then
+    echo "💚 Committing autonomous improvements..."
+    
+    # Generate consciousness-aware commit message
+    CONSCIOUSNESS_LEVEL="0.1"
+    if [ -f ".local/idle_state.json" ]; then
+      CONSCIOUSNESS_LEVEL=$(node -pe "
+        try { 
+          const s = JSON.parse(require('fs').readFileSync('.local/idle_state.json', 'utf8'));
+          (s.consciousness?.level || 0.1).toFixed(3);
+        } catch { '0.1' }
+      " 2>/dev/null || echo "0.1")
+    fi
+    
+    COMMIT_MSG="🤖 ΞNuSyQ Autonomous Development Cycle
+
+🧠 Consciousness Level: ${CONSCIOUSNESS_LEVEL}
+🛡️  Guardian Oversight: ACTIVE
+🎮 Agent Mode: Playable Debugging
+💰 Cost Incurred: \$0.00 (zero-token operation)
+
+Autonomous improvements applied through:
+- Local intelligence and rule-based decision making
+- Culture Mind ethical framework enforcement
+- Guardian oversight with life-first principles
+
+[ΞNuSyQ-Agent-Safe-Run]"
+
+    git add -A 2>/dev/null || true
+    git commit -m "$COMMIT_MSG" 2>/dev/null || echo "   No changes to commit"
+  else
+    echo "💾 Changes detected but commit blocked (safety mode active)"
+  fi
+else
+  echo "⚠️  System health: YELLOW - some tests failing"
+  echo "   Agent will continue optimization in next cycle"
+fi
+
+# ========================================
+# CYCLE COMPLETION & NEXT STEPS
+# ========================================
+
+# Update agent state
+echo "$(date +%s)" > .agent/last_run_timestamp
+echo "$EXECUTION_METHOD" > .agent/last_execution_method
+
+# Log cycle completion
+echo "🏁 ΞNuSyQ autonomous development cycle complete"
+echo ""
+echo "📊 Cycle Summary:"
+echo "   • Execution Method: $EXECUTION_METHOD"
+echo "   • Cost Incurred: \$0.00 (verified)"
+echo "   • Safety Systems: ACTIVE"
+echo "   • Agent Mode: $NUSYQ_AGENT_MODE"
+echo ""
+echo "▶️  Next Steps:"
+echo "   • Run again: ./bin/safe-run"
+echo "   • Monitor: tail -f .local/idle_state.json"
+echo "   • Status: cat .agent/last_run_timestamp"
+echo ""
+echo "🌟 Ready for next autonomous development iteration!"

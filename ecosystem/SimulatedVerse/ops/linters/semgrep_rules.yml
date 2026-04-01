@@ -1,0 +1,14 @@
+rules:
+  - id: no-console-log
+    patterns:
+      - pattern: console.log(...)
+    message: "Replace console.log with logger.debug"
+    languages: [javascript, typescript]
+    severity: WARNING
+    fix: "logger.debug(...)"
+  - id: fixme-todo-enforce
+    patterns:
+      - pattern: // (TODO|FIXME): ...
+    message: "Convert TODO/FIXME to typed TODO stub"
+    languages: [javascript, typescript, python]
+    severity: INFO

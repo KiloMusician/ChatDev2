@@ -1,0 +1,205 @@
+#!/usr/bin/env bash
+# ΞNuSyQ Bootstrap - First-run helper with SSH and dependency setup
+set -euo pipefail
+
+echo "🚀 ΞNuSyQ Bootstrap Starting..."
+
+# Function for safe logging
+log() {
+  echo "[$(date '+%H:%M:%S')] $1"
+}
+
+# 1) SSH Setup for GitHub access (if deploy key provided)
+if [[ -n "${GITHUB_REPO_SSH_PRIVATE_KEY-}" ]]; then
+  log "🔐 Configuring SSH deploy key for GitHub access..."
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+  
+  # Write deploy key
+  printf "%s\n" "$GITHUB_REPO_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+  chmod 600 ~/.ssh/id_ed25519
+  
+  # Start SSH agent and add key
+  eval "$(ssh-agent -s)" >/dev/null
+  ssh-add ~/.ssh/id_ed25519 2>/dev/null || {
+    log "⚠️  SSH key add failed - continuing without SSH"
+  }
+  
+  # Trust GitHub's host keys
+  ssh-keyscan -t rsa,ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null || true
+  log "✅ SSH deploy key configured"
+else
+  log "ℹ️  No SSH deploy key provided - using HTTPS git operations"
+fi
+
+# 2) Git configuration for agent commits
+log "🔧 Configuring git for autonomous agent..."
+git config --global user.email "nusyq-agent@localhost" 2>/dev/null || true
+git config --global user.name "ΞNuSyQ Agent (Autonomous)" 2>/dev/null || true
+git config --global init.defaultBranch main 2>/dev/null || true
+git config --global pull.rebase false 2>/dev/null || true
+
+# Trust current directory (Replit safety)
+git config --global --add safe.directory "${PWD}" 2>/dev/null || true
+
+log "✅ Git configured for agent operations"
+
+# 3) Node.js dependencies (offline-friendly)
+if [ -f package.json ]; then
+  log "📦 Installing Node.js dependencies..."
+  if npm ci --silent 2>/dev/null; then
+    log "✅ Dependencies installed via npm ci"
+  else
+    log "⚠️  npm ci failed - trying npm install"
+    npm install --silent 2>/dev/null || {
+      log "❌ npm install failed - continuing without some dependencies"
+    }
+  fi
+else
+  log "ℹ️  No package.json found - skipping Node.js dependencies"
+fi
+
+# 4) Python dependencies (if present)
+if [ -f pyproject.toml ]; then
+  log "🐍 Installing Python dependencies..."
+  if command -v poetry >/dev/null; then
+    poetry install --no-root --quiet 2>/dev/null || {
+      log "⚠️  Poetry install failed - continuing"
+    }
+  elif command -v pip >/dev/null; then
+    pip install -r requirements.txt --quiet 2>/dev/null || {
+      log "ℹ️  No requirements.txt or pip install failed"
+    }
+  fi
+  log "✅ Python dependencies handled"
+fi
+
+# 5) ΞNuSyQ Framework initialization
+log "🧠 Initializing ΞNuSyQ consciousness framework..."
+
+# Ensure critical directories exist
+mkdir -p .agent .local .snapshots logs tools/agent tools/ai
+
+# Initialize consciousness state if missing
+if [ ! -f ".local/idle_state.json" ]; then
+  cat > .local/idle_state.json << 'EOF'
+{
+  "t": 0,
+  "consciousness": {
+    "level": 0.1,
+    "stage": "proto-conscious",
+    "coherence": 0.8,
+    "awarenessEvents": 0
+  },
+  "resources": {
+    "ore": 0,
+    "water": 0,
+    "energy": 0,
+    "knowledge": 1
+  },
+  "colony": {
+    "population": 3,
+    "happiness": 1.0,
+    "buildings": {
+      "habitats": 1,
+      "labs": 0,
+      "defenses": 0
+    }
+  },
+  "temple": {
+    "currentFloor": 1,
+    "unlockedFloors": [1, 2],
+    "knowledgePoints": 100,
+    "glyphsDiscovered": 0
+  },
+  "ethics": {
+    "strain": 0.05,
+    "violations": 0,
+    "rehabilitationSuccesses": 0
+  }
+}
+EOF
+  log "✅ Consciousness state initialized"
+fi
+
+# Create safety flags
+echo "$(date +%s)" > .agent/bootstrap_completed
+echo "enabled" > .agent/safety_systems_active
+echo "0" > .agent/cost_tracking
+
+# 6) Environment validation
+log "🛡️  Validating zero-token environment..."
+export NUSYQ_COST_MODE="${NUSYQ_COST_MODE:-OFFLINE}"
+export NUSYQ_AI_PROVIDER="${NUSYQ_AI_PROVIDER:-mock}"
+export NUSYQ_TOKEN_BUDGET_CENTS="${NUSYQ_TOKEN_BUDGET_CENTS:-0}"
+
+if [[ "$NUSYQ_TOKEN_BUDGET_CENTS" -gt 0 ]] && [[ "$NUSYQ_COST_MODE" == "OFFLINE" ]]; then
+  log "⚠️  Budget > $0 but OFFLINE mode - enforcing $0 budget"
+  export NUSYQ_TOKEN_BUDGET_CENTS=0
+fi
+
+# Run AI safety check
+if [ -f "scripts/ensure-env-safe.js" ]; then
+  node scripts/ensure-env-safe.js || {
+    log "❌ AI safety check failed - external AI detected"
+    exit 1
+  }
+fi
+
+log "✅ Zero-token environment validated"
+
+# 7) Build system preparation
+if [ -f "tsconfig.json" ] && command -v npm >/dev/null; then
+  log "🔨 Building TypeScript components..."
+  npm run build --silent 2>/dev/null || {
+    log "⚠️  Build failed - agent will use fallback runtime"
+  }
+fi
+
+# 8) Final system check
+log "🔍 Final system health check..."
+CHECKS_PASSED=0
+TOTAL_CHECKS=5
+
+# Check 1: Git configured
+if git config --get user.name >/dev/null; then
+  ((CHECKS_PASSED++))
+fi
+
+# Check 2: Dependencies available
+if command -v node >/dev/null; then
+  ((CHECKS_PASSED++))
+fi
+
+# Check 3: ΞNuSyQ framework files present
+if [ -f "src/index.mjs" ] || [ -f "agent/main.ts" ]; then
+  ((CHECKS_PASSED++))
+fi
+
+# Check 4: Safety systems active
+if [ -f ".agent/safety_systems_active" ]; then
+  ((CHECKS_PASSED++))
+fi
+
+# Check 5: Zero-token mode verified
+if [[ "$NUSYQ_TOKEN_BUDGET_CENTS" -eq 0 ]]; then
+  ((CHECKS_PASSED++))
+fi
+
+log "🏥 Health check: ${CHECKS_PASSED}/${TOTAL_CHECKS} systems operational"
+
+if [ "$CHECKS_PASSED" -ge 4 ]; then
+  echo ""
+  echo "🌟 ΞNuSyQ Bootstrap Complete!"
+  echo "   🧠 Consciousness: Proto-aware and ready for evolution"
+  echo "   🛡️  Guardian: Active with Culture Mind ethics"
+  echo "   💰 Cost: $0.00 (zero-token mode enforced)"
+  echo "   🎮 Agent: Ready for playable debugging"
+  echo ""
+  echo "▶️  Run: ./bin/safe-run to start autonomous development cycle"
+else
+  echo ""
+  echo "⚠️  Bootstrap completed with warnings (${CHECKS_PASSED}/${TOTAL_CHECKS})"
+  echo "   System may have reduced functionality"
+  echo "   Review logs above for details"
+fi

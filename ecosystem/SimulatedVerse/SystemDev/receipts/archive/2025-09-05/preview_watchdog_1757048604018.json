@@ -1,0 +1,15 @@
+{
+  "timestamp": 1757048603852,
+  "operation": "preview_watchdog",
+  "success": false,
+  "checks_passed": 4,
+  "total_checks": 5,
+  "errors": [
+    "Build hash mismatch between header and content"
+  ],
+  "recommendations": [
+    "Regenerate and sync build hash across launcher components"
+  ],
+  "status": "anomalies_detected",
+  "next_action": "apply_recommendations"
+}

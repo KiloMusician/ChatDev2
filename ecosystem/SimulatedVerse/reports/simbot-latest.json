@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-08-28T15:27:39.687Z",
+  "totalProbes": 6,
+  "passedProbes": 4,
+  "failedProbes": 2,
+  "successRate": "66.7%",
+  "results": [
+    {
+      "probe": "tick-advances",
+      "ok": false,
+      "duration": 1201,
+      "timestamp": 1756394857072
+    },
+    {
+      "probe": "view-switching",
+      "ok": true,
+      "duration": 405,
+      "timestamp": 1756394857477
+    },
+    {
+      "probe": "pause-resume",
+      "ok": true,
+      "duration": 206,
+      "timestamp": 1756394857684
+    },
+    {
+      "probe": "resource-generation",
+      "ok": false,
+      "duration": 2001,
+      "timestamp": 1756394859686
+    },
+    {
+      "probe": "consciousness-evolution",
+      "ok": true,
+      "duration": 0,
+      "timestamp": 1756394859686
+    },
+    {
+      "probe": "no-hard-stalls",
+      "ok": true,
+      "duration": 0,
+      "timestamp": 1756394859687
+    }
+  ],
+  "systemHealthy": false,
+  "summary": "4/6 tests passed (66.7%)"
+}

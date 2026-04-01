@@ -1,0 +1,15 @@
+{"id":"RVN-01","kind":"plan","title":"Establish Raven TODO tree for repo","meta":{"scope":"infra-first"},"priority":"high"}
+{"id":"RVN-02","kind":"refactor","title":"Expose /api/raven/* in OpenAPI","files":[{"path":"docs/API.md","content":"## Raven\n- GET /api/raven/health\n- POST /api/raven/queue\n- POST /api/raven/lease\n- POST /api/raven/ack\n"}]}
+{"id":"RVN-03","kind":"ops","title":"Add npm script: raven:runner","files":[{"path":"package.json","content":"{ \"scripts\": { \"raven:runner\": \"node ops/raven-runner.ts\" } }"}]}
+{"id":"RVN-04","kind":"doc","title":"RAVEN.md overview","files":[{"path":"docs/RAVEN.md","content":"# Raven\nAdmin-grade autonomous agent (local-first). Infra-first, PR-only writes."}]}
+{"id":"RVN-05","kind":"test","title":"smoke: /api/raven/health reachable"}
+{"id":"RVN-06","kind":"plan","title":"Plan: convert placeholder prints -> contextual emitters","meta":{"sweep":"server/, client/, agents/"}} 
+{"id":"RVN-07","kind":"refactor","title":"Replace hard-coded 'MODULE ACTIVE' logs","meta":{"glob":"**/*.ts","rule":"emit Msg⛛ with component+delta"}}
+{"id":"RVN-08","kind":"doc","title":"Budget policy note in RSEV_Rituals.md","files":[{"path":"docs/RSEV_Rituals.md","content":"## Budget Gates\nLocal-first; paid fallback requires PAID_FALLBACK=1 and daily allowance."}]}
+{"id":"RVN-09","kind":"ops","title":"Wire GitHub PR bridge use","meta":{"path":"server/services/git.ts","mode":"pr-only"}}
+{"id":"RVN-10","kind":"refactor","title":"Attach Raven events to SSE HUD","meta":{"bus":"Msg⛛","topic":"raven"}}
+{"id":"RVN-11","kind":"test","title":"lease/ack roundtrip","meta":{"n":1}}
+{"id":"RVN-12","kind":"doc","title":"RUNBOOK: Replit + Raven","files":[{"path":"docs/RUNBOOK_RAVEN.md","content":"Start runner with ADMIN_TOKEN set; Raven leases work and opens PRs."}]}
+{"id":"RVN-13","kind":"balance","title":"Cost sentinel: track per-PR token estimate","meta":{"source":"TokenGuard"}}
+{"id":"RVN-14","kind":"migrate","title":"Snapshot before Raven sweeps","meta":{"snapshots":1}}
+{"id":"RVN-15","kind":"plan","title":"ChatDev ↔ Raven interop plan","meta":{"handoff":"pipeline triggers, artifacts exchange"}}

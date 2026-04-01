@@ -1,0 +1,12 @@
+{
+  "id": "tier0_llm_spine_recovery",
+  "type": "fix_errors",
+  "priority": 1,
+  "blast_radius": "critical",
+  "tier": 0,
+  "title": "LLM Spine Recovery - Ollama Connection",
+  "action": "diagnose_and_repair_ollama_daemon",
+  "expected_receipt": "ollama_health.json",
+  "agent": "Raven",
+  "estimated_time": "5m"
+}

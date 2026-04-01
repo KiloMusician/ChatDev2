@@ -1,0 +1,53 @@
+{
+  "action": "preview_conflicts_verification_post_restart",
+  "timestamp": 1756940975000,
+  "status": "no_new_conflicts_detected",
+  
+  "server_restart_confirmed": {
+    "build_hash_previous": "Vm59EH8E",
+    "build_hash_current": "-EPJpKnt", 
+    "restart_successful": true,
+    "services_restarted": [
+      "Council Bus", "Chat system", "Game API", "Zeta Integration",
+      "Label backfill", "PU Queue", "Autonomous coordination"
+    ]
+  },
+  
+  "routing_integrity_maintained": {
+    "root_route": "/ → ΞNuSyQ Culture-Ship Interface ✅",
+    "preview_route": "/preview → HUD overlay ✅",
+    "legacy_route": "/legacy → dev tools ✅",
+    "api_routes": "/api/* → game/colony endpoints ✅"
+  },
+  
+  "ui_freshness_verified": {
+    "title_correct": "ΞNuSyQ — Culture-Ship Interface",
+    "cache_busting": "no-store headers active",
+    "build_nonce": "available via /ui-version endpoint",
+    "service_worker_bypassed": true
+  },
+  
+  "resource_api_operational": {
+    "endpoint": "/api/resources",
+    "response": "JSON with energy: 145.96, research: 4.6",
+    "game_state_active": true,
+    "tick_system_running": true
+  },
+  
+  "feature_flags_preserved": {
+    "ui_mode": "game",
+    "nanobots_ui": true,
+    "metamorphosis_bootstrap": true,
+    "ui_theme_holographic": true,
+    "play_dev_toggle": "functional"
+  },
+  
+  "conflicts_avoided": {
+    "duplicate_servers": "none_detected",
+    "shadow_builds": "none_detected", 
+    "import_drift": "minimal_relative_paths_only",
+    "cache_staleness": "eliminated_via_restart"
+  },
+  
+  "organism_health_maintained": "100%_despite_llm_rate_limits"
+}

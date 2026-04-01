@@ -1,0 +1,36 @@
+ROSETTA BOOT
+generated_at: 2026-03-31T09:37:47Z
+read precedence:
+1. state/boot/rosetta_bootstrap.json
+2. state/registry.json
+3. state/reports/control_plane_snapshot.json
+4. focused feed artifacts
+5. docs fallback
+culture ship:
+runtime_owner: simulatedverse
+control_owner: nusyq_hub
+repo roles:
+- concept: kernel @ /mnt/c/CONCEPT
+- dev_mentor: developer_intelligence @ /mnt/c/Users/keath/Dev-Mentor
+- simulatedverse: simulation_runtime @ /mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse
+- nusyq_hub: control_plane @ /mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub
+- nusyq: rosetta_bundle @ /mnt/c/Users/keath/NuSyQ
+services:
+- dev_mentor: http://127.0.0.1:7337/api/health
+- simulatedverse: http://127.0.0.1:5002/api/health
+- chatdev_adapter: http://127.0.0.1:4466/chatdev/agents
+- ollama: http://127.0.0.1:11434/api/tags
+- lm_studio: http://127.0.0.1:1234/v1/models
+ide surfaces:
+- mediator commands: 8
+- dev-mentor tasks: 57
+storage surfaces:
+- tracked stores: 11
+- sqlite dbs: 2
+top focus:
+- legacy current_state archive pressure: 85 files under NuSyQ-Hub/archive/obsolete
+- simulatedverse shared quest log needs rotation; run the canonical quest-log rotation tool
+read next:
+- docs/ROSETTA_STONE.md
+- state/registry.json
+- state/reports/control_plane_snapshot.json

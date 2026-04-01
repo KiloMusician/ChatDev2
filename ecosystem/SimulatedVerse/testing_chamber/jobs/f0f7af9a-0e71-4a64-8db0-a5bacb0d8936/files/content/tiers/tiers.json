@@ -1,0 +1,31 @@
+{
+  "tiers": [
+    {
+      "id": "tier_-1",
+      "name": "Deep Sleep",
+      "description": "Fundamental survival state - gather basic resources",
+      "unlock": "time>=45s",
+      "effects": {
+        "energy_regen": 0.1
+      }
+    },
+    {
+      "id": "tier_0",
+      "name": "Boot Sequence",
+      "description": "Initial systems online - basic automation unlocked",
+      "unlock": "time>=180s",
+      "effects": {
+        "automation_slots": 1
+      }
+    },
+    {
+      "id": "tier_1",
+      "name": "Survival Protocol",
+      "description": "Stable resource generation - expansion possible",
+      "unlock": "energy>=100",
+      "effects": {
+        "building_slots": 3
+      }
+    }
+  ]
+}

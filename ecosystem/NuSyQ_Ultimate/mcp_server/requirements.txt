@@ -1,0 +1,52 @@
+# ============================================================================
+# NuSyQ MCP Server Dependencies
+# ============================================================================
+# Python 3.8+ required
+# Installation: pip install -r requirements.txt
+# Development: pip install -r requirements.txt black ruff pytest
+# Update: pip install --upgrade -r requirements.txt
+# ============================================================================
+
+# === Core Web Framework ===
+fastapi>=0.104.1          # Modern async web framework for MCP protocol endpoints
+uvicorn[standard]>=0.24.0 # High-performance ASGI server with WebSocket support
+pydantic>=2.5.0           # Data validation, serialization, and settings management
+
+# === HTTP & Network Communication ===
+requests>=2.31.0          # Synchronous HTTP client for Ollama API communication
+httpx>=0.25.2             # Async HTTP client (for future async operations)
+aiohttp>=3.9.0            # Async HTTP client for modular services
+
+# === Configuration & Data Management ===
+PyYAML>=6.0.1             # YAML parser for configuration files
+python-dotenv>=1.0.0      # Environment variable loading (.env file support)
+
+# === Development, Testing & Quality ===
+pytest>=7.4.3             # Testing framework for unit and integration tests
+pytest-asyncio>=0.21.1    # Async/await support for pytest
+black>=23.12.0            # Opinionated code formatter (PEP 8 compliant)
+ruff>=0.1.7               # Fast Python linter (replaces flake8, isort, etc.)
+
+# === Optional: Enhanced Logging & Monitoring ===
+# structlog>=23.2.0       # Structured logging for better observability
+# prometheus-client>=0.19.0  # Metrics collection and Prometheus export
+
+# === Optional: Security & Authentication ===
+# python-jose[cryptography]>=3.3.0  # JWT token handling
+# passlib[bcrypt]>=1.7.4            # Password hashing utilities
+
+# === Optional: Jupyter Integration ===
+# jupyter-client>=8.6.0   # Enable proper Jupyter kernel communication
+# ipykernel>=6.27.1       # Jupyter kernel for Python execution
+
+# === Optional: Database Support ===
+# sqlalchemy>=2.0.0       # SQL toolkit and ORM
+# databases>=0.8.0        # Async database support
+
+# ============================================================================
+# Production Deployment Notes:
+# - Pin exact versions for reproducibility (use pip freeze > requirements.lock)
+# - Consider using poetry or pipenv for dependency management
+# - Run security audits: pip-audit or safety check
+# - Use virtual environments: python -m venv .venv
+# ============================================================================

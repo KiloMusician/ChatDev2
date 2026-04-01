@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": "wood",
+      "name": "Wood",
+      "stack": 99,
+      "description": "Basic building material"
+    },
+    {
+      "id": "stone",
+      "name": "Stone",
+      "stack": 50,
+      "description": "Foundation resource"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "intro",
+      "name": "Awakening",
+      "description": "Foundation consciousness initializes"
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop",
+      "description": "Basic crafting space"
+    }
+  ],
+  "ui": {
+    "routes": [
+      "title",
+      "new",
+      "load",
+      "settings",
+      "game"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+name: Rosetta Nightly Dry-Run
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # daily at 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  rosetta-dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install lightweight deps (if requirements.txt present)
+        run: |
+          if [ -f requirements.txt ]; then python -m pip install --upgrade -r requirements.txt || true; fi
+
+      - name: Run Rosetta updater (dry-run)
+        run: |
+          python scripts/update_rosetta.py --dry-run || true
+
+      - name: Run model discovery (dry-run)
+        run: |
+          python scripts/find_ggufs.py --auto-drives --dry-run || true

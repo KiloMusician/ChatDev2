@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MsgX Transaction Protocol",
+  "description": "Canonical packet format for Culture Ship → Substrate task execution",
+  "type": "object",
+  "properties": {
+    "msgx_id": {"type": "string", "description": "Transaction UUID"},
+    "version": {"type": "string", "const": "1.0"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "source": {"type": "string", "description": "Originating agent (e.g., culture-ship)"},
+    "target": {"type": "string", "description": "Destination service/agent"},
+    "action": {"type": "string", "enum": ["restart", "heal", "observe", "audit", "scale"], "description": "Remediation action"},
+    "payload": {
+      "type": "object",
+      "properties": {
+        "service": {"type": "string"},
+        "reason": {"type": "string"},
+        "priority": {"enum": ["P0", "P1", "P2", "P3"]},
+        "safe_mode": {"type": "boolean"}
+      }
+    },
+    "decision_path": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Audit trail: which council members voted on this"
+    },
+    "expected_outcome": {"type": "string", "description": "Expected result after execution"}
+  },
+  "required": ["msgx_id", "version", "timestamp", "source", "action", "payload"]
+}

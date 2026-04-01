@@ -1,0 +1,190 @@
+{
+  // Dev-Mentor Multi-Repo Workspace
+  // ─────────────────────────────────────────────────────────────────────────
+  // Copy this file ONE LEVEL ABOVE your repos folder, e.g.:
+  //   C:\Users\keath\Dev-Mentor.code-workspace
+  // Then open it with: File → Open Workspace from File...
+  //
+  // Adjust paths below if your repos are in different locations.
+  // ─────────────────────────────────────────────────────────────────────────
+
+  "folders": [
+    {
+      "name": "🧠 Dev-Mentor (game + mentor)",
+      "path": "C:/Users/keath/Dev-Mentor"
+    },
+    {
+      "name": "🌐 NuSyQ-Hub (orchestrator)",
+      "path": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub"
+    },
+    {
+      "name": "🎮 SimulatedVerse (UI/sim)",
+      "path": "C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse"
+    },
+    {
+      "name": "⚙️ NuSyQ (multi-agent core)",
+      "path": "C:/Users/keath/NuSyQ"
+    },
+    {
+      "name": "📖 prime_anchor (reference)",
+      "path": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/prime_anchor"
+    }
+  ],
+
+  "settings": {
+    // ── Python ──────────────────────────────────────────────────────────────
+    "python.defaultInterpreterPath": "C:/Users/keath/AppData/Local/Programs/Python/Python312/python.exe",
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.exclude": [
+      "**/node_modules",
+      "**/app/frontend",
+      "**/.devmentor",
+      "**/knowledge",
+      "**/__pycache__",
+      "**/.*"
+    ],
+    "python.testing.autoTestDiscoverOnSaveEnabled": false,
+
+    // ── Git ──────────────────────────────────────────────────────────────────
+    "git.enableSmartCommit": false,
+    "git.confirmSync": true,
+    "git.autoRepositoryDetection": "subFolders",
+    "git.openRepositoryInParentFolders": "never",
+    "git.decorations.enabled": true,
+
+    // ── Terminal ─────────────────────────────────────────────────────────────
+    "terminal.integrated.defaultProfile.windows": "DM: Dev",
+    "terminal.integrated.profiles.windows": {
+      "DM: Dev": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "terminal",
+        "color": "terminal.ansiCyan"
+      },
+      "DM: Game Server": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Dev-Mentor && python -m cli.devmentor serve --port 7337; exec bash"],
+        "icon": "game",
+        "color": "terminal.ansiMagenta"
+      },
+      "DM: Ops": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Dev-Mentor && python scripts/devmentor_ops.py doctor; exec bash"],
+        "icon": "pulse",
+        "color": "terminal.ansiYellow"
+      },
+      "DM: CHUG": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "sync",
+        "color": "terminal.ansiGreen"
+      },
+      "DM: NuSyQ Bridge": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Desktop/Legacy/NuSyQ-Hub && python scripts/start_nusyq.py; exec bash"],
+        "icon": "extensions",
+        "color": "terminal.ansiBlue"
+      },
+      "DM: Ollama": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "echo '🦙 Ollama: http://localhost:11434'; ollama list; exec bash"],
+        "icon": "server-process",
+        "color": "terminal.ansiWhite"
+      },
+      "DM: Git/Sync": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Dev-Mentor && git status; exec bash"],
+        "icon": "git-branch",
+        "color": "terminal.ansiRed"
+      },
+      "DM: Agent Dispatch": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "robot",
+        "color": "terminal.ansiCyan",
+        "env": {
+          "OLLAMA_HOST": "http://localhost:11434",
+          "LMSTUDIO_HOST": "http://localhost:1234"
+        }
+      },
+      "Hub: NuSyQ-Hub Shell": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Desktop/Legacy/NuSyQ-Hub; exec bash"],
+        "icon": "circuit-board",
+        "color": "terminal.ansiBlue"
+      },
+      "SV: SimulatedVerse Shell": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse; exec bash"],
+        "icon": "globe",
+        "color": "terminal.ansiGreen"
+      },
+      "PowerShell": {
+        "source": "PowerShell",
+        "icon": "terminal-powershell"
+      }
+    },
+    "terminal.integrated.fontSize": 14,
+
+    // ── Editor ───────────────────────────────────────────────────────────────
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "editor.inlineSuggest.enabled": true,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.wrapTabs": true,
+    "explorer.confirmDelete": false,
+    "explorer.sortOrder": "type",
+
+    // ── AI / Copilot ─────────────────────────────────────────────────────────
+    "github.copilot.enable": {
+      "*": true,
+      "markdown": true,
+      "python": true,
+      "javascript": true,
+      "typescript": true,
+      "json": true
+    },
+
+    // ── File watchers (perf) ─────────────────────────────────────────────────
+    "files.watcherExclude": {
+      "**/.git/**": true,
+      "**/node_modules/**": true,
+      "**/__pycache__/**": true,
+      "**/app/frontend/static/**": true,
+      "**/knowledge/**": true,
+      "**/.devmentor/**": true,
+      "**/state/**": true
+    },
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/node_modules": true
+    }
+  },
+
+  "extensions": {
+    "recommendations": [
+      "github.copilot",
+      "github.copilot-chat",
+      "eamodio.gitlens",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.debugpy",
+      "charliermarsh.ruff",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "biomejs.biome",
+      "ms-vscode-remote.remote-containers",
+      "ms-azuretools.vscode-docker",
+      "godotengine.godot-tools",
+      "continue.continue",
+      "vscode-icons-team.vscode-icons"
+    ],
+    "unwantedRecommendations": [
+      "visualstudioexptteam.vscodeintellicode",
+      "ms-vscode.remote-containers"
+    ]
+  }
+}

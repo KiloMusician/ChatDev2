@@ -1,0 +1,27 @@
+{
+  "timestamp": 1757069691436,
+  "operation": "label_backfill",
+  "files_processed": 80019,
+  "labels_assigned": 47,
+  "coverage_percentage": 0,
+  "namespace_distribution": {
+    "unknown": 79972,
+    "tools.development": 18,
+    "pkg.node": 2,
+    "ours.chatdev": 5,
+    "ours.gamedev": 1,
+    "ours.previewui": 2,
+    "ours.systemdev": 1,
+    "ours.client": 1,
+    "ours.server": 13,
+    "ours.shared": 4
+  },
+  "errors": [],
+  "recommendations": [
+    "79972 files need manual namespace classification",
+    "254 experimental files - consider stability review",
+    "80009 files require caution for moves - use Artificer"
+  ],
+  "labels_index_location": "SystemDev/reports/labels.index.json",
+  "status": "successful"
+}

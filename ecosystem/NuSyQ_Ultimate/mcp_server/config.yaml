@@ -1,0 +1,135 @@
+# NuSyQ MCP Server Configuration
+# ================================
+
+service:
+  host: localhost
+  port: 8765
+  debug: false
+  max_connections: 100
+  timeout: 30
+  version: "2.0.0"
+
+ollama:
+  host: localhost
+  port: 11434
+  timeout: 300
+  models:
+    qwen2.5-coder:7b: "Primary code generation and analysis model"
+    qwen2.5-coder:14b: "Advanced coding with larger context"
+    llama3.1:8b: "General purpose conversations and reasoning"
+    codellama:7b: "Code completion and debugging specialist"
+    phi3.5: "Lightweight reasoning for quick tasks"
+    mistral:7b: "Alternative general-purpose model"
+
+security:
+  # Allowed base paths for file operations (prevents path traversal)
+  allowed_paths:
+    - "${workspace}"
+    - "${workspace}/ChatDev"
+    - "${workspace}/AI_Hub"
+    - "${workspace}/config"
+    - "${workspace}/mcp_server"
+    - "${home}/Documents"
+    - "${home}/Desktop"
+
+  # Maximum file size for read/write operations (bytes)
+  max_file_size: 10485760  # 10MB
+
+  # Rate limiting (requests per minute)
+  rate_limit: 100
+
+  # Enable authentication (set to true in production)
+  enable_auth: false
+
+chatdev:
+  # Path to ChatDev installation (relative to workspace)
+  path: "./ChatDev"
+
+  # Default configuration to use
+  config: "NuSyQ_Ollama"
+
+  # Default timeout for ChatDev operations (seconds)
+  timeout: 300
+
+  # Maximum task description length
+  max_task_length: 1000
+
+jupyter:
+  # Default kernel for code execution
+  kernel: "python3"
+
+  # Timeout for code execution (seconds)
+  timeout: 60
+
+  # Maximum code length (characters)
+  max_code_length: 10000
+
+  # Enable sandboxing (recommended for production)
+  enable_sandbox: false
+
+logging:
+  # Log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  level: "INFO"
+
+  # Log file path (relative to mcp_server directory)
+  file: "logs/nusyq-mcp.log"
+
+  # Log format
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+  # Rotate logs when they reach this size (bytes)
+  max_bytes: 10485760  # 10MB
+
+  # Keep this many backup log files
+  backup_count: 5
+
+health:
+  # Health check interval (seconds)
+  check_interval: 60
+
+  # Components to monitor
+  components:
+    - ollama
+    - chatdev
+    - file_system
+    - configuration
+
+cors:
+  # CORS allowed origins (use specific origins in production)
+  allowed_origins:
+    - "*"
+
+  # Allow credentials
+  allow_credentials: true
+
+  # Allowed HTTP methods
+  allowed_methods:
+    - GET
+    - POST
+    - OPTIONS
+
+  # Allowed headers
+  allowed_headers:
+    - "*"
+
+# Environment-specific overrides
+environments:
+  development:
+    service:
+      debug: true
+    logging:
+      level: "DEBUG"
+    security:
+      enable_auth: false
+
+  production:
+    service:
+      debug: false
+    logging:
+      level: "WARNING"
+    security:
+      enable_auth: true
+    cors:
+      allowed_origins:
+        - "https://claude.ai"
+        - "https://api.anthropic.com"

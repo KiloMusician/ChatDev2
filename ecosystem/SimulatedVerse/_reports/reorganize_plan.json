@@ -1,0 +1,20 @@
+{
+  "rename_plan": [
+    {
+      "op": "rename",
+      "from": "./tests/smoke/boot.test.ts",
+      "to": "tests/smoke/boot-test.ts"
+    },
+    {
+      "op": "rename",
+      "from": "./tests/smoke/idle-tick.test.ts",
+      "to": "tests/smoke/idle-tick-test.ts"
+    },
+    {
+      "op": "rename",
+      "from": "./global/safety/guardian/tests/behavior.test.ts",
+      "to": "global/safety/guardian/tests/behavior-test.ts"
+    }
+  ],
+  "dry_run": true
+}

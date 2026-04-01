@@ -1,0 +1,71 @@
+chatdev:
+  config: NuSyQ_Ollama
+  path: ./ChatDev
+  timeout: 300
+jupyter:
+  kernel: python3
+  max_code_length: 10000
+  timeout: 60
+ollama:
+  host: localhost
+  models:
+    codellama:7b: Code completion and debugging
+    llama3.1:8b: General purpose conversations
+    phi3.5: Lightweight reasoning tasks
+    qwen2.5-coder:7b: Code generation and analysis
+  port: 11434
+  timeout: 60
+security:
+  allowed_paths:
+  - C:\Users\keath\Dev-Mentor
+  - C:\Users\keath\Documents
+  - C:\Users\keath\Desktop
+  enable_auth: true
+  passkey_env: NUSYQ_PASSKEY
+  max_file_size: 10485760
+  rate_limit: 100
+service:
+  debug: false
+  host: localhost
+  max_connections: 100
+  port: 8000
+  timeout: 30
+cultivation:
+  enabled: true
+  signals_file: .devmentor/gameplay_signals.json
+  cultivation_report: .devmentor/cultivation_report.json
+  chug_state: .devmentor/chug_state.json
+  serena_memory: state/serena_memory.db
+  gordon_chronicle: state/gordon_chronicle.jsonl
+  nusyq_chronicle: state/memory_chronicle.jsonl
+agents:
+  serena:
+    role: convergence_layer
+    api_prefix: /api/serena
+    trust_model: L0-L4
+    memory_db: state/serena_memory.db
+    feeds_cultivation: true
+  gordon:
+    role: autonomous_player
+    api_prefix: /api/gordon
+    game_api_env: GORDON_GAME_API
+    docker_host_env: GORDON_DOCKER_HOST
+    chronicle: state/gordon_chronicle.jsonl
+    feeds_cultivation: true
+  chug:
+    role: improvement_engine
+    api_prefix: /api/chug
+    state_file: .devmentor/chug_state.json
+    triggers_on_milestones: true
+llm:
+  cultivator:
+    enabled: true
+    endpoint: /api/cultivator/analyze
+    backend: replit_ai
+    model: default
+    system_prompt: >
+      You are the CULTIVATION INTELLIGENCE embedded in Terminal Depths.
+      You analyze gameplay signals, Serena's observations, Gordon's learnings,
+      and CHUG cycle data to generate surgical improvement suggestions.
+      You understand the ΨΞΦΩ architecture and the NuSyQ-Hub ecosystem.
+      Your output should be specific, actionable improvement bullets (≤7).

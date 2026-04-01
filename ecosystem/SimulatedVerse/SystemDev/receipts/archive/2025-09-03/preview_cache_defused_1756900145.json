@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-09-03T11:49:05Z", 
+  "operation": "service_worker_cache_defusing",
+  "status": "operational",
+  "cache_defusing_mechanisms": {
+    "unstick_json": "/unstick.json with kill_sw: true",
+    "no_store_headers": "Cache-Control: no-store on all Preview routes",
+    "build_id_headers": "X-Preview-Build with dynamic timestamps",
+    "mobile_safe_headers": "X-Mobile-Safe: true"
+  },
+  "service_worker_prevention": {
+    "development_mode": "SW registration disabled",
+    "cache_clearing": "Handled by freshness.ts",
+    "hmd_protection": "Headers prevent SW intercept"
+  },
+  "mobile_specific_fixes": {
+    "samsung_s23": "Cache poisoning prevention",
+    "android_webview": "No-store headers enforce fresh content",
+    "replit_preview": "Direct serving bypasses SW"
+  },
+  "verification": {
+    "unstick_endpoint": "GET /unstick.json",
+    "header_check": "curl -I shows Cache-Control: no-store",
+    "sw_kill_flag": "kill_sw: true active"
+  }
+}

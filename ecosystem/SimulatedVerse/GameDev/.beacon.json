@@ -1,0 +1,27 @@
+{
+  "entrypoints": [
+    "GameDev/engine/godot",
+    "GameDev/gameplay",
+    "GameDev/systems",
+    "GameDev/content"
+  ],
+  "safe_move_roots": [
+    "GameDev",
+    "src/game"
+  ],
+  "ignore": [
+    "**/node_modules/**",
+    "**/.godot/**",
+    "**/dist/**",
+    "**/*.map",
+    "**/.import",
+    "**/build/**"
+  ],
+  "preferred_scanners": [
+    "godot_scene_scan",
+    "asset_index",
+    "targeted_provenance"
+  ],
+  "description": "GameDev quadrant - game engine, gameplay systems, content pipeline",
+  "quadrant": "GameDev"
+}

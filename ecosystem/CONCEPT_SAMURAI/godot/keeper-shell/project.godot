@@ -1,0 +1,23 @@
+; Engine configuration file.
+; Offline-first Keeper desktop shell.
+
+config_version=5
+
+[application]
+config/name="Keeper Shell"
+run/main_scene="res://scenes/Main.tscn"
+boot_splash/show_image=false
+config/features=PackedStringArray("4.2")
+
+[display]
+window/size/viewport_width=1120
+window/size/viewport_height=760
+window/size/resizable=true
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[gui]
+theme/custom_font=""
+
+[rendering]
+renderer/rendering_method="gl_compatibility"

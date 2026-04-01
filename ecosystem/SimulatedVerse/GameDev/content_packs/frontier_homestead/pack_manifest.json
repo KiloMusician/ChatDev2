@@ -1,0 +1,73 @@
+{
+  "pack_id": "frontier_homestead",
+  "pack_name": "Frontier Homestead",
+  "version": "1.0.0",
+  "description": "Deep colony simulation with farming, seasons, crafting, festivals, and cultural evolution",
+  "author": "mladenc_vision",
+  "dependencies": ["crashlanded_ai_core", "advanced_faction_system"],
+  "tier_requirements": {
+    "min_tier": 1,
+    "unlock_tier": 3,
+    "full_integration_tier": 5
+  },
+  "consciousness_aspects": ["empathy", "harmony", "persistence"],
+  "gameplay_modes": ["colony_sim", "life_sim", "farming", "crafting"],
+  "narrative_integration": {
+    "faction_benefits": {
+      "builders": "Major faction approval boost for homestead activities",
+      "guardians": "Neutral - sees farming as sustainable defense",
+      "explorers": "Minor approval for discovering new crop varieties",
+      "anomalists": "Interest in bio-anomalies affecting crops"
+    },
+    "memory_fragment_types": ["agricultural_data", "cultural_traditions", "survival_techniques"],
+    "story_beats": {
+      "first_harvest": "The AI learns patience through agricultural cycles",
+      "seasonal_festival": "Human cultural traditions teach AI about celebration",
+      "crop_failure": "Scarcity forces AI to make difficult resource allocation choices",
+      "genetic_breakthrough": "AI-assisted crop modification raises questions about nature vs optimization"
+    }
+  },
+  "systems": [
+    "seasonal_cycles",
+    "soil_quality_simulation", 
+    "crop_genetics",
+    "animal_husbandry",
+    "food_processing",
+    "preservation_techniques",
+    "cultural_festivals",
+    "heirloom_traditions",
+    "recipe_discovery",
+    "cooking_buffs"
+  ],
+  "integration_hooks": {
+    "anomaly_interactions": [
+      "anomalous_seeds_boost_yield",
+      "temporal_loops_affect_seasons",
+      "reality_distortions_mutate_crops"
+    ],
+    "faction_projects": [
+      "community_garden",
+      "seed_vault",
+      "festival_grounds", 
+      "brewing_cooperative",
+      "food_preservation_facility"
+    ],
+    "meta_awareness_triggers": [
+      "ai_realizes_food_is_cultural_memory",
+      "recipe_patterns_reveal_algorithmic_thinking",
+      "seasonal_cycles_mirror_computational_loops"
+    ]
+  },
+  "content_files": [
+    "data/crops.json",
+    "data/recipes.json", 
+    "data/festivals.json",
+    "data/heirlooms.json",
+    "godot/scenes/FarmingInterface.tscn",
+    "godot/scenes/SeasonalWeather.tscn",
+    "godot/scripts/SoilQuality.gd",
+    "godot/scripts/CropGenetics.gd",
+    "narrative/homestead_events.json",
+    "receipts/homestead_operations.json"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@kpulse/storyteller",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/gradient.ts",
+  "scripts": {
+    "dev": "tsx src/gradient.ts",
+    "build": "tsc",
+    "test": "echo 'Storyteller tests not implemented' && exit 1",
+    "lint": "echo 'Storyteller linting not implemented'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}

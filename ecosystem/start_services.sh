@@ -1,0 +1,46 @@
+#!/bin/bash
+# NuSyQ Ecosystem Service Launcher
+# Starts all ecosystem repos that can run in this environment
+
+ECOSYSTEM_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+echo "[ecosystem] Starting NuSyQ ecosystem services..."
+
+# ── Dev-Mentor: Terminal Depths FastAPI backend ──────────────────────────
+echo "[ecosystem] Starting Dev-Mentor (Terminal Depths) on port 8008..."
+cd "$ECOSYSTEM_DIR/Dev-Mentor"
+python -m uvicorn app.backend.main:app \
+  --host localhost \
+  --port 8008 \
+  --log-level warning \
+  2>&1 | sed 's/^/[dev-mentor] /' &
+DEV_MENTOR_PID=$!
+
+# ── CONCEPT_SAMURAI: Static concept docs ────────────────────────────────
+echo "[ecosystem] Starting CONCEPT_SAMURAI (static docs) on port 3001..."
+cd "$ECOSYSTEM_DIR/CONCEPT_SAMURAI"
+python -c "
+import http.server, socketserver, os
+os.chdir('$ECOSYSTEM_DIR/CONCEPT_SAMURAI')
+class H(http.server.SimpleHTTPRequestHandler):
+    def log_message(self, f, *a): pass
+with socketserver.TCPServer(('localhost', 3001), H) as s:
+    s.serve_forever()
+" 2>&1 | sed 's/^/[concept-samurai] /' &
+CONCEPT_PID=$!
+
+# ── NuSyQ-Hub: Run health snapshot and write to shared state ────────────
+echo "[ecosystem] Running NuSyQ-Hub health check..."
+cd "$ECOSYSTEM_DIR/NuSyQ-Hub"
+python src/main.py --mode=health 2>&1 | tail -20 > /tmp/nusyq_hub_health.txt &
+HUB_PID=$!
+
+# ── Wait for services to start ───────────────────────────────────────────
+sleep 3
+echo "[ecosystem] Services started:"
+echo "  Dev-Mentor  → http://localhost:8008/api/manifest"
+echo "  CONCEPT_SAMURAI → http://localhost:3001"
+echo "  NuSyQ-Hub   → health check running (CLI)"
+
+# Keep running until killed
+wait $DEV_MENTOR_PID $CONCEPT_PID

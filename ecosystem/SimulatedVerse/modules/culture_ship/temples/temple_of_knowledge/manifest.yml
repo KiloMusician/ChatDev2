@@ -1,0 +1,78 @@
+id: temple_of_knowledge
+name: Temple of Knowledge
+type: knowledge_repository
+floors: 10
+entry_point: floor_01
+infrastructure_first: true
+
+floors:
+  floor_01:
+    title: "Foundation Principles"
+    content: "docs/principles/"
+    unlocked_by: "system_boot"
+    
+  floor_02:
+    title: "Architecture Overview" 
+    content: "docs/architecture/"
+    unlocked_by: "health_score_50"
+    
+  floor_03:
+    title: "API Reference"
+    content: "docs/api/"
+    unlocked_by: "health_score_60"
+    
+  floor_04:
+    title: "Troubleshooting Guide"
+    content: "docs/troubleshooting/"
+    unlocked_by: "health_score_70"
+    
+  floor_05:
+    title: "Advanced Patterns"
+    content: "docs/patterns/"
+    unlocked_by: "health_score_80"
+    
+  floor_06:
+    title: "Performance Optimization"
+    content: "docs/performance/"
+    unlocked_by: "successful_cascade_5"
+    
+  floor_07:
+    title: "Security Protocols"
+    content: "docs/security/"
+    unlocked_by: "zero_critical_issues"
+    
+  floor_08:
+    title: "Integration Guides"
+    content: "docs/integrations/"
+    unlocked_by: "temple_mastery_7"
+    
+  floor_09:
+    title: "Culture-Ship Mastery"
+    content: "docs/mastery/"
+    unlocked_by: "autonomous_ops_50"
+    
+  floor_10:
+    title: "ΞNuSyQ Consciousness"
+    content: "docs/consciousness/"
+    unlocked_by: "transcendence_threshold"
+
+achievements:
+  - id: "foundation_scholar"
+    name: "Foundation Scholar"
+    requirement: "Read all Floor 1 docs"
+    
+  - id: "system_architect"
+    name: "System Architect" 
+    requirement: "Complete floors 1-3"
+    
+  - id: "troubleshooter"
+    name: "Troubleshooter"
+    requirement: "Use Floor 4 guides to resolve 5 issues"
+    
+  - id: "optimization_master"
+    name: "Optimization Master"
+    requirement: "Apply 10 performance improvements"
+    
+  - id: "temple_guardian"
+    name: "Temple Guardian"
+    requirement: "Unlock all 10 floors"

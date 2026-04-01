@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pwsh -NoProfile -NonInteractive -File keeper.ps1 score)",
+      "Bash(pwsh -NoProfile -NonInteractive -File keeper.ps1 advisor)",
+      "Bash(find /c/Users/keath/Dev-Mentor -type f \\\\\\(-name *.ps1 -o -name *.psm1 -o -name *.psd1 \\\\\\))",
+      "Bash(pwsh -NoProfile -NonInteractive -File C:/CONCEPT/keeper.ps1 score)",
+      "Bash(pwsh -NoProfile -NonInteractive -File C:/CONCEPT/keeper.ps1 doctor)",
+      "Bash(pwsh -NoProfile -NonInteractive -File C:/CONCEPT/keeper.ps1 advisor)",
+      "Bash(for repo:*)",
+      "Bash(do)",
+      "Bash(done)",
+      "Bash(pwsh -NoProfile -File C:/CONCEPT/keeper.ps1 maintain)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(xargs -I {} basename {} .cmd)",
+      "Bash(for key:*)",
+      "Bash(do echo:*)",
+      "Bash(cmd /c \"dir C:\\\\CONCEPT\\\\config\")",
+      "Read(//n/**)",
+      "Bash(do if:*)",
+      "Bash(then echo:*)",
+      "Bash(pwsh -NoProfile -File C:/CONCEPT/keeper.ps1 mode -Mode coding)",
+      "Bash(pwsh -NoProfile -NonInteractive -File C:/CONCEPT/keeper.ps1 mode -Mode coding)",
+      "Bash(pwsh -NoProfile -Command \":*)"
+    ]
+  }
+}

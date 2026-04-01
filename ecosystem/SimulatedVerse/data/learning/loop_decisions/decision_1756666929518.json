@@ -1,0 +1,38 @@
+{
+  "context": {
+    "queue_size": 0,
+    "budget_remaining": 5000,
+    "error_rate": 0,
+    "completion_rate": 0,
+    "system_load": 0,
+    "cognitive_state": {
+      "repository_health": 0.85,
+      "complexity_score": 0.7,
+      "neural_connections": 156,
+      "cognitive_load": 0.6,
+      "optimization_opportunities": [
+        "cache_improvements",
+        "async_optimizations",
+        "code_deduplication"
+      ]
+    },
+    "recent_failures": [],
+    "performance_metrics": {
+      "tasks_per_minute": 0,
+      "success_rate": 1,
+      "cost_efficiency": 0
+    }
+  },
+  "decision": {
+    "action": "proceed",
+    "confidence": 0.42857142857142855,
+    "reasoning": "2/5 agents agree: Democratic consensus: 0% completion rate, 0 queued tasks",
+    "next_evaluation_ms": 5000,
+    "conditions": [
+      "success_rate > 0.8",
+      "budget > 20"
+    ]
+  },
+  "timestamp": 1756666929518,
+  "outcomes": {}
+}

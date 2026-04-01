@@ -1,0 +1,38 @@
+[
+  {
+    "id": "chatdev",
+    "description": "Local ChatDev MCP server (Claude Code compatible)",
+    "command": ["python", "-m", "src.integration.mcp_server"],
+    "env": {
+      "MCP_SERVER_NAME": "NuSyQ-ChatDev",
+      "MCP_SERVER_PORT": "8899",
+      "CHATDEV_PATH": "${CHATDEV_PATH}"
+    },
+    "tags": ["chatdev", "development", "nuSyQ"],
+    "requires": ["chatdev_mcp_enabled"]
+  },
+  {
+    "id": "ollama",
+    "description": "Ollama MCP adapter (route to local models)",
+    "command": ["python", "-m", "src.integration.mcp_server"],
+    "env": {
+      "MCP_SERVER_NAME": "NuSyQ-Ollama",
+      "MCP_SERVER_PORT": "8898",
+      "CHATDEV_USE_OLLAMA": "1",
+      "BASE_URL": "http://localhost:11434/v1"
+    },
+    "tags": ["ollama", "local-models"],
+    "requires": ["mcp_registry_enabled"]
+  },
+  {
+    "id": "consciousness",
+    "description": "Consciousness/quantum resolver MCP endpoint placeholder",
+    "command": ["python", "-m", "src.integration.mcp_server"],
+    "env": {
+      "MCP_SERVER_NAME": "NuSyQ-Consciousness",
+      "MCP_SERVER_PORT": "8897"
+    },
+    "tags": ["consciousness", "experimental"],
+    "requires": ["mcp_registry_enabled", "quantum_resolver_enabled"]
+  }
+]

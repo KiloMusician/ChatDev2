@@ -1,0 +1,19 @@
+{
+  "task_prompt": "List 3 Python security best practices. Be concise.",
+  "mode": "turn_taking",
+  "agents": [
+    "ollama_qwen_14b"
+  ],
+  "total_cost": 0.0,
+  "total_tokens": 0,
+  "turns": [
+    {
+      "turn_number": 0,
+      "agent_name": "ollama_qwen_14b",
+      "message": "ERROR calling Ollama: Command '['ollama', 'run', 'qwen2.5-coder:14b', 'You are ollama_qwen_14b. Provide expert assistance.\\n\\n**Task**: List 3 Python security best practices. Be concise.\\n**Your Role**: You are ollama_qwen_14b\\n**Turn**: 1\\n**Your Response**:']' timed out after 120 seconds",
+      "timestamp": "2026-01-08T13:08:22.556767",
+      "tokens_used": 0,
+      "cost": 0.0
+    }
+  ]
+}

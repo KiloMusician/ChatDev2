@@ -1,0 +1,30 @@
+{
+  "ringBufferSize": 300,
+  "watchIntervalSeconds": 3,
+  "sessionRetention": 30,
+  "incidentRetentionDays": 14,
+  "watch": {
+    "sampleIntervalSec": 5,
+    "ringBufferSamples": 180,
+    "defaultDurationSec": 0
+  },
+  "doctor": {
+    "cpuWarningPercent": 60,
+    "nahimicServicePatterns": ["Nahimic*"],
+    "nahimicProcessPatterns": ["Nahimic*", "NahimicService"],
+    "audioRiskProcessPatterns": []
+  },
+  "listener": {
+    "pollIntervalSec": 3,
+    "steamVdfPath": null,
+    "onGameStart": "gaming",
+    "onGameExit": "restore"
+  },
+  "anomaly": {
+    "enabled": true,
+    "cpuSpikePercent": 80,
+    "spikeSustainSamples": 3,
+    "captureOnNahimicDetected": true,
+    "audioRiskNewProcesses": 2
+  }
+}

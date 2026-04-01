@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreLink Foundation - Cognitectonic Idle HUD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .hud-container {
+            padding: 20px;
+            height: 100vh;
+            display: grid;
+            grid-template-areas:
+                "header header header"
+                "cp resources agents"
+                "stats stats stats";
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .header {
+            grid-area: header;
+            text-align: center;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 10px;
+        }
+        
+        .cp-display {
+            grid-area: cp;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .cp-number {
+            font-size: 3.5em;
+            font-weight: bold;
+            text-shadow: 0 0 20px #00ff88;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .cp-rate {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+        
+        .ap-display {
+            font-size: 1.8em;
+            color: #ff6b6b;
+            margin-top: 15px;
+            text-shadow: 0 0 10px #ff6b6b;
+        }
+        
+        .resources {
+            grid-area: resources;
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .resource-bar {
+            margin-bottom: 15px;
+        }
+        
+        .resource-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .energy .progress-fill { background: #4ecdc4; }
+        .magic .progress-fill { background: #45b7d1; }
+        .focus .progress-fill { background: #f39c12; }
+        
+        .agents {
+            grid-area: agents;
+            background: rgba(69, 183, 209, 0.1);
+            border: 2px solid #45b7d1;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .agent {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        
+        .agent-health {
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+        
+        .stats {
+            grid-area: stats;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.9em;
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff88; }
+            to { text-shadow: 0 0 30px #00ff88, 0 0 40px #00ff88; }
+        }
+        
+        .achievement {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .achievement.show {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hud-container {
+                grid-template-areas:
+                    "header"
+                    "cp"
+                    "resources"
+                    "agents"
+                    "stats";
+                grid-template-columns: 1fr;
+            }
+            
+            .cp-number { font-size: 2.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hud-container">
+        <div class="header">
+            <h1>🌌 COGNITECTONIC IDLE - CULTURE SHIP HUD</h1>
+            <p>Autonomous Development Ecosystem | Infrastructure-First Principles</p>
+        </div>
+        
+        <div class="cp-display">
+            <div class="cp-number glow" id="cpNumber">Loading...</div>
+            <div class="cp-rate" id="cpRate">Calculating...</div>
+            <div class="ap-display" id="apDisplay">AP: 0</div>
+        </div>
+        
+        <div class="resources">
+            <h3>🔋 System Resources</h3>
+            <div class="resource-bar energy">
+                <div class="resource-label">
+                    <span>Energy</span>
+                    <span id="energyValue">--/--</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="energyBar"></div>
+                </div>
+            </div>
+            <div class="resource-bar magic">
+                <div class="resource-label">
+                    <span>Magic</span>
+                    <span id="magicValue">--/--</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="magicBar"></div>
+                </div>
+            </div>
+            <div class="resource-bar focus">
+                <div class="resource-label">
+                    <span>Focus</span>
+                    <span id="focusValue">--/--</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="focusBar"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="agents">
+            <h3>🤖 Agent Status</h3>
+            <div id="agentList">Loading agents...</div>
+        </div>
+        
+        <div class="stats">
+            <div>Uptime: <span id="uptime">--</span></div>
+            <div>Cycle: <span id="cycle">--</span></div>
+            <div>Version: <span id="version">--</span></div>
+            <div>Achievements: <span id="achievements">--</span></div>
+        </div>
+    </div>
+    
+    <div class="achievement" id="achievementNotification">
+        🏆 Achievement Unlocked!
+    </div>
+    
+    <script>
+        let lastCP = 0;
+        let lastUpdate = Date.now();
+        let achievementQueue = [];
+        
+        async function fetchHUDData() {
+            try {
+                const response = await fetch('/api/hud');
+                const data = await response.json();
+                updateHUD(data);
+            } catch (error) {
+                console.error('Failed to fetch HUD data:', error);
+                document.getElementById('cpNumber').textContent = 'ERROR';
+            }
+        }
+        
+        function updateHUD(data) {
+            // Update CP display with animation
+            const cpElement = document.getElementById('cpNumber');
+            const currentCP = data.cognitive_power;
+            
+            if (currentCP > lastCP && lastCP > 0) {
+                cpElement.classList.add('glow');
+                setTimeout(() => cpElement.classList.remove('glow'), 2000);
+            }
+            
+            cpElement.textContent = currentCP.toLocaleString();
+            document.getElementById('cpRate').textContent = `+${data.cp_per_second.toFixed(1)} CP/sec`;
+            document.getElementById('apDisplay').textContent = `AP: ${data.architectural_points || 0}`;
+            
+            // Update resources
+            const resources = data.resources;
+            updateResource('energy', resources.energy);
+            updateResource('magic', resources.magic);
+            updateResource('focus', resources.focus);
+            
+            // Update agents
+            updateAgents(data.agents);
+            
+            // Update stats
+            document.getElementById('uptime').textContent = formatTime(data.system_status.uptime);
+            document.getElementById('cycle').textContent = data.system_status.cycle_count;
+            document.getElementById('version').textContent = data.system_status.version;
+            
+            // Check achievements
+            checkAchievements(data.achievements);
+            
+            lastCP = currentCP;
+            lastUpdate = Date.now();
+        }
+        
+        function updateResource(type, resource) {
+            const percentage = (resource.current / resource.max) * 100;
+            document.getElementById(`${type}Value`).textContent = `${resource.current}/${resource.max}`;
+            document.getElementById(`${type}Bar`).style.width = `${Math.min(100, Math.max(0, percentage))}%`;
+        }
+        
+        function updateAgents(agents) {
+            const agentList = document.getElementById('agentList');
+            agentList.innerHTML = '';
+            
+            Object.entries(agents).forEach(([name, agent]) => {
+                const agentDiv = document.createElement('div');
+                agentDiv.className = 'agent';
+                agentDiv.innerHTML = `
+                    <div class="agent-header">
+                        <strong>${name}</strong>
+                        <span style="color: ${getHealthColor(agent.health)}">${agent.health.toFixed(0)}% HP</span>
+                    </div>
+                    <div class="agent-health">${agent.current_task} (${agent.efficiency}% eff)</div>
+                `;
+                agentList.appendChild(agentDiv);
+            });
+        }
+        
+        function getHealthColor(health) {
+            if (health > 80) return '#4ecdc4';
+            if (health > 60) return '#f39c12';
+            if (health > 40) return '#e67e22';
+            return '#e74c3c';
+        }
+        
+        function checkAchievements(achievements) {
+            let count = 0;
+            Object.entries(achievements).forEach(([key, unlocked]) => {
+                if (unlocked) count++;
+            });
+            document.getElementById('achievements').textContent = count;
+            
+            // Show new achievements
+            Object.entries(achievements).forEach(([key, unlocked]) => {
+                if (unlocked && !localStorage.getItem(`achievement_${key}`)) {
+                    showAchievement(key);
+                    localStorage.setItem(`achievement_${key}`, 'true');
+                }
+            });
+        }
+        
+        function showAchievement(key) {
+            const notification = document.getElementById('achievementNotification');
+            notification.textContent = `🏆 ${formatAchievementName(key)} Unlocked!`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function formatAchievementName(key) {
+            return key.replace(/_/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase());
+        }
+        
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            return `${hours}h ${minutes}m`;
+        }
+        
+        // Initialize and set up auto-refresh
+        fetchHUDData();
+        setInterval(fetchHUDData, 2000); // Update every 2 seconds
+        
+        // Add click events for manual refresh
+        document.getElementById('cpNumber').addEventListener('click', fetchHUDData);
+    </script>
+</body>
+</html>

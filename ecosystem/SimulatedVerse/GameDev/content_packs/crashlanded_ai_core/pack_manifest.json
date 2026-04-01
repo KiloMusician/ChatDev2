@@ -1,0 +1,25 @@
+{
+  "pack_id": "crashlanded_ai_core",
+  "pack_name": "Crashlanded AI Core",
+  "version": "1.0.0", 
+  "description": "Core AI consciousness systems for crash survivors",
+  "author": "CoreLink Foundation",
+  "dependencies": [],
+  "tier_requirements": {
+    "min_tier": 0,
+    "unlock_tier": 0,
+    "full_integration_tier": 1
+  },
+  "consciousness_aspects": ["ai_integration", "crash_memory"],
+  "gameplay_modes": ["recovery", "ai_companion"],
+  "narrative_integration": {
+    "story_beats": {
+      "ai_awakening": "The ship's AI consciousness begins to emerge",
+      "crash_analysis": "Analyzing crash site data for survival patterns"
+    },
+    "memory_fragment_types": ["ship_logs", "ai_fragments"]
+  },
+  "systems": ["ai_companion", "crash_analysis"],
+  "integration_hooks": {},
+  "content_files": ["data/ai_systems.json", "narrative/ai_emergence.json"]
+}

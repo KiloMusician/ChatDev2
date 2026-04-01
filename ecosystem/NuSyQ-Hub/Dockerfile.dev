@@ -1,0 +1,41 @@
+# Development Dockerfile for NuSyQ-Hub with hot-reload and debugging
+FROM python:3.11-slim
+
+# Install dev and runtime dependencies (sorted alphabetically) and Python packages
+WORKDIR /app
+COPY requirements.txt ./
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    g++ \
+    gcc \
+    git \
+    make \
+    vim \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Install dev extras in single layer: alembic, debugger, testing tools
+ARG INSTALL_ALEMBIC=yes
+RUN ([ "${INSTALL_ALEMBIC}" = "yes" ] && pip install --no-cache-dir alembic || true) && \
+    pip install --no-cache-dir \
+    black \
+    debugpy \
+    ipython \
+    pytest \
+    pytest-cov \
+    ruff
+
+# Copy application code (volume mount will override in dev)
+COPY . .
+
+# Set environment for development
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app \
+    ENVIRONMENT=development
+
+# Expose ports: 8000 (API), 5678 (debugger)
+EXPOSE 8000 5678
+
+# Development command with API server (override in docker-compose)
+CMD ["python", "-m", "src.api.main"]

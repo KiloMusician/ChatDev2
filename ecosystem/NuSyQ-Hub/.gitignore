@@ -1,0 +1,455 @@
+# Maintenance and blob audit artifacts
+.maintenance-log
+largest_blobs.txt
+objects_raw.txt
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.coverage
+.coverage.*
+ChatDev/WareHouse/
+**/WareHouse/
+
+# C extensions
+*.so
+
+# Legacy build contexts (archived/historical)
+.sanitized_build_context/
+.docker_build_context/
+legacy/consolidation_20251211/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+!packaging/nusyq.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# UV
+#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#uv.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
+.pdm.toml
+.pdm-python
+.pdm-build/
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Secrets and local env
+config/secrets.json
+.env
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/
+
+# Ruff stuff:
+.ruff_cache/
+
+# PyPI configuration file
+.pypirc
+
+# Cursor
+#  Cursor is an AI-powered code editor.`.cursorignore` specifies files/directories to
+#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
+#  refer to https://docs.cursor.com/context/ignore-files
+.cursorignore
+.cursorindexingignore
+
+# Security - API Keys and Secrets
+config/secrets.ps1
+config/secrets.json
+config/secrets.py
+config/.env.local
+config/.env.production
+config/.secure/
+config/.backup/
+.env.local
+.env.production
+.env.secrets
+*.key
+*.pem
+*.p12
+secrets/
+keys/
+credentials/
+
+# AI Model Files (can be large)
+models/
+*.bin
+*.safetensors
+*.gguf
+
+# Logs with potential sensitive data
+logs/*.log
+*.log
+
+# Tracing receipts (auto-generated)
+docs/tracing/RECEIPTS/
+
+# Runtime artifacts (temple metadata, summaries, etc.)
+src/integration/temple/agent_registry.json
+SUMMARY_PRUNE_PLAN.json
+state/reports/*.tmp
+state/reports/*_snapshot.json
+state/reports/*_validation.json
+state/reports/workspace_validation.json
+docs/temple/
+*.timestamp.json
+
+# Local/generated Windows and tooling debris
+desktop.ini
+C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub/
+projects/DeepTalk/Assemblies/
+scripts/docs/reports/
+
+# Python virtual environment
+venv_kilo/
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code settings that might contain paths
+.vscode/settings.json
+*.code-workspace
+# VS Code extension pseudo-path artifacts on Windows/WSL mounts
+vscode:/
+# Devcontainer env (do not commit secrets)
+.devcontainer/.env
+
+# Windows
+Thumbs.db
+*.lnk
+nul
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp_*/
+_tmp_*/
+
+# Repository-specific runtime/AI artifacts and outputs
+# Prevent large/ephemeral files from being tracked to reduce watcher load and terminal churn
+
+# Generated code extraction artifacts (local-only)
+data/task_results/
+data/applied_results/
+generated_code/
+extracted_code/
+tests/auto_generated/
+
+# Ad-hoc extraction helpers (local-only)
+scripts/extract_and_create_code.py
+scripts/clean_extracted_code.py
+scripts/smart_extract_code.py
+scripts/list_generated_code.py
+scripts/find_generated_code_by_type.py
+scripts/apply_extracted_code.py
+scripts/parallel_processor.py
+
+# Copilot/AI memory and caches
+copilot_memory/
+copilot_memory/**
+
+# Autonomous/runtime churn artifacts
+projects/generated/
+generated/
+projects/**/obj/
+state/autonomous_monitor.log
+state/reports/autonomous_monitor_trace_*.json
+state/reports/spine_health_snapshot.json
+docs/Learning/learning_report_*.json
+docs/Agent-Sessions/GUILD_BOARD_SNAPSHOT_*.md
+docs/Metrics/dashboard.html
+docs/guild_board.html
+docs/guild_board.json
+docs/Agent-Sessions/commit_batch_*.json
+data/terminal_logs/
+data/tags/*.json
+config/workflows/_executions.jsonl
+system_health_assessment_*.json
+quest_test_output.txt
+test_output.txt
+pytest_output.txt
+pytest2_output.txt
+
+# Runtime state files that churn every autonomous cycle
+config/artifact_registry.json
+config/workflows/test_exec.json
+config/workflows/test_save_load.json
+data/autonomous_monitor_config.json
+data/execution_metrics.json
+data/state.duckdb
+data/unified_pu_queue.json
+data/agent_registry.json
+data/ecosystem/quest_assignments.json
+data/temple_of_knowledge/floor_1_foundation/agent_registry.json
+src/Rosetta_Quest_System/quest_log.jsonl
+src/Rosetta_Quest_System/questlines.json
+src/Rosetta_Quest_System/quests.json
+
+# Accidental Windows-path artifacts generated by tooling
+c:/
+copilot_memory/*.db
+*.db
+*.sqlite
+*.pkl
+
+# Quest system logs and orchestration state
+Rosetta_Quest_System/quest_log.jsonl
+orchestration_state.json
+
+# Analysis outputs
+repo_analysis.json
+quick_system_analysis_*.json
+comprehensive_repository_analysis*.json
+comprehensive_quantum_analysis*.json
+
+# Logs and reports
+logs/
+LOGGING/*.log
+*.bak
+*.backup
+
+# Component index artifacts (generated)
+config/KILO_COMPONENT_INDEX.json
+KILO_COMPONENT_INDEX.json
+
+# Transient data caches and logs
+data/logs/
+data/terminal_output_cache/
+data/ollama/*.json
+data/*.duckdb
+data/unified_pu_queue.json
+
+# Quest system runtime state (auto-generated)
+src/Rosetta_Quest_System/quest_log.jsonl
+
+# Generated reports and images and archived analysis artifacts
+reports/*.png
+/reports/
+Reports/
+/*_REPORT.*
+/*analysis*.*
+/*ANALYSIS*.*
+
+.fakeCOMPLETE_FUNCTION_REGISTRY.md
+COMPLETE_FUNCTION_REGISTRY.md
+function_registry_data.json
+**/function_registry*.json
+
+# Runtime state (generated reports, snapshots)
+state/*
+# Canonical structured truth — version-controlled
+!state/ecosystem_registry.json
+!state/reports/
+state/reports/*
+!state/reports/obsolete_current_state_archive_index.json
+!state/reports/obsolete_current_state_archive_summary.md
+
+
+# NuSyQ Stewardship: Generated/Temporary Files
+docs/Learning/learning_report_*.json
+docs/Metrics/metrics_*.json
+state/work_logs/
+src/src/
+src/docs/
+
+.fake
+
+# Auto-generated summary prune plans (derived data)
+docs/Auto/SUMMARY_PRUNE_PLAN.json
+docs/dependency-analysis/dependency-analysis.json
+
+# === Generated Artifacts (DO NOT COMMIT) ===
+# Maze scanner outputs (keep latest 3 locally, never commit)
+logs/maze_summary_*.json
+logs/maze_summary_*.json.gz
+
+# Search indexes (regenerated by hooks)
+State/search_index/*.json
+State/search_index/*.jsonl
+
+# Audit and analysis outputs
+**/*_audit.json
+**/*_analysis.json
+**/*_report.json
+docs/reports/archived/
+
+# Compressed archives
+*.json.gz
+*.log.gz
+NuSyQ-Hub/
+# Temporary/experimental repositories
+_vibe/
+nusyq_clean_clone/
+temp_sns_core/
+web/modular-window-server/node_modules/
+node_modules/
+**/node_modules/
+vscode-extension/tmpclaude-*
+data/sector_gap_report_*.json
+
+# K8s secrets — filled-in local copies must never be committed
+# (deploy/k8s/secrets.yaml is the tracked TEMPLATE; secrets.local.yaml is gitignored)
+deploy/k8s/secrets.local.yaml
+deploy/k8s/*.secret.yaml
+
+# Pruned archives
+docs/Archive/Pruned/state_reports/
+
+# Claude Code agent worktrees (temporary isolated checkouts)
+.claude/worktrees/
+
+# Copilot Orchestrator temporary files
+.worktrees/
+.orchestrator/
+.copilot-cli/
+.github/instructions/orchestrator-*.instructions.md
+
+# Temporary work dirs
+/tmp_router_gate_check/

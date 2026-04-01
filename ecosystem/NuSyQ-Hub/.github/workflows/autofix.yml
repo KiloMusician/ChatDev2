@@ -1,0 +1,63 @@
+name: AutoFix Code Style
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  autofix:
+    name: Run auto-fix (ruff + black) and open PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install format/lint tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff black
+
+      - name: Run ruff auto-fix
+        run: |
+          # `ruff check --fix` will apply safe fixes
+          ruff check src/ --fix || true
+
+      - name: Run black auto-fix
+        run: |
+          black src/ --line-length=100 || true
+
+      - name: Commit and push fixes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          branch="autofix/ruff-black-${{ github.run_id }}"
+          git commit -m "chore: autofix formatting (ruff + black)"
+          git push --set-upstream origin "${branch}"
+
+      - name: Create Pull Request for autofix
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: autofix formatting (ruff + black)"
+          branch: "autofix/ruff-black-${{ github.run_id }}"
+          title: "Autofix: ruff + black fixes"
+          body: |
+            This PR was created by the automated autofix workflow. It applies
+            formatting and safe lint fixes using ruff and black so reviewers
+            can inspect and merge if acceptable.
+          labels: autofix,ci

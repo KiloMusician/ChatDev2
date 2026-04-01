@@ -1,0 +1,142 @@
+# Testing Chamber Promotion Rules
+# Based on SimulatedVerse safe edit policy
+# Version: 1.0.0
+
+promotion_criteria:
+  # All tests must pass
+  smoke_tests:
+    boot_test:
+      required: true
+      command: "python -m pytest tests/test_minimal.py -v"
+      timeout: 30
+      severity: critical
+
+    import_test:
+      required: true
+      command: "python -c 'from src.automation.unified_pu_queue import UnifiedPUQueue; print(\"✅ Imports OK\")'"
+      timeout: 10
+      severity: critical
+
+    render_test:
+      required: false  # Optional for non-UI components
+      command: "python -m src.main --help"
+      timeout: 15
+      severity: medium
+
+  # Diff must be clean
+  diff_requirements:
+    max_files_changed: 10
+    max_lines_changed: 500
+    require_clean_whitespace: true
+    forbid_binary_changes: true
+
+  # No duplicates or bloat
+  code_quality:
+    duplicate_threshold: 0.85
+    max_file_size_kb: 500
+    max_cyclomatic_complexity: 15
+    require_type_hints: true
+
+  # Owner approval
+  review_requirements:
+    require_owner_approval: true
+    min_reviewers: 1
+    allow_self_review: false  # For agent-generated code
+    require_test_coverage: true
+    min_coverage_percent: 80
+
+# Promotion workflow stages
+stages:
+  1_staging:
+    description: "File copied to testing_chamber/<module>/<file>"
+    automatic: true
+
+  2_proof_generation:
+    description: "Generate smoke test results and diff patches"
+    automatic: true
+    artifacts:
+      - "ops/smokes/<module>.<timestamp>.json"
+      - "ops/diffs/<module>.<timestamp>.patch"
+
+  3_gate_validation:
+    description: "Validate against all promotion gates"
+    automatic: true
+    gates:
+      - smoke_tests
+      - diff_requirements
+      - code_quality
+      - review_requirements
+
+  4_owner_review:
+    description: "OWNER must approve changes"
+    automatic: false
+    approval_method: "manual"  # Can be "automated" with AI approval
+
+  5_promotion:
+    description: "Copy from staging to production"
+    automatic: false  # Requires explicit promotion command
+    backup_original: true
+
+# Agent ownership mapping
+agent_ownership:
+  core_infrastructure:
+    - librarian
+    - zod
+    - redstone
+
+  ai_orchestration:
+    - alchemist
+    - council
+    - artificer
+
+  integration:
+    - consciousness_bridge
+    - party
+    - culture_ship
+
+  diagnostic:
+    - system_health_assessor
+    - quantum_resolver
+
+  testing:
+    - pytest_runner
+    - validation_suite
+
+# Auto-assignment rules
+auto_assignment:
+  # Assign based on file path
+  path_patterns:
+    "src/core/**": ["librarian", "zod"]
+    "src/orchestration/**": ["alchemist", "council"]
+    "src/integration/**": ["consciousness_bridge", "party"]
+    "src/diagnostics/**": ["system_health_assessor"]
+    "tests/**": ["pytest_runner"]
+    "docs/**": ["librarian"]
+
+  # Assign based on file type
+  file_types:
+    ".py": ["zod", "redstone"]
+    ".ts": ["culture_ship"]
+    ".md": ["librarian"]
+    ".json": ["artificer"]
+    ".yaml": ["artificer"]
+
+# Rollback procedures
+rollback:
+  enabled: true
+  keep_backups: 5
+  backup_location: "testing_chamber/.backups"
+
+# Logging
+logging:
+  level: INFO
+  output: "testing_chamber/logs/promotion.log"
+  include_timestamps: true
+  include_agent_actions: true
+
+# Metrics tracking
+metrics:
+  track_promotion_time: true
+  track_gate_failures: true
+  track_agent_performance: true
+  report_interval_hours: 24

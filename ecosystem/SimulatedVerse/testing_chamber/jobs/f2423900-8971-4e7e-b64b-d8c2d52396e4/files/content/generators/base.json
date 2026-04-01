@@ -1,0 +1,41 @@
+{
+  "generators": [
+    {
+      "id": "hand_crank",
+      "name": "Hand Crank",
+      "description": "Manual energy generation",
+      "cost": {
+        "materials": 5
+      },
+      "production": {
+        "energy": 0.2
+      },
+      "unlock": "tier_-1"
+    },
+    {
+      "id": "solar_panel",
+      "name": "Solar Panel",
+      "description": "Automated solar energy collection",
+      "cost": {
+        "components": 3
+      },
+      "production": {
+        "energy": 1.5
+      },
+      "unlock": "tier_0"
+    },
+    {
+      "id": "micro_fabricator",
+      "name": "Micro Fabricator",
+      "description": "Converts materials into components",
+      "cost": {
+        "materials": 25,
+        "energy": 10
+      },
+      "production": {
+        "components": 0.1
+      },
+      "unlock": "tier_1"
+    }
+  ]
+}

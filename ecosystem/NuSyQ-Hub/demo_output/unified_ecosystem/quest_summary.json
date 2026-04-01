@@ -1,0 +1,370 @@
+{
+  "total_quests": 10,
+  "quests_by_status": {
+    "pending": 9,
+    "active": 4,
+    "complete": 8,
+    "blocked": 0,
+    "archived": 0
+  },
+  "agents": {
+    "copilot": {
+      "total": 2,
+      "pending": 0,
+      "active": 0,
+      "complete": 2,
+      "quests": [
+        {
+          "id": "3aeb2cfe-196c-4abf-ae04-641ecd4f7605",
+          "title": "Fix Import Errors",
+          "description": "Resolve all import-related errors in the codebase",
+          "questline": "code_quality",
+          "status": "complete",
+          "created_at": "2025-12-06T00:45:36.773278",
+          "updated_at": "2025-12-06T00:45:37.309945",
+          "dependencies": [],
+          "tags": [
+            "imports",
+            "syntax",
+            "cleanup"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T00:45:36.775279"
+            },
+            {
+              "status": "complete",
+              "timestamp": "2025-12-06T00:45:37.309945"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T00:45:36.775279",
+            "started_at": "2025-12-06T00:45:36.800162",
+            "completed_at": "2025-12-06T00:45:37.311935",
+            "xp_reward": 20,
+            "skill_reward": "syntax"
+          }
+        },
+        {
+          "id": "06e9295a-2907-41de-8424-e1c4f514c050",
+          "title": "Fix Import Errors",
+          "description": "Resolve all import-related errors in the codebase",
+          "questline": "code_quality",
+          "status": "complete",
+          "created_at": "2025-12-06T02:19:28.861394",
+          "updated_at": "2025-12-06T02:19:29.546202",
+          "dependencies": [],
+          "tags": [
+            "imports",
+            "syntax",
+            "cleanup"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T02:19:28.873581"
+            },
+            {
+              "status": "complete",
+              "timestamp": "2025-12-06T02:19:29.546202"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T02:19:28.873581",
+            "started_at": "2025-12-06T02:19:28.993815",
+            "completed_at": "2025-12-06T02:19:29.607930",
+            "xp_reward": 20,
+            "skill_reward": "syntax"
+          }
+        }
+      ]
+    },
+    "claude": {
+      "total": 2,
+      "pending": 0,
+      "active": 0,
+      "complete": 2,
+      "quests": [
+        {
+          "id": "7be2acc9-6373-4200-bdd4-bc7af38086e1",
+          "title": "Generate API Documentation",
+          "description": "Create comprehensive API documentation using AI",
+          "questline": "documentation",
+          "status": "complete",
+          "created_at": "2025-12-06T00:45:36.779795",
+          "updated_at": "2025-12-06T00:45:38.164778",
+          "dependencies": [],
+          "tags": [
+            "docs",
+            "api",
+            "architecture"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T00:45:36.781308"
+            },
+            {
+              "status": "complete",
+              "timestamp": "2025-12-06T00:45:38.164778"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T00:45:36.781308",
+            "started_at": "2025-12-06T00:45:37.637367",
+            "completed_at": "2025-12-06T00:45:38.166309",
+            "xp_reward": 30,
+            "skill_reward": "documentation"
+          }
+        },
+        {
+          "id": "08a441e3-796e-4bbd-8efa-f62af49dd286",
+          "title": "Generate API Documentation",
+          "description": "Create comprehensive API documentation using AI",
+          "questline": "documentation",
+          "status": "complete",
+          "created_at": "2025-12-06T02:19:28.881420",
+          "updated_at": "2025-12-06T02:19:32.062840",
+          "dependencies": [],
+          "tags": [
+            "docs",
+            "api",
+            "architecture"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T02:19:28.889953"
+            },
+            {
+              "status": "complete",
+              "timestamp": "2025-12-06T02:19:32.062840"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T02:19:28.889953",
+            "started_at": "2025-12-06T02:19:30.978699",
+            "completed_at": "2025-12-06T02:19:32.069749",
+            "xp_reward": 30,
+            "skill_reward": "documentation"
+          }
+        }
+      ]
+    },
+    "ollama": {
+      "total": 2,
+      "pending": 0,
+      "active": 0,
+      "complete": 2,
+      "quests": [
+        {
+          "id": "312fb361-055c-498a-8c1e-4215f0747713",
+          "title": "Implement User Authentication",
+          "description": "Generate secure authentication system with JWT",
+          "questline": "features",
+          "status": "complete",
+          "created_at": "2025-12-06T00:45:36.783522",
+          "updated_at": "2025-12-06T00:45:39.015218",
+          "dependencies": [],
+          "tags": [
+            "security",
+            "authentication",
+            "backend"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T00:45:36.785985"
+            },
+            {
+              "status": "complete",
+              "timestamp": "2025-12-06T00:45:39.015218"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T00:45:36.785985",
+            "started_at": "2025-12-06T00:45:38.490360",
+            "completed_at": "2025-12-06T00:45:39.027794",
+            "xp_reward": 50,
+            "skill_reward": "code_generation"
+          }
+        },
+        {
+          "id": "e0771d6e-d882-4f31-8270-bc9a562dfe3e",
+          "title": "Implement User Authentication",
+          "description": "Generate secure authentication system with JWT",
+          "questline": "features",
+          "status": "complete",
+          "created_at": "2025-12-06T02:19:28.900506",
+          "updated_at": "2025-12-06T02:19:32.948168",
+          "dependencies": [],
+          "tags": [
+            "security",
+            "authentication",
+            "backend"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T02:19:28.909522"
+            },
+            {
+              "status": "complete",
+              "timestamp": "2025-12-06T02:19:32.948168"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T02:19:28.909522",
+            "started_at": "2025-12-06T02:19:32.419682",
+            "completed_at": "2025-12-06T02:19:32.958207",
+            "xp_reward": 50,
+            "skill_reward": "code_generation"
+          }
+        }
+      ]
+    },
+    "chatdev": {
+      "total": 2,
+      "pending": 0,
+      "active": 2,
+      "complete": 0,
+      "quests": [
+        {
+          "id": "7f6f2450-21c5-4f18-a08b-532d966baab9",
+          "title": "Create Test Suite",
+          "description": "Develop comprehensive unit and integration tests",
+          "questline": "testing",
+          "status": "active",
+          "created_at": "2025-12-06T00:45:36.789648",
+          "updated_at": "2025-12-06T00:45:36.790647",
+          "dependencies": [],
+          "tags": [
+            "testing",
+            "quality",
+            "automation"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T00:45:36.790647"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T00:45:36.790647",
+            "started_at": null,
+            "completed_at": null,
+            "xp_reward": 40,
+            "skill_reward": "testing"
+          }
+        },
+        {
+          "id": "1507fcb9-53ff-42b8-b44a-80d551684a48",
+          "title": "Create Test Suite",
+          "description": "Develop comprehensive unit and integration tests",
+          "questline": "testing",
+          "status": "active",
+          "created_at": "2025-12-06T02:19:28.934488",
+          "updated_at": "2025-12-06T02:19:28.950807",
+          "dependencies": [],
+          "tags": [
+            "testing",
+            "quality",
+            "automation"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T02:19:28.950807"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T02:19:28.950807",
+            "started_at": null,
+            "completed_at": null,
+            "xp_reward": 40,
+            "skill_reward": "testing"
+          }
+        }
+      ]
+    },
+    "culture_ship": {
+      "total": 2,
+      "pending": 0,
+      "active": 2,
+      "complete": 0,
+      "quests": [
+        {
+          "id": "fdcfd854-9db1-438a-b754-929f2b44691c",
+          "title": "Optimize Database Queries",
+          "description": "Analyze and optimize all database query patterns",
+          "questline": "performance",
+          "status": "active",
+          "created_at": "2025-12-06T00:45:36.794646",
+          "updated_at": "2025-12-06T00:45:36.796646",
+          "dependencies": [],
+          "tags": [
+            "performance",
+            "database",
+            "optimization"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T00:45:36.796646"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T00:45:36.796646",
+            "started_at": null,
+            "completed_at": null,
+            "xp_reward": 60,
+            "skill_reward": "optimization"
+          }
+        },
+        {
+          "id": "6ac92e5b-1949-4613-b53a-5316a7cf1f90",
+          "title": "Optimize Database Queries",
+          "description": "Analyze and optimize all database query patterns",
+          "questline": "performance",
+          "status": "active",
+          "created_at": "2025-12-06T02:19:28.970919",
+          "updated_at": "2025-12-06T02:19:28.982969",
+          "dependencies": [],
+          "tags": [
+            "performance",
+            "database",
+            "optimization"
+          ],
+          "history": [
+            {
+              "status": "active",
+              "timestamp": "2025-12-06T02:19:28.982969"
+            }
+          ],
+          "assignment": {
+            "assigned_at": "2025-12-06T02:19:28.982969",
+            "started_at": null,
+            "completed_at": null,
+            "xp_reward": 60,
+            "skill_reward": "optimization"
+          }
+        }
+      ]
+    },
+    "consciousness": {
+      "total": 0,
+      "pending": 0,
+      "active": 0,
+      "complete": 0,
+      "quests": []
+    },
+    "quantum": {
+      "total": 0,
+      "pending": 0,
+      "active": 0,
+      "complete": 0,
+      "quests": []
+    }
+  }
+}

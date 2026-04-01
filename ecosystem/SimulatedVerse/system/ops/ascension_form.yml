@@ -1,0 +1,782 @@
+# ops/ascension_form.yml
+meta:
+  codename: "ΞNuSyQ Ascension Form"
+  version: 1
+  purpose: "Mobile-first stabilization + polish pass for complex game/app on Replit"
+  ethic: "Respectful, life-preserving, accessibility-first, Culture-aligned"
+  scoring:
+    method: "sum_passes_weighted"
+    pass_threshold: 96           # tune to your quality bar
+    weights:
+      critical: 3
+      major: 2
+      minor: 1
+  hooks:
+    precheck: ["npm run typecheck", "npm run lint"]
+    run: ["npm run dev"]
+    build: ["npm run build"]
+    measure: ["node ops/mobile_metrics.cjs --json out/metrics.json"]
+  output:
+    report: "out/ascension_report.json"
+    artifacts: ["out/metrics.json", "out/screens.zip"]
+
+categories:
+  - name: "Boot & Startup"
+    id: "C1"
+    checks:
+      - id: "AF-001"
+        level: "critical"
+        title: "Cold start under 3s (mid device)"
+        intent: "Avoid user bounce; fast first paint."
+        pass: "TTI ≤ 3000ms on 6x CPU throttle, slow 4G simulated."
+
+      - id: "AF-002"
+        level: "critical"
+        title: "No blocking permissions on first launch"
+        intent: "Defer prompts until user intent is clear."
+        pass: "No camera/storage/location prompts before action."
+
+      - id: "AF-003"
+        level: "major"
+        title: "Boot sequence resilient"
+        intent: "Recover from missing network/config."
+        pass: "Splash shows offline-safe path + retry with backoff."
+
+      - id: "AF-004"
+        level: "major"
+        title: "Delta-hydration / skeletons"
+        intent: "Perceived speed; no layout jank."
+        pass: "Skeletons used for heavy panes; CLS < 0.1."
+
+  - name: "Layout & Responsiveness"
+    id: "C2"
+    checks:
+      - id: "AF-005"
+        level: "critical"
+        title: "Safe area & notches"
+        intent: "Respect iOS/Android cutouts."
+        pass: "Uses env(safe-area-*) padding; no content under sensors."
+
+      - id: "AF-006"
+        level: "critical"
+        title: "Adaptive breakpoints"
+        intent: "Phone portrait, landscape, tablets."
+        pass: "At least 3 breakpoints; HUD reflows without overlap."
+
+      - id: "AF-007"
+        level: "major"
+        title: "One-handed reach"
+        intent: "Primary controls reachable with thumb."
+        pass: "Main actions in bottom zone; 44x44pt min targets."
+
+      - id: "AF-008"
+        level: "major"
+        title: "Orientation locks per view"
+        intent: "Prevent accidental flips."
+        pass: "ASCII/terminal views can lock to landscape toggle."
+
+      - id: "AF-009"
+        level: "minor"
+        title: "Haptics affordance"
+        intent: "Micro feedback for actions."
+        pass: "Tap/drag/commit haptics on supported devices."
+
+  - name: "Navigation & IA"
+    id: "C3"
+    checks:
+      - id: "AF-010"
+        level: "critical"
+        title: "3-step max to core loop"
+        intent: "From boot to play quickly."
+        pass: "Home→Play path ≤ 3 taps."
+
+      - id: "AF-011"
+        level: "major"
+        title: "Global command palette"
+        intent: "Fast jump between windows/modes."
+        pass: "⌘K/🔍 button opens searchable actions."
+
+      - id: "AF-012"
+        level: "major"
+        title: "Pause always available"
+        intent: "Player control, debugging."
+        pass: "Hardware back or on-screen pause works in all modes."
+
+      - id: "AF-013"
+        level: "minor"
+        title: "Recently used views"
+        intent: "Quick context return."
+        pass: "History stack shows last 5 panes with thumbnails."
+
+  - name: "Input & Controls"
+    id: "C4"
+    checks:
+      - id: "AF-014"
+        level: "critical"
+        title: "Touch hit areas"
+        intent: "Prevent mis-taps."
+        pass: "Minimum 44x44pt; spacing ≥ 8pt."
+
+      - id: "AF-015"
+        level: "critical"
+        title: "Virtual joystick / swipe schema"
+        intent: "Exploration & platforming on mobile."
+        pass: "Configurable: joystick, swipe, tap-to-path."
+
+      - id: "AF-016"
+        level: "major"
+        title: "Gesture conflicts resolved"
+        intent: "No accidental browser nav."
+        pass: "Horizontal carousels don't trigger back/forward."
+
+      - id: "AF-017"
+        level: "major"
+        title: "Keyboard overlays"
+        intent: "Text prompts, knife-missile commands."
+        pass: "Auto-scroll into view; adjust pan to avoid occlusion."
+
+      - id: "AF-018"
+        level: "minor"
+        title: "Controller support"
+        intent: "Optional but delightful."
+        pass: "MFI/BT mapping present; UI hints adapt."
+
+  - name: "Rendering: ASCII / Unicode UI"
+    id: "C5"
+    checks:
+      - id: "AF-019"
+        level: "critical"
+        title: "Mono font fallback chain"
+        intent: "Consistent grid metrics."
+        pass: "FiraMono→JetBrainsMono→system-mono; ligatures off."
+
+      - id: "AF-020"
+        level: "critical"
+        title: "Color-safe palette"
+        intent: "Dark/Light + colorblind-accessible."
+        pass: "Meets WCAG AA contrast; deuteranopia sim passes."
+
+      - id: "AF-021"
+        level: "major"
+        title: "True cell-based layout"
+        intent: "No kerning drift with emoji/combining marks."
+        pass: "Measure with grapheme clusters; fixed cell renderer."
+
+      - id: "AF-022"
+        level: "major"
+        title: "60fps text animations (budgeted)"
+        intent: "Fluid but battery-aware."
+        pass: "Animation frame cost < 8ms median."
+
+      - id: "AF-023"
+        level: "minor"
+        title: "Unicode domains curated"
+        intent: "Avoid PUA; stable symbols."
+        pass: "Blocklist PUA; mapping table documented."
+
+  - name: "Performance & Power"
+    id: "C6"
+    checks:
+      - id: "AF-024"
+        level: "critical"
+        title: "CPU budget envelopes"
+        intent: "Keep thermals sane."
+        pass: "Background sim ≤ 10%; active ≤ 45% on mid device."
+
+      - id: "AF-025"
+        level: "critical"
+        title: "Memory ceilings"
+        intent: "Prevent OS kills."
+        pass: "Heap ≤ 300MB; textures/fonts streamed."
+
+      - id: "AF-026"
+        level: "major"
+        title: "Lazy load heavy panes"
+        intent: "Faster initial render."
+        pass: "Code-splitting routes/components."
+
+      - id: "AF-027"
+        level: "major"
+        title: "Frame spike guard"
+        intent: "Smoothness under load."
+        pass: "Degrade visual effects when fps < 45 for 2s."
+
+      - id: "AF-028"
+        level: "minor"
+        title: "Battery saver mode"
+        intent: "Long sessions."
+        pass: "Reduce fps/particles when on low power."
+
+  - name: "Offline & Sync"
+    id: "C7"
+    checks:
+      - id: "AF-029"
+        level: "critical"
+        title: "Offline-first saves"
+        intent: "Play on subway/plane."
+        pass: "Local save queue; conflict-free CRDT or last-write+diff."
+
+      - id: "AF-030"
+        level: "major"
+        title: "Predictable autosave"
+        intent: "No progress loss."
+        pass: "Every 60s or major action; manual save button."
+
+      - id: "AF-031"
+        level: "major"
+        title: "Sync bandwidth caps"
+        intent: "Zero-cost dev runs."
+        pass: "Backoff + batch; toggle '0-token dev mode'."
+
+      - id: "AF-032"
+        level: "minor"
+        title: "Cloud save export"
+        intent: "Obsidian/Jupyter pipelines."
+        pass: "JSON/CSV export; share-to-file works mobile."
+
+  - name: "Accessibility"
+    id: "C8"
+    checks:
+      - id: "AF-033"
+        level: "critical"
+        title: "Screen reader paths"
+        intent: "Non-visual navigation."
+        pass: "Landmarks/roles; nav tree test passes."
+
+      - id: "AF-034"
+        level: "critical"
+        title: "Scalable text (200%)"
+        intent: "Legibility."
+        pass: "No clipping or overlap at 200%."
+
+      - id: "AF-035"
+        level: "major"
+        title: "Motion reduction"
+        intent: "Vestibular safety."
+        pass: "Prefers-reduced-motion respected."
+
+      - id: "AF-036"
+        level: "minor"
+        title: "Colorblind modes"
+        intent: "Alternate palettes."
+        pass: "At least 2 presets; togglable in Settings."
+
+  - name: "Audio & Haptics"
+    id: "C9"
+    checks:
+      - id: "AF-037"
+        level: "major"
+        title: "Dynamic mixing"
+        intent: "No clipping; ducking for dialogue."
+        pass: "Music duck 6dB on VO; limiter headroom."
+
+      - id: "AF-038"
+        level: "minor"
+        title: "Latency control"
+        intent: "Rhythm/timing accuracy."
+        pass: "User-adjustable offset ±100ms."
+
+      - id: "AF-039"
+        level: "minor"
+        title: "Haptic patterns library"
+        intent: "Consistent feel."
+        pass: "Action→pattern map documented."
+
+  - name: "ASCII HUD / Multi-View Windows"
+    id: "C10"
+    checks:
+      - id: "AF-040"
+        level: "critical"
+        title: "View toggles are instant"
+        intent: "Swap roguelike/base/tower views fast."
+        pass: "≤ 150ms pane swap; cache prev state."
+
+      - id: "AF-041"
+        level: "major"
+        title: "Overlay stack with priorities"
+        intent: "Cutscenes/layers without input traps."
+        pass: "Z-index spec; focus trap tests."
+
+      - id: "AF-042"
+        level: "major"
+        title: "Minimap & heatmaps"
+        intent: "At-a-glance state."
+        pass: "ASCII minimap; colorized heat overlays."
+
+      - id: "AF-043"
+        level: "minor"
+        title: "Quick actions bar"
+        intent: "Frequent commands in 1 tap."
+        pass: "Configurable 5–8 slots; long-press edit."
+
+  - name: "Gameplay Loops (Idle/Builder/TD/Rogue)"
+    id: "C11"
+    checks:
+      - id: "AF-044"
+        level: "critical"
+        title: "Pause truly pauses"
+        intent: "Deterministic sim."
+        pass: "No timers continue while paused."
+
+      - id: "AF-045"
+        level: "critical"
+        title: "Offline idle calculation"
+        intent: "Fair rewards."
+        pass: "Δt cap; diminishing returns; anti-exploit clamps."
+
+      - id: "AF-046"
+        level: "major"
+        title: "Tower path clarity"
+        intent: "Factorio/mindustry readability."
+        pass: "Path preview + DPS/coverage ASCII viz."
+
+      - id: "AF-047"
+        level: "major"
+        title: "Rogue seeds reproducible"
+        intent: "Debug & share runs."
+        pass: "Seed visible; copy/share button."
+
+      - id: "AF-048"
+        level: "minor"
+        title: "Base blueprinting"
+        intent: "Place ghost plans first."
+        pass: "Cost preview; cancels with refund rules."
+
+  - name: "Systems & Economy"
+    id: "C12"
+    checks:
+      - id: "AF-049"
+        level: "critical"
+        title: "No soft-lock states"
+        intent: "Always a way out."
+        pass: "Heuristic grants escape quests/resources."
+
+      - id: "AF-050"
+        level: "major"
+        title: "Price elasticity curves"
+        intent: "Avoid stagnation."
+        pass: "Dynamic pricing; anti-inflation sinks."
+
+      - id: "AF-051"
+        level: "major"
+        title: "Drop rates disclosed"
+        intent: "Trust & tuning."
+        pass: "Shown as ranges; pity/ceiling documented."
+
+      - id: "AF-052"
+        level: "minor"
+        title: "Prestige visibility"
+        intent: "Long-term goals."
+        pass: "Projected gains preview."
+
+  - name: "Lore, Narrative, Knife-Missile I/O"
+    id: "C13"
+    checks:
+      - id: "AF-053"
+        level: "major"
+        title: "Knife-missile command grammar"
+        intent: "Natural-language micro-scripts."
+        pass: "Local parser; no external tokens in dev mode."
+
+      - id: "AF-054"
+        level: "major"
+        title: "Content safety & tone"
+        intent: "Respectful Culture ethos."
+        pass: "Profanity filters optional; consent prompts."
+
+      - id: "AF-055"
+        level: "minor"
+        title: "Diegetic tutorials"
+        intent: "No walls of text."
+        pass: "Tooltips + quests + skippable sims."
+
+      - id: "AF-056"
+        level: "minor"
+        title: "Lore codex searchable"
+        intent: "Obsidian sync."
+        pass: "Full-text search; tags/OmniTag supported."
+
+  - name: "Telemetry & Debugging"
+    id: "C14"
+    checks:
+      - id: "AF-057"
+        level: "critical"
+        title: "Crash capture with breadcrumb"
+        intent: "Fix fast."
+        pass: "Stack + last 20 events stored locally."
+
+      - id: "AF-058"
+        level: "major"
+        title: "Dev HUD toggle"
+        intent: "Perf, logs, state inspector."
+        pass: "Overlay shows fps, heap, actions/sec."
+
+      - id: "AF-059"
+        level: "major"
+        title: "Error copy-to-clipboard"
+        intent: "Shareable bug reports."
+        pass: "One-tap copy JSON diagnostic."
+
+      - id: "AF-060"
+        level: "minor"
+        title: "Replay-last-30s"
+        intent: "Input/state repro."
+        pass: "Stores deterministic seed + inputs window."
+
+  - name: "Build, Assets, Size"
+    id: "C15"
+    checks:
+      - id: "AF-061"
+        level: "critical"
+        title: "Bundle under target"
+        intent: "Mobile networks."
+        pass: "<= 2.5MB initial; lazy beyond."
+
+      - id: "AF-062"
+        level: "major"
+        title: "Fonts subsetted"
+        intent: "ASCII/Unicode needed only."
+        pass: "WOFF2 subsets per language block."
+
+      - id: "AF-063"
+        level: "major"
+        title: "Images/vector balance"
+        intent: "Favor procedural/ASCII."
+        pass: "No uncompressed PNGs > 200KB."
+
+      - id: "AF-064"
+        level: "minor"
+        title: "Codegen cache"
+        intent: "Replit speed."
+        pass: "tsbuildinfo, vite/webpack cache mounted."
+
+  - name: "Network & Costs"
+    id: "C16"
+    checks:
+      - id: "AF-065"
+        level: "critical"
+        title: "Zero-token dev mode"
+        intent: "No paid API hits in dev."
+        pass: "All LLM routes stubbed to Ollama/local."
+
+      - id: "AF-066"
+        level: "major"
+        title: "Backoff + jitter"
+        intent: "Resilience/cost."
+        pass: "Exponential; max cap 60s; cancelable."
+
+      - id: "AF-067"
+        level: "major"
+        title: "Batching events"
+        intent: "Fewer requests."
+        pass: "Telemetry/events flushed every 5s or 10 items."
+
+      - id: "AF-068"
+        level: "minor"
+        title: "Compression"
+        intent: "Bandwidth."
+        pass: "gzip/brotli; JSON trimmed; NDJSON where apt."
+
+  - name: "Security & Data"
+    id: "C17"
+    checks:
+      - id: "AF-069"
+        level: "critical"
+        title: "Secrets never in client"
+        intent: "Protect credentials."
+        pass: "Only server-side tokens; mobile uses scoped keys."
+
+      - id: "AF-070"
+        level: "critical"
+        title: "Permission gating"
+        intent: "Principle of least privilege."
+        pass: "RBAC for dangerous actions."
+
+      - id: "AF-071"
+        level: "major"
+        title: "Save encryption at rest"
+        intent: "Player trust."
+        pass: "Local AES; key derivation from device salt."
+
+      - id: "AF-072"
+        level: "minor"
+        title: "PII minimization"
+        intent: "Privacy by design."
+        pass: "No unnecessary personal data stored."
+
+  - name: "Testing & QA on Device"
+    id: "C18"
+    checks:
+      - id: "AF-073"
+        level: "major"
+        title: "Golden journeys"
+        intent: "Automated taps/gestures."
+        pass: "3 core paths scripted with Playwright-mobile."
+
+      - id: "AF-074"
+        level: "major"
+        title: "Matrix of devices"
+        intent: "Coverage."
+        pass: "Small/mid/large; iOS/Android; 60/120Hz sample."
+
+      - id: "AF-075"
+        level: "minor"
+        title: "Snapshot diffs for ASCII"
+        intent: "UI drift detection."
+        pass: "ANSI snapshots pixel-compared."
+
+  - name: "Modularity & Extensibility"
+    id: "C19"
+    checks:
+      - id: "AF-076"
+        level: "major"
+        title: "Plug-in mounts"
+        intent: "New modes without core edits."
+        pass: "Well-defined extension API for panes/systems."
+
+      - id: "AF-077"
+        level: "major"
+        title: "Feature flags"
+        intent: "Gradual rollouts."
+        pass: "Remote/local flags; kill-switch ready."
+
+      - id: "AF-078"
+        level: "minor"
+        title: "Data schema versioning"
+        intent: "Save migrations safe."
+        pass: "Semver; up/down migrators present."
+
+  - name: "Content Pipelines (Obsidian/Jupyter)"
+    id: "C20"
+    checks:
+      - id: "AF-079"
+        level: "major"
+        title: "Markdown-to-UI"
+        intent: "Docs/lore ingestion."
+        pass: "MDX/YAML loaders; tagged OmniTag → UI panels."
+
+      - id: "AF-080"
+        level: "minor"
+        title: "Jupyter exports"
+        intent: "Balance sheets/analytics."
+        pass: "CSV/JSON ingest; chart-to-ASCII renderer."
+
+      - id: "AF-081"
+        level: "minor"
+        title: "Notebook reproducibility"
+        intent: "Deterministic sim eval."
+        pass: "Pinned seeds; env snapshot saved."
+
+  - name: "Art & Aesthetic"
+    id: "C21"
+    checks:
+      - id: "AF-082"
+        level: "major"
+        title: "Consistent ASCII styleguide"
+        intent: "Cohesive look."
+        pass: "Borders, shading, icons defined in /assets/ascii_style.md."
+
+      - id: "AF-083"
+        level: "minor"
+        title: "Particle ASCII budget"
+        intent: "No noise overload."
+        pass: "Max 120 active glyph particles."
+
+      - id: "AF-084"
+        level: "minor"
+        title: "Theme switch"
+        intent: "Light/Dark/Cogmind-inspired."
+        pass: "No reflow; palette transitions smooth."
+
+  - name: "Economy UX & Store (if any)"
+    id: "C22"
+    checks:
+      - id: "AF-085"
+        level: "major"
+        title: "No pay-to-win loops"
+        intent: "Fairness."
+        pass: "Cosmetics/time-savers only; audited gains."
+
+      - id: "AF-086"
+        level: "major"
+        title: "Refund/undo window"
+        intent: "Mis-tap safety."
+        pass: "10s grace with confirm."
+
+      - id: "AF-087"
+        level: "minor"
+        title: "Price locale handling"
+        intent: "Trust."
+        pass: "Local currency display."
+
+  - name: "Internationalization"
+    id: "C23"
+    checks:
+      - id: "AF-088"
+        level: "major"
+        title: "Grapheme-safe slicing"
+        intent: "CJK/RTL correctness."
+        pass: "Intl.Segmenter used; no broken clusters."
+
+      - id: "AF-089"
+        level: "minor"
+        title: "RTL mirroring"
+        intent: "Layout parity."
+        pass: "Core panes mirror correctly."
+
+      - id: "AF-090"
+        level: "minor"
+        title: "Font fallbacks per script"
+        intent: "Coverage."
+        pass: "Latin/Cyrillic/Greek/CJK fallback chain."
+
+  - name: "Save/Load & Mods"
+    id: "C24"
+    checks:
+      - id: "AF-091"
+        level: "major"
+        title: "Slot management"
+        intent: "Multiple runs."
+        pass: "3+ slots; rename/duplicate/export."
+
+      - id: "AF-092"
+        level: "major"
+        title: "Mod sandboxing"
+        intent: "Safety."
+        pass: "WASM/sandbox JS; permission prompts."
+
+      - id: "AF-093"
+        level: "minor"
+        title: "Checksum & integrity"
+        intent: "Cheat detection/bug triage."
+        pass: "Hash plus version tagged."
+
+  - name: "AI Adapters (Ollama/ChatDev/Copilot)"
+    id: "C25"
+    checks:
+      - id: "AF-094"
+        level: "critical"
+        title: "Local-first inference path"
+        intent: "Zero cost dev loop."
+        pass: "Ollama route default; cloud behind flag."
+
+      - id: "AF-095"
+        level: "major"
+        title: "Deterministic prompts"
+        intent: "Stable build outputs."
+        pass: "Seed/temp pinned in toolchain."
+
+      - id: "AF-096"
+        level: "minor"
+        title: "AI-off fallback UX"
+        intent: "No dead ends if models absent."
+        pass: "Manual flow mirrors AI path."
+
+  - name: "Tower Defense / Swarm Tuning"
+    id: "C26"
+    checks:
+      - id: "AF-097"
+        level: "major"
+        title: "Wave budget curves"
+        intent: "Difficulty ramps sanely."
+        pass: "Elo-like adaptation; publish curves."
+
+      - id: "AF-098"
+        level: "minor"
+        title: "Targeting rules visible"
+        intent: "Player agency."
+        pass: "First/Last/Strong/Fast toggles."
+
+      - id: "AF-099"
+        level: "minor"
+        title: "Auto-pause on boss"
+        intent: "Tactical window."
+        pass: "Optional; defaults off."
+
+  - name: "Exploration / Mapgen"
+    id: "C27"
+    checks:
+      - id: "AF-100"
+        level: "major"
+        title: "Fog-of-war performance"
+        intent: "No O(n^2) redraws."
+        pass: "Dirty-rect rendering; tile diffs only."
+
+      - id: "AF-101"
+        level: "major"
+        title: "Biome readability"
+        intent: "ASCII palettes distinct."
+        pass: "Legend HUD; colorblind alt."
+
+      - id: "AF-102"
+        level: "minor"
+        title: "Path preview"
+        intent: "Tap-to-move clarity."
+        pass: "Animated dotted path; cost displayed."
+
+  - name: "Roguelike Interop"
+    id: "C28"
+    checks:
+      - id: "AF-103"
+        level: "major"
+        title: "Turn/real-time duality"
+        intent: "Swap modes cleanly."
+        pass: "Scheduler handles both without desync."
+
+      - id: "AF-104"
+        level: "minor"
+        title: "Inventory Tetris (optional)"
+        intent: "Depth for loot."
+        pass: "Grid or weight-based toggle."
+
+      - id: "AF-105"
+        level: "minor"
+        title: "Log readability"
+        intent: "Combat clarity."
+        pass: "Icons + terse sentences; filter tabs."
+
+  - name: "City/Base Builder"
+    id: "C29"
+    checks:
+      - id: "AF-106"
+        level: "major"
+        title: "Queue & priorities"
+        intent: "RimWorld-like planning."
+        pass: "Work orders reorderable; rush costs."
+
+      - id: "AF-107"
+        level: "major"
+        title: "Colonist AI states"
+        intent: "Needs/roles visible."
+        pass: "Status chips; schedules UI."
+
+      - id: "AF-108"
+        level: "minor"
+        title: "Blueprint sharing"
+        intent: "Community."
+        pass: "Import/export JSON; checksum shown."
+
+  - name: "Guides, Help, Temple/House Structures"
+    id: "C30"
+    checks:
+      - id: "AF-109"
+        level: "major"
+        title: "Temple of Knowledge elevator"
+        intent: "10 floors of progressive help."
+        pass: "Floor-indexed guides; search & jump."
+
+      - id: "AF-110"
+        level: "major"
+        title: "House of Leaves routing"
+        intent: "Flexible, non-linear docs."
+        pass: "Breadcrumbs + 'you are here' map."
+
+      - id: "AF-111"
+        level: "minor"
+        title: "Oldest House navigation"
+        intent: "Deep index for systems."
+        pass: "System atlas with cross-links."
+
+  - name: "Community & Social"
+    id: "C31"
+    checks:

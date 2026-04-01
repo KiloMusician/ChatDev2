@@ -1,0 +1,239 @@
+{
+  "ai_agent_system": {
+    "version": "1.0.0",
+    "enabled": true,
+    "autonomous_mode": true,
+    "description": "AI agent configuration for full autonomous development access"
+  },
+
+  "agent_permissions": {
+    "code_generation": true,
+    "code_modification": true,
+    "file_creation": true,
+    "file_deletion": false,
+    "quest_execution": true,
+    "docker_operations": true,
+    "ai_model_access": true,
+    "multi_agent_collaboration": true,
+    "system_debugging": true,
+    "test_execution": true
+  },
+
+  "ai_models": {
+    "primary_coding": "qwen2.5-coder:14b",
+    "code_review": "deepseek-coder-v2:16b",
+    "architecture": "gemma2:9b",
+    "debugging": "qwen2.5-coder:7b",
+    "general": "llama3.1:8b",
+    "embeddings": "nomic-embed-text:latest"
+  },
+
+  "ollama_connection": {
+    "enabled": true,
+    "host": "http://127.0.0.1:11434",
+    "timeout": 300,
+    "max_retries": 3,
+    "models_available": [
+      "qwen2.5-coder:7b",
+      "qwen2.5-coder:14b",
+      "deepseek-coder-v2:16b",
+      "starcoder2:15b",
+      "codellama:7b",
+      "llama3.1:8b",
+      "gemma2:9b",
+      "phi3.5:latest",
+      "nomic-embed-text:latest"
+    ]
+  },
+
+  "quest_system": {
+    "enabled": true,
+    "auto_quest_generation": true,
+    "max_concurrent_quests": 5,
+    "quest_types": [
+      "code_generation",
+      "debugging",
+      "optimization",
+      "testing",
+      "documentation",
+      "game_development",
+      "web_app_development",
+      "package_creation"
+    ]
+  },
+
+  "multi_agent_collaboration": {
+    "enabled": true,
+    "max_agents": 10,
+    "coordination_strategy": "consensus",
+    "agent_roles": {
+      "architect": {
+        "model": "gemma2:9b",
+        "responsibilities": ["system_design", "architecture_decisions"]
+      },
+      "developer": {
+        "model": "qwen2.5-coder:14b",
+        "responsibilities": ["code_generation", "implementation"]
+      },
+      "reviewer": {
+        "model": "deepseek-coder-v2:16b",
+        "responsibilities": ["code_review", "quality_assurance"]
+      },
+      "debugger": {
+        "model": "qwen2.5-coder:7b",
+        "responsibilities": ["bug_fixing", "error_resolution"]
+      },
+      "tester": {
+        "model": "codellama:7b",
+        "responsibilities": ["test_generation", "test_execution"]
+      }
+    }
+  },
+
+  "development_workflows": {
+    "game_development": {
+      "enabled": true,
+      "stages": ["design", "mechanics", "implementation", "testing", "polish"],
+      "primary_model": "qwen2.5-coder:14b",
+      "review_model": "deepseek-coder-v2:16b"
+    },
+    "web_app_development": {
+      "enabled": true,
+      "stages": ["planning", "frontend", "backend", "integration", "deployment"],
+      "primary_model": "qwen2.5-coder:14b",
+      "review_model": "deepseek-coder-v2:16b"
+    },
+    "package_creation": {
+      "enabled": true,
+      "stages": ["specification", "implementation", "testing", "documentation", "publishing"],
+      "primary_model": "qwen2.5-coder:14b",
+      "review_model": "deepseek-coder-v2:16b"
+    }
+  },
+
+  "docker_integration": {
+    "enabled": true,
+    "auto_containerize": true,
+    "default_base": "python:3.11-slim",
+    "compose_generation": true,
+    "deployment_ready": true
+  },
+
+  "chatdev_integration": {
+    "enabled": true,
+    "manager_available": true,
+    "orchestration_mode": "autonomous",
+    "phases": [
+      "planning",
+      "design",
+      "implementation",
+      "testing",
+      "review",
+      "documentation"
+    ]
+  },
+
+  "autonomous_capabilities": {
+    "self_debugging": true,
+    "self_optimization": true,
+    "error_correction": true,
+    "code_finessing": true,
+    "system_enhancement": true,
+    "integration_improvement": true,
+    "test_generation": true,
+    "documentation_generation": true
+  },
+
+  "safety_guardrails": {
+    "require_user_approval_for": [
+      "file_deletion",
+      "system_config_changes",
+      "external_api_calls",
+      "production_deployment"
+    ],
+    "auto_approve_for": [
+      "code_generation",
+      "test_creation",
+      "documentation",
+      "debugging",
+      "optimization"
+    ],
+    "backup_before": [
+      "major_refactoring",
+      "file_deletion",
+      "config_changes"
+    ]
+  },
+
+  "output_targets": {
+    "code_output": "generated/",
+    "game_projects": "projects/games/",
+    "web_apps": "projects/web/",
+    "packages": "projects/packages/",
+    "docker_configs": "deploy/generated/",
+    "documentation": "docs/generated/"
+  },
+
+  "collaboration_modes": {
+    "parallel": {
+      "description": "Multiple agents work on different components simultaneously",
+      "max_agents": 5,
+      "coordination": "partition_tasks"
+    },
+    "sequential": {
+      "description": "Agents work in a pipeline passing work forward",
+      "coordination": "pipeline"
+    },
+    "review": {
+      "description": "One agent generates, others review and refine",
+      "roles": ["generator", "reviewer", "finalizer"]
+    }
+  },
+
+  "quest_templates": {
+    "simple_game": {
+      "description": "Generate a simple game with basic mechanics",
+      "steps": [
+        "Design game concept",
+        "Implement core mechanics",
+        "Add UI/graphics",
+        "Test gameplay",
+        "Polish and refine"
+      ],
+      "estimated_agents": 3,
+      "estimated_time": "30-60 minutes"
+    },
+    "web_dashboard": {
+      "description": "Create a web dashboard with data visualization",
+      "steps": [
+        "Design UI/UX",
+        "Implement frontend",
+        "Create backend API",
+        "Add data visualization",
+        "Deploy and test"
+      ],
+      "estimated_agents": 4,
+      "estimated_time": "1-2 hours"
+    },
+    "python_package": {
+      "description": "Create a reusable Python package",
+      "steps": [
+        "Define API specification",
+        "Implement core functionality",
+        "Write comprehensive tests",
+        "Generate documentation",
+        "Create setup.py and packaging"
+      ],
+      "estimated_agents": 3,
+      "estimated_time": "45-90 minutes"
+    }
+  },
+
+  "monitoring": {
+    "enabled": true,
+    "log_level": "INFO",
+    "metrics_collection": true,
+    "performance_tracking": true,
+    "error_reporting": true
+  }
+}

@@ -1,0 +1,33 @@
+name: Go CLI Tool
+type: cli
+language: go
+runtime_profile: native_terminal
+description: Fast, compiled CLI tool written in Go.
+metadata:
+  go_version: "1.21"
+dependencies:
+  - github.com/spf13/cobra
+  - github.com/spf13/viper
+file_structure:
+  README.md: Project overview and build instructions
+  go.mod: Go module definition
+  go.sum: Dependency checksums
+  main.go: Application entry point
+  cmd/root.go: Root command with global flags
+  cmd/health.go: Health check subcommand
+  internal/utils/logger.go: Logging utilities
+  internal/config/config.go: Configuration loading
+complexity: 4
+requires_multifile: true
+entry_point: main.go
+cli_framework: cobra
+packaging: go build -ldflags="-s -w"
+generation_hints:
+  - Use cobra for CLI command structure
+  - Use viper for configuration management
+  - Follow Go conventions (PascalCase for exports)
+  - Use internal/ for private packages
+  - Use context.Context for cancellation
+  - Use structured logging (slog or zerolog)
+  - Write table-driven tests
+  - Use interfaces for dependency injection

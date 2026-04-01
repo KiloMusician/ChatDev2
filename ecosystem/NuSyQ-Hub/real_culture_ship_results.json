@@ -1,0 +1,109 @@
+{
+  "scan_timestamp": "2025-10-08T10:53:06.929883",
+  "files_scanned": 0,
+  "errors_detected": 0,
+  "fixes_applied": 9,
+  "files_fixed": [
+    "ecosystem_health_checker.py",
+    "src\\main.py",
+    "complete_function_registry.py",
+    "demo_integrated_docs.py",
+    "execute_function_registry.py",
+    "chatdev_workflow_integration_analysis_clean.py",
+    "chatdev_workflow_integration_analysis.py",
+    "demo_ai_documentation_coordination.py",
+    "src\\scripts\\chatdev_workflow_integration_analysis.py"
+  ],
+  "improvements": [
+    {
+      "type": "unused_import_removed",
+      "file": "src/main.py",
+      "description": "Removed unused Optional import"
+    },
+    {
+      "type": "encoding_added",
+      "file": "src/main.py",
+      "description": "Added explicit encoding to file operations"
+    },
+    {
+      "type": "subprocess_check_added",
+      "file": "src/main.py",
+      "description": "Added check=True to subprocess calls"
+    },
+    {
+      "type": "indentation_fixed",
+      "file": "src/main.py",
+      "description": "Fixed continuation line indentation"
+    },
+    {
+      "type": "trailing_whitespace_removed",
+      "file": "src/main.py",
+      "description": "Removed trailing whitespace"
+    },
+    {
+      "type": "newline_added",
+      "file": "src/main.py",
+      "description": "Added newline at end of file"
+    },
+    {
+      "type": "exception_handling_improved",
+      "file": "src/main.py",
+      "description": "Replaced broad Exception catches with specific exceptions"
+    },
+    {
+      "type": "unused_imports_removed",
+      "file": "src\\scripts\\chatdev_workflow_integration_analysis.py",
+      "description": "Removed unused os and logging imports"
+    },
+    {
+      "type": "typing_imports_cleaned",
+      "file": "src\\scripts\\chatdev_workflow_integration_analysis.py",
+      "description": "Cleaned up unused typing imports"
+    },
+    {
+      "type": "fstring_fixed",
+      "file": "src\\scripts\\chatdev_workflow_integration_analysis.py",
+      "description": "Fixed f-string without replacement fields"
+    },
+    {
+      "type": "trailing_whitespace_removed",
+      "file": "src\\scripts\\chatdev_workflow_integration_analysis.py",
+      "description": "Removed trailing whitespace"
+    },
+    {
+      "type": "unused_imports_cleaned",
+      "file": "chatdev_workflow_integration_analysis.py",
+      "description": "Cleaned unused imports in chatdev_workflow_integration_analysis.py"
+    },
+    {
+      "type": "unused_imports_cleaned",
+      "file": "chatdev_workflow_integration_analysis_clean.py",
+      "description": "Cleaned unused imports in chatdev_workflow_integration_analysis_clean.py"
+    },
+    {
+      "type": "unused_imports_cleaned",
+      "file": "complete_function_registry.py",
+      "description": "Cleaned unused imports in complete_function_registry.py"
+    },
+    {
+      "type": "unused_imports_cleaned",
+      "file": "demo_ai_documentation_coordination.py",
+      "description": "Cleaned unused imports in demo_ai_documentation_coordination.py"
+    },
+    {
+      "type": "unused_imports_cleaned",
+      "file": "demo_integrated_docs.py",
+      "description": "Cleaned unused imports in demo_integrated_docs.py"
+    },
+    {
+      "type": "unused_imports_cleaned",
+      "file": "ecosystem_health_checker.py",
+      "description": "Cleaned unused imports in ecosystem_health_checker.py"
+    },
+    {
+      "type": "unused_imports_cleaned",
+      "file": "execute_function_registry.py",
+      "description": "Cleaned unused imports in execute_function_registry.py"
+    }
+  ]
+}

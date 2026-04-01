@@ -1,0 +1,39 @@
+name: Deploy to Replit - Infrastructure-First Sync
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  sync-replit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Replit to sync and restart
+        run: |
+          echo "🔄 Triggering Replit sync for merged changes..."
+          
+          # Generate timestamp and signature for webhook
+          ts=$(date +%s)
+          sig=$(echo -n "$ts" | openssl dgst -sha256 -hmac "${{ secrets.REPLIT_SYNC_SECRET }}" -binary | base64)
+          
+          # Send authenticated webhook to Replit
+          curl -sS -X POST "${{ secrets.REPLIT_SYNC_URL }}" \
+            -H "X-Signature: $sig" \
+            -H "X-Timestamp: $ts" \
+            -H "Authorization: Bearer ${{ secrets.ADMIN_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "deploy",
+              "branch": "main",
+              "timestamp": "'$ts'",
+              "source": "github-actions",
+              "infrastructure_first": true
+            }'
+          
+          echo "✅ Replit sync webhook sent"
+
+      - name: Log deployment
+        run: |
+          echo "🚀 Infrastructure-First deployment completed"
+          echo "📡 Changes synced to Replit environment"
+          echo "🤖 Autonomous development cycle active"

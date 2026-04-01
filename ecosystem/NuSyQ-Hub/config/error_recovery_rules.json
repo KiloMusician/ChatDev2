@@ -1,0 +1,200 @@
+{
+  "version": "1.0",
+  "description": "Comprehensive error recovery mapping from ruff rule codes to recovery strategies",
+  "last_updated": "2026-02-16",
+  
+  "severity_levels": {
+    "critical": "Must fix - blocks execution",
+    "error": "Should fix - affects correctness",
+    "warning": "Consider fixing - code quality",
+    "info": "Optional - suggestions"
+  },
+
+  "auto_fixable_rules": {
+    "F401": {
+      "name": "Unused import",
+      "severity": "warning",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via ruff --fix",
+      "description": "Unused library imports can be removed safely",
+      "confidence": 0.95
+    },
+    "F841": {
+      "name": "Unused variable",
+      "severity": "warning",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via ruff --fix",
+      "description": "Unused local variables can be removed",
+      "confidence": 0.85
+    },
+    "E402": {
+      "name": "Module level import not at top",
+      "severity": "error",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via ruff --fix",
+      "description": "Move import to module top level",
+      "confidence": 0.80
+    },
+    "W291": {
+      "name": "Trailing whitespace",
+      "severity": "info",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via surgical edit",
+      "description": "Remove whitespace at end of lines",
+      "confidence": 1.0
+    },
+    "W292": {
+      "name": "No newline at end of file",
+      "severity": "info",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via surgical edit",
+      "description": "Add final newline to file",
+      "confidence": 1.0
+    },
+    "E225": {
+      "name": "Missing whitespace around operator",
+      "severity": "info",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via ruff --fix",
+      "description": "Add proper spacing around operators",
+      "confidence": 0.90
+    },
+    "E231": {
+      "name": "Missing whitespace after comma",
+      "severity": "info",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via ruff --fix",
+      "description": "Add space after commas",
+      "confidence": 0.95
+    },
+    "I001": {
+      "name": "Import sorting issues",
+      "severity": "warning",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via ruff --fix",
+      "description": "Reorder imports to standard grouping",
+      "confidence": 0.85
+    }
+  },
+
+  "manual_review_rules": {
+    "B904": {
+      "name": "Exception re-raising pattern",
+      "severity": "error",
+      "auto_fixable": false,
+      "suggested_action": "manual: add 'raise ... from err' in except blocks",
+      "description": "Exception should be re-raised using 'raise ... from err' pattern",
+      "confidence": 0.75
+    },
+    "C901": {
+      "name": "Function too complex",
+      "severity": "warning",
+      "auto_fixable": false,
+      "suggested_action": "manual: refactor to reduce McCabe complexity",
+      "description": "Function has high cyclomatic complexity - suggest refactoring",
+      "confidence": 0.70
+    },
+    "C90": {
+      "name": "Line too long",
+      "severity": "info",
+      "auto_fixable": false,
+      "suggested_action": "manual review: break long lines intelligently",
+      "description": "Lines exceeding configured maximum length",
+      "confidence": 0.60
+    },
+    "E501": {
+      "name": "Line too long (style)",
+      "severity": "info",
+      "auto_fixable": false,
+      "suggested_action": "manual: break line intelligently",
+      "description": "Line exceeds max length (common with long strings/comments)",
+      "confidence": 0.50
+    },
+    "F841_WITH_UNDERSCORE": {
+      "name": "Unused variable prefixed with underscore",
+      "severity": "info",
+      "auto_fixable": false,
+      "suggested_action": "manual: verify intentional use",
+      "description": "Variable marked with underscore but unused - may be intentional",
+      "confidence": 0.40
+    }
+  },
+
+  "type_checking_rules": {
+    "E302": {
+      "name": "Expected 2 blank lines",
+      "severity": "info",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via surgical edit",
+      "description": "Missing blank lines before class/function definitions",
+      "confidence": 0.95
+    },
+    "E303": {
+      "name": "Too many blank lines",
+      "severity": "info",
+      "auto_fixable": true,
+      "suggested_action": "auto-fix via surgical edit",
+      "description": "Excessive blank lines (>2)",
+      "confidence": 0.95
+    }
+  },
+
+  "recovery_strategies": {
+    "auto_fix_via_ruff": {
+      "name": "Apply ruff --fix",
+      "method": "ruff --fix [file]",
+      "timeout_seconds": 10,
+      "requires_git": false,
+      "reversible": true,
+      "confidence": 0.90
+    },
+    "surgical_edit": {
+      "name": "Targeted file edit",
+      "method": "custom regex/string replacement",
+      "timeout_seconds": 5,
+      "requires_git": false,
+      "reversible": true,
+      "confidence": 0.85
+    },
+    "manual_review": {
+      "name": "Create quest for human review",
+      "method": "create quest_system entry",
+      "timeout_seconds": 0,
+      "requires_git": false,
+      "reversible": true,
+      "confidence": 0.50
+    },
+    "refactor": {
+      "name": "Request AI-guided refactoring",
+      "method": "route to AI orchestrator",
+      "timeout_seconds": 30,
+      "requires_git": false,
+      "reversible": false,
+      "confidence": 0.70
+    }
+  },
+
+  "recovery_priority": {
+    "critical": 1,
+    "error": 2,
+    "warning": 3,
+    "info": 4
+  },
+
+  "batch_recovery_config": {
+    "auto_fix_batch_size": 20,
+    "timeout_per_batch": 120,
+    "stop_on_failure": false,
+    "create_checkpoint_before": true,
+    "create_checkpoint_after": true,
+    "validate_after_fix": true
+  },
+
+  "metrics_collection": {
+    "track_success_rate": true,
+    "track_fix_time": true,
+    "track_regression_rate": true,
+    "persist_to": "state/recovery_metrics.json",
+    "aggregation_interval_hours": 24
+  }
+}

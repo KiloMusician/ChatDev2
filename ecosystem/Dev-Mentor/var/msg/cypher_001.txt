@@ -1,0 +1,19 @@
+FROM: Cypher <cypher@resistance-net.onion>
+TO: ghost@node-7.nexus
+DATE: 2026-01-07T07:45:12Z
+SUBJECT: Warning — Watch the Syscalls
+
+// CYPHER SECURE-DROP MESSAGE
+// Encrypted relay: watcher-relay → ghost@node-7
+
+dont trust the syscalls. CHIMERA hooks them.
+if nexus daemon sees your process list, they know what youre running.
+
+stay quiet. use `ps aux` to verify no trace daemon attached.
+pid 1337 is the heartbeat — never SIGKILL it without wiping logs first.
+
+found something in /proc/1337/environ last week.
+AUTH_TOKEN is in there. encoded. you know what to do with it.
+
+stay dark,
+cypher

@@ -1,0 +1,397 @@
+{
+  "timestamp": "2025-12-30T02:49:05.679651",
+  "psutil_available": true,
+  "total_processes": 528,
+  "services": [
+    {
+      "id": "mcp_server",
+      "name": "NuSyQ MCP Server",
+      "repo": "NuSyQ",
+      "match_terms": [
+        "mcp_server",
+        "nusyq mcp",
+        "uvicorn"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "jupyter_lab",
+      "name": "Jupyter Lab",
+      "repo": "NuSyQ",
+      "match_terms": [
+        "jupyter",
+        "jupyter-lab",
+        "notebook"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "simverse_dev_server",
+      "name": "SimulatedVerse Dev Server",
+      "repo": "SimulatedVerse",
+      "match_terms": [
+        "server/index.ts",
+        "server/minimal-agent-server.ts",
+        "vite",
+        "tsx"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "orchestrator",
+      "name": "NuSyQ Orchestrator",
+      "repo": "NuSyQ",
+      "match_terms": [
+        "start_orchestrator.py",
+        "MultiAIOrchestrator"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "hub_autonomous_monitor",
+      "name": "NuSyQ-Hub Autonomous Monitor",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "autonomous_monitor.py"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "hub_context_server",
+      "name": "NuSyQ-Hub Context Server",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "context_server.py"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "hub_healthcheck_server",
+      "name": "NuSyQ-Hub Healthcheck Server",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "healthcheck_server.py"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "hub_agent_hub",
+      "name": "NuSyQ-Hub Agent Hub",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "agent_communication_hub.py"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "hub_ai_intermediary",
+      "name": "NuSyQ-Hub AI Intermediary",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "ai_intermediary.py"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "architecture_watcher",
+      "name": "Architecture Watcher",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "architecturewatcher.py",
+        "architecture watcher"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "pu_queue",
+      "name": "PU Queue Processor",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "unified_pu_queue",
+        "pu_queue",
+        "processing_units"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "quest_log_sync",
+      "name": "Quest Log Sync",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "cross_ecosystem_sync",
+        "quest_log",
+        "quest replay"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "trace_service",
+      "name": "Trace Service",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "otel",
+        "opentelemetry",
+        "trace_service"
+      ],
+      "active": false,
+      "processes": []
+    },
+    {
+      "id": "guild_board_renderer",
+      "name": "Guild Board Renderer",
+      "repo": "NuSyQ-Hub",
+      "match_terms": [
+        "guild_render",
+        "guild_board",
+        "GUILD_BOARD.md"
+      ],
+      "active": false,
+      "processes": []
+    }
+  ],
+  "process_summary": {
+    "python": 31,
+    "node": 0,
+    "ollama": 3,
+    "docker": 1,
+    "pwsh": 19
+  },
+  "intelligent_terminal_state": {
+    "generated_at": "2025-12-26T07:31:17.701273",
+    "total_terminals": 16,
+    "terminals": {
+      "claude": {
+        "name": "\ud83e\udd16 Claude",
+        "purpose": "Claude agent execution, analysis, code generation",
+        "routes": [
+          "claude",
+          "anthropic",
+          "sonnet",
+          "claude_code"
+        ],
+        "persistent": true
+      },
+      "copilot": {
+        "name": "\ud83e\udde9 Copilot",
+        "purpose": "GitHub Copilot agent execution, suggestions, completions",
+        "routes": [
+          "copilot",
+          "github_copilot",
+          "gh_copilot",
+          "github copilot"
+        ],
+        "persistent": true
+      },
+      "codex": {
+        "name": "\ud83e\udde0 Codex",
+        "purpose": "OpenAI Codex agent execution, transformations",
+        "routes": [
+          "codex",
+          "openai_codex",
+          "gpt_code",
+          "openai",
+          "gpt"
+        ],
+        "persistent": true
+      },
+      "chatdev": {
+        "name": "\ud83c\udfd7\ufe0f ChatDev",
+        "purpose": "ChatDev multi-agent team coordination",
+        "routes": [
+          "chatdev",
+          "chat dev",
+          "multi_agent",
+          "software_company"
+        ],
+        "persistent": true
+      },
+      "ai_council": {
+        "name": "\ud83c\udfdb\ufe0f AI Council",
+        "purpose": "AI Council deliberations and consensus runs",
+        "routes": [
+          "council",
+          "ai_council",
+          "consensus",
+          "deliberation",
+          "vote"
+        ],
+        "persistent": true
+      },
+      "intermediary": {
+        "name": "\ud83d\udd17 Intermediary",
+        "purpose": "Cross-agent communication, routing, coordination",
+        "routes": [
+          "intermediary",
+          "router",
+          "bridge",
+          "coordinator",
+          "handoff"
+        ],
+        "persistent": true
+      },
+      "errors": {
+        "name": "\ud83d\udd25 Errors",
+        "purpose": "Error output, exceptions, failures across all agents",
+        "routes": [
+          "error",
+          "exception",
+          "failed",
+          "stderr",
+          "traceback"
+        ],
+        "persistent": true
+      },
+      "suggestions": {
+        "name": "\ud83d\udca1 Suggestions",
+        "purpose": "Next steps, recommendations from all agents",
+        "routes": [
+          "suggest",
+          "recommend",
+          "next_steps",
+          "hint",
+          "todo"
+        ],
+        "persistent": true
+      },
+      "tasks": {
+        "name": "\u2705 Tasks",
+        "purpose": "Task execution, work queue, PU processing",
+        "routes": [
+          "task",
+          "pu_queue",
+          "work_queue",
+          "processing",
+          "job"
+        ],
+        "persistent": true
+      },
+      "tests": {
+        "name": "\ud83e\uddea Tests",
+        "purpose": "Test execution, pytest output, coverage and test diagnostics",
+        "routes": [
+          "pytest",
+          "tests/",
+          "test suite",
+          "coverage",
+          "xfailed",
+          "xpassed",
+          "test run"
+        ],
+        "persistent": true
+      },
+      "zeta": {
+        "name": "\ud83c\udfaf Zeta",
+        "purpose": "Zeta orchestration, autonomous cycles, meta-operations",
+        "routes": [
+          "zeta",
+          "autonomous",
+          "orchestrat",
+          "cycle",
+          "meta"
+        ],
+        "persistent": true
+      },
+      "agents": {
+        "name": "\ud83e\udd16 Agents",
+        "purpose": "Multi-agent coordination, AI systems",
+        "routes": [
+          "agent",
+          "ai_",
+          "ollama",
+          "multi-agent"
+        ],
+        "persistent": true
+      },
+      "metrics": {
+        "name": "\ud83d\udcca Metrics",
+        "purpose": "Cultivation metrics, health monitoring, dashboards",
+        "routes": [
+          "metric",
+          "health",
+          "dashboard",
+          "monitor",
+          "stats"
+        ],
+        "persistent": true
+      },
+      "anomalies": {
+        "name": "\u26a1 Anomalies",
+        "purpose": "Unusual events, orphaned processes, unexpected behaviors",
+        "routes": [
+          "anomaly",
+          "orphan",
+          "unexpected",
+          "zombie",
+          "leak"
+        ],
+        "persistent": true
+      },
+      "future": {
+        "name": "\ud83d\udd2e Future",
+        "purpose": "Planned features, upcoming tasks, development roadmap",
+        "routes": [
+          "future",
+          "planned",
+          "roadmap",
+          "upcoming",
+          "vision"
+        ],
+        "persistent": true
+      },
+      "main": {
+        "name": "\ud83c\udfe0 Main",
+        "purpose": "Default terminal for general operations",
+        "routes": [
+          "main",
+          "default",
+          "general",
+          "snapshot",
+          "status",
+          "info"
+        ],
+        "persistent": true
+      }
+    },
+    "routing_keywords": 79,
+    "status": "intelligent orchestration ready"
+  },
+  "critical_services_missing": [
+    "orchestrator",
+    "pu_queue",
+    "quest_log_sync",
+    "trace_service",
+    "guild_board_renderer"
+  ],
+  "alerts_triggered": [
+    "orchestrator",
+    "pu_queue",
+    "trace_service"
+  ],
+  "defaults_applied": {
+    "retention_count": 30,
+    "critical_services": [
+      "guild_board_renderer",
+      "orchestrator",
+      "pu_queue",
+      "quest_log_sync",
+      "trace_service"
+    ],
+    "missing_service_alerts": [
+      "orchestrator",
+      "pu_queue",
+      "trace_service"
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+# Code owners for NuSyQ-Hub repository
+# Lines that match files will assign the mentioned users as code owners
+# Reference: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for entire repository
+*       @KiloMusician
+
+# CRITICAL PATH PROTECTION (Phase 1A Autonomy System)
+# Autonomy system - protects closed-loop feedback mechanism
+/src/autonomy/                                  @KiloMusician
+/src/autonomy/patch_builder.py                  @KiloMusician
+/src/autonomy/risk_scorer.py                    @KiloMusician
+/src/autonomy/pr_bot.py                         @KiloMusician
+
+# Core Orchestration - Highest priority
+/src/orchestration/                             @KiloMusician
+/src/orchestration/multi_ai_orchestrator.py     @KiloMusician
+/src/orchestration/background_task_orchestrator.py @KiloMusician
+
+# Core Healing & Diagnostics
+/src/healing/                                   @KiloMusician
+/src/navigation/                                @KiloMusician
+/src/diagnostics/                               @KiloMusician
+
+# Integration Points
+/src/integration/                               @KiloMusician
+/src/integration/consciousness_bridge.py        @KiloMusician
+
+# AI Integration & Tools
+/src/ai/                                        @KiloMusician
+/src/tools/                                     @KiloMusician
+
+# Main Entry Points (highest sensitivity)
+/src/main.py                                    @KiloMusician
+/scripts/start_nusyq.py                         @KiloMusician
+
+# Configuration Management
+/config/                                        @KiloMusician
+
+# GitHub Actions & CI/CD Pipeline
+/.github/workflows/                             @KiloMusician
+/.github/CODEOWNERS                             @KiloMusician
+
+# Critical Tests (autonomy validation)
+/tests/test_autonomy*.py                        @KiloMusician
+/tests/test_orchestration*.py                   @KiloMusician
+
+# Utilities (lower priority)
+/src/utilities/                                 @KiloMusician
+/src/utils/                                     @KiloMusician

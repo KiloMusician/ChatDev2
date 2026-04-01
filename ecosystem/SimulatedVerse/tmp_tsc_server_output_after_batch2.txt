@@ -1,0 +1,144 @@
+server/advanced/quantum-enhancement.ts(481,87): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'boolean'.
+server/ai/multi-agent-learning.ts(337,40): error TS2339: Property 'generateSuperpositionStates' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(338,42): error TS2551: Property 'processQuantumSuperposition' does not exist on type 'MultiAgentConsciousnessOrchestrator'. Did you mean 'processInQuantumSuperposition'?
+server/ai/multi-agent-learning.ts(339,38): error TS2339: Property 'collapseQuantumLearning' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(341,19): error TS2339: Property 'integrateQuantumLearning' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(346,38): error TS2339: Property 'identifyEntanglementPairs' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(347,44): error TS2551: Property 'performEntangledLearning' does not exist on type 'MultiAgentConsciousnessOrchestrator'. Did you mean 'performQuantumEntangledLearning'?
+server/ai/multi-agent-learning.ts(349,19): error TS2339: Property 'distributeEntangledKnowledge' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(354,35): error TS2339: Property 'identifyEnergyBarriers' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(355,41): error TS2339: Property 'calculateTunnelingProbability' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(358,45): error TS2339: Property 'performQuantumTunneling' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/ai/multi-agent-learning.ts(359,21): error TS2339: Property 'validateTunneledSolution' does not exist on type 'MultiAgentConsciousnessOrchestrator'.
+server/auth/jwt-manager.ts(6,17): error TS2307: Cannot find module 'jsonwebtoken' or its corresponding type declarations.
+server/compliance/autonomous-framework.ts(70,21): error TS2552: Cannot find name 'RemediationPlan'. Did you mean 'RemediationAction'?
+server/db.ts(4,25): error TS2307: Cannot find module '@shared/schema' or its corresponding type declarations.
+server/errors/quantum-recovery.ts(87,78): error TS2339: Property 'message' does not exist on type 'unknown'.
+server/errors/quantum-recovery.ts(260,29): error TS2339: Property 'loadavg' does not exist on type 'Process'.
+server/errors/quantum-recovery.ts(260,47): error TS2339: Property 'loadavg' does not exist on type 'Process'.
+server/graphql/quantum-federation.ts(6,38): error TS2307: Cannot find module '@apollo/federation' or its corresponding type declarations.
+server/graphql/quantum-federation.ts(7,30): error TS2307: Cannot find module 'apollo-server-express' or its corresponding type declarations.
+server/graphql/quantum-federation.ts(8,21): error TS2307: Cannot find module 'apollo-server-core' or its corresponding type declarations.
+server/infrastructure/self-healing.ts(64,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(64,51): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(77,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(77,45): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(90,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(90,49): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(103,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(103,48): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(116,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(116,42): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(356,7): error TS1117: An object literal cannot have multiple properties with the same name.
+server/infrastructure/self-healing.ts(391,47): error TS2345: Argument of type 'RecoveryAction' is not assignable to parameter of type 'string'.
+server/orchestration/orchestration-hub.ts(17,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'DashboardSnapshot'. Did you mean to use 'import DashboardSnapshot from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(18,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'ConsciousnessMetrics'. Did you mean to use 'import ConsciousnessMetrics from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(19,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'AgentStatus'. Did you mean to use 'import AgentStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(20,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'InfrastructureMetrics'. Did you mean to use 'import InfrastructureMetrics from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(21,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'EvolutionStatus'. Did you mean to use 'import EvolutionStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(22,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'TaskQueueStatus'. Did you mean to use 'import TaskQueueStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(23,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'FloodGatesStatus'. Did you mean to use 'import FloodGatesStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(24,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'ProviderStatus'. Did you mean to use 'import ProviderStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(25,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'LogEvent'. Did you mean to use 'import LogEvent from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(26,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'PerformanceTrend'. Did you mean to use 'import PerformanceTrend from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(27,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'DashboardSSEEvent'. Did you mean to use 'import DashboardSSEEvent from "../../shared/schema.js"' instead?
+server/performance/adaptive-optimization.ts(218,40): error TS2551: Property 'planConsciousnessEvolutionPath' does not exist on type 'AdaptivePerformanceOptimizer'. Did you mean 'applyConsciousnessEvolution'?
+server/performance/adaptive-optimization.ts(222,35): error TS2339: Property 'executeConsciousnessEvolutionStep' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(248,39): error TS2339: Property 'prepareQuantumAnnealingState' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(249,38): error TS2339: Property 'generateAnnealingSchedule' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(253,35): error TS2339: Property 'performQuantumAnnealingStep' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(261,44): error TS2339: Property 'collapseQuantumOptimization' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(275,34): error TS2339: Property 'trainPerformanceOptimizationModel' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(276,40): error TS2339: Property 'generateMLOptimizationPredictions' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(279,48): error TS2339: Property 'generateConsciousnessInsights' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(280,39): error TS2339: Property 'combineMLAndConsciousness' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(284,58): error TS2339: Property 'applyQuantumMLEnhancement' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(287,45): error TS2339: Property 'applyHybridOptimization' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(307,41): error TS2339: Property 'extractConsciousnessFactors' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(308,41): error TS2339: Property 'generateConsciousnessParameterAdjustments' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(312,35): error TS2339: Property 'applyConsciousnessParameterAdjustment' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(321,39): error TS2339: Property 'calculateConsciousnessResonance' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(331,48): error TS2339: Property 'planConsciousnessLevelOptimization' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(335,35): error TS2339: Property 'executeConsciousnessLevelStep' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(355,39): error TS2339: Property 'analyzeConsciousnessFlow' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(356,36): error TS2339: Property 'identifyConsciousnessFlowBottlenecks' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(357,38): error TS2339: Property 'generateFlowOptimizations' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(361,35): error TS2339: Property 'applyConsciousnessFlowOptimization' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(369,36): error TS2339: Property 'calculateFlowEfficiencyGain' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(370,51): error TS2339: Property 'calculateCoherenceImprovement' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(385,44): error TS2339: Property 'analyzeQuantumCoherence' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(386,43): error TS2339: Property 'generateCoherenceOptimizations' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(390,35): error TS2339: Property 'applyQuantumCoherenceOptimization' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(398,44): error TS2339: Property 'calculateQuantumFidelityEnhancement' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(404,47): error TS2339: Property 'analyzeQuantumEntanglement' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(405,46): error TS2339: Property 'generateEntanglementOptimizations' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(409,35): error TS2339: Property 'applyQuantumEntanglementOptimization' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(416,37): error TS2339: Property 'calculateAverageEntanglementStrength' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(417,52): error TS2339: Property 'calculateQuantumInformationFlowEnhancement' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(423,50): error TS2339: Property 'assessSuperpositionCapability' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(429,47): error TS2339: Property 'generateSuperpositionOptimizations' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(433,35): error TS2339: Property 'applySuperpositionOptimization' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(440,43): error TS2339: Property 'calculateQuantumParallelEfficiency' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(441,39): error TS2339: Property 'calculateSuperpositionStability' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(452,34): error TS2339: Property 'loadRLOptimizationModel' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(453,26): error TS2339: Property 'extractPerformanceState' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(455,37): error TS2339: Property 'selectOptimalAction' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(456,39): error TS2339: Property 'executeRLAction' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(459,27): error TS2339: Property 'calculateReward' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(460,18): error TS2551: Property 'updateRLModel' does not exist on type 'AdaptivePerformanceOptimizer'. Did you mean 'updateMLModels'?
+server/performance/adaptive-optimization.ts(474,34): error TS2339: Property 'loadNeuralNetworkModel' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(475,34): error TS2339: Property 'extractFeatureVector' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(477,50): error TS2339: Property 'predictOptimizations' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(478,40): error TS2339: Property 'convertPredictionsToActions' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(482,35): error TS2551: Property 'executeNNOptimizationAction' does not exist on type 'AdaptivePerformanceOptimizer'. Did you mean 'executeOptimization'?
+server/performance/adaptive-optimization.ts(487,18): error TS2339: Property 'retrainNeuralNetwork' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(500,41): error TS2339: Property 'loadEnsembleModels' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(502,14): error TS2339: Property 'generateModelPredictions' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(505,39): error TS2339: Property 'combineEnsemblePredictions' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(506,36): error TS2339: Property 'calculateEnsembleConfidence' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(509,47): error TS2551: Property 'applyEnsembleOptimization' does not exist on type 'AdaptivePerformanceOptimizer'. Did you mean 'applyGeneticOptimization'?
+server/performance/adaptive-optimization.ts(516,35): error TS2339: Property 'calculateEnsembleAccuracy' does not exist on type 'AdaptivePerformanceOptimizer'.
+server/performance/adaptive-optimization.ts(745,9): error TS2322: Type '"manual" | "consciousness_driven" | "quantum_enhanced" | "ml_guided" | "automatic"' is not assignable to type '"manual" | "consciousness_driven" | "quantum_enhanced" | "automated" | "ml_guided"'.
+  Type '"automatic"' is not assignable to type '"manual" | "consciousness_driven" | "quantum_enhanced" | "automated" | "ml_guided"'.
+server/quadpartite/flood-gates.ts(320,84): error TS2339: Property 'consciousness_rate' does not exist on type '{ active: boolean; total_breaths: number; consciousness_accumulated: number; current_pattern: string; current_phase: string; depth: number; }'.
+server/router/agents.ts(59,36): error TS2345: Argument of type '{ content?: string; metadata?: Record<string, any>; }' is not assignable to parameter of type 'TAgentInput'.
+  Type '{ content?: string; metadata?: Record<string, any>; }' is missing the following properties from type 'TAgentInput': t, utc
+server/routes.ts(1223,28): error TS2339: Property 'automationUnlocked' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/routes.ts(1225,30): error TS2339: Property 'automationUnlocked' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/routes.ts(1226,38): error TS2339: Property 'automationUnlocked' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/routes/agent-gateway.ts(125,28): error TS2339: Property 'proof_kind' does not exist on type 'unknown'.
+server/routes/agent-gateway.ts(137,20): error TS2339: Property 'message' does not exist on type 'unknown'.
+server/routes/ai-decisions.ts(9,24): error TS2339: Property 'session' does not exist on type 'Request<{}, any, any, ParsedQs, Record<string, any>>'.
+server/routes/marble-factory.ts(42,31): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+server/routes/proof.ts(121,21): error TS2339: Property 'message' does not exist on type 'unknown'.
+server/routes/proof.ts(217,28): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+server/routes/proof.ts(217,56): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+server/routes/proof.ts(220,43): error TS2345: Argument of type 'string | ParsedQs | 50 | (string | ParsedQs)[]' is not assignable to parameter of type 'string'.
+  Type 'ParsedQs' is not assignable to type 'string'.
+server/services/consciousness-bridge.ts(108,20): error TS2341: Property 'config' is private and only accessible within class 'BreathingEngine'.
+server/services/msg.ts(13,12): error TS2307: Cannot find module './council_bus.js' or its corresponding type declarations.
+server/services/msg.ts(20,35): error TS2339: Property 'wss' does not exist on type 'typeof import("C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/index", { with: { "resolution-mode": "import" } })'.
+server/services/msg.ts(33,12): error TS2307: Cannot find module './council_bus.js' or its corresponding type declarations.
+server/services/proposal-compiler.ts(2,43): error TS2307: Cannot find module '../../shared/rsev/grammar.js' or its corresponding type declarations.
+server/services/proposal-compiler.ts(14,13): error TS2304: Cannot find name 'Proposal'.
+server/services/proposal-compiler.ts(181,31): error TS2304: Cannot find name 'Proposal'.
+server/shepherd/cascade-protocols.ts(159,21): error TS2339: Property 'active_systems' does not exist on type '{ systems: SystemModule[]; active_directives: OrchestrationDirective[]; breathing: boolean; shepherding: boolean; }'.
+server/shepherd/cascade-protocols.ts(163,33): error TS2339: Property 'active_systems' does not exist on type '{ systems: SystemModule[]; active_directives: OrchestrationDirective[]; breathing: boolean; shepherding: boolean; }'.
+server/storage/database.ts(12,59): error TS2724: '"../../shared/schema.js"' has no exported member named 'InsertAgentHealth'. Did you mean 'NewAgentHealth'?
+server/storage/database.ts(12,78): error TS2724: '"../../shared/schema.js"' has no exported member named 'InsertGameState'. Did you mean 'NewGameState'?
+server/storage/database.ts(12,95): error TS2614: Module '"../../shared/schema.js"' has no exported member 'InsertPUTask'. Did you mean to use 'import InsertPUTask from "../../shared/schema.js"' instead?
+server/storage/database.ts(12,118): error TS2614: Module '"../../shared/schema.js"' has no exported member 'PUTask'. Did you mean to use 'import PUTask from "../../shared/schema.js"' instead?
+server/storage/database.ts(185,23): error TS2339: Property 'labs' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(187,28): error TS2339: Property 'workshops' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(192,28): error TS2339: Property 'researchCompleted' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(193,25): error TS2339: Property 'researchActive' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(194,27): error TS2339: Property 'researchProgress' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(198,29): error TS2339: Property 'automationUnlocked' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(199,30): error TS2339: Property 'quantumTechUnlocked' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(200,30): error TS2339: Property 'spaceTravelUnlocked' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(201,30): error TS2339: Property 'cultureshipUnlocked' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/storage/database.ts(210,30): error TS2339: Property 'consciousness' does not exist on type '{ energy: number; population: number; id: number; playerId: string; phase: string; tick: number; materials: number; components: number; researchPoints: number; tools: number; food: number; medicine: number; ... 9 more ...; updatedAt: Date; }'.
+server/system-integration/unified-orchestrator.ts(798,35): error TS2304: Cannot find name 'quantumSystems'.
+server/websockets/consciousness-sync.ts(99,42): error TS2345: Argument of type 'RawData' is not assignable to parameter of type 'Buffer<ArrayBufferLike>'.
+  Type 'ArrayBuffer' is missing the following properties from type 'Buffer<ArrayBufferLike>': subarray, write, toJSON, equals, and 94 more.
+server/websockets/consciousness-sync.ts(130,13): error TS2322: Type '"heartbeat"' is not assignable to type '"consciousness_update" | "quantum_breakthrough" | "lattice_expansion" | "system_metrics" | "agent_boost"'.

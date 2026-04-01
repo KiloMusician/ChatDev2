@@ -1,0 +1,41 @@
+# Minimal semgrep ruleset for fast tri-repo scans
+rules:
+  # Python: unsafe subprocess shell
+  - id: py-subprocess-shell
+    patterns:
+      - pattern-either:
+          - pattern: subprocess.$FUNC(..., shell=True, ...)
+          - pattern: os.system(...)
+    message: Avoid shell=True unless strictly necessary.
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: safety
+  # Python: pickle usage
+  - id: py-pickle-usage
+    pattern: pickle.$FUNC(...)
+    message: Avoid pickle; use safer serializers.
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: safety
+  # JS/TS: http server
+  - id: js-http-server
+    patterns:
+      - pattern: http.createServer(...)
+    message: Prefer https; ensure local-only or add justification.
+    severity: WARNING
+    languages: [javascript, typescript]
+    metadata:
+      category: safety
+  # Generic: eval/exec
+  - id: generic-eval-exec
+    patterns:
+      - pattern-either:
+          - pattern: eval(...)
+          - pattern: exec(...)
+    message: Avoid eval/exec unless justified.
+    severity: WARNING
+    languages: [python, javascript, typescript]
+    metadata:
+      category: safety

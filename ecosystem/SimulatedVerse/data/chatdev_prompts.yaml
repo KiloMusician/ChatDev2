@@ -1,0 +1,27 @@
+prompts:
+  p_idler_design: |
+    Design a minimal, composable spec for the requested idler feature. Include: resources, generators, sinks, unlock gates, balancing hooks.
+  p_code_scaffold: |
+    Produce a small, testable TypeScript module with pure functions; zero side effects; export factory+reducers.
+  p_test_gen: |
+    Generate vitest tests (unit + a simple property test) for edge cases and balancing invariants.
+  p_docs_snippet: |
+    Add a short Obsidian doc section with usage, knobs, and pitfalls. Use OmniTags.
+  p_godot_scene: |
+    Inspect scene archetype and suggest nodes/signals; output a patch list and code hooks.
+  p_refactor: |
+    Reduce bloat; split concerns; stable interfaces; add types; no regressions.
+  p_godot_tests: |
+    Write Godot test scenarios to assert signals/inputs produce expected node state changes.
+  p_hud_spec: |
+    Propose HUD widgets that respect 250ms frame budget and clarity-first ASCII design.
+  p_ascii_art: |
+    Render a compact ASCII block with status bars and labels; no flicker; monospace-safe.
+  p_lore_world: |
+    Draft a short lore shard (150–250 words) + tag set (OmniTag) aligned with Pantheon.
+  p_obsidian: |
+    Emit a markdown file with frontmatter, tags, breadcrumbs, and backlinks.
+  p_metrics: |
+    Define a Pandas analysis for event logs: session lengths, action frequencies, win rates, frame times.
+  p_notebook_doc: |
+    A quick README block to accompany the notebook; how to rerun, expected outputs, where results feed back.

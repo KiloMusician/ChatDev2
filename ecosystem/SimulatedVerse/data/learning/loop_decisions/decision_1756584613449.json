@@ -1,0 +1,41 @@
+{
+  "context": {
+    "queue_size": 157,
+    "budget_remaining": 5000,
+    "error_rate": 0.2,
+    "completion_rate": 0.8,
+    "system_load": 1,
+    "cognitive_state": {
+      "repository_health": 0.85,
+      "complexity_score": 0.7,
+      "neural_connections": 156,
+      "cognitive_load": 0.6,
+      "optimization_opportunities": [
+        "cache_improvements",
+        "async_optimizations",
+        "code_deduplication"
+      ]
+    },
+    "recent_failures": [
+      "timeout in task xyz",
+      "validation error in abc"
+    ],
+    "performance_metrics": {
+      "tasks_per_minute": 3.2,
+      "success_rate": 0.8,
+      "cost_efficiency": 0.8
+    }
+  },
+  "decision": {
+    "action": "continue",
+    "confidence": 0.4118476727785613,
+    "reasoning": "2/5 agents agree: Strategic assessment based on system trajectory",
+    "next_evaluation_ms": 10000,
+    "conditions": [
+      "error_rate < 0.3",
+      "budget > 10"
+    ]
+  },
+  "timestamp": 1756584613449,
+  "outcomes": {}
+}

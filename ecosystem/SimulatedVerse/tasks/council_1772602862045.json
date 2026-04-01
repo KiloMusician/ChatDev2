@@ -1,0 +1,49 @@
+{
+  "task_id": "council_1772602862045",
+  "agent_id": "council",
+  "content": "Vote on PU priority and viability",
+  "metadata": {
+    "pu": {
+      "id": "PU-288-1772602831",
+      "type": "DocPU",
+      "title": "Document Ollama model usage patterns",
+      "description": "Create comprehensive guide for 8 Ollama models",
+      "source_repo": "nusyq-root",
+      "priority": "high",
+      "proof_criteria": [
+        "All 8 models documented",
+        "Usage examples provided",
+        "Performance benchmarks included"
+      ],
+      "metadata": {
+        "models": 8
+      },
+      "status": "queued",
+      "created_at": "2026-03-03T22:40:31.896525",
+      "votes": {},
+      "assigned_agents": [],
+      "execution_results": {},
+      "completed_at": "",
+      "failed_at": "",
+      "last_error": "",
+      "associated_quest_id": "",
+      "background_task_id": "",
+      "dependencies": []
+    },
+    "vote_options": [
+      "approve",
+      "reject",
+      "defer"
+    ],
+    "criteria": [
+      "All 8 models documented",
+      "Usage examples provided",
+      "Performance benchmarks included"
+    ]
+  },
+  "t": 1772602862045,
+  "utc": 1772602862045,
+  "entropy": 0.5,
+  "budget": 0.95,
+  "submitted_at": "2026-03-03T22:41:02.045755"
+}

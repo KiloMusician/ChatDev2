@@ -1,0 +1,304 @@
+{
+  "files": [
+    {
+      "path": ".eslintrc.cjs",
+      "bytes": 1063,
+      "lines": 42,
+      "lang": "other",
+      "smells": [],
+      "score": 0,
+      "mtime": 1756397375478.8462
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "bytes": 933,
+      "lines": 38,
+      "lang": "yaml",
+      "smells": [],
+      "score": 0,
+      "mtime": 1756292244331.0273
+    },
+    {
+      "path": "CULTURE_SHIP_READY.md",
+      "bytes": 3758,
+      "lines": 114,
+      "lang": "md",
+      "smells": [
+        "empty-file",
+        "print-banner",
+        "placeholder-text"
+      ],
+      "score": 29,
+      "mtime": 1756462966687.8403
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "bytes": 7975,
+      "lines": 272,
+      "lang": "md",
+      "smells": [
+        "empty-file",
+        "print-banner"
+      ],
+      "score": 23,
+      "mtime": 1756306014502.9114
+    },
+    {
+      "path": "README.md",
+      "bytes": 8889,
+      "lines": 224,
+      "lang": "md",
+      "smells": [
+        "empty-file",
+        "print-banner",
+        "placeholder-text"
+      ],
+      "score": 29,
+      "mtime": 1756530038352.1973
+    },
+    {
+      "path": "acia_findings.ndjson",
+      "bytes": 93642,
+      "lines": 97,
+      "lang": "other",
+      "smells": [
+        "todo-fixme",
+        "placeholder-text"
+      ],
+      "score": 14,
+      "mtime": 1756528607902.024
+    },
+    {
+      "path": "chatdev.yml",
+      "bytes": 769,
+      "lines": 25,
+      "lang": "yaml",
+      "smells": [],
+      "score": 0,
+      "mtime": 1756460665411.6409
+    },
+    {
+      "path": "components.json",
+      "bytes": 459,
+      "lines": 20,
+      "lang": "json",
+      "smells": [],
+      "score": 0,
+      "mtime": 1756274813438.2722
+    },
+    {
+      "path": "context.md",
+      "bytes": 4842,
+      "lines": 87,
+      "lang": "md",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756360684201.1682
+    },
+    {
+      "path": "drizzle.config.ts",
+      "bytes": 325,
+      "lines": 15,
+      "lang": "ts",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756274813437.2722
+    },
+    {
+      "path": "index.js",
+      "bytes": 3567,
+      "lines": 118,
+      "lang": "js",
+      "smells": [
+        "fake-print",
+        "empty-file"
+      ],
+      "score": 35,
+      "mtime": 1756309889752.2778
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 525259,
+      "lines": 14654,
+      "lang": "json",
+      "smells": [
+        "empty-file",
+        "placeholder-text"
+      ],
+      "score": 26,
+      "mtime": 1756533390761.6086
+    },
+    {
+      "path": "package.json",
+      "bytes": 4838,
+      "lines": 152,
+      "lang": "json",
+      "smells": [
+        "empty-file",
+        "placeholder-text"
+      ],
+      "score": 26,
+      "mtime": 1756533390475.6091
+    },
+    {
+      "path": "postcss.config.js",
+      "bytes": 80,
+      "lines": 7,
+      "lang": "js",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756274813438.2722
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 341,
+      "lines": 17,
+      "lang": "toml",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756476390492.8904
+    },
+    {
+      "path": "replit.md",
+      "bytes": 6256,
+      "lines": 87,
+      "lang": "md",
+      "smells": [
+        "empty-file",
+        "placeholder-text"
+      ],
+      "score": 26,
+      "mtime": 1756530907144.5205
+    },
+    {
+      "path": "replit.toml",
+      "bytes": 3681,
+      "lines": 121,
+      "lang": "toml",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756302345350.135
+    },
+    {
+      "path": "start-dev.js",
+      "bytes": 758,
+      "lines": 33,
+      "lang": "js",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756343494548.7302
+    },
+    {
+      "path": "static-server.js",
+      "bytes": 617,
+      "lines": 20,
+      "lang": "js",
+      "smells": [
+        "fake-print",
+        "empty-file"
+      ],
+      "score": 35,
+      "mtime": 1756311267561.576
+    },
+    {
+      "path": "tailwind.config.ts",
+      "bytes": 5740,
+      "lines": 176,
+      "lang": "ts",
+      "smells": [
+        "empty-file",
+        "placeholder-text"
+      ],
+      "score": 26,
+      "mtime": 1756389363924.4675
+    },
+    {
+      "path": "test-dual-layer.js",
+      "bytes": 8202,
+      "lines": 249,
+      "lang": "js",
+      "smells": [
+        "fake-print",
+        "empty-file"
+      ],
+      "score": 35,
+      "mtime": 1756344519691.7527
+    },
+    {
+      "path": "test_pu_sample.json",
+      "bytes": 961,
+      "lines": 13,
+      "lang": "json",
+      "smells": [],
+      "score": 0,
+      "mtime": 1756527792294.6428
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 693,
+      "lines": 25,
+      "lang": "json",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756299208718.3108
+    },
+    {
+      "path": "vite.config.ts",
+      "bytes": 971,
+      "lines": 38,
+      "lang": "ts",
+      "smells": [
+        "empty-file"
+      ],
+      "score": 20,
+      "mtime": 1756274813454.2722
+    },
+    {
+      "path": "zeta_123_audit_tasks.ndjson",
+      "bytes": 12202,
+      "lines": 31,
+      "lang": "other",
+      "smells": [],
+      "score": 0,
+      "mtime": 1756528854977.5334
+    },
+    {
+      "path": "zi_001_123.ndjson",
+      "bytes": 18081,
+      "lines": 124,
+      "lang": "other",
+      "smells": [
+        "placeholder-text"
+      ],
+      "score": 6,
+      "mtime": 1756528127172.978
+    },
+    {
+      "path": "zi_batch.json",
+      "bytes": 22549,
+      "lines": 871,
+      "lang": "json",
+      "smells": [
+        "empty-file",
+        "placeholder-text"
+      ],
+      "score": 26,
+      "mtime": 1756528273815.687
+    }
+  ],
+  "duplicates": []
+}

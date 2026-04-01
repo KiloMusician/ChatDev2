@@ -1,0 +1,94 @@
+name: Rehydration Harness CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+jobs:
+  rehydrate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: SimulatedVerse
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies (SimulatedVerse)
+        run: |
+          cd SimulatedVerse
+          npm ci
+
+      - name: Run repo CI script (SimulatedVerse)
+        run: |
+          cd SimulatedVerse
+          npm run ci
+
+      - name: Run deterministic rehydration harness (and auxiliary checks)
+        run: |
+          cd SimulatedVerse
+          # Create a circuit dump via reportError to trigger integrations
+          npx --yes tsx server/utils/trigger_dump_via_report.ts || true
+          # Attempt to verify verbosity endpoint (best-effort)
+          npx --yes tsx server/utils/verify_verbosity_endpoint.ts || true
+          # Run the deterministic harness
+          npm run rehydrate:harness
+
+      - name: Show harness result
+        if: always()
+        run: |
+          echo '--- rehydration harness outputs ---'
+          cat SimulatedVerse/state/rehydration_harness_result.json || true
+          echo '--- rehydration harness error (if any) ---'
+          cat SimulatedVerse/state/rehydration_harness_error.json || true
+
+      - name: Assert harness success
+        if: always()
+        run: |
+          node -e "const fs=require('fs');const p='SimulatedVerse/state/rehydration_harness_result.json'; if(!fs.existsSync(p)){console.error('Result file missing'); process.exit(4);} const r=JSON.parse(fs.readFileSync(p,'utf8')); if(!r.circuitFound||r.gatesWithOperation!==r.totalGates){console.error('Rehydration assertion failed:',JSON.stringify(r)); process.exit(5);} console.log('Rehydration harness assertion passed');"
+
+      - name: Prepare harness failure comment
+        if: failure()
+        run: |
+          result=$(cat SimulatedVerse/state/rehydration_harness_result.json 2>/dev/null || echo "result file missing")
+          error=$(cat SimulatedVerse/state/rehydration_harness_error.json 2>/dev/null || echo "error file missing")
+          cat <<EOF > SimulatedVerse/state/rehydration_harness_comment.md
+          ⚠️ **Rehydration harness failed**
+          Workflow: $GITHUB_WORKFLOW
+          Run ID: $GITHUB_RUN_ID
+          Result:
+          ```json
+          $result
+          ```
+          Error:
+          ```json
+          $error
+          ```
+          EOF
+
+      - name: Comment harness failure
+        if: failure() && github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-file: SimulatedVerse/state/rehydration_harness_comment.md
+
+      - name: Upload result artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rehydration-harness-state
+          path: |
+            SimulatedVerse/state/rehydration_harness_result.json
+            SimulatedVerse/state/rehydration_harness_error.json

@@ -1,0 +1,62 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: nusyq-hub
+
+resources:
+  - namespace.yaml
+  - rbac.yaml
+  - configmap.yaml
+  - secret.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  - postgres.yaml
+  - redis.yaml
+  - ollama.yaml
+
+# Common labels for all resources
+commonLabels:
+  app.kubernetes.io/name: nusyq-hub
+  app.kubernetes.io/instance: nusyq-hub-dev
+  app.kubernetes.io/version: "1.0.0"
+  app.kubernetes.io/component: application
+  app.kubernetes.io/part-of: nusyq-ecosystem
+  app.kubernetes.io/managed-by: kustomize
+
+# Image configurations
+images:
+  - name: nusyq-hub
+    newName: nusyq-hub
+    newTag: v1.0.0
+
+# ConfigMap generator (alternative to configmap.yaml)
+configMapGenerator:
+  - name: app-config
+    literals:
+      - APP_NAME=nusyq-hub
+      - ENVIRONMENT=development
+      - LOG_FORMAT=json
+
+# Secret generator (use for local dev only!)
+secretGenerator:
+  - name: app-secrets
+    literals:
+      - API_KEY=dev-key-changeme
+
+# Patches for different environments
+patchesStrategicMerge:
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nusyq-hub
+      namespace: nusyq-hub
+    spec:
+      template:
+        spec:
+          containers:
+          - name: nusyq-hub
+            env:
+            - name: ENVIRONMENT
+              value: development

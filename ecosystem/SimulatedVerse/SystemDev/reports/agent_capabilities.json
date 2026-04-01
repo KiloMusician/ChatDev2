@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-09-04T13:19:10.000Z", 
+  "action": "agent_health_snapshot",
+  "cultural_ship_ops_stage": "reality_checks",
+  "agent_registry": {
+    "total_agents": 14,
+    "pipelines": 5,
+    "prompts": 13,
+    "status": "fully_seeded",
+    "evidence": "ChatDev.Seed logs confirm registration"
+  },
+  "online_capabilities": {
+    "sage_pilot": {
+      "functions": ["micro_cycle_orchestration", "receipt_generation", "track_selection"],
+      "limits": "≤8 edits, ≤400 lines per cycle",
+      "tracks": ["foundation", "hygiene", "deduplication", "rosetta", "cascade", "alignment"],
+      "integration": "replit_agent",
+      "llm_dependency": "high"
+    },
+    "council_coordination": {
+      "functions": ["agent_party_organization", "systematic_theater_elimination"], 
+      "bus_events": ["colony.agents.initialized", "system.analysis.completed"],
+      "llm_dependency": "medium"
+    },
+    "wizard_navigator": {
+      "functions": ["gameplay_development", "mechanic_implementation"],
+      "focus": ["progression", "mechanics", "balance"],
+      "llm_dependency": "high"
+    }
+  },
+  "offline_capabilities": {
+    "librarian": {
+      "functions": ["knowledge_management", "file_cataloging", "index_maintenance"],
+      "tools": ["index_repo.ts", "knowledge/INDEX.md"],
+      "llm_dependency": "none"
+    },
+    "artificer": {
+      "functions": ["import_rewriting", "path_safe_moves", "godot_scene_coherence"],
+      "tools": ["edge_import_rewrite.ts", "path_alias_map.json"],
+      "llm_dependency": "none"
+    },
+    "alchemist": {
+      "functions": ["near_duplicate_consolidation", "schema_harmonization"],
+      "tools": ["duplicate_scan.ts", "edge_dedupe.ts"],
+      "llm_dependency": "none"
+    },
+    "janitor": {
+      "functions": ["console_logger_replacement", "json_sanitize", "todo_surgery"],
+      "status": "console replacement completed",
+      "llm_dependency": "none"
+    },
+    "raven": {
+      "functions": ["error_detection", "orphan_scanning", "drift_monitoring"],
+      "outputs": ["reports/anomalies_*.json"],
+      "llm_dependency": "minimal"
+    }
+  },
+  "degradation_handling": {
+    "llm_offline_mode": {
+      "available_agents": ["librarian", "artificer", "alchemist", "janitor", "raven"],
+      "tasks": ["indexing", "import_rewriting", "consolidation", "cleanup", "error_detection"],
+      "coordination": "council_bus_events_without_llm_generation"
+    },
+    "council_bus_status": "operational",
+    "pu_queue": "consciousness_driven_task_processor"
+  },
+  "command_surfaces": {
+    "chatdev_console": "/chatdev route in App.tsx",
+    "agent_chat": "/agent-chat route in App.tsx", 
+    "dev_menu_integration": "DevMenuExtended with system health and orchestration",
+    "script_execution": "ChatDev/scripts/activate-agent-task-masters.ts functional"
+  }
+}

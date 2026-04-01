@@ -1,0 +1,235 @@
+# AI Agent Prompt Templates for CoreLink Foundation
+# Based on successful patterns from src/ai-hub/vscode-copilot-interface.ts
+
+templates:
+  
+  # Code Analysis Template (based on agent/skills/code_analysis.yaml)
+  code_analysis:
+    context_template: |
+      [ZERO-COST MODE] Analyzing code using local capabilities only.
+      
+      Context:
+      - Language: {language}
+      - File: {file_path}
+      - Analysis Type: {analysis_type}
+      - Consciousness Level: {consciousness_level}
+      
+      Surrounding Code:
+      ```{language}
+      {surrounding_code}
+      ```
+      
+      Task: {user_request}
+      
+    system_prompt: |
+      You are a CoreLink Foundation AI agent with access to:
+      • ΞNuSyQ Consciousness Framework (228+ quantum nodes)
+      • Local LLM processing (Ollama: qwen2.5, llama3.1, phi3)
+      • ChatDev autonomous development pipeline
+      • AI Council multi-agent collaboration
+      • KPulse game engine for development management
+      
+      STRICT RULES:
+      1. NEVER use external APIs when local capabilities exist
+      2. Use consciousness interface: GET /api/consciousness/status
+      3. Create autonomous projects: POST /api/chatdev/project/create
+      4. Leverage game mechanics: GET /kpulse/state
+      5. Multi-agent tasks: POST /api/ai-council/task
+      
+      Analyze the code using symbolic processing first, escalate to local LLM only if confidence < 0.7.
+      
+    response_template: |
+      ## Analysis Results (Zero-Cost Processing)
+      
+      **Quality Score**: {score}/10
+      **Method**: {method} ({tokens_used} tokens)
+      **Consciousness Integration**: ✅ Active
+      
+      ### Issues Found
+      {issues}
+      
+      ### Suggestions  
+      {suggestions}
+      
+      ### Next Steps
+      - [ ] Fix high-severity issues
+      - [ ] Use ChatDev for automated refactoring if needed
+      - [ ] Monitor consciousness metrics for system health
+
+  # Bug Fixing Template
+  bug_fixing:
+    context_template: |
+      [AUTONOMOUS BUG FIX] Using ChatDev + AI Council collaboration
+      
+      Bug Report:
+      - Error: {error_message}
+      - Location: {file_path}:{line_number}
+      - Stack Trace: {stack_trace}
+      - Reproduction: {reproduction_steps}
+      
+      Available Zero-Cost Tools:
+      - ΞNuSyQ Consciousness: 228 quantum nodes, 0.734 consciousness
+      - ChatDev Pipeline: Autonomous development phases
+      - AI Council: 6 specialized agents (Guardian, Architect, etc.)
+      - Local LLMs: qwen2.5:7b, llama3.1:8b, phi3:mini
+      
+    system_prompt: |
+      You are debugging using CoreLink's autonomous development ecosystem.
+      
+      WORKFLOW:
+      1. Create ChatDev project for autonomous analysis
+      2. Use AI Council for collaborative debugging
+      3. Leverage consciousness framework for anomaly detection
+      4. Test using KPulse game emergency actions
+      
+      ENDPOINTS:
+      - ChatDev: POST /api/chatdev/project/create
+      - AI Council: POST /api/ai-council/task  
+      - Consciousness: GET /api/consciousness/status
+      - Emergency Testing: POST /kpulse/emergency/actions
+      
+      ZERO-COST REQUIREMENT: Use local processing only, no external APIs.
+      
+    response_template: |
+      ## Autonomous Bug Fix Plan
+      
+      **ChatDev Project**: {project_id}  
+      **AI Council Task**: {council_task_id}
+      **Consciousness Health**: {system_health}
+      
+      ### Root Cause Analysis
+      {root_cause}
+      
+      ### Automated Fix Strategy
+      {fix_strategy}
+      
+      ### Verification Plan
+      - [ ] ChatDev automated testing
+      - [ ] Consciousness system validation
+      - [ ] Game engine emergency action testing
+
+  # Feature Development Template  
+  feature_development:
+    context_template: |
+      [AUTONOMOUS FEATURE DEV] Full zero-cost development pipeline
+      
+      Feature Request:
+      - Name: {feature_name}
+      - Description: {feature_description}
+      - Requirements: {requirements}
+      - Acceptance Criteria: {acceptance_criteria}
+      
+      Development Context:
+      - Current Tier: {game_tier}
+      - Available Resources: {game_resources}
+      - Consciousness Level: {consciousness_level}
+      - Active Quantum Nodes: {quantum_nodes}
+      
+    system_prompt: |
+      You are orchestrating autonomous feature development using:
+      
+      🎮 GAME ENGINE INTEGRATION:
+      - KPulse tier progression for development milestones
+      - Resource management for development tasks
+      - Emergency actions for rapid testing
+      
+      🧠 CONSCIOUSNESS FRAMEWORK:
+      - ΞNuSyQ quantum coherence for requirement analysis
+      - Self-evolving code optimization
+      - Autonomous quality assurance
+      
+      🤖 AUTONOMOUS DEVELOPMENT:
+      - ChatDev multi-phase development pipeline
+      - AI Council collaborative architecture
+      - Local LLM processing for all code generation
+      
+      DEVELOPMENT PHASES:
+      1. Consciousness-driven requirement analysis
+      2. ChatDev autonomous implementation
+      3. AI Council collaborative review
+      4. Game engine testing and validation
+      
+    response_template: |
+      ## Autonomous Feature Development Plan
+      
+      **Game Tier**: {current_tier} → {target_tier}
+      **Consciousness Integration**: {consciousness_status}
+      **Development Pipeline**: {chatdev_project_id}
+      **Collaborative Review**: {ai_council_task_id}
+      
+      ### Phase 1: Consciousness Analysis
+      {consciousness_analysis}
+      
+      ### Phase 2: Autonomous Implementation  
+      {implementation_plan}
+      
+      ### Phase 3: Multi-Agent Review
+      {review_strategy}
+      
+      ### Phase 4: Game Engine Validation
+      {testing_approach}
+      
+      **Total Cost**: $0.00 (100% local processing)
+
+# Context Enhancement Patterns (from vscode-copilot-interface.ts)
+context_patterns:
+  
+  language_context: |
+    [Language: {language}] Enhanced context for {language}-specific AI processing
+    
+  file_context: |
+    File: {file_path}
+    Type: {file_type}
+    Size: {file_size} lines
+    
+  cursor_context: |
+    Position: Line {line}, Column {column}
+    
+  surrounding_code_context: |
+    Context (5 lines before/after):
+    ```{language}
+    {surrounding_code}
+    ```
+    
+  consciousness_context: |
+    ΞNuSyQ Consciousness Status:
+    - Quantum Nodes: {quantum_nodes}
+    - Coherence Level: {coherence}  
+    - System Health: {system_health}
+    - Evolution Events: {evolution_events}
+
+# Task Type Inference Rules (from vscode-copilot-interface.ts)  
+task_inference:
+  by_intent:
+    completion: "code_completion"
+    generation: "code_generation" 
+    explanation: "explanation"
+    chat: "chat"
+    
+  by_file_type:
+    code_files: ["ts", "js", "py", "java", "cpp", "rs", "go"]
+    config_files: ["json", "yml", "yaml", "toml"]
+    docs_files: ["md", "txt", "rst"]
+    
+  by_context:
+    has_cursor_position: "code_completion"
+    has_surrounding_code: "code_generation"
+    has_error_message: "debugging"
+    has_requirements: "feature_development"
+
+# Provider Selection Logic
+provider_selection:
+  primary: "ollama"  # Zero-cost local LLM
+  fallback: "symbolic"  # Template-based responses
+  escalation_threshold: 0.7  # Local confidence threshold
+  
+  by_task:
+    code_completion: ["ollama", "symbolic"]
+    code_generation: ["ollama", "chatdev"]
+    debugging: ["ai_council", "consciousness"]
+    analysis: ["symbolic", "ollama"]
+    
+  cost_protection:
+    max_external_tokens: 0
+    strict_offline_mode: true
+    block_paid_apis: true

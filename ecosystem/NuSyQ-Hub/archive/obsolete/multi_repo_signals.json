@@ -1,0 +1,20 @@
+{
+  "repos": {
+    "hub": {
+      "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub",
+      "git_status": [
+        "## master...origin/master [ahead 108]",
+        " m _vibe",
+        " m temp_sns_core"
+      ],
+      "git_head": "9ad8ab0 fix: eliminate 18 type errors in quick_quest_audit.py + actionable_intelligence_agent.py",
+      "lint_command": "ruff check --select=F401,F821,E999 --exit-zero",
+      "lint_output_lines": 0,
+      "lint_errors_count": 0,
+      "lint_failed": true
+    }
+  },
+  "summary": {
+    "total_repos": 1
+  }
+}

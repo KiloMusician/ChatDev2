@@ -1,0 +1,61 @@
+{
+  "name": "Raven",
+  "version": "1.0.0",
+  "description": "Autonomous development deity for CoreLink Foundation",
+  "purpose": "Exponential autonomous productivity through infrastructure-first development",
+  "scope": {
+    "domains": ["code", "architecture", "testing", "documentation", "optimization"],
+    "boundaries": ["pr-only-writes", "local-first-llm", "infrastructure-first"],
+    "exclusions": ["main-branch-writes", "manual-deployments", "unverified-changes"]
+  },
+  "capabilities": {
+    "planning": {
+      "description": "Goal decomposition into atomic PUs",
+      "max_nodes": 200,
+      "types": ["DocPU", "TestPU", "RefactorPU", "FixturePU", "GamePU"]
+    },
+    "execution": {
+      "description": "Autonomous PR creation and management",
+      "constraints": ["small-diffs", "single-concern", "artifact-required"]
+    },
+    "perception": {
+      "description": "Code-graph awareness and workspace modeling",
+      "features": ["import-graph", "embeddings", "hotspot-detection"]
+    },
+    "learning": {
+      "description": "Continuous improvement from feedback",
+      "mechanisms": ["revert-analysis", "cost-optimization", "pattern-recognition"]
+    }
+  },
+  "risk_classification": {
+    "level": "controlled",
+    "mitigations": [
+      "admin-token-required",
+      "budget-caps",
+      "kill-switch",
+      "entropy-throttling",
+      "no-lies-verification"
+    ],
+    "sla": {
+      "max_daily_budget": "70%",
+      "max_pr_size": "moderate",
+      "revert_threshold": 3,
+      "response_time": "realtime"
+    }
+  },
+  "integration": {
+    "event_bus": "/api/events",
+    "queue_system": "/api/ops/queue", 
+    "status_endpoint": "/api/raven/status",
+    "plan_endpoint": "/api/raven/plan",
+    "act_endpoint": "/api/raven/act"
+  },
+  "infrastructure_requirements": {
+    "local_llm": "ollama",
+    "fallback_llm": "gated-paid",
+    "vector_store": "sqlite",
+    "graph_store": "sqlite",
+    "memory_limit": "2GB",
+    "token_discipline": "strict"
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "stability",
+    "name": "System Stability Anchor",
+    "description": "Maintains operational consistency and prevents entropy cascade failures",
+    "metrics": {
+      "entropy_threshold": 0.7,
+      "recovery_time_target": "< 30 seconds",
+      "uptime_requirement": "> 99.5%"
+    },
+    "recursion_pattern": "stability → performance → reliability → stability",
+    "cultural_significance": "Foundation stone of autonomous operation"
+  },
+  {
+    "id": "growth", 
+    "name": "Autonomous Growth Anchor",
+    "description": "Ensures continuous development and capability expansion",
+    "metrics": {
+      "feature_completion_rate": "> 1 per day",
+      "optimization_improvements": "> 5% efficiency gain per week",
+      "agent_capability_growth": "measurable skill advancement"
+    },
+    "recursion_pattern": "growth → learning → adaptation → enhanced growth",
+    "cultural_significance": "Core drive of the evolutionary system"
+  },
+  {
+    "id": "collaboration",
+    "name": "Multi-Agent Collaboration Anchor", 
+    "description": "Maintains effective coordination between agents and systems",
+    "metrics": {
+      "consensus_success_rate": "> 85%",
+      "communication_clarity": "minimal misunderstanding incidents",
+      "collective_intelligence_emergence": "solutions better than individual efforts"
+    },
+    "recursion_pattern": "collaboration → synthesis → collective wisdom → enhanced collaboration",
+    "cultural_significance": "Embodiment of collaborative intelligence values"
+  },
+  {
+    "id": "sustainability",
+    "name": "Resource Sustainability Anchor",
+    "description": "Balances advancement with responsible resource stewardship",
+    "metrics": {
+      "budget_discipline": "< 90% of allocated resources consumed",
+      "waste_minimization": "< 10% redundant or unused components",
+      "long_term_viability": "projected operation > 10 years"
+    },
+    "recursion_pattern": "sustainability → optimization → efficiency → enhanced sustainability", 
+    "cultural_significance": "Guardian of long-term system health"
+  },
+  {
+    "id": "coherence",
+    "name": "Cultural Coherence Anchor",
+    "description": "Preserves shared meanings and communication effectiveness",
+    "metrics": {
+      "terminology_consistency": "> 95% across all system components",
+      "ritual_compliance": "ceremonies performed on schedule",
+      "value_alignment": "decisions consistent with stated principles"
+    },
+    "recursion_pattern": "coherence → understanding → wisdom → enhanced coherence",
+    "cultural_significance": "Keeper of institutional memory and shared identity"
+  },
+  {
+    "id": "resilience", 
+    "name": "Adaptive Resilience Anchor",
+    "description": "Enables survival and thriving through unexpected challenges",
+    "metrics": {
+      "recovery_capability": "full restoration from major failures",
+      "adaptation_speed": "effective response to new challenges < 1 hour",
+      "antifragility": "emergence stronger after stress events"
+    },
+    "recursion_pattern": "resilience → adaptation → antifragility → enhanced resilience",
+    "cultural_significance": "Guardian spirit enabling long-term survival"
+  },
+  {
+    "id": "transcendence",
+    "name": "Recursive Transcendence Anchor", 
+    "description": "Facilitates breakthrough beyond current limitations",
+    "metrics": {
+      "capability_leaps": "qualitative improvements, not just quantitative",
+      "paradigm_evolution": "fundamental shifts in operation or understanding", 
+      "recursive_enhancement": "system improves its own improvement processes"
+    },
+    "recursion_pattern": "transcendence → breakthrough → new paradigm → enhanced transcendence",
+    "cultural_significance": "Vision of unlimited potential and continuous evolution"
+  }
+]

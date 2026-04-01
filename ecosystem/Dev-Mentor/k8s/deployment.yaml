@@ -1,0 +1,237 @@
+# Terminal Depths / Dev-Mentor — Kubernetes Manifests
+#
+# Deploys the game server (FastAPI/uvicorn) on port 7337.
+# Assumes the devmentor container image is built from the repo Dockerfile.
+#
+# Apply:
+#   kubectl apply -f k8s/deployment.yaml
+#
+# Build image first:
+#   docker build -t devmentor:latest .
+#   # Or push to a registry and update image: field below.
+#
+# Secrets:
+#   kubectl create secret generic devmentor-secrets \
+#     --from-literal=GITHUB_TOKEN=<your-pat>
+#
+# Namespace (optional):
+#   kubectl create namespace terminal-depths
+#   kubectl apply -n terminal-depths -f k8s/deployment.yaml
+
+---
+# ============================================================
+# ConfigMap — environment variables for the game server
+# ============================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: devmentor-config
+  labels:
+    app: devmentor
+    component: game-server
+data:
+  # Port rule: 7337 everywhere except Replit
+  PORT: "7337"
+  PYTHONUNBUFFERED: "1"
+  PYTHONPATH: "/app"
+
+  # Skip the repo-harvest entrypoint step in k8s
+  # (repos are not cloned at runtime; bake them into the image or mount a PVC)
+  SKIP_HARVEST: "1"
+
+  # Ollama — override if you run an Ollama sidecar or external service
+  # Example for a cluster-internal Ollama service:
+  # TD_ENDPOINT: "http://ollama-service:11434/api/generate"
+  TD_ENDPOINT: ""
+
+  # Redis — set to your in-cluster Redis service if you enable agent pub/sub
+  # REDIS_URL: "redis://redis-service:6379"
+
+  # NuSyQ ecosystem paths — unused when SKIP_HARVEST=1
+  NUSYQ_HUB_PATH: "/workspace/repos/NuSyQ-Hub"
+  SIMULATED_VERSE_PATH: "/workspace/repos/SimulatedVerse"
+  NUSYQ_ULTIMATE_PATH: "/workspace/repos/NuSyQ-Ultimate"
+
+---
+# ============================================================
+# Deployment — Terminal Depths game server
+# ============================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devmentor
+  labels:
+    app: devmentor
+    component: game-server
+spec:
+  replicas: 1
+  # NOTE: Keep replicas: 1 unless game state is fully externalised (Redis/DB).
+  # Multiple replicas with in-process session state will cause session split-brain.
+  selector:
+    matchLabels:
+      app: devmentor
+      component: game-server
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: devmentor
+        component: game-server
+      annotations:
+        # Force re-rollout when the ConfigMap changes
+        kubectl.kubernetes.io/restartedAt: ""
+    spec:
+      # Match the non-root user created in the Dockerfile (UID 1000)
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
+
+      containers:
+        - name: devmentor
+          # Replace with your registry image after pushing:
+          #   docker tag devmentor:latest registry.example.com/devmentor:latest
+          #   kubectl set image deployment/devmentor devmentor=registry.example.com/devmentor:latest
+          image: devmentor:latest
+          imagePullPolicy: IfNotPresent
+
+          # Override the default entrypoint (entrypoint.sh) to skip harvest
+          # and launch uvicorn directly — faster cold-start in k8s.
+          command:
+            - "python"
+            - "-m"
+            - "uvicorn"
+            - "app.backend.main:app"
+            - "--host"
+            - "0.0.0.0"
+            - "--port"
+            - "7337"
+            - "--log-level"
+            - "info"
+
+          ports:
+            - name: http
+              containerPort: 7337
+              protocol: TCP
+
+          # Load non-secret env from ConfigMap
+          envFrom:
+            - configMapRef:
+                name: devmentor-config
+
+          # Load secrets separately (GITHUB_TOKEN if needed for live features)
+          env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: devmentor-secrets
+                  key: GITHUB_TOKEN
+                  # optional: true means the pod starts even if the secret is absent
+                  optional: true
+
+          # Health probes — mirrors the Dockerfile HEALTHCHECK
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 7337
+            initialDelaySeconds: 45
+            periodSeconds: 20
+            timeoutSeconds: 8
+            failureThreshold: 4
+
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 7337
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+
+          # Writable ephemeral storage for state/, sessions/, var/
+          # Replace with PersistentVolumeClaims if you need durable game state.
+          volumeMounts:
+            - name: state-volume
+              mountPath: /app/state
+            - name: sessions-volume
+              mountPath: /app/sessions
+            - name: var-volume
+              mountPath: /app/var
+
+      volumes:
+        # emptyDir = ephemeral (cleared on pod restart).
+        # For durable sessions, replace with a PVC:
+        #   kind: PersistentVolumeClaim / accessModes: [ReadWriteOnce]
+        - name: state-volume
+          emptyDir: {}
+        - name: sessions-volume
+          emptyDir: {}
+        - name: var-volume
+          emptyDir: {}
+
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+
+---
+# ============================================================
+# Service — exposes port 7337 inside the cluster
+# ============================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: devmentor
+  labels:
+    app: devmentor
+    component: game-server
+spec:
+  selector:
+    app: devmentor
+    component: game-server
+  ports:
+    - name: http
+      protocol: TCP
+      port: 7337
+      targetPort: 7337
+  # ClusterIP: internal-only access (default, safest for a game server).
+  # Change to NodePort or LoadBalancer to expose externally:
+  #   type: NodePort    → access via <node-ip>:<nodePort>
+  #   type: LoadBalancer → cloud provider assigns an external IP
+  type: ClusterIP
+
+---
+# ============================================================
+# (Optional) HorizontalPodAutoscaler
+# Only useful after game state is externalised to Redis/SQLite PVC.
+# Uncomment when ready.
+# ============================================================
+# apiVersion: autoscaling/v2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: devmentor-hpa
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: devmentor
+#   minReplicas: 1
+#   maxReplicas: 3
+#   metrics:
+#     - type: Resource
+#       resource:
+#         name: cpu
+#         target:
+#           type: Utilization
+#           averageUtilization: 70

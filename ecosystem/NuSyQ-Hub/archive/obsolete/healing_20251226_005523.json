@@ -1,0 +1,61 @@
+{
+  "health_report": {
+    "timestamp": "2025-12-26T00:55:18.764486",
+    "repositories": {
+      "NuSyQ-Hub": {
+        "exists": true,
+        "python_files": 28131,
+        "broken_imports": 0,
+        "critical_files": {
+          "src/main.py": true,
+          "COMPLETE_FUNCTION_REGISTRY.md": true,
+          "config/ZETA_PROGRESS_TRACKER.json": true
+        }
+      },
+      "SimulatedVerse": {
+        "exists": true,
+        "python_files": 5343,
+        "broken_imports": 0,
+        "critical_files": {
+          "package.json": true,
+          "CULTURE_SHIP_READY.md": true,
+          "server_entry": true
+        },
+        "server_entry_point": "server/index.ts"
+      },
+      "NuSyQ-Core": {
+        "exists": true,
+        "python_files": 12636,
+        "broken_imports": 0,
+        "critical_files": {
+          "mcp_server/main.py": true,
+          "NuSyQ.Orchestrator.ps1": true,
+          "knowledge-base.yaml": true
+        }
+      }
+    },
+    "ai_systems": {
+      "ollama": {
+        "status": "healthy",
+        "models_available": 9,
+        "models": [
+          "nomic-embed-text:latest",
+          "phi3.5:latest",
+          "gemma2:9b",
+          "deepseek-coder-v2:16b",
+          "starcoder2:15b",
+          "codellama:7b",
+          "qwen2.5-coder:7b",
+          "qwen2.5-coder:14b",
+          "llama3.1:8b"
+        ]
+      }
+    },
+    "critical_issues": [],
+    "recommendations": []
+  },
+  "actions_taken": [
+    "analysis_only"
+  ],
+  "auto_confirm": false
+}

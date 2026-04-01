@@ -1,0 +1,12 @@
+{
+  "id": "scripts_structural_audit_sh_4",
+  "tier": 1,
+  "priority": 5,
+  "title": "Fix: todos=$(rg -n --no-heading 'TODO|FIXME' --glob '!node_modules' --glob '!.git' | wc -l | tr -d ' ')",
+  "source": {
+    "file": "scripts/structural_audit.sh",
+    "line": 4
+  },
+  "action": "apply_patch_or_impl",
+  "expected_receipt": "reports/receipt_1756883401.303995_scripts_structural_audit_sh_4.json"
+}

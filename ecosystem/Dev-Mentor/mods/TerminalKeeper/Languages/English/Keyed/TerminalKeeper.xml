@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Buildings -->
+  <TK_LatticeTerminal_label>Lattice Terminal</TK_LatticeTerminal_label>
+  <TK_LatticeConsole_label>Lattice Console</TK_LatticeConsole_label>
+  <TK_LatticeNexus_label>Lattice Nexus</TK_LatticeNexus_label>
+
+  <!-- UI: Terminal access dialog -->
+  <TK_DialogTitle>Lattice Terminal — {0}</TK_DialogTitle>
+  <TK_PlayTerminalDepths>▶ Play Terminal Depths</TK_PlayTerminalDepths>
+  <TK_UploadLog>Upload Today's Log</TK_UploadLog>
+  <TK_DownloadBlueprint>Download Blueprint</TK_DownloadBlueprint>
+  <TK_CouncilVote>AI Council Vote</TK_CouncilVote>
+  <TK_QueryCultureShip>Query Culture Ship</TK_QueryCultureShip>
+  <TK_ViewGordonStatus>Gordon Status</TK_ViewGordonStatus>
+  <TK_ViewSerenaAnalytics>Serena Analytics</TK_ViewSerenaAnalytics>
+  <TK_TerminalOffline>Terminal Offline — check API connection</TK_TerminalOffline>
+  <TK_UploadSuccess>Log uploaded. CHUG engine received {0} XP.</TK_UploadSuccess>
+  <TK_UploadFailed>Upload failed: {0}</TK_UploadFailed>
+
+  <!-- Gizmos -->
+  <TK_Gizmo_AccessTerminal>Access Lattice</TK_Gizmo_AccessTerminal>
+  <TK_Gizmo_AccessTerminal_Desc>Open the Lattice Terminal interface. Upload logs, download blueprints, query the AI Council.</TK_Gizmo_AccessTerminal_Desc>
+
+  <!-- Messages -->
+  <TK_Message_NexusOnline>Lattice Nexus online. Colony telemetry broadcasting to NuSyQ-Hub.</TK_Message_NexusOnline>
+  <TK_Message_NexusOffline>Lattice Nexus offline. Colonists losing Lattice-linked buff.</TK_Message_NexusOffline>
+  <TK_Message_BlueprintReceived>AI Council blueprint received: {0}. Awaiting construction approval.</TK_Message_BlueprintReceived>
+  <TK_Message_CouncilDecision>AI Council decision: {0}</TK_Message_CouncilDecision>
+
+  <!-- Work type -->
+  <TK_LatticeTask_label>lattice work</TK_LatticeTask_label>
+  <TK_LatticeTask_pawnLabel>Lattice Worker</TK_LatticeTask_pawnLabel>
+
+  <!-- Mod Audit dialog -->
+  <TK_ModAudit_Title>Lattice Mod Auditor — TerminalKeeper</TK_ModAudit_Title>
+  <TK_ModAudit_Loading>Scanning mod list via Terminal Depths API…</TK_ModAudit_Loading>
+  <TK_Gizmo_ModAudit>Mod Audit</TK_Gizmo_ModAudit>
+  <TK_Gizmo_ModAudit_Desc>Audit the active mod list for conflicts, duplicate packageIds, and load-order violations. Powered by the Terminal Depths mod engine.</TK_Gizmo_ModAudit_Desc>
+
+  <!-- Inspection strings -->
+  <TK_Inspect_AgentId>Agent ID: {0}</TK_Inspect_AgentId>
+  <TK_Inspect_LastSession>Last session: {0}</TK_Inspect_LastSession>
+  <TK_Inspect_TotalUploads>Total uploads: {0}</TK_Inspect_TotalUploads>
+  <TK_Inspect_LatticeStrength>Lattice strength: {0}%</TK_Inspect_LatticeStrength>
+</LanguageData>

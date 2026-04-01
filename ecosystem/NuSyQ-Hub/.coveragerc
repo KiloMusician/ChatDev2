@@ -1,0 +1,32 @@
+[run]
+omit =
+    tests/*
+    */tests/*
+    */site-packages/*
+    */.venv/*
+    */venv/*
+    */node_modules/*
+    *.pyc
+    *__init__.py
+    src/games/*
+    src/factories/*
+    src/quantum/*
+    src/consciousness/*
+    src/observability/*
+    src/tagging/*
+    src/Rosetta_Quest_System/*
+    src/integrations/*
+
+[report]
+show_missing = True
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.
+    raise NotImplementedError
+    return NotImplemented
+    def __repr__
+    def __str__
+    if TYPE_CHECKING:
+
+[html]
+directory = htmlcov

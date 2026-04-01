@@ -1,0 +1,14 @@
+{
+  "id": "00_TAJMAHAL_BOOLEAN_ENGINE",
+  "type": "engine_hint",
+  "eval": {
+    "keyword_semantics": {
+      "probe": "shell_or_python_snippet",
+      "expect": "assertion_or_range",
+      "on_pass": "list_of_micro_ops",
+      "on_fail": "list_of_micro_ops",
+      "route:Agent->verb(args)": "council dispatch primitive"
+    },
+    "safety": {"sandbox": true, "no destructive ops without snapshot": true}
+  }
+}

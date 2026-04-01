@@ -1,0 +1,41 @@
+services:
+  postgres-core:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=nusyq_core
+      - POSTGRES_USER=nusyq
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-nusyq}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-core-data:/var/lib/postgresql/data
+      - ./schema_core.sql:/docker-entrypoint-initdb.d/01_schema_core.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nusyq -d nusyq_core"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  registry-sync:
+    image: python:3.11-slim
+    profiles: ["sync"]
+    working_dir: /workspace
+    depends_on:
+      postgres-core:
+        condition: service_healthy
+    volumes:
+      - ../..:/workspace:ro
+    environment:
+      PG_HOST: postgres-core
+      PG_PORT: "5432"
+      PG_DB: nusyq_core
+      PG_USER: nusyq
+      PG_PASS: ${DB_PASSWORD:-nusyq}
+    command: >
+      sh -c "
+        pip install --no-cache-dir psycopg2-binary &&
+        python scripts/postgres/sync_registry.py --registry state/registry.json
+      "
+
+volumes:
+  postgres-core-data:

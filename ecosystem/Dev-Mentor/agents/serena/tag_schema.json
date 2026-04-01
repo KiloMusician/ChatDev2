@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Serena OmniTag / Msg⛛ Canonical Tag Schema",
+  "description": "Canonical tag set for the DevMentor / Terminal Depths / NuSyQ ecosystem. All memory entries, events, and observations are tagged using this schema. Tags are stored as JSON arrays of single-key objects: [{\"type\":\"observation\"},{\"agent\":\"SERENA\"}].",
+  "version": "1.0.0",
+
+  "tags": {
+    "type": {
+      "description": "Primary classification of the entry",
+      "values": [
+        "code_chunk", "observation", "conversation", "relationship",
+        "proposal", "walk_event", "arc_beat", "npc_interaction",
+        "game_event", "system_event", "agent_action"
+      ]
+    },
+    "agent": {
+      "description": "Codename of the agent that created this entry",
+      "examples": ["SERENA", "GORDON", "SENTINEL", "ORACLE", "SURFACE_BRIDGE"]
+    },
+    "ctx": {
+      "description": "Context layer within the ΨΞΦΩ architecture",
+      "values": ["Ω", "Ξ", "Ψ", "Φ", "meta", "surface"]
+    },
+    "surface": {
+      "description": "Development surface where the entry originated",
+      "values": ["replit", "vscode", "docker", "obsidian", "github_ci", "game", "local"]
+    },
+    "sess": {
+      "description": "Session identifier (UUID or named session)",
+      "examples": ["gordon-a3f7c1", "human-session-01", "cli-default"]
+    },
+    "file": {
+      "description": "Relative file path the entry relates to",
+      "examples": ["app/game_engine/commands.py", "agents/serena/memory.py"]
+    },
+    "kind": {
+      "description": "For code_chunk entries: the AST node type",
+      "values": ["function", "class", "module", "text", "parse_error"]
+    },
+    "severity": {
+      "description": "For observation entries: anomaly severity",
+      "values": ["info", "warn", "error", "anomaly", "critical"]
+    },
+    "faction": {
+      "description": "Game faction context",
+      "examples": ["PHANTOM_CIRCUIT", "WATCHER_GUILD", "SPECIAL_CIRCUMSTANCES", "CATHEDRAL_MESH"]
+    },
+    "arc": {
+      "description": "Narrative arc being tracked",
+      "examples": ["cathedral_mesh", "discovery", "chimera"]
+    },
+    "walk_id": {
+      "description": "Walk journal entry this chunk belongs to",
+      "type": "integer"
+    },
+    "ts": {
+      "description": "Unix timestamp (float) of the entry",
+      "type": "number"
+    }
+  },
+
+  "envelope": {
+    "description": "Standard event envelope used for agent-to-agent messages and chronicle entries",
+    "structure": {
+      "[Msg⛛{X}]":   "message identity (X = sequential or UUID fragment)",
+      "[Sess⛛{UID}]": "session continuity token",
+      "[Ctx⛛{Layer}]": "ΨΞΦΩ layer (Ω|Ξ|Ψ|Φ|meta)",
+      "[Agent⛛{CODE}]": "originating agent codename",
+      "[Type⛛{kind}]": "entry type from tags.type",
+      "[Sev⛛{level}]": "severity from tags.severity"
+    },
+    "example": "[Msg⛛{0042}][Sess⛛{gordon-a3f7}][Ctx⛛{Ξ}][Agent⛛{SERENA}][Type⛛{observation}][Sev⛛{warn}]"
+  },
+
+  "ψξφω_mapping": {
+    "Ψ": "Flow / intake — Walker, raw signal from repository",
+    "Ω": "Core / compression — MemoryPalace, entropy held in suspension",
+    "Ξ": "Recursion / refinement — ask(), explain(), self-correcting loops",
+    "Φ": "Phase / sync — cross-surface coherence, surface_bridge, tag consistency"
+  }
+}

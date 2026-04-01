@@ -1,0 +1,18 @@
+{
+  "id": "bridge_rebuild_1774501952400",
+  "title": "Rebuild nusyq-bridge after unexpected state drift",
+  "type": "fix",
+  "details": "NuSyQ bridge startup state drift detected after restart. Compare hashes d1407cce57e8e2ff80c1b2381937eab771f3126c9fbc9bca969709d9a5e0e9c8 -> 7483eff60aaf7ea76e0f33f8bbc1759bbad9a49cd57c0618abd0057b00e4b0bc and inspect bridge_state_diff.json.",
+  "target": "nusyq-bridge",
+  "priority": 1,
+  "status": "pending",
+  "created_at": "2026-03-26T05:12:32.400593",
+  "updated_at": "2026-03-26T05:12:32.400593",
+  "result": "",
+  "metadata": {
+    "source": "nusyq_bridge",
+    "state_diff_file": "state/bridge_state_diff.json",
+    "previous_state_hash": "d1407cce57e8e2ff80c1b2381937eab771f3126c9fbc9bca969709d9a5e0e9c8",
+    "current_state_hash": "7483eff60aaf7ea76e0f33f8bbc1759bbad9a49cd57c0618abd0057b00e4b0bc"
+  }
+}

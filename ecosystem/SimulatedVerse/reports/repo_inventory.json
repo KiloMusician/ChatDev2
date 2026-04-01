@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-09-03T04:20:00.000Z",
+  "sage_protocol": "ΞNuSyQ-prime³",
+  "temple_classification": {
+    "temple1_knowledge": {
+      "count": 0,
+      "description": "docs, knowledge, notebooks, *.md files",
+      "paths": ["./docs", "./knowledge", "./notebooks", "*.md", "*.qgl", "*.rtf"]
+    },
+    "temple2_system": {
+      "count": 0,
+      "description": "ops, scripts, health, watchdog, queue files", 
+      "paths": ["./ops", "./scripts", "./packages/*/ops", "*health*", "*watchdog*", "*queue*"]
+    },
+    "temple3_simulation": {
+      "count": 0,
+      "description": "UI, game, ASCII, React components",
+      "paths": ["./apps/*/ui", "./game", "./ascii", "./client", "*.tsx", "*.jsx"]
+    },
+    "temple4_culture": {
+      "count": 0,
+      "description": "LLM, council, agents, consciousness",
+      "paths": ["./packages/llm", "./packages/council", "./agents", "./packages/chatdev*", "./packages/consciousness"]
+    }
+  },
+  "noise_exclusions": [
+    ".git", "node_modules", ".venv", ".pythonlibs", "__pycache__", 
+    ".cache", "dist", "build", "coverage", "attic", "quarantine"
+  ],
+  "signal_analysis": {
+    "total_signal_files": 0,
+    "quarantine_success": "1257 scaffold files moved to attic/quarantine/scaffold-spam/",
+    "theater_eliminated": true
+  }
+}

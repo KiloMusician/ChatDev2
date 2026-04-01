@@ -1,0 +1,33 @@
+{
+  "routes": [
+    {
+      "name": "atrium",
+      "to": [
+        "workshop",
+        "observatory"
+      ],
+      "notes": "safe spawn"
+    },
+    {
+      "name": "workshop",
+      "to": [
+        "archives",
+        "observatory"
+      ]
+    },
+    {
+      "name": "observatory",
+      "to": [
+        "archives",
+        "atrium"
+      ]
+    },
+    {
+      "name": "archives",
+      "to": [
+        "atrium"
+      ]
+    }
+  ],
+  "created_at": "2025-08-27T14:50:39Z"
+}

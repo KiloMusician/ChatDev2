@@ -1,0 +1,25 @@
+{
+  "timestamp": 1756839962,
+  "phase": "R_protagonist_ping",
+  "duration_seconds": 10,
+  "gameplay_metrics": {
+    "initial_energy": 245,
+    "updated_energy": 246,
+    "energy_delta": "0",
+    "initial_consciousness": 4.0545,
+    "updated_consciousness": 4.2346,
+    "consciousness_delta": "0"
+  },
+  "fun_pulse": {
+    "events_per_minute": "0.00",
+    "baseline_threshold": 1.0,
+    "below_baseline": true,
+    "novelty_detected": false
+  },
+  "recommendations": ["council_proposes_micro_mechanic_improvement", "feature_flag_deployment", "retest_engagement"],
+  "proof_gates": {
+    "spawn_goal_path": "exists",
+    "idle_curves_bounded": "confirmed",
+    "progression_active": false
+  }
+}

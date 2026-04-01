@@ -1,0 +1,14 @@
+:root{
+  --ascii-font: ui-monospace, "JetBrains Mono", "Fira Code", "Iosevka", Menlo, Consolas, monospace;
+  --ascii-scale: 1;
+  --ascii-fg: #cfd2dc;
+  --ascii-bg: #0b0e14;
+  --ascii-accent: #7aa2f7;
+  --ascii-warn: #e0af68;
+  --ascii-crit: #f7768e;
+}
+.ascii-root{ font-family: var(--ascii-font); line-height: 1; background: var(--ascii-bg); color: var(--ascii-fg); }
+.ascii-pre{ white-space: pre; margin:0; font-size: calc(12px * var(--ascii-scale)); letter-spacing: 0.02em; }
+.ascii-layer{ position:absolute; inset:0; pointer-events:none; }
+.ascii-window{ border: 1px solid #283046; background: #0f1320cc; border-radius: 6px; padding: 6px; }
+@media (max-width: 800px){ :root{ --ascii-scale: 0.9; } }

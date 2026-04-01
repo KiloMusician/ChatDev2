@@ -1,0 +1,70 @@
+{
+  "timestamp": "2025-09-04T13:19:05.000Z",
+  "action": "ui_route_probe",
+  "cultural_ship_ops_stage": "reality_checks",
+  "entrypoints_discovered": {
+    "primary_apps": [
+      {
+        "file": "client/src/App.tsx",
+        "role": "main_application_router",
+        "routes": ["/", "/home", "/game-menu", "/chatdev", "/vantages", "/infrastructure", "/admin", "/game"],
+        "framework": "wouter + React",
+        "last_modified": "recent",
+        "mount_mechanism": "wouter Switch/Route components"
+      },
+      {
+        "file": "PreviewUI/web/App.tsx", 
+        "role": "preview_ui_shell",
+        "framework": "React",
+        "integration": "imported by client/src/App.tsx as UIMetamorphosisShell",
+        "last_modified": "recent"
+      }
+    ],
+    "routers": [
+      {
+        "file": "PreviewUI/web/router.ts",
+        "role": "UIRouter class for ui mode resolution",
+        "capabilities": ["legacy", "main", "demo"],
+        "url_params": ["?ui=", "?demo=", "?milestone="],
+        "navigation_method": "programmatic with feature flags"
+      },
+      {
+        "file": "PreviewUI/web/core/MenuRouter.tsx",
+        "role": "dev_play_mode_switching",
+        "modes": ["DEV", "PLAY"],
+        "components": {"DEV": "DevMenuExtended", "PLAY": "Ship Systems + panels"},
+        "bridge_mechanism": "game.setMode() state switching"
+      }
+    ],
+    "scene_loaders": [
+      {
+        "file": "ml/serving/router.ts",
+        "role": "ml_serving_routes",
+        "scope": "backend ML pipeline routing"
+      }
+    ],
+    "godot_integration": {
+      "status": "not_found",
+      "evidence": "No project.godot files detected",
+      "autoload_scripts": "none_detected"
+    }
+  },
+  "route_conflicts": {
+    "dual_app_structure": {
+      "conflict": "client/src/App.tsx vs PreviewUI/web/App.tsx",
+      "resolution": "PreviewUI imported as component, not competing router",
+      "impact": "minimal - proper composition pattern"
+    },
+    "dev_play_separation": {
+      "mechanism": "MenuRouter mode switching within UIMetamorphosisShell",
+      "isolation": "clean - DevMenuExtended vs Ship Systems UI",
+      "crossover_bridges": ["mode switching buttons", "consciousness state sharing"]
+    }
+  },
+  "environment_flags": {
+    "detected": ["PLAY_MODE localStorage check", "UI_VERSION potential"],
+    "missing": "APP_MODE centralized flag system",
+    "recommendation": "implement unified feature flag system"
+  },
+  "consolidation_status": "minimal conflicts - proper architectural separation maintained"
+}

@@ -1,0 +1,893 @@
+{
+  "repo_root": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+  "total_required_modules": 91,
+  "total_optional_modules": 89,
+  "checked_summary": {
+    "KILO_Core": {
+      "ok": true
+    },
+    "PyQt5": {
+      "ok": true
+    },
+    "abc": {
+      "ok": true
+    },
+    "ai": {
+      "ok": true
+    },
+    "aiohttp": {
+      "ok": true
+    },
+    "argparse": {
+      "ok": true
+    },
+    "ast": {
+      "ok": true
+    },
+    "asyncio": {
+      "ok": true
+    },
+    "base64": {
+      "ok": true
+    },
+    "cmath": {
+      "ok": true
+    },
+    "codecs": {
+      "ok": true
+    },
+    "collections": {
+      "ok": true
+    },
+    "concurrent": {
+      "ok": true
+    },
+    "contextlib": {
+      "ok": true
+    },
+    "copilot": {
+      "ok": true
+    },
+    "core": {
+      "ok": true
+    },
+    "cryptography": {
+      "ok": true
+    },
+    "csv": {
+      "ok": true
+    },
+    "dataclasses": {
+      "ok": true
+    },
+    "datetime": {
+      "ok": true
+    },
+    "difflib": {
+      "ok": true
+    },
+    "enum": {
+      "ok": true
+    },
+    "errno": {
+      "ok": true
+    },
+    "functools": {
+      "ok": true
+    },
+    "git": {
+      "ok": true
+    },
+    "hashlib": {
+      "ok": true
+    },
+    "heapq": {
+      "ok": true
+    },
+    "http": {
+      "ok": true
+    },
+    "importlib": {
+      "ok": true
+    },
+    "inspect": {
+      "ok": true
+    },
+    "integration": {
+      "ok": true
+    },
+    "io": {
+      "ok": true
+    },
+    "itertools": {
+      "ok": true
+    },
+    "json": {
+      "ok": true
+    },
+    "logging": {
+      "ok": true
+    },
+    "math": {
+      "ok": true
+    },
+    "matplotlib": {
+      "ok": true
+    },
+    "mimetypes": {
+      "ok": true
+    },
+    "multiprocessing": {
+      "ok": true
+    },
+    "networkx": {
+      "ok": true
+    },
+    "numpy": {
+      "ok": true
+    },
+    "os": {
+      "ok": true
+    },
+    "pandas": {
+      "ok": true
+    },
+    "pathlib": {
+      "ok": true
+    },
+    "pickle": {
+      "ok": true
+    },
+    "pkg_resources": {
+      "ok": true
+    },
+    "platform": {
+      "ok": true
+    },
+    "plotly": {
+      "ok": true
+    },
+    "psutil": {
+      "ok": true
+    },
+    "py_compile": {
+      "ok": true
+    },
+    "pytest": {
+      "ok": true
+    },
+    "queue": {
+      "ok": true
+    },
+    "random": {
+      "ok": true
+    },
+    "re": {
+      "ok": true
+    },
+    "requests": {
+      "ok": true
+    },
+    "rich": {
+      "ok": true
+    },
+    "runpy": {
+      "ok": true
+    },
+    "seaborn": {
+      "ok": true
+    },
+    "shutil": {
+      "ok": true
+    },
+    "signal": {
+      "ok": true
+    },
+    "socketserver": {
+      "ok": true
+    },
+    "sqlite3": {
+      "ok": true
+    },
+    "src": {
+      "ok": true
+    },
+    "statistics": {
+      "ok": true
+    },
+    "streamlit": {
+      "ok": true
+    },
+    "streamlit_agraph": {
+      "ok": true
+    },
+    "subprocess": {
+      "ok": true
+    },
+    "sympy": {
+      "ok": true
+    },
+    "sys": {
+      "ok": true
+    },
+    "system": {
+      "ok": true
+    },
+    "system_verification": {
+      "ok": true
+    },
+    "tempfile": {
+      "ok": true
+    },
+    "threading": {
+      "ok": true
+    },
+    "time": {
+      "ok": true
+    },
+    "tkinter": {
+      "ok": true
+    },
+    "tokenize": {
+      "ok": true
+    },
+    "tools": {
+      "ok": true
+    },
+    "traceback": {
+      "ok": true
+    },
+    "types": {
+      "ok": true
+    },
+    "typing": {
+      "ok": true
+    },
+    "unittest": {
+      "ok": true
+    },
+    "urllib": {
+      "ok": true
+    },
+    "utils": {
+      "ok": true
+    },
+    "uuid": {
+      "ok": true
+    },
+    "warnings": {
+      "ok": true
+    },
+    "watchdog": {
+      "ok": true
+    },
+    "weakref": {
+      "ok": true
+    },
+    "webbrowser": {
+      "ok": true
+    },
+    "yaml": {
+      "ok": true
+    },
+    "zipfile": {
+      "ok": true
+    }
+  },
+  "missing": {},
+  "optional_not_checked": {
+    "ArchitectureScanner": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\healing\\ArchitectureWatcher.py"
+      ]
+    },
+    "Enhanced_Interactive_Context_Browser": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_anti_recursion.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_browser_fix.py"
+      ]
+    },
+    "KILO_Core": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\health_verifier.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\health_verification.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Ollama_Integration_Hub.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\system_testing\\test_enhanced_placeholders.py"
+      ]
+    },
+    "LOGGING": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\LOGGING\\infrastructure\\__init__.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ChatDev-Party-System.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\health_verifier.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\health_verification.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Interactive-Context-Browser.py"
+      ]
+    },
+    "LocalLLMConfigurationChatDevOllama": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Update-ChatDev-to-use-Ollama.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\enhanced_copilot_launcher.py"
+      ]
+    },
+    "Ollama_Client_for_ChatDev_Integration": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Update-ChatDev-to-use-Ollama.py"
+      ]
+    },
+    "Scripts": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser.py"
+      ]
+    },
+    "ai": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ollama_chatdev_integrator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\chatdev_capabilities_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\kilo_infrastructure_validator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\advanced_chatdev_copilot_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\kilo_ai_orchestration_master.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\enhanced_agent_launcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\llm_validation_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\tools\\kilo_dev_launcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\enhanced_directory_context_generator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\llm_testing\\test_chatdev_browser.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\llm_testing\\ultimate_gas_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_import.py"
+      ]
+    },
+    "ai_coordinator": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\enhanced_copilot_launcher.py"
+      ]
+    },
+    "aiohttp": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ollama_chatdev_integrator.py"
+      ]
+    },
+    "arcade": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\game_development\\zeta21_game_pipeline.py"
+      ]
+    },
+    "ast": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\smart_extract_code.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\healing\\quantum_problem_resolver.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\healing\\quantum_problem_resolver_clean.py"
+      ]
+    },
+    "asyncio": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\llm_testing\\ultimate_gas_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_minimal.py"
+      ]
+    },
+    "azure": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\cloud\\quantum_cloud_orchestrator.py"
+      ]
+    },
+    "boto3": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\cloud\\quantum_cloud_orchestrator.py"
+      ]
+    },
+    "builtins": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_enhancement_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Update-ChatDev-to-use-Ollama.py"
+      ]
+    },
+    "chatdev": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\empirical_llm_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\setup_chatdev_integration.py"
+      ]
+    },
+    "chatdev_integration": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\enhanced_copilot_launcher.py"
+      ]
+    },
+    "chatdev_launcher": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\chatdev_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\chatdev_testing_chamber.py"
+      ]
+    },
+    "cirq": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\quantum_ml_processor.py"
+      ]
+    },
+    "collections": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\party_system_test_launcher.py"
+      ]
+    },
+    "complete_function_registry": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\execute_function_registry.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\python\\execute_function_registry.py"
+      ]
+    },
+    "consciousness": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ollama_chatdev_integrator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\kilo_infrastructure_validator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\kilo_ai_orchestration_master.py"
+      ]
+    },
+    "copilot": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\vscode_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\kilo_infrastructure_validator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Ollama_Integration_Hub.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\kilo_ai_orchestration_master.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\tools\\kilo_dev_launcher.py"
+      ]
+    },
+    "copilot_agent_launcher": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_get_target_files.py"
+      ]
+    },
+    "copilot_chatdev_bridge": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\chatdev_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\enhanced_copilot_launcher.py"
+      ]
+    },
+    "copilot_enhancement_bridge": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Ollama_Integration_Hub.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Interactive-Context-Browser.py"
+      ]
+    },
+    "cryptography": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\blockchain\\quantum_consciousness_blockchain.py"
+      ]
+    },
+    "dataclasses": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\party_system_test_launcher.py"
+      ]
+    },
+    "datetime": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\broken_paths_analyzer.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\party_system_test_launcher.py"
+      ]
+    },
+    "diagnostics": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\comprehensive_integration_validator.py"
+      ]
+    },
+    "difflib": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\ci\\gpt_runner.py"
+      ]
+    },
+    "enum": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\enhanced_copilot_launcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\party_system_test_launcher.py"
+      ]
+    },
+    "faiss": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\consciousness\\the_oldest_house.py"
+      ]
+    },
+    "github_validation_suite": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_github_validation.py"
+      ]
+    },
+    "google": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\cloud\\quantum_cloud_orchestrator.py"
+      ]
+    },
+    "healing": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py"
+      ]
+    },
+    "importlib": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_enhancement_bridge.py"
+      ]
+    },
+    "integration": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ollama_chatdev_integrator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\performance_monitor.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\chatdev_capabilities_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\kilo_infrastructure_validator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\advanced_chatdev_copilot_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\kilo_ai_orchestration_master.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\copilot_agent_launcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\enhanced_agent_launcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\llm_validation_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\enhanced_directory_context_generator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\setup_chatdev_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\llm_testing\\test_chatdev_browser.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\llm_testing\\ultimate_gas_test.py"
+      ]
+    },
+    "json": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\comprehensive_repository_analyzer.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_enhancement_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_minimal.py"
+      ]
+    },
+    "jupyter_client": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Wizard-Navigator.py"
+      ]
+    },
+    "kubernetes": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\cloud\\quantum_cloud_orchestrator.py"
+      ]
+    },
+    "logging": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\LOGGING\\infrastructure\\__init__.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_enhancement_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_workspace_enhancer.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_minimal.py"
+      ]
+    },
+    "matplotlib": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py"
+      ]
+    },
+    "networkx": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\quantum\\quantum_problem_resolver_test.py"
+      ]
+    },
+    "numpy": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\health_verifier.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\consciousness\\the_oldest_house.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\health_verification.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\quantum\\__main__.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\quantum\\quantum_problem_resolver_test.py"
+      ]
+    },
+    "ollama": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Wizard-Navigator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\setup\\secrets.py"
+      ]
+    },
+    "ollama_ai_runner": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\ci\\test_ai_pipeline.py"
+      ]
+    },
+    "openai": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\ci\\gpt_runner.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\chatdev_environment_patcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\setup\\secrets.py"
+      ]
+    },
+    "orchestration": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\kilo_infrastructure_validator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\enhanced_directory_context_generator.py"
+      ]
+    },
+    "os": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_enhancement_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Update-ChatDev-to-use-Ollama.py"
+      ]
+    },
+    "pandas": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\broken_paths_analyzer.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\health_verifier.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\health_verification.py"
+      ]
+    },
+    "pathlib": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Ollama_Integration_Hub.py"
+      ]
+    },
+    "psutil": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\environment_diagnostic_enhanced.py"
+      ]
+    },
+    "py_compile": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tools\\check_core_imports.py"
+      ]
+    },
+    "pygame": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\game_development\\zeta21_game_pipeline.py"
+      ]
+    },
+    "qiskit": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\blockchain\\quantum_consciousness_blockchain.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\quantum_ml_processor.py"
+      ]
+    },
+    "qiskit_aer": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\blockchain\\quantum_consciousness_blockchain.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\quantum_ml_processor.py"
+      ]
+    },
+    "quantum": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\comprehensive_quantum_analysis.py"
+      ]
+    },
+    "quantum_problem_resolver_test": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\quantum_system_complete_overview.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\quantum_kilo_integration_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\quantum\\quantum_demo_interactive.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\quantum\\quantum_quick_start_guide.py"
+      ]
+    },
+    "quantum_workflow_automation": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\quantum_system_complete_overview.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\quantum\\quantum_overview.py"
+      ]
+    },
+    "random": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\party_system_test_launcher.py"
+      ]
+    },
+    "re": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\advanced_chatdev_copilot_integration.py"
+      ]
+    },
+    "repository_compendium_stub": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Interactive-Context-Browser.py"
+      ]
+    },
+    "requests": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\quick_integration_check.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\setup\\secrets.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\system\\rpg_inventory.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\tools\\extract_commands.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\tools\\launch-adventure.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_requests.py"
+      ]
+    },
+    "rich": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ChatDev-Party-System.py"
+      ]
+    },
+    "scipy": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\healing\\evolution_catalyst.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\pattern_consciousness_analyzer.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\spine\\transcendent_spine_core.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\integration_tests.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\spine_tests.py"
+      ]
+    },
+    "seaborn": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py"
+      ]
+    },
+    "secrets": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\blockchain\\quantum_consciousness_blockchain.py"
+      ]
+    },
+    "sentence_transformers": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\consciousness\\the_oldest_house.py"
+      ]
+    },
+    "setup": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ollama_chatdev_integrator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\vscode_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\kilo_infrastructure_validator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\chatdev_launcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\kilo_ai_orchestration_master.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\enhanced_directory_context_generator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_minimal.py"
+      ]
+    },
+    "shutil": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\game_development\\zeta21_game_pipeline.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta04_conversation_management.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta21_game_pipeline.py"
+      ]
+    },
+    "sklearn": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\healing\\evolution_catalyst.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\consciousness_enhanced_ml.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\pattern_consciousness_analyzer.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\spine\\transcendent_spine_core.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\spine_tests.py"
+      ]
+    },
+    "src": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\ai\\__init__.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\copilot\\__init__.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\execute_repository_organization.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\repository_dictionary_demo.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\ci\\ollama_ai_runner.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\ci\\test_ai_pipeline.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\python\\execute_repository_organization.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\python\\repository_dictionary_demo.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\main.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\quantum_system_complete_overview.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\copilot_chatdev_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\quantum\\quantum_overview.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\system\\capability_inventory.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\system\\dictionary\\repository_dictionary.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\system\\system_snapshot_generator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\tools\\extract_commands.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\tools\\kilo_dev_launcher.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\github_integration_auditor.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\test_repository_systems.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\quantum_system_test.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\system_testing\\test_enhanced_placeholders.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_ollama_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta03_model_selection.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta04_conversation_management.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta21_game_pipeline.py"
+      ]
+    },
+    "streamlit_ace": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py"
+      ]
+    },
+    "streamlit_lottie": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py"
+      ]
+    },
+    "streamlit_option_menu": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py"
+      ]
+    },
+    "subprocess": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ChatDev-Party-System.py"
+      ]
+    },
+    "sys": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_enhancement_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\performance_monitor.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Ollama_Integration_Hub.py"
+      ]
+    },
+    "system": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ollama_chatdev_integrator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\comprehensive_integration_validator.py"
+      ]
+    },
+    "tensorflow": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\neural_quantum_bridge.py"
+      ]
+    },
+    "tiktoken": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\ci\\gpt_runner.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\consciousness\\the_oldest_house.py"
+      ]
+    },
+    "tools": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-v2.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser.py"
+      ]
+    },
+    "torch": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\consciousness\\the_oldest_house.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\consciousness_enhanced_ml.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ml\\neural_quantum_bridge.py"
+      ]
+    },
+    "traceback": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\python\\chatdev_workflow_integration_analysis_clean.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\scripts\\chatdev_workflow_integration_analysis_clean.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\setup_chatdev_integration.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_minimal.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_requests.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta03_model_selection.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta04_conversation_management.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\tests\\test_zeta21_game_pipeline.py"
+      ]
+    },
+    "transformers": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\consciousness\\the_oldest_house.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_transcendent.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\quantum_problem_resolver_unified.py"
+      ]
+    },
+    "typing": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\copilot\\copilot_enhancement_bridge.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\integration\\Update-ChatDev-to-use-Ollama.py"
+      ]
+    },
+    "utils": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\ContextBrowser_DesktopApp.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\interface\\Enhanced-Interactive-Context-Browser-Fixed.py"
+      ]
+    },
+    "yaml": {
+      "files": [
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\analysis\\comprehensive_repository_analyzer.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\setup\\secrets.py",
+        "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\utils\\github_validation_suite.py"
+      ]
+    }
+  }
+}

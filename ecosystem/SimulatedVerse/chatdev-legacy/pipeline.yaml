@@ -1,0 +1,128 @@
+version: 1.0
+description: "ChatDev pipeline for autonomous development with token discipline"
+
+stages:
+  - name: prompt_lint
+    description: "Validate and optimize prompts before LLM calls"
+    tool: lint
+    rules:
+      - "system_message_max_words: 60"
+      - "force_json_output: true"
+      - "no_chain_of_thought: true"
+      - "no_reasoning_requests: true"
+      - "compress_context: true"
+    success_criteria:
+      - "prompt_tokens < 2200"
+      - "has_clear_output_schema: true"
+
+  - name: plan
+    description: "Generate execution plan using Rosetta planner"
+    tool: rosetta_planner
+    input: "{task}"
+    output: "{plan_json}"
+    rules:
+      - "prefer_symbolic: true" 
+      - "check_cache_first: true"
+      - "estimate_tokens: true"
+    budget_limit: 100
+
+  - name: exec_local
+    description: "Execute using local LLM via token guard"
+    tool: token_guard.ask
+    model: local_primary
+    input: "{plan_json.min_prompt}"
+    options:
+      temperature: 0.5
+      max_tokens: 384
+      force_json: "{plan_json.requires_structured_output}"
+    retry_policy:
+      max_retries: 2
+      backoff_ms: [150, 400]
+
+  - name: judge
+    description: "Evaluate quality and confidence of local result"
+    tool: token_guard.ask
+    model: local_judge
+    input: "Score fitness & confidence for: {exec_local.content}"
+    options:
+      temperature: 0.1
+      max_tokens: 150
+      force_json: true
+    schema:
+      type: object
+      required: ["confidence", "info_gain", "quality_score"]
+      properties:
+        confidence: { type: "number", minimum: 0, maximum: 1 }
+        info_gain: { type: "number", minimum: 0, maximum: 1 }
+        quality_score: { type: "integer", minimum: 1, maximum: 10 }
+
+  - name: maybe_paid
+    description: "Escalate to paid API if justified"
+    when: 
+      - "judge.confidence < budgets.api_escalation_min_conf"
+      - "judge.info_gain >= budgets.api_escalation_min_info_gain"
+      - "today_budget_remaining > 5000"
+    tool: token_guard.ask
+    model: paid_fallback
+    input: "{plan_json.compressed_prompt}"
+    options:
+      temperature: 0.3
+      max_tokens: 600
+    budget_limit: 1000
+
+  - name: symbolic_fallback
+    description: "Use algorithmic approach if LLMs fail"
+    when:
+      - "exec_local.error OR (judge.confidence < 0.3 AND maybe_paid.skipped)"
+    tool: symbolic_planner
+    input: "{task}"
+    rules:
+      - "try_math: true"
+      - "try_search: true" 
+      - "try_validation: true"
+      - "try_graph_algorithms: true"
+
+  - name: finalize
+    description: "Post-process and validate output"
+    tool: postprocess
+    input: "{maybe_paid.content OR exec_local.content OR symbolic_fallback.content}"
+    rules:
+      - "validate_against_schema: true"
+      - "attach_provenance: true"
+      - "update_cache: true"
+      - "record_metrics: true"
+    output_schema:
+      type: object
+      required: ["content", "metadata"]
+      properties:
+        content: { type: "string" }
+        metadata:
+          type: object
+          properties:
+            method: { enum: ["local", "paid", "symbolic"] }
+            confidence: { type: "number" }
+            tokens_used: { type: "integer" }
+            latency_ms: { type: "integer" }
+
+# Pipeline configuration
+config:
+  timeout_ms: 30000
+  budget_per_pipeline: 2500
+  quality_threshold: 0.6
+  cache_results: true
+  trace_sampling: 0.1
+
+# Error handling
+error_handling:
+  max_retries: 2
+  fallback_to_symbolic: true
+  escalation_strategy: "degrade_gracefully"
+  budget_exhausted_action: "queue_for_later"
+
+# Metrics collection
+metrics:
+  track_token_usage: true
+  track_latency: true
+  track_quality_scores: true
+  track_escalation_rate: true
+  track_cache_hit_rate: true

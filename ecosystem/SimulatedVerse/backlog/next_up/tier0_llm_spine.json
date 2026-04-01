@@ -1,0 +1,12 @@
+{
+  "id": "tier0_llm_spine",
+  "tier": 0,
+  "priority": 1,
+  "action": "spine_recovery_monitoring",
+  "agent": "Raven",
+  "blast_radius": "critical",
+  "centrality": "high",
+  "expected_receipt": "spine_health_report.json",
+  "eta": "2025-09-03T05:23:59+00:00",
+  "source": "G1_gate_"
+}

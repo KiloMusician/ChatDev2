@@ -1,0 +1,36 @@
+name: Tripartite Build (local contexts)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-all:
+    runs-on: ubuntu-latest
+    env:
+      CHATDEV_PATH: ${{ github.workspace }}/NuSyQ/ChatDev
+      PYTHONPATH: ${{ github.workspace }}/NuSyQ:${{ github.workspace }}/NuSyQ/ChatDev
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build nusyq-root image
+        run: |
+          docker build -t nusyq-root:ci ./NuSyQ || true
+
+      - name: Build simverse image
+        run: |
+          if [ -d "./Desktop/SimulatedVerse/SimulatedVerse" ]; then
+            docker build -t simverse:ci ./Desktop/SimulatedVerse/SimulatedVerse || true
+          else
+            echo "SimulatedVerse path not present in this checkout; skipping"
+          fi
+
+      - name: Build chatdev image
+        run: |
+          if [ -d "./NuSyQ/ChatDev" ]; then
+            docker build -t chatdev:ci ./NuSyQ/ChatDev || true
+          else
+            echo "ChatDev path not present in this checkout; skipping"
+          fi

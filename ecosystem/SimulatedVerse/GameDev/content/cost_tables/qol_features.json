@@ -1,0 +1,99 @@
+{
+  "tooltips_plus": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 50 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M1_PANELS" }
+    ],
+    "tier": 1,
+    "category": "ui_qol",
+    "description": "Enhanced tooltips with detailed information and cost breakdowns",
+    "effects": ["Rich hover tooltips", "Cost breakdown on hover", "Resource availability indicators"]
+  },
+  "batch_buy": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 75 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M1_PANELS" }
+    ],
+    "tier": 1,
+    "category": "ui_qol",
+    "description": "Purchase multiple items at once with quantity selectors",
+    "effects": ["Quantity input fields", "Bulk purchase calculations", "Resource optimization hints"]
+  },
+  "cost_breakdown": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 60 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M1_PANELS" }
+    ],
+    "tier": 1,
+    "category": "ui_qol",
+    "description": "Detailed cost analysis and resource tracking",
+    "effects": ["Cost per unit calculations", "Resource efficiency metrics", "Shortage predictions"]
+  },
+  "ghost_planner": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 100 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M1_PANELS" },
+      { "type": "research", "id": "cognitics.nanofab_online" }
+    ],
+    "tier": 2,
+    "category": "ui_qol",
+    "description": "Preview building placement and resource flows before committing",
+    "effects": ["Ghost building placement", "Resource flow simulation", "Undo/redo support"]
+  },
+  "pin_panels": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 40 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M1_PANELS" }
+    ],
+    "tier": 1,
+    "category": "ui_qol",
+    "description": "Pin important panels and information to stay visible",
+    "effects": ["Persistent panel layouts", "Custom panel arrangements", "Quick access bookmarks"]
+  },
+  "macro_recorder": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 200 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M2_ADVISOR" }
+    ],
+    "tier": 2,
+    "category": "ui_qol",
+    "description": "Record and replay sequences of actions for automation",
+    "effects": ["Action sequence recording", "Macro playback system", "Conditional automation"]
+  },
+  "smart_alerts": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 150 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M2_ADVISOR" }
+    ],
+    "tier": 2,
+    "category": "ui_qol",
+    "description": "Intelligent alert system with suggested solutions",
+    "effects": ["Context-aware alerts", "Solution suggestions", "Priority-based filtering"]
+  },
+  "inspector_overlays": {
+    "costs": [
+      { "type": "research", "id": "points", "amount": 180 }
+    ],
+    "requirements": [
+      { "type": "milestone", "id": "UI_M2_ADVISOR" }
+    ],
+    "tier": 2,
+    "category": "ui_qol",
+    "description": "Detailed inspection overlays for buildings and systems",
+    "effects": ["Building performance metrics", "Resource flow visualization", "Efficiency heat maps"]
+  }
+}

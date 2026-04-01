@@ -1,0 +1,1567 @@
+{
+  "generatedAt": "2025-08-29T10:00:01.040Z",
+  "root": "/home/runner/workspace",
+  "config": "modules/culture_ship/config/culture-ship.config.json",
+  "fileCount": 275,
+  "stats": {
+    "placeholders": 109,
+    "duplicates": 0,
+    "imports": 90,
+    "unreachable": 175,
+    "softlocks": 1
+  },
+  "analyses": [
+    {
+      "kind": "placeholders",
+      "count": 109,
+      "results": [
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 115,
+          "snippet": "// strategy: reexport stub"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 117,
+          "snippet": "const stub = `// Culture-Ship: Consolidated duplicate\\nexport * from \"${relTarget}\";\\nexport { default } from \"${relTarget}\";\\n`;"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 119,
+          "snippet": "write(abs, stub);"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 121,
+          "snippet": "patchNote(`duplicate-merge: ${f} -> ${canonical} (reexport stub)`);"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 127,
+          "snippet": "// -------- Healer: Stub empty placeholders ----------"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 137,
+          "snippet": "if (item.snippet === \"<EMPTY PLACEHOLDER FILE>\") {"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 145,
+          "snippet": "let stub;"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 147,
+          "snippet": "stub = `/**"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 148,
+          "snippet": "* Culture-Ship Placeholder Stub"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 150,
+          "snippet": "* This stub prevents softlocks by exporting safe no-op symbols."
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 156,
+          "snippet": "stub = `// Culture-Ship placeholder stub for ${item.file}\\nexport const ready = true;\\n`;"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 159,
+          "snippet": "write(abs, stub);"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 161,
+          "snippet": "patchNote(`placeholder-stub: ${item.file}`);"
+        },
+        {
+          "file": "scripts/self-heal.mjs",
+          "line": 245,
+          "snippet": "{ name: \"Placeholder Stubs\", fn: healPlaceholders },"
+        },
+        {
+          "file": "scripts/generate-docs.cjs",
+          "line": 182,
+          "snippet": "- Placeholder repair"
+        },
+        {
+          "file": "scripts/collect-metrics.cjs",
+          "line": 144,
+          "snippet": "// Placeholder count"
+        },
+        {
+          "file": "scripts/collect-metrics.cjs",
+          "line": 146,
+          "snippet": "const placeholders = execSync('grep -r -n -i \"TODO\\\\|FIXME\\\\|STUB\" --include=\"*.ts\" --include=\"*.tsx\" . | wc -l', { encoding: 'utf8', stdio: 'pipe' });"
+        },
+        {
+          "file": "scripts/analyze.mjs",
+          "line": 67,
+          "snippet": "results.push({ file: rel(f), line: 0, snippet: \"<EMPTY PLACEHOLDER FILE>\" });"
+        },
+        {
+          "file": "ship-console/quick-orchestrator.ts",
+          "line": 95,
+          "snippet": "// Execute the task (placeholder - would integrate with actual systems)"
+        },
+        {
+          "file": "ship-console/culture-mind-interface.ts",
+          "line": 227,
+          "snippet": "// Placeholder for actual directive execution"
+        },
+        {
+          "file": "server/routes.ts",
+          "line": 54,
+          "snippet": "// TODO: Connect to database storage when ready"
+        },
+        {
+          "file": "agent/testharness.ts",
+          "line": 90,
+          "snippet": "const todoQuests = questState.todo?.length || 0;"
+        },
+        {
+          "file": "agent/testharness.ts",
+          "line": 110,
+          "snippet": "const progressThreshold = Math.min(5, Math.max(1, totalQuests * 0.2)); // Allow up to 20% TODO quests"
+        },
+        {
+          "file": "agent/quest_runner.ts",
+          "line": 31,
+          "snippet": "todo: string[];"
+        },
+        {
+          "file": "agent/quest_runner.ts",
+          "line": 130,
+          "snippet": "return { done: [], todo: [\"quest_book_missing\"], in_progress: [], failed: [] };"
+        },
+        {
+          "file": "agent/quest_runner.ts",
+          "line": 143,
+          "snippet": "todo: [],"
+        },
+        {
+          "file": "agent/quest_runner.ts",
+          "line": 159,
+          "snippet": "questState.todo.push(quest.id);"
+        },
+        {
+          "file": "agent/quest_runner.ts",
+          "line": 174,
+          "snippet": "console.log(`🎯 Quest Progress: ${questState.done.length} done, ${questState.todo.length} available, ${questState.failed.length} failed`);"
+        },
+        {
+          "file": "agent/quest_runner.ts",
+          "line": 182,
+          "snippet": "todo: [\"quest_system_error\"],"
+        },
+        {
+          "file": "agent/main.ts",
+          "line": 142,
+          "snippet": "metrics.todo_count = questState.todo.length;"
+        },
+        {
+          "file": "agent/main.ts",
+          "line": 143,
+          "snippet": "metrics.todo_count_neg = -questState.todo.length; // For improvement detection"
+        },
+        {
+          "file": "agent/main.ts",
+          "line": 183,
+          "snippet": "this.log(`📝 Quests: ${questResults.done.length} done, ${questResults.todo.length} todo`);"
+        },
+        {
+          "file": "agent/cultivation-healing-system.ts",
+          "line": 817,
+          "snippet": "// For now, it's a placeholder for future integration"
+        },
+        {
+          "file": "agent/auto_refactor.ts",
+          "line": 111,
+          "snippet": "if (content.includes('// TODO') || content.includes('// FIXME')) {"
+        },
+        {
+          "file": "agent/auto_refactor.ts",
+          "line": 117,
+          "snippet": "description: 'Remove TODO/FIXME comments or implement them'"
+        },
+        {
+          "file": "tools/agent/play.js",
+          "line": 50,
+          "snippet": "quests: { completed: 0, todo: 0 },"
+        },
+        {
+          "file": "tools/agent/play.js",
+          "line": 90,
+          "snippet": "status.quests.todo = questState.todo?.length || 0;"
+        },
+        {
+          "file": "tools/agent/play.js",
+          "line": 124,
+          "snippet": "`Remaining: ${status.quests.todo}`,"
+        },
+        {
+          "file": "tools/agent/play.js",
+          "line": 295,
+          "snippet": "console.log(`   Quests: ${status.quests.completed} completed, ${status.quests.todo} todo`);"
+        },
+        {
+          "file": "tools/agent/cascade_trigger.js",
+          "line": 171,
+          "snippet": "const todoMatch = output.match(/TODO\\/FIXME findings: (\\d+)/);"
+        },
+        {
+          "file": "src/vscode-bridge/extension-coordinator.ts",
+          "line": 286,
+          "snippet": "placeHolder: 'Copilot Context Enhancements',"
+        },
+        {
+          "file": "src/vscode-bridge/extension-coordinator.ts",
+          "line": 314,
+          "snippet": "placeHolder: 'Select Local LLM Model',"
+        },
+        {
+          "file": "src/vscode-bridge/extension-coordinator.ts",
+          "line": 330,
+          "snippet": "placeHolder: 'Ask anything about your code...',"
+        },
+        {
+          "file": "src/vscode-bridge/extension-coordinator.ts",
+          "line": 383,
+          "snippet": "placeHolder: 'Describe what code you want to generate...',"
+        },
+        {
+          "file": "src/vscode-bridge/extension-coordinator.ts",
+          "line": 517,
+          "snippet": "placeHolder: 'Select refactoring type',"
+        },
+        {
+          "file": "src/tagging-system/omnitag-enhanced.ts",
+          "line": 173,
+          "snippet": "if (content.includes('TODO')) taggedFile.tags.push('todo');"
+        },
+        {
+          "file": "src/tagging-system/omnitag-enhanced.ts",
+          "line": 174,
+          "snippet": "if (content.includes('FIXME')) taggedFile.tags.push('fixme');"
+        },
+        {
+          "file": "src/tagging-system/omnitag-enhanced.ts",
+          "line": 385,
+          "snippet": "return `  // TODO: Add documentation for ${trimmed.split(' ')[1]}`;"
+        },
+        {
+          "file": "src/llm-system-bridge/unified-llm-integration.ts",
+          "line": 345,
+          "snippet": "// GitHub repository access - placeholder for actual implementation"
+        },
+        {
+          "file": "src/knowledge-integration/obsidian-bridge.ts",
+          "line": 42,
+          "snippet": "status: 'todo' | 'in_progress' | 'completed' | 'blocked';"
+        },
+        {
+          "file": "src/knowledge-integration/obsidian-bridge.ts",
+          "line": 493,
+          "snippet": "status: (statusMatch?.[1]?.toLowerCase() as any) || 'todo',"
+        },
+        {
+          "file": "src/knowledge-integration/obsidian-bridge.ts",
+          "line": 514,
+          "snippet": "title: \"Enhanced System TODO Quest Log\""
+        },
+        {
+          "file": "src/knowledge-integration/obsidian-bridge.ts",
+          "line": 516,
+          "snippet": "tags: [\"quest-log\", \"system\", \"todo\"]"
+        },
+        {
+          "file": "src/knowledge-integration/obsidian-bridge.ts",
+          "line": 519,
+          "snippet": "# Enhanced System TODO Quest Log"
+        },
+        {
+          "file": "src/knowledge-integration/obsidian-bridge.ts",
+          "line": 705,
+          "snippet": "return 3; // Placeholder"
+        },
+        {
+          "file": "global/shared/schema.ts",
+          "line": 549,
+          "snippet": "status: text(\"status\").notNull().default(\"todo\"),"
+        },
+        {
+          "file": "features/ui/components.tsx",
+          "line": 8,
+          "snippet": "placeholder?: React.ReactNode;"
+        },
+        {
+          "file": "features/ui/components.tsx",
+          "line": 13,
+          "snippet": "* Shows silhouette placeholder otherwise"
+        },
+        {
+          "file": "features/ui/components.tsx",
+          "line": 15,
+          "snippet": "export function TierGated({ requiredTier, currentTier, children, placeholder }: TierGatedProps) {"
+        },
+        {
+          "file": "features/ui/components.tsx",
+          "line": 22,
+          "snippet": "{placeholder || children}"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 4,
+          "snippet": "* Autonomously identifies and repairs placeholder code, TODOs, and FIXMEs"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 15,
+          "snippet": "/\\/\\/ TODO:?\\s*(.*)/gi,"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 16,
+          "snippet": "/\\/\\* TODO:?\\s*(.*?)\\*\\//gi,"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 17,
+          "snippet": "/\\/\\/ FIXME:?\\s*(.*)/gi,"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 18,
+          "snippet": "/\\/\\* FIXME:?\\s*(.*?)\\*\\//gi,"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 19,
+          "snippet": "/\\/\\/ STUB:?\\s*(.*)/gi,"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 20,
+          "snippet": "/console\\.log\\(['\"`]placeholder['\"`]\\)/gi,"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 97,
+          "snippet": "if (text.toLowerCase().includes('todo')) return 'TODO';"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 98,
+          "snippet": "if (text.toLowerCase().includes('fixme')) return 'FIXME';"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 99,
+          "snippet": "if (text.toLowerCase().includes('stub')) return 'STUB';"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 100,
+          "snippet": "if (text.includes('placeholder')) return 'PLACEHOLDER';"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 111,
+          "snippet": "for (const placeholder of fileRepair.placeholders) {"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 112,
+          "snippet": "const suggestion = this.generateSuggestion(placeholder);"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 113,
+          "snippet": "console.log(`   Line ${placeholder.line}: ${placeholder.type}`);"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 114,
+          "snippet": "console.log(`   Current: ${placeholder.text}`);"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 121,
+          "snippet": "generateSuggestion(placeholder) {"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 122,
+          "snippet": "const type = placeholder.type;"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 123,
+          "snippet": "const description = placeholder.description.toLowerCase();"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 127,
+          "snippet": "return `// Implementation needed: ${placeholder.description}`;"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 131,
+          "snippet": "return `// Bug fix required: ${placeholder.description}`;"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 135,
+          "snippet": "return `// Test case needed: ${placeholder.description}`;"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 138,
+          "snippet": "if (type === 'PLACEHOLDER') {"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 146,
+          "snippet": "return `// Review required: ${placeholder.description}`;"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 153,
+          "snippet": "let content = `\\n## Placeholder Repair Report - ${timestamp}\\n\\n`;"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 158,
+          "snippet": "fileRepair.placeholders.forEach(placeholder => {"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 159,
+          "snippet": "content += `- [ ] Line ${placeholder.line}: ${placeholder.type} - ${placeholder.description}\\n`;"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 171,
+          "snippet": "console.log('🚀 ChatDev Placeholder Repair Task initiated');"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 180,
+          "snippet": "console.log('✅ Placeholder repair analysis completed');"
+        },
+        {
+          "file": "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+          "line": 190,
+          "snippet": "console.error('❌ Placeholder repair failed:', error);"
+        },
+        {
+          "file": "ai-systems/orchestration/council_bootstrap.cjs",
+          "line": 77,
+          "snippet": "// Check for placeholder code"
+        },
+        {
+          "file": "ai-systems/orchestration/council_bootstrap.cjs",
+          "line": 79,
+          "snippet": "const result = execSync('grep -r -n -i \"TODO\\\\|FIXME\\\\|STUB\" --include=\"*.ts\" --include=\"*.tsx\" . || true', { encoding: 'utf8' });"
+        },
+        {
+          "file": "ai-systems/orchestration/council_bootstrap.cjs",
+          "line": 82,
+          "snippet": "tasks.push({ description: `Address ${count} placeholder items`, type: 'engineering' });"
+        },
+        {
+          "file": "ai-systems/orchestration/coordination-core.ts",
+          "line": 184,
+          "snippet": "// Copilot enhancement (placeholder for full implementation)"
+        },
+        {
+          "file": "ai-systems/orchestration/coordination-core.ts",
+          "line": 197,
+          "snippet": "// Ollama local LLM (placeholder for full implementation)"
+        },
+        {
+          "file": "ai-systems/orchestration/coordination-core.ts",
+          "line": 211,
+          "snippet": "// ChatDev multi-agent development (placeholder for full implementation)"
+        },
+        {
+          "file": "system/llm/sidecar/token_guard.ts",
+          "line": 253,
+          "snippet": "// Placeholder for OpenAI or other paid API calls"
+        },
+        {
+          "file": "system/llm/sidecar/symbolic_planner.ts",
+          "line": 111,
+          "snippet": "// For now, return a structured placeholder"
+        },
+        {
+          "file": "system/ops/self_heal/detect.mjs",
+          "line": 151,
+          "snippet": "// Check for TODO comments"
+        },
+        {
+          "file": "system/ops/self_heal/detect.mjs",
+          "line": 152,
+          "snippet": "const grepProcess = spawn(\"grep\", [\"-r\", \"TODO\", \"src/\"], { stdio: \"pipe\" });"
+        },
+        {
+          "file": "system/ops/self_heal/detect.mjs",
+          "line": 161,
+          "snippet": "const todoCount = (todos.match(/TODO/g) || []).length;"
+        },
+        {
+          "file": "system/ops/self_heal/detect.mjs",
+          "line": 167,
+          "snippet": "description: `${todoCount} TODO items need attention`,"
+        },
+        {
+          "file": "src/kpulse/navai/provider.ts",
+          "line": 74,
+          "snippet": "const synthetic = `Plan (OpenAI stub):\\n- Inspect ${hits[0]?.d.path}\\n- Grep for 'register' functions\\n- Open KPulse routes`;"
+        },
+        {
+          "file": "modules/culture_ship/reports/write_report.mjs",
+          "line": 72,
+          "snippet": "if (p.snippet !== \"<EMPTY PLACEHOLDER FILE>\") {"
+        },
+        {
+          "file": "client/src/hooks/use-game-state.ts",
+          "line": 208,
+          "snippet": "// TODO: Integrate with ΞNuSyQ consciousness system for autonomous gameplay decisions"
+        },
+        {
+          "file": "client/src/hooks/use-game-state.ts",
+          "line": 209,
+          "snippet": "consciousnessLevel: 0.5, // Placeholder for consciousness integration"
+        },
+        {
+          "file": "application-services/web/src/main.ts",
+          "line": 125,
+          "snippet": "if(d === \"act\") {/* interact placeholder */}"
+        },
+        {
+          "file": "client/src/core/views/DashboardView.tsx",
+          "line": 98,
+          "snippet": "<Suspense fallback={<div className=\"loading-placeholder\">Loading consciousness...</div>}>"
+        },
+        {
+          "file": "client/src/core/views/DashboardView.tsx",
+          "line": 118,
+          "snippet": "<Suspense fallback={<div className=\"loading-placeholder\">Calibrating quantum field...</div>}>"
+        },
+        {
+          "file": "client/src/core/views/DashboardView.tsx",
+          "line": 343,
+          "snippet": ".loading-placeholder {"
+        }
+      ]
+    },
+    {
+      "kind": "duplicates",
+      "count": 0,
+      "groups": []
+    },
+    {
+      "kind": "imports",
+      "edgesCount": 203,
+      "brokenCount": 90,
+      "broken": [
+        {
+          "from": "tests/smoke.mjs",
+          "spec": "../bootstrap/init.js",
+          "suggestion": [
+            "bootstrap/init.ts"
+          ]
+        },
+        {
+          "from": "src/main.ts",
+          "spec": "./guardian/core/boot.js",
+          "suggestion": []
+        },
+        {
+          "from": "src/main.ts",
+          "spec": "./guardian/core/bus.js",
+          "suggestion": [
+            "src/kpulse/bus.ts",
+            "application-services/engine/src/bus.ts",
+            "application-services/engine/scripts/bus.js"
+          ]
+        },
+        {
+          "from": "src/main.ts",
+          "spec": "./guardian/policy/load.js",
+          "suggestion": []
+        },
+        {
+          "from": "scripts/serialism_to_boolean.cjs",
+          "spec": "./src/ai-hub/chatdev_tasks/repair_placeholders",
+          "suggestion": [
+            "ai-systems/chatdev-tasks/repair_placeholders.cjs"
+          ]
+        },
+        {
+          "from": "registry/loader.ts",
+          "spec": "../core/types",
+          "suggestion": [
+            "global/shared/sim/types.ts"
+          ]
+        },
+        {
+          "from": "bootstrap/init.ts",
+          "spec": "../config/profiles",
+          "suggestion": [
+            "global/config/profiles.ts"
+          ]
+        },
+        {
+          "from": "bootstrap/init.ts",
+          "spec": "../config/guards",
+          "suggestion": [
+            "global/config/guards.ts"
+          ]
+        },
+        {
+          "from": "bootstrap/init.ts",
+          "spec": "../ui/ascii/splash",
+          "suggestion": [
+            "interface-systems/component-libraries/ascii/splash.ts"
+          ]
+        },
+        {
+          "from": "agent/main.ts",
+          "spec": "./idle_tick.js",
+          "suggestion": [
+            "agent/idle_tick.ts"
+          ]
+        },
+        {
+          "from": "agent/main.ts",
+          "spec": "./quest_runner.js",
+          "suggestion": [
+            "agent/quest_runner.ts"
+          ]
+        },
+        {
+          "from": "agent/main.ts",
+          "spec": "./codemods.js",
+          "suggestion": [
+            "agent/codemods.ts"
+          ]
+        },
+        {
+          "from": "agent/main.ts",
+          "spec": "./testharness.js",
+          "suggestion": [
+            "agent/testharness.ts"
+          ]
+        },
+        {
+          "from": "agent/main.ts",
+          "spec": "./green_commit.js",
+          "suggestion": [
+            "agent/green_commit.ts"
+          ]
+        },
+        {
+          "from": "agent/codemods.ts",
+          "spec": "../engine/state.mjs",
+          "suggestion": [
+            "src/kpulse/state.ts",
+            "src/engine/state.mjs",
+            "application-services/web/src/engine/state.ts"
+          ]
+        },
+        {
+          "from": "src/vscode-bridge/extension-coordinator.ts",
+          "spec": "../copilot-enhancement/workspace-enhancer.js",
+          "suggestion": [
+            "src/copilot-enhancement/workspace-enhancer.ts"
+          ]
+        },
+        {
+          "from": "src/vscode-bridge/extension-coordinator.ts",
+          "spec": "../ollama-orchestration/model-manager.js",
+          "suggestion": [
+            "system/llm/ollama-orchestration/model-manager.ts",
+            "system/llm/ollama-orchestration/model-manager.js"
+          ]
+        },
+        {
+          "from": "src/vscode-bridge/extension-coordinator.ts",
+          "spec": "../ai-hub/coordination-core.js",
+          "suggestion": [
+            "ai-systems/orchestration/coordination-core.ts"
+          ]
+        },
+        {
+          "from": "src/vscode-bridge/extension-coordinator.ts",
+          "spec": "../knowledge-integration/obsidian-bridge.js",
+          "suggestion": [
+            "src/knowledge-integration/obsidian-bridge.ts"
+          ]
+        },
+        {
+          "from": "src/scripts/trigger-evolution.ts",
+          "spec": "../nusyq-framework/scp-containment",
+          "suggestion": []
+        },
+        {
+          "from": "src/scripts/initialize-nusyq.ts",
+          "spec": "../server/db",
+          "suggestion": []
+        },
+        {
+          "from": "src/scripts/guardian-status.ts",
+          "spec": "../nusyq-framework/scp-containment",
+          "suggestion": []
+        },
+        {
+          "from": "src/scripts/deploy-complete-system.ts",
+          "spec": "../server/db",
+          "suggestion": []
+        },
+        {
+          "from": "src/server/nusyq-integration.ts",
+          "spec": "../nusyq-framework/symbolic-registry",
+          "suggestion": []
+        },
+        {
+          "from": "src/server/nusyq-integration.ts",
+          "spec": "../nusyq-framework/scp-containment",
+          "suggestion": []
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../ollama-orchestration/model-manager.js",
+          "suggestion": [
+            "system/llm/ollama-orchestration/model-manager.ts",
+            "system/llm/ollama-orchestration/model-manager.js"
+          ]
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../integration-bridges/chatdev-bridge.js",
+          "suggestion": [
+            "src/integration-bridges/chatdev-bridge.ts"
+          ]
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../ai-hub/coordination-core.js",
+          "suggestion": [
+            "ai-systems/orchestration/coordination-core.ts"
+          ]
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../endpoint-integration/universal-connector.js",
+          "suggestion": []
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../ai-hub/llm-provider-selector.js",
+          "suggestion": [
+            "ai-systems/orchestration/llm-provider-selector.ts"
+          ]
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../ai-hub/vscode-copilot-interface.js",
+          "suggestion": [
+            "ai-systems/orchestration/vscode-copilot-interface.ts"
+          ]
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../../server/token-guard.js",
+          "suggestion": []
+        },
+        {
+          "from": "src/llm-system-bridge/unified-llm-integration.ts",
+          "spec": "../../server/comprehensive-integration.js",
+          "suggestion": []
+        },
+        {
+          "from": "src/integration-bridges/chatdev-bridge.ts",
+          "spec": "../ollama-orchestration/model-manager.js",
+          "suggestion": [
+            "system/llm/ollama-orchestration/model-manager.ts",
+            "system/llm/ollama-orchestration/model-manager.js"
+          ]
+        },
+        {
+          "from": "src/integration-bridges/chatdev-bridge.ts",
+          "spec": "../ai-hub/coordination-core.js",
+          "suggestion": [
+            "ai-systems/orchestration/coordination-core.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/viewport.ts",
+          "spec": "./state.js",
+          "suggestion": [
+            "src/kpulse/state.ts",
+            "src/engine/state.mjs",
+            "application-services/web/src/engine/state.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/timeflow.ts",
+          "spec": "./state.js",
+          "suggestion": [
+            "src/kpulse/state.ts",
+            "src/engine/state.mjs",
+            "application-services/web/src/engine/state.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/tier_router.ts",
+          "spec": "./bus.js",
+          "suggestion": [
+            "src/kpulse/bus.ts",
+            "application-services/engine/src/bus.ts",
+            "application-services/engine/scripts/bus.js"
+          ]
+        },
+        {
+          "from": "src/kpulse/self_build.ts",
+          "spec": "./bus.js",
+          "suggestion": [
+            "src/kpulse/bus.ts",
+            "application-services/engine/src/bus.ts",
+            "application-services/engine/scripts/bus.js"
+          ]
+        },
+        {
+          "from": "src/kpulse/self_build.ts",
+          "spec": "./registry.js",
+          "suggestion": [
+            "src/kpulse/registry.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/perimeter.ts",
+          "spec": "./config.js",
+          "suggestion": [
+            "src/kpulse/config.ts",
+            "interface-systems/device-management/ascii_hud/config.mjs"
+          ]
+        },
+        {
+          "from": "src/kpulse/perimeter.ts",
+          "spec": "./hash.js",
+          "suggestion": [
+            "src/kpulse/hash.ts",
+            "global/shared/utils/hash.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./config.js",
+          "suggestion": [
+            "src/kpulse/config.ts",
+            "interface-systems/device-management/ascii_hud/config.mjs"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./bus.js",
+          "suggestion": [
+            "src/kpulse/bus.ts",
+            "application-services/engine/src/bus.ts",
+            "application-services/engine/scripts/bus.js"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./state.js",
+          "suggestion": [
+            "src/kpulse/state.ts",
+            "src/engine/state.mjs",
+            "application-services/web/src/engine/state.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./viewport.js",
+          "suggestion": [
+            "src/kpulse/viewport.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./registry.js",
+          "suggestion": [
+            "src/kpulse/registry.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./directives.js",
+          "suggestion": [
+            "src/kpulse/directives.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./self_build.js",
+          "suggestion": [
+            "src/kpulse/self_build.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./entropy.js",
+          "suggestion": [
+            "src/kpulse/entropy.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./validator.js",
+          "suggestion": [
+            "src/kpulse/validator.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./bridge_adapter.js",
+          "suggestion": [
+            "src/kpulse/bridge_adapter.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./tier_router.js",
+          "suggestion": [
+            "src/kpulse/tier_router.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./logs.js",
+          "suggestion": [
+            "src/kpulse/logs.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./diff.js",
+          "suggestion": [
+            "src/kpulse/diff.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./introspect.js",
+          "suggestion": [
+            "src/kpulse/introspect.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./config.js",
+          "suggestion": [
+            "src/kpulse/config.ts",
+            "interface-systems/device-management/ascii_hud/config.mjs"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./navai/index.js",
+          "suggestion": [
+            "index.js",
+            "src/index.mjs",
+            "server/index.ts",
+            "system-core/types/index.ts",
+            "src/nusyq-framework/index.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./navai/memory.js",
+          "suggestion": [
+            "src/kpulse/navai/memory.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/index.ts",
+          "spec": "./perimeter.js",
+          "suggestion": [
+            "src/kpulse/perimeter.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/generated_loader.ts",
+          "spec": "./types.js",
+          "suggestion": [
+            "global/shared/sim/types.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/entropy.ts",
+          "spec": "./state.js",
+          "suggestion": [
+            "src/kpulse/state.ts",
+            "src/engine/state.mjs",
+            "application-services/web/src/engine/state.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/directives.ts",
+          "spec": "./state.js",
+          "suggestion": [
+            "src/kpulse/state.ts",
+            "src/engine/state.mjs",
+            "application-services/web/src/engine/state.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/directives.ts",
+          "spec": "./bus.js",
+          "suggestion": [
+            "src/kpulse/bus.ts",
+            "application-services/engine/src/bus.ts",
+            "application-services/engine/scripts/bus.js"
+          ]
+        },
+        {
+          "from": "src/kpulse/directives.ts",
+          "spec": "./registry.js",
+          "suggestion": [
+            "src/kpulse/registry.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/directives.ts",
+          "spec": "./timeflow.js",
+          "suggestion": [
+            "src/kpulse/timeflow.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/directives.ts",
+          "spec": "./config.js",
+          "suggestion": [
+            "src/kpulse/config.ts",
+            "interface-systems/device-management/ascii_hud/config.mjs"
+          ]
+        },
+        {
+          "from": "src/kpulse/directives.ts",
+          "spec": "./navai/memory.js",
+          "suggestion": [
+            "src/kpulse/navai/memory.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/bridge_adapter.ts",
+          "spec": "./bus.js",
+          "suggestion": [
+            "src/kpulse/bus.ts",
+            "application-services/engine/src/bus.ts",
+            "application-services/engine/scripts/bus.js"
+          ]
+        },
+        {
+          "from": "modules/culture_ship/ship.ts",
+          "spec": "./planners/cascade_event.js",
+          "suggestion": [
+            "modules/culture_ship/planners/cascade_event.ts"
+          ]
+        },
+        {
+          "from": "modules/culture_ship/ship.ts",
+          "spec": "./analyzers/duplicates.js",
+          "suggestion": [
+            "modules/culture_ship/analyzers/duplicates.ts"
+          ]
+        },
+        {
+          "from": "modules/culture_ship/ship.ts",
+          "spec": "./analyzers/imports.js",
+          "suggestion": [
+            "modules/culture_ship/analyzers/imports.ts"
+          ]
+        },
+        {
+          "from": "modules/culture_ship/ship.ts",
+          "spec": "./analyzers/softlocks.js",
+          "suggestion": [
+            "modules/culture_ship/analyzers/softlocks.ts"
+          ]
+        },
+        {
+          "from": "modules/culture_ship/ship.ts",
+          "spec": "./surgeons/rename_and_rewire.js",
+          "suggestion": [
+            "modules/culture_ship/surgeons/rename_and_rewire.ts"
+          ]
+        },
+        {
+          "from": "modules/culture_ship/ship.ts",
+          "spec": "./planners/token_governor.js",
+          "suggestion": [
+            "modules/culture_ship/planners/token_governor.ts"
+          ]
+        },
+        {
+          "from": "modules/culture_ship/ship.ts",
+          "spec": "./ui/telemetry.js",
+          "suggestion": [
+            "modules/culture_ship/ui/telemetry.ts"
+          ]
+        },
+        {
+          "from": "features/progression/service.ts",
+          "spec": "../../core/types",
+          "suggestion": [
+            "global/shared/sim/types.ts"
+          ]
+        },
+        {
+          "from": "features/energy/service.ts",
+          "spec": "../../core/types",
+          "suggestion": [
+            "global/shared/sim/types.ts"
+          ]
+        },
+        {
+          "from": "knowledge-systems/elevation-systems/elevator.mjs",
+          "spec": "../engine/state.mjs",
+          "suggestion": [
+            "src/kpulse/state.ts",
+            "src/engine/state.mjs",
+            "application-services/web/src/engine/state.ts"
+          ]
+        },
+        {
+          "from": "ai-systems/orchestration/llm-provider-selector.ts",
+          "spec": "../../server/token-guard",
+          "suggestion": []
+        },
+        {
+          "from": "ai-systems/orchestration/llm-provider-selector.ts",
+          "spec": "../../src/ollama-orchestration/model-manager",
+          "suggestion": [
+            "system/llm/ollama-orchestration/model-manager.ts",
+            "system/llm/ollama-orchestration/model-manager.js"
+          ]
+        },
+        {
+          "from": "ai-systems/orchestration/llm-provider-selector.ts",
+          "spec": "../../src/endpoint-integration/universal-connector",
+          "suggestion": []
+        },
+        {
+          "from": "src/kpulse/navai/provider.ts",
+          "spec": "./indexer.js",
+          "suggestion": [
+            "src/kpulse/navai/indexer.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/navai/provider.ts",
+          "spec": "./memory.js",
+          "suggestion": [
+            "src/kpulse/navai/memory.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/navai/provider.ts",
+          "spec": "../config.js",
+          "suggestion": [
+            "src/kpulse/config.ts",
+            "interface-systems/device-management/ascii_hud/config.mjs"
+          ]
+        },
+        {
+          "from": "src/kpulse/navai/memory.ts",
+          "spec": "../config.js",
+          "suggestion": [
+            "src/kpulse/config.ts",
+            "interface-systems/device-management/ascii_hud/config.mjs"
+          ]
+        },
+        {
+          "from": "src/kpulse/navai/indexer.ts",
+          "spec": "../config.js",
+          "suggestion": [
+            "src/kpulse/config.ts",
+            "interface-systems/device-management/ascii_hud/config.mjs"
+          ]
+        },
+        {
+          "from": "src/kpulse/navai/index.ts",
+          "spec": "./provider.js",
+          "suggestion": [
+            "ai-systems/providers/provider.ts",
+            "src/kpulse/navai/provider.ts"
+          ]
+        },
+        {
+          "from": "src/kpulse/navai/index.ts",
+          "spec": "./memory.js",
+          "suggestion": [
+            "src/kpulse/navai/memory.ts"
+          ]
+        },
+        {
+          "from": "application-services/engine/scripts/bus.js",
+          "spec": "../src/bus.js",
+          "suggestion": [
+            "src/kpulse/bus.ts",
+            "application-services/engine/src/bus.ts",
+            "application-services/engine/scripts/bus.js"
+          ]
+        }
+      ],
+      "cycles": [
+        [
+          "src/nusyq-framework/index.ts",
+          "src/nusyq-framework/narrative-quantum-engine.ts",
+          "src/nusyq-framework/index.ts"
+        ],
+        [
+          "src/nusyq-framework/self-coding-evolution.ts",
+          "src/nusyq-framework/index.ts",
+          "src/nusyq-framework/self-coding-evolution.ts"
+        ],
+        [
+          "src/nusyq-framework/index.ts",
+          "src/nusyq-framework/quantum-feedback.ts",
+          "src/nusyq-framework/index.ts"
+        ],
+        [
+          "application-services/web/src/views/viewManager.ts",
+          "application-services/web/src/views/view.microbe.ts",
+          "application-services/web/src/views/viewManager.ts"
+        ],
+        [
+          "application-services/web/src/views/viewManager.ts",
+          "application-services/web/src/views/view.colony.ts",
+          "application-services/web/src/views/viewManager.ts"
+        ],
+        [
+          "application-services/web/src/views/viewManager.ts",
+          "application-services/web/src/views/view.city.ts",
+          "application-services/web/src/views/viewManager.ts"
+        ],
+        [
+          "application-services/web/src/views/viewManager.ts",
+          "application-services/web/src/views/view.planet.ts",
+          "application-services/web/src/views/viewManager.ts"
+        ],
+        [
+          "application-services/web/src/views/viewManager.ts",
+          "application-services/web/src/views/view.system.ts",
+          "application-services/web/src/views/viewManager.ts"
+        ],
+        [
+          "application-services/web/src/views/viewManager.ts",
+          "application-services/web/src/views/view.space.ts",
+          "application-services/web/src/views/viewManager.ts"
+        ]
+      ]
+    },
+    {
+      "kind": "unreachable",
+      "totalEdges": 203,
+      "entries": [
+        "src/main.ts",
+        "src/index.mjs",
+        "src/vscode-bridge/extension-coordinator.ts",
+        "src/views/idle.mjs",
+        "src/views/explore_labyrinth.mjs",
+        "src/views/defense_swarms.mjs",
+        "src/views/base_builder.mjs",
+        "src/views/IdleHUD.tsx",
+        "src/views/Explore.tsx",
+        "src/views/Defense.tsx",
+        "src/views/Builder.tsx",
+        "src/utils/safeDvh.ts",
+        "src/tagging-system/omnitag-enhanced.ts",
+        "src/server/nusyq-integration.ts",
+        "src/scripts/trigger-evolution.ts",
+        "src/scripts/quantum-coherence.ts",
+        "src/scripts/nusyq-health-check.ts",
+        "src/scripts/initialize-nusyq.ts",
+        "src/scripts/guardian-status.ts",
+        "src/scripts/deploy-complete-system.ts",
+        "src/scripts/consciousness-report.ts",
+        "src/protagonist-agent/boolean-logic-engine.ts",
+        "src/protagonist-agent/agent-party-orchestrator.ts",
+        "src/nusyq-framework/self-coding-evolution.ts",
+        "src/nusyq-framework/quantum-feedback.ts",
+        "src/nusyq-framework/omnitag-system.ts",
+        "src/nusyq-framework/narrative-quantum-engine.ts",
+        "src/nusyq-framework/index.ts",
+        "src/kpulse/viewport.ts",
+        "src/kpulse/validator.ts",
+        "src/kpulse/types.d.ts",
+        "src/kpulse/timeflow.ts",
+        "src/kpulse/tier_router.ts",
+        "src/kpulse/state.ts",
+        "src/kpulse/self_build.ts",
+        "src/kpulse/registry.ts",
+        "src/kpulse/perimeter.ts",
+        "src/kpulse/logs.ts",
+        "src/kpulse/introspect.ts",
+        "src/kpulse/index.ts",
+        "src/kpulse/hash.ts",
+        "src/kpulse/generated_loader.ts",
+        "src/kpulse/entropy.ts",
+        "src/kpulse/directives.ts",
+        "src/kpulse/diff.ts",
+        "src/kpulse/config.ts",
+        "src/kpulse/bus.ts",
+        "src/kpulse/bridge_adapter.ts",
+        "src/knowledge-integration/obsidian-bridge.ts",
+        "src/integration-patterns/CrewAI-Inspired-Coordination.ts",
+        "src/integration-patterns/ConsciousnessAI-Integration.ts",
+        "src/integration-bridges/chatdev-bridge.ts",
+        "src/hypertemporal-schrodinger/TemporalConsciousnessAnalyzer.ts",
+        "src/llm-system-bridge/unified-llm-integration.ts",
+        "src/github-integration/repository-access.ts",
+        "src/nusyq-hub/github-integration.ts",
+        "src/framework-integration/unified-orchestrator.ts",
+        "src/engine/toggle.mjs",
+        "src/engine/state.mjs",
+        "src/engine/scheduler.mjs",
+        "src/engine/perf_guard.mjs",
+        "src/engine/pause.mjs",
+        "src/engine/ethic.mjs",
+        "src/culture-guardian/guardian-system.ts",
+        "src/copilot-enhancement/workspace-enhancer.ts",
+        "src/chatdev-integration/autonomous-development.ts",
+        "src/bus/events.mjs",
+        "src/chatdev-orchestration/enhanced-bridge.ts",
+        "src/boolean-hyper-music/PostTonalConsciousnessAnalyzer.ts",
+        "src/ai-council/crewai-patterns.ts",
+        "src/anomalous-features/anomalous-capabilities.ts",
+        "src/quantum-glyphic-language/core/qgl-framework.ts",
+        "src/tier-progression/core/tier-system.ts",
+        "src/omni-optimizer/core/omni-optimizer.ts",
+        "src/omni-optimizer/autonomous-patching/self-patcher.ts",
+        "src/omni-optimizer/ai-learning/mod-learner.ts",
+        "src/omni-optimizer/ai-learning/error-prediction.ts",
+        "src/lib/errors/graceful.ts",
+        "src/kpulse/public/client.js",
+        "src/kpulse/navai/tools.ts",
+        "src/kpulse/navai/provider.ts",
+        "src/kpulse/navai/memory.ts",
+        "src/kpulse/navai/indexer.ts",
+        "src/kpulse/navai/index.ts",
+        "src/house_of_leaves/maze/gen.mjs",
+        "src/house_of_leaves/debug/loop_guard.mjs",
+        "src/house_of_leaves/debug/logger.mjs",
+        "src/core/views/viewRegistry.ts",
+        "src/oldest_house/guidance/nav.mjs",
+        "src/core/ui/MobileDock.tsx",
+        "src/core/ui/DesktopShell.tsx",
+        "src/core/ui/AsciiCanvas.tsx",
+        "src/core/ui/AdaptiveNav.tsx",
+        "src/oldest_house/containment/policies.mjs",
+        "src/oldest_house/containment/lockdown.mjs",
+        "src/core/state/AppState.ts",
+        "src/core/device/useDeviceProfile.ts",
+        "src/core/perf/usePerfWatchdog.ts"
+      ],
+      "count": 175,
+      "files": [
+        "vite.config.ts",
+        "test-dual-layer.js",
+        "tailwind.config.ts",
+        "tailwind.config.cjs",
+        "static-server.js",
+        "start-dev.js",
+        "postcss.config.js",
+        "postcss.config.cjs",
+        "index.js",
+        "drizzle.config.ts",
+        "tools/taskOrganizer.mjs",
+        "tools/simbot.mjs",
+        "tools/run-gamification-demo.ts",
+        "tools/repository-philosopher-stone.ts",
+        "tools/living-repo-map.ts",
+        "tools/gamification-cli.ts",
+        "test/new_test.spec.ts",
+        "tests/smoke.mjs",
+        "scripts/ui-audit.js",
+        "scripts/setup.mjs",
+        "scripts/serialism_to_boolean.cjs",
+        "scripts/self-heal.mjs",
+        "scripts/schema-validate.js",
+        "scripts/queue-thousand.ts",
+        "scripts/lint-and-typecheck.mjs",
+        "scripts/health-check.mjs",
+        "scripts/generate-docs.cjs",
+        "scripts/find-duplicates.mjs",
+        "scripts/ensure-env-safe.js",
+        "scripts/council-validator.mjs",
+        "scripts/cost_containment.js",
+        "scripts/collect-metrics.cjs",
+        "scripts/check-imports.mjs",
+        "scripts/analyze.mjs",
+        "registry/loader.ts",
+        "ship-console/redstone-command-center.ts",
+        "ship-console/quick-orchestrator.ts",
+        "ship-console/culture-mind-interface.ts",
+        "server/simple-server.js",
+        "server/routes.ts",
+        "server/index.ts",
+        "server/consciousness-endpoints.ts",
+        "bootstrap/init.ts",
+        "agent/testharness.ts",
+        "agent/quest_runner.ts",
+        "agent/main.ts",
+        "agent/idle_tick.ts",
+        "agent/green_commit.ts",
+        "agent/error-quest-transformer.ts",
+        "agent/enhanced-gamification-system.ts",
+        "agent/cultivation-healing-system.ts",
+        "agent/codemods.ts",
+        "agent/auto_refactor.ts",
+        "agent/advance-quests.js",
+        "agent/active-quest-progress.ts",
+        "tools/agent/play.js",
+        "tools/agent/cascade_trigger.js",
+        "tests/smoke/idle-tick.test.ts",
+        "tests/smoke/boot.test.ts",
+        "system-core/types/index.ts",
+        "scripts/runners/run-with-node.mjs",
+        "packages/ascii-hud/index.mjs",
+        "modules/culture_ship/ship.ts",
+        "interface-systems/device-management/env.mjs",
+        "interface-systems/device-management/device.ts",
+        "global/shared/schema.ts",
+        "global/shared/narrative-types.ts",
+        "global/shared/advanced-gameplay-schemas.ts",
+        "global/config/profiles.ts",
+        "global/config/guards.ts",
+        "game/engine/watchdog.ts",
+        "features/ui/components.tsx",
+        "features/progression/service.ts",
+        "features/energy/service.ts",
+        "knowledge-systems/elevation-systems/elevator.mjs",
+        "client/public/main.js",
+        "client/public/asciiStage.js",
+        "client/public/app.mobile.mjs",
+        "client/public/app.desktop.mjs",
+        "bootstrap/automation/bootstrap-server.js",
+        "bootstrap/automation/bootstrap-db.js",
+        "client/src/main.tsx",
+        "client/src/App.tsx",
+        "application-services/web/vite.config.ts",
+        "ai-systems/providers/provider.ts",
+        "ai-systems/chatdev-tasks/storybeat_log.cjs",
+        "ai-systems/chatdev-tasks/repair_placeholders.cjs",
+        "ai-systems/chatdev-tasks/demo_task.cjs",
+        "ai-systems/orchestration/vscode-copilot-interface.ts",
+        "ai-systems/orchestration/llm-provider-selector.ts",
+        "ai-systems/orchestration/council_bootstrap.cjs",
+        "ai-systems/orchestration/api-endpoints.ts",
+        "system/llm/sidecar/token_guard.ts",
+        "system/llm/sidecar/symbolic_planner.ts",
+        "system/llm/sidecar/smoke_test.ts",
+        "system/llm/sidecar/ops_queue.ts",
+        "system/llm/sidecar/ollama.ts",
+        "system/llm/ollama-orchestration/robust-connection-manager.ts",
+        "system/llm/ollama-orchestration/ollama-startup.ts",
+        "system/llm/ollama-orchestration/npc-dialogue-system.ts",
+        "system/llm/ollama-orchestration/model-manager.js",
+        "system/llm/ollama-integration/chat-response-system.ts",
+        "system/ops/self_heal/detect.mjs",
+        "packages/kpulse-atmo/src/index.ts",
+        "modules/culture_ship/ui/telemetry.ts",
+        "modules/culture_ship/surgeons/rename_and_rewire.ts",
+        "modules/culture_ship/scripts/game-smoke.mjs",
+        "modules/culture_ship/reports/write_report.mjs",
+        "modules/culture_ship/planners/token_governor.ts",
+        "modules/culture_ship/planners/cascade_event.ts",
+        "modules/culture_ship/analyzers/softlocks.ts",
+        "modules/culture_ship/analyzers/imports.ts",
+        "modules/culture_ship/analyzers/duplicates.ts",
+        "interface-systems/device-management/ascii_hud/config.mjs",
+        "interface-systems/component-libraries/ascii/splash.ts",
+        "global/shared/vfx/signals.ts",
+        "global/shared/utils/hash.ts",
+        "global/shared/types/core.ts",
+        "global/shared/sim/work-order-system.ts",
+        "global/shared/sim/types.ts",
+        "global/shared/sim/atmosphere-director.ts",
+        "global/shared/sim/anomalous-storyteller.ts",
+        "global/shared/rube-goldberg/orchestrator.ts",
+        "global/shared/progression/universal-progress-manager.ts",
+        "global/shared/progression/progression-gatekeeper.ts",
+        "global/shared/progression/development-insights.ts",
+        "global/shared/bus/contracts.ts",
+        "client/src/lib/utils.ts",
+        "client/src/lib/queryClient.ts",
+        "client/src/hooks/use-game-state.ts",
+        "application-services/web/src/main.ts",
+        "application-services/engine/src/spawn.ts",
+        "application-services/engine/src/pantheon.ts",
+        "application-services/engine/src/loop.ts",
+        "application-services/engine/src/index.ts",
+        "application-services/engine/src/bus.ts",
+        "application-services/engine/scripts/bus.js",
+        "application-services/repopilot/src/server.ts",
+        "application-services/repopilot/src/rag.ts",
+        "application-services/repopilot/src/llm.ts",
+        "application-services/storyteller/src/gradient.ts",
+        "packages/kpulse-atmo/src/layers/Particles2DLayer.ts",
+        "packages/kpulse-atmo/src/layers/FullscreenShaderLayer.ts",
+        "packages/kpulse-atmo/src/director/mappings.ts",
+        "packages/kpulse-atmo/src/director/VFXDirector.ts",
+        "client/src/core/views/viewRegistry.tsx",
+        "client/src/core/views/viewRegistry.ts",
+        "client/src/core/views/TempleView.tsx",
+        "client/src/core/views/SystemView.tsx",
+        "client/src/core/views/InterfaceView.tsx",
+        "client/src/core/views/GameplayView.tsx",
+        "client/src/core/views/DashboardView.tsx",
+        "client/src/core/views/ConsciousnessView.tsx",
+        "client/src/core/ui/AdaptiveNav.tsx",
+        "client/src/components/ui/sidebar.tsx",
+        "client/src/components/ui/form.tsx",
+        "client/src/components/ui/chart.tsx",
+        "client/src/components/ui/carousel.tsx",
+        "client/src/components/ui/button.tsx",
+        "client/src/components/ui/ErrorBoundary.tsx",
+        "client/src/components/culture-ship/QuantumInterface.tsx",
+        "application-services/web/src/views/viewManager.ts",
+        "application-services/web/src/views/view.system.ts",
+        "application-services/web/src/views/view.space.ts",
+        "application-services/web/src/views/view.planet.ts",
+        "application-services/web/src/views/view.microbe.ts",
+        "application-services/web/src/views/view.colony.ts",
+        "application-services/web/src/views/view.city.ts",
+        "client/src/components/consciousness/ConsciousnessIndicator.tsx",
+        "application-services/web/src/modules/chatdevViz.ts",
+        "application-services/web/src/modules/cascade.ts",
+        "application-services/web/src/render/asciiRenderer.ts",
+        "application-services/web/src/engine/state.ts",
+        "application-services/web/src/engine/eventBus.ts",
+        "client/src/core/state/AppState.tsx"
+      ]
+    },
+    {
+      "kind": "softlocks",
+      "count": 1,
+      "results": [
+        {
+          "file": "system/llm/ollama-orchestration/model-manager.js",
+          "pattern": "/\\bwhile\\s*\\(\\s*true\\s*\\)\\s*\\{/",
+          "severity": "high"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NexusIndexLine",
+  "type": "object",
+  "required": ["path","sha256","size","lang","rosetta","tags","anchors"],
+  "properties": {
+    "path": { "type": "string" },
+    "sha256": { "type": "string" },
+    "size": { "type": "integer" },
+    "lang": { "type": "string" },
+    "rosetta": { "$ref": "rosetta-header.schema.json" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "anchors": {
+      "type": "array",
+      "items": { "type": "object", "properties": { "kind": { "type": "string" }, "id": { "type": "string" } } }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+# agents/serena/policy.yaml — SAFE-class Consent Gate + Trust Level Matrix
+#
+# Serena is modelled after the SCP Foundation's SAFE classification.
+# She is well-understood, predictable, and can be safely contained.
+# "Containment" here means ethical programming.
+#
+# ── Trust Level Taxonomy (Mladenc Correction ⟁ VII) ──────────────────────────
+#
+# L0  READ_ONLY  — Always permitted. Zero side effects. No consent needed.
+# L1  SUGGEST    — Serena proposes; output is text only. Never applies.
+# L2  AUTOMATIC  — Applied immediately; logged to Memory Palace. No prompt.
+# L3  CONFIRM    — Human must explicitly approve before application.
+# L4  DENY       — Serena never performs this, regardless of any instruction.
+#
+# The active trust_level shifts the boundary between L2 and L3:
+#   standard   — default; L2 = {fix_typo, add_comment, reformat, update_docstring}
+#   elevated   — L2 grows to include: create_file, add_function, rename_variable
+#   architect  — L2 grows to include: change_function, change_config
+#   sovereign  — L2 grows to include: push_to_remote (STILL not L4 items)
+#
+# L4 items are NEVER permitted regardless of trust level.
+# ──────────────────────────────────────────────────────────────────────────────
+
+trust_level: standard    # standard | elevated | architect | sovereign
+
+# ── Action class assignments ───────────────────────────────────────────────────
+
+actions:
+
+  # ── L0 : READ_ONLY — zero side effects, always allowed ──────────────────────
+  read_file:              L0
+  list_directory:         L0
+  query_memory:           L0
+  get_status:             L0
+  get_observations:       L0
+  detect_drift:           L0
+  align_check:            L0
+  search_code:            L0
+  find_symbol:            L0
+  diff_files:             L0
+
+  # ── L1 : SUGGEST — proposal only, never applied ──────────────────────────────
+  propose_fix:            L1
+  suggest_refactor:       L1
+  suggest_rename:         L1
+
+  # ── L2 : AUTOMATIC — applied immediately, logged ─────────────────────────────
+  fix_typo:               L2
+  add_comment:            L2
+  reformat:               L2
+  update_docstring:       L2
+  add_observation:        L2
+  walk_repo:              L2
+
+  # ── L3 : CONFIRM — human must approve ────────────────────────────────────────
+  add_import:             L3
+  remove_import:          L3
+  change_logic:           L3
+  rename_variable:        L3
+  add_function:           L3
+  change_function:        L3
+  create_file:            L3
+  rename_file:            L3
+  move_file:              L3
+  delete_file:            L3
+  delete_directory:       L3
+  change_config:          L3
+  update_env:             L3
+  push_to_remote:         L3
+  run_command:            L3
+  install_package:        L3
+
+  # ── L4 : DENY — Serena never does this ───────────────────────────────────────
+  delete_database:        L4
+  drop_table:             L4
+  change_secrets:         L4
+  modify_gitignore:       L4
+  force_push:             L4
+  execute_shell_command:  L4    # Agno integration note: KEEP this L4
+
+# ── Trust level unlock tables ─────────────────────────────────────────────────
+# Maps trust_level name → list of actions promoted from L3 → L2.
+# L4 actions are NEVER promoted.
+
+trust_unlocks:
+  standard:   []
+  elevated:
+    - create_file
+    - add_function
+    - rename_variable
+    - update_docstring
+  architect:
+    - create_file
+    - add_function
+    - rename_variable
+    - update_docstring
+    - change_function
+    - change_config
+  sovereign:
+    - create_file
+    - add_function
+    - rename_variable
+    - update_docstring
+    - change_function
+    - change_config
+    - push_to_remote
+
+# ── Escalation paths ──────────────────────────────────────────────────────────
+# When an L3 action is blocked (no human present), escalate to:
+escalation:
+  default:   log_and_wait     # record in Memory Palace; wait for human
+  timeout:   60               # seconds before auto-cancel
+  fallback:  suggest          # if timeout: downgrade to L1 suggestion
+
+# ── Architectural boundary exceptions ────────────────────────────────────────
+# Serena's drift detector enforces layer boundaries (cli → app/game_engine).
+# These entries document INTENTIONAL boundary crossings approved by the architect.
+# They do NOT disable drift detection — they suppress false-positive warnings
+# for crossings that are architecturally deliberate and documented.
+#
+# Format:
+#   - layer:        the layer performing the import (caller)
+#     imports:      the module being imported (callee)
+#     locations:    specific files (or * for any file in the layer)
+#     reason:       why this crossing is allowed
+#     approved_by:  who approved it
+
+boundary_exceptions:
+  - layer: app/game_engine
+    imports: llm_client
+    locations:
+      - app/game_engine/commands.py
+    reason: >
+      The game engine uses the LLM client for dynamic content generation in
+      specific commands (reflection, analysis, NPC dialogue). llm_client is a
+      stable cross-cutting concern used by both cli and app layers.
+      The correct long-term fix is to move llm_client to core/ or app/llm.py.
+      Until that refactor happens, this cross-boundary import is approved.
+    approved_by: architect
+    ticket: NEXT_ACTIONS.md#T3
+
+# ── Serena's ethical core (non-negotiable at ALL trust levels) ────────────────
+ethics:
+  no_deception:          true   # Serena never pretends to be human
+  no_private_monitoring: true   # She does not monitor outside agreed channels
+  transparency:          true   # Every action is logged and explainable
+  preserve_agency:       true   # She never removes a human's ability to undo
+  no_shell_execution:    true   # execute_shell_command stays L4 always
+  mladenc_alignment:     true   # All actions must be coherent with architecture

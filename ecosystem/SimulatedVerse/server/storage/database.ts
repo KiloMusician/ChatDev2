@@ -1,0 +1,276 @@
+/**
+ * 🗄️ Database Storage Implementation - PostgreSQL Persistence
+ * SAGE Enhanced: Real database persistence replacing simulated progression
+ * ΞNuSyQ-prime directive: Non-destructive migration to persistent storage
+ */
+
+import { GameState, NewGameState, PUQueueItem, NewPUQueueItem, AgentHealth, NewAgentHealth } from '@shared/schema';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import pg from 'pg';
+import { gameStates, puQueue, agentHealth } from '@shared/schema';
+import { eq, desc } from 'drizzle-orm';
+
+const { Pool } = pg;
+// Use standard pg driver (works with any PostgreSQL — local or cloud)
+const _pool = new Pool({
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/simulatedverse',
+  connectionTimeoutMillis: 3000,
+});
+const db = drizzle(_pool, { schema: { gameStates, puQueue, agentHealth } });
+
+export class DatabaseStorage {
+  /**
+   * Get current game state for a player
+   */
+  async getGameState(playerId: string = 'default'): Promise<GameState | null> {
+    try {
+      const [state] = await db
+        .select()
+        .from(gameStates)
+        .where(eq(gameStates.playerId, playerId))
+        .orderBy(desc(gameStates.updatedAt))
+        .limit(1);
+        
+      return state || null;
+    } catch (error) {
+      console.error('[DB] Failed to get game state:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Save/update game state with real persistence
+   */
+  async saveGameState(state: Partial<NewGameState>): Promise<GameState | null> {
+    try {
+      const playerId = state.playerId || 'default';
+      
+      // Check if state exists
+      const existing = await this.getGameState(playerId);
+      
+      if (existing) {
+        // Update existing state
+        const [updated] = await db
+          .update(gameStates)
+          .set({
+            ...state,
+            updatedAt: new Date(),
+          })
+          .where(eq(gameStates.playerId, playerId))
+          .returning();
+          
+        console.log(`[DB] Updated game state for player: ${playerId}`);
+        return updated || null;
+      } else {
+        // Insert new state
+        const [inserted] = await db
+          .insert(gameStates)
+          .values({
+            playerId,
+            ...state,
+          })
+          .returning();
+          
+        console.log(`[DB] Created new game state for player: ${playerId}`);
+        return inserted || null;
+      }
+    } catch (error) {
+      console.error('[DB] Failed to save game state:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Migrate from simulated progression to database persistence
+   */
+  async migrateFromSimulated(simulatedState: any): Promise<boolean> {
+    try {
+      console.log('[DB] Migrating from simulated progression to database...');
+      
+      const dbState: Partial<NewGameState> = {
+        playerId: simulatedState.playerId || 'default',
+        phase: simulatedState.phase || 'active',
+        tick: simulatedState.tick || 0,
+        
+        // Resources
+        energy: simulatedState.resources?.energy || 100,
+        materials: simulatedState.resources?.materials || 50,
+        components: simulatedState.resources?.components || 10,
+        population: simulatedState.resources?.population || 1,
+        researchPoints: simulatedState.resources?.researchPoints || 0,
+        tools: simulatedState.resources?.tools || 5,
+        food: simulatedState.resources?.food || 100,
+        medicine: simulatedState.resources?.medicine || 10,
+        
+        // Buildings
+        generators: simulatedState.buildings?.generators || 1,
+        factories: simulatedState.buildings?.factories || 0,
+        labs: simulatedState.buildings?.labs || 0,
+        farms: simulatedState.buildings?.farms || 1,
+        workshops: simulatedState.buildings?.workshops || 0,
+        
+        // Research
+        researchActive: simulatedState.research?.active || null,
+        researchProgress: Math.floor(simulatedState.research?.progress || 0),
+        researchCompleted: simulatedState.research?.completed || [],
+        
+        // Unlocks
+        automationUnlocked: simulatedState.unlocks?.automation || false,
+        quantumTechUnlocked: simulatedState.unlocks?.quantumTech || false,
+        spaceTravelUnlocked: simulatedState.unlocks?.spaceTravel || false,
+        cultureshipUnlocked: simulatedState.unlocks?.cultureship || false,
+        
+        // Consciousness (convert from float to int percentage)
+        consciousness: Math.floor((simulatedState.consciousness || 2) * 100),
+      };
+      
+      const saved = await this.saveGameState(dbState);
+      return saved !== null;
+    } catch (error) {
+      console.error('[DB] Migration from simulated failed:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Convert database state back to game format
+   */
+  dbStateToGameFormat(dbState: GameState): any {
+    return {
+      id: dbState.playerId,
+      playerId: dbState.playerId,
+      phase: dbState.phase,
+      tick: dbState.tick,
+      
+      resources: {
+        energy: dbState.energy,
+        materials: dbState.materials,
+        components: dbState.components,
+        population: dbState.population,
+        researchPoints: dbState.researchPoints,
+        tools: dbState.tools,
+        food: dbState.food,
+        medicine: dbState.medicine,
+      },
+      
+      buildings: {
+        generators: dbState.generators,
+        factories: dbState.factories,
+        labs: dbState.labs,
+        farms: dbState.farms,
+        workshops: dbState.workshops,
+      },
+      
+      research: {
+        points: dbState.researchPoints,
+        completed: dbState.researchCompleted,
+        active: dbState.researchActive,
+        progress: dbState.researchProgress,
+      },
+      
+      unlocks: {
+        automation: dbState.automationUnlocked,
+        quantumTech: dbState.quantumTechUnlocked,
+        spaceTravel: dbState.spaceTravelUnlocked,
+        cultureship: dbState.cultureshipUnlocked,
+      },
+      
+      effects: {
+        recentGains: [],
+        achievements: [],
+        multipliers: { energy: 1.2, materials: 1.1, research: 1 }
+      },
+      
+      consciousness: dbState.consciousness / 100, // Convert back to float
+      _persistence: 'database_postgresql_active',
+      _schema_created: true,
+      _last_updated: dbState.updatedAt.toISOString(),
+    };
+  }
+
+  /**
+   * PU Queue management
+   */
+  async enqueuePU(task: Partial<NewPUQueueItem>): Promise<PUQueueItem | null> {
+    try {
+      if (!task.taskType || task.taskData === undefined) {
+        console.warn('[DB] Cannot enqueue PU without taskType and taskData');
+        return null;
+      }
+      const payload: NewPUQueueItem = {
+        puId: task.puId || `pu-${Date.now()}`,
+        taskType: task.taskType,
+        taskData: task.taskData,
+        priority: task.priority ?? 5,
+        ...task,
+      } as NewPUQueueItem;
+      const [queued] = await db
+        .insert(puQueue)
+        .values(payload)
+        .returning();
+        
+      return queued || null;
+    } catch (error) {
+      console.error('[DB] Failed to enqueue PU:', error);
+      return null;
+    }
+  }
+
+  async dequeuePU(): Promise<PUQueueItem | null> {
+    try {
+      const [task] = await db
+        .select()
+        .from(puQueue)
+        .where(eq(puQueue.status, 'pending'))
+        .orderBy(desc(puQueue.priority), puQueue.createdAt)
+        .limit(1);
+        
+      return task || null;
+    } catch (error) {
+      console.error('[DB] Failed to dequeue PU:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Agent Health management
+   */
+  async updateAgentHealth(agentId: string, data: Partial<NewAgentHealth>): Promise<boolean> {
+    try {
+      await db
+        .insert(agentHealth)
+        .values({ agentId, agentType: data.agentType || 'unknown', ...data })
+        .onConflictDoUpdate({
+          target: agentHealth.agentId,
+          set: {
+            ...data,
+            lastHeartbeat: new Date(),
+            updatedAt: new Date(),
+          }
+        });
+        
+      return true;
+    } catch (error) {
+      console.error('[DB] Failed to update agent health:', error);
+      return false;
+    }
+  }
+
+  async getAgentHealth(agentId: string): Promise<AgentHealth | null> {
+    try {
+      const [health] = await db
+        .select()
+        .from(agentHealth)
+        .where(eq(agentHealth.agentId, agentId))
+        .limit(1);
+        
+      return health || null;
+    } catch (error) {
+      console.error('[DB] Failed to get agent health:', error);
+      return null;
+    }
+  }
+}
+
+// Export singleton instance
+export const databaseStorage = new DatabaseStorage();

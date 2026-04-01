@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "modules": {
+    "root": {
+      "id": "root",
+      "path": "/",
+      "owner": "SCP-ENG",
+      "deputy": "SCP-OPS",
+      "status": "stable",
+      "description": "Core system primitives and bootstrap",
+      "dependencies": [],
+      "exports": ["bootstrap", "config", "guards"]
+    },
+    "energy": {
+      "id": "energy", 
+      "path": "/features/energy",
+      "owner": "SCP-ENG",
+      "deputy": "SCP-QA",
+      "status": "stable",
+      "description": "Resource generation and allocation engine",
+      "dependencies": ["root"],
+      "exports": ["Engine", "Allocator", "Monitor"]
+    },
+    "progression": {
+      "id": "progression",
+      "path": "/features/progression", 
+      "owner": "SCP-LORE",
+      "deputy": "SCP-ENG",
+      "status": "active",
+      "description": "Tier unlocks and advancement system",
+      "dependencies": ["root", "energy"],
+      "exports": ["TierManager", "UnlockTree", "ProgressTracker"]
+    },
+    "ui": {
+      "id": "ui",
+      "path": "/features/ui",
+      "owner": "SCP-UX", 
+      "deputy": "SCP-ENG",
+      "status": "active",
+      "description": "Interface components and rendering",
+      "dependencies": ["root", "progression"],
+      "exports": ["Components", "Layouts", "Themes"]
+    },
+    "narrative": {
+      "id": "narrative",
+      "path": "/features/narrative",
+      "owner": "SCP-LORE",
+      "deputy": "SCP-UX", 
+      "status": "experimental",
+      "description": "Storytelling and lore systems",
+      "dependencies": ["root", "progression"],
+      "exports": ["StoryEngine", "DialogueSystem", "Cutscenes"]
+    },
+    "automation": {
+      "id": "automation",
+      "path": "/features/automation",
+      "owner": "SCP-ENG",
+      "deputy": "SCP-OPS",
+      "status": "active", 
+      "description": "Background tasks and scheduling",
+      "dependencies": ["root", "energy"],
+      "exports": ["Scheduler", "TaskQueue", "Workers"]
+    }
+  },
+  "status_definitions": {
+    "experimental": "Early development, breaking changes expected",
+    "active": "Under active development, API may change",
+    "stable": "Production ready, semantic versioning",
+    "deprecated": "Planned for removal, use alternatives",
+    "locked": "Temporarily frozen for refactoring"
+  }
+}

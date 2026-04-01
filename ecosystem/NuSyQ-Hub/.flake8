@@ -1,0 +1,28 @@
+[flake8]
+max-line-length = 88
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    migrations,
+    venv,
+    .venv,
+    src/legacy,
+    src/*BAK*,
+    .docker_build_context,
+    .sanitized_build_context
+# E501: line too long (handled by black)
+# W503: line break before binary operator (conflicts with black)
+# E402: module level import not at top (intentional for sys.path manipulation)
+# E203: whitespace before ':' in slices (black formatter preference)
+ignore = E501,W503,E402,E203,F401
+per-file-ignores =
+    # Package re-export modules intentionally import symbols for public APIs.
+    __init__.py: F401
+    # Protocol-heavy facade uses compact stub signatures.
+    src/core/orchestrate.py: E301,E704
+    src/utils/sorting.py: E704
+    # Generated test artifacts are intentionally left minimally formatted.
+    tests/generated/*.py: E302,E712,W292,W293
+    tests/auto_generated/*.py: W292,W293

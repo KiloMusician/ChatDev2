@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>keeper.ps1 — Windows Mode Switcher</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f1117;
+      color: #e1e4e8;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .container { max-width: 920px; margin: 0 auto; }
+    header {
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #58a6ff;
+      font-family: 'Consolas', monospace;
+    }
+    header p {
+      margin-top: 0.5rem;
+      color: #8b949e;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 700px;
+    }
+    .badges { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .badge {
+      display: inline-block;
+      background: #1c2128;
+      border: 1px solid #30363d;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      color: #8b949e;
+      font-family: monospace;
+    }
+    .badge.ps  { color: #3b82f6; border-color: #3b82f6; }
+    .badge.win { color: #f59e0b; border-color: #f59e0b; }
+    .badge.new { color: #3fb950; border-color: #3fb950; }
+
+    .section { margin-bottom: 2.5rem; }
+    .section h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #c9d1d9;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section h2::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 1rem;
+      background: #58a6ff;
+      border-radius: 2px;
+    }
+
+    .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .mode-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+    .mode-card.highlight { border-color: #388bfd44; background: #0d1117; }
+    .mode-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #58a6ff;
+      margin-bottom: 0.4rem;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .mode-card h3 .new-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #3fb950;
+      flex-shrink: 0;
+    }
+    .mode-card p {
+      font-size: 0.82rem;
+      color: #8b949e;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.12rem 0.4rem;
+      border-radius: 999px;
+    }
+    .tag-green { background: #0d4429; color: #3fb950; }
+    .tag-red   { background: #3d1c1c; color: #f85149; }
+    .tag-blue  { background: #0c2d6b; color: #79c0ff; }
+    .tag-orange{ background: #3d2600; color: #f0883e; }
+    .tag-gray  { background: #21262d; color: #8b949e; }
+
+    pre {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-size: 0.83rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      overflow-x: auto;
+      line-height: 1.7;
+      color: #e6edf3;
+    }
+    .comment { color: #6e7681; }
+    .cmd     { color: #7ee787; }
+    .flag    { color: #d2a8ff; }
+    .arg     { color: #ffa657; }
+
+    .cmd-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .cmd-block {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+    }
+    .cmd-block code {
+      display: block;
+      font-family: 'Consolas', monospace;
+      font-size: 0.82rem;
+      color: #7ee787;
+      margin-bottom: 0.3rem;
+    }
+    .cmd-block span { font-size: 0.78rem; color: #8b949e; }
+
+    .flags-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .flags-table th {
+      text-align: left; color: #8b949e; font-weight: 500;
+      padding: 0.4rem 0.75rem; border-bottom: 1px solid #30363d;
+    }
+    .flags-table td {
+      padding: 0.4rem 0.75rem; border-bottom: 1px solid #21262d;
+      font-family: Consolas, monospace;
+    }
+    .flags-table td:last-child { font-family: inherit; color: #8b949e; }
+
+    .files-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .file-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+    }
+    .file-card code {
+      display: block;
+      font-size: 0.8rem;
+      color: #58a6ff;
+      margin-bottom: 0.4rem;
+    }
+    .file-card p { font-size: 0.78rem; color: #8b949e; line-height: 1.5; }
+
+    .note {
+      background: #161b22;
+      border: 1px solid #3d3006;
+      border-left: 3px solid #f59e0b;
+      border-radius: 6px;
+      padding: 0.9rem 1rem;
+      font-size: 0.85rem;
+      color: #c9ae68;
+      line-height: 1.5;
+    }
+    .note strong { color: #f0883e; }
+
+    .doc-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .doc-link {
+      display: inline-block;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-size: 0.83rem;
+      color: #58a6ff;
+      text-decoration: none;
+      font-family: monospace;
+    }
+    .doc-link:hover { border-color: #58a6ff; }
+
+    @media (max-width: 600px) {
+      .cmd-grid { grid-template-columns: 1fr; }
+      .modes-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>keeper.ps1</h1>
+    <p>Lightweight, safe system orchestrator for Windows laptops. Switches between gaming and coding modes, reduces background interference, and monitors system health in real time — no bloat, no risky tweaks, just predictable performance.</p>
+    <div class="badges">
+      <span class="badge ps">PowerShell</span>
+      <span class="badge win">Windows Only</span>
+      <span class="badge">Profile-Based</span>
+      <span class="badge">Rollback Support</span>
+      <span class="badge">-WhatIf Safe</span>
+      <span class="badge">HTML Export</span>
+    </div>
+  </header>
+
+  <div class="section">
+    <h2>Mode Profiles</h2>
+    <div class="modes-grid">
+      <div class="mode-card">
+        <h3>gaming</h3>
+        <p>Optimizes for game performance by removing all dev interference and locking the power plan.</p>
+        <div class="tags">
+          <span class="tag tag-red">stops VS Code</span>
+          <span class="tag tag-red">stops Docker</span>
+          <span class="tag tag-blue">shuts down WSL</span>
+          <span class="tag tag-red">stops WSearch</span>
+          <span class="tag tag-green">high-performance power</span>
+          <span class="tag tag-green">Game Mode on</span>
+        </div>
+      </div>
+      <div class="mode-card">
+        <h3>coding</h3>
+        <p>Restores a balanced development environment.</p>
+        <div class="tags">
+          <span class="tag tag-green">balanced power</span>
+          <span class="tag tag-green">restores WSearch</span>
+          <span class="tag tag-gray">Game Mode off</span>
+          <span class="tag tag-gray">WSL untouched</span>
+        </div>
+      </div>
+      <div class="mode-card highlight">
+        <h3><span class="new-dot"></span> audio-safe</h3>
+        <p>Kills all known audio-risk processes. Use when experiencing stutter or before running LatencyMon.</p>
+        <div class="tags">
+          <span class="tag tag-red">stops all dev tools</span>
+          <span class="tag tag-red">stops browsers</span>
+          <span class="tag tag-blue">shuts down WSL</span>
+          <span class="tag tag-red">stops Docker</span>
+          <span class="tag tag-green">high-performance power</span>
+          <span class="tag tag-gray">Game Mode off</span>
+        </div>
+      </div>
+      <div class="mode-card highlight">
+        <h3><span class="new-dot"></span> quiet</h3>
+        <p>Maximum silence — stops all workloads and browsers. Use for recording, video calls, or deep troubleshooting.</p>
+        <div class="tags">
+          <span class="tag tag-red">stops all dev tools</span>
+          <span class="tag tag-red">stops browsers</span>
+          <span class="tag tag-blue">shuts down WSL</span>
+          <span class="tag tag-green">balanced power</span>
+          <span class="tag tag-gray">no Game Mode</span>
+        </div>
+      </div>
+      <div class="mode-card">
+        <h3>diagnose</h3>
+        <p>Balanced baseline for audio stutter testing without extra mode noise. Run <code style="color:#7ee787">doctor</code> after switching.</p>
+        <div class="tags">
+          <span class="tag tag-green">balanced power</span>
+          <span class="tag tag-gray">no extra changes</span>
+          <span class="tag tag-gray">Game Mode off</span>
+        </div>
+      </div>
+      <div class="mode-card">
+        <h3>restore</h3>
+        <p>Rolls back the last reversible mode change using <code style="color:#ffa657">state/rollback.json</code>.</p>
+        <div class="tags">
+          <span class="tag tag-blue">reverts power plan</span>
+          <span class="tag tag-blue">restarts services</span>
+          <span class="tag tag-blue">reverts Game Mode</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Commands</h2>
+    <div class="cmd-grid">
+      <div class="cmd-block">
+        <code>.\keeper.ps1 status</code>
+        <span>Show current system health snapshot</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 mode gaming</code>
+        <span>Switch to gaming mode</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 mode coding</code>
+        <span>Switch to coding mode</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 mode audio-safe</code>
+        <span>Kill all audio-risk processes (new)</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 mode quiet</code>
+        <span>Stop all workloads, maximum quiet (new)</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 mode restore</code>
+        <span>Roll back to previous state</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 watch</code>
+        <span>Real-time health monitor (Ctrl+C to stop)</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 watch -DurationSec 60</code>
+        <span>Watch for 60 seconds then exit</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 doctor</code>
+        <span>Diagnose Nahimic, audio risk, CPU, WSL</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 export</code>
+        <span>Export JSON report to incidents/</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 export -Html</code>
+        <span>Export HTML report to incidents/ (new)</span>
+      </div>
+      <div class="cmd-block">
+        <code>.\keeper.ps1 prune</code>
+        <span>Clean up old session and incident logs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Flags</h2>
+    <table class="flags-table">
+      <tr><th>Flag</th><th>Description</th></tr>
+      <tr><td>-WhatIf</td><td>Preview changes without applying them (safe dry-run)</td></tr>
+      <tr><td>-DebugMode</td><td>Show full structured action results for every step</td></tr>
+      <tr><td>-Quiet</td><td>Suppress INFO log lines</td></tr>
+      <tr><td>-Html</td><td>Generate HTML report when used with <code>export</code></td></tr>
+      <tr><td>-DurationSec N</td><td>Stop <code>watch</code> after N seconds (0 = run forever)</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Quick Start</h2>
+    <pre><span class="comment"># Preview gaming mode (no changes applied)</span>
+<span class="cmd">.\keeper.ps1</span> mode <span class="arg">gaming</span> <span class="flag">-WhatIf</span>
+
+<span class="comment"># Switch to gaming mode for real</span>
+<span class="cmd">.\keeper.ps1</span> mode <span class="arg">gaming</span>
+
+<span class="comment"># Audio is stuttering — kill everything that might interfere</span>
+<span class="cmd">.\keeper.ps1</span> mode <span class="arg">audio-safe</span>
+
+<span class="comment"># Run diagnostics to detect Nahimic, high CPU, WSL, Docker</span>
+<span class="cmd">.\keeper.ps1</span> doctor
+
+<span class="comment"># Export a self-contained HTML report</span>
+<span class="cmd">.\keeper.ps1</span> export <span class="flag">-Html</span>
+
+<span class="comment"># Roll everything back</span>
+<span class="cmd">.\keeper.ps1</span> mode <span class="arg">restore</span></pre>
+  </div>
+
+  <div class="section">
+    <h2>State &amp; Storage</h2>
+    <pre>state/
+  current.json      <span class="comment"># Overwritten in place on every status/watch/mode change</span>
+  ringbuffer.json   <span class="comment"># Rolling 180-sample buffer — oldest auto-dropped</span>
+  rollback.json     <span class="comment"># Last reversible changes (power plan, stopped services)</span>
+sessions/           <span class="comment"># Compact per-session summaries (max 30, pruned automatically)</span>
+incidents/          <span class="comment"># Export bundles — JSON or HTML — auto-pruned after 14 days</span></pre>
+  </div>
+
+  <div class="section">
+    <h2>Configuration Files</h2>
+    <div class="files-grid">
+      <div class="file-card">
+        <code>config/defaults.json</code>
+        <p>Global defaults: power plans, watch interval, ring buffer size, retention policy, doctor thresholds, launcher paths.</p>
+      </div>
+      <div class="file-card">
+        <code>config/profiles.json</code>
+        <p>Mode definitions for gaming, coding, audio-safe, quiet, diagnose, restore. Edit to customize which processes and services each mode touches.</p>
+      </div>
+      <div class="file-card">
+        <code>config/machine.local.json</code>
+        <p>Per-machine overrides (git-ignored). Copy from <code>machine.local.example.json</code> and add your process names, launcher paths, or profile tweaks.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Docs</h2>
+    <div class="doc-links">
+      <a class="doc-link" href="docs/design.md">docs/design.md</a>
+      <a class="doc-link" href="docs/safety.md">docs/safety.md</a>
+      <a class="doc-link" href="README.md">README.md</a>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Windows Only:</strong> keeper.ps1 requires Windows PowerShell 5.1+ or PowerShell 7+ on Windows.
+    Run as Administrator for service control and power plan changes.
+    The <code>audio-safe</code> and <code>quiet</code> profiles are new — customize which processes they stop via <code>config/machine.local.json</code>.
+  </div>
+</div>
+</body>
+</html>

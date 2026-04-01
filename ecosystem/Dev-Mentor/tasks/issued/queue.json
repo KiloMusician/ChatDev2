@@ -1,0 +1,177 @@
+{
+  "updated_at": "2026-03-21T18:50:00+00:00",
+  "source": "codex_persistent_swarm",
+  "tasks": [
+    {
+      "id": "T1001",
+      "description": "RimWorld bridge mod scaffold with HTTP event surface",
+      "priority": "P0",
+      "category": "integration",
+      "assigned_to": "Plato",
+      "status": "completed",
+      "worker": "plato+codex",
+      "completed_at": "2026-03-21T17:08:00+00:00",
+      "output_preview": "RimWorld bridge scaffold exists under rimworld_mod/ with About.xml, LoadFolders.xml, Harmony patch stubs, and an HTTP event surface including the local Python bridge server."
+    },
+    {
+      "id": "T1002",
+      "description": "NuSyQ-Hub health probe with restart cooldown logic",
+      "priority": "P0",
+      "category": "health",
+      "assigned_to": "Chandrasekhar",
+      "status": "completed",
+      "worker": "chandrasekhar+codex",
+      "completed_at": "2026-03-21T17:08:00+00:00",
+      "output_preview": "Hub health probe is live with cooldown-based restart logic and JSONL logging in scripts/hub_health_probe.py."
+    },
+    {
+      "id": "T1003",
+      "description": "SimulatedVerse degraded mode with static client and readiness endpoints",
+      "priority": "P0",
+      "category": "health",
+      "assigned_to": "Linnaeus",
+      "status": "completed",
+      "worker": "linnaeus+codex",
+      "completed_at": "2026-03-21T17:08:00+00:00",
+      "output_preview": "Degraded SimulatedVerse mode is live with static client serving, /api/health, /healthz, /readyz, and startup fallback/daemon wiring."
+    },
+    {
+      "id": "T1004",
+      "description": "NuSyQ bridge state reconciliation and ready-state semantics",
+      "priority": "P1",
+      "category": "integration",
+      "assigned_to": "Schrodinger",
+      "status": "completed",
+      "worker": "schrodinger+codex",
+      "completed_at": "2026-03-21T17:08:00+00:00",
+      "output_preview": "Bridge readiness semantics are aligned: /livez is liveness, /readyz is bridge readiness, and the port map advertises the correct bridge health surface."
+    },
+    {
+      "id": "T1005",
+      "description": "Terminal Depths explorer playbook and hidden-trigger capture",
+      "priority": "P1",
+      "category": "playtest",
+      "assigned_to": "Nietzsche",
+      "status": "completed",
+      "worker": "nietzsche+codex",
+      "completed_at": "2026-03-21T17:08:00+00:00",
+      "output_preview": "Explorer and completionist playbook artifacts exist in state/playbook.json, state/playbook.md, and state/playbook_completionist.json."
+    },
+    {
+      "id": "T1006",
+      "description": "Port map and health endpoint standardization across ecosystem",
+      "priority": "P1",
+      "category": "infrastructure",
+      "assigned_to": "Schrodinger",
+      "status": "completed",
+      "worker": "schrodinger",
+      "completed_at": "2026-03-21T15:38:00+00:00",
+      "output_preview": "Verified the manifest/helper pair already align on bridge health truth: port_map advertises /health and the shared helper keeps /api/health as an alias."
+    },
+    {
+      "id": "T1007",
+      "description": "Orchestrator spawn-agent task type and persistent-worker loop",
+      "priority": "P2",
+      "category": "orchestration",
+      "assigned_to": null,
+      "status": "completed",
+      "worker": "codex",
+      "completed_at": "2026-03-21T18:26:00+00:00",
+      "output_preview": "Added spawn_agent dispatch support in scripts/dispatch_task.py, including role inference, /api/swarm/spawn routing, task-file result updates, and focused pytest coverage for spawn-agent task completion."
+    },
+    {
+      "id": "T1005A",
+      "description": "Add Terminal Depths playbook command that reads machine-readable hint data",
+      "priority": "P1",
+      "category": "feature",
+      "assigned_to": "Nietzsche",
+      "status": "completed",
+      "worker": "nietzsche",
+      "completed_at": "2026-03-21T15:38:00+00:00",
+      "output_preview": "Verified the playbook command is already implemented end-to-end in app/game_engine/commands.py and reads state/playbook.json correctly."
+    },
+    {
+      "id": "T1002A",
+      "description": "Wire Hub health listener into orchestrator task gating",
+      "priority": "P1",
+      "category": "orchestration",
+      "assigned_to": null,
+      "status": "completed",
+      "worker": "copernicus+codex",
+      "completed_at": "2026-03-21T17:08:00+00:00",
+      "output_preview": "Added scripts/health_listener.py and updated agents/orchestrator.py to pause pending-task execution when the latest Hub probe is classified as critical."
+    },
+    {
+      "id": "T1001A",
+      "description": "Review and compile RimWorld chat adapter bridge patch",
+      "priority": "P1",
+      "category": "review",
+      "assigned_to": null,
+      "status": "completed",
+      "worker": "godel+codex",
+      "completed_at": "2026-03-21T17:16:00+00:00",
+      "output_preview": "Reviewed the RimWorld chat adapter, fixed the Harmony postfix parameter binding to use ref for the documented out arguments, and kept the compile/toolchain gap tracked separately under T1001B."
+    },
+    {
+      "id": "T1001B",
+      "description": "Compile and smoke-test generated RimWorld mod scaffold",
+      "priority": "P1",
+      "category": "verification",
+      "assigned_to": null,
+      "status": "completed",
+      "worker": "hooke+codex",
+      "completed_at": "2026-03-21T18:34:00+00:00",
+      "output_preview": "Verified the local Windows dotnet toolchain and RimWorld/Harmony references are present, built TerminalKeeper.EventBridge.csproj successfully with /mnt/c/Program Files/dotnet/dotnet.exe, and confirmed TerminalKeeper.EventBridge.dll lands in rimworld_mod/Assemblies."
+    },
+    {
+      "id": "T1002B",
+      "description": "Add focused tests for NuSyQ-Hub health and status endpoint semantics",
+      "priority": "P1",
+      "category": "testing",
+      "assigned_to": "Chandrasekhar",
+      "status": "completed",
+      "worker": "copernicus+codex",
+      "completed_at": "2026-03-21T16:46:00+00:00",
+      "output_preview": "Added focused NuSyQ-Hub tests for status/health semantics, aligned stale set-status expectations with the current API contract, and fixed Python 3.10 UTC compatibility blockers so the targeted suite passes."
+    },
+    {
+      "id": "T1003A",
+      "description": "Make SimulatedVerse full server resilient to missing textures instead of falling back immediately",
+      "priority": "P1",
+      "category": "hardening",
+      "assigned_to": "Linnaeus",
+      "status": "completed",
+      "started_at": "2026-03-21T14:14:33.253554+00:00",
+      "worker": "linnaeus+codex",
+      "output": "/app/state/chatdev_output/20260321_141433_t1003a_make_simulatedverse_full_server_resilient_to_mis.md",
+      "completed_at": "2026-03-21T20:27:00+00:00",
+      "output_preview": "Verified the full-server import path completes in about 52s on the Windows-backed workspace, raised startup_fallback.ts to a realistic 75s default full-startup timeout, and confirmed the fallback script brings a separate instance healthy on :5004 without dropping to degraded mode. Degraded mode remains available as a true fallback, but the full server is now a validated slow-start path rather than a false stall."
+    },
+    {
+      "id": "T1010",
+      "description": "Harden scripts/hub_health_probe.py with tests, error handling, daemon mode, and import safety",
+      "priority": "P1",
+      "category": "hardening",
+      "assigned_to": "chatdev",
+      "status": "completed",
+      "started_at": "2026-03-21T06:35:28.968647+00:00",
+      "worker": "chatdev_worker",
+      "completed_at": "2026-03-21T06:35:29.225854+00:00",
+      "output": "/app/state/chatdev_output/20260321_063529_t1010_harden_scripts_hub_health_probe_py_with_tests_er.md",
+      "output_preview": "# Summary\n\nFallback ChatDev response for `T1010` because no higher-quality model response was available.\n\n# Proposed Changes\n\n- Review `scripts/hub_health_probe.py` for import safety and side effects.\n- Add daemon-mode signal handling and retry/backoff around network reads.\n- Add focused pytest coverage for success and failure paths.\n- Re-run Serena scoped walk after edits.\n\n# Unified Diff\n\n```diff\n*** placeholder diff for Harden scripts/hub_health_probe.py with tests, error handling, daemon mod"
+    },
+    {
+      "id": "T1012",
+      "description": "Harden agent/queue freshness sync so stale agent IDs and outdated health metadata are detected and repaired automatically",
+      "priority": "P1",
+      "category": "hardening",
+      "assigned_to": "chatdev",
+      "status": "completed",
+      "started_at": "2026-03-21T15:29:50.185206+00:00",
+      "worker": "chatdev_worker+codex",
+      "completed_at": "2026-03-21T15:29:50.546512+00:00",
+      "output": "/app/state/chatdev_output/20260321_152950_t1012_harden_agent_queue_freshness_sync_so_stale_agent.md",
+      "output_preview": "ChatDev returned only a placeholder. Codex then patched scripts/agent_output_watcher.py to reconcile agent_health.json from state/agent_state and mark active-but-old agents as stale automatically."
+    }
+  ]
+}

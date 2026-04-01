@@ -1,0 +1,17 @@
+{
+  "loop": { "intervalMs": 8000 },
+  "ui": { "maxSkewMs": 60000 },
+  "repo": { "maxGrowthPerMin": 50 },
+  "auditor": { "enabled": true },
+  "agent_health": {
+    "enabled": true,
+    "intervalMs": 30000,
+    "throttle_429": true,
+    "max_concurrent": 2
+  },
+  "llm": {
+    "retry_backoff": [1000, 3000, 7000],
+    "budget_reduction_429": 0.6,
+    "cascade_fallback": true
+  }
+}

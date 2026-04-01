@@ -1,0 +1,9 @@
+{
+  "root": ".",
+  "ignore": [
+    "node_modules/**","client/node_modules/**","client/dist/**",".next/**",
+    ".git/**",".venv/**",".mypy_cache/**",".pytest_cache/**",
+    ".cache/**","build/**",".build/**","coverage/**","__pycache__/**"
+  ],
+  "include": ["**/*.js","**/*.ts","**/*.tsx","**/*.jsx","**/*.py","**/*.md","**/*.json","**/*.yml","**/*.yaml","**/*.gd","**/*.toml"]
+}

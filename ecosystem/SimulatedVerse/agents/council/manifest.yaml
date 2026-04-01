@@ -1,0 +1,8 @@
+id: council
+role: council
+name: Council
+description: Merges agent votes and builds consensus decisions
+capabilities: [vote, inspect, compose]
+version: 0.1.0
+runner: in-process
+enabled: true

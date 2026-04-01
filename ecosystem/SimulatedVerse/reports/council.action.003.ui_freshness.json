@@ -1,0 +1,11 @@
+{
+  "id": "action.ui_freshness_restoration",
+  "who": "Alchemist", 
+  "intent": "Fix system-status.json staleness and restore <60s freshness",
+  "target": "Provisioner system + /public/system-status.json + ETag headers",
+  "proof_gate": "system-status.json timestamp drift <60s AND provisioner active",
+  "eta": "10 minutes",
+  "cooldown": "1.1s",
+  "priority": 3,
+  "blockers_addressed": ["ui_freshness_stale_4hrs", "provisioner_dormant"]
+}

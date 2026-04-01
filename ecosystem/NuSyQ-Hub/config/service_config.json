@@ -1,0 +1,29 @@
+{
+  "services": {
+    "mcp_server": {
+      "host": "0.0.0.0",
+      "port": 3000,
+      "healthcheck": "http://localhost:3000/health"
+    },
+    "ollama": {
+      "host": "localhost",
+      "port": 11434,
+      "healthcheck": "http://localhost:11434/api/tags"
+    },
+    "simverse_dev": {
+      "host": "localhost",
+      "port": 5002,
+      "healthcheck": "http://localhost:5002/health"
+    },
+    "simverse_react": {
+      "host": "localhost",
+      "port": 3001,
+      "healthcheck": "http://localhost:3001"
+    }
+  },
+  "paths": {
+    "simulatedverse": "C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse",
+    "nusyq": "C:/Users/keath/NuSyQ",
+    "nusyq_hub": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub"
+  }
+}

@@ -1,0 +1,16 @@
+budget:
+  warn: 0.7
+  hard: 0.9
+rules:
+  - name: prefer-tests-when-entropy-high
+    if: "entropy > 0.20"
+    then: ["queue:TestPU", "queue:DocPU"]
+  - name: prefer-perf-when-latency-high
+    if: "avg_latency_ms > 180"
+    then: ["queue:PerfPU"]
+  - name: idle-cultivation
+    if: "kardashev_pulse >= 1"
+    then: ["queue:DocPU", "queue:RefactorPU"]
+  - name: ml-bootstrap
+    if: "training_data_count < 10"
+    then: ["queue:TestPU", "queue:DocPU"]

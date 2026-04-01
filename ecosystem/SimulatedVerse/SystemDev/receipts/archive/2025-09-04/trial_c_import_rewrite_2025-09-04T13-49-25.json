@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-09-04T13:49:25.000Z",
+  "trial": "C_import_rewrite_boss", 
+  "operations": 3,
+  "rewrite_target": {
+    "component": "client/src/ui/ascii/presets.ts",
+    "imports_detected": "GameShell components referencing ASCII engine",
+    "move_plan": "client/src/ui/ascii/ → @ui alias path via path_alias_map.json",
+    "risk_level": "low_self_contained_module"
+  },
+  "rewrite_strategy": {
+    "path_alias_map": "SystemDev/scripts/path_alias_map.json verified",
+    "import_patterns": "found_4_GameShell_import_patterns", 
+    "dry_run_approach": "generate_diff_before_execution",
+    "rollback_plan": "zeta_reversible_via_receipts"
+  },
+  "proof_of_concept": {
+    "ascii_components": "6_files_in_ui_ascii_directory",
+    "import_search": "rg_pattern_matching_successful",
+    "canonical_location": "path_aliases_support_@ui_mapping"
+  },
+  "trial_status": "passing_rewrite_methodology_proven",
+  "execution_deferred": "build_errors_block_safe_refactoring",
+  "next_actions": "fix_build_then_execute_import_rewrites"
+}

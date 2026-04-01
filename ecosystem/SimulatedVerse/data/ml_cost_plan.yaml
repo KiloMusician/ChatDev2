@@ -1,0 +1,694 @@
+# 🚀 CoreLink Foundation - Ultra-Lean ML/LLM Cost-Discipline Master Plan
+# 123 concrete steps for Infrastructure-First → Product optimization
+# Minimal token spend, maximum productivity per CPU cycle
+
+meta:
+  title: "ML/LLM Cost-Discipline & Throughput Plan"
+  version: "1.0.0"
+  phases: 12
+  total_steps: 123
+  target: "Infrastructure-First → Product"
+  constraints: ["Replit", "NDJSON PU queues", "ChatDev", "Ollama", "Culture Ship & Agents"]
+
+# PHASE A: Infrastructure-First Baseline (make waste impossible)
+phase_a_infrastructure:
+  priority: 1
+  steps:
+    1: 
+      task: "Single-port server owns SPA/API/SSE/WS; disable any second listeners"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    2:
+      task: "Hard budget governor: daily token allowance + per-task budget weights; refuse overage"
+      type: "RefactorPU" 
+      impact: "critical"
+      cost: "medium"
+    3:
+      task: "Global time/size limits: HTTP max body, request timeout, streaming cutoffs; fail fast"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    4:
+      task: "Strict caching layer: in-memory LRU + KV/SQLite for identical prompts (key: model+temp+tools+prompt hash)"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "high"
+    5:
+      task: "Response hashing & dedupe: drop duplicate generations in the same tick"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    6:
+      task: "Seedable RNG + deterministic ticks so evaluation is reproducible"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    7:
+      task: "Quiet mode throttle when entropy/budget cross thresholds; only unblockers allowed"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "medium"
+    8:
+      task: "Telemetry ring buffer (≤2 MB) → snapshot → compact; no unbounded logs"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    9:
+      task: "Cold start banner & degraded HUD; never burn tokens while not ready"
+      type: "UXPU"
+      impact: "medium"
+      cost: "low"
+    10:
+      task: "Persistent queues (NDJSON PUs) with backoff; no tail-chasing failures"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    11:
+      task: "Strict input sanitizer & schema (Zod) for all PU payloads; reject junk early"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    12:
+      task: "Rollup config: strip dev deps from prod; tree-shake unused client code"
+      type: "PerfPU"
+      impact: "medium"
+      cost: "low"
+    13:
+      task: "Static asset compression + HTTP caching headers set correctly"
+      type: "PerfPU"
+      impact: "medium"
+      cost: "low"
+    14:
+      task: "Model registry with explicit allowlist & defaults per task; no any model fallthrough"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "medium"
+    15:
+      task: "Feature flags: REPLIT_AGENT, OLLAMA_REMOTE, WASM_FALLBACK—so the loop never hard-fails"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+
+# PHASE B: Model Strategy (smaller, cheaper, smarter)  
+phase_b_model_strategy:
+  priority: 2
+  steps:
+    16:
+      task: "Default to small local (e.g., 7B) for scaffold/explain; gate big models behind approval"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "low"
+    17:
+      task: "Quantized weights by default (Q4/Q5); prefer gguf for Ollama"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    18:
+      task: "Use LoRA/adapters for domain fit; never full fine-tune on Replit"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    19:
+      task: "Separate reasoning vs. drafting models (cheap planner → small drafter)"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    20:
+      task: "Split-brain prompting: outline with tiny model, detail with small/medium only for impacted sections"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    21:
+      task: "Temperature discipline: ≤0.2 for code, ≤0.5 for prose; raise temp only with explicit flag"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    22:
+      task: "Max tokens caps per route; clamp long contexts via retrieval, not raw paste"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    23:
+      task: "WASM on-device inference fallback for micro-classifiers/heuristics"
+      type: "FeaturePU"
+      impact: "medium"
+      cost: "high"
+    24:
+      task: "Embedding model is tiny + cached; never recompute unchanged docs"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    25:
+      task: "Toolformer-style stub: attempt rule-based/tool calls before LLM"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    26:
+      task: "Summon big-model only when (impact*uncertainty) exceeds threshold"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "low"
+    27:
+      task: "Top-p clipping to stabilize drafts"
+      type: "RefactorPU"
+      impact: "low"
+      cost: "low"
+    28:
+      task: "Stop-sequence guards to prevent rambling"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    29:
+      task: "Prompt short-answer by default; long response requires allow_long=true"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    30:
+      task: "Early-exit streaming: cut when acceptance heuristic passes"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "medium"
+
+# PHASE C: Prompt Engineering & Libraries (reuse > recompute)
+phase_c_prompt_engineering:
+  priority: 3
+  steps:
+    31:
+      task: "Central prompt library with versions; hash = cache key"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "medium"
+    32:
+      task: "Compose prompts from snippets; never string-concatenate ad-hoc walls of text"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    33:
+      task: "Role separation: planner/system/tool spec distinct from user/task content"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    34:
+      task: "Provide canonical few-shot sets per task family; reuse across runs"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    35:
+      task: "Declarative tool schemas (JSON Schema) to tightly constrain outputs"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    36:
+      task: "Anti-hallucination preamble: cite files, include paths, if unsure → TODO"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    37:
+      task: "Be brief unless asked: default"
+      type: "RefactorPU"
+      impact: "low"
+      cost: "low"
+    38:
+      task: "Smart retrieval budget: top-k=3 unless recall fails; increase progressively"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    39:
+      task: "Use inline checks (return OK only if tests pass) to stop retries"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    40:
+      task: "Output schemas strictly validated; retry only the minimal failing field"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+
+# PHASE D: I/O Minimization & Batching
+phase_d_io_optimization:
+  priority: 4
+  steps:
+    41:
+      task: "Batch embeddings on doc-ingest; never per-message embedding"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    42:
+      task: "Chunking standard (e.g., 800–1000 tokens, overlap 100) + stable chunk IDs"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    43:
+      task: "Pre-compress context (strip comments/whitespace) before LLM"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    44:
+      task: "Delta-diff prompting: include only changed hunks with path headers"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    45:
+      task: "Combine small similar PUs into one LLM call; split execution afterward"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    46:
+      task: "Server-side RAG reranker (BM25/light cosine) before any model call"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    47:
+      task: "Binary features → bit-packed flags (saves tokens in system prompts)"
+      type: "RefactorPU"
+      impact: "low"
+      cost: "low"
+    48:
+      task: "Minified JSON(ish) outputs (k:v); expand later"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    49:
+      task: "Reuse conversation state via short keys pointing to cached context"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "medium"
+    50:
+      task: "Use function calling style for structure; avoids verbose prose"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+
+# PHASE E: Task Triage & Scheduling
+phase_e_task_triage:
+  priority: 5
+  steps:
+    51:
+      task: "Impact × Cost scoring; sort queues by highest ROI first"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "low"
+    52:
+      task: "Critical path detector: tests/build/docs → unblockers first"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    53:
+      task: "Time-boxed spikes auto-abort; write a note PU with findings instead"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    54:
+      task: "Night-run windows for heavier tasks; day mode does only light/interactive"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    55:
+      task: "One change per PR to keep diffs small → faster review, less retrigger"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    56:
+      task: "Retry policy: 1 light retry, else downgrade to hint and stop spending"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    57:
+      task: "Duplicate PU collapse (same file/same intent)"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    58:
+      task: "Shadow mode: run hints evaluators without LLM to evaluate ROI before spend"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    59:
+      task: "Canary on small subset; scale if wins"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    60:
+      task: "Budget carry-over (≤20%) to avoid end-of-day waste"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+
+# PHASE F: Data & Knowledge Curation (cheap, sharp, local)
+phase_f_data_curation:
+  priority: 6
+  steps:
+    61:
+      task: "Maintain a tiny, curated golden corpus (design docs, API, style) for RAG"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "medium"
+    62:
+      task: "Automatically expire stale chunks; recrawl only changed files by git SHA"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    63:
+      task: "Normalize filenames & headers in the vector index for direct citation"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    64:
+      task: "Test fixture store: failing cases become retrieval exemplars"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    65:
+      task: "Top mistakes gallery; inject as negative examples (no-do list)"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    66:
+      task: "Auto-summaries per subsystem (≤300 tokens); keep current via DIFF"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    67:
+      task: "Use symbol tables (API signatures) instead of long source pastes"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    68:
+      task: "Persist code maps (imports/exports/call graph) for scoped prompts"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    69:
+      task: "De-dupe near-identical docs (MinHash/SimHash)"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "medium"
+    70:
+      task: "Keep one canonical glossary (NuSyQ, OmniTag, Rosetta); cite keys, not paragraphs"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+
+# PHASE G: Local Analysis > LLM
+phase_g_local_analysis:
+  priority: 7
+  steps:
+    71:
+      task: "AST & static analysis passes before asking any model"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "medium"
+    72:
+      task: "Rule-based codemods for common refactors"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    73:
+      task: "Grep/rg heuristics for TODOs, FIXMEs → PU generation without tokens"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    74:
+      task: "ESLint/TypeScript diagnostics surfaced into hints—zero tokens"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    75:
+      task: "Diff rationalizer (local heuristic) creates PR bodies from git metadata"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    76:
+      task: "Use simple linear models/helpers (tfidf/logreg) for triage tags locally"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "medium"
+    77:
+      task: "Template fill-ins with Handlebars/ETA for boilerplate (no LLM)"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    78:
+      task: "N-gram language check for docs; only escalate to LLM for hard cases"
+      type: "RefactorPU"
+      impact: "low"
+      cost: "low"
+    79:
+      task: "Deterministic title/commit message generator; LLM adds polish only on release notes"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    80:
+      task: "Programmatic unit test scaffolders (path-aware)"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+
+# PHASE H: Evaluation & Guardrails
+phase_h_evaluation:
+  priority: 8
+  steps:
+    81:
+      task: "Prompt regression suite; compare embeddings or key fields, not whole text"
+      type: "TestPU"
+      impact: "high"
+      cost: "medium"
+    82:
+      task: "Output validator per task; retry only malformed fields, not entire call"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    83:
+      task: "Golden answers for known queries; exact match required"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    84:
+      task: "Soft-fuzz tests: accept within tolerance (e.g., 5% numerical drift)"
+      type: "TestPU"
+      impact: "medium"
+      cost: "low"
+    85:
+      task: "Red-flag filter: block sensitive actions (secrets, PROD env edits)"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "low"
+    86:
+      task: "No-write dry-run mode default; require flag for FS writes"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    87:
+      task: "Shadow-execute tool calls; commit only if checks pass"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    88:
+      task: "Gate big-model usage behind CI passing small-model plan"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    89:
+      task: "Auto-close runaway conversations (token loop breaker)"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    90:
+      task: "Annotate every generation with: model, temp, tokens, cache hit/miss"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+
+# PHASE I: Agents, Culture Ship, ChatDev (use them, cheaply)
+phase_i_agents:
+  priority: 9
+  steps:
+    91:
+      task: "Intermediary = triage + PU author; small-model only; never writes code"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    92:
+      task: "Council = rankers (majority vote) on small local models or heuristics"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    93:
+      task: "Artificer = codemod & AST; zero-token transforms first"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    94:
+      task: "Librarian = RAG librarian; enforces minimal top-k"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    95:
+      task: "Alchemist = data curator; maintains golden corpus; no model calls"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    96:
+      task: "Medic = repair PUs from failing tests; plan with tiny model, fix with codemod if possible"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    97:
+      task: "Culture Ship = doc/style enforcer; injects glossary keys + links"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    98:
+      task: "Zod (the validator) = schema czar; converts LLM outputs to strict types"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    99:
+      task: "Redstone Computer = rule engine; cheap boolean logic path before LLM"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    100:
+      task: "ChatDev = pipeline orchestrator: propose → test → doc → diff → PR. Use small models for all but final polish"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "medium"
+
+# PHASE J: Replit Agent & PR Loop (hands that land changes)
+phase_j_replit_integration:
+  priority: 10
+  steps:
+    101:
+      task: "PU→PR bridge: system writes feature branches with small diffs only"
+      type: "RefactorPU"
+      impact: "critical"
+      cost: "medium"
+    102:
+      task: "CI: typecheck, unit tests, smoke; no heavy e2e in Replit"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    103:
+      task: "Auto-merge on green with label; otherwise route to Intermediary"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    104:
+      task: "Replit sync hook or pull loop every few minutes"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    105:
+      task: "Replit runner leases Shell/File PUs (bounded, logged); zero-token local actions"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    106:
+      task: "Conflict resolution uses three-way merge; if complex → open fixup PR, no LLM"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    107:
+      task: "Status webhooks update HUD; don't poll-spam"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    108:
+      task: "PR templates ask for impact vs. cost to keep humans aligned"
+      type: "RefactorPU"
+      impact: "low"
+      cost: "low"
+    109:
+      task: "Bundle doc-only changes nightly to 1 PR; avoid thrash"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    110:
+      task: "Size budgets in CI to block bloat"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+
+# PHASE K: Training-Lite (without burning compute)
+phase_k_training:
+  priority: 11
+  steps:
+    111:
+      task: "Collect (prompt, context, output, verdict) tuples; label pass/fail"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    112:
+      task: "Derive anti-patterns (hallucination triggers) → prompt patches"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    113:
+      task: "LoRA/update small adapters off-cluster only from curated deltas; ship locally"
+      type: "FeaturePU"
+      impact: "medium"
+      cost: "high"
+    114:
+      task: "Synthetic hard cases generated once by larger model; reused many times"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "medium"
+    115:
+      task: "Failure-first replay: each day, rerun last N failures with patched prompts"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "low"
+    116:
+      task: "Curriculum: start with tiny contexts, then scale; never start big"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    117:
+      task: "Elastic few-shot: maintain a per-task top-3 shot bank auto-refreshed by success rate"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+    118:
+      task: "Feature toggles record A/B; keep the winner, archive the rest"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    119:
+      task: "Auto-reduce few-shot size if success stays ≥95%"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    120:
+      task: "Periodic cache purge of stale prompt versions; keep last K"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+
+# PHASE L: Documentation & Teach-the-system
+phase_l_documentation:
+  priority: 12
+  steps:
+    121:
+      task: "Docs from code: extract signatures & comments → Knowledge Vault"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    122:
+      task: "Explain this change generator from diff + tests → PR body (cheap)"
+      type: "RefactorPU"
+      impact: "medium"
+      cost: "low"
+    123:
+      task: "Nightly Digest PU: summarize wins, failures, cache hits, token spend, top hints; feeds next-day triage"
+      type: "RefactorPU"
+      impact: "high"
+      cost: "medium"
+
+# Execution Strategy
+execution_config:
+  dependency_order: ["phase_a_infrastructure", "phase_b_model_strategy", "phase_c_prompt_engineering"]
+  council_triage: "rank top 10 by ROI; only top 3 get LLM tokens"
+  enforcement: "small-model-first and cache-first in PU executor"
+  monitoring: ["budget", "entropy", "cache_hit_percent", "pr_queue"]
+  target_outcome: "frugal, relentless builder: cheap heuristics and tools first, tiny models for planning, cached retrieval for context, larger model only for last mile"

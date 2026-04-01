@@ -1,0 +1,14 @@
+{
+  "anomaly_types": {
+    "spatial_distortion": {
+      "name": "Spatial Distortion",
+      "danger_level": 3,
+      "containment_requirements": ["electromagnetic_field", "quantum_stabilizers"]
+    },
+    "temporal_flux": {
+      "name": "Temporal Flux", 
+      "danger_level": 5,
+      "containment_requirements": ["temporal_anchor", "causality_dampers"]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "seasonal_festivals": {
+    "harvest_celebration": {
+      "season": "autumn",
+      "requirements": {"crops_harvested": 50, "population": 10},
+      "effects": {
+        "morale_boost": 25,
+        "community_cohesion": 15,
+        "cultural_memory_fragments": 3
+      },
+      "consciousness_impact": "ai_learns_celebration_value",
+      "narrative_weight": 0.8
+    },
+    "winter_solstice": {
+      "season": "winter", 
+      "requirements": {"stockpiled_food": 100, "firewood": 20},
+      "effects": {
+        "hope_preservation": 30,
+        "storytelling_tradition": 20,
+        "elder_wisdom_unlocked": true
+      },
+      "consciousness_impact": "ai_understands_hope_in_darkness",
+      "narrative_weight": 0.9
+    }
+  }
+}

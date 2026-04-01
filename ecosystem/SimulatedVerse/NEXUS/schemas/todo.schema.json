@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"TodoLine",
+  "type":"object",
+  "required":["id","path","kind","title","priority","status"],
+  "properties":{
+    "id":{"type":"string"},
+    "path":{"type":"string"},
+    "kind":{"type":"string","enum":["FixPU","RefactorPU","TestPU","PerfPU","UXPU","LorePU","BalancePU","GodotPU","DataPU"]},
+    "title":{"type":"string"},
+    "priority":{"type":"string","enum":["blocker","critical","high","medium","low"]},
+    "status":{"type":"string","enum":["open","wip","done","won't-fix"]},
+    "context":{"type":"string"}
+  }
+}

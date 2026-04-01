@@ -1,0 +1,233 @@
+# /ops/capabilities.registry.yml
+meta:
+  name: "NuSyQ Rube Goldbergian Capabilities Registry"
+  version: 1
+  ethos: "Preserve life; optimize tokens; keep momentum; ask for guidance when blocked."
+  scoring:
+    # generic weight guidelines used by orchestrator
+    weight_impact: 3
+    weight_cost: 2
+    weight_risk: 2
+    weight_speed: 1
+defaults:
+  shell: bash
+  timeout_sec: 180
+  dry_run_flag: "--dry-run"  # some tools respect it; orchestrator still timeboxes
+
+capabilities:
+  # --- REPO & HOUSEKEEPING ---------------------------------------------------
+  - cap_id: repo.lint
+    label: "Lint (JS/TS/Python)"
+    present_if:
+      any_file_exists: ["**/*.js","**/*.ts","**/*.py"]
+    cmds:
+      - "npx -y eslint . || true"
+      - "flake8 || true"
+    outcome: "Adds warnings to console; never blocks."
+    cost: {tokens: 0, cpu: "low"}
+    impact: "medium"
+    risk: "low"
+
+  - cap_id: repo.format
+    label: "Auto-format"
+    present_if:
+      any_file_exists: ["**/*.js","**/*.ts","**/*.py"]
+    cmds:
+      - "npx -y prettier -w . || true"
+      - "black . || true"
+    outcome: "Cleaner diffs; fewer false-positive errors."
+    cost: {tokens: 0, cpu: "low"}
+    impact: "medium"
+    risk: "low"
+
+  - cap_id: repo.typecheck
+    label: "Type-check"
+    present_if:
+      any_file_exists: ["**/*.ts","**/*.tsx"]
+    cmds: ["npx -y tsc -p . || true"]
+    outcome: "Surface TS issues early."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  - cap_id: repo.tests
+    label: "Run tests"
+    present_if:
+      any_file_exists: ["**/*.test.*","**/tests/**"]
+    cmds:
+      - "pytest -q || true"
+      - "npm test --silent || true"
+    outcome: "Records pass/fail in logs."
+    cost: {tokens: 0}
+    impact: "high"
+    risk: "low"
+
+  - cap_id: repo.build
+    label: "Build project"
+    present_if:
+      any_file_exists: ["package.json","pnpm-lock.yaml","bun.lockb"]
+    cmds:
+      - "npm run build || pnpm build || bun run build || true"
+    outcome: "Generates artifacts; confirms app compiles."
+    cost: {tokens: 0}
+    impact: "high"
+    risk: "low"
+
+  - cap_id: repo.cli_smoke
+    label: "CLI smoke run"
+    present_if:
+      all_files_exist: ["ops/agents/rg_orchestrator.py"]
+    cmds: ["python3 ops/agents/rg_orchestrator.py --help || true"]
+    outcome: "Ensures orchestrator is runnable."
+    cost: {tokens: 0}
+    impact: "low"
+    risk: "low"
+
+  - cap_id: repo.git_smart_commit
+    label: "Smart commit with annotation"
+    present_if:
+      cmd_available: "git"
+    cmds:
+      - 'git add -A && git commit -m "chore(rg): smart cycle $(date -u +%Y-%m-%dT%H:%M:%SZ) [no-token][safe]" || true'
+    outcome: "Creates small annotated commits often."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  - cap_id: repo.git_compact_log
+    label: "Compact recent git log"
+    present_if:
+      cmd_available: "git"
+    cmds:
+      - 'git log --pretty=format:"%h|%ad|%s" --date=iso -n 25 > logs/git_recent.log || true'
+    outcome: "Provides history for planner."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  # --- DIAGNOSE & REPAIR -----------------------------------------------------
+  - cap_id: diag.ripgrep_errors
+    label: "Scan for errors, TODOs, FIXMEs"
+    present_if:
+      cmd_available: "rg"
+    cmds:
+      - 'rg -n "TODO|FIXME|XXX|HACK|@ts-ignore|raise |throw |console\\.error" > logs/scan_findings.txt || true'
+    outcome: "Feeds orchestrator with quick wins."
+    cost: {tokens: 0}
+    impact: "high"
+    risk: "low"
+
+  - cap_id: diag.syntax_check_py
+    label: "Python syntax check"
+    present_if:
+      any_file_exists: ["**/*.py"]
+    cmds:
+      - 'python3 -m pyflakes . | tee -a logs/scan_pyflakes.txt || true'
+    outcome: "Catches common mistakes cheaply."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  - cap_id: fix.eslint_autofix
+    label: "ESLint --fix"
+    present_if:
+      any_file_exists: ["**/*.js","**/*.ts","**/*.tsx"]
+    cmds:
+      - "npx -y eslint . --fix || true"
+    outcome: "Autofixes common issues."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  - cap_id: fix.prettier_write
+    label: "Prettier write"
+    present_if:
+      any_file_exists: ["**/*.{js,ts,tsx,css,md,json,yml,yaml}"]
+    cmds:
+      - "npx -y prettier -w . || true"
+    outcome: "Normalizes formatting."
+    cost: {tokens: 0}
+    impact: "low"
+    risk: "low"
+
+  # --- MOBILE / UI ADAPTATION ------------------------------------------------
+  - cap_id: ui.mobile_probe
+    label: "Mobile/desktop probe flag"
+    present_if:
+      any_file_exists: ["**/*.{ts,tsx,js,jsx}"]
+    cmds:
+      - 'mkdir -p data && echo "{ \"mobile\": true }" > data/ui_probe.json'
+    outcome: "Allows runtime to branch UI."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  - cap_id: ui.ascii_hud_smoke
+    label: "ASCII HUD smoke (if present)"
+    present_if:
+      any_file_exists: ["ui/ascii/hud.ts","ui/ascii/renderer.ts"]
+    cmds:
+      - 'node ui/ascii/hud.ts --smoke || true'
+    outcome: "Confirms HUD entrypoints compile."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  # --- GAME ENGINE TICKS / IDLER --------------------------------------------
+  - cap_id: sim.tick
+    label: "Run sim tick (headless)"
+    present_if:
+      any_file_exists: ["sim/tick.py","sim/tick.ts"]
+    cmds:
+      - 'python3 sim/tick.py --steps 50 || true'
+      - 'node sim/tick.ts --steps 50 || true'
+    outcome: "Generates state deltas; logs metrics."
+    cost: {tokens: 0}
+    impact: "high"
+    risk: "low"
+
+  - cap_id: sim.mobile_perf_probe
+    label: "Run mobile perf probe"
+    present_if:
+      any_file_exists: ["sim/perf_probe.py"]
+    cmds:
+      - 'python3 sim/perf_probe.py --target mobile --budget-ms 120 || true'
+    outcome: "Writes perf.json with hotspots."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  # --- KNOWLEDGE / QUESTBOOK -------------------------------------------------
+  - cap_id: kb.index_quests
+    label: "Index qbook.yml"
+    present_if:
+      any_file_exists: ["qbook.yml","qbook.yaml"]
+    cmds:
+      - 'python3 ops/tools/history_indexer.py --quests qbook.yml --out logs/quests_index.json || true'
+    outcome: "Quest list becomes searchable."
+    cost: {tokens: 0}
+    impact: "high"
+    risk: "low"
+
+  - cap_id: kb.docs_toc
+    label: "Docs ToC builder"
+    present_if:
+      any_file_exists: ["docs/**"]
+    cmds:
+      - 'python3 ops/tools/history_indexer.py --docs ./docs --out logs/docs_index.json || true'
+    outcome: "Creates docs index with titles."
+    cost: {tokens: 0}
+    impact: "medium"
+    risk: "low"
+
+  # --- CASCADE & META --------------------------------------------------------
+  - cap_id: meta.cascade
+    label: "Cascade event"
+    present_if:
+      any_file_exists: ["ops/cascade_event.py"]
+    cmds:
+      - "python3 ops/cascade_event.py --mode plan --budget 0 --annotate"
+    outcome: "Plans high-impact future actions for when tokens become available."
+    cost: {tokens: 0}
+    impact: "high"
+    risk: "low"

@@ -1,0 +1,25 @@
+{
+  "checks": [
+    {
+      "name": "Receipts Discipline",
+      "passed": true,
+      "details": "reports/* present"
+    },
+    {
+      "name": "Backlog Next-Up",
+      "passed": true,
+      "details": "backlog/next_up present"
+    },
+    {
+      "name": "Agents Receipt Flow",
+      "passed": false,
+      "details": "agent receipts exist"
+    },
+    {
+      "name": "Temple Alignment",
+      "passed": false,
+      "details": "temple_alignment receipt exists"
+    }
+  ],
+  "ok": false
+}

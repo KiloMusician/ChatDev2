@@ -1,0 +1,44 @@
+{
+  "breath": "ΞΘΛΔ_counts",
+  "timestamp": "2025-09-04T13:24:17.920Z",
+  "totals": {
+    "ours": 256,
+    "packages": 0,
+    "build": 0,
+    "other": 38149
+  },
+  "percentages": {
+    "ours": 1,
+    "packages": 0,
+    "build": 0,
+    "other": 99
+  },
+  "breakdown": {
+    "ours": [
+      {
+        "bucket": "ours.src",
+        "c": 233,
+        "s": 1217275
+      },
+      {
+        "bucket": "ours.systemdev",
+        "c": 22,
+        "s": 798643
+      },
+      {
+        "bucket": "ours.chatdev",
+        "c": 1,
+        "s": 2857
+      }
+    ],
+    "pkg": [],
+    "build": 0,
+    "other": [
+      {
+        "bucket": "other",
+        "c": 38149,
+        "s": 616066250
+      }
+    ]
+  }
+}

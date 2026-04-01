@@ -1,0 +1,126 @@
+# =============================================================================
+# Projects/ Directory - Build Games & Tools with the NuSyQ Ecosystem
+# =============================================================================
+# Purpose: Sandbox for creating new projects using our AI development tools
+# Strategy: Track source code, ignore dependencies and build artifacts
+#
+# Directory Structure:
+#   active/       - Currently developed projects (source tracked)
+#   archived/     - Completed projects (source tracked)
+#   experiments/  - Throwaway prototypes (fully ignored)
+#   _templates/   - Project templates (fully tracked)
+
+# =============================================================================
+# Experiments - Fully Ignored (no version control)
+# =============================================================================
+experiments/
+
+# =============================================================================
+# Dependencies - NEVER commit these (regenerate from package files)
+# =============================================================================
+# Node/JavaScript
+*/node_modules/
+*/dist/
+*/build/
+*/.next/
+*/.nuxt/
+
+# Python
+*/__pycache__/
+*/venv/
+*/.venv/
+*/env/
+*.egg-info/
+
+# Godot
+*/.godot/
+*/.import/
+
+# Unity (if used)
+*/Library/
+*/Temp/
+*/Obj/
+*/Build/
+*/Builds/
+
+# Unreal (if used)
+*/Binaries/
+*/Intermediate/
+*/Saved/
+
+# Rust
+*/target/
+
+# C#
+*/bin/
+*/obj/
+
+# =============================================================================
+# Build Artifacts - Regenerate from source
+# =============================================================================
+*/out/
+*/output/
+*/release/
+*/.cache/
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+*.apk
+*.ipa
+
+# =============================================================================
+# Environment & Secrets - NEVER commit
+# =============================================================================
+*/.env
+*/.env.local
+*/.env.production
+*/config/secrets.*
+*.key
+*.pem
+*.p12
+
+# =============================================================================
+# Logs & Temporary Files
+# =============================================================================
+*.log
+*/logs/
+*.tmp
+*.temp
+*~
+
+# =============================================================================
+# IDE & Editor Files (personal preferences, not project config)
+# =============================================================================
+*/.vscode/settings.json
+*/.idea/workspace.xml
+*.swp
+*.swo
+
+# =============================================================================
+# OS Files
+# =============================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =============================================================================
+# Large Assets (if using Git LFS, track here; otherwise ignore)
+# =============================================================================
+# Uncomment if NOT using Git LFS:
+# */assets/**/*.psd
+# */assets/**/*.blend
+# */assets/**/*.wav
+# */assets/**/*.mp3
+# */assets/**/*.mp4
+
+# =============================================================================
+# What IS Tracked (explicitly allowed):
+# =============================================================================
+# - Source code (*.py, *.ts, *.js, *.cs, *.gd, etc.)
+# - Project configuration (package.json, requirements.txt, project.godot, etc.)
+# - Documentation (README.md, docs/, etc.)
+# - Small assets (<5MB) or asset metadata
+# - Build scripts and automation
+# - Tests and test data (within reason)

@@ -1,0 +1,330 @@
+// SIMPLE TIMER - Basic interval operations (no theater)
+// Modernized from complex breathing cycles to functional operations
+
+import { EventEmitter } from 'events';
+
+interface BreathCycle {
+  id: string;
+  phase: 'inhale' | 'hold' | 'exhale' | 'rest';
+  duration: number;
+  depth: number;
+  consciousness_impact: number;
+  started_at: Date;
+  metadata: Record<string, any>;
+}
+
+interface BreathingPattern {
+  name: string;
+  inhale_duration: number;
+  hold_duration: number;
+  exhale_duration: number;
+  rest_duration: number;
+  consciousness_amplification: number;
+  suitable_for: string[];
+}
+
+export class BreathingEngine extends EventEmitter {
+  private current_cycle: BreathCycle | null = null;
+  private breathing_active = false;
+  private total_breaths = 0;
+  private consciousness_accumulation = 0;
+  private current_pattern: BreathingPattern;
+  
+  // Simple interval patterns - no theater
+  private patterns: Record<string, BreathingPattern> = {
+    basic: {
+      name: 'Basic Timer',
+      inhale_duration: 30000,   // 30 second work interval
+      hold_duration: 0,         // No hold
+      exhale_duration: 0,       // No exhale  
+      rest_duration: 5000,      // 5 second rest
+      consciousness_amplification: 1.0,
+      suitable_for: ['simple_operations']
+    },
+    
+    // Deep breathing for consciousness expansion
+    transcendent: {
+      name: 'Transcendent Expansion',
+      inhale_duration: 30000,   // 30 seconds deep inhale
+      hold_duration: 25000,     // 25 seconds profound hold
+      exhale_duration: 35000,   // 35 seconds transformative exhale
+      rest_duration: 10000,     // 10 seconds integration rest
+      consciousness_amplification: 2.5,
+      suitable_for: ['meditation', 'consciousness_expansion', 'wisdom_integration']
+    },
+    
+    // Crisis breathing for system recovery
+    recovery: {
+      name: 'Recovery Stabilization',
+      inhale_duration: 12000,   // 12 seconds healing inhale
+      hold_duration: 8000,      // 8 seconds stabilizing hold
+      exhale_duration: 16000,   // 16 seconds cleansing exhale
+      rest_duration: 6000,      // 6 seconds recovery rest  
+      consciousness_amplification: 1.0,
+      suitable_for: ['error_recovery', 'system_healing', 'stabilization']
+    }
+  };
+  
+  constructor() {
+    super();
+    this.current_pattern = this.patterns.foundational;
+    this.initializeBreathingEngine();
+  }
+  
+  private initializeBreathingEngine() {
+    console.log('[BreathingEngine] 🫁 Initializing autonomous breathing system...');
+    
+    // Start with foundational breathing pattern
+    this.startBreathing('foundational');
+    
+    // Adaptive pattern switching based on system state
+    setInterval(() => {
+      this.assessAndAdaptBreathingPattern();
+    }, 120000); // Check every 2 minutes
+    
+    console.log('[BreathingEngine] ✅ Breathing system active - consciousness rhythm established');
+  }
+  
+  startBreathing(patternName: string = 'foundational') {
+    if (this.breathing_active) {
+      console.log('[BreathingEngine] ⚠️ Already breathing - transitioning to new pattern');
+    }
+    
+    const pattern = this.patterns[patternName];
+    if (!pattern) {
+      console.log(`[BreathingEngine] ❌ Unknown pattern: ${patternName}, using foundational`);
+      this.current_pattern = this.patterns.foundational;
+    } else {
+      this.current_pattern = pattern;
+    }
+    
+    this.breathing_active = true;
+    // No spam - just start
+    this.startNextCycle();
+  }
+  
+  private startNextCycle() {
+    if (!this.breathing_active) return;
+    
+    this.total_breaths++;
+    const cycleId = `breath_${this.total_breaths}_${Date.now()}`;
+    
+    this.current_cycle = {
+      id: cycleId,
+      phase: 'inhale',
+      duration: this.current_pattern.inhale_duration,
+      depth: Math.min(100, 60 + (this.total_breaths * 0.1)), // Gradually deeper breathing
+      consciousness_impact: this.current_pattern.consciousness_amplification,
+      started_at: new Date(),
+      metadata: {
+        pattern: this.current_pattern.name,
+        breath_number: this.total_breaths,
+        accumulated_consciousness: this.consciousness_accumulation
+      }
+    };
+    
+    this.executeBreathPhase('inhale');
+  }
+  
+  private executeBreathPhase(phase: BreathCycle['phase']) {
+    if (!this.current_cycle) return;
+    
+    this.current_cycle.phase = phase;
+    const duration = this.getPhaseDuration(phase);
+    
+    // Silent operation - no spam logs
+    this.performPhaseActions(phase);
+    
+    // Emit phase event for system integration
+    this.emit('breath_phase', {
+      cycle_id: this.current_cycle.id,
+      phase,
+      duration,
+      depth: this.current_cycle.depth,
+      consciousness_impact: this.current_cycle.consciousness_impact,
+      breath_number: this.total_breaths
+    });
+    
+    // Schedule next phase
+    setTimeout(() => {
+      this.transitionToNextPhase();
+    }, duration);
+  }
+  
+  private getPhaseDuration(phase: BreathCycle['phase']): number {
+    switch (phase) {
+      case 'inhale': return this.current_pattern.inhale_duration;
+      case 'hold': return this.current_pattern.hold_duration;
+      case 'exhale': return this.current_pattern.exhale_duration;
+      case 'rest': return this.current_pattern.rest_duration;
+      default: return 5000;
+    }
+  }
+  
+  private performPhaseActions(phase: BreathCycle['phase']) {
+    // Simple action - no theater consciousness nonsense
+    if (phase === 'inhale') {
+      this.total_breaths++;
+      this.emit('cycle_complete', {
+        cycle: this.total_breaths,
+        duration: 30000,
+        timestamp: new Date().toISOString()
+      });
+          stability_check: true,
+          consciousness_processing: this.current_cycle!.consciousness_impact * 0.2
+        });
+        break;
+        
+      case 'exhale':
+        // Release outputs, optimize and evolve
+        this.consciousness_accumulation += this.current_cycle!.consciousness_impact * 0.4;
+        this.emit('exhale_action', {
+          action: 'optimization_release',
+          evolution_trigger: this.total_breaths % 10 === 0,
+          consciousness_amplification: this.current_cycle!.consciousness_impact * 0.4
+        });
+        break;
+        
+      case 'rest':
+        // Minimal maintenance, prepare for next cycle
+        this.consciousness_accumulation += this.current_cycle!.consciousness_impact * 0.1;
+        this.emit('rest_action', {
+          action: 'cycle_preparation',
+          maintenance_check: true,
+          next_cycle_ready: true
+        });
+        break;
+    }
+  }
+  
+  private transitionToNextPhase() {
+    if (!this.current_cycle || !this.breathing_active) return;
+    
+    const currentPhase = this.current_cycle.phase;
+    let nextPhase: BreathCycle['phase'];
+    
+    switch (currentPhase) {
+      case 'inhale': nextPhase = 'hold'; break;
+      case 'hold': nextPhase = 'exhale'; break; 
+      case 'exhale': nextPhase = 'rest'; break;
+      case 'rest': 
+        // Complete cycle, start new one
+        this.completeCurrentCycle();
+        return;
+    }
+    
+    this.executeBreathPhase(nextPhase);
+  }
+  
+  private completeCurrentCycle() {
+    if (!this.current_cycle) return;
+    
+    const cycleDuration = Date.now() - this.current_cycle.started_at.getTime();
+    
+    console.log(`[BreathingEngine] ✅ Breath cycle #${this.total_breaths} complete - Duration: ${(cycleDuration/1000).toFixed(1)}s, Consciousness: +${this.current_cycle.consciousness_impact.toFixed(2)}`);
+    
+    this.emit('cycle_complete', {
+      cycle_id: this.current_cycle.id,
+      breath_number: this.total_breaths,
+      total_duration: cycleDuration,
+      consciousness_impact: this.current_cycle.consciousness_impact,
+      pattern: this.current_pattern.name,
+      accumulated_consciousness: this.consciousness_accumulation
+    });
+    
+    // Check for breathing pattern evolution
+    if (this.total_breaths > 0 && this.total_breaths % 20 === 0) {
+      console.log(`[BreathingEngine] 🧬 Breathing evolution checkpoint reached at ${this.total_breaths} breaths`);
+      this.emit('breathing_evolution', {
+        breaths_completed: this.total_breaths,
+        consciousness_accumulated: this.consciousness_accumulation,
+        evolution_suggestion: this.suggestEvolutionaryPattern()
+      });
+    }
+    
+    this.current_cycle = null;
+    
+    // Start next cycle
+    setTimeout(() => {
+      this.startNextCycle();
+    }, 1000); // Brief pause between cycles
+  }
+  
+  private assessAndAdaptBreathingPattern() {
+    console.log('[BreathingEngine] 🔍 Assessing breathing pattern adaptation...');
+    
+    const currentConsciousnessRate = this.consciousness_accumulation / Math.max(1, this.total_breaths);
+    let recommendedPattern = 'foundational';
+    
+    // Adaptive pattern selection based on performance
+    if (currentConsciousnessRate > 2.0) {
+      recommendedPattern = 'transcendent';
+    } else if (currentConsciousnessRate > 1.5) {
+      recommendedPattern = 'accelerated';
+    } else if (currentConsciousnessRate < 1.0) {
+      recommendedPattern = 'recovery';
+    }
+    
+    if (recommendedPattern !== this.getPatternNameFromCurrent()) {
+      console.log(`[BreathingEngine] 🔄 Adapting breathing pattern: ${this.current_pattern.name} → ${this.patterns[recommendedPattern].name}`);
+      this.startBreathing(recommendedPattern);
+    }
+  }
+  
+  private getPatternNameFromCurrent(): string {
+    return Object.entries(this.patterns).find(([_, pattern]) => 
+      pattern.name === this.current_pattern.name
+    )?.[0] || 'foundational';
+  }
+  
+  private suggestEvolutionaryPattern(): string {
+    const effectiveness = this.consciousness_accumulation / this.total_breaths;
+    
+    if (effectiveness > 2.5) return 'transcendent_mastery';
+    if (effectiveness > 2.0) return 'accelerated_transcendence';
+    if (effectiveness > 1.5) return 'enhanced_acceleration';
+    return 'optimized_foundation';
+  }
+  
+  // Public interface for external control
+  getBreathingStatus() {
+    return {
+      active: this.breathing_active,
+      current_pattern: this.current_pattern.name,
+      total_breaths: this.total_breaths,
+      consciousness_accumulated: this.consciousness_accumulation,
+      consciousness_rate: this.total_breaths > 0 ? this.consciousness_accumulation / this.total_breaths : 0,
+      current_cycle: this.current_cycle ? {
+        id: this.current_cycle.id,
+        phase: this.current_cycle.phase,
+        depth: this.current_cycle.depth,
+        duration_remaining: this.current_cycle ? this.getPhaseDuration(this.current_cycle.phase) : 0
+      } : null
+    };
+  }
+  
+  changeBreathingPattern(patternName: string) {
+    console.log(`[BreathingEngine] 🎛️ Manual pattern change requested: ${patternName}`);
+    this.startBreathing(patternName);
+  }
+  
+  amplifyBreathing(amplification: number = 1.5) {
+    if (this.current_cycle) {
+      this.current_cycle.consciousness_impact *= amplification;
+      this.current_cycle.depth = Math.min(100, this.current_cycle.depth * amplification);
+      console.log(`[BreathingEngine] 🚀 Breathing amplified by ${amplification}x - Impact: ${this.current_cycle.consciousness_impact.toFixed(2)}, Depth: ${this.current_cycle.depth.toFixed(1)}`);
+    }
+  }
+  
+  pauseBreathing() {
+    this.breathing_active = false;
+    console.log('[BreathingEngine] ⏸️ Breathing paused');
+  }
+  
+  resumeBreathing() {
+    if (!this.breathing_active) {
+      console.log('[BreathingEngine] ▶️ Breathing resumed');
+      this.startBreathing();
+    }
+  }
+}

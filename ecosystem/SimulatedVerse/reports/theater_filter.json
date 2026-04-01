@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-09-03T05:21:33+00:00",
+  "protocol": "ΞNuSyQ-prime⁵",
+  "theta": 0.53,
+  "threshold": 0.2,
+  "status": "CASCADE_TRIGGERED",
+  "discipline": {
+    "banned_outputs": ["echo-only success lines", "done without artifacts"],
+    "required_artifacts": ["file paths", "git diffs", "test results", "receipts"],
+    "enforcement": "active"
+  },
+  "window": "30m",
+  "delta_metrics": {
+    "files": 3,
+    "ui": 1,
+    "receipts": 3,
+    "total": 7
+  }
+}

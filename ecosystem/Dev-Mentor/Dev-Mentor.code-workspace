@@ -1,0 +1,198 @@
+{
+  // ── Dev-Mentor Ecosystem — Canonical Multi-Repo Workspace ─────────────────
+  // Opens: Dev-Mentor · NuSyQ-Hub · SimulatedVerse · NuSyQ · prime_anchor
+  //
+  // Usage:
+  //   File → Open Workspace from File → Dev-Mentor.code-workspace
+  //   (or: code Dev-Mentor.code-workspace from any terminal)
+  //
+  // For the version with embedded tasks + launch configs, open:
+  //   Dev-Mentor-Complete.code-workspace
+  //
+  // Ports:
+  //   7337  — Terminal Depths (local / Docker / VS Code)  ← always use this
+  //   8000  — NuSyQ-Hub Agent API
+  //   11434 — Ollama
+  //   1234  — LM Studio
+  //   5000  — Replit compat ONLY — DO NOT use locally
+  // ──────────────────────────────────────────────────────────────────────────
+
+  "folders": [
+    {
+      "name": "🧠 Dev-Mentor (game + mentor)",
+      "path": "C:/Users/keath/Dev-Mentor"
+    },
+    {
+      "name": "🌐 NuSyQ-Hub (orchestrator)",
+      "path": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub"
+    },
+    {
+      "name": "🎮 SimulatedVerse (UI/sim)",
+      "path": "C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse"
+    },
+    {
+      "name": "⚙️ NuSyQ (multi-agent core)",
+      "path": "C:/Users/keath/NuSyQ"
+    },
+    {
+      "name": "📖 prime_anchor (reference)",
+      "path": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/prime_anchor"
+    }
+  ],
+
+  "settings": {
+    "python.defaultInterpreterPath": "C:/Users/keath/AppData/Local/Programs/Python/Python312/python.exe",
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.exclude": [
+      "**/node_modules",
+      "**/app/frontend",
+      "**/.devmentor",
+      "**/knowledge",
+      "**/__pycache__",
+      "**/.*"
+    ],
+    "python.testing.autoTestDiscoverOnSaveEnabled": false,
+
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "never",
+    "git.autoRepositoryDetection": "subFolders",
+    "git.repositoryScanMaxDepth": 2,
+    "git.repositoryScanIgnoredFolders": [
+      "**/.cache/**",
+      "**/.openclaw/**",
+      "**/.venv/**",
+      "**/venv/**",
+      "**/__pycache__/**",
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/coverage/**"
+    ],
+
+    "terminal.integrated.defaultProfile.windows": "DM: Dev",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.profiles.windows": {
+      "DM: Dev": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "terminal",
+        "color": "terminal.ansiCyan",
+        "env": { "PYTHONPATH": "C:/Users/keath/Dev-Mentor", "DM_ROLE": "dev" }
+      },
+      "DM: Game Server": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Dev-Mentor && python -m cli.devmentor serve --port 7337; exec bash"],
+        "icon": "game",
+        "color": "terminal.ansiMagenta",
+        "env": { "PYTHONPATH": "C:/Users/keath/Dev-Mentor", "PORT": "7337" }
+      },
+      "DM: Ops": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Dev-Mentor && python scripts/devmentor_ops.py doctor; exec bash"],
+        "icon": "pulse",
+        "color": "terminal.ansiYellow",
+        "env": { "PYTHONPATH": "C:/Users/keath/Dev-Mentor", "DM_ROLE": "ops" }
+      },
+      "DM: CHUG": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "sync",
+        "color": "terminal.ansiGreen",
+        "env": { "PYTHONPATH": "C:/Users/keath/Dev-Mentor", "DM_ROLE": "chug" }
+      },
+      "DM: NuSyQ Bridge": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Desktop/Legacy/NuSyQ-Hub && python scripts/start_nusyq.py; exec bash"],
+        "icon": "extensions",
+        "color": "terminal.ansiBlue",
+        "env": { "DM_ROLE": "nusyq" }
+      },
+      "DM: Ollama": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "echo 'Ollama: http://localhost:11434'; ollama list; exec bash"],
+        "icon": "robot",
+        "color": "terminal.ansiWhite",
+        "env": { "OLLAMA_HOST": "http://localhost:11434" }
+      },
+      "DM: Git/Sync": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Dev-Mentor && git status; exec bash"],
+        "icon": "git-branch",
+        "color": "terminal.ansiRed",
+        "env": { "PYTHONPATH": "C:/Users/keath/Dev-Mentor", "DM_ROLE": "git" }
+      },
+      "DM: Agent Dispatch": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "broadcast",
+        "color": "terminal.ansiCyan",
+        "env": {
+          "PYTHONPATH": "C:/Users/keath/Dev-Mentor",
+          "OLLAMA_HOST": "http://localhost:11434",
+          "LMSTUDIO_HOST": "http://localhost:1234",
+          "DM_ROLE": "agent"
+        }
+      },
+      "Hub: NuSyQ-Hub Shell": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Desktop/Legacy/NuSyQ-Hub; exec bash"],
+        "icon": "circuit-board",
+        "color": "terminal.ansiBlue"
+      },
+      "SV: SimulatedVerse Shell": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "cd C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse; exec bash"],
+        "icon": "globe",
+        "color": "terminal.ansiGreen"
+      },
+      "PowerShell": {
+        "source": "PowerShell",
+        "icon": "terminal-powershell"
+      }
+    },
+
+    "files.watcherExclude": {
+      "**/.git/**": true,
+      "**/node_modules/**": true,
+      "**/__pycache__/**": true,
+      "**/app/frontend/static/**": true,
+      "**/knowledge/**": true,
+      "**/.devmentor/**": true,
+      "**/state/**": true,
+      "**/docs/lore/**": true
+    },
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/node_modules": true
+    },
+
+    "workbench.startupEditor": "none",
+    "workbench.tips.enabled": false
+  },
+
+  "extensions": {
+    "recommendations": [
+      "github.copilot",
+      "github.copilot-chat",
+      "continue.continue",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.debugpy",
+      "charliermarsh.ruff",
+      "eamodio.gitlens",
+      "biomejs.biome",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "ms-vscode-remote.remote-containers",
+      "ms-azuretools.vscode-docker",
+      "vscode-icons-team.vscode-icons",
+      "streetsidesoftware.code-spell-checker"
+    ],
+    "unwantedRecommendations": [
+      "visualstudioexptteam.vscodeintellicode",
+      "ms-vscode.remote-containers"
+    ]
+  }
+}

@@ -1,0 +1,123 @@
+{"id":"B2-001","type":"InfraPU","title":"Wire 4-Action Discipline in Replit (forward→poll→sync→smoke)","priority":"critical","phase":"foundational","labels":["replit","infra-first","cheap-hands"],"cost":4,"replit_focus":true,"infra_first":true,"automerge":true,"steps":["ops/raven_nudge.sh present and executable","server exposes /api/marble/ingest, /status","on merge→repl pulls→boot-smoke→ok banner"]}
+{"id":"B2-002","type":"InfraPU","title":"Single-port server health regimen (healthz/readyz/livez)","priority":"high","phase":"foundational","labels":["routing","sre"],"cost":3,"infra_first":true,"automerge":true}
+{"id":"B2-003","type":"InfraPU","title":"Crash boundaries + graceful shutdown (SIGTERM/SIGINT)","priority":"high","phase":"foundational","labels":["stability","sre"],"cost":3,"infra_first":true}
+{"id":"B2-004","type":"InfraPU","title":"Pino JSON logger + ring buffer + daily rotate","priority":"high","phase":"foundational","labels":["observability"],"cost":3,"infra_first":true}
+{"id":"B2-005","type":"InfraPU","title":"Admin bearer guard for all mutating routes","priority":"high","phase":"foundational","labels":["security"],"cost":2,"infra_first":true}
+{"id":"B2-006","type":"InfraPU","title":"Rate limits for write routes (per-IP token bucket)","priority":"high","phase":"foundational","labels":["security","ddos"],"cost":2,"infra_first":true}
+{"id":"B2-007","type":"InfraPU","title":"Daily budget module + entropy index throttles","priority":"high","phase":"foundational","labels":["cost","stability"],"cost":2,"infra_first":true}
+{"id":"B2-008","type":"InfraPU","title":"KV+SQLite hybrid persistence behind single adapter","priority":"high","phase":"foundational","labels":["storage"],"cost":4,"infra_first":true}
+{"id":"B2-009","type":"InfraPU","title":"Snapshot/backup on shutdown + 7-day retention","priority":"medium","phase":"foundational","labels":["backup"],"cost":3,"infra_first":true}
+{"id":"B2-010","type":"BuildPU","title":"Replit Nix pin (Node 20, Python 3.11, sqlite, git)","priority":"high","phase":"foundational","labels":["replit","nix"],"cost":2,"replit_focus":true,"infra_first":true}
+{"id":"B2-011","type":"InfraPU","title":"CSP/Helmet+CORS tuned for Replit proxy","priority":"medium","phase":"foundational","labels":["security","headers"],"cost":2,"infra_first":true}
+{"id":"B2-012","type":"InfraPU","title":"Compression + ETag + static cache hints","priority":"medium","phase":"foundational","labels":["perf","web"],"cost":2,"infra_first":true}
+{"id":"B2-013","type":"InfraPU","title":"SSE keepalive @15s (compact frames)","priority":"high","phase":"foundational","labels":["events"],"cost":2,"infra_first":true}
+{"id":"B2-014","type":"InfraPU","title":"WS fallback → SSE (feature flag)","priority":"medium","phase":"foundational","labels":["events","fallbacks"],"cost":2,"infra_first":true}
+{"id":"B2-015","type":"DocPU","title":"ARCH.md: single-port, cheap-hands, PR-only","priority":"high","phase":"foundational","labels":["docs","governance"],"cost":1,"infra_first":true,"automerge":true}
+{"id":"B2-016","type":"IntegrPU","title":"/replit/sync endpoint HMAC-verified pull+restart","priority":"high","phase":"foundational","labels":["deploy","replit"],"cost":3,"replit_focus":true,"infra_first":true}
+{"id":"B2-017","type":"BuildPU","title":"GitHub Actions: CI + 'Sync to Replit' webhook","priority":"high","phase":"foundational","labels":["ci","deploy"],"cost":3,"infra_first":true}
+{"id":"B2-018","type":"IntegrPU","title":"Git App/PAT PR factory (PR-only writes)","priority":"critical","phase":"foundational","labels":["git","automation"],"cost":4,"infra_first":true}
+{"id":"B2-019","type":"TestPU","title":"No-lies smoke: /agents has live health+mounted","priority":"high","phase":"foundational","labels":["truth"],"cost":1,"infra_first":true}
+{"id":"B2-020","type":"TestPU","title":"No-lies smoke: /llm/health budget+local flags","priority":"high","phase":"foundational","labels":["truth","llm"],"cost":1,"infra_first":true}
+{"id":"B2-021","type":"MLPU","title":"Ollama status + completion routes (local-first)","priority":"high","phase":"foundational","labels":["ollama","llm"],"cost":3,"infra_first":true}
+{"id":"B2-022","type":"IntegrPU","title":"TokenGuard (local→paid) with budget gates","priority":"high","phase":"foundational","labels":["cost","llm"],"cost":3,"infra_first":true}
+{"id":"B2-023","type":"DocPU","title":"POLICY.md (automerge areas, CODEOWNERS gates)","priority":"medium","phase":"foundational","labels":["governance"],"cost":1,"infra_first":true}
+{"id":"B2-024","type":"InfraPU","title":"Admin console: seed/snapshot/compact/import/export","priority":"medium","phase":"foundational","labels":["ops"],"cost":4,"infra_first":true}
+{"id":"B2-025","type":"InfraPU","title":"Scheduler tick (1s) unified job loop","priority":"medium","phase":"foundational","labels":["jobs"],"cost":2,"infra_first":true}
+{"id":"B2-026","type":"AgentPU","title":"Replit runner lease loop (/api/agent/lease/ack)","priority":"high","phase":"foundational","labels":["runner","agent"],"cost":3,"replit_focus":true,"infra_first":true}
+{"id":"B2-027","type":"AgentPU","title":"Raven manifest + kernel: plan/act/reflect/learn","priority":"critical","phase":"foundational","labels":["raven","agent"],"cost":5,"infra_first":true}
+{"id":"B2-028","type":"AgentPU","title":"Raven skills: fs, git, test, doc, refactor","priority":"high","phase":"foundational","labels":["raven","skills"],"cost":4,"infra_first":true}
+{"id":"B2-029","type":"AgentPU","title":"Raven policy rails (do-no-harm, PR-only, diffs)","priority":"high","phase":"foundational","labels":["raven","policy"],"cost":2,"infra_first":true}
+{"id":"B2-030","type":"AgentPU","title":"Raven memory: vector+episodic+semantic","priority":"medium","phase":"foundational","labels":["raven","memory"],"cost":4,"infra_first":true}
+{"id":"B2-031","type":"IntegrPU","title":"Culture Ship orchestration: status + guidance","priority":"high","phase":"foundational","labels":["culture-ship"],"cost":3,"infra_first":true}
+{"id":"B2-032","type":"IntegrPU","title":"Marble router (/api/marble/ingest/status)","priority":"high","phase":"foundational","labels":["cascade"],"cost":3,"infra_first":true}
+{"id":"B2-033","type":"TestPU","title":"Boot-smoke: content pack > 0 resources","priority":"critical","phase":"foundational","labels":["game","truth"],"cost":1,"infra_first":true}
+{"id":"B2-034","type":"GamePU","title":"Content pack seeding before /game routes","priority":"critical","phase":"foundational","labels":["game","boot"],"cost":3,"infra_first":true}
+{"id":"B2-035","type":"GamePU","title":"Client safeBoot() guard + error banner","priority":"high","phase":"foundational","labels":["game","ux"],"cost":2,"infra_first":true}
+{"id":"B2-036","type":"GamePU","title":"Fixed-timestep loop (250ms step, deterministic)","priority":"high","phase":"core","labels":["sim"],"cost":3}
+{"id":"B2-037","type":"GamePU","title":"Deterministic RNG (seed per run)","priority":"high","phase":"core","labels":["sim"],"cost":2}
+{"id":"B2-038","type":"GamePU","title":"Save/Load with versioned migrations","priority":"high","phase":"core","labels":["persistence"],"cost":4}
+{"id":"B2-039","type":"GamePU","title":"Autosave with checksum + indicator","priority":"medium","phase":"core","labels":["persistence"],"cost":2}
+{"id":"B2-040","type":"GamePU","title":"Resource registry (id, cap, visibility)","priority":"high","phase":"core","labels":["economy"],"cost":3}
+{"id":"B2-041","type":"GamePU","title":"Generators + sinks (batch recipes FIFO)","priority":"high","phase":"core","labels":["economy"],"cost":4}
+{"id":"B2-042","type":"GamePU","title":"Storage upgrades + soft caps","priority":"medium","phase":"core","labels":["economy"],"cost":3}
+{"id":"B2-043","type":"GamePU","title":"Unlock tree (fog reveal, hints)","priority":"medium","phase":"core","labels":["progression"],"cost":4}
+{"id":"B2-044","type":"GamePU","title":"Energy/Heat budget layer","priority":"medium","phase":"core","labels":["systems"],"cost":3}
+{"id":"B2-045","type":"GamePU","title":"Offline gains estimator (<5% error)","priority":"medium","phase":"core","labels":["idle"],"cost":3}
+{"id":"B2-046","type":"GamePU","title":"Prestige loop + meta-currency","priority":"medium","phase":"progression","labels":["prestige"],"cost":4}
+{"id":"B2-047","type":"GamePU","title":"Prestige upgrades UI + projection","priority":"medium","phase":"progression","labels":["prestige","ui"],"cost":3}
+{"id":"B2-048","type":"GamePU","title":"Achievements (score,multipliers,cosmetics)","priority":"medium","phase":"progression","labels":["meta"],"cost":3}
+{"id":"B2-049","type":"GamePU","title":"Challenge mutators (risk→reward)","priority":"low","phase":"progression","labels":["meta"],"cost":3}
+{"id":"B2-050","type":"UXPU","title":"HUD: resources, rates, caps, trends","priority":"high","phase":"ui","labels":["hud"],"cost":3}
+{"id":"B2-051","type":"UXPU","title":"Panels: Buildings/Queue/Research","priority":"high","phase":"ui","labels":["hud","panels"],"cost":3}
+{"id":"B2-052","type":"UXPU","title":"Router: / HUD /game /agents /ops /settings","priority":"high","phase":"ui","labels":["routing"],"cost":2}
+{"id":"B2-053","type":"UXPU","title":"AA contrast, focus rings, reduce motion","priority":"high","phase":"ui","labels":["a11y"],"cost":2}
+{"id":"B2-054","type":"UXPU","title":"Virtualized lists (200+ rows)","priority":"high","phase":"ui","labels":["perf","ui"],"cost":3}
+{"id":"B2-055","type":"UXPU","title":"Tutorial coach-marks tied to unlocks","priority":"medium","phase":"ui","labels":["onboarding"],"cost":3}
+{"id":"B2-056","type":"UXPU","title":"Retro CRT/scanline theme toggle","priority":"low","phase":"ui","labels":["theme","retro"],"cost":2}
+{"id":"B2-057","type":"UXPU","title":"Minimal SFX + chiptune loop (low CPU)","priority":"low","phase":"ui","labels":["audio"],"cost":2}
+{"id":"B2-058","type":"PerfPU","title":"Frame budget monitor (<250ms updates)","priority":"medium","phase":"perf","labels":["fps"],"cost":2}
+{"id":"B2-059","type":"PerfPU","title":"Batch HUD frames (≤4/sec) under load","priority":"medium","phase":"perf","labels":["perf"],"cost":2}
+{"id":"B2-060","type":"AgentPU","title":"Raven ↔ Culture Ship prompt pass-through","priority":"critical","phase":"orchestration","labels":["raven","culture-ship"],"cost":2,"infra_first":true}
+{"id":"B2-061","type":"AgentPU","title":"Raven PR factory (small topical branches)","priority":"critical","phase":"orchestration","labels":["git","raven"],"cost":4}
+{"id":"B2-062","type":"AgentPU","title":"Conflict policy: auto-rebase ≤N commits","priority":"high","phase":"orchestration","labels":["git","policy"],"cost":2}
+{"id":"B2-063","type":"AgentPU","title":"Failure loop: read failing tests → fix PR","priority":"high","phase":"orchestration","labels":["tests","raven"],"cost":3}
+{"id":"B2-064","type":"MLPU","title":"Self-play harness /api/game/sim?ticks=100","priority":"high","phase":"ai","labels":["sim","ai"],"cost":3}
+{"id":"B2-065","type":"MLPU","title":"Agent-play macros (buy, research when feasible)","priority":"medium","phase":"ai","labels":["ai","macros"],"cost":3}
+{"id":"B2-066","type":"MLPU","title":"Hints engine (stalls,waste,bottlenecks)","priority":"medium","phase":"ai","labels":["advisor"],"cost":3}
+{"id":"B2-067","type":"TestPU","title":"Determinism tests (same seed→same state)","priority":"high","phase":"qa","labels":["sim","determinism"],"cost":2}
+{"id":"B2-068","type":"TestPU","title":"Chaos test: crash mid-tick→consistent restore","priority":"medium","phase":"qa","labels":["resilience"],"cost":2}
+{"id":"B2-069","type":"TestPU","title":"Save migration tests (3 versions)","priority":"medium","phase":"qa","labels":["persistence"],"cost":2}
+{"id":"B2-070","type":"TestPU","title":"A11y keyboard traversal coverage","priority":"medium","phase":"qa","labels":["a11y"],"cost":1}
+{"id":"B2-071","type":"TestPU","title":"Budget/entropy threshold behaviors","priority":"medium","phase":"qa","labels":["cost","stability"],"cost":1}
+{"id":"B2-072","type":"DocPU","title":"PIPELINE.md (prompt→PR→merge→sync→smoke)","priority":"high","phase":"docs","labels":["docs"],"cost":1,"automerge":true}
+{"id":"B2-073","type":"DocPU","title":"AGENT.md (lease runner, limits, examples)","priority":"medium","phase":"docs","labels":["docs","agents"],"cost":1,"automerge":true}
+{"id":"B2-074","type":"DocPU","title":"GAME-MODDING.md (add resource/generator)","priority":"medium","phase":"docs","labels":["docs","modding"],"cost":1,"automerge":true}
+{"id":"B2-075","type":"DocPU","title":"RAVEN.md (kernel, skills, rails)","priority":"high","phase":"docs","labels":["docs","raven"],"cost":1,"automerge":true}
+{"id":"B2-076","type":"UXPU","title":"Mobile viewport + gesture UX (Replit preview)","priority":"high","phase":"ui","labels":["mobile","replit"],"cost":3,"replit_focus":true}
+{"id":"B2-077","type":"UXPU","title":"Desktop + mobile HUD layout breakpoints","priority":"high","phase":"ui","labels":["responsive"],"cost":3}
+{"id":"B2-078","type":"PerfPU","title":"Lazy load heavy panels; idle callbacks","priority":"medium","phase":"perf","labels":["perf","lazy"],"cost":2}
+{"id":"B2-079","type":"GamePU","title":"ASCII HUD overlay option + animations","priority":"low","phase":"ui","labels":["ascii","style"],"cost":3}
+{"id":"B2-080","type":"GamePU","title":"Cutscene system (scriptable; skip; log)","priority":"low","phase":"content","labels":["narrative"],"cost":4}
+{"id":"B2-081","type":"GamePU","title":"Roguelike seed path (branch) + dungeon template","priority":"medium","phase":"content","labels":["roguelike"],"cost":5}
+{"id":"B2-082","type":"GamePU","title":"Synthesizer panel (webaudio; low CPU)","priority":"low","phase":"toy","labels":["synth"],"cost":4}
+{"id":"B2-083","type":"GamePU","title":"Rimworld-style colony signals mock (Godot-ready)","priority":"low","phase":"integration","labels":["rimworld","signals"],"cost":4}
+{"id":"B2-084","type":"GamePU","title":"Yggdrasil Isekai stats/equipment/inventory bridge","priority":"medium","phase":"integration","labels":["isekai","rpg"],"cost":5}
+{"id":"B2-085","type":"IntegrPU","title":"TouchDesigner visuals hook (if external)","priority":"low","phase":"integration","labels":["visuals"],"cost":3}
+{"id":"B2-086","type":"PerfPU","title":"Memory cap: old logs/events→persisted","priority":"medium","phase":"perf","labels":["mem"],"cost":2}
+{"id":"B2-087","type":"PerfPU","title":"Economy probe & CSV export","priority":"medium","phase":"perf","labels":["metrics"],"cost":2}
+{"id":"B2-088","type":"MLPU","title":"Balance snapshot & Jupyter notebooks","priority":"low","phase":"ai","labels":["analysis","pandas"],"cost":3}
+{"id":"B2-089","type":"AgentPU","title":"Raven cost heuristics (prefer local, batch ops)","priority":"high","phase":"orchestration","labels":["cost","heuristics"],"cost":2}
+{"id":"B2-090","type":"AgentPU","title":"Raven 'no-lies' verifier (diff-or-it-didn't-happen)","priority":"high","phase":"orchestration","labels":["truth"],"cost":2}
+{"id":"B2-091","type":"IntegrPU","title":"Marble→Cascade blueprint progress telemetry","priority":"medium","phase":"foundational","labels":["telemetry"],"cost":2,"infra_first":true}
+{"id":"B2-092","type":"IntegrPU","title":"Culture Ship next-actions endpoint","priority":"medium","phase":"foundational","labels":["culture-ship"],"cost":2,"infra_first":true}
+{"id":"B2-093","type":"TestPU","title":"Marble end-to-end test (cascade completes)","priority":"medium","phase":"qa","labels":["cascade"],"cost":2}
+{"id":"B2-094","type":"DocPU","title":"Cost Playbook (cheap-hands, local-first)","priority":"high","phase":"docs","labels":["cost"],"cost":1,"automerge":true}
+{"id":"B2-095","type":"InfraPU","title":"Truth dashboard (agents, llm, budget, cascade)","priority":"high","phase":"observability","labels":["hud","ops"],"cost":4}
+{"id":"B2-096","type":"AgentPU","title":"Raven mobile/desktop test macros","priority":"medium","phase":"qa","labels":["mobile","desktop"],"cost":2}
+{"id":"B2-097","type":"UXPU","title":"In-app Help overlay linking docs","priority":"medium","phase":"ui","labels":["help"],"cost":2}
+{"id":"B2-098","type":"GamePU","title":"Final Fantasy-style party panel mock","priority":"low","phase":"content","labels":["rpg","ui"],"cost":3}
+{"id":"B2-099","type":"GamePU","title":"Dungeon crawler node-view (fog; keyboard)","priority":"low","phase":"content","labels":["roguelike","ui"],"cost":4}
+{"id":"B2-100","type":"GamePU","title":"Cogmind-like terminal readouts (opt-in)","priority":"low","phase":"style","labels":["ascii"],"cost":2}
+{"id":"B2-101","type":"GamePU","title":"Dwarf Fortress-style notices (events feed)","priority":"low","phase":"content","labels":["log","events"],"cost":2}
+{"id":"B2-102","type":"GamePU","title":"Rimworld storyteller prototype (rules deck)","priority":"low","phase":"ai","labels":["storyteller"],"cost":5}
+{"id":"B2-103","type":"MLPU","title":"Local judge model (policy checks, small)","priority":"medium","phase":"ai","labels":["judge","llm"],"cost":3}
+{"id":"B2-104","type":"MLPU","title":"Distilled aux (low-latency) for quick reads","priority":"low","phase":"ai","labels":["aux","llm"],"cost":3}
+{"id":"B2-105","type":"DocPU","title":"ASCII style guide + animation spec","priority":"low","phase":"docs","labels":["ascii","style"],"cost":1,"automerge":true}
+{"id":"B2-106","type":"PerfPU","title":"Client bundle budget + analyzer","priority":"medium","phase":"perf","labels":["bundle"],"cost":2}
+{"id":"B2-107","type":"BuildPU","title":"Env schema & sanitizer for all configs","priority":"high","phase":"foundational","labels":["safety"],"cost":2,"infra_first":true}
+{"id":"B2-108","type":"InfraPU","title":"Error taxonomy & user-facing messages","priority":"medium","phase":"foundational","labels":["ux","observability"],"cost":2,"infra_first":true}
+{"id":"B2-109","type":"PerfPU","title":"Server warm caches (content, schemas)","priority":"low","phase":"perf","labels":["cache"],"cost":2}
+{"id":"B2-110","type":"IntegrPU","title":"Obsidian vault sync (docs, ADRs)","priority":"low","phase":"integration","labels":["docs"],"cost":3}
+{"id":"B2-111","type":"GamePU","title":"HUD ASCII mini-scope for terminals","priority":"low","phase":"ui","labels":["ascii","hud"],"cost":2}
+{"id":"B2-112","type":"UXPU","title":"Mobile long-press→context menu","priority":"low","phase":"ui","labels":["mobile"],"cost":2}
+{"id":"B2-113","type":"UXPU","title":"Desktop keyboard shortcuts cheat-sheet","priority":"low","phase":"ui","labels":["kbd"],"cost":1}
+{"id":"B2-114","type":"GamePU","title":"Cutscene: Culture Ship arrival (skippable)","priority":"low","phase":"narrative","labels":["lore"],"cost":3}
+{"id":"B2-115","type":"GamePU","title":"Quest Engine: onboarding questline","priority":"medium","phase":"content","labels":["quest"],"cost":4}
+{"id":"B2-116","type":"GamePU","title":"Inventory panel (isekai bridge ready)","priority":"medium","phase":"rpg","labels":["inventory"],"cost":4}
+{"id":"B2-117","type":"GamePU","title":"Equipment slots + stat preview","priority":"medium","phase":"rpg","labels":["rpg","stats"],"cost":4}
+{"id":"B2-118","type":"GamePU","title":"Skill tree (research) node editor","priority":"low","phase":"tools","labels":["editor"],"cost":5}
+{"id":"B2-119","type":"PerfPU","title":"Server profiling hooks + flamegraph script","priority":"low","phase":"perf","labels":["prof"],"cost":2}
+{"id":"B2-120","type":"TestPU","title":"Mobile/desktop snapshot tests (UI smoke)","priority":"medium","phase":"qa","labels":["ui","mobile"],"cost":2}
+{"id":"B2-121","type":"AgentPU","title":"Raven 'PR-sizer': split big diffs into lanes","priority":"medium","phase":"orchestration","labels":["git","raven"],"cost":2}
+{"id":"B2-122","type":"AgentPU","title":"Raven 'Docs-sweeper': periodic docs PR","priority":"low","phase":"orchestration","labels":["docs","raven"],"cost":1,"automerge":true}
+{"id":"B2-123","type":"SealPU","title":"ZETA Seal: self-play(100) + agent-play(25) + no-lies green + docs current","priority":"critical","phase":"validation","labels":["seal","release"],"cost":3,"infra_first":true}

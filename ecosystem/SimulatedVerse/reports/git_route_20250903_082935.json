@@ -1,0 +1,21 @@
+{
+  "stage": "route",
+  "timestamp": "2025-09-03T08:29:35Z",
+  "path": "manual_setup_required",
+  "edits_made": 0,
+  "moves": 0,
+  "diagnosis": "environment_limitations",
+  "blockers": [
+    "No authentication secrets configured",
+    "No remote origin URL available",
+    "Git operations restricted (index.lock errors)",
+    "Cannot automatically configure remote without credentials"
+  ],
+  "recommendations": [
+    "Configure GIT_PAT or GH_TOKEN secret for HTTPS authentication",
+    "Set GIT_REMOTE secret with repository URL", 
+    "Or configure SSH keys (GIT_SSH_PRIV/GIT_SSH_PUB)",
+    "Consider enabling git operations in environment"
+  ],
+  "next_hint": "manual_configuration_needed"
+}

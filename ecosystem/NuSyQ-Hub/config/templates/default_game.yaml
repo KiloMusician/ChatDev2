@@ -1,0 +1,26 @@
+name: Default Game
+type: game
+language: python
+runtime_profile: godot_export
+description: Default game template for prototyping.
+metadata: {}
+dependencies:
+  - pygame
+file_structure:
+  README.md: Project overview
+  src/main.py: Entry point
+  tests/test_smoke.py: Smoke test
+complexity: 6
+requires_multifile: true
+engine: godot
+engine_version: "4.x"
+target_platforms:
+  - windows
+  - linux
+genre: general
+godot_translate: true
+feature_flags:
+  data_pipeline: true
+  event_router: true
+  save_migration: true
+  modding_api: true

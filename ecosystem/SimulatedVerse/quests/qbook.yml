@@ -1,0 +1,188 @@
+# qbook.yml — Culture Protocol Questbook (Extended & Bound)
+# Notes:
+# - Each quest now includes:
+#   bindings: (glyphs/sigils from Lexicon + OmniTags)
+#   council: which advisors weigh in + their decision filters
+#   overlays: UI modes/layers Replit can render to "show attention"
+#   hooks: concrete actions for Replit's interface (open, tests, commit, run)
+#   telemetry: structured events for progress dashboards
+#   tests: unit/integration assertions the runner can execute
+#   ethics: guardrails aligned to Culture ethos (life-first, SC minimality)
+# - Tier numerals match your ladder; Culture Mode drives defaults.
+
+meta:
+  version: 2
+  codename: "Culture-Mode: Reverie"
+  ethic: "Preserve life. Intervene only under Special Circumstances."
+  defaults:
+    rewards:
+      xp: 1
+      unlocks: []
+      signals: []
+    council_policy: "consensus_or_two_thirds"
+    overlays:
+      - map.min
+      - terminal.min
+      - table.audit
+    telemetry_namespace: "nu.reverie"
+    signals:
+      - guardian.quarantine
+      - guardian.review.requested
+      - guardian.escalation.sc
+  replit_hooks:
+    open: "replit.open"              # open file / panel
+    tests: "replit.tests.green"       # run tests and parse report
+    commit: "replit.git.commit"        # commit with message
+    run: "replit.shell.run"         # run script/command
+
+lexicon:
+  # Logical references to your ConLang/OmniTag store (kept separate in repo)
+  glyphs_yaml: "assets/glyphs.yml"
+  ascii_json: "assets/ascii.json"
+  rosetta: "assets/RosettaStone.txt"
+  omni: "assets/OmniTag.txt"
+
+quests:
+
+  - id: q001
+    title: Preserve Colonist Sanctity
+    prompt: "How do we preserve the sanctity of colonist life at Tier 1 survival?"
+    tier: I
+    tags: [foundation, safety, survival]
+    bindings:
+      glyphs: [Σ-ethos, Ψ-life, Λ-steward]
+      omni: [LIFE_FIRST, SAFE_IDLE, HUMBLE_PROMPT]
+      ui_tokens: [badge.life, banner.harmony]
+    acceptance:
+      - "write: docs/safety.md (include SAFE_IDLE, LIFE_FIRST semantics)"
+      - "env: .env add LIFE_FIRST=true"
+      - "code: sim/fallback.ts implements SAFE_IDLE with heartbeat"
+      - "tests: tests/sim_fallback.spec.ts (enter/exit SAFE_IDLE)"
+    tests:
+      - name: enters-safe-idle-on-critical
+        assert: 'expect(sim.enterSafeIdle("crit")).toBe(true)'
+      - name: forbids-harmful-op-when-life-first
+        assert: 'expect(ops.guard({risk:"harm"})).toBe(false)'
+    council:
+      advisors: [SCP-6971, Culture-SC]
+      decision: consensus_or_two_thirds
+    overlays: [terminal.min, map.min, hud.status]
+    telemetry:
+      on_accept: {event: nu.reverie.q001.accepted}
+      on_complete: {event: nu.reverie.q001.completed}
+    hooks:
+      on_open:
+        - {fn: replit.open, args: ["docs/safety.md"]}
+      on_commit:
+        - {fn: replit.git.commit, args: ["feat(q001): life-first + SAFE_IDLE"]}
+      on_run:
+        - {fn: replit.shell.run, args: ["pnpm test -r tests/sim_fallback.spec.ts"]}
+    rewards:
+      xp: 3
+      unlocks: [safety_fallbacks, telemetry_life]
+      signals: [sig.safety_ready]
+    ethics:
+      non_negotiables: [no_harm, reversible, explainable]
+
+  - id: q002
+    title: Protect Biosphere While Harvesting
+    prompt: "In what ways can the biosphere be protected as we harvest basic resources?"
+    tier: I
+    tags: [ecosystem, harvesting]
+    bindings:
+      glyphs: [Φ-eco, Θ-balance]
+      omni: [ECO_CAP, IMPACT_MITIGATION]
+      ui_tokens: [chip.eco, bar.eco_index]
+    acceptance:
+      - "file: sim/harvest.ts add ecoImpact(resource, amount, biome)"
+      - "write: docs/eco.md mitigation: [buffer_zones, seasonal_limits, ally_species]"
+      - "conf: data/eco_thresholds.yml with ECO_CAP defaults"
+    tests:
+      - name: harvest-respects-eco-cap
+        assert: 'expect(ecoImpact("wood",120,"riparian").status).toBe("limit")'
+    council:
+      advisors: [Eco-Steward, Culture-SC]
+    overlays: [map.eco, graph.impact]
+    telemetry:
+      on_complete: {event: nu.reverie.q002.eco_protectors_boot}
+    hooks:
+      on_commit:
+        - {fn: replit.git.commit, args: ["feat(q002): ecoImpact + thresholds + docs"]}
+      on_run:
+        - {fn: replit.shell.run, args: ["pnpm test -r tests"]}
+    rewards: {xp: 2, unlocks: [eco_index], signals: [sig.eco_guard]}
+
+  - id: q003
+    title: Harmony Glyph
+    prompt: "Which glyph best represents harmony between colonists and native beings?"
+    tier: I
+    tags: [conlang, glyphs, culture]
+    bindings:
+      glyphs: [Ω-harmony]
+      omni: [GLYPH_REGISTER]
+      ui_tokens: [icon.harmony]
+    acceptance:
+      - "edit: assets/glyphs.yml register: harmony: Ω"
+      - "ui: ui/banner.tsx render icon.harmony when eco_index >= 0.6"
+    tests:
+      - name: harmony-glyph-exists
+        assert: 'expect(glyphs.get("harmony")).toBe("Ω")'
+    council: {advisors: [Archivist]}
+    overlays: [overlay.glyphs]
+    hooks:
+      on_commit:
+        - {fn: replit.git.commit, args: ["feat(q003): Harmony glyph registered + UI hook"]}
+    rewards: {xp: 1, unlocks: [glyph_pipeline]}
+
+  - id: q004
+    title: Gentle Placeholder Detection
+    prompt: "How do we detect placeholders or broken paths in early modules without harm?"
+    tier: I
+    tags: [debug, ux]
+    bindings:
+      glyphs: [Ξ-patience]
+      omni: [SOFT_WARN, TODO_AUDIT]
+    acceptance:
+      - "linter: tools/lint-rules.ts add rule placeholder.soft.warn"
+      - "ui: ui/errors/GentleNotice.tsx with recovery CTA"
+    tests:
+      - name: placeholder-warns-softly
+        assert: 'expect(lint("TODO")).toMatch(/soft-warning/)'
+    council: {advisors: [SCP-6974]}
+    overlays: [terminal.log, toast.notice]
+    rewards: {xp: 2}
+
+  - id: q005
+    title: Peaceful Fallback State
+    prompt: "What is the peaceful fallback state when entropy rises in initial quests?"
+    tier: I
+    tags: [state, resilience]
+    bindings:
+      glyphs: [Ψ-life, Σ-calm]
+      omni: [SAFE_IDLE, RETRY_BACKOFF]
+    acceptance:
+      - "code: sim/fallback.ts add coolDown(reason) + jitter backoff"
+      - "tests: tests/fallback_backoff.spec.ts cover jitter bounds"
+    tests:
+      - name: jitter-bounded
+        assert: 'expect(jitter(1000)).toBeLessThanOrEqual(1500)'
+    council: {advisors: [Culture-SC]}
+    overlays: [hud.status, osc.backoff]
+    rewards: {xp: 2}
+
+  - id: q021
+    title: Eco-Checks on Expansion
+    prompt: "What checks keep expansion from overwhelming ecosystems?"
+    tier: II
+    tags: [ecosystem, scaling]
+    bindings: 
+      glyphs: [Φ-eco, Θ-balance]
+      omni: [ECO_CAP, ECO_HEALTH_INDEX]
+    acceptance:
+      - "cap: sim/eco/index.ts compute ecoHealth 0..1; gate buildings when <0.4"
+    tests:
+      - name: gate-on-low-eco
+        assert: 'expect(gate.build("factory", eco=0.3)).toBe("blocked")'
+    council: {advisors: [Eco-Steward, Culture-SC]}
+    overlays: [graph.eco]
+    rewards: {xp: 2}

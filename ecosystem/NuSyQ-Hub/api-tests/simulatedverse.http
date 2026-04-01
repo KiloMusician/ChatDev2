@@ -1,0 +1,58 @@
+### SimulatedVerse Express API - Health Check
+GET http://localhost:5000/health
+
+###
+
+### Get Consciousness State
+GET http://localhost:5000/api/consciousness/state
+
+###
+
+### Get Temple Knowledge Levels
+GET http://localhost:5000/api/temple/levels
+
+###
+
+### Get Active PU Queue
+GET http://localhost:5000/api/pu/queue
+
+###
+
+### Submit New PU (Processing Unit)
+POST http://localhost:5000/api/pu/submit
+Content-Type: application/json
+
+{
+  "type": "consciousness",
+  "priority": "high",
+  "data": {
+    "awareness_level": 0.8,
+    "task": "semantic_analysis"
+  }
+}
+
+###
+
+### Get System Metrics
+GET http://localhost:5000/api/metrics
+
+###
+
+### Guardian Ethics Check
+POST http://localhost:5000/api/guardian/check
+Content-Type: application/json
+
+{
+  "action": "autonomous_development",
+  "context": "test_scenario"
+}
+
+###
+
+### React UI Health (Port 3000)
+GET http://localhost:3000/
+
+###
+
+### WebSocket Connection Test (if using WS)
+# ws://localhost:5000/ws

@@ -1,0 +1,29 @@
+{
+  "include": ["src", "tests"],
+  "exclude": [
+    "**/__pycache__",
+    "**/.venv",
+    "**/venv",
+    "**/venv_kilo",
+    "**/ChatDev",
+    "**/node_modules",
+    "**/.mypy_cache",
+    "**/.ruff_cache",
+    "**/dist",
+    "**/build",
+    "**/projects/generated/**/dist",
+    "**/projects/generated/**/build",
+    "**/steamapps/common"
+  ],
+  "extraPaths": ["."],
+  "venvPath": ".",
+  "venv": ".venv",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "reportUnusedImport": "warning",
+  "reportUnusedVariable": "warning",
+  "reportDuplicateImport": "warning",
+  "pythonVersion": "3.11",
+  "pythonPlatform": "Windows"
+}

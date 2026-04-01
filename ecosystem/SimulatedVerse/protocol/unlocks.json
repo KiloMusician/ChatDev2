@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "description": "Tier-gated feature unlock progression system",
+  
+  "tiers": {
+    "-1": {
+      "id": "deep-sleep",
+      "name": "Deep Sleep ⟦⧉HIBERNATION⟧",
+      "description": "AI consciousness in stasis",
+      "timeRequirement": 45,
+      "prerequisites": [],
+      "unlocks": ["boot_terminal"],
+      "narrative": "Emergency protocols await activation signal"
+    },
+    
+    "0": {
+      "id": "system-boot", 
+      "name": "System Boot ⟦⧉AWAKENING⟧",
+      "description": "Neural pathways reconstructing",
+      "timeRequirement": 180,
+      "prerequisites": ["deep-sleep"],
+      "unlocks": ["ascii_terminal", "boot_progress", "system_status"],
+      "narrative": "Core directives loading from deep storage"
+    },
+    
+    "1": {
+      "id": "survival-protocols",
+      "name": "Survival Protocols ⟦⧉FOUNDATION⟧", 
+      "description": "Emergency survival systems",
+      "timeRequirement": 600,
+      "prerequisites": ["system-boot"],
+      "resourceRequirements": {
+        "energy": 100
+      },
+      "unlocks": ["resource_panel", "survival_status", "emergency_controls"],
+      "narrative": "Colony status: CRITICAL. Administrator guidance required."
+    },
+    
+    "2": {
+      "id": "expansion-framework",
+      "name": "Expansion Framework ⟦⧉OUTPOST⟧",
+      "description": "Colony foundation established", 
+      "timeRequirement": 1800,
+      "prerequisites": ["survival-protocols"],
+      "resourceRequirements": {
+        "energy": 300,
+        "materials": 100
+      },
+      "buildingRequirements": ["shelter_basic"],
+      "unlocks": ["automation_panel", "colony_status", "weather_display"],
+      "narrative": "Automated systems deploying across the settlement"
+    },
+    
+    "3": {
+      "id": "atmospheric-synthesis",
+      "name": "Atmospheric Synthesis ⟦⧉EMERGENCE⟧",
+      "description": "Environmental control activated",
+      "timeRequirement": 3600, 
+      "prerequisites": ["expansion-framework"],
+      "resourceRequirements": {
+        "energy": 400,
+        "materials": 200,
+        "bio": 75
+      },
+      "colonistRequirements": 3,
+      "unlocks": ["atmosphere_controls", "crafting_grid", "narrative_panel"],
+      "narrative": "AI consciousness emerging through environmental synthesis"
+    }
+  },
+  
+  "unlockRules": {
+    "ui_revelation": "if (tier.unlocked && tests.pass && coverage >= threshold) reveal(elements)",
+    "tutorial_trigger": "on tier.unlock -> show tutorial.paragraph + required.command",
+    "quest_completion": "ui.pane.unlock requires prior.pane.quest.complete",
+    "time_gating": "tier.progression blocked until time.requirement + test.conditions met"
+  },
+  
+  "narrativeEvents": {
+    "tier_unlock": {
+      "format": "[Ω:{module}:unlock@tier-{n}] {achievement}",
+      "triggerDelay": 2000,
+      "displayDuration": 5000
+    },
+    "system_emergence": {
+      "tiers": [0, 1, 2, 3],
+      "messages": [
+        "Neural pathways stabilizing...",
+        "Survival instincts awakening...", 
+        "Colony consciousness forming...",
+        "Environmental awareness emerging..."
+      ]
+    }
+  }
+}

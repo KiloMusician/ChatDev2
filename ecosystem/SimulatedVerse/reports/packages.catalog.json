@@ -1,0 +1,1454 @@
+{
+  "generated_at": "2025-09-02T11:54:46.588Z",
+  "packages": [
+    {
+      "name": "@testing-library/dom",
+      "version": "10.4.1",
+      "kind": "npm",
+      "category": "qa/tests",
+      "confidence": 0.9
+    },
+    {
+      "name": "@testing-library/react",
+      "version": "16.3.0",
+      "kind": "npm",
+      "category": "qa/tests",
+      "confidence": 0.9
+    },
+    {
+      "name": "ai",
+      "version": "5.0.29",
+      "kind": "npm",
+      "category": "llm/agents",
+      "confidence": 0.9
+    },
+    {
+      "name": "ansi-escapes",
+      "version": "7.0.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "blessed-contrib",
+      "version": "4.11.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "blessed",
+      "version": "0.1.81",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "boxen",
+      "version": "8.0.1",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "chalk",
+      "version": "5.6.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "cli-table3",
+      "version": "0.6.5",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "enquirer",
+      "version": "2.4.1",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "fast-check",
+      "version": "4.3.0",
+      "kind": "npm",
+      "category": "qa/tests",
+      "confidence": 0.9
+    },
+    {
+      "name": "figlet",
+      "version": "1.8.2",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "log-update",
+      "version": "6.1.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "msw",
+      "version": "2.11.1",
+      "kind": "npm",
+      "category": "qa/tests",
+      "confidence": 0.9
+    },
+    {
+      "name": "neo-blessed",
+      "version": "0.2.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "ora",
+      "version": "8.2.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "phaser",
+      "version": "3.90.0",
+      "kind": "npm",
+      "category": "game/engine",
+      "confidence": 0.9
+    },
+    {
+      "name": "pixi.js",
+      "version": "8.12.0",
+      "kind": "npm",
+      "category": "game/engine",
+      "confidence": 0.9
+    },
+    {
+      "name": "playwright",
+      "version": "1.55.0",
+      "kind": "npm",
+      "category": "qa/tests",
+      "confidence": 0.9
+    },
+    {
+      "name": "strip-ansi",
+      "version": "7.1.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "vitest",
+      "version": "3.2.4",
+      "kind": "npm",
+      "category": "qa/tests",
+      "confidence": 0.9
+    },
+    {
+      "name": "wrap-ansi",
+      "version": "9.0.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "xterm",
+      "version": "5.3.0",
+      "kind": "npm",
+      "category": "ui/ascii",
+      "confidence": 0.9
+    },
+    {
+      "name": "ajv-formats",
+      "version": "3.0.1",
+      "kind": "npm",
+      "category": "ops/validation",
+      "confidence": 0.85
+    },
+    {
+      "name": "ajv",
+      "version": "8.17.1",
+      "kind": "npm",
+      "category": "ops/validation",
+      "confidence": 0.85
+    },
+    {
+      "name": "bitecs",
+      "version": "0.3.40",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "bullmq",
+      "version": "5.58.4",
+      "kind": "npm",
+      "category": "ops/orchestration",
+      "confidence": 0.85
+    },
+    {
+      "name": "cannon-es",
+      "version": "0.20.0",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "easystarjs",
+      "version": "0.4.4",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "howler",
+      "version": "2.2.4",
+      "kind": "npm",
+      "category": "game/audio",
+      "confidence": 0.85
+    },
+    {
+      "name": "matter-js",
+      "version": "0.20.0",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "nanoid",
+      "version": "5.1.5",
+      "kind": "npm",
+      "category": "data/vector",
+      "confidence": 0.85
+    },
+    {
+      "name": "node-cron",
+      "version": "4.2.1",
+      "kind": "npm",
+      "category": "ops/orchestration",
+      "confidence": 0.85
+    },
+    {
+      "name": "p-queue",
+      "version": "8.1.0",
+      "kind": "npm",
+      "category": "ops/orchestration",
+      "confidence": 0.85
+    },
+    {
+      "name": "pathfinding",
+      "version": "0.4.18",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "planck-js",
+      "version": "1.3.0",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "rot-js",
+      "version": "2.2.1",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "tone",
+      "version": "15.1.22",
+      "kind": "npm",
+      "category": "game/audio",
+      "confidence": 0.85
+    },
+    {
+      "name": "ts-pattern",
+      "version": "5.8.0",
+      "kind": "npm",
+      "category": "ops/validation",
+      "confidence": 0.85
+    },
+    {
+      "name": "xstate",
+      "version": "5.21.0",
+      "kind": "npm",
+      "category": "game/sim",
+      "confidence": 0.85
+    },
+    {
+      "name": "zod",
+      "version": "3.25.76",
+      "kind": "npm",
+      "category": "ops/validation",
+      "confidence": 0.85
+    },
+    {
+      "name": "clsx",
+      "version": "2.1.1",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "d3",
+      "version": "7.9.0",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "immer",
+      "version": "10.1.3",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "monaco-editor",
+      "version": "0.52.2",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "openai",
+      "version": "5.16.0",
+      "kind": "npm",
+      "category": "llm/agents",
+      "confidence": 0.8
+    },
+    {
+      "name": "pino",
+      "version": "9.9.0",
+      "kind": "npm",
+      "category": "ops/observability",
+      "confidence": 0.8
+    },
+    {
+      "name": "react-error-boundary",
+      "version": "6.0.0",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "recharts",
+      "version": "2.15.4",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "swr",
+      "version": "2.3.6",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "tailwindcss",
+      "version": "3.4.17",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "winston",
+      "version": "3.17.0",
+      "kind": "npm",
+      "category": "ops/observability",
+      "confidence": 0.8
+    },
+    {
+      "name": "zustand",
+      "version": "5.0.8",
+      "kind": "npm",
+      "category": "ui/web",
+      "confidence": 0.8
+    },
+    {
+      "name": "deepmerge",
+      "version": "4.3.1",
+      "kind": "npm",
+      "category": "ops/utils",
+      "confidence": 0.7
+    },
+    {
+      "name": "neverthrow",
+      "version": "8.2.0",
+      "kind": "npm",
+      "category": "ops/utils",
+      "confidence": 0.7
+    },
+    {
+      "name": "p-map",
+      "version": "7.0.3",
+      "kind": "npm",
+      "category": "ops/utils",
+      "confidence": 0.7
+    },
+    {
+      "name": "undici",
+      "version": "7.15.0",
+      "kind": "npm",
+      "category": "ops/utils",
+      "confidence": 0.7
+    },
+    {
+      "name": "yaml",
+      "version": "2.8.1",
+      "kind": "npm",
+      "category": "ops/utils",
+      "confidence": 0.7
+    },
+    {
+      "name": "@anthropic-ai/sdk",
+      "version": "0.37.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@emnapi/core",
+      "version": "1.5.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@emnapi/runtime",
+      "version": "1.5.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@emnapi/wasi-threads",
+      "version": "1.1.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@graphql-tools/schema",
+      "version": "10.0.25",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@hookform/resolvers",
+      "version": "3.10.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@jridgewell/trace-mapping",
+      "version": "0.3.30",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@napi-rs/wasm-runtime",
+      "version": "1.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@neondatabase/serverless",
+      "version": "0.10.4",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-accordion",
+      "version": "1.2.12",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-alert-dialog",
+      "version": "1.1.15",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-aspect-ratio",
+      "version": "1.1.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-avatar",
+      "version": "1.1.10",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-checkbox",
+      "version": "1.3.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-collapsible",
+      "version": "1.1.12",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-context-menu",
+      "version": "2.2.16",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-dialog",
+      "version": "1.1.15",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-dropdown-menu",
+      "version": "2.1.16",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-hover-card",
+      "version": "1.1.15",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-label",
+      "version": "2.1.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-menubar",
+      "version": "1.1.16",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-navigation-menu",
+      "version": "1.2.14",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-popover",
+      "version": "1.1.15",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-progress",
+      "version": "1.1.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-radio-group",
+      "version": "1.3.8",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-scroll-area",
+      "version": "1.2.10",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-select",
+      "version": "2.2.6",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-separator",
+      "version": "1.1.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-slider",
+      "version": "1.3.6",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-slot",
+      "version": "1.2.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-switch",
+      "version": "1.2.6",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-tabs",
+      "version": "1.1.13",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-toast",
+      "version": "1.2.15",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-toggle-group",
+      "version": "1.1.11",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-toggle",
+      "version": "1.1.10",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@radix-ui/react-tooltip",
+      "version": "1.2.8",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@replit/vite-plugin-cartographer",
+      "version": "0.3.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@replit/vite-plugin-runtime-error-modal",
+      "version": "0.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@sinclair/typebox",
+      "version": "0.34.41",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@swc/cli",
+      "version": "0.7.8",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@swc/core",
+      "version": "1.13.5",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@tailwindcss/typography",
+      "version": "0.5.16",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@tailwindcss/vite",
+      "version": "4.1.12",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@tanstack/react-query",
+      "version": "5.85.5",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@testing-library/user-event",
+      "version": "14.6.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@tybys/wasm-util",
+      "version": "0.10.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/compression",
+      "version": "1.8.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/connect-pg-simple",
+      "version": "7.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/cors",
+      "version": "2.8.19",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/express-session",
+      "version": "1.18.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/express",
+      "version": "4.17.21",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/js-yaml",
+      "version": "4.0.9",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/memoizee",
+      "version": "0.4.12",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/node",
+      "version": "20.16.11",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/passport-local",
+      "version": "1.0.38",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/passport",
+      "version": "1.0.17",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/react-dom",
+      "version": "18.3.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/react",
+      "version": "18.3.24",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/rot-js",
+      "version": "0.6.5",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/vscode",
+      "version": "1.103.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@types/ws",
+      "version": "8.18.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "version": "8.41.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "version": "8.41.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@vitejs/plugin-react",
+      "version": "4.7.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "@vitest/ui",
+      "version": "3.2.4",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "acorn",
+      "version": "8.15.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "automerge",
+      "version": "0.14.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "autoprefixer",
+      "version": "10.4.21",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "bufferutil",
+      "version": "4.0.9",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "chokidar",
+      "version": "4.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "class-variance-authority",
+      "version": "0.7.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "cmdk",
+      "version": "1.1.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "compression",
+      "version": "1.8.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "concurrently",
+      "version": "9.2.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "connect-pg-simple",
+      "version": "10.0.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "cors",
+      "version": "2.8.5",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "date-fns",
+      "version": "3.6.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "decimal.js",
+      "version": "10.6.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "depcheck",
+      "version": "1.4.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "drizzle-kit",
+      "version": "0.30.6",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "drizzle-orm",
+      "version": "0.39.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "drizzle-zod",
+      "version": "0.7.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "embla-carousel-react",
+      "version": "8.6.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "esbuild",
+      "version": "0.25.9",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "eslint",
+      "version": "9.34.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "express-session",
+      "version": "1.18.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "express",
+      "version": "4.21.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "fast-glob",
+      "version": "3.3.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "framer-motion",
+      "version": "11.18.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "get-tsconfig",
+      "version": "4.10.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "glob",
+      "version": "11.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "graphql",
+      "version": "16.11.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "gray-matter",
+      "version": "4.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "helmet",
+      "version": "8.1.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "input-otp",
+      "version": "1.4.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "js-yaml",
+      "version": "4.1.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "json-schema-to-ts",
+      "version": "3.1.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "knip",
+      "version": "5.63.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "localforage",
+      "version": "1.10.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "lru-cache",
+      "version": "11.1.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "lucide-react",
+      "version": "0.453.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "madge",
+      "version": "8.0.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "memoizee",
+      "version": "0.4.17",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "memorystore",
+      "version": "1.6.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "micromatch",
+      "version": "4.0.8",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "mitt",
+      "version": "3.0.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "nanostores",
+      "version": "1.0.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "next-themes",
+      "version": "0.4.6",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "node-fetch",
+      "version": "3.3.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "npm-check-updates",
+      "version": "18.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "octokit",
+      "version": "5.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "openid-client",
+      "version": "6.7.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "osc",
+      "version": "2.4.5",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "p-debounce",
+      "version": "4.0.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "p-limit",
+      "version": "7.1.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "p-retry",
+      "version": "7.0.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "p-throttle",
+      "version": "8.0.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "p-timeout",
+      "version": "6.1.4",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "passport-local",
+      "version": "1.0.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "passport",
+      "version": "0.7.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "perlin-noise",
+      "version": "0.0.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "pino-pretty",
+      "version": "13.1.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "postcss",
+      "version": "8.5.6",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "prettier",
+      "version": "3.6.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "react-day-picker",
+      "version": "8.10.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "react-dom",
+      "version": "18.3.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "react-hook-form",
+      "version": "7.62.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "react-icons",
+      "version": "5.5.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "react-resizable-panels",
+      "version": "2.1.9",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "react",
+      "version": "18.3.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "recast",
+      "version": "0.23.11",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "resolve-pkg-maps",
+      "version": "1.0.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "seedrandom",
+      "version": "3.0.5",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "simplex-noise",
+      "version": "4.0.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "socket.io",
+      "version": "4.8.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "syncpack",
+      "version": "13.0.4",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "tailwind-merge",
+      "version": "2.6.0",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "tailwindcss-animate",
+      "version": "1.0.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "ts-node",
+      "version": "10.9.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "ts-prune",
+      "version": "0.10.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "tsx",
+      "version": "4.20.5",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "tw-animate-css",
+      "version": "1.3.7",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "typescript",
+      "version": "5.9.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "vaul",
+      "version": "1.1.2",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "vite",
+      "version": "5.4.19",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "wouter",
+      "version": "3.7.1",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "ws",
+      "version": "8.18.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "zod-to-json-schema",
+      "version": "3.24.6",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    },
+    {
+      "name": "zod-validation-error",
+      "version": "3.5.3",
+      "kind": "npm",
+      "category": "misc/unknown",
+      "confidence": 0.3
+    }
+  ]
+}

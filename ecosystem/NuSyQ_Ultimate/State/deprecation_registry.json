@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-03-31T09:37:47Z",
+  "generator_version": "rosetta-bootstrap-v1",
+  "stale_after_seconds": 86400,
+  "source_paths": [
+    "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/ECOSYSTEM_CONTROL_PLANE.md",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/README.md"
+  ],
+  "source_hashes": {
+    "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md": "06e7e311c2627057804a6863eb7c5d23045c9ad1a715721ace28df1b69b6c3cc",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/ECOSYSTEM_CONTROL_PLANE.md": "f9e0a845f5611b206fe3fc1bb5c11b9244542e7f401a4099246c5e0327a9e327",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/README.md": "a772cfdb2f846ff3ee090269a637018ccd0e9cc1a4c5cf1d365ab659d98a8187"
+  },
+  "deprecated": {
+    "docs": [
+      {
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/CULTURE_SHIP_OPERATIONAL.md",
+        "reason": "Legacy single-owner Culture Ship framing; prefer structured dual-authority artifacts.",
+        "replacement": "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md"
+      }
+    ],
+    "extensions": [
+      {
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/extensions/agent-dashboard",
+        "reason": "Legacy dashboard surface; behavior is folded into the mediator cockpit.",
+        "replacement": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension"
+      },
+      {
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/integration/vscode_extension",
+        "reason": "Supporting ChatDev extension, not the canonical control-plane cockpit.",
+        "replacement": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension"
+      }
+    ],
+    "bridges": [
+      {
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/router/culture-ship.ts",
+        "reason": "Legacy bridge-style Culture Ship router; keep for compatibility, but prefer the runtime descriptor and active routes.",
+        "replacement": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "broad_repo_scan_before_bootstrap",
+        "reason": "Superseded by structured control-plane read precedence.",
+        "replacement": "state/boot/rosetta_bootstrap.json"
+      }
+    ]
+  }
+}

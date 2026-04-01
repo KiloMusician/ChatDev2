@@ -1,0 +1,12 @@
+{
+  "name": "code_formatter",
+  "version": "1.0.0",
+  "description": "Format Python code using autopep8 or ruff, with LLM review.",
+  "entry_point": "plugin.py",
+  "category": "development",
+  "enabled": true,
+  "config_schema": {
+    "file": "path to Python file (optional, use input_data for inline code)",
+    "review": "true|false — ask LLM for code review after formatting"
+  }
+}

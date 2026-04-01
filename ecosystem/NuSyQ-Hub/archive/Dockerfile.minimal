@@ -1,0 +1,26 @@
+# ARCHIVED — 2026-02-24
+# This file was an experimental minimal build. It is incomplete:
+# hardcoded deps (flask, requests, sqlalchemy only), no requirements.txt,
+# and a fake health check (python -c "print('healthy')").
+# Use Dockerfile (standard) or Dockerfile.prod (Alpine optimized) instead.
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install only critical dependencies
+RUN pip install --no-cache-dir flask requests sqlalchemy
+
+# Create non-root user
+RUN groupadd -r nusyq && useradd -r -g nusyq -u 1000 nusyq
+
+# Copy only essential Python code
+COPY src/ ./src/
+
+USER nusyq
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD python -c "print('healthy')" || exit 1
+
+CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]

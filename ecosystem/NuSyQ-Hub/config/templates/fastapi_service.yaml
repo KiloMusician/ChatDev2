@@ -1,0 +1,94 @@
+# FastAPI Async Service Template
+# OmniTag: [webapp, fastapi, async, api, backend]
+# MegaTag: TEMPLATE⨳WEBAPP⦾FASTAPI_SERVICE→∞
+
+name: FastAPI Service
+type: webapp
+language: python
+runtime_profile: native_terminal
+description: FastAPI async service with Pydantic validation and SQLAlchemy async
+version: "1.0.0"
+
+metadata:
+  framework: fastapi
+  auth_method: jwt
+  database: sqlalchemy_async
+  async: true
+
+dependencies:
+  - fastapi>=0.109.0
+  - uvicorn[standard]>=0.27.0
+  - pydantic>=2.5.0
+  - pydantic-settings>=2.1.0
+  - sqlalchemy[asyncio]>=2.0.0
+  - asyncpg>=0.29.0
+  - alembic>=1.13.0
+  - python-jose[cryptography]>=3.3.0
+  - passlib[bcrypt]>=1.7.4
+  - python-multipart>=0.0.6
+  - httpx>=0.26.0
+
+dev_dependencies:
+  - pytest>=8.0.0
+  - pytest-asyncio>=0.23.0
+  - pytest-cov>=4.1.0
+  - black>=24.0.0
+  - ruff>=0.2.0
+  - mypy>=1.8.0
+
+file_structure:
+  README.md: "Project documentation with OpenAPI info"
+  requirements.txt: "Production dependencies"
+  requirements-dev.txt: "Development dependencies"
+  .env.example: "Environment variable template"
+  Dockerfile: "Multi-stage container build"
+  docker-compose.yml: "Local development with Postgres"
+  alembic.ini: "Alembic migration config"
+
+  src/__init__.py: "Package init"
+  src/main.py: "FastAPI application with lifespan"
+  src/config.py: "Pydantic settings configuration"
+  src/database.py: "Async SQLAlchemy engine and session"
+  src/dependencies.py: "FastAPI dependency injection"
+
+  src/models/__init__.py: "Model exports"
+  src/models/base.py: "Base model with async operations"
+  src/models/user.py: "User model"
+
+  src/schemas/__init__.py: "Pydantic schema exports"
+  src/schemas/user.py: "User request/response schemas"
+  src/schemas/token.py: "JWT token schemas"
+
+  src/routers/__init__.py: "Router registration"
+  src/routers/auth.py: "Authentication endpoints"
+  src/routers/users.py: "User CRUD endpoints"
+  src/routers/health.py: "Health and readiness probes"
+
+  src/services/__init__.py: "Service layer exports"
+  src/services/auth.py: "Authentication service"
+  src/services/user.py: "User business logic"
+
+  src/core/__init__.py: "Core utilities"
+  src/core/security.py: "JWT and password utilities"
+  src/core/exceptions.py: "Custom HTTP exceptions"
+
+  migrations/: "Alembic migration scripts"
+
+  tests/__init__.py: "Test package"
+  tests/conftest.py: "Async pytest fixtures"
+  tests/test_auth.py: "Auth endpoint tests"
+  tests/test_users.py: "User endpoint tests"
+
+complexity: 6
+requires_multifile: true
+entry_point: "src/main.py"
+
+hooks:
+  post_generate:
+    - "pip install -r requirements.txt"
+    - "alembic upgrade head"
+
+integrations:
+  - nusyq_quest: true
+  - background_orchestrator: true
+  - smart_search: true

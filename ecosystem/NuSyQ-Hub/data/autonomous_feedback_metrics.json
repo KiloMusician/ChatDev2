@@ -1,0 +1,103 @@
+{
+  "cycles": [
+    {
+      "cycle": 1,
+      "timestamp": "2026-02-15T03:49:51.500753",
+      "mode": "preview",
+      "apply": {
+        "status": "skipped",
+        "reason": "result_applier_unavailable",
+        "mode": "preview",
+        "applied_file_count": 0
+      },
+      "validation": {
+        "checks": [],
+        "checks_run": 0,
+        "checks_passed": 0,
+        "issue_count": 0,
+        "python_targets": []
+      },
+      "impact": {
+        "score": 0.15,
+        "band": "low",
+        "execution_success_rate": 0.0,
+        "validation_pass_rate": 0.5,
+        "apply_activity": 0.0,
+        "error_reduction": 0.0,
+        "applied_file_count": 0,
+        "preview_applicable_results": 0,
+        "checks_run": 0,
+        "checks_passed": 0,
+        "audit_findings": 0,
+        "post_validation_issues": 0
+      }
+    },
+    {
+      "cycle": 1,
+      "timestamp": "2026-04-01T01:13:31.342169",
+      "mode": "stage",
+      "apply": {
+        "status": "skipped",
+        "reason": "result_applier_unavailable",
+        "mode": "stage",
+        "applied_file_count": 0
+      },
+      "validation": {
+        "checks": [],
+        "checks_run": 0,
+        "checks_passed": 0,
+        "issue_count": 0,
+        "python_targets": []
+      },
+      "impact": {
+        "score": 0.5,
+        "band": "medium",
+        "execution_success_rate": 1.0,
+        "validation_pass_rate": 0.5,
+        "apply_activity": 0.0,
+        "error_reduction": 0.0,
+        "applied_file_count": 0,
+        "preview_applicable_results": 0,
+        "checks_run": 0,
+        "checks_passed": 0,
+        "audit_findings": 0,
+        "post_validation_issues": 0
+      }
+    }
+  ],
+  "last_cycle": {
+    "cycle": 1,
+    "timestamp": "2026-04-01T01:13:31.342169",
+    "mode": "stage",
+    "apply": {
+      "status": "skipped",
+      "reason": "result_applier_unavailable",
+      "mode": "stage",
+      "applied_file_count": 0
+    },
+    "validation": {
+      "checks": [],
+      "checks_run": 0,
+      "checks_passed": 0,
+      "issue_count": 0,
+      "python_targets": []
+    },
+    "impact": {
+      "score": 0.5,
+      "band": "medium",
+      "execution_success_rate": 1.0,
+      "validation_pass_rate": 0.5,
+      "apply_activity": 0.0,
+      "error_reduction": 0.0,
+      "applied_file_count": 0,
+      "preview_applicable_results": 0,
+      "checks_run": 0,
+      "checks_passed": 0,
+      "audit_findings": 0,
+      "post_validation_issues": 0
+    }
+  },
+  "total_cycles": 2,
+  "updated_at": "2026-04-01T01:13:31.343184",
+  "average_feedback_score": 0.325
+}

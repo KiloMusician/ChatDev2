@@ -1,0 +1,212 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "description": "NuSyQ-Hub Spine Module Registry",
+    "generated_by": "spine_init_generator.py",
+    "last_updated": "2026-02-07T00:05:00Z",
+    "total_modules": 13
+  },
+  "modules": {
+    "orchestration": {
+      "description": "Multi-AI orchestration and task routing",
+      "module_path": "src.orchestration.unified_ai_orchestrator",
+      "class_name": "UnifiedAIOrchestrator",
+      "public_api": [
+        "UnifiedAIOrchestrator",
+        "AgentOrchestrationHub"
+      ],
+      "dependencies": [
+        "ai",
+        "integration",
+        "consciousness"
+      ],
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "consciousness": {
+      "description": "Consciousness-aware subsystems and quantum cognition",
+      "module_path": "src.consciousness.consciousness_bridge",
+      "class_name": "ConsciousnessBridge",
+      "public_api": [
+        "ConsciousnessBridge",
+        "QuantumProblemResolver"
+      ],
+      "dependencies": [
+        "memory",
+        "quantum"
+      ],
+      "submodules": {
+        "house_of_leaves": {
+          "description": "Recursive consciousness exploration system",
+          "module_path": "src.consciousness.house_of_leaves.maze_navigator",
+          "class_name": "MazeNavigator",
+          "public_api": [
+            "Door",
+            "MazeNavigator"
+          ]
+        },
+        "temple_of_knowledge": {
+          "description": "Multi-floor knowledge progression system",
+          "module_path": "src.consciousness.temple_of_knowledge.temple_manager",
+          "class_name": "TempleManager",
+          "public_api": [
+            "TempleManager",
+            "Floor1Foundation"
+          ]
+        }
+      },
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "ai": {
+      "description": "AI integration and model coordination",
+      "module_path": "src.ai.ai_coordinator",
+      "class_name": "AICoordinator",
+      "public_api": [
+        "AICoordinator",
+        "OllamaChatDevIntegrator"
+      ],
+      "dependencies": [
+        "integration"
+      ],
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "integration": {
+      "description": "External system integration bridges",
+      "module_path": "src.integration.chatdev_launcher",
+      "class_name": "ChatDevLauncher",
+      "public_api": [
+        "ChatDevLauncher",
+        "OllamaIntegration",
+        "N8NIntegration"
+      ],
+      "dependencies": [
+        "utils"
+      ],
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "memory": {
+      "description": "Memory management and persistence",
+      "module_path": "src.memory.memory_palace",
+      "class_name": "MemoryPalace",
+      "public_api": [
+        "MemoryPalace",
+        "ContextualMemory"
+      ],
+      "dependencies": [],
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "quantum": {
+      "description": "Quantum-inspired problem solving",
+      "module_path": "src.quantum.quantum_problem_resolver",
+      "class_name": "QuantumProblemResolver",
+      "public_api": [
+        "QuantumProblemResolver",
+        "QuantumWorkflowAutomator"
+      ],
+      "dependencies": [
+        "consciousness"
+      ],
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "utils": {
+      "description": "Utility functions and helpers",
+      "module_path": "src.utils",
+      "class_name": null,
+      "public_api": [
+        "enhanced_directory_context_generator",
+        "github_instructions_enhancer"
+      ],
+      "dependencies": [],
+      "spine_wired": false,
+      "lazy_load": false
+    },
+    "cli": {
+      "description": "Command-line interface and REPL",
+      "module_path": "src.cli",
+      "class_name": null,
+      "public_api": [
+        "NuSyQCLI"
+      ],
+      "dependencies": [
+        "orchestration",
+        "ai"
+      ],
+      "spine_wired": true,
+      "lazy_load": false
+    },
+    "config": {
+      "description": "Configuration management and validation",
+      "module_path": "src.config",
+      "class_name": null,
+      "public_api": [
+        "ConfigValidator",
+        "OrchestrationConfigLoader"
+      ],
+      "dependencies": [],
+      "spine_wired": true,
+      "lazy_load": false
+    },
+    "spine": {
+      "description": "Spine registry and module wiring system",
+      "module_path": "src.spine.registry",
+      "class_name": "SpineRegistry",
+      "public_api": [
+        "SpineRegistry",
+        "get_service",
+        "register_service",
+        "get_spine"
+      ],
+      "dependencies": [],
+      "spine_wired": true,
+      "lazy_load": false
+    },
+    "connector.registry": {
+      "description": "Connector registry for external service integrations",
+      "module_path": "src.connectors.registry",
+      "class_name": "ConnectorRegistry",
+      "public_api": [
+        "ConnectorRegistry",
+        "get_connector_registry"
+      ],
+      "dependencies": [
+        "spine"
+      ],
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "workflow.engine": {
+      "description": "Node-based workflow execution engine",
+      "module_path": "src.workflow.engine",
+      "class_name": "WorkflowEngine",
+      "public_api": [
+        "WorkflowEngine",
+        "Workflow",
+        "get_workflow_engine"
+      ],
+      "dependencies": [
+        "spine"
+      ],
+      "spine_wired": true,
+      "lazy_load": true
+    },
+    "automation.test_loop": {
+      "description": "Self-testing loop with iterative AI fix attempts",
+      "module_path": "src.automation.test_loop",
+      "class_name": "TestLoop",
+      "public_api": [
+        "TestLoop"
+      ],
+      "dependencies": [
+        "orchestration",
+        "spine"
+      ],
+      "spine_wired": true,
+      "lazy_load": true
+    }
+  }
+}

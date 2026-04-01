@@ -1,0 +1,687 @@
+ M .env.example
+ M .github/workflows/ci.yml
+ M .gitignore
+ M .tmp_audit/branch.txt
+ M .tmp_audit/status.txt
+ M .vscode/tasks.json
+ M AGENTS.md
+ M Dockerfile
+ M KILO_Core/__init__.py
+ M KILO_Core/secrets.py
+ M LOGGING/__init__.py
+ M README.md
+ M ai/__init__.py
+ M chatdev_workflow_integration_analysis.py
+ M complete_function_registry.py
+ M config/ZETA_PROGRESS_TRACKER.json
+ M config/feature_flags.json
+ M config/secrets.json
+ M config/settings.json
+ M copilot/__init__.py
+ M core/__init__.py
+ M docs/Reports/administrative_access_status_report.md
+ M docs/Reports/python_file_classification_report.md
+ M "docs/SRC/# KILO-FOOLISH Reality Check - Deep Error.txt"
+ M ollama_port_standardizer.py
+ M requirements.txt
+ M scripts/agent_git_helper.py
+ M scripts/codex_integration.py
+ M scripts/fix_ollama_hosts.py
+ M scripts/generate_api_docs.py
+ M scripts/llm_task_suggester.py
+ M scripts/performance_monitor.py
+ M scripts/project_navigator.py
+ M scripts/update_powershell_profile.ps1
+A  signing-check.txt
+ M src/LOGGING/infrastructure/modular_logging_system.py
+ M src/Rosetta_Quest_System/quest_engine.py
+ M src/Rosetta_Quest_System/quest_log.jsonl
+ M src/__init__.py
+ M src/ai/ChatDev-Party-System.py
+ M src/ai/__init__.py
+ M src/ai/ai_coordinator.py
+ M src/ai/ai_intermediary.py
+ M src/ai/chatdev_phase_orchestrator.py
+ M src/ai/ollama_chatdev_integrator.py
+ M src/ai/ollama_hub.py
+ M src/ai/ollama_integration.py
+ M src/ai/ollama_model_manager.py
+ M src/ai/symbolic_cognition.py
+ M src/analysis/__init__.py
+ M src/analysis/broken_paths_analyzer.py
+ M src/analysis/comprehensive_repository_analyzer.py
+ M src/analysis/health_verifier.py
+ M src/analysis/quantum_analyzer.py
+ M src/analysis/repository_analyzer.py
+ M src/analytics/model_selection_analytics.py
+ M src/automation/auto_theater_audit.py
+ M src/automation/autonomous_monitor.py
+ M src/automation/autonomous_orchestrator.py
+ M src/automation/chatdev_orchestration.py
+ M src/automation/ollama_validation_pipeline.py
+ M src/automation/unified_pu_queue.py
+ M src/blockchain/__init__.py
+ M src/blockchain/quantum_consciousness_blockchain.py
+ M src/cloud/__init__.py
+ M src/cloud/quantum_cloud_orchestrator.py
+ M src/consciousness/quantum_problem_resolver_unified.py
+ M src/consciousness/temple_of_knowledge/floor_1_foundation.py
+ M src/consciousness/temple_of_knowledge/temple_manager.py
+ M src/consciousness/the_oldest_house.py
+ M src/context/context_manager.py
+ M src/context/extensions/file_summaries.py
+ M src/copilot/__init__.py
+ M src/copilot/bridge_cli.py
+ M src/copilot/copilot_enhancement_bridge.py
+ M src/copilot/copilot_workspace_enhancer.py
+ M src/copilot/enhanced_bridge.py
+ M src/copilot/extensions/chatdev_extension.py
+ M src/copilot/megatag_processor.py
+ M src/copilot/omnitag_system.py
+ M src/copilot/symbolic_cognition.py
+ M src/copilot/task_manager.py
+ M src/copilot/vscode_integration.py
+ M src/copilot/workspace_enhancer.py
+ M src/core/AIContextGenerator.ps1
+ M src/core/__init__.py
+ M src/core/__init___.py
+ M src/core/config_manager.py
+ M src/core/context_server.py
+ M src/core/job_tracker.py
+ M src/core/kilo_foolish_master_launcher.py
+ M src/core/main.py
+ M src/core/performance_monitor.py
+ M src/core/performance_monitor_mastery.py
+ M src/core/quantum_problem_resolver_transcendent.py
+ M src/core/quantum_problem_resolver_unified.py
+ M src/diagnostics/DiagnoseSecrets.ps1
+ M src/diagnostics/broken_paths_analyzer.py
+ M src/diagnostics/chatdev_capabilities_test.py
+ M src/diagnostics/comprehensive_integration_validator.py
+ M src/diagnostics/comprehensive_quantum_analysis.py
+ M src/diagnostics/comprehensive_test_runner.py
+ M src/diagnostics/diagnose-api-keys.ps1
+ M src/diagnostics/direct_repository_audit.py
+ M src/diagnostics/health_verification.py
+ M src/diagnostics/kilo_infrastructure_validator.py
+ M src/diagnostics/quantum_system_complete_overview.py
+ M src/diagnostics/quest_based_auditor.py
+ M src/diagnostics/quick_integration_check.py
+ M src/diagnostics/quick_quest_audit.py
+ M src/diagnostics/quick_system_analyzer.py
+ M src/diagnostics/repository_syntax_analyzer.py
+ M src/diagnostics/system_health_assessor.py
+ M src/diagnostics/system_integration_checker.py
+ M src/diagnostics/systematic_src_audit.py
+ M src/enhancements/IntelligentCommentary.py
+ M src/enhancements/__init__.py
+ M src/enhancements/collaborative_intelligence.py
+ M src/enhancements/context_retention.py
+ M src/enhancements/search_amplification.py
+ M src/evolution/consolidated_system.py
+ M src/evolution/progress_tracker.py
+ M src/evolution/system_evolution_auditor.py
+ M src/game_development/zeta21_game_pipeline.py
+ M src/healing/ArchitectureWatcher.py
+ M src/healing/__init__.py
+ M src/healing/entropy_reverser.py
+ M src/healing/evolution_catalyst.py
+ M src/healing/fix-coordinator-errors.ps1
+ M src/healing/quantum_problem_resolver.py
+ M src/healing/quantum_problem_resolver_clean.py
+ M src/healing/repository_health_restorer.py
+ M src/healing/system_regenerator.py
+ M src/integration/Enhanced-Shell-Integration.ps1
+ M src/integration/Ollama_Integration_Hub.py
+ M src/integration/Update-ChatDev-to-use-Ollama.py
+ M src/integration/__init__.py
+ M src/integration/__main__.py
+ M src/integration/advanced_chatdev_copilot_integration.py
+ M src/integration/chatdev_environment_patcher.py
+ M src/integration/chatdev_integration.py
+ M src/integration/chatdev_launcher.py
+ M src/integration/chatdev_llm_adapter.py
+ M src/integration/chatdev_service.py
+ M src/integration/consciousness_bridge.py
+ M src/integration/copilot_chatdev_bridge.py
+ M src/integration/legacy_transformer.py
+ M src/integration/n8n_integration.py
+ M src/integration/oldest_house_interface.py
+ M src/integration/ollama_integration.py
+ M src/integration/quantum_bridge.py
+ M src/integration/quantum_kilo_integration_bridge.py
+ M src/integration/quantum_resolver_adapter.py
+ M src/integration/repository_harmonizer.py
+ M src/interface/ContextBrowser_DesktopApp.py
+ M src/interface/Enhanced-Interactive-Context-Browser-Fixed.py
+ M src/interface/Enhanced-Interactive-Context-Browser-v2.py
+ M src/interface/Enhanced-Interactive-Context-Browser.py
+ M src/interface/Enhanced-Wizard-Navigator.py
+ M src/interface/Interactive-Context-Browser.py
+ M src/interface/environment_diagnostic_enhanced.py
+ M src/interface/launch_context_browser_app.py
+ M src/main.py
+ M src/memory/__init__.py
+ M src/memory/contextual_memory.py
+ M src/memory/memory_palace.py
+ M src/memory/semantic_clusters.py
+ M src/ml/__init__.py
+ M src/ml/consciousness_enhanced_ml.py
+ M src/ml/neural_quantum_bridge.py
+ M src/ml/pattern_consciousness_analyzer.py
+ M src/ml/quantum_ml_processor.py
+ M src/navigation/repository_navigator.py
+ M src/navigation/wizard_navigator.py
+ M src/navigation/wizard_navigator/__init__.py
+ M src/navigation/wizard_navigator/graph.py
+ M src/navigation/wizard_navigator/room.py
+ M src/navigation/wizard_navigator/wizard_navigator.py
+ M src/orchestration/__init__.py
+ M src/orchestration/chamber_promotion_manager.py
+ M src/orchestration/chatdev_testing_chamber.py
+ M src/orchestration/colonist_scheduler.py
+ M src/orchestration/comprehensive_workflow_orchestrator.py
+ M src/orchestration/ingest_maze_summary.py
+ M src/orchestration/kilo_ai_orchestration_master.py
+ M src/orchestration/multi_ai_orchestrator.py
+ M src/orchestration/quantum_workflow_automation.py
+ M src/orchestration/quantum_workflows.py
+ M src/orchestration/snapshot_maintenance_system.py
+ M src/orchestration/system_testing_orchestrator.py
+ M src/protocols/healing_protocols.py
+ M src/quantum/__init__.py
+ M src/quantum/__main__.py
+ M src/quantum/consciousness_substrate.py
+ M src/quantum/demo_interactive.py
+ M src/quantum/import_numpy_as_np.py
+ M src/quantum/multidimensional_processor.py
+ M src/quantum/quantum_cognition_engine.py
+ M src/quantum/quantum_demo_interactive.py
+ M src/quantum/quantum_music_analysis.py
+ M src/quantum/quantum_overview.py
+ M src/quantum/quantum_problem_resolver.py
+ M src/quantum/quantum_problem_resolver_test.py
+ M src/quantum/quantum_quick_start_guide.py
+ M src/quantum/quick_start_guide.py
+ M src/real_time_context_monitor.py
+ M src/scripts/ai_intermediary_checkin.py
+ M src/scripts/chatdev_integration_implementation.py
+ M src/scripts/chatdev_integration_success_summary.py
+ M src/scripts/chatdev_workflow_integration_analysis_clean.py
+ M src/scripts/copilot_agent_launcher.py
+ M src/scripts/empirical_llm_test.py
+ M src/scripts/enhanced_agent_launcher.py
+ M src/scripts/enhanced_copilot_launcher.py
+ M src/scripts/generate_directory_notebooks.py
+ M src/scripts/llm_validation_test.py
+ M src/scripts/next_steps_priority_assessment.py
+ M src/scripts/party_system_test_launcher.py
+ M src/scripts/quest_analyzer.py
+ M src/scripts/safe_consolidation.py
+ M src/scripts/simple_browser_launcher.py
+ M src/security/SecretsManager.ps1
+ M src/security/secrets.template.ps1
+ M src/security/secure_api_manager.py
+ M src/setup/InstallVSCodeExtensions.ps1
+ M src/setup/IntelligentCommentary.ps1
+ M src/setup/enhanced_session_startup.ps1
+ M src/setup/secrets.py
+ M src/setup/setup-architecture-intelligence.ps1
+ M src/setup/setup-coordinator.ps1
+ M src/setup/setup-intelligent-commentary.ps1
+ M src/setup/setup-path-intelligence.ps1
+ M src/setup/setup.ps1
+ M src/spine/__init__.py
+ M src/spine/civilization_orchestrator.py
+ M src/spine/culture_consciousness.py
+ M src/spine/kardeshev_optimizer.py
+ M src/spine/reality_weaver.py
+ M src/spine/transcendent_spine_core.py
+ M src/system/PathIntelligence.ps1
+ M src/system/RepositoryCoordinator.ps1
+ M src/system/RepositoryCoordinator.py
+ M src/system/capability_inventory.py
+ M src/system/dictionary/__init__.py
+ M src/system/dictionary/consciousness_bridge.py
+ M src/system/dictionary/repository_dictionary.py
+ M src/system/dictionary/system_organizer.py
+ M src/system/dictionary/unified_mapper.py
+ M src/system/feature_flags.py
+ M src/system/process_manager.py
+ M src/system/rpg_inventory.py
+ M src/system/system_snapshot_generator.py
+ M src/system/task_queue.py
+ M src/system/terminal_manager.py
+ M src/system/terminal_manager_integration.py
+ M src/tagging/advanced_tag_manager.py
+ M src/tagging/bridge_validators.py
+ M src/tagging/import_asyncio.py
+ M src/tagging/megatag_processor.py
+ M src/tagging/omnitag_system.py
+ M src/tagging/tag_processors.py
+ M src/tagging/tagging_framework.py
+ M src/tools/ChatDev-Party-System.py
+ M src/tools/README.md
+ M src/tools/consolidation_planner.py
+ M src/tools/extract_commands.py
+ M src/tools/health_restorer.py
+ M src/tools/kilo_dev_launcher.py
+ M src/tools/kilo_discovery_system.py
+ M src/tools/launch-adventure.py
+ M src/tools/log_indexer.py
+ M src/tools/maze_solver.py
+ M src/tools/performance_optimizer.py
+ M src/tools/repo_scan.py
+ M src/tools/run_and_capture.py
+ M src/tools/safe_consolidator.py
+ M src/tools/structure_organizer.py
+ M src/tools/wizard_navigator.py
+ M src/ui/__init__.py
+ M src/unified_documentation_engine.py
+ M src/utils/#_CLI_Interface_for_Dependency_Resolver.py
+ M src/utils/Repository-Context-Compendium-System.py
+ M src/utils/Repository-Pandas-Library.py
+ M src/utils/base44.py
+ M src/utils/classify_python_files.py
+ M src/utils/config_dataclasses.py
+ M src/utils/constants.py
+ M src/utils/contextual_output.py
+ M src/utils/directory_context_generator.py
+ M src/utils/directory_context_generator_simplified.py
+ M src/utils/enhanced_directory_context_generator.py
+ M src/utils/extract_commands_summary.py
+ M src/utils/file_organization_auditor.py
+ M src/utils/generate_structure_tree.py
+ M src/utils/generate_structure_tree2BAK.py
+ M src/utils/generate_structure_treeBAK.py
+ M src/utils/github_instructions_enhancer.py
+ M src/utils/github_integration_auditor.py
+ M src/utils/github_validation_suite.py
+ M src/utils/graceful_shutdown.py
+ M src/utils/import_health_checker.py
+ M src/utils/memory_serializers.py
+ M src/utils/quick_github_audit.py
+ M src/utils/quick_import_fix.py
+ M src/utils/repository_analyzer.py
+ M src/utils/settings.py
+ M src/utils/setup_chatdev_integration.py
+ M src/utils/setup_enhanced_navigator.py
+ M src/utils/stubs/repository_compendium_stub.py
+ M src/utils/validators.py
+ D test_browser_fix.py
+ M tests/__init__.py
+ M tests/benchmarks/test_latency.py
+ M tests/consciousness_validation.py
+ M tests/integration_tests.py
+ M tests/llm_testing/simple_test.py
+ M tests/llm_testing/test_chatdev_browser.py
+ M tests/llm_testing/ultimate_gas_test.py
+ M tests/quantum_system_test.py
+ M tests/spine_tests.py
+ M tests/system_testing/test_enhanced_placeholders.py
+ M tests/test_ai_coordinator_generated.py
+ M tests/test_anti_recursion.py
+ M tests/test_browser_fix.py
+ M tests/test_chatdev.py
+ M tests/test_chatdev_llm_adapter_import.py
+ M tests/test_colonist_scheduler.py
+ M tests/test_conversation_manager.py
+ M tests/test_copilot_bridge_cli.py
+ M tests/test_get_target_files.py
+ M tests/test_github_validation.py
+ M tests/test_import.py
+ M tests/test_maze_scanner_run.py
+ M tests/test_minimal.py
+ M tests/test_n8n_base44.py
+ M tests/test_quicksort.py
+ M tests/test_repo_scan.py
+ M tests/test_repository_compendium.py
+ M tests/test_requests.py
+ M tests/test_temple_and_monitor.py
+ M tests/test_terminal_manager_timeout.py
+ M tests/test_zeta03_model_selection.py
+ M tests/test_zeta04_conversation_management.py
+ M tests/test_zeta21_game_pipeline.py
+?? .claude/
+?? .github/chatmodes/
+?? .github/instructions/Agent-Awareness-Protocol.instructions.md
+?? .github/workflows/docker-integration-extended.yml
+?? .github/workflows/docker-integration.yml
+?? .github/workflows/docker-validate.yml
+?? .github/workflows/quick-smoke.yml
+?? .hub/
+?? .prettierrc
+?? .vscode/collect_powershell_extension_logs.ps1
+?? .vscode/install_pwsh.ps1
+?? .vscode/mediator/
+?? .vscode/peacock.json
+?? .vscode/run_start_editor_services_launcher.ps1
+?? .vscode/scripts/
+?? .vscode/start_editor_services_manual.ps1
+?? .vscode/start_editor_services_session.json
+?? .vscode/tail_starteditor_and_procs.ps1
+?? .vscode/trace_parent.ps1
+?? .vscode/trace_parent_32988.ps1
+?? CHATDEV_DEVELOPMENT_TASK.py
+?? CONFIGURATION_FIXES_APPLIED.md
+?? CONTINUE_DEV_INVESTIGATION_COMPLETE.md
+?? CULTURE_SHIP_PU_GENERATION_SUCCESS.md
+?? DEBUGGING_TECHNIQUES_LEARNED.md
+?? Dockerfile.dev
+?? EVOLUTION_INTEGRATION_SUCCESS.md
+?? EXTENSION_CLEANUP_GUIDE.txt
+?? FRONTEND_DEPLOYMENT.md
+?? IMPORT_FIX_COMPLETE.md
+?? LOGGING/modular_logging_system.py
+?? MULTI_REPOSITORY_CAPABILITIES_AUDIT.md
+?? Makefile
+?? QUALITY_RESOLUTION_SUMMARY.md
+?? QUICK_START.md
+?? SECURITY_ALERT.md
+?? SESSION_HANDOFF_2025-10-07.md
+?? SESSION_SUCCESS_SUMMARY.md
+?? SESSION_SUMMARY.md
+?? SESSION_SUMMARY_2025_10_12.md
+?? SIMULATEDVERSE_ALL_AGENTS_VALIDATED.md
+?? SIMULATEDVERSE_ASYNC_INTEGRATION_SUCCESS.md
+?? SIMULATEDVERSE_INTEGRATION_COMPLETE_SUCCESS.md
+?? SIMULATEDVERSE_INTEGRATION_PROGRESS.md
+?? SIMULATEDVERSE_INTEGRATION_ROADMAP.md
+?? SIMULATEDVERSE_INVESTIGATION_SUMMARY.md
+?? STARTUP_QUICK_REFERENCE.md
+?? Transcendent_Spine/kilo-foolish-transcendent-spine/src/
+?? UNBLOCK_SUCCESS_SUMMARY.md
+?? _vibe/
+?? ai_coordinator.py
+?? api-tests/
+?? architecture_map.json
+?? bootstrap_chatdev_pipeline.py
+?? capability_inventory_output.txt
+?? chatdev_demo_results.json
+?? chatdev_task_demo.py
+?? clean_continue_cache.py
+?? cleanup_evolution_duplicates.py
+?? config/chatdev_ollama_models.json
+?? config/secrets.example.json
+?? conftest.py
+?? copilot/bridge_cli.py
+?? copilot_agent_launcher.py
+?? cspell.json
+?? data/autonomous_monitor_metrics.json
+?? data/autonomous_monitor_output.txt
+?? data/chatdev_orchestration/
+?? data/chatdev_tests/
+?? data/cleanup_backup/
+?? data/consciousness_analysis_report.json
+?? data/ecosystem_startup_status.json
+?? data/ecosystem_tour_report.json
+?? data/evolution/
+?? data/fix_files_audit.json
+?? data/ollama_validations/
+?? data/orchestration_state_after_task.json
+?? data/sector_gap_report_20251010_141830.json
+?? data/sector_gap_report_20251010_142328.json
+?? data/sector_gap_report_20251025_090757.json
+?? data/sector_gap_report_20251025_091836.json
+?? data/sector_gap_report_20251025_092239.json
+?? data/sector_gap_report_20251025_092558.json
+?? data/sector_gap_report_20251025_093051.json
+?? data/sector_gap_report_20251025_093144.json
+?? data/sector_gap_report_20251025_093655.json
+?? data/sector_gap_report_20251025_193015.json
+?? data/sector_gap_report_20251025_193445.json
+?? data/sector_gap_report_20251025_204026.json
+?? data/sector_gap_report_20251025_204226.json
+?? data/sector_gap_report_20251025_204450.json
+?? data/sector_gap_report_20251025_211546.json
+?? data/sector_gap_report_20251025_223602.json
+?? data/sector_gap_report_20251025_223721.json
+?? data/sector_gap_report_20251025_223825.json
+?? data/sector_gap_report_20251025_230842.json
+?? data/sector_gap_report_20251025_231720.json
+?? data/tags/
+?? data/temple_of_knowledge/
+?? data/theater_audit.json
+?? data/theater_audits/
+?? demo_ai_documentation_coordination.py
+?? demo_integrated_docs.py
+?? deploy/
+?? dev-requirements.txt
+?? docs/AGENT_AWARENESS_REPORT_20251015.md
+?? docs/AUTONOMOUS_MODERNIZATION_EXECUTION_REPORT.md
+?? docs/Agent-Sessions/AGENT_CAPABILITIES_AND_TERMINAL_MANAGEMENT.md
+?? docs/Agent-Sessions/CAPABILITIES_DEMO_20251013_032154.json
+?? docs/Agent-Sessions/CAPABILITIES_DEMO_20251013_034017.json
+?? docs/Agent-Sessions/CAPABILITIES_DEMO_20251013_034050.json
+?? docs/Agent-Sessions/COMPREHENSIVE_SYSTEM_REVIEW_2025_10_13.md
+?? docs/Agent-Sessions/PHASE_1_CRITICAL_FIXES_COMPLETE.md
+?? docs/Agent-Sessions/SELF_HEALING_ARCHITECTURE_COMPREHENSIVE_REVIEW.md
+?? docs/Agent-Sessions/SESSION_20251013_CAPABILITIES_DEMONSTRATION.md
+?? docs/Agent-Sessions/SESSION_20251015_AWARENESS_INITIALIZATION.md
+?? docs/Agent-Sessions/SESSION_20251015_MODERNIZATION_PLANNING.md
+?? docs/Agent-Sessions/SESSION_20251015_PHASE1_COMPLETE.md
+?? docs/Agent-Sessions/SESSION_20251015_PHASE1_EXECUTION.md
+?? docs/Agent-Sessions/SESSION_20251015_PHASE2_AUTONOMOUS.md
+?? docs/Agent-Sessions/SESSION_20251021_000000_systematic_fixes.md
+?? docs/Agent-Sessions/SESSION_20251022_Deep_Fixes_Consciousness.md
+?? docs/Agent-Sessions/SESSION_20251022_Performance_Optimizations.md
+?? docs/Agent-Sessions/SESSION_2025_10_13_ABANDONED_TASK_RECOVERY.md
+?? docs/Agent-Sessions/SESSION_2025_10_15_QUEST_SYSTEM_ACTIVATION.md
+?? docs/Agent-Sessions/SNS_CORE_EVALUATION_FOR_NUSYQ.md
+?? docs/Agent-Sessions/SNS_CORE_INTEGRATION_COMPLETE.md
+?? docs/Agent-Sessions/SNS_CORE_PHASE_2_COMPLETE.md
+?? docs/Agent-Sessions/SNS_CORE_TASK_3_COMPLETE.md
+?? docs/Agent-Sessions/TERMINAL_PROCESS_ANALYSIS.md
+?? docs/Agent-Sessions/VSC_EXTENSIONS_IMPLEMENTATION_SUMMARY.md
+?? docs/Agent-Sessions/VSC_EXTENSIONS_UTILIZATION_PLAN.md
+?? docs/CI_SETUP.md
+?? docs/CODING_FUNDAMENTALS_AUDIT.md
+?? docs/CODING_FUNDAMENTALS_SUMMARY.md
+?? docs/COMPLETE_REPOSITORY_INVENTORY.md
+?? docs/COMPREHENSIVE_MULTI_REPO_INVESTIGATION_REPORT.md
+?? docs/COMPREHENSIVE_OPTIMIZATION_SUMMARY.md
+?? docs/COMPREHENSIVE_PROGRESS_REPORT_20251015.md
+?? docs/CONFIGURATION_TESTING_SESSION_SUMMARY.md
+?? docs/COPILOT_PRIMER.md
+?? docs/COVERAGE_REMEDIATION_PLAN.md
+?? docs/Checklists/GAME_SYSTEMS_QUEST_CHECKLIST.md
+?? docs/Cross-Repository-Updates/
+?? docs/DEVELOPMENT.md
+?? docs/DEVELOPMENT_DOCKER_K8S.md
+?? docs/DEV_BOOTSTRAP.md
+?? docs/DEV_NOTES_SHIMS.md
+?? docs/DEV_QUICK_RUN.md
+?? docs/DIAGNOSTIC_SYSTEMS_ANALYSIS.md
+?? docs/DIAGNOSTIC_SYSTEMS_STATUS_REPORT.md
+?? docs/DORMANT_SYSTEMS_COMPREHENSIVE_AUDIT.md
+?? docs/ECOSYSTEM_ORCHESTRATION_ACTIVATED.md
+?? docs/ECOSYSTEM_STARTUP_AUTOMATION.md
+?? docs/ECOSYSTEM_TOUR_20251022.md
+?? docs/EXISTING_INFRASTRUCTURE_AUDIT.md
+?? docs/GAME_PIPELINE_TEST_DEBUG_REPORT.md
+?? docs/GAME_SYSTEMS_COMPREHENSIVE_ANALYSIS.md
+?? docs/GAME_SYSTEMS_QUICK_REFERENCE.md
+?? docs/GATED_TOOL_CATEGORIES_CATALOG.md
+?? docs/HEALTH_DASHBOARD_GUIDE.md
+?? docs/HONEST_SELF_ASSESSMENT.md
+?? docs/IMPORT_FIX_RESULTS.md
+?? docs/IMPORT_FIX_SUCCESS_REPORT.md
+?? docs/INTERRUPT_PROTECTION_IMPLEMENTATION.md
+?? docs/Integration/
+?? docs/JOBS_AND_WORKFLOWS.md
+?? docs/MAXIMUM_DEPTH_ACTIVATION_REPORT.md
+?? docs/MISSION_ACCOMPLISHED_20251015.md
+?? docs/ML_NEURAL_REDSTONE_STATUS_REPORT.md
+?? docs/MODERNIZATION_EXECUTIVE_SUMMARY.md
+?? docs/MODERNIZATION_FINAL_REPORT.md
+?? docs/MODERNIZATION_IMPACT_REPORT.md
+?? docs/MODERNIZATION_QUICK_REFERENCE.md
+?? docs/MODERNIZATION_QUICK_START.md
+?? docs/MULTI_REPO_MODERNIZATION_ROADMAP.md
+?? docs/NUSYQ_MODULE_MAP.md
+?? docs/PHASE_1_COMPLETION_SUMMARY.md
+?? docs/REMEDIATION_SUCCESS_SUMMARY.md
+?? docs/SELF_DIAGNOSTIC_SYSTEMS_INVENTORY.md
+?? docs/SESSION_ACTIONS_20251020.md
+?? docs/SNS-CORE/
+?? docs/TERMINAL_SPAZZ_INVESTIGATION_REPORT.md
+?? docs/TESTING_CHAMBER_AND_SECTOR_CONFIGURATION_ANALYSIS.md
+?? docs/TIMEOUT_POLICY.md
+?? docs/TIMEOUT_REPLACEMENT_PROJECT_COMPLETE.md
+?? docs/TOOL_CAPABILITY_ANALYSIS_SUMMARY.md
+?? docs/UTF8_ENCODING_ERROR_FIX.md
+?? docs/Vault/XiNuSyQ_Mesh.md
+?? docs/Vault/lattices_index.json
+?? docs/Vault/vibe_lattice_readme.md
+?? docs/Vault/xi_nusyq_pipeline.md
+?? docs/comprehensive_modernization_audit.json
+?? ecosystem_health_checker.py
+?? ecosystem_status.json
+?? examples/
+?? final_health_check.py
+?? health-check.ps1
+?? investigate_continue_issues.py
+?? lattices/
+?? launch_enhanced_ai_system.py
+?? launch_unified_docs.py
+?? node_modules/
+?? notebooks/Tool_Capability_Analysis.ipynb
+?? nul
+?? optimize_continue_config.py
+?? package-lock.json
+?? package.json
+?? real_culture_ship_results.json
+?? requirements-dev.txt
+?? run_full_ci.py
+?? run_tests.py
+?? scan_syntax_errors.py
+?? scripts/Start-SimulatedVerse.ps1
+?? scripts/_import_smoke_test.py
+?? scripts/add_type_hints.py
+?? scripts/analyze_consciousness_patterns.py
+?? scripts/analyze_vscode_tools.py
+?? scripts/apply_high_priority_changes.py
+?? scripts/audit_fix_files.py
+?? scripts/autonomous_modernization_execution.py
+?? scripts/check_docker_k8s.ps1
+?? scripts/check_env.py
+?? scripts/check_file_encoding.py
+?? scripts/check_imports.py
+?? scripts/cleanup_docker.ps1
+?? scripts/comprehensive_modernization_audit.py
+?? scripts/compute_vibe_artifact_info.py
+?? scripts/create_game_system_quests.py
+?? scripts/crystallize_wisdom.py
+?? scripts/db_migrate.sh
+?? scripts/demonstrate_capabilities.py
+?? scripts/dev.ps1
+?? scripts/dev.sh
+?? scripts/dev_prune.ps1
+?? scripts/dev_stop.ps1
+?? scripts/dev_up.ps1
+?? scripts/ecosystem_deep_dive_tour.py
+?? scripts/execute_remaining_pus.py
+?? scripts/extract_maze_summary.py
+?? scripts/fix_async_patterns.py
+?? scripts/fix_backticks.py
+?? scripts/fix_coding_fundamentals.py
+?? scripts/fix_defensive_imports.py
+?? scripts/fix_diagnostic_systems.py
+?? scripts/fix_file_encodings.py
+?? scripts/fix_file_encodings_nusyq.py
+?? scripts/fix_logging_calls.py
+?? scripts/fix_simulatedverse_fields.py
+?? scripts/fix_simulatedverse_schemas.py
+?? scripts/friendly_test_runner.py
+?? scripts/generate_sns_tests.py
+?? scripts/git_cleanup_and_commit.ps1
+?? scripts/import_smoke.py
+?? scripts/launch_health_dashboard.py
+?? scripts/mediator_e2e.ps1
+?? scripts/orchestrate_coding_fixes.py
+?? scripts/play_consciousness_game.py
+?? scripts/powershell_mediator.js
+?? scripts/pwsh_helpers/
+?? scripts/redact_secrets.py
+?? scripts/register_vibe_artifact.py
+?? scripts/run_import_smoke.py
+?? scripts/run_post_optimization_qa.py
+?? scripts/run_tests_quick.py
+?? scripts/start_multi_ai_orchestrator.py
+?? scripts/start_powershell_mediator.ps1
+?? scripts/start_simulatedverse_minimal.py
+?? scripts/submit_orchestrator_test_task.py
+?? scripts/test_all_systems.py
+?? scripts/test_chatdev_consensus.py
+?? scripts/test_copilot.py
+?? scripts/test_culture_ship_integration.py
+?? scripts/test_oldest_house_fix.py
+?? scripts/test_ollama_sns.py
+?? scripts/theater_audit.py
+?? scripts/validate_embeddings.py
+?? scripts/validate_environment.py
+?? scripts/validate_vibe_embeddings.py
+?? scripts/venv-repair.ps1
+?? src/LOGGING/__init__.py
+?? src/LOGGING/modular_logging_system.py
+?? src/Rosetta_Quest_System/questlines.json
+?? src/Rosetta_Quest_System/quests.json
+?? src/ai/sns_core_integration.py
+?? src/consciousness/house_of_leaves/
+?? src/contextual_awareness_demo.py
+?? src/copilot/extension.py
+?? src/copilot/extension/
+?? src/core/ArchitectureScanner.py
+?? src/core/megatag_processor.py
+?? src/core/symbolic_cognition.py
+?? src/culture_ship_real_action.py
+?? src/diagnostics/duplicate_scanner.py
+?? src/diagnostics/ecosystem_startup_sentinel.py
+?? src/diagnostics/smoke_test_runner.py
+?? src/ecosystem_activation_report.py
+?? src/enhanced_contextual_integration.py
+?? src/integration/simulatedverse_async_bridge.py
+?? src/integration/simulatedverse_bridge.py
+?? src/integration/test_all_agents.py
+?? src/interface/__init__.py
+?? src/orchestration/sns_orchestrator_adapter.py
+?? src/quantum_task_orchestrator.py
+?? src/scripts/chatdev_workflow_integration_analysis.py.broken
+?? src/setup/env_loader.py
+?? src/tagging/validator.py
+?? src/tools/__init__.py
+?? src/tools/agent_context_manager.py
+?? src/tools/embeddings_exporter.py
+?? src/tools/meshctl.py
+?? src/tools/register_lattice.py
+?? src/tools/scan_guard.py
+?? src/tools/vibe_indexer.py
+?? src/utils/config_validator.py
+?? src/utils/error_handling.py
+?? src/utils/safe_file_reader.py
+?? src/utils/timeout_config.py
+?? src/vscode_mediator_extension/
+?? src/xi_nusyq/
+?? start-all-servers.ps1
+?? stop-all-servers.ps1
+?? system_health_assessment_20251010_144241.json
+?? system_health_assessment_20251010_145028.json
+?? system_health_assessment_20251013_020642.json
+?? system_health_assessment_20251015_005709.json
+?? system_health_assessment_20251017_031106.json
+?? system_health_assessment_20251017_032253.json
+?? temp_sns_core/
+?? test_continue_integration.py
+?? test_multi_ai_orchestrator.py
+?? test_ollama_quick.py
+?? test_ollama_request.json
+?? tests/conftest.py
+?? tests/import_smoke/
+?? tests/pytest_temp.ini
+?? tests/test_agent_context_manager.py
+?? tests/test_kilo_discovery.py
+?? tests/test_orchestrator_sns.py
+?? tests/test_quantum_import.py
+?? tests/test_scan_and_maze.py
+?? tests/test_xi_pipeline.py
+?? web/modular-window-server/

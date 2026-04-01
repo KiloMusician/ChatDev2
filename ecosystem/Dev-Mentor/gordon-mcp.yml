@@ -1,0 +1,128 @@
+# gordon-mcp.yml — MCP Server configuration for the Terminal Depths Lattice
+# Drop this file in the project root and Gordon will load these servers.
+# Each service exposes tool capabilities to Gordon via the Model Context Protocol.
+#
+# Usage:
+#   docker-compose -f gordon-mcp.yml up -d   (standalone MCP servers)
+#   Or reference from Gordon's Docker Desktop Toolbox configuration.
+#
+# NETWORK NOTE: All services attach to kilocore-net (the live running network).
+#   Container names on that network: kilocore-dev-mentor (:7337),
+#   kilocore-redis (:6379), kilocore-ollama (:11434), kilocore-nusyq-hub (:8000)
+#
+# Documentation: https://docs.docker.com/gordon/mcp/
+
+services:
+
+  # ── Standard MCP servers from Docker Hub mcp/ namespace ──────────────────
+
+  time:
+    image: mcp/time
+    restart: unless-stopped
+    labels:
+      gordon.mcp.description: "Timezone-aware temporal capabilities — scheduling, time-based event triggers"
+
+  fetch:
+    image: mcp/fetch
+    restart: unless-stopped
+    labels:
+      gordon.mcp.description: "Web content retrieval — fetch docs, wikis, GitHub raw, external APIs"
+
+  filesystem:
+    image: mcp/filesystem
+    restart: unless-stopped
+    command:
+      - /rootfs
+    volumes:
+      - .:/rootfs                                       # Dev-Mentor (rw)
+      - C:\CONCEPT:/rootfs/concept:ro                   # katana-keeper
+      - C:\prime_anchor\NuSyQ-Hub:/rootfs/nusyq-hub:ro  # NuSyQ-Hub brain
+      - C:\prime_anchor\SimulatedVerse:/rootfs/simulatedverse:ro  # SimulatedVerse
+      - C:\prime_anchor\NuSyQ:/rootfs/nusyq:ro          # NuSyQ root
+    labels:
+      gordon.mcp.description: "Full ecosystem filesystem — Dev-Mentor (rw), CONCEPT, NuSyQ-Hub, SimulatedVerse, NuSyQ (all ro)"
+
+  git:
+    image: mcp/git
+    restart: unless-stopped
+    volumes:
+      - .:/repo
+    labels:
+      gordon.mcp.description: "Git operations — commit, branch, diff, log for Dev-Mentor repo"
+
+  github:
+    image: mcp/github
+    restart: unless-stopped
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    labels:
+      gordon.mcp.description: "GitHub — issues, PRs, releases for KiloMusician/* repos"
+
+  sqlite:
+    image: mcp/sqlite
+    restart: unless-stopped
+    command:
+      - --db-path
+      - /data/gordon_memory.db
+    volumes:
+      - ./state/gordon_memory.db:/data/gordon_memory.db
+    labels:
+      gordon.mcp.description: "Gordon memory DB — memories, strategies, npc_interactions; full experience history"
+
+  # ── Custom MCP servers for Terminal Depths ecosystem ─────────────────────
+
+  terminaldepths:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    restart: unless-stopped
+    command: ["python", "mcp_server.py", "--http", "9100"]
+    environment:
+      - TD_URL=${TERMINAL_DEPTHS_URL:-http://kilocore-dev-mentor:7337}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - PORT=9100
+    ports:
+      - "9100:9100"
+    labels:
+      gordon.mcp.description: "Terminal Depths game commands — execute commands, read state, talk to agents"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9100/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  lattice:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+      args:
+        MCP_MODULE: lattice_mcp
+    restart: unless-stopped
+    environment:
+      - TERMINAL_DEPTHS_URL=${TERMINAL_DEPTHS_URL:-http://kilocore-dev-mentor:7337}
+      - REDIS_URL=${REDIS_URL:-redis://kilocore-redis:6379}
+      - PORT=9101
+    volumes:
+      - ./state:/state
+    ports:
+      - "9101:9101"
+    labels:
+      gordon.mcp.description: "Lattice knowledge graph — query, search, and seed the vector knowledge store"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9101/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  redis-mcp:
+    image: mcp/redis
+    restart: unless-stopped
+    environment:
+      - REDIS_URL=${REDIS_URL:-redis://kilocore-redis:6379}
+    labels:
+      gordon.mcp.description: "Redis pub/sub — publish to Lattice channels, subscribe to agent events on kilocore-net"
+
+networks:
+  default:
+    name: kilocore-net
+    external: true

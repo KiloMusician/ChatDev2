@@ -1,0 +1,23 @@
+# thresholds & weights — tweak without code changes
+idle:
+  check_interval_ms: 8000
+  max_stale_ui_ms: 90000       # /system-status.json timestamp skew
+  max_no_pu_complete_ms: 60000 # no PU finished in a minute => nudge
+  max_llm_error_rate: 0.25     # rolling window, trigger fallback/retry strategy
+budgets:
+  llm:
+    max_input_tokens: 4096
+    max_output_tokens: 1024
+    retry_backoff_ms: [1000, 3000, 7000]
+    chunk_bytes: 16000         # if token overflow suspected
+ops:
+  max_parallel_actions: 3
+  allow_cascade_events: true
+priorities:
+  - fix_errors
+  - unblock_ui
+  - ollama_health
+  - clear_dup_sprawl
+  - progress_gameplay
+  - refactor_safely
+  - expand_features

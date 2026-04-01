@@ -1,0 +1,314 @@
+{
+  "timestamp": "2025-08-02T03:55:27.839091",
+  "components": {
+    "python": {
+      "name": "Python Environment",
+      "status": "ComponentStatus.ONLINE",
+      "version": "Python 3.13.5",
+      "last_check": "2025-08-02 03:55:19.818709",
+      "health_score": 100.0,
+      "dependencies": [],
+      "capabilities": [
+        "code_execution",
+        "package_management"
+      ],
+      "errors": [],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": true
+    },
+    "pip": {
+      "name": "Pip Package Manager",
+      "status": "ComponentStatus.ONLINE",
+      "version": "25.1.1",
+      "last_check": "2025-08-02 03:55:20.647053",
+      "health_score": 100.0,
+      "dependencies": [
+        "python"
+      ],
+      "capabilities": [
+        "package_install",
+        "dependency_management"
+      ],
+      "errors": [],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": true
+    },
+    "vscode": {
+      "name": "Visual Studio Code",
+      "status": "ComponentStatus.ERROR",
+      "version": "unknown",
+      "last_check": "2025-08-02 03:55:03.957087",
+      "health_score": 0.0,
+      "dependencies": [],
+      "capabilities": [
+        "code_editing",
+        "debugging",
+        "git_integration"
+      ],
+      "errors": [
+        "[WinError 2] The system cannot find the file specified"
+      ],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": false
+    },
+    "ollama": {
+      "name": "Ollama Local AI",
+      "status": "ComponentStatus.ONLINE",
+      "version": "unknown",
+      "last_check": "2025-08-02 03:55:22.735305",
+      "health_score": 100.0,
+      "dependencies": [
+        "python"
+      ],
+      "capabilities": [
+        "local_ai",
+        "code_generation",
+        "reasoning"
+      ],
+      "errors": [],
+      "metrics": {
+        "available_models": 12
+      },
+      "uptime": 0.0,
+      "auto_heal": true
+    },
+    "openai": {
+      "name": "OpenAI Integration",
+      "status": "ComponentStatus.OFFLINE",
+      "version": "unknown",
+      "last_check": "2025-08-02 03:55:22.735560",
+      "health_score": 0.0,
+      "dependencies": [
+        "python"
+      ],
+      "capabilities": [
+        "cloud_ai",
+        "advanced_reasoning",
+        "large_context"
+      ],
+      "errors": [],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": true
+    },
+    "git": {
+      "name": "Git Version Control",
+      "status": "ComponentStatus.ONLINE",
+      "version": "2.50.0.windows.2",
+      "last_check": "2025-08-02 03:55:22.785395",
+      "health_score": 100.0,
+      "dependencies": [],
+      "capabilities": [
+        "version_control",
+        "collaboration",
+        "backup"
+      ],
+      "errors": [],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": false
+    },
+    "diagnostics": {
+      "name": "Error Detection System",
+      "status": "ComponentStatus.OFFLINE",
+      "version": "unknown",
+      "last_check": "2025-08-02 03:55:22.785410",
+      "health_score": 0.0,
+      "dependencies": [
+        "python"
+      ],
+      "capabilities": [
+        "error_detection",
+        "auto_healing",
+        "monitoring"
+      ],
+      "errors": [],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": true
+    },
+    "coordinator": {
+      "name": "AI Coordination Layer",
+      "status": "ComponentStatus.OFFLINE",
+      "version": "unknown",
+      "last_check": "2025-08-02 03:55:22.785438",
+      "health_score": 0.0,
+      "dependencies": [
+        "python",
+        "ollama",
+        "openai"
+      ],
+      "capabilities": [
+        "ai_routing",
+        "load_balancing",
+        "fallback_handling"
+      ],
+      "errors": [],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": true
+    },
+    "secrets": {
+      "name": "Secrets Management",
+      "status": "ComponentStatus.OFFLINE",
+      "version": "unknown",
+      "last_check": "2025-08-02 03:55:22.785445",
+      "health_score": 0.0,
+      "dependencies": [
+        "python"
+      ],
+      "capabilities": [
+        "api_key_management",
+        "secure_storage",
+        "environment_config"
+      ],
+      "errors": [],
+      "metrics": {},
+      "uptime": 0.0,
+      "auto_heal": false
+    }
+  },
+  "skills": {
+    "code_generation": {
+      "name": "Code Generation",
+      "level": "SkillLevel.NOVICE",
+      "experience": 0,
+      "max_experience": 1000,
+      "proficiency": 0.0,
+      "last_used": null,
+      "usage_count": 0,
+      "success_rate": 0.0
+    },
+    "error_handling": {
+      "name": "Error Handling & Recovery",
+      "level": "SkillLevel.NOVICE",
+      "experience": 0,
+      "max_experience": 500,
+      "proficiency": 0.0,
+      "last_used": null,
+      "usage_count": 0,
+      "success_rate": 0.0
+    },
+    "ai_coordination": {
+      "name": "AI System Coordination",
+      "level": "SkillLevel.NOVICE",
+      "experience": 0,
+      "max_experience": 750,
+      "proficiency": 0.0,
+      "last_used": null,
+      "usage_count": 0,
+      "success_rate": 0.0
+    },
+    "performance_optimization": {
+      "name": "Performance Optimization",
+      "level": "SkillLevel.NOVICE",
+      "experience": 0,
+      "max_experience": 800,
+      "proficiency": 0.0,
+      "last_used": null,
+      "usage_count": 0,
+      "success_rate": 0.0
+    },
+    "security_management": {
+      "name": "Security & Secrets Management",
+      "level": "SkillLevel.NOVICE",
+      "experience": 0,
+      "max_experience": 600,
+      "proficiency": 0.0,
+      "last_used": null,
+      "usage_count": 0,
+      "success_rate": 0.0
+    },
+    "dependency_management": {
+      "name": "Dependency & Package Management",
+      "level": "SkillLevel.NOVICE",
+      "experience": 0,
+      "max_experience": 400,
+      "proficiency": 0.0,
+      "last_used": null,
+      "usage_count": 0,
+      "success_rate": 0.0
+    },
+    "monitoring": {
+      "name": "System Monitoring & Diagnostics",
+      "level": "SkillLevel.NOVICE",
+      "experience": 25,
+      "max_experience": 300,
+      "proficiency": 0.0,
+      "last_used": "2025-08-02 03:55:13.777923",
+      "usage_count": 1,
+      "success_rate": 0.0
+    },
+    "automation": {
+      "name": "Process Automation",
+      "level": "SkillLevel.NOVICE",
+      "experience": 0,
+      "max_experience": 900,
+      "proficiency": 0.0,
+      "last_used": null,
+      "usage_count": 0,
+      "success_rate": 0.0
+    }
+  },
+  "quests": {
+    "setup_completion": {
+      "id": "setup_completion",
+      "title": "Complete System Setup",
+      "description": "Get all core components online",
+      "priority": 5,
+      "progress": 44.44444444444444,
+      "dependencies": [],
+      "rewards": [
+        "experience:automation:50"
+      ],
+      "created": "2025-08-02 03:55:13.777895",
+      "deadline": null,
+      "auto_complete": true
+    },
+    "ai_integration": {
+      "id": "ai_integration",
+      "title": "AI Integration Complete",
+      "description": "Get all AI components working together",
+      "priority": 4,
+      "progress": 33.33333333333333,
+      "dependencies": [],
+      "rewards": [
+        "experience:ai_coordination:75"
+      ],
+      "created": "2025-08-02 03:55:13.777902",
+      "deadline": null,
+      "auto_complete": true
+    }
+  },
+  "resources": {
+    "cpu_percent": 46.9,
+    "memory_percent": 68.2,
+    "disk_usage": 83.0,
+    "network_io": {
+      "bytes_sent": 4932326063,
+      "bytes_recv": 2539647628,
+      "packets_sent": 5000177,
+      "packets_recv": 4139106,
+      "errin": 0,
+      "errout": 0,
+      "dropin": 1508,
+      "dropout": 0
+    },
+    "process_count": 239,
+    "temperature": null,
+    "timestamp": "2025-08-02 03:55:19.808023"
+  },
+  "system_stats": {
+    "total_uptime": 0.0,
+    "total_operations": 0,
+    "success_rate": 0.0,
+    "error_count": 0,
+    "last_backup": null,
+    "system_level": 1,
+    "experience_points": 25
+  },
+  "overall_health": 44.44444444444444
+}

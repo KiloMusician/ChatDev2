@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SystemProvision", 
+  "description": "Authoritative system state exported for Game UI (read-only).",
+  "type": "object",
+  "properties": {
+    "timestamp": { "type": "number" },
+    "health": {
+      "type": "object",
+      "properties": {
+        "invariance_score": { "type": "number" },
+        "build_success_rate": { "type": "number" },
+        "agent_joy_average": { "type": "number" },
+        "event_throughput": { "type": "number" },
+        "cognitive_load": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "pu_queue": {
+      "type": "object", 
+      "properties": {
+        "total": { "type": "number" },
+        "completed": { "type": "number" },
+        "next_task": { "type": "string" },
+        "processing": { "type": "boolean" },
+        "current_type": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "recent": {
+      "type": "object",
+      "properties": {
+        "last_action": { "type": "string" },
+        "last_agent": { "type": "string" },
+        "last_audit_id": { "type": "string" },
+        "events_last_min": { "type": "number" },
+        "last_consciousness_task": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "consciousness": {
+      "type": "object",
+      "properties": {
+        "level": { "type": "number" },
+        "energy": { "type": "number" },
+        "population": { "type": "number" },
+        "research": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

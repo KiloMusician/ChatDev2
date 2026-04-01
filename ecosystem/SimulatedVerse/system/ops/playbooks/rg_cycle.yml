@@ -1,0 +1,55 @@
+# /ops/playbooks/rg_cycle.yml
+cycle:
+  name: "Rube Goldbergian Cycle v1"
+  phases:
+    - name: "Bootstrap & History"
+      goals: ["Know the state", "Don't repeat work", "Cheap wins first"]
+      try_caps:
+        - repo.git_compact_log
+        - kb.index_quests
+        - kb.docs_toc
+        - repo.cli_smoke
+
+    - name: "Diagnose"
+      goals: ["Surface errors", "Collect TODOs", "Map hotspots"]
+      try_caps:
+        - diag.ripgrep_errors
+        - repo.lint
+        - diag.syntax_check_py
+        - repo.typecheck
+
+    - name: "Autofix (No-Token)"
+      goals: ["Resolve easy issues", "Stabilize formatting", "Unblock build"]
+      try_caps:
+        - fix.eslint_autofix
+        - fix.prettier_write
+        - repo.format
+
+    - name: "Build & Test"
+      goals: ["Compile", "Exercise sim", "Log pass/fail"]
+      try_caps:
+        - repo.build
+        - repo.tests
+        - sim.tick
+
+    - name: "UI Readiness"
+      goals: ["Respect mobile/desktop", "HUD ready"]
+      try_caps:
+        - ui.mobile_probe
+        - ui.ascii_hud_smoke
+        - sim.mobile_perf_probe
+
+    - name: "Commit & Annotate"
+      goals: ["Small commits", "Link logs", "Traceability"]
+      try_caps:
+        - repo.git_smart_commit
+
+    - name: "Cascade Planning"
+      goals: ["Plan future steps", "Zero token burn"]
+      try_caps:
+        - meta.cascade
+
+  limits:
+    max_phase_seconds: 420
+    max_caps_per_phase: 6
+    ask_for_help_after_sec_without_progress: 120

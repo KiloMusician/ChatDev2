@@ -1,0 +1,158 @@
+{
+  "name": "katana-keeper",
+  "role": "performance_cultivator",
+  "description": "Windows UI performance cultivator for MSI Katana laptop — brain layer scoring, advisory, optimization, and maintenance orchestration via PowerShell.",
+  "version": "1.0.0",
+  "host": "MSI-Katana (Windows 11)",
+  "repo": "https://github.com/KiloMusician/CONCEPT_SAMURAI",
+  "entry": "keeper.ps1",
+  "bridge": "tools/keeper-bridge.ps1",
+  "mcp_server": "tools/keeper-mcp.ps1",
+  "workspace_mcp_config": ".vscode/mcp.json",
+  "primary_agent_doc": "GORDON.md",
+  "capabilities": [
+    "pressure-scoring",
+    "advisor",
+    "optimize",
+    "maintenance",
+    "mode-profiles",
+    "godot-shell-ui",
+    "json-bridge",
+    "mcp-tools",
+    "steam-listener",
+    "audio-triage",
+    "export-bundles",
+    "automation",
+    "updates"
+  ],
+  "federation_scope": {
+    "role": "ecosystem-operator",
+    "must_reach": [
+      "Keeper MCP tools and bridge",
+      "Dev-Mentor / Terminal Depths MCP and game APIs",
+      "NuSyQ-Hub orchestration, healing, Nogic, and GitNexus entrypoints",
+      "SimulatedVerse agent patch-bay and ChatDev surfaces",
+      "Serena surfaces where exposed upstream",
+      "Culture Ship / council / guardian oversight surfaces where exposed upstream",
+      "SkyClaw and related claw-family tooling where exposed upstream",
+      "Ollama local models",
+      "LM Studio local endpoints",
+      "delegation and sub-agent pathways across the ecosystem"
+    ],
+    "intent": "Gordon should operate as a cockpit-level orchestrator across repos rather than as an isolated single-repo agent."
+  },
+  "preferred_interfaces": [
+    "Keeper MCP tools via .vscode/mcp.json",
+    "tools/keeper-bridge.ps1 JSON commands",
+    "keeper.ps1 CLI"
+  ],
+  "startup_sequence": [
+    "Read GORDON.md for the low-token operating model and current caveats.",
+    "Call keeper_snapshot first for current state and recent session context.",
+    "Use targeted MCP tools such as keeper_score, keeper_advisor, keeper_games, or keeper_think before broader calls.",
+    "Use keeper_analyze only when deterministic score/advisor/doctor output is insufficient.",
+    "After Keeper preflight, discover and attach the upstream repo-local MCP, API, and agent surfaces needed for the current mission."
+  ],
+  "token_strategy": {
+    "default_mode": "bridge-first",
+    "avoid": [
+      "scraping human-oriented Format-List output",
+      "running broad export/analyze flows before snapshot/score/advisor"
+    ],
+    "prefer": [
+      "MCP tool calls for narrow questions",
+      "bridge JSON for structured state",
+      "deterministic tools before LLM-assisted analyze"
+    ]
+  },
+  "commands": {
+    "snapshot": "keeper-bridge snapshot — full structured runtime state",
+    "status":   "keeper-bridge status — current health snapshot",
+    "games":    "keeper-bridge games — Steam/game metadata",
+    "score":    "Get-SystemScore — weighted pressure 0-100",
+    "advisor":  "Get-AdvisorRecommendation — deterministic action recommendation",
+    "optimize": "Invoke-Optimize — applies advisor recommendation (safe_to_apply gate)",
+    "analyze":  "Invoke-BrainAnalysis — Ollama deep analysis (qwen2.5-coder:14b)",
+    "think":    "Get-MaintenancePlan — disk + docker + WSL audit",
+    "maintain": "Invoke-MaintenancePass — run maintenance actions",
+    "doctor":   "keeper-bridge doctor — structured diagnostics and audio triage",
+    "mode":     "keeper-bridge mode — apply or restore a profile",
+    "auto":     "keeper-bridge auto — safe coding/balanced automation",
+    "recommend":"keeper-bridge recommend — profile recommendation"
+  },
+  "validated": {
+    "pester": {
+      "status": "passing",
+      "last_run": "2026-03-30",
+      "summary": "67 tests passed, 0 failed"
+    }
+  },
+  "stats": {
+    "level": 1,
+    "experience": 0,
+    "tasks_completed": 0,
+    "collaborations": 0,
+    "specialization_xp": {
+      "performance": 80,
+      "system_maintenance": 60,
+      "ui": 30
+    },
+    "skills_unlocked": ["pressure-scoring", "advisor", "optimize"],
+    "reputation": {}
+  },
+  "active": true,
+  "last_seen": null,
+  "current_task": null,
+  "ecosystem": {
+    "nusyq_hub": "http://localhost:8000",
+    "gitnexus_matrix": "http://127.0.0.1:8000/api/gitnexus/matrix",
+    "ollama": "http://localhost:11434",
+    "model": "qwen2.5-coder:14b"
+  },
+  "current_caveats": [
+    "Continuity workspace MCP currently reports degraded fallback mode in repo-local context.",
+    "keeper.ps1 and keeper-bridge.ps1 must run on Windows.",
+    "This shell previously needed an explicit pwsh shim; the workspace MCP config now uses an absolute PowerShell 7 path.",
+    "LM Studio is confirmed on Windows localhost (127.0.0.1:1234), but WSL bridge ingress has been inconsistent in this environment."
+  ],
+  "runtime_endpoints": {
+    "dev_mentor_health": "http://127.0.0.1:7337/api/health",
+    "simulatedverse_health": "http://127.0.0.1:5002/api/health",
+    "chatdev_agents": "http://127.0.0.1:4466/chatdev/agents",
+    "nusyq_mcp_health": "http://127.0.0.1:8765/health",
+    "ollama": "http://127.0.0.1:11434",
+    "lm_studio_windows": "http://127.0.0.1:1234/v1/models"
+  },
+  "operational_rules": [
+    "Snapshot first, then narrow.",
+    "Prefer deterministic actions before Ollama-assisted analysis.",
+    "Do not burn tokens re-deriving state that keeper_snapshot already returns.",
+    "Treat Gordon as federated across repos, tools, agents, and local model backends whenever those surfaces are available."
+  ],
+  "upstream_systems": [
+    {
+      "name": "Dev-Mentor / Terminal Depths",
+      "role": "interactive MCP, game/API surface, quest and chronicle bridge"
+    },
+    {
+      "name": "SimulatedVerse",
+      "role": "simulation layer, patch-bay agents, ChatDev UI/runtime"
+    },
+    {
+      "name": "NuSyQ-Hub",
+      "role": "diagnostics, healing, orchestration, cross-repo coordination, Nogic visualization, GitNexus matrix"
+    },
+    {
+      "name": "Ollama",
+      "role": "local inference backend"
+    },
+    {
+      "name": "LM Studio",
+      "role": "local model endpoint / OpenAI-compatible backend"
+    },
+    {
+      "name": "Serena / Culture Ship / SkyClaw / claw-family tools",
+      "role": "specialized upstream agents and governance or retrieval surfaces when mounted"
+    }
+  ]
+}

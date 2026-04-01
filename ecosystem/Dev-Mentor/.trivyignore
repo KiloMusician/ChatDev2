@@ -1,0 +1,9 @@
+# Intentional fake credentials embedded as game lore in Terminal Depths.
+# These are simulated network credentials used for the cyberpunk RPG narrative
+# and are never used for real authentication.
+
+# Virtual filesystem containing lore-world API keys / DB URLs
+app/frontend/game/filesystem.js
+
+# Per-session game state snapshots (contain in-game character progress, not real secrets)
+sessions/

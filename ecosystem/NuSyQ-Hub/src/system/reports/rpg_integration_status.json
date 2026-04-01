@@ -1,0 +1,90 @@
+{
+  "timestamp": "2025-08-04T04:04:16.274948",
+  "rpg_integration_status": "active",
+  "available_equipment": {
+    "weapons": {
+      "python_functions": {
+        "system_snapshot_generator.py": {
+          "type": "executable_script",
+          "path": "system_snapshot_generator.py",
+          "description": "\ud83d\udcf8 KILO-FOOLISH System Snapshot Generator Creates comprehensive system snapshots following Rube Goldbergian protocols  OmniTag: { \"purpose\": \"system_snapshot_generation\", \"type\": \"monitoring_utility\", \"evolution_stage\": \"v3.0_enhanced\" } MegaTag: { \"scope\": \"repository_consciousness\", \"integration_points\": [\"rpg_inventory\", \"capability_inventory\", \"zeta_tracker\"], \"quantum_context\": \"system_state_preservation\" }",
+          "executable": true,
+          "command": "python system_snapshot_generator.py",
+          "category": "analysis"
+        },
+        "system_snapshot_generator.boolean_check_existing_snapshots": {
+          "type": "function",
+          "path": "system_snapshot_generator.py",
+          "description": "Boolean checks for existing snapshots per Rube Goldbergian protocols",
+          "executable": true,
+          "parameters": []
+        },
+        "system_snapshot_generator.check_system_components_availability": {
+          "type": "function",
+          "path": "system_snapshot_generator.py",
+          "description": "Boolean checks for system component availability",
+          "executable": true,
+          "parameters": []
+        },
+        "system_snapshot_generator.create_comprehensive_snapshot": {
+          "type": "function",
+          "path": "system_snapshot_generator.py",
+          "description": "Create comprehensive system snapshot",
+          "executable": true,
+          "parameters": []
+        },
+        "system_snapshot_generator.save_snapshot": {
+          "type": "function",
+          "path": "system_snapshot_generator.py",
+          "description": "Save snapshot to file",
+          "executable": true,
+          "parameters": []
+        },
+        "system_snapshot_generator.display_snapshot_summary": {
+          "type": "function",
+          "path": "system_snapshot_generator.py",
+          "description": "Display snapshot summary",
+          "executable": true,
+          "parameters": []
+        },
+        "system_snapshot_generator.main": {
+          "type": "function",
+          "path": "system_snapshot_generator.py",
+          "description": "Main execution function",
+          "executable": true,
+          "parameters": []
+        }
+      },
+      "shell_scripts": {
+        "PathIntelligence.ps1": {
+          "type": "powershell_script",
+          "path": "PathIntelligence.ps1",
+          "description": "PowerShell script: Pathintelligence",
+          "executable": true,
+          "command": "powershell -File PathIntelligence.ps1"
+        },
+        "RepositoryCoordinator.ps1": {
+          "type": "powershell_script",
+          "path": "RepositoryCoordinator.ps1",
+          "description": "PowerShell script: Repositorycoordinator",
+          "executable": true,
+          "command": "powershell -File RepositoryCoordinator.ps1"
+        }
+      },
+      "vscode_tasks": {},
+      "documentation_procedures": {}
+    },
+    "armor": {
+      "monitoring_systems": {}
+    },
+    "tools": {}
+  },
+  "skill_progression": {},
+  "active_quests": {},
+  "recommended_actions": [
+    "Run system health assessment to check all equipment status",
+    "Execute monitoring systems to maintain passive defenses",
+    "Update skill proficiency through regular capability usage",
+    "Complete active quests to gain experience points"
+  ]
+}

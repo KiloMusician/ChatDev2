@@ -1,0 +1,37 @@
+{
+  "gaming": {
+    "stopProcesses": [
+      "docker-desktop",
+      "Code",
+      "node",
+      "python",
+      "jupyter-lab"
+    ],
+    "stopServices": [
+      "WSearch"
+    ],
+    "commands": [
+      "wsl --shutdown"
+    ],
+    "setPowerPlan": "High performance",
+    "enableGameMode": true,
+    "startWatch": true
+  },
+
+  "coding": {
+    "startProcesses": ["code"],
+    "startServices": ["WSearch"],
+    "commands": [],
+    "setPowerPlan": "Balanced",
+    "enableGameMode": false,
+    "startWatch": false
+  },
+
+  "diagnose": {
+    "setPowerPlan": "Balanced",
+    "startWatch": true,
+    "captureIncidentOnAudioRisk": true
+  },
+
+  "restore": { "fromRollback": true }
+}

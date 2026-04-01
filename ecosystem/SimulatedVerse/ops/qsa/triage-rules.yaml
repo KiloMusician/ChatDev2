@@ -1,0 +1,56 @@
+# Quadpartite tags (path heuristics you can tune)
+quad_tags:
+  system: ["^packages/", "^ops/", "^server/", "^system/", "^scripts/"]
+  ui: ["^apps/web/", "^client/", "^frontend/"]
+  simulation: ["^apps/web/src/pages/Game/Simulation", "^apps/sim/"]
+  bridge: ["^apps/bridge/", "^packages/bridge/", "^ops/provision", "^ops/ollama", "^packages/llm"]
+
+temples:
+  - "Pantheon"
+  - "Vantages"
+  - "ThreeTemples"
+
+vantages:
+  - "ASCII-HUD"
+  - "ChatDevConsole"
+  - "AdminConsole"
+  - "ColonyMap"
+
+# Patterns that mark "ability" files (tools/actions/hooks)
+ability_hints:
+  - "tool"
+  - "agent"
+  - "ability"
+  - "action"
+  - "plugin"
+  - "bridge"
+  - "provision"
+  - "pipeline"
+  - "watchdog"
+  - "orchestrator"
+
+# Spam / report / log heuristics
+spam:
+  max_files_per_bucket: 80        # more than this with same stem => spam
+  min_useful_ratio: 0.08          # unique_lines / total_lines threshold
+  huge_file_bytes: 2_000_000      # treat as giant report
+  stale_days: 7                    # older than this and never referenced
+
+# Near-dup similarity threshold (0..1)
+near_dup_threshold: 0.92
+
+# Issue patterns (extend freely)
+issue_patterns:
+  placeholders: ["TODO", "FIXME", "TBD", "PASS", "NOT_IMPLEMENTED", "throw new Error(", "raise NotImplementedError", "assert(false)"]
+  hardcoded_errors: ["m.map is not a function", "console.error(", "panic(", "fatal("]
+  ui_strobe_clues: ["Fast Refresh", "HMR", "full-reload", "hot update failed"]
+  watchers: ["nodemon", "vite", "webpack", "watch", "chokidar"]
+
+# Paths to always ignore
+ignore:
+  - "^node_modules/"
+  - "^.git/"
+  - "^dist/"
+  - "^build/"
+  - "^coverage/"
+  - "^.next/"

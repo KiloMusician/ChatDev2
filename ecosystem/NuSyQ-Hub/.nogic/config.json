@@ -1,0 +1,29 @@
+{
+  "project_name": "NuSyQ-Hub",
+  "project_id": "",
+  "workspace_root": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub",
+  "agent_profile": "codex",
+  "index": {
+    "languages": [
+      "python",
+      "typescript",
+      "javascript"
+    ],
+    "include": [
+      "src/**",
+      "scripts/**",
+      "tests/**",
+      "web/**",
+      "docs/**"
+    ],
+    "exclude": [
+      ".git/**",
+      ".venv/**",
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "**/__pycache__/**",
+      "**/*.min.js"
+    ]
+  }
+}

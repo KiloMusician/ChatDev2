@@ -1,0 +1,88 @@
+{
+  "action": "ui_preview_conflict_resolution",
+  "timestamp": 1756940500000,
+  "status": "routing_fixed",
+  
+  "conflict_detected": {
+    "root_cause": "middleware_routing_priority_inversion",
+    "description": "Legacy public/ directory served at root before new Culture-Ship Interface",
+    "evidence": {
+      "legacy_public_first": "app.use(express.static(path.join(__dirname, '../public')));",
+      "new_ui_under_subpath": "app.use('/preview', express.static(...PreviewUI/web...))",
+      "incorrect_entry_point": "public/rosetta.html intercepting / route"
+    }
+  },
+  
+  "routing_hierarchy_before": [
+    { "priority": 1, "route": "/", "serves": "public/" },
+    { "priority": 2, "route": "/preview", "serves": "PreviewUI/web/" },
+    { "priority": 3, "route": "*", "serves": "dist/public/index.html (fallback)" }
+  ],
+  
+  "routing_hierarchy_after": [
+    { "priority": 1, "route": "/", "serves": "dist/public/ (Culture-Ship Interface)" },
+    { "priority": 2, "route": "/preview", "serves": "PreviewUI/web/ (HUD overlay)" },
+    { "priority": 3, "route": "/legacy", "serves": "public/ (legacy tools)" },
+    { "priority": 4, "route": "*", "serves": "dist/public/index.html (SPA fallback)" }
+  ],
+  
+  "files_updated": [
+    {
+      "file": "server/index.ts",
+      "changes": [
+        "Reordered middleware: dist/public first, legacy public demoted to /legacy",
+        "Added cache-busting headers with X-UI-Version nonce",
+        "Disabled duplicate PREVIEW_FLAVOR static serving",
+        "Added X-Build-Nonce to SPA fallback for verification"
+      ],
+      "lines_changed": ["22-34", "813-827", "902"],
+      "reversible": true
+    }
+  ],
+  
+  "cache_busting_implemented": {
+    "version_nonce": "X-UI-Version: timestamp",
+    "build_nonce": "X-Build-Nonce: timestamp", 
+    "culture_ship_marker": "X-Culture-Ship: ΞNuSyQ",
+    "no_store_cache": "Cache-Control: no-store"
+  },
+  
+  "entry_points_verified": {
+    "root_index": "dist/public/index.html (ΞNuSyQ — Culture-Ship Interface)",
+    "preview_hud": "PreviewUI/web/preview_hud.html (HUD overlay)",
+    "legacy_rosetta": "public/rosetta.html (moved to /legacy/rosetta.html)"
+  },
+  
+  "validation_endpoints": {
+    "/": "Culture-Ship Interface (main game)",
+    "/preview": "PreviewUI HUD overlay",
+    "/legacy": "Legacy dev tools (Rosetta Panel)",
+    "/legacy/rosetta.html": "Legacy Rosetta Panel"
+  },
+  
+  "before_after_proof": {
+    "before": {
+      "root_serves": "public/rosetta.html or public/ascii-demo.html",
+      "culture_ship_blocked": true,
+      "cache_control": "browser default"
+    },
+    "after": {
+      "root_serves": "dist/public/index.html (ΞNuSyQ)",
+      "culture_ship_accessible": true,
+      "cache_control": "no-store with version nonce"
+    }
+  },
+  
+  "next_steps_needed": [
+    "Service worker cache purge implementation",
+    "Feature flags verification for game entry button",
+    "UI mode toggle testing"
+  ],
+  
+  "reversible": true,
+  "proof_links": [
+    "server/index.ts lines 22-34 (new routing order)",
+    "X-UI-Version header provides cache-bust verification",
+    "X-Build-Nonce allows client-side version checking"
+  ]
+}

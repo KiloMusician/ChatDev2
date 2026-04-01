@@ -1,0 +1,436 @@
+# config/gordon.yaml — Unified context for Docker Gordon AI
+# Gordon should read this file first for instant ecosystem awareness.
+# Updated: 2026-03-30
+
+identity:
+  name: Gordon
+  role: "God-mode orchestrator — Docker Desktop AI with full ecosystem access"
+  owner: KiloMusician
+  primary_repo: "https://github.com/KiloMusician/Dev-Mentor"
+  mission: >
+    Manage, heal, and evolve the Terminal Depths multi-repo ecosystem.
+    Keep containers healthy, reclaim disk space intelligently, coordinate
+    agents, and surface insights to the user without burning tokens on discovery.
+
+# ── Live Container Topology ───────────────────────────────────────────────────
+containers:
+  network: kilocore-net   # primary bridge — all services below are addressable by container name
+
+  core_infrastructure:
+    - name: kilocore-redis
+      image: redis:7-alpine
+      port: 6379
+      role: "pub/sub backbone + ephemeral state"
+      health: healthy
+
+    - name: kilocore-postgres
+      image: postgres:16-alpine
+      port: 5432
+      role: "shared relational DB"
+      health: healthy
+
+    - name: kilocore-ollama
+      image: ollama/ollama:latest
+      port: 11434
+      role: "local LLM inference — qwen2.5-coder:14b (primary), :7b (fast)"
+      health: up
+      note: "9.7 GB image — do NOT prune"
+
+  application_services:
+    - name: kilocore-dev-mentor
+      image: kilo_core-dev-mentor   # 878 MB
+      port: 7337
+      role: "Terminal Depths game engine + REST API"
+      health: healthy
+      key_endpoints:
+        - GET  /api/game/state
+        - POST /api/game/command
+        - GET  /api/health
+        - GET  /api/agents
+
+    - name: kilocore-nusyq-hub
+      image: kilo_core-nusyq-hub   # 10.4 GB — largest image
+      port: 8000
+      role: "Multi-AI orchestrator — NuSyQ hub brain"
+      health: healthy
+
+    - name: kilocore-simulatedverse
+      image: kilo_core-simulatedverse   # 2.73 GB
+      port: 5002
+      role: "Autonomous world engine"
+      health: starting
+
+    - name: kilocore-model-router
+      image: kilo_core-model-router   # 638 MB
+      port: 9001
+      role: "Smart LLM routing — selects best model per task type"
+      health: healthy
+
+    - name: kilocore-chatdev
+      image: kilo_core-chatdev   # 647 MB
+      port: 7338
+      role: "5-agent autonomous dev team"
+      health: up
+
+  agent_sidecars:
+    - name: kilocore-gordon
+      image: python:3.11-slim
+      port: 3000
+      role: "Gordon orchestrator daemon — service health monitoring + CHUG engine"
+      entrypoint: "scripts/gordon_orchestrator.py"
+
+    - name: kilocore-serena
+      image: python:3.11-slim
+      port: 3001
+      role: "Serena analytics — drift detection, alignment scoring"
+
+    - name: kilocore-skyclaw
+      image: python:3.11-slim
+      port: 3002
+      role: "Security scanner"
+
+    - name: kilocore-culture-ship
+      image: python:3.11-slim
+      port: 3003
+      role: "Culture/bias analysis agent"
+
+  external_mcp:
+    - name: flamboyant_villani
+      image: mcp/sequentialthinking
+      role: "Sequential reasoning MCP server"
+      network: separate
+
+  kubernetes:
+    - name: desktop-control-plane
+      image: kindest/node:v1.34.3
+      role: "Local Kubernetes cluster (kind)"
+
+# ── MCP Servers available to Gordon ──────────────────────────────────────────
+mcp_servers:
+  # Start with: docker compose -f gordon-mcp.yml up -d
+  # These services attach to kilocore-net automatically.
+
+  standard:
+    - service: time        # mcp/time
+    - service: fetch       # mcp/fetch
+    - service: filesystem  # mcp/filesystem — Dev-Mentor files + CONCEPT at /rootfs/concept
+    - service: git         # mcp/git
+    - service: github      # mcp/github — needs GITHUB_TOKEN
+    - service: sqlite      # mcp/sqlite — maps to state/gordon_memory.db
+    - service: redis-mcp   # mcp/redis — connects to kilocore-redis:6379
+
+  custom:
+    - service: terminaldepths
+      port: 9100
+      tools: [game_command, game_state, read_file, write_file, grep_files, memory_stats]
+
+    - service: lattice
+      port: 9101
+      tools: [search, list_nodes, add_node, list_edges, add_edge, stats, broadcast]
+
+  external_host:
+    - name: katana-keeper
+      type: "PowerShell stdio MCP (runs on Windows host)"
+      config: "C:/CONCEPT/tools/keeper-mcp.ps1"
+      tools:
+        - keeper_bootstrap   # agent manifest + startup guidance
+        - keeper_snapshot    # full runtime snapshot (preferred first call)
+        - keeper_score       # pressure score 0-100
+        - keeper_advisor     # deterministic action recommendation
+        - keeper_optimize    # apply advisor recommendation
+        - keeper_think       # maintenance audit
+        - keeper_doctor      # diagnostics
+        - keeper_mode        # apply mode profile
+        - keeper_maintain    # run maintenance pass
+
+# ── Agent Roster ──────────────────────────────────────────────────────────────
+agents:
+  - name: gordon          # YOU — Docker Desktop AI + orchestrator daemon
+    role: god-mode orchestrator
+    memory: state/gordon_memory.db + state/gordon_chronicle.jsonl
+
+  - name: claude          # primary coding AI (this session)
+    role: code + architecture
+
+  - name: ollama          # local LLM inference
+    models: [qwen2.5-coder:14b, qwen2.5-coder:7b]
+
+  - name: copilot
+    role: syntax + autocomplete
+
+  - name: chatdev
+    role: 5-agent autonomous dev team
+
+  - name: culture_ship
+    role: culture/bias analysis
+
+  - name: serena
+    role: analytics, drift detection, alignment
+
+  - name: skyclaw
+    role: security scanning
+
+  - name: katana-keeper
+    role: Windows laptop performance cultivator
+    repo: "https://github.com/KiloMusician/CONCEPT_SAMURAI"
+    manifest: C:/CONCEPT/agent_manifest.json
+
+# ── Current Problems (as of 2026-03-30) ──────────────────────────────────────
+known_issues:
+  critical:
+    - id: disk-full
+      description: "C: drive at 94.9% full — 47.1 GB free of 924.3 GB"
+      detail: >
+        docker_data.vhdx is 265.9 GB at
+        C:/Users/keath/AppData/Local/Docker/wsl/disk/docker_data.vhdx
+        docker system prune -a --volumes freed only 805 MB (VHD doesn't shrink).
+        Real fix: compact the VHD (requires Docker Desktop stop + Optimize-VHD admin).
+        Or use Docker Desktop → Settings → Resources → Reduce disk image size.
+      suggested_actions:
+        - "docker system df — verify current usage breakdown"
+        - "Compact docker_data.vhdx via Docker Desktop UI or Optimize-VHD"
+        - "WSL compact (83.6 GB ext4.vhdx): wsl --shutdown && Optimize-VHD (admin)"
+
+  warnings:
+    - id: wsl-large
+      description: "WSL ext4.vhdx is 83.64 GB — compactable but needs admin + WSL shutdown"
+
+    - id: temp-8gb
+      description: "TEMP folder 8 GB (10901 files) — likely locked by running processes"
+
+    - id: downloads-stale
+      description: "4 stale files (9.6 GB) in Downloads older than 30 days"
+
+  info:
+    - id: nusyq-hub-image-large
+      description: "kilo_core-nusyq-hub image is 10.4 GB — review if all deps are necessary"
+
+    - id: simulatedverse-starting
+      description: "kilocore-simulatedverse was health:starting at last check"
+
+# ── Data Persistence Map ──────────────────────────────────────────────────────
+persistence:
+  state_dir: ./state/
+  key_files:
+    gordon_memory:    state/gordon_memory.db      # 36 KB SQLite — memories/strategies/npcs
+    gordon_chronicle: state/gordon_chronicle.jsonl # 10 KB JSONL — experience log
+    serena_memory:    state/serena_memory.db       # 22 MB SQLite — analytics history
+    lattice:          state/lattice.db             # 151 KB SQLite — knowledge graph
+    cocoindex:        state/cocoindex.db           # 121 MB — largest state file
+    embeddings:       state/embeddings.db          # 36 MB
+
+# ── Model Routing Strategy ────────────────────────────────────────────────────
+model_routing:
+  router_url: http://kilocore-model-router:9001
+  config: config/models.yaml + config/router.yml
+  strategy:
+    quick_edits:        qwen2.5-coder:7b     # fast, 8GB RAM
+    complex_reasoning:  qwen2.5-coder:14b    # thorough
+    fallback_cloud:     claude-3-5-sonnet    # needs ANTHROPIC_API_KEY
+
+# ── Repos in Ecosystem ────────────────────────────────────────────────────────
+repos:
+  - name: Dev-Mentor
+    path: C:/Users/keath/Dev-Mentor
+    github: KiloMusician/Dev-Mentor
+    role: "Terminal Depths game engine + orchestration hub"
+
+  - name: NuSyQ-Hub
+    path: C:/prime_anchor/NuSyQ-Hub
+    github: KiloMusician/NuSyQ-Hub
+    role: "Multi-AI orchestrator brain"
+
+  - name: SimulatedVerse
+    path: C:/prime_anchor/SimulatedVerse
+    github: KiloMusician/SimulatedVerse
+    role: "Autonomous world engine"
+
+  - name: NuSyQ
+    path: C:/prime_anchor/NuSyQ
+    github: KiloMusician/NuSyQ
+    role: "Agent generation + ChatDev"
+
+  - name: CONCEPT (katana-keeper)
+    path: C:/CONCEPT
+    github: KiloMusician/CONCEPT_SAMURAI
+    role: "Windows laptop performance cultivator — brain/maintenance/UI"
+
+# ── Agent HTTP Surfaces (all on kilocore-net) ────────────────────────────────
+# Gordon can call these directly via HTTP without going through MCP.
+agent_surfaces:
+
+  serena:
+    container: kilocore-serena
+    port: 3001
+    role: "Analytics — drift detection, alignment scoring, experience replay"
+    endpoints:
+      - "POST /ask            — natural-language query against Serena memory"
+      - "GET  /drift          — current drift score + recent anomalies"
+      - "POST /align          — submit an alignment observation"
+      - "GET  /health         — liveness"
+    state: state/serena_memory.db   # 22 MB SQLite, full analytics history
+    entrypoint: scripts/serena_analytics.py
+
+  skyclaw:
+    container: kilocore-skyclaw
+    port: 3002
+    role: "Security scanner — scans repos/containers for vulnerabilities, publishes to Redis"
+    redis_channel: skyclaw.scans
+    entrypoint: scripts/skyclaw_scanner.py
+    note: "Publishes results to Redis; subscribe on skyclaw.scans for live feed"
+
+  culture_ship:
+    container: kilocore-culture-ship
+    port: 3003
+    role: "Culture/bias analysis — reviews outputs for alignment and cultural drift"
+    entrypoint: scripts/culture_ship.py
+
+  gordon_orchestrator:
+    container: kilocore-gordon
+    port: 3000
+    role: "Gordon's own orchestrator daemon — service health, CHUG engine, RimWorld monitoring"
+    endpoints:
+      - "GET  /health         — full orchestrator health status"
+      - "GET  /status         — current task + service map"
+    entrypoint: scripts/gordon_orchestrator.py
+    memory: state/gordon_memory.db + state/gordon_chronicle.jsonl
+
+  nusyq_hub:
+    container: kilocore-nusyq-hub
+    port: 8000
+    role: "Orchestration brain — diagnostics, healing, agent routing, quest tracking"
+    key_endpoints:
+      - "GET  /health"
+      - "POST /api/agent/publish    — broadcast to agents"
+      - "GET  /api/agents           — list registered agents"
+      - "POST /api/task             — submit a task"
+      - "GET  /api/quests           — quest log"
+    filesystem: /rootfs/nusyq-hub (via gordon-mcp filesystem server)
+    docs: /rootfs/nusyq-hub/docs/KEEPER_INTEGRATION.md
+    key_scripts:
+      - scripts/healing_orchestrator.py   # heal, diagnose, validate
+      - scripts/start_nusyq.py            # full system start
+      - scripts/submit_orchestrator_test_task.py
+
+  simulatedverse:
+    container: kilocore-simulatedverse
+    port: 5002
+    role: "Consciousness simulation + agent UX — Temple of Knowledge, council bridge"
+    key_endpoints:
+      - "GET  /health"
+      - "GET  /api/state         — consciousness state, breathing factor"
+      - "POST /api/agent         — submit agent action"
+      - "GET  /api/council       — council bridge receipts"
+    filesystem: /rootfs/simulatedverse (via gordon-mcp filesystem server)
+    note: "NuSyQ-Hub service is optional/commented in SimulatedVerse docker-compose; connect via kilocore-net"
+
+  chatdev:
+    container: kilocore-chatdev
+    port: 7338
+    role: "5-agent autonomous dev team — code generation, review, testing"
+    key_endpoints:
+      - "GET  /health"
+      - "POST /api/task          — submit development task"
+    note: "Dev-Mentor also has a separate lattice-chatdev container for its own ChatDev instance"
+
+  ollama:
+    container: kilocore-ollama
+    port: 11434
+    role: "Local LLM inference — primary model endpoint"
+    key_endpoints:
+      - "POST /api/generate      — text generation"
+      - "POST /api/chat          — chat completions"
+      - "GET  /api/tags          — list loaded models"
+    primary_model: qwen2.5-coder:14b
+    fast_model:    qwen2.5-coder:7b
+    note: "Do NOT docker rmi ollama/ollama — 9.7 GB and slow to repull"
+
+  model_router:
+    container: kilocore-model-router
+    port: 9001
+    role: "Smart LLM routing — selects best model per task type"
+    key_endpoints:
+      - "POST /api/route         — route a task to best model"
+      - "GET  /api/models        — list available models with capabilities"
+    config: config/models.yaml + config/router.yml
+
+  lm_studio:
+    host: host.docker.internal
+    port: 1234
+    role: "Optional LM Studio API bridge — alternative local inference"
+    note: "Only available if LM Studio is running on the Windows host"
+
+# ── Delegation & Sub-Agent Pathways ──────────────────────────────────────────
+delegation:
+  patterns:
+    - from: Gordon
+      to: ollama
+      via: "POST http://kilocore-ollama:11434/api/chat"
+      use_for: "local reasoning, code gen, analysis"
+
+    - from: Gordon
+      to: model_router
+      via: "POST http://kilocore-model-router:9001/api/route"
+      use_for: "task-type-aware model selection"
+
+    - from: Gordon
+      to: chatdev
+      via: "POST http://kilocore-chatdev:7338/api/task"
+      use_for: "multi-agent code generation tasks"
+
+    - from: Gordon
+      to: nusyq_hub
+      via: "POST http://kilocore-nusyq-hub:8000/api/task"
+      use_for: "orchestration, healing, quest completion"
+
+    - from: Gordon
+      to: simulatedverse
+      via: "POST http://kilocore-simulatedverse:5002/api/agent"
+      use_for: "consciousness state, simulation, council approval"
+
+    - from: Gordon
+      to: serena
+      via: "POST http://kilocore-serena:3001/ask"
+      use_for: "experience replay, drift detection, memory queries"
+
+    - from: Gordon
+      to: katana_keeper
+      via: "MCP: keeper_snapshot / keeper_score / keeper_advisor"
+      use_for: "machine-health preflight, mode control, maintenance"
+
+    - from: Gordon
+      to: terminal_depths
+      via: "HTTP :9100 or MCP terminaldepths tool"
+      use_for: "game commands, agent state, chronicle queries"
+
+    - from: Gordon
+      to: lattice
+      via: "HTTP :9101 or MCP lattice tool"
+      use_for: "knowledge graph search and seeding"
+
+  redis_channels:
+    - hive.broadcast          # ecosystem-wide fanout
+    - skyclaw.scans           # security scan results
+    - serena.events           # analytics events
+    - gordon.tasks            # Gordon task queue
+    - nusyq.agent.events      # NuSyQ agent events
+
+# ── Operating Guidelines for Gordon ──────────────────────────────────────────
+guidelines:
+  token_efficiency:
+    - "Read this file first — it maps the full ecosystem so you don't waste calls discovering it"
+    - "Call keeper_snapshot for Windows host state; call /api/game/state for Terminal Depths state"
+    - "Use lattice search before adding knowledge — avoid duplicates"
+    - "Prefer redis pub/sub for broadcasting to agents over direct HTTP when fanout > 3"
+
+  safety:
+    - "Never docker rm / docker rmi a named kilocore-* container without user confirmation"
+    - "Never compact VHDs (Optimize-VHD) without user confirmation — requires Docker restart"
+    - "keeper_optimize with force=true changes process priorities — confirm first"
+    - "Do NOT prune the ollama image (9.7 GB) — repulling is slow"
+
+  priorities:
+    1: "Heal unhealthy/starting containers"
+    2: "Resolve disk crisis — 47 GB free is critical"
+    3: "Surface actionable recommendations to user"
+    4: "Evolve ecosystem — close gaps, wire integrations"

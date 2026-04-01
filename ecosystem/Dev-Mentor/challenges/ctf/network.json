@@ -1,0 +1,46 @@
+[
+  {
+    "id": "net_01",
+    "title": "Port Knocking",
+    "category": "Network",
+    "difficulty": "easy",
+    "description": "A hidden service on `chimera-relay.nexus` only opens port 22 after a port-knock sequence: 7000, 8000, 9000. What series of commands would send the knock sequence using netcat?",
+    "solution": "nc -z chimera-relay.nexus 7000; nc -z chimera-relay.nexus 8000; nc -z chimera-relay.nexus 9000",
+    "hint": "Port knocking sends connection attempts (not data) to a sequence of closed ports. Use `nc -z` which just checks if a port is open without sending data.",
+    "xp": 40,
+    "tags": ["network", "port-knocking", "netcat", "easy"]
+  },
+  {
+    "id": "net_02",
+    "title": "Packet Sniffer",
+    "category": "Network",
+    "difficulty": "medium",
+    "description": "You need to capture HTTP traffic on interface `eth0` to find credentials being transmitted in plaintext. What `tcpdump` command captures only HTTP packets (port 80) and saves to a file `capture.pcap`?",
+    "solution": "tcpdump -i eth0 -w capture.pcap port 80",
+    "hint": "tcpdump uses BPF filters. The `-i` flag selects the interface, `-w` writes to a file, and `port 80` filters HTTP traffic.",
+    "xp": 65,
+    "tags": ["network", "tcpdump", "packet-capture", "medium"]
+  },
+  {
+    "id": "net_03",
+    "title": "ARP Poisoning",
+    "category": "Network",
+    "difficulty": "hard",
+    "description": "To perform a man-in-the-middle attack on the LAN segment, you need to send gratuitous ARP replies to poison the ARP cache of two hosts: gateway (192.168.1.1) and target (192.168.1.50). What arpspoof command intercepts traffic from target to gateway?",
+    "solution": "arpspoof -i eth0 -t 192.168.1.50 192.168.1.1",
+    "hint": "arpspoof syntax: `arpspoof -i <interface> -t <target-to-poison> <gateway-to-impersonate>`. You also need to run the reverse direction to complete MITM.",
+    "xp": 155,
+    "tags": ["network", "arp", "mitm", "hard"]
+  },
+  {
+    "id": "net_04",
+    "title": "DNS Tunneling",
+    "category": "Network",
+    "difficulty": "expert",
+    "description": "Exfiltration over DNS is being used to bypass the firewall. Data is encoded in subdomain labels sent to `attacker.c2.io`. The maximum label length is 63 characters and total hostname length is 253. What is the maximum data per query in bytes if using hex encoding (2 chars per byte)?",
+    "solution": "31",
+    "hint": "Available label space = 253 - len('.attacker.c2.io') - dots. With hex encoding, divide usable chars by 2. A single label of 63 chars = 31 bytes of data.",
+    "xp": 220,
+    "tags": ["network", "dns", "tunneling", "exfiltration", "expert"]
+  }
+]

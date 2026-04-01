@@ -1,0 +1,102 @@
+{
+  "total_agents": 7,
+  "active_agents": 7,
+  "total_level": 8,
+  "total_xp": 285,
+  "total_tasks": 4,
+  "agents": {
+    "copilot": {
+      "name": "copilot",
+      "role": "copilot",
+      "level": 1,
+      "xp": 20,
+      "xp_to_next_level": 80,
+      "tasks_completed": 0,
+      "collaborations": 0,
+      "skills": [],
+      "reputation": {},
+      "active": true,
+      "current_task": null
+    },
+    "claude": {
+      "name": "claude",
+      "role": "claude",
+      "level": 1,
+      "xp": 5,
+      "xp_to_next_level": 95,
+      "tasks_completed": 1,
+      "collaborations": 1,
+      "skills": [],
+      "reputation": {},
+      "active": true,
+      "current_task": null
+    },
+    "ollama": {
+      "name": "ollama",
+      "role": "ollama",
+      "level": 1,
+      "xp": 15,
+      "xp_to_next_level": 85,
+      "tasks_completed": 1,
+      "collaborations": 1,
+      "skills": [],
+      "reputation": {},
+      "active": true,
+      "current_task": null
+    },
+    "chatdev": {
+      "name": "chatdev",
+      "role": "chatdev",
+      "level": 1,
+      "xp": 30,
+      "xp_to_next_level": 70,
+      "tasks_completed": 0,
+      "collaborations": 0,
+      "skills": [],
+      "reputation": {},
+      "active": true,
+      "current_task": null
+    },
+    "culture_ship": {
+      "name": "culture_ship",
+      "role": "culture_ship",
+      "level": 2,
+      "xp": 140,
+      "xp_to_next_level": 60,
+      "tasks_completed": 2,
+      "collaborations": 0,
+      "skills": [],
+      "reputation": {},
+      "active": true,
+      "current_task": null
+    },
+    "consciousness": {
+      "name": "consciousness",
+      "role": "consciousness",
+      "level": 1,
+      "xp": 25,
+      "xp_to_next_level": 75,
+      "tasks_completed": 0,
+      "collaborations": 0,
+      "skills": [],
+      "reputation": {},
+      "active": true,
+      "current_task": null
+    },
+    "quantum": {
+      "name": "quantum",
+      "role": "quantum",
+      "level": 1,
+      "xp": 50,
+      "xp_to_next_level": 50,
+      "tasks_completed": 0,
+      "collaborations": 0,
+      "skills": [
+        "quantum_resolution_master"
+      ],
+      "reputation": {},
+      "active": true,
+      "current_task": null
+    }
+  }
+}

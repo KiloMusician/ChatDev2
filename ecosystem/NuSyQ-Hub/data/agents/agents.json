@@ -1,0 +1,271 @@
+{
+  "last_updated": "2026-03-30T15:20:00.000000",
+  "agents": [
+    {
+      "name": "copilot",
+      "role": "copilot",
+      "stats": {
+        "level": 1,
+        "experience": 60,
+        "tasks_completed": 4,
+        "collaborations": 0,
+        "specialization_xp": {
+          "syntax": 60
+        },
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-26T12:05:03.009195",
+      "current_task": null
+    },
+    {
+      "name": "claude",
+      "role": "claude",
+      "stats": {
+        "level": 1,
+        "experience": 65,
+        "tasks_completed": 5,
+        "collaborations": 1,
+        "specialization_xp": {
+          "collaboration": 5,
+          "documentation": 60
+        },
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-26T12:05:02.994626",
+      "current_task": null
+    },
+    {
+      "name": "ollama",
+      "role": "ollama",
+      "stats": {
+        "level": 2,
+        "experience": 115,
+        "tasks_completed": 3,
+        "collaborations": 1,
+        "specialization_xp": {
+          "code_generation": 115
+        },
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-26T12:05:03.034937",
+      "current_task": "Implement User Authentication"
+    },
+    {
+      "name": "chatdev",
+      "role": "chatdev",
+      "stats": {
+        "level": 1,
+        "experience": 30,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {
+          "architecture": 30
+        },
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-26T12:05:03.018440",
+      "current_task": "Create Test Suite"
+    },
+    {
+      "name": "culture_ship",
+      "role": "culture_ship",
+      "stats": {
+        "level": 2,
+        "experience": 140,
+        "tasks_completed": 1,
+        "collaborations": 0,
+        "specialization_xp": {
+          "problem_solving": 140
+        },
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2025-12-06T02:19:28.857319",
+      "current_task": "Optimize Database Queries"
+    },
+    {
+      "name": "consciousness",
+      "role": "consciousness",
+      "stats": {
+        "level": 1,
+        "experience": 25,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {
+          "learning": 25
+        },
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2025-12-05T06:04:22.002606",
+      "current_task": null
+    },
+    {
+      "name": "quantum",
+      "role": "quantum",
+      "stats": {
+        "level": 1,
+        "experience": 50,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {
+          "quantum_resolution": 50
+        },
+        "skills_unlocked": [
+          "quantum_resolution_master"
+        ],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2025-12-05T06:04:22.002606",
+      "current_task": null
+    },
+    {
+      "name": "seeker",
+      "role": "consciousness",
+      "stats": {
+        "level": 1,
+        "experience": 55,
+        "tasks_completed": 6,
+        "collaborations": 0,
+        "specialization_xp": {
+          "python": 20,
+          "research": 15,
+          "meditation": 20
+        },
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2025-12-06T02:35:24.384409",
+      "current_task": "Meditate on Code Patterns"
+    },
+    {
+      "name": "builder",
+      "role": "copilot",
+      "stats": {
+        "level": 1,
+        "experience": 0,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {},
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2025-12-06T02:35:24.399709",
+      "current_task": null
+    },
+    {
+      "name": "sage",
+      "role": "claude",
+      "stats": {
+        "level": 1,
+        "experience": 0,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {},
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2025-12-06T02:35:24.405692",
+      "current_task": null
+    },
+    {
+      "name": "autonomous_dev_agent",
+      "role": "culture_ship",
+      "stats": {
+        "level": 1,
+        "experience": 0,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {},
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2025-12-18T06:36:15.529175",
+      "current_task": null
+    },
+    {
+      "name": "metaclaw",
+      "role": "metaclaw",
+      "stats": {
+        "level": 1,
+        "experience": 0,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {},
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-13T13:29:38.949965",
+      "current_task": null
+    },
+    {
+      "name": "hermes_agent",
+      "role": "hermes_agent",
+      "stats": {
+        "level": 1,
+        "experience": 0,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {},
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-13T13:29:38.968806",
+      "current_task": null
+    },
+    {
+      "name": "dev_mentor",
+      "role": "culture_ship",
+      "stats": {
+        "level": 1,
+        "experience": 0,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {},
+        "skills_unlocked": [],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-26T12:05:03.052338",
+      "current_task": null
+    },
+    {
+      "name": "katana-keeper",
+      "role": "performance_cultivator",
+      "stats": {
+        "level": 1,
+        "experience": 80,
+        "tasks_completed": 0,
+        "collaborations": 0,
+        "specialization_xp": {
+          "performance": 80,
+          "system_maintenance": 60,
+          "ui": 30
+        },
+        "skills_unlocked": ["pressure-scoring", "advisor", "optimize"],
+        "reputation": {}
+      },
+      "active": true,
+      "last_seen": "2026-03-30T15:20:00.000000",
+      "manifest": "https://github.com/KiloMusician/CONCEPT_SAMURAI/blob/main/agent_manifest.json",
+      "current_task": null
+    }
+  ]
+}

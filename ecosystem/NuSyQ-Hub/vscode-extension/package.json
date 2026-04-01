@@ -1,0 +1,194 @@
+{
+  "name": "vscode-extension",
+  "displayName": "NuSyQ Copilot Bridge",
+  "publisher": "nusyq",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.109.0"
+  },
+  "main": "./dist/extension.js",
+  "files": [
+    "dist/**",
+    "package.json"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "workspaceContains:scripts/start_nusyq.py"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "enhanceCopilotContext",
+        "title": "Enhance Copilot Context"
+      },
+      {
+        "command": "nusyq.showQuickMenu",
+        "title": "NuSyQ: Show Quick Menu"
+      },
+      {
+        "command": "nusyq.showGuildBoard",
+        "title": "NuSyQ: Show Guild Board"
+      },
+      {
+        "command": "nusyq.refreshStatus",
+        "title": "NuSyQ: Refresh Status"
+      },
+      {
+        "command": "nusyq.tripartiteStatus",
+        "title": "NuSyQ: Tripartite Status"
+      },
+      {
+        "command": "nusyq.startServices",
+        "title": "NuSyQ: Start Services"
+      },
+      {
+        "command": "nusyq.serviceStatus",
+        "title": "NuSyQ: Service Status"
+      },
+      {
+        "command": "nusyq.controlCenter",
+        "title": "NuSyQ: Control Center"
+      },
+      {
+        "command": "nusyq.ignition",
+        "title": "NuSyQ: Run Ignition"
+      },
+      {
+        "command": "nusyq.ignitionThorough",
+        "title": "NuSyQ: Run Ignition (Thorough)"
+      },
+      {
+        "command": "nusyq.terminalsActivate",
+        "title": "NuSyQ: Activate Terminals"
+      },
+      {
+        "command": "nusyq.terminalsSnapshot",
+        "title": "NuSyQ: Terminal Snapshot"
+      },
+      {
+        "command": "nusyq.routeToTerminal",
+        "title": "NuSyQ: Route Message To Terminal"
+      },
+      {
+        "command": "nusyq.intermediary.send",
+        "title": "NuSyQ: Intermediary Send"
+      },
+      {
+        "command": "nusyq.openclaw.status",
+        "title": "NuSyQ: OpenClaw Status"
+      },
+      {
+        "command": "nusyq.antigravity.health",
+        "title": "NuSyQ: Antigravity Health"
+      },
+      {
+        "command": "nusyq.simVerse.sync",
+        "title": "NuSyQ: SimulatedVerse Sync"
+      },
+      {
+        "command": "nusyq.cultureShip.audit",
+        "title": "NuSyQ: Culture Ship Audit"
+      },
+      {
+        "command": "nusyq.claude.query",
+        "title": "NuSyQ: Claude Query"
+      },
+      {
+        "command": "nusyq.copilot.query",
+        "title": "NuSyQ: Copilot Query"
+      },
+      {
+        "command": "nusyq.codex.query",
+        "title": "NuSyQ: Codex Query"
+      },
+      {
+        "command": "nusyq.chatdev.generate",
+        "title": "NuSyQ: ChatDev Generate"
+      },
+      {
+        "command": "nusyq.council.propose",
+        "title": "NuSyQ: AI Council Propose"
+      },
+      {
+        "command": "nusyq.chatgpt.bridge",
+        "title": "NuSyQ: ChatGPT Bridge"
+      },
+      {
+        "command": "nusyq.ollama.query",
+        "title": "NuSyQ: Ollama Query"
+      },
+      {
+        "command": "nusyq.lmstudio.query",
+        "title": "NuSyQ: LM Studio Query"
+      },
+      {
+        "command": "nusyq.future.predictions",
+        "title": "NuSyQ: Future Predictions"
+      },
+      {
+        "command": "nusyq.moderator.review",
+        "title": "NuSyQ: Moderator Review"
+      },
+      {
+        "command": "nusyq.tasks.run",
+        "title": "NuSyQ: Run Tasks"
+      },
+      {
+        "command": "nusyq.tests.run",
+        "title": "NuSyQ: Run Tests"
+      },
+      {
+        "command": "nusyq.showSystemState",
+        "title": "NuSyQ: Show System State"
+      }
+    ],
+    "configuration": {
+      "title": "NuSyQ",
+      "properties": {
+        "nusyq.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Python executable used to run NuSyQ scripts."
+        },
+        "nusyq.autoStartOnOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically start NuSyQ orchestration when VS Code opens the workspace."
+        },
+        "nusyq.autoStartMode": {
+          "type": "string",
+          "enum": [
+            "terminals",
+            "ignition"
+          ],
+          "default": "terminals",
+          "description": "Auto-start mode to run when nusyq.autoStartOnOpen is enabled."
+        },
+        "nusyq.autoRouteOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Route save events into NuSyQ terminal channels."
+        },
+        "nusyq.autoRouteDiagnostics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Route VS Code diagnostics updates into NuSyQ Errors/Anomalies channels."
+        },
+        "nusyq.diagnosticsSpikeThreshold": {
+          "type": "number",
+          "default": 25,
+          "minimum": 1,
+          "description": "Diagnostics delta threshold that triggers anomaly alerts."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "@types/vscode": "^1.109.0",
+    "typescript": "^5.9.3"
+  }
+}

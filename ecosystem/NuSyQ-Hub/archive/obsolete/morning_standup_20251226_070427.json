@@ -1,0 +1,133 @@
+{
+  "run_id": "20251226_070427",
+  "timestamp": "2025-12-26T07:05:55.212324",
+  "status": "fail",
+  "total_checks": 6,
+  "passed": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "check": "?? Quick Tests",
+      "exit_code": 1,
+      "duration_seconds": 30.03,
+      "details": "Command '['C:\\\\Users\\\\keath\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe', '-m', 'pytest', 'tests/', '-q', '-x']' timed out after 30 seconds",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "tests/",
+        "-q",
+        "-x"
+      ]
+    },
+    {
+      "check": "?? Code Format",
+      "exit_code": 1,
+      "duration_seconds": 7.28,
+      "details": "Skipping .ipynb files as Jupyter dependencies are not installed. | You can fix this by running ``pip install \"black[jupyter]\"`` | would reformat C:\\Users\\kea...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "black",
+        "src/",
+        "--check"
+      ]
+    },
+    {
+      "check": "?? Lint Check",
+      "exit_code": 1,
+      "duration_seconds": 0.14,
+      "details": "E501 Line too long (101 > 100) | --> src\\agents\\code_generator.py:251:101 | | | 250 |         # Requirements | 251 |         requirements_prompt = f\"\"\"List P...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src/",
+        "--select=E,F"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "check": "?? System Health",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 16.72,
+      "details": "\ud83c\udfe5 NuSyQ Selfcheck Diagnostic | ================================================== | 1. Validating Python syntax... | 2. Checking required directories... | 3....",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "selfcheck"
+      ]
+    },
+    {
+      "check": "?? Capabilities",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 16.97,
+      "details": "\ud83e\udde0 NuSyQ Comprehensive Capability Discovery | ====================================================================== | \ud83d\udcca System Snapshot | Total Capabilities:...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "capabilities"
+      ]
+    },
+    {
+      "check": "?? Guild Status",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 16.48,
+      "details": "{ | \"timestamp\": \"2025-12-26T07:04:17.452636\", | \"agents_online\": 2, | \"quests_open\": 1, | \"quests_active\": 0, | \"quests_blocked\": 0, | \"critical_signals\": [...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "guild_status"
+      ]
+    },
+    {
+      "check": "?? Quick Tests",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 30.03,
+      "details": "Command '['C:\\\\Users\\\\keath\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe', '-m', 'pytest', 'tests/', '-q', '-x']' timed out after 30 seconds",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "pytest",
+        "tests/",
+        "-q",
+        "-x"
+      ]
+    },
+    {
+      "check": "?? Code Format",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 7.28,
+      "details": "Skipping .ipynb files as Jupyter dependencies are not installed. | You can fix this by running ``pip install \"black[jupyter]\"`` | would reformat C:\\Users\\kea...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "black",
+        "src/",
+        "--check"
+      ]
+    },
+    {
+      "check": "?? Lint Check",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 0.14,
+      "details": "E501 Line too long (101 > 100) | --> src\\agents\\code_generator.py:251:101 | | | 250 |         # Requirements | 251 |         requirements_prompt = f\"\"\"List P...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src/",
+        "--select=E,F"
+      ]
+    }
+  ]
+}

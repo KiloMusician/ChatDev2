@@ -1,0 +1,34 @@
+{
+  "total_quests": 1,
+  "quests": [
+    {
+      "title": "Fix warnings: I001 (8 occurrences)",
+      "description": "Fix 16 warnings across 10 files",
+      "type": "RefactorPU",
+      "priority": "high",
+      "files_affected": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/copilot/task_manager.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/core/context_server.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/culture_ship/plugins/black_formatter.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/culture_ship/plugins/ruff_fixer.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/culture_ship_real_action.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/healthcheck_server.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/orchestration/culture_ship_strategic_advisor.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/orchestration/workspace_coordinator.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/tracing_setup.py",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/unified_documentation_engine.py"
+      ],
+      "total_issues": 16,
+      "issue_breakdown": {
+        "I001": 8,
+        "F401": 2,
+        "F821": 6
+      },
+      "proof_criteria": [
+        "All warnings of type I001 resolved",
+        "Tests passing for affected files",
+        "No new warnings introduced"
+      ]
+    }
+  ]
+}

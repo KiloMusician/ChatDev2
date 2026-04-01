@@ -1,0 +1,333 @@
+# Terminal Depths — Model Registry Configuration
+# 
+# Defines available models with capabilities, endpoints, and priorities.
+# Used by model router and agent surfaces (Continue, Roo Code, etc.)
+# 
+# Format: YAML with model metadata for intelligent routing
+# Usage: agents query this registry to select appropriate model for task
+
+models:
+  # ============================================================
+  # Primary Coder Models (Code generation, editing, reasoning)
+  # ============================================================
+  - id: qwen2.5-coder:7b
+    name: "Qwen2.5-Coder 7B"
+    provider: ollama
+    endpoint: "http://localhost:11434/api/chat"
+    openai_compatible: "http://localhost:11434/v1/chat/completions"
+    capabilities:
+      - code
+      - chat
+      - tools
+      - reasoning
+    context_length: 32768
+    tokens_per_second: ~15
+    priority: 10
+    hardware_requirement: "8GB RAM"
+    description: "Fast, versatile coder. Excellent for Terminal Depths game logic."
+    suitable_for:
+      - game_commands
+      - quick_edits
+      - tool_calling
+    note: "Primary local coder for resource-constrained setups"
+
+  - id: qwen2.5-coder:14b
+    name: "Qwen2.5-Coder 14B"
+    provider: ollama
+    endpoint: "http://localhost:11434/api/chat"
+    openai_compatible: "http://localhost:11434/v1/chat/completions"
+    capabilities:
+      - code
+      - chat
+      - tools
+      - reasoning
+      - complex_analysis
+    context_length: 32768
+    tokens_per_second: ~8
+    priority: 20
+    hardware_requirement: "16GB RAM"
+    description: "Stronger reasoning for complex game scenarios and multi-step tasks."
+    suitable_for:
+      - complex_hacks
+      - mission_planning
+      - architecture_decisions
+    note: "Recommended for balanced setups (16GB+)"
+
+  - id: deepseek-coder-v2:16b
+    name: "DeepSeek Coder V2 16B"
+    provider: ollama
+    endpoint: "http://localhost:11434/api/chat"
+    openai_compatible: "http://localhost:11434/v1/chat/completions"
+    capabilities:
+      - code
+      - chat
+      - tools
+      - reasoning
+      - complex_analysis
+      - debugging
+    context_length: 32768
+    tokens_per_second: ~6
+    priority: 25
+    hardware_requirement: "24GB RAM"
+    description: "Strongest code reasoning and debugging. Expert-level game interactions."
+    suitable_for:
+      - deep_reasoning
+      - debugging
+      - expert_tasks
+    note: "For powerful workstations only (24GB+)"
+
+  # ============================================================
+  # Vision Models (Image understanding, visual reasoning)
+  # ============================================================
+  - id: qwen2.5-vl:7b
+    name: "Qwen2.5-VL 7B"
+    provider: ollama
+    endpoint: "http://localhost:11434/api/chat"
+    openai_compatible: "http://localhost:11434/v1/chat/completions"
+    capabilities:
+      - vision
+      - chat
+      - image_understanding
+      - visual_localization
+      - ocr
+    context_length: 32768
+    tokens_per_second: ~10
+    priority: 15
+    hardware_requirement: "12GB RAM"
+    description: "Primary vision model. Understands code screenshots, diagrams, game screens."
+    suitable_for:
+      - screenshot_analysis
+      - code_review_from_images
+      - game_state_visual_analysis
+      - diagram_interpretation
+    note: "Recommended default vision model"
+
+  - id: llava:7b
+    name: "LLaVA 7B"
+    provider: ollama
+    endpoint: "http://localhost:11434/api/chat"
+    openai_compatible: "http://localhost:11434/v1/chat/completions"
+    capabilities:
+      - vision
+      - chat
+      - image_understanding
+    context_length: 4096
+    tokens_per_second: ~8
+    priority: 5
+    hardware_requirement: "10GB RAM"
+    description: "Fallback vision model. Good for basic image understanding."
+    suitable_for:
+      - fallback_vision
+      - lightweight_analysis
+    note: "Backup when qwen-vl unavailable"
+
+  # ============================================================
+  # LM Studio Models (Compatibility layer, OpenAI-compatible)
+  # ============================================================
+  - id: gpt-oss-20b
+    name: "GPT-OSS 20B (via LM Studio)"
+    provider: lmstudio
+    endpoint: "http://localhost:8000/v1/chat/completions"
+    capabilities:
+      - code
+      - chat
+      - reasoning
+    context_length: 2048
+    priority: 25
+    hardware_requirement: "20GB VRAM"
+    description: "LM Studio-served model for compatibility testing and cloud fallback."
+    suitable_for:
+      - lmstudio_testing
+      - gpu_acceleration
+    note: "Use if GPU available and high throughput needed"
+
+model_routing:
+  # Rules for automatic model selection based on task capabilities
+  rules:
+    - task_type: vision
+      required_capabilities: [vision]
+      preferred_model: qwen2.5-vl:7b
+      fallback_model: llava:7b
+      reasoning: "Vision task requires image understanding"
+
+    - task_type: code_generation
+      required_capabilities: [code, tools]
+      preferred_model: qwen2.5-coder:7b
+      fallback_model: qwen2.5-coder:14b
+      reasoning: "Code task requires code capability"
+
+    - task_type: complex_reasoning
+      required_capabilities: [code, reasoning]
+      preferred_model: qwen2.5-coder:14b
+      fallback_model: deepseek-coder-v2:16b
+      reasoning: "Complex task benefits from larger model"
+
+    - task_type: tool_calling
+      required_capabilities: [tools]
+      preferred_model: qwen2.5-coder:7b
+      fallback_model: qwen2.5-coder:14b
+      reasoning: "Tool use requires models with function calling"
+
+    - task_type: game_command
+      required_capabilities: [chat]
+      preferred_model: qwen2.5-coder:7b
+      fallback_model: qwen2.5-coder:14b
+      reasoning: "Game commands are fast, simple tasks"
+
+  # Load balancing and fallback
+  primary_endpoint: "http://localhost:11434/v1/chat/completions"
+  fallback_endpoints:
+    - "http://localhost:8000/v1/chat/completions"  # LM Studio fallback
+
+profiles:
+  # Hardware profiles: auto-select models based on available resources
+  lite:
+    description: "Low-end laptops (8GB RAM)"
+    models:
+      coder: qwen2.5-coder:7b
+      vision: llava:7b
+      reasoning: qwen2.5-coder:7b
+    batch_size: 1
+
+  balanced:
+    description: "Standard dev machine (16GB RAM) — RECOMMENDED"
+    models:
+      coder: qwen2.5-coder:7b
+      vision: qwen2.5-vl:7b
+      reasoning: qwen2.5-coder:14b
+    batch_size: 2
+
+  architect:
+    description: "Powerful workstation (32GB+ RAM)"
+    models:
+      coder: deepseek-coder-v2:16b
+      vision: qwen2.5-vl:7b
+      reasoning: deepseek-coder-v2:16b
+    batch_size: 4
+
+  vision:
+    description: "Multi-modal focus with GPU"
+    models:
+      coder: qwen2.5-coder:14b
+      vision: qwen2.5-vl:7b
+      reasoning: qwen2.5-coder:14b
+    batch_size: 2
+
+integration:
+  # How models integrate with Terminal Depths
+  game_engine:
+    llm_commands:
+      - "llm <prompt>"                    # Route to preferred coder model
+      - "vision <image_path>"              # Route to preferred vision model
+      - "reason <problem>"                 # Route to preferred reasoning model
+    endpoint: "http://localhost:11434/api/generate"
+    fallback_endpoint: "http://localhost:8000/v1/chat/completions"
+
+  continue_extension:
+    config_path: "~/.continue/config.json"
+    models: all                           # Use all available models
+    recommendation: "Use primary endpoint with fallback"
+
+  roo_code:
+    config_path: "~/.roo-code/config.json"
+    models: all
+    recommendation: "Configure both Ollama and LM Studio"
+
+tool_calling:
+  # Models that support tool/function calling
+  supported_models:
+    - qwen2.5-coder:7b
+    - qwen2.5-coder:14b
+    - deepseek-coder-v2:16b
+  mechanism: "OpenAI-compatible function calling"
+  example_tool:
+    name: "execute_game_command"
+    description: "Execute a command in Terminal Depths"
+    parameters:
+      command:
+        type: string
+        description: "The game command to execute (e.g., 'scan', 'hack')"
+
+vision_integration:
+  # How vision models integrate with game
+  supported_models:
+    - qwen2.5-vl:7b
+    - llava:7b
+  input_formats:
+    - file_path: "/path/to/image.png"
+    - data_url: "data:image/png;base64,..."
+    - screenshot: "capture current terminal"
+  use_cases:
+    - game_state_analysis
+    - code_screenshot_review
+    - terminal_output_parsing
+    - diagram_interpretation
+
+performance_metrics:
+  # Expected performance on standard hardware
+  ollama_local:
+    latency_ms:
+      qwen2.5-coder:7b: "50-100ms"
+      qwen2.5-coder:14b: "100-200ms"
+      qwen2.5-vl:7b: "150-300ms"
+    throughput:
+      qwen2.5-coder:7b: "~15 tok/sec"
+      qwen2.5-coder:14b: "~8 tok/sec"
+    cold_start: "~2s"
+    warm_start: "<100ms"
+
+  lmstudio_gpu:
+    latency_ms:
+      "gpt-oss-20b": "20-50ms (with GPU)"
+    throughput: "~50 tok/sec (NVIDIA A100)"
+
+# ============================================================
+# Configuration Examples
+# ============================================================
+
+examples:
+  # Example 1: Continue Extension
+  continue_config: |
+    {
+      "models": [
+        {
+          "title": "Local Coder (Ollama)",
+          "provider": "ollama",
+          "model": "qwen2.5-coder:7b",
+          "apiBase": "http://localhost:11434/api"
+        },
+        {
+          "title": "Local Vision (Ollama)",
+          "provider": "ollama",
+          "model": "qwen2.5-vl:7b",
+          "apiBase": "http://localhost:11434/api"
+        }
+      ]
+    }
+
+  # Example 2: Game Integration
+  game_command: |
+    # In Terminal Depths CLI:
+    > vision screenshot.png
+    [sends screenshot to qwen2.5-vl:7b]
+    
+    > llm analyze the previous output
+    [routes to qwen2.5-coder:7b]
+    
+    > reason about next steps
+    [routes to qwen2.5-coder:14b for complex reasoning]
+
+  # Example 3: Python Script
+  python_router: |
+    from model_router import ModelRouter
+    
+    router = ModelRouter(config_path="config/models.yaml")
+    model = router.select_model(task_type="vision")
+    response = model.generate("Describe this image", image_path="screen.png")
+
+notes: |
+  1. All endpoints use OpenAI-compatible interface (where applicable)
+  2. Models auto-download from Ollama registry on first use
+  3. Vision models require ~1-2x more VRAM than text-only models
+  4. Tool calling works via OpenAI function_calling interface
+  5. Fallback models are used if primary endpoint unavailable

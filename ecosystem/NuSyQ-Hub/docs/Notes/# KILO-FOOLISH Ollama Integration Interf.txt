@@ -1,0 +1,256 @@
+# KILO-FOOLISH Ollama Integration Interface
+
+param(
+    [string]$Chat,
+    [string]$Model,
+    [string]$AnalyzeFile,
+    [string]$GenerateDocs,
+    [switch]$Status,
+    [switch]$Models,
+    [switch]$Pull,
+    [string]$PullModel,
+    [switch]$Stream,
+    [switch]$Clear,
+    [switch]$Export
+)
+
+function Write-OllamaLog {
+    param([string]$Message, [string]$Level = "INFO")
+
+    $colors = @{
+        "ERROR" = "Red"; "WARNING" = "Yellow"; "SUCCESS" = "Green"
+        "INFO" = "Cyan"; "OLLAMA" = "Magenta"
+    }
+
+    $timestamp = Get-Date -Format "HH:mm:ss"
+    Write-Host "[$timestamp] [OLLAMA] $Message" -ForegroundColor $colors[$Level]
+}
+
+function Start-OllamaChat {
+    param([string]$Message, [string]$Model = "", [bool]$Stream = $false)
+
+    Write-OllamaLog "🤖 Starting Ollama chat..." "OLLAMA"
+
+    try {
+        $pythonArgs = @("--chat", $Message)
+        if ($Model) { $pythonArgs += @("--model", $Model) }
+        if ($Stream) { $pythonArgs += "--stream" }
+
+        $result = python ".\src\core\OllamaHub.py" @pythonArgs 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host $result
+        } else {
+            Write-OllamaLog "❌ Chat failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Chat error: $_" "ERROR"
+    }
+}
+
+function Get-OllamaStatus {
+    Write-OllamaLog "📊 Getting Ollama hub status..." "INFO"
+
+    try {
+        $result = python ".\src\core\OllamaHub.py" --status 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            $status = $result | ConvertFrom-Json
+
+            Write-Host "🚀 KILO Ollama Hub Status" -ForegroundColor Magenta
+            Write-Host "=" * 40 -ForegroundColor Magenta
+            Write-Host "Connection: $($status.connection_status)" -ForegroundColor $(if($status.connection_status -eq "connected") {"Green"} else {"Red"})
+            Write-Host "Available Models: $($status.available_models)" -ForegroundColor Cyan
+            Write-Host "Conversation History: $($status.conversation_history_length) messages" -ForegroundColor Cyan
+            Write-Host "Total Requests: $($status.performance_stats.total_requests)" -ForegroundColor Cyan
+            Write-Host "Success Rate: $([math]::Round(($status.performance_stats.successful_requests / [math]::Max($status.performance_stats.total_requests, 1)) * 100, 1))%" -ForegroundColor Green
+
+            if ($status.model_list) {
+                Write-Host "`n📦 Available Models:" -ForegroundColor Yellow
+                foreach ($model in $status.model_list) {
+                    Write-Host "  • $model" -ForegroundColor White
+                }
+            }
+        } else {
+            Write-OllamaLog "❌ Status check failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Status error: $_" "ERROR"
+    }
+}
+
+function Get-OllamaModels {
+    Write-OllamaLog "📦 Discovering available models..." "INFO"
+
+    try {
+        $result = python ".\src\core\OllamaHub.py" --models 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host $result
+        } else {
+            Write-OllamaLog "❌ Model discovery failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Model discovery error: $_" "ERROR"
+    }
+}
+
+function Install-OllamaModel {
+    param([string]$ModelName)
+
+    if (!$ModelName) {
+        Write-OllamaLog "❌ Model name required" "ERROR"
+        return
+    }
+
+    Write-OllamaLog "📥 Pulling model: $ModelName..." "INFO"
+
+    try {
+        $result = python ".\src\core\OllamaHub.py" --pull $ModelName 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-OllamaLog "✅ Model pulled successfully: $ModelName" "SUCCESS"
+            Write-Host $result
+        } else {
+            Write-OllamaLog "❌ Model pull failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Model pull error: $_" "ERROR"
+    }
+}
+
+function Start-CodeAnalysis {
+    param([string]$FilePath)
+
+    if (!$FilePath -or !(Test-Path $FilePath)) {
+        Write-OllamaLog "❌ Valid file path required" "ERROR"
+        return
+    }
+
+    Write-OllamaLog "🔍 Analyzing code: $FilePath..." "INFO"
+
+    try {
+        $result = python ".\src\core\OllamaHub.py" --analyze $FilePath 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-OllamaLog "✅ Code analysis complete" "SUCCESS"
+            Write-Host $result
+        } else {
+            Write-OllamaLog "❌ Code analysis failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Analysis error: $_" "ERROR"
+    }
+}
+
+function New-Documentation {
+    param([string]$CodeSnippet)
+
+    if (!$CodeSnippet) {
+        Write-OllamaLog "❌ Code snippet required" "ERROR"
+        return
+    }
+
+    Write-OllamaLog "📝 Generating documentation..." "INFO"
+
+    try {
+        $result = python ".\src\core\OllamaHub.py" --generate-docs $CodeSnippet 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-OllamaLog "✅ Documentation generated" "SUCCESS"
+            Write-Host $result
+        } else {
+            Write-OllamaLog "❌ Documentation generation failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Documentation error: $_" "ERROR"
+    }
+}
+
+function Clear-OllamaHistory {
+    Write-OllamaLog "🧹 Clearing conversation history..." "WARNING"
+
+    try {
+        $result = python ".\src\core\OllamaHub.py" --clear 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-OllamaLog "✅ Conversation history cleared" "SUCCESS"
+        } else {
+            Write-OllamaLog "❌ Clear failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Clear error: $_" "ERROR"
+    }
+}
+
+function Export-OllamaConversation {
+    Write-OllamaLog "📤 Exporting conversation history..." "INFO"
+
+    try {
+        $result = python ".\src\core\OllamaHub.py" --export 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-OllamaLog "✅ Conversation exported" "SUCCESS"
+            Write-Host $result
+        } else {
+            Write-OllamaLog "❌ Export failed: $result" "ERROR"
+        }
+    }
+    catch {
+        Write-OllamaLog "❌ Export error: $_" "ERROR"
+    }
+}
+
+# Main execution
+Write-Host "`n🤖 KILO-FOOLISH Ollama Intelligence Hub" -ForegroundColor Magenta
+Write-Host "=" * 50 -ForegroundColor Magenta
+
+if ($Chat) {
+    Start-OllamaChat -Message $Chat -Model $Model -Stream $Stream
+}
+elseif ($Status) {
+    Get-OllamaStatus
+}
+elseif ($Models) {
+    Get-OllamaModels
+}
+elseif ($Pull -or $PullModel) {
+    Install-OllamaModel -ModelName $PullModel
+}
+elseif ($AnalyzeFile) {
+    Start-CodeAnalysis -FilePath $AnalyzeFile
+}
+elseif ($GenerateDocs) {
+    New-Documentation -CodeSnippet $GenerateDocs
+}
+elseif ($Clear) {
+    Clear-OllamaHistory
+}
+elseif ($Export) {
+    Export-OllamaConversation
+}
+else {
+    Write-OllamaLog "Available commands:" "INFO"
+    Write-OllamaLog "  -Chat 'message'        : Chat with Ollama AI" "INFO"
+    Write-OllamaLog "  -Status               : Show hub status" "INFO"
+    Write-OllamaLog "  -Models               : List available models" "INFO"
+    Write-OllamaLog "  -PullModel 'name'     : Install new model" "INFO"
+    Write-OllamaLog "  -AnalyzeFile 'path'   : Analyze code file" "INFO"
+    Write-OllamaLog "  -GenerateDocs 'code'  : Generate documentation" "INFO"
+    Write-OllamaLog "  -Clear                : Clear conversation history" "INFO"
+    Write-OllamaLog "  -Export               : Export conversations" "INFO"
+
+    Write-Host "`n🚀 Quick examples:" -ForegroundColor Yellow
+    Write-Host "  .\src\core\OllamaHub.ps1 -Chat 'Explain KILO architecture'" -ForegroundColor White
+    Write-Host "  .\src\core\OllamaHub.ps1 -AnalyzeFile '.\src\config\secrets.py'" -ForegroundColor White
+    Write-Host "  .\src\core\OllamaHub.ps1 -Status" -ForegroundColor White
+}
+
+Write-Host "`n💡 Pro tip: Use -Stream for real-time responses!" -ForegroundColor Cyan

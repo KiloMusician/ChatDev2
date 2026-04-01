@@ -1,0 +1,16 @@
+batch_size: 50
+rates:
+  max_per_minute: 120
+  max_external_calls_per_hour: 10
+defaults:
+  allowExternalCalls: false
+  prefer_zero_token: true
+strategies:
+  dedupe_keys: [kind, data.path, data.symbol]
+  priorities:
+    - softlock.recover: 0
+    - import.fix: 1
+    - compile.error: 1
+    - placeholder.replace: 2
+    - rename.rewire: 2
+    - docs.index: 6

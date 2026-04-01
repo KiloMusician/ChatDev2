@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-02-03T13:57:07.435414",
+  "services": {
+    "docker": {
+      "state": "failed",
+      "name": "Docker Daemon"
+    },
+    "ollama": {
+      "state": "failed",
+      "name": "Ollama LLM"
+    },
+    "vscode": {
+      "state": "running",
+      "name": "VS Code Workspace"
+    },
+    "terminals": {
+      "state": "running",
+      "name": "Agent Terminals"
+    },
+    "quest_system": {
+      "state": "running",
+      "name": "Quest System"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+# SimulatedVerse — Docker build context exclusions
+# Prevents the 24GB working tree from being sent to the daemon on every build.
+
+# Node / package managers
+**/node_modules
+**/npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+.yarn/
+
+# Build output (rebuilt inside container)
+dist/
+build/
+**/bin
+**/obj
+.vite/
+.cache/
+.tmp/
+tmp/
+
+# Git
+**/.git
+**/.gitignore
+**/.gitattributes
+.github/
+
+# IDE / OS
+**/.vscode
+**/.vs
+**/.idea
+**/.DS_Store
+**/*.DS_Store
+Thumbs.db
+
+# Test / coverage
+coverage/
+**/__tests__/
+
+# Env / secrets
+**/.env
+**/.env.*
+!.env.example
+**/secrets.dev.yaml
+**/values.dev.yaml
+
+# Logs
+*.log
+logs/
+var/
+
+# Large asset / data directories
+uploads/
+exports/
+backups/
+*.sqlite
+*.db
+
+# Docker (don't recurse into self)
+Dockerfile*
+**/Dockerfile*
+docker-compose*
+**/docker-compose*
+**/compose*
+.dockerignore
+**/.dockerignore
+
+# Misc project-specific ignores
+**/__pycache__
+**/.venv
+**/.classpath
+**/.project
+**/.settings
+**/.toolstarget
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/charts
+
+# Docs / meta (not needed at runtime)
+docs/
+*.md
+LICENSE
+README.md

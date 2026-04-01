@@ -1,0 +1,153 @@
+# SCP FOUNDATION MOBILE TASK FORCE
+# SITE-19 COGNITECTONIC RESEARCH FACILITY
+# SECTOR DESIGNATION MAP
+
+facility_designation: "Site-19 Cognitectonic Research Facility"
+anomaly_classification: "SCP-CLINK (CoreLink Foundation)"
+containment_status: "Partial Breach - React Hydration Failure"
+threat_level: "EUCLID"
+last_inspection: "2025-08-30T23:59:43Z"
+
+sectors:
+  # ============================================================================
+  # SECTOR-01: SITE-19 ADMINISTRATIVE LOBBY
+  # ============================================================================
+  - id: "SECTOR-01"
+    designation: "Site-19 Administrative Lobby"
+    path: "./"
+    risk_level: "SAFE"
+    description: "Root configuration and project definition files. Entry point control."
+    containment_protocol: "Standard access controls. Monitor for unauthorized modifications."
+    anomalous_objects:
+      - "package.json - Dependency manifest"
+      - "tsconfig.json - TypeScript configuration artifact"
+      - "vite.config.ts - Build system controller"
+      - "replit.md - Site documentation anomaly"
+    personnel_clearance: "Level-1"
+    
+  # ============================================================================
+  # SECTOR-02: THE CONTAINMENT WINGS
+  # ============================================================================
+  - id: "SECTOR-02-A"
+    designation: "Euclid Containment Wing - Autonomous Entities"
+    path: "./server/services"
+    risk_level: "EUCLID" 
+    description: "Autonomous AI systems and self-modifying code entities. Unpredictable behavior patterns."
+    containment_protocol: "All entities require Rosetta onboarding. Continuous monitoring via connectome."
+    anomalous_objects:
+      - "cognitive_power.ts - CP calculation entity"
+      - "loop_orchestrator.ts - AI Council autonomous decision system"
+      - "pu_queue.ts - Self-executing task processor"
+      - "offline_progress.ts - Temporal manipulation system"
+    personnel_clearance: "Level-3"
+    
+  - id: "SECTOR-02-B"
+    designation: "Safe Storage Wing - Utility Arsenal" 
+    path: "./shared"
+    risk_level: "SAFE"
+    description: "Predictable utility functions and stable interfaces. Well-contained artifacts."
+    containment_protocol: "Standard monitoring. Safe for junior researcher access."
+    anomalous_objects:
+      - "schema.ts - Data structure definitions"
+      - "utils/ - Tool collection"
+    personnel_clearance: "Level-1"
+    
+  - id: "SECTOR-02-C"
+    designation: "Keter Containment Zone - High-Risk Entities"
+    path: "./client/src"
+    risk_level: "KETER"
+    description: "ACTIVE CONTAINMENT BREACH: React hydration failure. Client-side anomalies."
+    containment_protocol: "EMERGENCY PROTOCOL ACTIVE. Systematic archeology required."
+    anomalous_objects:
+      - "App.tsx - Primary UI controller (BREACH DETECTED)"
+      - "main.tsx - Application bootstrap (SUSPECTED ANOMALY)"
+      - "components/ - UI entity collection (UNSTABLE)"
+    personnel_clearance: "Level-4"
+    breach_status: "ACTIVE"
+    breach_type: "React Error #185 - Hydration Mismatch"
+    
+  # ============================================================================
+  # SECTOR-03: THE TEMPLE OF KNOWLEDGE
+  # ============================================================================
+  - id: "SECTOR-03"
+    designation: "Temple of Knowledge - Archive Complex"
+    path: "./vision"
+    risk_level: "SAFE"
+    description: "Strategic documentation and consciousness framework lore."
+    containment_protocol: "Preserve all artifacts. Update connectome linkages."
+    anomalous_objects:
+      - "cognitectonic_idle_grand_tech_tree.md - The Grand Plan artifact"
+      - "cognitectonic_idle_plan.md - Strategic blueprint"
+    personnel_clearance: "Level-2"
+    
+  # ============================================================================
+  # SECTOR-04: TESTING CHAMBERS
+  # ============================================================================
+  - id: "SECTOR-04"
+    designation: "Testing Chambers - Containment Validation"
+    path: "./tests"
+    risk_level: "THAUMIEL"
+    description: "Thaumiel-class testing systems. Used to contain other anomalies."
+    containment_protocol: "Each test is a containment procedure. Breach drills mandatory."
+    anomalous_objects: []
+    status: "UNDERPOPULATED - Requires Thaumiel test development"
+    personnel_clearance: "Level-3"
+    
+  # ============================================================================
+  # SECTOR-05: POWER GRID & INFRASTRUCTURE
+  # ============================================================================
+  - id: "SECTOR-05"
+    designation: "Infrastructure Power Grid"
+    path: "./server"
+    risk_level: "EUCLID"
+    description: "Core server infrastructure. Critical to site operations."
+    containment_protocol: "Redundant monitoring. No single-point failures permitted."
+    anomalous_objects:
+      - "index.ts - Primary server controller"
+      - "routes.ts - API gateway system"
+      - "routes/ - Modular route handlers"
+    personnel_clearance: "Level-2"
+
+# ============================================================================
+# SPECIAL CONTAINMENT PROCEDURES
+# ============================================================================
+containment_procedures:
+  - id: "SCP-REACT-185"
+    title: "React Hydration Anomaly"
+    description: "Client-side rendering mismatch causing interface failures"
+    status: "ACTIVE BREACH"
+    priority: "CRITICAL"
+    assigned_mtf: "MTF-DELTA-7 (Archaeological Survey Team)"
+    
+  - id: "SCP-QUEUE-NULL"
+    title: "Task Processor Verification Failure"
+    description: "All tasks completing with [NO PROOF] status"
+    status: "CHRONIC ANOMALY"
+    priority: "HIGH"
+    
+  - id: "SCP-CONNECT-DEAD"
+    title: "Connectome Synchronization Failure"
+    description: "System state not properly updating in real-time"
+    status: "INVESTIGATION REQUIRED"
+    priority: "MEDIUM"
+
+# ============================================================================
+# RESEARCH DIRECTIVES
+# ============================================================================
+research_priorities:
+  - "Implement Object Classifier Agent for systematic file analysis"
+  - "Deploy Rosetta Stone Protocol for content-addressed identification"
+  - "Establish Archivist Agent for living documentation"
+  - "Resolve SCP-REACT-185 containment breach"
+  - "Implement verification gates for task completion proof"
+
+# ============================================================================
+# PERSONNEL ASSIGNMENTS
+# ============================================================================
+mtf_assignments:
+  - designation: "MTF-DELTA-7"
+    codename: "Archaeological Survey Team" 
+    mission: "Systematic codebase cartography and integration"
+    clearance_level: "Level-4"
+    specialization: "Non-destructive analysis and containment"
+    current_operation: "Operation: Systematic Cartography & Integration"

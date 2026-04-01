@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Terminal Keeper: Lattice Colonists</name>
+  <author>DevMentor / KiloMusician</author>
+  <packageId>com.devmentor.terminalkeeper</packageId>
+  <version>0.1.0</version>
+  <supportedVersions>
+    <li>1.6</li>
+    <li>1.5</li>
+    <li>1.4</li>
+  </supportedVersions>
+  <description>
+Terminal Keeper wires your RimWorld colony into the Terminal Depths AI ecosystem.
+
+Each colonist becomes a persistent LLM agent backed by Ollama or LM Studio running in Docker.
+Build Lattice Terminals so colonists can upload task logs, download blueprints from the AI Council,
+and converse with Gordon, Serena, Ada-7, Cypher, and the Watcher.
+
+The AI Council (Gordon + Serena + Culture Ship) votes on colony-wide strategies, generates
+base blueprints, and queues jobs directly into RimWorld's work system.
+
+Playing Terminal Depths feeds the CHUG engine. Your colony IS the ecosystem.
+
+Requirements:
+- Terminal Depths server running locally or via Docker (default: http://localhost:7337)
+- Harmony mod
+
+Optional:
+- Vanilla Expanded Framework (for enhanced UI)
+- RimAPI (for extended colony state exposure)
+  </description>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+  </loadAfter>
+</ModMetaData>

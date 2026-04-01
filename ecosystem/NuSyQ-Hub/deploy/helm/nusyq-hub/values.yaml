@@ -1,0 +1,229 @@
+# Default values for nusyq-hub Helm chart
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global settings
+global:
+  namespace: nusyq-hub
+  imageRegistry: ghcr.io/kilomusician
+
+# Application image configuration
+image:
+  repository: nusyq-hub
+  pullPolicy: IfNotPresent
+  tag: "v1.0.0"  # Pinned — matches kustomization.yaml; update when releasing
+
+# Image pull secrets (if using private registry)
+imagePullSecrets: []
+
+# Service account
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "nusyq-hub-sa"
+
+# Pod annotations
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "9090"
+  prometheus.io/path: "/metrics"
+
+# Pod security context
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+# Container security context
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: false
+  allowPrivilegeEscalation: false
+
+# Application configuration
+config:
+  environment: production
+  logLevel: INFO
+  orchestratorMode: production
+  consciousnessBridgeEnabled: true
+  quantumResolverEnabled: true
+  chatdevEnabled: true
+  chatdevMaxAgents: 7
+  maxWorkers: 4
+  timeoutSeconds: 600
+  breathingPacingEnabled: true
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 5000
+  targetPort: http
+  metricsPort: 9090
+  sessionAffinity: ClientIP
+  sessionAffinityTimeout: 10800
+
+# LoadBalancer configuration (optional)
+loadBalancer:
+  enabled: false
+  port: 80
+  httpsPort: 443
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+  hosts:
+    - host: nusyq.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: nusyq-tls-cert
+      hosts:
+        - nusyq.example.com
+
+# Resource limits and requests
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
+  limits:
+    memory: "2Gi"
+    cpu: "1000m"
+
+# Autoscaling configuration
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# Health checks
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+startupProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  timeoutSeconds: 3
+  failureThreshold: 30
+
+# Node selection
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity rules
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - nusyq-hub
+        topologyKey: kubernetes.io/hostname
+
+# PostgreSQL configuration
+postgresql:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "15.8-alpine"  # Pinned — matches deploy/k8s/postgres.yaml
+  auth:
+    username: nusyq
+    password: ""  # Provide via --set secrets.postgresPassword=<value>
+    database: nusyq
+  persistence:
+    enabled: true
+    size: 10Gi
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# Redis configuration
+redis:
+  enabled: true
+  image:
+    repository: redis
+    tag: "7.4.2-alpine"  # Pinned — matches deploy/k8s/redis.yaml
+  auth:
+    enabled: true  # Authentication required; provide password via --set
+    password: ""   # Provide via helm install --set secrets.redisPassword=<value>
+  persistence:
+    enabled: false
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+# Ollama configuration
+ollama:
+  enabled: true
+  image:
+    repository: ollama/ollama
+    tag: "0.5.4"  # Pinned — matches deploy/k8s/ollama.yaml
+  persistence:
+    enabled: true
+    size: 50Gi
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: "2000m"
+    limits:
+      memory: "16Gi"
+      cpu: "8000m"
+
+# Secrets configuration
+secrets:
+  create: true
+  annotations: {}
+  # Provide actual values via helm install --set or via sealed-secrets
+  # NEVER commit real passwords to version control
+  postgresPassword: ""
+  redisPassword: ""
+  secretKey: ""
+  jwtSecret: ""
+  openaiApiKey: ""
+  anthropicApiKey: ""
+  googleApiKey: ""
+  githubToken: ""

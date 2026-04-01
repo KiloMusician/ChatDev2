@@ -1,0 +1,29 @@
+#!/bin/sh
+# Post-commit hook wrapper for cross-platform compatibility
+# Executes Python implementation using available Python interpreter
+
+HOOK_DIR="$(dirname "$0")"
+PYTHON_SCRIPT="$HOOK_DIR/post-commit-impl.py"
+
+# Windows (MINGW64/Git Bash): find Python dynamically to avoid Windows Store stub.
+if [ "$(uname -o 2>/dev/null)" = "Msys" ] || [ "$(uname -o 2>/dev/null)" = "Cygwin" ]; then
+    for win_cmd in py python; do
+        PY_WIN="$(command -v "$win_cmd" 2>/dev/null || true)"
+        if [ -n "$PY_WIN" ]; then
+            "$PY_WIN" -c 'import sys; sys.exit(0) if sys.version_info >= (3,10) else sys.exit(2)' 2>/dev/null \
+                && exec "$PY_WIN" "$PYTHON_SCRIPT" "$@"
+        fi
+    done
+fi
+
+# Unix-like: Try python3 first, fall back to python (require >= 3.10)
+for cmd in python3.12 python3.11 python3.10 python3 python; do
+    candidate="$(command -v "$cmd" 2>/dev/null || true)"
+    if [ -n "$candidate" ]; then
+        "$candidate" -c 'import sys; sys.exit(0) if sys.version_info >= (3,10) else sys.exit(2)' 2>/dev/null \
+            && exec "$candidate" "$PYTHON_SCRIPT" "$@"
+    fi
+done
+
+echo "❌ Python >= 3.10 not found. Install Python 3.10+ to run git hooks."
+exit 1

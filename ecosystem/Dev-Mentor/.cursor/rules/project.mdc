@@ -1,0 +1,85 @@
+---
+description: Terminal Depths / DevMentor — Cyberpunk RPG + VS Code mentorship platform
+globs: ["**/*.py", "**/*.md", "**/*.json", "**/*.yaml", "**/*.ts", "**/*.js"]
+alwaysApply: true
+---
+
+# DevMentor / Terminal Depths — Cursor Project Rules
+
+## What This Project Is
+A VS Code-native mentorship platform (DevMentor) that embeds a full cyberpunk terminal RPG (Terminal Depths). The game runs as a FastAPI server, teaches real developer skills through gameplay, and is designed to be extended by AI agents.
+
+## Critical Architecture Rules
+
+### NEVER DO THESE:
+- Rewrite `app/game_engine/commands.py` wholesale — it's 30,000+ lines, surgical edits only
+- Use `_info()` helper — it's undefined at module scope. Will crash.
+- Create duplicate `_cmd_` methods — grep first to check if it exists
+- Use port 7337 for Replit (that's Docker only) — use port 5000
+
+### ALWAYS DO THESE:
+- Use the correct helpers: `_line(text, type)`, `_dim(text)`, `_ok(text)`, `_err(text)`, `_sys(text)`, `_lore(text)`
+- Register new commands in the aliases dict around line 1415 in commands.py
+- Create a man page in `docs/commands/<name>.md` for every new command
+- Test with: `curl -X POST http://localhost:5000/api/game/command -H "Content-Type: application/json" -d '{"session_id":"cursor-test","command":"<cmd>"}'`
+- Run syntax check after any commands.py edit: `python3 -c "import ast; ast.parse(open('app/game_engine/commands.py').read())"`
+
+## Key Files
+| File | Purpose |
+|------|---------|
+| `app/game_engine/commands.py` | All 469+ game commands — the core engine |
+| `app/game_engine/filesystem.py` | Virtual filesystem (VFS) — all in-game files |
+| `app/game_engine/gamestate.py` | Player state, XP, achievements, story beats |
+| `app/backend/main.py` | FastAPI server — REST API + session management |
+| `mcp/server.py` | MCP server — 38 tools for AI agent integration |
+| `AGENTS.md` | Universal agent guide (read this!) |
+| `CONTEXT.md` | Dense AI-optimized context |
+| `docs/ARCHITECTURE.md` | Full architectural deep-dive |
+
+## Adding a New Game Command
+```python
+def _cmd_mycommand(self, args: List[str]) -> List[dict]:
+    """mycommand [arg] — description here."""
+    gs = self.gs
+    if not args:
+        return [_sys("Usage: mycommand <arg>"), _dim("Description.")]
+    return [_ok(f"  Result: {args[0]}"), _dim("  XP awarded.")]
+```
+Then register near line 1415:
+```python
+"mycommand": "_cmd_mycommand",
+```
+
+## Adding VFS Content (filesystem.py)
+Find the `_build_tree()` method or equivalent static dict. Add entries using the `_f(content)` pattern:
+```python
+"/opt/library/myfile.txt": _f("Content here\nLine 2"),
+```
+
+## Game State Schema
+```python
+gs.level          # int — current player level
+gs.story_beats    # set — completed story events
+gs.flags          # dict — arbitrary persistent flags
+gs.add_story_beat("beat_name")   # trigger a story event
+gs.award_xp("skill_name", amount)  # award XP
+gs.unlock("ACHIEVEMENT_ID")      # unlock achievement
+```
+
+## REST API Quick Reference
+- `POST /api/game/command` — `{"session_id": "x", "command": "help"}`
+- `GET /api/game/state?session_id=x` — full game state
+- `GET /api/health` — server health
+- `GET /api/mcp/tools` — list all 38 MCP tools
+
+## Running the Server
+```bash
+python -m cli.devmentor serve --host 0.0.0.0 --port 5000
+```
+
+## Test a Command
+```bash
+curl -s -X POST http://localhost:5000/api/game/command \
+  -H "Content-Type: application/json" \
+  -d '{"session_id":"cursor-test","command":"help"}' | python3 -m json.tool
+```

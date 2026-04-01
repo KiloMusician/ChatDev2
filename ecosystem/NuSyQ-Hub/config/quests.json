@@ -1,0 +1,541 @@
+[
+  {
+    "id": "fda1795b-14a3-457b-9187-8bd4dd4d3ceb",
+    "title": "Implement PID Guard",
+    "description": "Create idempotent process lock",
+    "questline": "Core Engine",
+    "status": "pending",
+    "created_at": "2025-07-28T03:29:29.633394",
+    "updated_at": "2025-07-28T03:29:29.633394",
+    "dependencies": [],
+    "tags": [
+      "startup",
+      "guard"
+    ],
+    "history": []
+  },
+  {
+    "id": "171ff9d1-6574-4fbe-89c0-87e099795337",
+    "title": "Set PowerShell Execution Policy",
+    "description": "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force to allow script execution.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:14:06.514748",
+    "updated_at": "2025-07-28T04:14:06.514748",
+    "dependencies": [],
+    "tags": [
+      "powershell",
+      "setup",
+      "security"
+    ],
+    "history": []
+  },
+  {
+    "id": "924401c1-f7de-4dcd-a55c-2f4fa66bc928",
+    "title": "Gather System Information",
+    "description": "Collect OS, version, and hardware info using systeminfo and Get-ComputerInfo.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:14:10.543816",
+    "updated_at": "2025-07-28T04:14:10.543816",
+    "dependencies": [],
+    "tags": [
+      "system",
+      "info",
+      "setup",
+      "windows"
+    ],
+    "history": []
+  },
+  {
+    "id": "b43e36c3-8baf-4d90-92ae-3726f5b39042",
+    "title": "Initialize Git Repository",
+    "description": "Run git init and configure user, email, and default branch.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:14:14.598314",
+    "updated_at": "2025-07-28T04:14:14.598314",
+    "dependencies": [],
+    "tags": [
+      "git",
+      "setup",
+      "version-control"
+    ],
+    "history": []
+  },
+  {
+    "id": "e5d35036-ac6b-411c-8fd5-3f26168a0006",
+    "title": "Install WinGet Package Manager",
+    "description": "Install and update WinGet for package management.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:15:15.147559",
+    "updated_at": "2025-07-28T04:15:15.147559",
+    "dependencies": [],
+    "tags": [
+      "winget",
+      "setup",
+      "windows",
+      "package-manager"
+    ],
+    "history": []
+  },
+  {
+    "id": "0b061dbb-fa19-47ef-86bc-975d4d254cf5",
+    "title": "Install Python 3.11",
+    "description": "Install Python 3.11 using WinGet and verify installation.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:15:19.754875",
+    "updated_at": "2025-07-28T04:15:19.754875",
+    "dependencies": [],
+    "tags": [
+      "python",
+      "setup",
+      "windows",
+      "winget"
+    ],
+    "history": []
+  },
+  {
+    "id": "58b8c25f-03c6-4a80-a753-7589890c0c13",
+    "title": "Create Python Virtual Environment",
+    "description": "Create and activate a virtual environment for the project.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:15:23.909837",
+    "updated_at": "2025-07-28T04:15:23.909837",
+    "dependencies": [],
+    "tags": [
+      "python",
+      "venv",
+      "setup",
+      "environment"
+    ],
+    "history": []
+  },
+  {
+    "id": "03d765ad-15b8-4930-84c5-ec94f25d2f72",
+    "title": "Install Core Python Dependencies",
+    "description": "Install all required Python packages from requirements.txt.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:15:33.054109",
+    "updated_at": "2025-07-28T04:15:33.054109",
+    "dependencies": [],
+    "tags": [
+      "python",
+      "pip",
+      "dependencies",
+      "setup"
+    ],
+    "history": []
+  },
+  {
+    "id": "7f4f203f-653e-4fe4-8638-632927942b16",
+    "title": "Install Visual Studio Code & Extensions",
+    "description": "Install VS Code and all recommended extensions for development.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:16:03.004557",
+    "updated_at": "2025-07-28T04:16:03.004557",
+    "dependencies": [],
+    "tags": [
+      "vscode",
+      "setup",
+      "extensions",
+      "editor"
+    ],
+    "history": []
+  },
+  {
+    "id": "0afdc2f5-3b1f-4ecf-880d-1b5549f6feff",
+    "title": "Run System Audit Script",
+    "description": "Run the system_audit.py script to verify system health and configuration.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:16:07.912821",
+    "updated_at": "2025-07-28T04:16:07.912821",
+    "dependencies": [],
+    "tags": [
+      "python",
+      "audit",
+      "system",
+      "health",
+      "setup"
+    ],
+    "history": []
+  },
+  {
+    "id": "257d1ca7-fe0b-4734-af76-34d337b82418",
+    "title": "Install Ollama & Models",
+    "description": "Install Ollama CLI and pull required AI models (phi:2.7b, mistral:7b-instruct, llama2:7b-chat).",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:16:16.491043",
+    "updated_at": "2025-07-28T04:16:16.491043",
+    "dependencies": [],
+    "tags": [
+      "ollama",
+      "ai",
+      "models",
+      "setup",
+      "cli"
+    ],
+    "history": []
+  },
+  {
+    "id": "aebb6518-35ff-4be2-94ef-7be6a6fab28a",
+    "title": "Test AI Integration",
+    "description": "Run test_ai_integration.py to validate Ollama, PyTorch, and Transformers integration.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:16:21.068781",
+    "updated_at": "2025-07-28T04:16:21.068781",
+    "dependencies": [],
+    "tags": [
+      "ai",
+      "test",
+      "python",
+      "ollama",
+      "pytorch",
+      "transformers",
+      "setup"
+    ],
+    "history": []
+  },
+  {
+    "id": "f0f5de83-5fa7-463e-bee6-5d75ccf3b126",
+    "title": "Run Pre-Audit Dependency Check",
+    "description": "Run scripts/pre_audit.py to verify essential dependencies before full audit.",
+    "questline": "System Setup & Maintenance",
+    "status": "pending",
+    "created_at": "2025-07-28T04:16:24.793749",
+    "updated_at": "2025-07-28T04:16:24.793749",
+    "dependencies": [],
+    "tags": [
+      "python",
+      "preaudit",
+      "dependencies",
+      "setup"
+    ],
+    "history": []
+  },
+  {
+    "id": "14ce259e-a2e8-4549-9244-a43980073dd6",
+    "title": "Implement CoreLogic module integration",
+    "description": "Integrate and validate CoreLogic.py for main system logic.",
+    "questline": "Core Engine",
+    "status": "pending",
+    "created_at": "2025-07-28T04:28:38.590785",
+    "updated_at": "2025-07-28T04:28:38.590785",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "388c85ea-d6bd-48d6-9ce9-743aa0e78444",
+    "title": "Integrate ModHandler module",
+    "description": "Integrate and test ModHandler.py for modular extension management.",
+    "questline": "Core Engine",
+    "status": "pending",
+    "created_at": "2025-07-28T04:28:46.678935",
+    "updated_at": "2025-07-28T04:28:46.678935",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "e094e05d-6573-4173-8d7e-1a0a7e67e834",
+    "title": "Integrate ObsidianSync module",
+    "description": "Integrate and validate ObsidianSync.py for Obsidian vault synchronization.",
+    "questline": "Core Engine",
+    "status": "pending",
+    "created_at": "2025-07-28T04:28:56.451610",
+    "updated_at": "2025-07-28T04:28:56.451610",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "60978b98-ed27-4f4b-872b-3d1b5103abf6",
+    "title": "Integrate GodotBridge for Godot connectivity",
+    "description": "Integrate and test GodotBridge.gd for Godot engine communication.",
+    "questline": "Godot & Game Engine Integration",
+    "status": "pending",
+    "created_at": "2025-07-28T04:29:10.609757",
+    "updated_at": "2025-07-28T04:29:10.609757",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "4df32709-c984-47d5-bd01-0497edace379",
+    "title": "Audit and maintain import_health_checker.py",
+    "description": "Ensure import_health_checker.py robustly validates and fixes all imports across the repo.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:29:19.686628",
+    "updated_at": "2025-07-28T04:29:19.686628",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "ff9beb5b-bde3-438f-bc4b-2d442e3fb64e",
+    "title": "Audit and maintain file_organization_auditor.py",
+    "description": "Ensure file_organization_auditor.py detects and fixes misplaced files across the repo.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:29:32.713751",
+    "updated_at": "2025-07-28T04:29:32.713751",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "b7184f48-266a-434c-afd5-92d9b2452be4",
+    "title": "Maintain and enhance copilot_enhancement_bridge.py",
+    "description": "Ensure copilot_enhancement_bridge.py provides robust Copilot context and memory integration.",
+    "questline": "Quantum Context & Memory Evolution",
+    "status": "pending",
+    "created_at": "2025-07-28T04:29:39.912151",
+    "updated_at": "2025-07-28T04:29:39.912151",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "cb453e4f-2ab6-482e-9c75-e543a72fe14e",
+    "title": "Maintain and enhance classify_python_files.py",
+    "description": "Ensure classify_python_files.py accurately classifies all Python files in the repo.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:29:47.335648",
+    "updated_at": "2025-07-28T04:29:47.335648",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "421a57ce-6782-4f7b-9c91-c39edcf3850c",
+    "title": "Maintain and enhance quick_import_fix.py",
+    "description": "Ensure quick_import_fix.py quickly resolves common import issues in the repo.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:29:57.997639",
+    "updated_at": "2025-07-28T04:29:57.997639",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "9797eab6-fd70-45b4-86ec-08f93ace2a96",
+    "title": "Maintain and enhance ImportHealthCheck.ps1",
+    "description": "Ensure ImportHealthCheck.ps1 automates and validates import health checks for the repo.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:30:07.574676",
+    "updated_at": "2025-07-28T04:30:07.574676",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "f45c844a-81d7-499b-82f3-c0662250a823",
+    "title": "Maintain and enhance AIContextGenerator.ps1",
+    "description": "Ensure AIContextGenerator.ps1 generates and serves accurate AI context for the system.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:30:15.251968",
+    "updated_at": "2025-07-28T04:30:15.251968",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "a77b5e33-a325-4115-872f-0a01d68d2d8b",
+    "title": "Maintain and enhance ArchitectureWatcher.py",
+    "description": "Ensure ArchitectureWatcher.py monitors and updates system architecture in real-time.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:30:23.468011",
+    "updated_at": "2025-07-28T04:30:23.468011",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "38f425e1-b291-41f1-8195-c3bbd054c7c6",
+    "title": "Maintain and enhance RepositoryCoordinator.ps1",
+    "description": "Ensure RepositoryCoordinator.ps1 coordinates, organizes, and reports on repository health.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:30:30.751207",
+    "updated_at": "2025-07-28T04:30:30.751207",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "1cac3006-1b13-44c0-b2e5-3a3653ca2d20",
+    "title": "Maintain and enhance IntelligentCommentary.ps1",
+    "description": "Ensure IntelligentCommentary.ps1 provides insightful, AI-driven code commentary sessions.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:30:43.739530",
+    "updated_at": "2025-07-28T04:30:43.739530",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "ab833123-cd30-4396-9609-391aba0091b2",
+    "title": "Maintain and enhance PathIntelligence.ps1",
+    "description": "Ensure PathIntelligence.ps1 provides advanced path searching and optimization for the repo.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:31:06.403665",
+    "updated_at": "2025-07-28T04:31:06.403665",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "b9623f62-e7a7-4649-b323-052d7588363b",
+    "title": "Maintain and enhance PathIntelligence.py",
+    "description": "Ensure PathIntelligence.py provides robust path intelligence and optimization for the system.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:31:16.445485",
+    "updated_at": "2025-07-28T04:31:16.445485",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "0445640f-9c89-48ad-bf2c-03cd2d363599",
+    "title": "Maintain and enhance IntelligentCommentary.py",
+    "description": "Ensure IntelligentCommentary.py provides robust, AI-driven code commentary for the system.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:31:27.846171",
+    "updated_at": "2025-07-28T04:31:27.846171",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "9cafd428-462d-41d6-b971-2a12a4e45df4",
+    "title": "Maintain and enhance RepositoryCoordinator.py",
+    "description": "Ensure RepositoryCoordinator.py coordinates, organizes, and reports on repository health in Python.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:31:35.285472",
+    "updated_at": "2025-07-28T04:31:35.285472",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "78642351-e8f7-4cc6-a545-c27d2d9a5a62",
+    "title": "Maintain and enhance heal_repository.py",
+    "description": "Ensure heal_repository.py automatically fixes path length and EOL issues in the repository.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-07-28T04:31:44.094424",
+    "updated_at": "2025-07-28T04:31:44.094424",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "531a0e8e-6537-4853-aa26-f407ccfa174e",
+    "title": "Maintain and enhance kilo_master.py",
+    "description": "Ensure kilo_master.py provides robust, idempotent system startup and orchestration.",
+    "questline": "Core Engine",
+    "status": "pending",
+    "created_at": "2025-07-28T04:31:52.131394",
+    "updated_at": "2025-07-28T04:31:52.131394",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "0d05215e-2085-4a1c-8b91-b0fb2679c729",
+    "title": "Maintain and enhance chatdev_unified_dashboard.py",
+    "description": "Ensure chatdev_unified_dashboard.py provides a robust unified AI dashboard with ChatDev integration.",
+    "questline": "ChatDev Integration & Multi-Agent Orchestration",
+    "status": "pending",
+    "created_at": "2025-07-28T04:32:00.593524",
+    "updated_at": "2025-07-28T04:32:00.593524",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "ab0bd58f-a5fa-400d-a3b7-b7601d2afb98",
+    "title": "Maintain and enhance chatdev_integration_framework.py",
+    "description": "Ensure chatdev_integration_framework.py robustly manages ChatDev agent orchestration.",
+    "questline": "ChatDev Integration & Multi-Agent Orchestration",
+    "status": "pending",
+    "created_at": "2025-07-28T04:32:11.782651",
+    "updated_at": "2025-07-28T04:32:11.782651",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "4a5a3ded-fdd4-4403-b5f1-f3065cf7653f",
+    "title": "Maintain and enhance multi_model_chat.py",
+    "description": "Ensure multi_model_chat.py enables robust multi-model AI chat and coordination.",
+    "questline": "ChatDev Integration & Multi-Agent Orchestration",
+    "status": "pending",
+    "created_at": "2025-07-28T04:32:20.233972",
+    "updated_at": "2025-07-28T04:32:20.233972",
+    "dependencies": [],
+    "tags": [],
+    "history": []
+  },
+  {
+    "id": "a01945c8-8334-4cdc-813d-ce47f6354fe8",
+    "title": "Enhanced Ollama-ChatDev Integration Consolidation",
+    "description": "Successfully consolidated and enhanced the Ollama-ChatDev integrator with consciousness bridge, AI coordination, and repository awareness.",
+    "questline": "System Health & Audit Automation",
+    "status": "complete",
+    "created_at": "2025-08-03T18:20:26.645935",
+    "updated_at": "2025-08-03T18:20:41.764903",
+    "dependencies": [],
+    "tags": [
+      "consolidation",
+      "ollama",
+      "chatdev",
+      "consciousness",
+      "ai_coordination"
+    ],
+    "history": [
+      {
+        "status": "complete",
+        "timestamp": "2025-08-03T18:20:41.764903"
+      }
+    ]
+  },
+  {
+    "id": "d1e9aec4-89fb-4232-89ef-260962fe3dda",
+    "title": "ChatDev Launcher Consolidation",
+    "description": "Consolidate chatdev_launcher.py duplicates (root + src/integration/) with consciousness integration and AI coordination enhancement.",
+    "questline": "System Health & Audit Automation",
+    "status": "pending",
+    "created_at": "2025-08-03T18:20:58.585715",
+    "updated_at": "2025-08-03T18:20:58.585715",
+    "dependencies": [],
+    "tags": [
+      "consolidation",
+      "chatdev",
+      "launcher",
+      "consciousness",
+      "duplication"
+    ],
+    "history": []
+  }
+]

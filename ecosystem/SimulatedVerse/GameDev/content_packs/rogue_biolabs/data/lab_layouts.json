@@ -1,0 +1,16 @@
+{
+  "lab_configurations": {
+    "basic_research": {
+      "layout": "4x4_grid",
+      "required_equipment": ["workbench", "centrifuge", "storage"],
+      "safety_level": 2,
+      "consciousness_unlock": "scientific_methodology"
+    },
+    "advanced_biotech": {
+      "layout": "6x6_sterile",
+      "required_equipment": ["bio_reactor", "gene_sequencer", "containment"],
+      "safety_level": 4, 
+      "consciousness_unlock": "genetic_understanding"
+    }
+  }
+}

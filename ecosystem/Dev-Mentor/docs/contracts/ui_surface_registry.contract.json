@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "description": "Canonical registry schema for all UI surfaces/districts in the AI universe.",
+  "required_top_level": ["version", "nexus", "districts", "surfaces"],
+  "surface_required_fields": [
+    "id",
+    "district",
+    "purpose",
+    "activation",
+    "reads",
+    "emits",
+    "linked"
+  ],
+  "district_ids": ["terminal", "workspace", "simulation", "memory", "build", "ops"]
+}

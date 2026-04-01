@@ -1,0 +1,113 @@
+name: ASCII Roguelike
+type: game
+language: python
+runtime_profile: native_terminal
+description: |
+  ASCII-based dungeon crawler roguelike game inspired by Cogmind/NetHack.
+  Features: procedural dungeons, turn-based combat, ASCII graphics,
+  inventory system, permadeath, discoverable items and enemies.
+  Runs in terminal with keyboard controls.
+
+metadata:
+  genre: roguelike
+  style: ascii
+  inspiration: [cogmind, nethack, angband, brogue]
+
+dependencies:
+  - blessed       # Terminal handling, cross-platform curses alternative
+  - colorama      # Windows ANSI colors support
+  - numpy         # Dungeon generation algorithms
+
+file_structure:
+  main.py: |
+    Game entry point and main loop.
+    - Initialize terminal with blessed
+    - Handle keyboard input (arrow keys, vim keys)
+    - Run game state machine
+
+  game/engine.py: |
+    Core game engine.
+    - GameState enum (MENU, PLAYING, INVENTORY, DEAD)
+    - Game class with main loop
+    - Turn-based tick system
+
+  game/dungeon.py: |
+    Procedural dungeon generation.
+    - Room-based generation with corridors
+    - Tile types: WALL, FLOOR, DOOR, STAIRS_UP, STAIRS_DOWN
+    - Multiple dungeon levels
+
+  game/entities.py: |
+    Entity system for player, enemies, items.
+    - Entity base class (x, y, char, color, name)
+    - Player class with stats (hp, attack, defense, gold)
+    - Enemy class with AI behavior
+    - Item class (weapons, potions, scrolls)
+
+  game/combat.py: |
+    Turn-based combat system.
+    - Attack calculations with randomness
+    - Defense and damage reduction
+    - Death handling
+
+  game/inventory.py: |
+    Inventory management.
+    - Pickup/drop items
+    - Equip weapons/armor
+    - Use consumables
+
+  game/renderer.py: |
+    ASCII renderer for terminal.
+    - Draw dungeon tiles with colors
+    - Draw entities (player @, enemies letters, items symbols)
+    - HUD with stats, messages
+    - Viewport that follows player
+
+  game/input_handler.py: |
+    Keyboard input processing.
+    - Movement: arrow keys, hjkl, numpad
+    - Actions: g=grab, i=inventory, q=quit, >=descend
+
+  game/messages.py: |
+    Message log system.
+    - Combat messages
+    - Discovery messages
+    - Color-coded by importance
+
+  assets/monsters.json: |
+    Monster definitions.
+    - Name, char, color, hp, attack, defense
+    - Example: Goblin (g), Orc (o), Dragon (D)
+
+  assets/items.json: |
+    Item definitions.
+    - Weapons, armor, potions, scrolls
+    - Example: Sword (+3 attack), Health Potion (+20 hp)
+
+  tests/test_game.py: Basic game tests
+
+complexity: 8
+requires_multifile: true
+engine: terminal
+target_platforms:
+  - windows
+  - linux
+  - macos
+genre: roguelike
+
+# AI generation hints
+generation_hints:
+  - Use blessed library for cross-platform terminal handling
+  - Player is always @ symbol in white/yellow
+  - Use colorama.init() on Windows for ANSI support
+  - Implement fog of war (only show explored areas)
+  - Make dungeon at least 80x24 characters
+  - Include at least 5 enemy types and 10 item types
+  - Add stairs between dungeon levels
+  - Win condition: reach dungeon level 5 and find the Amulet
+
+feature_flags:
+  data_pipeline: true
+  event_router: true
+  save_migration: true
+  modding_api: true

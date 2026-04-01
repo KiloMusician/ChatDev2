@@ -1,0 +1,10 @@
+{
+  "default": {
+    "response": "This is the default mock response.",
+    "meta": { "confidence": 0.5 }
+  },
+  "hello": {
+    "response": "Hello from Ollama mock!",
+    "meta": { "confidence": 0.9 }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "timestamp": 1756918736665,
+  "packages": {},
+  "capabilities": {
+    "vector_store": true,
+    "ast_rewriting": true,
+    "rule_engine": true,
+    "dependency_analysis": true,
+    "code_generation": false,
+    "local_models": true,
+    "offline_testing": true
+  },
+  "services": {
+    "council_bus": false,
+    "vector_indexing": true,
+    "pattern_library": false,
+    "proof_pipeline": false
+  },
+  "health_score": 42
+}

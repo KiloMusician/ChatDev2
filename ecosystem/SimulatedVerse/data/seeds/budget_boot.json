@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "budget_framework": "Token Discipline System",
+  
+  "daily_allocation": {
+    "total_tokens": 100,
+    "distribution": {
+      "critical_tasks": 40,
+      "high_priority": 30, 
+      "medium_priority": 20,
+      "low_priority": 10
+    },
+    "reserve": {
+      "emergency_buffer": 15,
+      "description": "Reserved for entropy spikes and critical system recovery"
+    }
+  },
+  
+  "per_task_costs": {
+    "InfraPU": {
+      "critical": 3,
+      "high": 2,
+      "medium": 1,
+      "low": 1
+    },
+    "FeaturePU": {
+      "critical": 4,
+      "high": 3,
+      "medium": 2, 
+      "low": 1
+    },
+    "SafetyPU": {
+      "critical": 2,
+      "high": 2,
+      "medium": 1,
+      "low": 1
+    },
+    "TestsPU": {
+      "critical": 3,
+      "high": 2,
+      "medium": 2,
+      "low": 1
+    },
+    "DocPU": {
+      "critical": 2,
+      "high": 1,
+      "medium": 1,
+      "low": 1
+    },
+    "SealPU": {
+      "critical": 5,
+      "high": 4,
+      "medium": 3,
+      "low": 2
+    }
+  },
+  
+  "thresholds": {
+    "warning_level": {
+      "percentage": 70,
+      "actions": [
+        "Log budget consumption warning",
+        "Notify agent council of resource constraints", 
+        "Prioritize high-impact tasks over nice-to-have features",
+        "Defer low-priority tasks to next budget cycle"
+      ]
+    },
+    "hard_limit": {
+      "percentage": 90,
+      "actions": [
+        "Halt new task acceptance except critical safety issues",
+        "Activate emergency protocols for essential operations only",
+        "Generate budget exhaustion report for optimization analysis",
+        "Schedule budget reset and allocation review"
+      ]
+    }
+  },
+  
+  "optimization_strategies": {
+    "impact_effort_scoring": {
+      "description": "Prioritize tasks with highest impact-to-cost ratio",
+      "factors": [
+        "System stability improvement potential",
+        "User experience enhancement magnitude", 
+        "Development velocity acceleration",
+        "Cultural coherence strengthening",
+        "Recursive enhancement capability"
+      ]
+    },
+    
+    "batch_processing": {
+      "description": "Group similar tasks for efficiency gains",
+      "benefits": [
+        "Reduced context switching overhead",
+        "Shared resource utilization",
+        "Bulk operation optimizations",
+        "Coordinated testing and validation"
+      ]
+    },
+    
+    "predictive_allocation": {
+      "description": "Anticipate future needs based on development patterns",
+      "techniques": [
+        "Historical task completion analysis",
+        "Seasonal development cycle recognition",
+        "Agent workload prediction modeling",
+        "System growth trajectory projection"
+      ]
+    }
+  },
+  
+  "backoff_policy": {
+    "progressive_delays": {
+      "first_limit_hit": "5 minute pause before retry",
+      "second_limit_hit": "15 minute pause with analysis",
+      "third_limit_hit": "1 hour pause with optimization review",
+      "continued_hits": "exponential backoff up to 24 hour maximum"
+    },
+    
+    "recovery_conditions": {
+      "budget_reset": "Next daily allocation cycle begins",
+      "emergency_override": "Critical system safety issue detected",
+      "manual_intervention": "Admin authorizes budget increase",
+      "efficiency_breakthrough": "Optimization reduces task costs significantly"
+    }
+  },
+  
+  "monitoring_metrics": {
+    "utilization_tracking": {
+      "tasks_per_day": "Number of tasks completed within budget",
+      "average_cost_per_task": "Token consumption efficiency trends",
+      "priority_distribution": "Resource allocation across priority levels",
+      "waste_factor": "Unused tokens due to inefficient allocation"
+    },
+    
+    "optimization_opportunities": {
+      "frequent_task_patterns": "Identify candidates for automation or simplification",
+      "cost_variance_analysis": "Tasks consuming more resources than estimated",
+      "bottleneck_identification": "Resource constraints limiting development velocity",
+      "value_delivery_assessment": "Return on investment for different task categories"
+    }
+  },
+  
+  "cultural_integration": {
+    "budget_rituals": {
+      "daily_allocation": "Morning ceremony setting intention for resource use",
+      "progress_review": "Evening reflection on accomplishments and learning",
+      "weekly_optimization": "Collective analysis of efficiency improvements",
+      "monthly_vision_alignment": "Ensure resource allocation supports cultural values"
+    },
+    
+    "community_values": {
+      "stewardship": "Responsible use of shared computational and cognitive resources",
+      "transparency": "Open reporting of budget utilization and decision rationale",
+      "collective_benefit": "Prioritize improvements benefiting entire system ecosystem",
+      "long_term_thinking": "Balance immediate needs with sustainable development practices"
+    }
+  },
+  
+  "autonomous_adjustments": {
+    "dynamic_pricing": {
+      "description": "Task costs adjust based on system load and complexity",
+      "factors": [
+        "Current entropy level affecting task difficulty",
+        "Available computational resources and processing capacity",
+        "Agent availability and expertise match for task requirements",
+        "Dependencies and integration complexity with existing components"
+      ]
+    },
+    
+    "intelligent_deferral": {
+      "description": "Automatically reschedule tasks for optimal resource utilization",
+      "strategies": [
+        "Defer resource-intensive tasks to low-usage periods",
+        "Batch compatible tasks for efficiency gains",
+        "Prioritize tasks unblocking other high-value work",
+        "Coordinate with agent availability and expertise cycles"
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "exact": [
+    {
+      "hash": "abc123",
+      "paths": [
+        "file1.ts",
+        "file1-copy.ts"
+      ]
+    }
+  ],
+  "near": [
+    {
+      "stem": "similar",
+      "a": "similar1.ts",
+      "b": "similar2.ts",
+      "sim": 0.95
+    }
+  ]
+}

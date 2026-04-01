@@ -1,0 +1,2 @@
+{"type":"Analysis","job_id":"test-123","step":1,"finding":"Agent execution pathway missing POST endpoints","action":"Wire /api/agent/:id/execute to actual runners"}
+{"type":"Plan","job_id":"test-123","step":2,"implementation":"Mount agent-gateway routes, create runner contracts","verification":"Test POST returns job_id and proof artifacts"}

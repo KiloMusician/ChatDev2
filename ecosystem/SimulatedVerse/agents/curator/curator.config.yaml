@@ -1,0 +1,42 @@
+version: 1
+ignore:
+  - "^node_modules/"
+  - "^.git/"
+  - "^client/dist/"
+  - "^.replit"
+  - "^replit.nix"
+  - "^.venv/"
+  - "^.build/"
+  - "^data/snapshots/"
+hard_limits:
+  max_file_mb: 25
+  large_text_mb: 5
+  logs_glob: ["**/*.log","**/*.ndjson","**/*.trace","**/*.profile"]
+  compress_after_days: 3
+  quarantine_ttl_days: 21
+duplicate:
+  keep_preference: ["^src/","^client/src/","^docs/"]
+  action: "dedupe"   # dedupe | quarantine
+orphans:
+  action: "quarantine"
+  allow_unreferenced_globs: ["docs/**","obsidian_vault/**"]
+placeholders:
+  detect_patterns:
+    - "\\bTODO\\b"
+    - "\\bWIP\\b"
+    - "MODULE\\s+ACTIVE\\b"
+    - "print\\([^)]*placeholder"
+classification:
+  mode: "rules-first"   # rules-first | ml-assisted | llm-assisted
+  ml_model: "tfjs/logreg@curator-v1"  # optional
+llm_guard:
+  enabled: false
+  max_tokens: 512
+  temperature: 0.0
+  only_on_uncertain: true
+paths:
+  quarantine: "_quarantine"
+  ledger: "data/curator_ledger.ndjson"
+report:
+  bloat_target_pct: 3.0
+  trend_window_days: 14

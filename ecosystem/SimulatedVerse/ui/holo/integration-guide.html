@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Holographic HUD Integration Guide</title>
+  <style>
+    html,body{height:100%;margin:0;background:#000;color:#e8f7ff;font-family:ui-monospace,monospace;line-height:1.5}
+    .container{max-width:800px;margin:0 auto;padding:20px}
+    h1,h2{color:#00eaff;text-shadow:0 0 8px rgba(0,234,255,.4)}
+    .code{background:#1a1a2e;padding:10px;border-radius:8px;border:1px solid #333;overflow-x:auto}
+    .highlight{background:#16213e;color:#7c4dff;padding:2px 4px;border-radius:4px}
+    .btn{background:#1f2937;color:#e5e7eb;border:1px solid #374151;padding:8px 12px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;margin:4px}
+    .btn:hover{background:#374151}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌟 Holographic HUD Integration</h1>
+    
+    <p>Your <span class="highlight">ΞNuSyQ Holographic Command Deck</span> is ready! Here's how to integrate it into your existing application:</p>
+    
+    <h2>📁 Files Created</h2>
+    <ul>
+      <li><code>ui/holo/holo-hud.ts</code> - Main Web Component</li>
+      <li><code>ui/holo/holo-demo.html</code> - Standalone demo</li>
+      <li><code>ui/holo/holo-hud.js</code> - Compiled bundle</li>
+    </ul>
+    
+    <h2>🔧 Integration Options</h2>
+    
+    <h3>Option 1: Direct HTML Mount</h3>
+    <div class="code">
+&lt;!-- Replace your current UI container with: --&gt;
+&lt;holo-hud style="width:100%;height:100vh;"&gt;&lt;/holo-hud&gt;
+&lt;script type="module" src="/ui/holo/holo-hud.js"&gt;&lt;/script&gt;
+    </div>
+    
+    <h3>Option 2: React Integration</h3>
+    <div class="code">
+// In your React component:
+import '/ui/holo/holo-hud.js';
+
+function App() {
+  return (
+    &lt;holo-hud 
+      style={{width: '100%', height: '100vh'}}
+      ref={hudRef}
+    /&gt;
+  );
+}
+    </div>
+    
+    <h3>Option 3: Replace Current GameShell</h3>
+    <div class="code">
+// In client/src/App.tsx, replace GameShell with:
+if (phase === "GAME") return (
+  &lt;&gt;
+    &lt;holo-hud style={{width: '100%', height: '100vh'}} /&gt;
+    &lt;script type="module" src="/ui/holo/holo-hud.js"&gt;&lt;/script&gt;
+  &lt;/&gt;
+);
+    </div>
+    
+    <h2>🎮 Features</h2>
+    <ul>
+      <li><strong>3D Parallax Grid:</strong> Perspective depth with holographic sway</li>
+      <li><strong>Starfield:</strong> Twinkling background with depth shimmer</li>
+      <li><strong>Scanlines & Noise:</strong> Film grain effects for hologram feel</li>
+      <li><strong>ASCII Viewport:</strong> Live content area with cutscene support</li>
+      <li><strong>Mobile Responsive:</strong> Auto-detects and adapts layout</li>
+      <li><strong>Pause/Resume:</strong> Background tab auto-pause to save battery</li>
+      <li><strong>Audio Hum:</strong> Subtle synth atmosphere (optional)</li>
+      <li><strong>Big Red Cascade:</strong> Integrates with your existing cascade system</li>
+    </ul>
+    
+    <h2>🔗 System Integration</h2>
+    
+    <h3>Cascade Integration</h3>
+    <p>The Big Red Cascade button will:</p>
+    <ol>
+      <li>Try <code>POST /api/cascade</code> if you have a backend endpoint</li>
+      <li>Fall back to copying <code>npm run cascade</code> to clipboard</li>
+    </ol>
+    
+    <h3>Live Data Binding</h3>
+    <div class="code">
+// Access the HUD element and update values:
+const hud = document.querySelector('holo-hud');
+const shadowRoot = hud.shadowRoot;
+shadowRoot.getElementById('v-cons').textContent = '85%';
+shadowRoot.getElementById('v-agents').textContent = '7';
+shadowRoot.getElementById('v-cascade').textContent = 'active';
+    </div>
+    
+    <h2>🚀 Quick Test</h2>
+    <a href="holo-demo.html" class="btn">▶ Launch Demo</a>
+    <a href="#" class="btn" onclick="openInNewTab()">🔍 Test Integration</a>
+    
+    <p style="margin-top:40px;opacity:0.7;font-size:12px">
+      Web Component works in any framework • Zero dependencies • Mobile optimized • Culture-Ship ready
+    </p>
+  </div>
+  
+  <script>
+    function openInNewTab() {
+      window.open('/ui/holo/holo-demo.html', '_blank');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl git && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir \
+    requests redis psutil openai
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app
+
+COPY . /app
+
+CMD ["python", "/app/scripts/chatdev_worker.py", "--daemon"]

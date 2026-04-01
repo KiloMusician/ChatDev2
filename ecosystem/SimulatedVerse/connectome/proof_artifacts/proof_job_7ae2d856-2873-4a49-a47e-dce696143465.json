@@ -1,0 +1,32 @@
+{
+  "id": "proof_job_7ae2d856-2873-4a49-a47e-dce696143465",
+  "kind": "file",
+  "path": "ops/proofs",
+  "creator": "agent/raven",
+  "job_id": "job_7ae2d856-2873-4a49-a47e-dce696143465",
+  "sha256": "",
+  "size": 100254,
+  "created_at": "2025-08-31T00:47:01.701Z",
+  "checks": [
+    {
+      "name": "exists",
+      "ok": true
+    },
+    {
+      "name": "nonempty",
+      "ok": true,
+      "detail": "100254 bytes"
+    },
+    {
+      "name": "schema",
+      "ok": true,
+      "detail": "file format accepted"
+    },
+    {
+      "name": "integrity",
+      "ok": false,
+      "detail": "sha256:..."
+    }
+  ],
+  "verdict": "fail"
+}

@@ -1,0 +1,72 @@
+{
+  "timestamp": "2025-09-03T04:48:30.000Z",
+  "protocol": "ΞNuSyQ-prime⁴",
+  "agents": {
+    "Raven": {
+      "class": "skeptic",
+      "requires": ["fs", "git"],
+      "backends": {
+        "ollama": "probe_needed",
+        "gpt": "probe_needed", 
+        "vacuum": "probe_needed"
+      },
+      "tools": ["diagnose", "health_check", "git_status"],
+      "receipts": ["repro.md", "system_health.json"]
+    },
+    "𝕄ₗₐ⧉𝕕𝕖𝕟𝔠": {
+      "class": "planner",
+      "requires": ["ollama", "chatdev"],
+      "backends": {
+        "ollama": "probe_needed",
+        "gpt": "probe_needed",
+        "vacuum": "limited"
+      },
+      "tools": ["plan", "graph", "boolean_chain"],
+      "receipts": ["plan.md", "dependency_graph.json"]
+    },
+    "Librarian": {
+      "class": "context",
+      "requires": ["fs"],
+      "backends": {
+        "ollama": "probe_needed",
+        "gpt": "probe_needed",
+        "vacuum": "ok"
+      },
+      "tools": ["index", "search", "omnitag"],
+      "receipts": ["index_receipt.json", "omnitag_map.json"]
+    },
+    "Artificer": {
+      "class": "builder", 
+      "requires": ["fs", "git"],
+      "backends": {
+        "ollama": "probe_needed",
+        "gpt": "probe_needed",
+        "vacuum": "ok"
+      },
+      "tools": ["patch", "diff", "build"],
+      "receipts": ["git_diff", "build_log.json"]
+    },
+    "Alchemist": {
+      "class": "stabilizer",
+      "requires": ["fs"],
+      "backends": {
+        "ollama": "probe_needed", 
+        "gpt": "probe_needed",
+        "vacuum": "ok"
+      },
+      "tools": ["guard", "zod", "timeouts", "p-queue"],
+      "receipts": ["test_pass.json", "guard_report.json"]
+    },
+    "Protagonist": {
+      "class": "player",
+      "requires": ["ui"],
+      "backends": {
+        "ollama": "probe_needed",
+        "gpt": "probe_needed",
+        "vacuum": "ok"
+      },
+      "tools": ["play", "scene", "simulate"],
+      "receipts": ["sim_proof.json", "scene_log.json"]
+    }
+  }
+}

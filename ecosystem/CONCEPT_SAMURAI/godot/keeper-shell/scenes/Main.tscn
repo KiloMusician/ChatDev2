@@ -1,0 +1,278 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/keeper_bridge.gd" id="2_bridge"]
+[ext_resource type="Texture2D" path="res://assets/icon.svg" id="3_icon"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="KeeperBridge" type="Node" parent="."]
+script = ExtResource("2_bridge")
+
+[node name="TrayMenu" type="PopupMenu" parent="."]
+
+[node name="Tray" type="StatusIndicator" parent="."]
+icon = ExtResource("3_icon")
+tooltip = "Keeper Shell"
+visible = true
+
+[node name="RefreshTimer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Root" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Hero" type="PanelContainer" parent="Margin/Root"]
+layout_mode = 2
+
+[node name="HeroBox" type="VBoxContainer" parent="Margin/Root/Hero"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Margin/Root/Hero/HeroBox"]
+layout_mode = 2
+text = "Keeper Shell"
+theme_override_font_sizes/font_size = 26
+
+[node name="Subtitle" type="Label" parent="Margin/Root/Hero/HeroBox"]
+layout_mode = 2
+text = "Offline-first desktop shell for keeper. Uses the local PowerShell bridge; no network required."
+autowrap_mode = 2
+
+[node name="StatusGrid" type="GridContainer" parent="Margin/Root"]
+layout_mode = 2
+columns = 4
+
+[node name="ModeCard" type="PanelContainer" parent="Margin/Root/StatusGrid"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Root/StatusGrid/ModeCard"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Root/StatusGrid/ModeCard/VBox"]
+layout_mode = 2
+text = "Mode"
+
+[node name="ModeValue" type="Label" parent="Margin/Root/StatusGrid/ModeCard/VBox"]
+layout_mode = 2
+text = "loading..."
+theme_override_font_sizes/font_size = 18
+
+[node name="RecommendationCard" type="PanelContainer" parent="Margin/Root/StatusGrid"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Root/StatusGrid/RecommendationCard"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Root/StatusGrid/RecommendationCard/VBox"]
+layout_mode = 2
+text = "Recommended"
+
+[node name="RecommendationValue" type="Label" parent="Margin/Root/StatusGrid/RecommendationCard/VBox"]
+layout_mode = 2
+text = "loading..."
+theme_override_font_sizes/font_size = 18
+
+[node name="CpuCard" type="PanelContainer" parent="Margin/Root/StatusGrid"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Root/StatusGrid/CpuCard"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Root/StatusGrid/CpuCard/VBox"]
+layout_mode = 2
+text = "CPU / Memory"
+
+[node name="CpuValue" type="Label" parent="Margin/Root/StatusGrid/CpuCard/VBox"]
+layout_mode = 2
+text = "loading..."
+theme_override_font_sizes/font_size = 18
+
+[node name="RiskCard" type="PanelContainer" parent="Margin/Root/StatusGrid"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Root/StatusGrid/RiskCard"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Root/StatusGrid/RiskCard/VBox"]
+layout_mode = 2
+text = "Risk"
+
+[node name="RiskValue" type="Label" parent="Margin/Root/StatusGrid/RiskCard/VBox"]
+layout_mode = 2
+text = "loading..."
+theme_override_font_sizes/font_size = 18
+
+[node name="BrainPanel" type="PanelContainer" parent="Margin/Root"]
+layout_mode = 2
+
+[node name="BrainBox" type="VBoxContainer" parent="Margin/Root/BrainPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BrainHeader" type="HBoxContainer" parent="Margin/Root/BrainPanel/BrainBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BrainTitle" type="Label" parent="Margin/Root/BrainPanel/BrainBox/BrainHeader"]
+layout_mode = 2
+text = "Brain Advisor"
+theme_override_font_sizes/font_size = 15
+
+[node name="HeaderSpacer" type="Control" parent="Margin/Root/BrainPanel/BrainBox/BrainHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreLabel" type="Label" parent="Margin/Root/BrainPanel/BrainBox/BrainHeader"]
+layout_mode = 2
+text = "Score: --"
+
+[node name="StatusBadge" type="Label" parent="Margin/Root/BrainPanel/BrainBox/BrainHeader"]
+layout_mode = 2
+text = "--"
+theme_override_font_sizes/font_size = 15
+
+[node name="ScoreBar" type="ProgressBar" parent="Margin/Root/BrainPanel/BrainBox"]
+layout_mode = 2
+max_value = 100.0
+value = 0.0
+
+[node name="AdvisorRow" type="HBoxContainer" parent="Margin/Root/BrainPanel/BrainBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AdvisorInfo" type="VBoxContainer" parent="Margin/Root/BrainPanel/BrainBox/AdvisorRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="AdvisorLabel" type="Label" parent="Margin/Root/BrainPanel/BrainBox/AdvisorRow/AdvisorInfo"]
+layout_mode = 2
+text = "Recommended: --"
+autowrap_mode = 2
+
+[node name="WhyLabel" type="Label" parent="Margin/Root/BrainPanel/BrainBox/AdvisorRow/AdvisorInfo"]
+layout_mode = 2
+text = "--"
+autowrap_mode = 2
+
+[node name="BrainButtons" type="VBoxContainer" parent="Margin/Root/BrainPanel/BrainBox/AdvisorRow"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="OptimizeButton" type="Button" parent="Margin/Root/BrainPanel/BrainBox/AdvisorRow/BrainButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(90, 0)
+text = "Optimize"
+disabled = true
+
+[node name="ForceButton" type="Button" parent="Margin/Root/BrainPanel/BrainBox/AdvisorRow/BrainButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(90, 0)
+text = "Force"
+disabled = true
+
+[node name="WorkloadPanel" type="PanelContainer" parent="Margin/Root"]
+layout_mode = 2
+
+[node name="WorkloadBox" type="VBoxContainer" parent="Margin/Root/WorkloadPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="WorkloadTitle" type="Label" parent="Margin/Root/WorkloadPanel/WorkloadBox"]
+layout_mode = 2
+text = "Active Workload"
+
+[node name="WorkloadValue" type="Label" parent="Margin/Root/WorkloadPanel/WorkloadBox"]
+layout_mode = 2
+text = "loading..."
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Root"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RefreshButton" type="Button" parent="Margin/Root/Buttons"]
+layout_mode = 2
+text = "Refresh"
+
+[node name="GamingButton" type="Button" parent="Margin/Root/Buttons"]
+layout_mode = 2
+text = "Gaming"
+
+[node name="CodingButton" type="Button" parent="Margin/Root/Buttons"]
+layout_mode = 2
+text = "Coding"
+
+[node name="BalancedButton" type="Button" parent="Margin/Root/Buttons"]
+layout_mode = 2
+text = "Balanced"
+
+[node name="DoctorButton" type="Button" parent="Margin/Root/Buttons"]
+layout_mode = 2
+text = "Doctor"
+
+[node name="ExportButton" type="Button" parent="Margin/Root/Buttons"]
+layout_mode = 2
+text = "Export"
+
+[node name="Body" type="HSplitContainer" parent="Margin/Root"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FindingsPanel" type="PanelContainer" parent="Margin/Root/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FindingsBox" type="VBoxContainer" parent="Margin/Root/Body/FindingsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FindingsTitle" type="Label" parent="Margin/Root/Body/FindingsPanel/FindingsBox"]
+layout_mode = 2
+text = "Doctor Findings"
+
+[node name="FindingsText" type="RichTextLabel" parent="Margin/Root/Body/FindingsPanel/FindingsBox"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
+[node name="DetailsPanel" type="PanelContainer" parent="Margin/Root/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DetailsBox" type="VBoxContainer" parent="Margin/Root/Body/DetailsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DetailsTitle" type="Label" parent="Margin/Root/Body/DetailsPanel/DetailsBox"]
+layout_mode = 2
+text = "Details"
+
+[node name="DetailsText" type="RichTextLabel" parent="Margin/Root/Body/DetailsPanel/DetailsBox"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true

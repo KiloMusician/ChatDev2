@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RosettaHeader",
+  "type": "object",
+  "required": ["OWNERS", "TAGS", "STABILITY", "HEALTH", "INTEGRATIONS", "SUMMARY"],
+  "properties": {
+    "OWNERS": { "type": "string" },
+    "TAGS": { "type": "string" },
+    "STABILITY": { "type": "string", "enum": ["wip","alpha","beta","stable","frozen"] },
+    "HEALTH": { "type": "string", "enum": ["unknown","failing","degraded","ok"] },
+    "INTEGRATIONS": { "type": "string" },
+    "SUMMARY": { "type": "string", "minLength": 6 }
+  }
+}

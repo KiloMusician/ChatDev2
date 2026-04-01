@@ -1,0 +1,1394 @@
+[
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 23,
+      "row": 154
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\NuSyQ-Hub\\tests\\conftest.py",
+    "fix": null,
+    "location": {
+      "column": 16,
+      "row": 154
+    },
+    "message": "`aiohttp` imported but unused; consider using `importlib.util.find_spec` to test for availability",
+    "noqa_row": 154,
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 18
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\activate_zen_engine.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 19
+          },
+          "location": {
+            "column": 1,
+            "row": 18
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 18
+    },
+    "message": "Redefinition of unused `sys` from line 17",
+    "noqa_row": 18,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 17
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 18
+          },
+          "location": {
+            "column": 1,
+            "row": 17
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 17
+    },
+    "message": "Redefinition of unused `sys` from line 16",
+    "noqa_row": 17,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 18
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 19
+          },
+          "location": {
+            "column": 1,
+            "row": 18
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 18
+    },
+    "message": "Redefinition of unused `sys` from line 17",
+    "noqa_row": 18,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 19
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 20
+          },
+          "location": {
+            "column": 1,
+            "row": 19
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 19
+    },
+    "message": "Redefinition of unused `sys` from line 18",
+    "noqa_row": 19,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 20
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 21
+          },
+          "location": {
+            "column": 1,
+            "row": 20
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 20
+    },
+    "message": "Redefinition of unused `sys` from line 19",
+    "noqa_row": 20,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 21
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 22
+          },
+          "location": {
+            "column": 1,
+            "row": 21
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 21
+    },
+    "message": "Redefinition of unused `sys` from line 20",
+    "noqa_row": 21,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 22
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 23
+          },
+          "location": {
+            "column": 1,
+            "row": 22
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 22
+    },
+    "message": "Redefinition of unused `sys` from line 21",
+    "noqa_row": 22,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 23
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 24
+          },
+          "location": {
+            "column": 1,
+            "row": 23
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 23
+    },
+    "message": "Redefinition of unused `sys` from line 22",
+    "noqa_row": 23,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 24
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 25
+          },
+          "location": {
+            "column": 1,
+            "row": 24
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 24
+    },
+    "message": "Redefinition of unused `sys` from line 23",
+    "noqa_row": 24,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 11,
+      "row": 25
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\autonomous_dev.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 26
+          },
+          "location": {
+            "column": 1,
+            "row": 25
+          }
+        }
+      ],
+      "message": "Remove definition: `sys`"
+    },
+    "location": {
+      "column": 8,
+      "row": 25
+    },
+    "message": "Redefinition of unused `sys` from line 24",
+    "noqa_row": 25,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 23,
+      "row": 154
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\nusyq_clean_clone\\tests\\conftest.py",
+    "fix": null,
+    "location": {
+      "column": 16,
+      "row": 154
+    },
+    "message": "`aiohttp` imported but unused; consider using `importlib.util.find_spec` to test for availability",
+    "noqa_row": 154,
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 34,
+      "row": 150
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\fix_imports.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"✨ IMPORT FIX RESULTS\"",
+          "end_location": {
+            "column": 34,
+            "row": 150
+          },
+          "location": {
+            "column": 11,
+            "row": 150
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 11,
+      "row": 150
+    },
+    "message": "f-string without any placeholders",
+    "noqa_row": 150,
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 37,
+      "row": 159
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\fix_ruff_errors.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"✨ AUTOMATIC FIX RESULTS\"",
+          "end_location": {
+            "column": 37,
+            "row": 159
+          },
+          "location": {
+            "column": 11,
+            "row": 159
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 11,
+      "row": 159
+    },
+    "message": "f-string without any placeholders",
+    "noqa_row": 159,
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 60,
+      "row": 163
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\fix_ruff_errors.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"\\n💡 Run 'ruff check .' to see remaining errors\"",
+          "end_location": {
+            "column": 60,
+            "row": 163
+          },
+          "location": {
+            "column": 11,
+            "row": 163
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 11,
+      "row": 163
+    },
+    "message": "f-string without any placeholders",
+    "noqa_row": 163,
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 41,
+      "row": 68
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\migrate_guild_board.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"📝 New schema version: 2.0.0\"",
+          "end_location": {
+            "column": 41,
+            "row": 68
+          },
+          "location": {
+            "column": 11,
+            "row": 68
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 11,
+      "row": 68
+    },
+    "message": "f-string without any placeholders",
+    "noqa_row": 68,
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 63,
+      "row": 134
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\render_guild_board.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"- **Acceptance Criteria**:\"",
+          "end_location": {
+            "column": 63,
+            "row": 134
+          },
+          "location": {
+            "column": 34,
+            "row": 134
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 34,
+      "row": 134
+    },
+    "message": "f-string without any placeholders",
+    "noqa_row": 134,
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "F541",
+    "end_location": {
+      "column": 32,
+      "row": 212
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\scripts\\render_guild_board.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "\"📊 Board State:\"",
+          "end_location": {
+            "column": 32,
+            "row": 212
+          },
+          "location": {
+            "column": 15,
+            "row": 212
+          }
+        }
+      ],
+      "message": "Remove extraneous `f` prefix"
+    },
+    "location": {
+      "column": 15,
+      "row": 212
+    },
+    "message": "f-string without any placeholders",
+    "noqa_row": 212,
+    "url": "https://docs.astral.sh/ruff/rules/f-string-missing-placeholders"
+  },
+  {
+    "cell": null,
+    "code": "E731",
+    "end_location": {
+      "column": 33,
+      "row": 32
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\api\\problems_api.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "def is_system_on():\n        return False",
+          "end_location": {
+            "column": 33,
+            "row": 32
+          },
+          "location": {
+            "column": 5,
+            "row": 32
+          }
+        }
+      ],
+      "message": "Rewrite `is_system_on` as a `def`"
+    },
+    "location": {
+      "column": 5,
+      "row": 32
+    },
+    "message": "Do not assign a `lambda` expression, use a `def`",
+    "noqa_row": 32,
+    "url": "https://docs.astral.sh/ruff/rules/lambda-assignment"
+  },
+  {
+    "cell": null,
+    "code": "B007",
+    "end_location": {
+      "column": 18,
+      "row": 237
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\api\\problems_api.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_issue",
+          "end_location": {
+            "column": 18,
+            "row": 237
+          },
+          "location": {
+            "column": 13,
+            "row": 237
+          }
+        }
+      ],
+      "message": "Rename unused `issue` to `_issue`"
+    },
+    "location": {
+      "column": 13,
+      "row": 237
+    },
+    "message": "Loop control variable `issue` not used within loop body",
+    "noqa_row": 237,
+    "url": "https://docs.astral.sh/ruff/rules/unused-loop-control-variable"
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 16,
+      "row": 141
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 13,
+      "row": 141
+    },
+    "message": "Expected an identifier, but found a keyword 'def' that cannot be used here",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 39,
+      "row": 141
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 141
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 94,
+      "row": 141
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 92,
+      "row": 141
+    },
+    "message": "Expected ',', found '->'",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 99,
+      "row": 141
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 98,
+      "row": 141
+    },
+    "message": "Expected ',', found ':'",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 30,
+      "row": 143
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 143
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 32,
+      "row": 143
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 31,
+      "row": 143
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 29,
+      "row": 144
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 144
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 31,
+      "row": 144
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 30,
+      "row": 144
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 30,
+      "row": 145
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 145
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 32,
+      "row": 145
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 31,
+      "row": 145
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 31,
+      "row": 146
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 146
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 33,
+      "row": 146
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 32,
+      "row": 146
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 31,
+      "row": 147
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 147
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 33,
+      "row": 147
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 32,
+      "row": 147
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 31,
+      "row": 148
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 148
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 33,
+      "row": 148
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 32,
+      "row": 148
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 32,
+      "row": 149
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 149
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 34,
+      "row": 149
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 33,
+      "row": 149
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 54,
+      "row": 150
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 53,
+      "row": 150
+    },
+    "message": "Expected 'else', found ':'",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 36,
+      "row": 151
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 35,
+      "row": 151
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 36,
+      "row": 157
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 21,
+      "row": 157
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 54,
+      "row": 158
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 53,
+      "row": 158
+    },
+    "message": "Expected 'else', found ':'",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 30,
+      "row": 159
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 29,
+      "row": 159
+    },
+    "message": "Expected ',', found '='",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 28,
+      "row": 160
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 21,
+      "row": 160
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 28,
+      "row": 161
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 21,
+      "row": 161
+    },
+    "message": "Expected ',', found name",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 62,
+      "row": 162
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 61,
+      "row": 162
+    },
+    "message": "Expected 'else', found ':'",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 1,
+      "row": 164
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 64,
+      "row": 163
+    },
+    "message": "Expected '}', found newline",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 25,
+      "row": 164
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 1,
+      "row": 164
+    },
+    "message": "Unexpected indentation",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 21,
+      "row": 166
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 21,
+      "row": 166
+    },
+    "message": "unindent does not match any outer indentation level",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 21,
+      "row": 170
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 21,
+      "row": 170
+    },
+    "message": "unindent does not match any outer indentation level",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 17,
+      "row": 171
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 1,
+      "row": 171
+    },
+    "message": "Unexpected indentation",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 23,
+      "row": 221
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 17,
+      "row": 221
+    },
+    "message": "Expected a statement",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 67,
+      "row": 221
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 24,
+      "row": 221
+    },
+    "message": "Only single target (not tuple) can be annotated",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 1,
+      "row": 222
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 68,
+      "row": 221
+    },
+    "message": "Expected an expression",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 21,
+      "row": 222
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 1,
+      "row": 222
+    },
+    "message": "Unexpected indentation",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 13,
+      "row": 225
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 13,
+      "row": 225
+    },
+    "message": "unindent does not match any outer indentation level",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 15,
+      "row": 235
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 235
+    },
+    "message": "Expected a statement",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 54,
+      "row": 235
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 52,
+      "row": 235
+    },
+    "message": "Expected a statement",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 1,
+      "row": 236
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 57,
+      "row": 235
+    },
+    "message": "Expected an expression",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 13,
+      "row": 236
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 1,
+      "row": 236
+    },
+    "message": "Unexpected indentation",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 1,
+      "row": 469
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\diagnostics\\system_integration_checker.py",
+    "fix": null,
+    "location": {
+      "column": 1,
+      "row": 469
+    },
+    "message": "Expected a statement",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "invalid-syntax",
+    "end_location": {
+      "column": 54,
+      "row": 178
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\auto_healing.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 178
+    },
+    "message": "Expected an indented block after function definition",
+    "noqa_row": null,
+    "url": null
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 25,
+      "row": 118
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\orchestration\\healing_cycle_scheduler.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 119
+          },
+          "location": {
+            "column": 1,
+            "row": 118
+          }
+        }
+      ],
+      "message": "Remove definition: `Path`"
+    },
+    "location": {
+      "column": 21,
+      "row": 118
+    },
+    "message": "Redefinition of unused `Path` from line 3",
+    "noqa_row": 118,
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "B008",
+    "end_location": {
+      "column": 61,
+      "row": 66
+    },
+    "filename": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\system\\terminal_api.py",
+    "fix": null,
+    "location": {
+      "column": 31,
+      "row": 66
+    },
+    "message": "Do not perform function call `Depends` in argument defaults; instead, perform the call within the function, or read the default from a module-level singleton variable",
+    "noqa_row": 66,
+    "url": "https://docs.astral.sh/ruff/rules/function-call-in-default-argument"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "timestamp": 1756906732899,
+  "operation": "preview_watchdog",
+  "success": false,
+  "checks_passed": 0,
+  "total_checks": 5,
+  "errors": [
+    "Watchdog failed: TypeError [ERR_INVALID_CHAR]: Invalid character in header content [\"User-Agent\"]"
+  ],
+  "recommendations": [
+    "Check if server is running and accessible",
+    "Priority: Fix game route accessibility",
+    "Apply cache-busting headers to prevent stale UI",
+    "Add required DOM markers for UI validation"
+  ],
+  "status": "anomalies_detected",
+  "next_action": "apply_recommendations"
+}

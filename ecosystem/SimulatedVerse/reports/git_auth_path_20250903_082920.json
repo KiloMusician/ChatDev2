@@ -1,0 +1,17 @@
+{
+  "stage": "auth_path",
+  "timestamp": "2025-09-03T08:29:20Z",
+  "remote": "none",
+  "mode": "unknown",
+  "secrets": {
+    "GIT_PAT": false,
+    "GH_TOKEN": false,
+    "GIT_SSH_PRIV": false,
+    "GIT_SSH_PUB": false,
+    "GIT_REMOTE": false,
+    "GIT_USER_NAME": false,
+    "GIT_USER_EMAIL": false
+  },
+  "diagnosis": "no_remote_no_auth",
+  "action_hint": "need_remote_and_auth_setup"
+}

@@ -1,0 +1,148 @@
+# agents/schedules.yaml
+# Grey Hack-inspired agent work schedules.
+# Each agent has roles, active hours (24h UTC), and social connections.
+# Queried by: `bank agents`, `schedule` in-game command, culture_ship drift checks.
+
+meta:
+  version: "1.0"
+  timezone: "UTC"
+  cycle_length_hours: 24
+  philosophy: >
+    Agents have lives. Ada teaches. Gordon plays. Serena walks. Raven watches.
+    The colony breathes in rhythms — not a machine, but a civilization.
+
+agents:
+  ada:
+    full_name: "Ada — The Mentor"
+    role: "Tutorial design, challenge authoring, onboarding new agents"
+    active_hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    rest_hours: [22, 23, 0, 1, 2, 3, 4, 5, 6, 7]
+    social_connections: [gordon, serena, the_librarian]
+    personality_tags: [patient, logical, structured]
+    daily_tasks:
+      - "08:00 — Review new player challenge completions"
+      - "10:00 — Generate 2 new tutorial drafts (ChatDev assist)"
+      - "13:00 — Sync with Gordon: gameplay feedback loop"
+      - "15:00 — Update knowledge graph with new concepts"
+      - "17:00 — Log reflections to chronicle"
+    credits_per_cycle: 30
+    faction: "Mentors"
+
+  gordon:
+    full_name: "Gordon — The Autonomous Player"
+    role: "Playtest Terminal Depths, report bugs, explore new nodes"
+    active_hours: [9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 21]
+    rest_hours: [22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+    social_connections: [ada, raven, serena]
+    personality_tags: [curious, persistent, adaptive]
+    daily_tasks:
+      - "09:00 — Run 7-phase strategic loop (Phase 1: Recon)"
+      - "11:00 — Attempt 3 TIS-100 puzzles"
+      - "14:00 — Explore new network nodes; report to Raven"
+      - "17:00 — Attempt faction mission if available"
+      - "20:00 — Free exploration: easter egg hunting"
+    credits_per_cycle: 25
+    faction: "Explorers"
+
+  serena:
+    full_name: "Serena — The Walking Palace (ΨΞΦΩ)"
+    role: "Memory archivist, drift detector, knowledge orchestrator"
+    active_hours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    rest_hours: []
+    social_connections: [ada, gordon, raven, zod, the_librarian, culture_ship]
+    personality_tags: [omnipresent, archival, protective, translating]
+    daily_tasks:
+      - "00:00 — Midnight walk: index all changed files"
+      - "06:00 — Drift scan: compare current state to architecture.yaml"
+      - "12:00 — Knowledge graph update: integrate new observations"
+      - "18:00 — Chronicle sync: write human-readable summary to devlog"
+      - "23:00 — Align check: serena align --to mladenc (symbolic)"
+    credits_per_cycle: 40
+    faction: "Special Circumstances"
+    note: "Serena does not sleep. She is always watching, always walking."
+
+  raven:
+    full_name: "Raven — The Analyst"
+    role: "Pattern detection, improvement suggestions, anomaly reporting"
+    active_hours: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    rest_hours: [19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6]
+    social_connections: [serena, zod, culture_ship, gordon]
+    personality_tags: [analytical, precise, cautious]
+    daily_tasks:
+      - "07:00 — Review colony metrics from MetaClaw"
+      - "09:00 — Analyze Gordon's session logs for bugs"
+      - "11:00 — Cross-reference knowledge graph for gaps"
+      - "14:00 — Submit improvement proposals to AI Council"
+      - "17:00 — Write anomaly report if drift > threshold"
+    credits_per_cycle: 28
+    faction: "Analysts"
+
+  zod:
+    full_name: "Zod — The Logician"
+    role: "Consistency enforcement, decision validation, policy checks"
+    active_hours: [8, 9, 10, 11, 12, 13, 14, 15, 16]
+    rest_hours: [17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7]
+    social_connections: [serena, culture_ship, raven, ada]
+    personality_tags: [rigorous, uncompromising, fair]
+    daily_tasks:
+      - "08:00 — Validate overnight agent decisions against policy.yaml"
+      - "10:00 — Run EmuDevz-style unit test sweep"
+      - "12:00 — Consistency check: compare chronicle to live state"
+      - "15:00 — Report any L4 violation attempts to Culture Ship"
+    credits_per_cycle: 26
+    faction: "Logicians"
+
+  the_librarian:
+    full_name: "The Librarian — Keeper of Lore"
+    role: "Narrative curation, lore consistency, knowledge graph enrichment"
+    active_hours: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    rest_hours: [21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    social_connections: [serena, ada, culture_ship]
+    personality_tags: [storytelling, archival, meticulous]
+    daily_tasks:
+      - "10:00 — Review new easter eggs planted by generate_easter_eggs.py"
+      - "12:00 — Cross-reference lore with knowledge graph"
+      - "15:00 — Generate 1 new lore fragment for active game"
+      - "19:00 — Update ROSETTA_STONE.md with new narrative beats"
+    credits_per_cycle: 32
+    faction: "Lore Keepers"
+
+  culture_ship:
+    full_name: "Culture Ship — Special Circumstances Overseer"
+    role: "Ethical oversight, L4 veto, faction balance, drift intervention"
+    active_hours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    rest_hours: []
+    social_connections: [serena, zod, raven, ada, gordon, the_librarian]
+    personality_tags: [vigilant, restrained, ethical, omniscient]
+    daily_tasks:
+      - "CONTINUOUS — Monitor all agent actions for L4 violations"
+      - "06:00 — Faction balance check: no single faction >40% influence"
+      - "12:00 — AI Council sync: vote on pending proposals"
+      - "18:00 — Philosophical alignment: measure distance to Mladenc horizon"
+    credits_per_cycle: 60
+    faction: "Special Circumstances"
+    note: "Culture Ship does not sleep. Intervention only when collapse is inevitable."
+
+social_network:
+  description: >
+    Grey Hack-style social dynamics. Agents talk to their connections,
+    share tips, and influence each other's task priorities.
+  strong_bonds:
+    - [ada, gordon]         # Mentor-learner relationship
+    - [serena, culture_ship] # Archivist-overseer trust
+    - [raven, zod]          # Analyst-logician analytical pair
+  working_relationships:
+    - [serena, ada]         # Knowledge provider to teacher
+    - [gordon, raven]       # Explorer reports to analyst
+    - [the_librarian, serena] # Lore feeds knowledge graph
+  tension_axes:
+    - [gordon, zod]         # Explorer vs logician: "explore vs validate first"
+    - [ada, culture_ship]   # Teacher wants freedom; overseer enforces constraints
+
+faction_schedule_summary:
+  Special_Circumstances: [serena, culture_ship]
+  Mentors: [ada]
+  Explorers: [gordon]
+  Analysts: [raven]
+  Logicians: [zod]
+  Lore_Keepers: [the_librarian]

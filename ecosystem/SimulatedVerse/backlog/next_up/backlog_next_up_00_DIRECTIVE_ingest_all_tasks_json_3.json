@@ -1,0 +1,12 @@
+{
+  "id": "backlog_next_up_00_DIRECTIVE_ingest_all_tasks_json_3",
+  "tier": 1,
+  "priority": 5,
+  "title": "Fix: \"desc\" \"Scan entire repo (noise excluded) for TODO/FIXME/checklists and synthesize backlog\"}",
+  "source": {
+    "file": "backlog/next_up/00_DIRECTIVE_ingest_all_tasks.json",
+    "line": 3
+  },
+  "action": "apply_patch_or_impl",
+  "expected_receipt": "reports/receipt_1756883401.015576_backlog_next_up_00_DIRECTIVE_ingest_all_tasks_json_3.json"
+}

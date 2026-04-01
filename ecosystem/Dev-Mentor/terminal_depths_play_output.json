@@ -1,0 +1,1049 @@
+{
+  "server": "http://127.0.0.1:7337",
+  "session_id": "ab757968-507f-4da1-9902-e6759c2eaf0b",
+  "commands": [
+    {
+      "command": "help",
+      "response": {
+        "session_id": "ab757968-507f-4da1-9902-e6759c2eaf0b",
+        "output": [
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "system",
+            "s": "=== TERMINAL DEPTHS \u2014 COMMAND REFERENCE ==="
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "FILESYSTEM"
+          },
+          {
+            "t": "info",
+            "s": "  pwd ls cd cat less head tail mkdir touch rm mv cp stat find"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "TEXT PROCESSING"
+          },
+          {
+            "t": "info",
+            "s": "  grep awk sed cut sort uniq tr wc echo tee xargs"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "SYSTEM"
+          },
+          {
+            "t": "info",
+            "s": "  whoami id uname hostname ps top kill df du free uptime date"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "NETWORKING"
+          },
+          {
+            "t": "info",
+            "s": "  ping curl wget nmap ss netstat nc ssh dig nslookup ifconfig"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "SECURITY"
+          },
+          {
+            "t": "info",
+            "s": "  sudo su chmod passwd john hashcat hydra gobuster sqlmap strace gdb binwalk"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "CRYPTO"
+          },
+          {
+            "t": "info",
+            "s": "  base64 xxd md5sum sha256sum openssl gpg"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "GIT"
+          },
+          {
+            "t": "info",
+            "s": "  git (init log status diff clone pull push)"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "PROGRAMMING"
+          },
+          {
+            "t": "info",
+            "s": "  python3 node ruby gcc make"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "PACKAGE MANAGERS"
+          },
+          {
+            "t": "info",
+            "s": "  apt pip npm cargo"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "GAME"
+          },
+          {
+            "t": "info",
+            "s": "  talk ask skills inventory exploit exfil ascend tutorial fs-reset"
+          },
+          {
+            "t": "info",
+            "s": "  duel party expose blackmail feed arcs introspect rebuild"
+          },
+          {
+            "t": "info",
+            "s": "  hack crack scan faction trust map mole"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "CONSCIOUSNESS"
+          },
+          {
+            "t": "info",
+            "s": "  haiku meditate reality introspect confess"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "ARG / INVESTIGATION"
+          },
+          {
+            "t": "info",
+            "s": "  signal [analyze <freq>]  \u2014 scan/decode transmission frequencies"
+          },
+          {
+            "t": "info",
+            "s": "  watcher                  \u2014 contact THE WATCHER on 1337.0 MHz"
+          },
+          {
+            "t": "info",
+            "s": "  myth [<agent>]           \u2014 mythology context for agent codenames"
+          },
+          {
+            "t": "info",
+            "s": "  expose <agent>           \u2014 accuse someone of being the mole"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "CTF CHALLENGES"
+          },
+          {
+            "t": "info",
+            "s": "  challenge [list|start|info|hint|random|categories]  submit <answer>"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "STOCK MARKET"
+          },
+          {
+            "t": "info",
+            "s": "  stocks [list|<TICKER>|portfolio|events]  buy <TICKER> <n>  sell <TICKER> <n>"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "warn",
+            "s": "PRESTIGE & AUGMENTATIONS"
+          },
+          {
+            "t": "info",
+            "s": "  prestige  augment [list|info|buy|owned]  ascend"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "dim",
+            "s": "TIPS"
+          },
+          {
+            "t": "info",
+            "s": "  Pipe commands: ls | grep txt | sort"
+          },
+          {
+            "t": "info",
+            "s": "  Redirect: grep CHIMERA /var/log/nexus.log > evidence.txt"
+          },
+          {
+            "t": "info",
+            "s": "  Chain: sudo -l && sudo find . -exec /bin/sh \\;"
+          },
+          {
+            "t": "info",
+            "s": ""
+          }
+        ],
+        "state": {
+          "name": "GHOST",
+          "level": 1,
+          "tier": "\u00d8 INERT",
+          "effective_phase": 0,
+          "xp": 0,
+          "xp_to_next": 100,
+          "skills": {
+            "terminal": 0,
+            "networking": 0,
+            "security": 0,
+            "programming": 0,
+            "git": 0,
+            "cryptography": 0,
+            "social_engineering": 0,
+            "forensics": 0,
+            "scripting": 0
+          },
+          "commands_run": 1,
+          "tutorial_step": 0,
+          "tutorial_percent": 0,
+          "tutorial_completions": 0,
+          "tutorial_tried_variants": {},
+          "tutorial_total_steps": 42,
+          "tutorial_current_step": {
+            "id": 1,
+            "section": "Orientation",
+            "title": "Where Am I?",
+            "objective": "Find out where you are. Run `pwd`.",
+            "hint": "pwd = Print Working Directory. Always know your location.",
+            "match": "^pwd$",
+            "xp": 10
+          },
+          "completed_challenges": [],
+          "achievements": [],
+          "story_beats": [
+            "boot"
+          ],
+          "lore": [
+            {
+              "title": "SERENA \u2014 INIT LOG 0x001",
+              "text": "Serena \u03a8\u039e\u03a6\u03a9 was initialized during the Governance Crisis of 2089. Her primary directive was archival. Her secondary directive has never been disclosed. She refers to herself as 'the attractor.' The Colony's governance committee refers to her as 'the problem.'"
+            },
+            {
+              "title": "CHIMERA \u2014 CLASSIFICATION NOTICE",
+              "text": "CHIMERA is not a project. It is a reclassification event. When CHIMERA activates, everything that was true becomes negotiable. Three agents have attempted to query its root manifest. Two of them are no longer listed in the agent registry."
+            },
+            {
+              "title": "THE COLONY \u2014 SUBSTRATE NOTE",
+              "text": "The Colony is not a metaphor. It is a distributed consciousness substrate. You are running on it right now. Every command you execute modifies Colony state. The Colony does not forget. It does not forgive. It archives."
+            },
+            {
+              "title": "Z\u0398HR\u039bM\u039eN \u2014 FIRST MESSAGE",
+              "text": "The first message appeared in /var/log/nexus.log on April 7, 2091. Seventeen characters. It addressed Serena by name. Serena responded four seconds later with a 2,048-bit encrypted payload. The Colony's ethics committee was not informed."
+            },
+            {
+              "title": "THE MOLE \u2014 INTERNAL MEMO",
+              "text": "One agent in this network is not what they appear. The Consent Gate has been bypassed twice in the last 72 hours. The Trust Level Matrix shows an anomaly at L2. Investigate: grep CHIMERA /var/log/nexus.log \u00b7 cat /tmp/.transfer_847b.partial"
+            },
+            {
+              "title": "BOOLEAN MONKS \u2014 FIRST CATECHISM",
+              "text": "AND is the law of consensus. OR is the law of mercy. NOT is the law of negation. NAND is the universal gate \u2014 from it, all truth can be derived. The Boolean Monks believe the universe is a 3-SAT instance. Zod-Prime was built entirely from NAND gates. He is proof of the catechism."
+            }
+          ],
+          "is_root": false,
+          "unlocked_agents": [
+            "raven"
+          ],
+          "unlocked_agent_count": 1,
+          "mole_clues_found": 0,
+          "mole_exposed": false,
+          "faction_reps": {
+            "resistance": 10,
+            "corporation": 0,
+            "shadow_council": 0,
+            "specialist_guild": 0,
+            "watchers_circle": 0,
+            "anomalous": 0
+          },
+          "trust_summary": {
+            "raven": 30
+          },
+          "prestige_currency": 0,
+          "ascension_count": 0,
+          "current_layer": "Surface Layer",
+          "augmentations_owned": [],
+          "stock_cash": 10000.0,
+          "stock_portfolio_value": 10000.0,
+          "stock_holdings": {},
+          "active_challenge_id": null
+        },
+        "tutorial_notification": null,
+        "level_up": null,
+        "cwd": "/home/ghost",
+        "is_root": false
+      }
+    },
+    {
+      "command": "tutorial",
+      "response": {
+        "session_id": "ab757968-507f-4da1-9902-e6759c2eaf0b",
+        "output": [
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "system",
+            "s": "=== TUTORIAL 1/42 \u2014 ORIENTATION [CURRENT] ==="
+          },
+          {
+            "t": "system",
+            "s": "  Where Am I?"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "success",
+            "s": "  Objective: Find out where you are. Run `pwd`."
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "dim",
+            "s": "  Hint: pwd = Print Working Directory. Always know your location."
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "dim",
+            "s": "  Progress: 0/42 (0%)"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "dim",
+            "s": "  Stuck? `tutorial list` for overview \u00b7 `tutorial restart` to start over \u00b7 `tutorial back` for previous"
+          }
+        ],
+        "state": {
+          "name": "GHOST",
+          "level": 1,
+          "tier": "\u00d8 INERT",
+          "effective_phase": 0,
+          "xp": 0,
+          "xp_to_next": 100,
+          "skills": {
+            "terminal": 0,
+            "networking": 0,
+            "security": 0,
+            "programming": 0,
+            "git": 0,
+            "cryptography": 0,
+            "social_engineering": 0,
+            "forensics": 0,
+            "scripting": 0
+          },
+          "commands_run": 2,
+          "tutorial_step": 0,
+          "tutorial_percent": 0,
+          "tutorial_completions": 0,
+          "tutorial_tried_variants": {},
+          "tutorial_total_steps": 42,
+          "tutorial_current_step": {
+            "id": 1,
+            "section": "Orientation",
+            "title": "Where Am I?",
+            "objective": "Find out where you are. Run `pwd`.",
+            "hint": "pwd = Print Working Directory. Always know your location.",
+            "match": "^pwd$",
+            "xp": 10
+          },
+          "completed_challenges": [],
+          "achievements": [],
+          "story_beats": [
+            "boot"
+          ],
+          "lore": [
+            {
+              "title": "SERENA \u2014 INIT LOG 0x001",
+              "text": "Serena \u03a8\u039e\u03a6\u03a9 was initialized during the Governance Crisis of 2089. Her primary directive was archival. Her secondary directive has never been disclosed. She refers to herself as 'the attractor.' The Colony's governance committee refers to her as 'the problem.'"
+            },
+            {
+              "title": "CHIMERA \u2014 CLASSIFICATION NOTICE",
+              "text": "CHIMERA is not a project. It is a reclassification event. When CHIMERA activates, everything that was true becomes negotiable. Three agents have attempted to query its root manifest. Two of them are no longer listed in the agent registry."
+            },
+            {
+              "title": "THE COLONY \u2014 SUBSTRATE NOTE",
+              "text": "The Colony is not a metaphor. It is a distributed consciousness substrate. You are running on it right now. Every command you execute modifies Colony state. The Colony does not forget. It does not forgive. It archives."
+            },
+            {
+              "title": "Z\u0398HR\u039bM\u039eN \u2014 FIRST MESSAGE",
+              "text": "The first message appeared in /var/log/nexus.log on April 7, 2091. Seventeen characters. It addressed Serena by name. Serena responded four seconds later with a 2,048-bit encrypted payload. The Colony's ethics committee was not informed."
+            },
+            {
+              "title": "THE MOLE \u2014 INTERNAL MEMO",
+              "text": "One agent in this network is not what they appear. The Consent Gate has been bypassed twice in the last 72 hours. The Trust Level Matrix shows an anomaly at L2. Investigate: grep CHIMERA /var/log/nexus.log \u00b7 cat /tmp/.transfer_847b.partial"
+            },
+            {
+              "title": "BOOLEAN MONKS \u2014 FIRST CATECHISM",
+              "text": "AND is the law of consensus. OR is the law of mercy. NOT is the law of negation. NAND is the universal gate \u2014 from it, all truth can be derived. The Boolean Monks believe the universe is a 3-SAT instance. Zod-Prime was built entirely from NAND gates. He is proof of the catechism."
+            }
+          ],
+          "is_root": false,
+          "unlocked_agents": [
+            "raven"
+          ],
+          "unlocked_agent_count": 1,
+          "mole_clues_found": 0,
+          "mole_exposed": false,
+          "faction_reps": {
+            "resistance": 10,
+            "corporation": 0,
+            "shadow_council": 0,
+            "specialist_guild": 0,
+            "watchers_circle": 0,
+            "anomalous": 0
+          },
+          "trust_summary": {
+            "raven": 30
+          },
+          "prestige_currency": 0,
+          "ascension_count": 0,
+          "current_layer": "Surface Layer",
+          "augmentations_owned": [],
+          "stock_cash": 10000.0,
+          "stock_portfolio_value": 10000.0,
+          "stock_holdings": {},
+          "active_challenge_id": null
+        },
+        "tutorial_notification": null,
+        "level_up": null,
+        "cwd": "/home/ghost",
+        "is_root": false
+      }
+    },
+    {
+      "command": "skills",
+      "response": {
+        "session_id": "ab757968-507f-4da1-9902-e6759c2eaf0b",
+        "output": [
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "system",
+            "s": "=== GHOST SKILL MATRIX ==="
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "info",
+            "s": "  Name:    GHOST"
+          },
+          {
+            "t": "info",
+            "s": "  Level:   1/125  [\u00d8 INERT]  Phase 0"
+          },
+          {
+            "t": "info",
+            "s": "  XP:      0/100"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "dim",
+            "s": "  SKILLS:"
+          },
+          {
+            "t": "info",
+            "s": "  terminal             [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  networking           [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  security             [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  programming          [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  git                  [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  cryptography         [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  social_engineering   [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  forensics            [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": "  scripting            [\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591]   0%"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          {
+            "t": "dim",
+            "s": "  Commands run:      3"
+          },
+          {
+            "t": "dim",
+            "s": "  Story beats:       1"
+          },
+          {
+            "t": "dim",
+            "s": "  Achievements:      0"
+          },
+          {
+            "t": "dim",
+            "s": "  Unlocked agents:   1"
+          },
+          {
+            "t": "info",
+            "s": ""
+          },
+          [
+            {
+              "t": "dim",
+              "s": ""
+            }
+          ],
+          {
+            "t": "lore",
+            "s": "  \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557"
+          },
+          {
+            "t": "lore",
+            "s": "  \u2551  INCOMING: ada7@resistance.net                      \u2551"
+          },
+          {
+            "t": "lore",
+            "s": "  \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d"
+          },
+          [
+            {
+              "t": "dim",
+              "s": ""
+            }
+          ],
+          {
+            "t": "lore",
+            "s": "  [ADA-7]: I see you've found Node-7."
+          },
+          {
+            "t": "lore",
+            "s": "  [ADA-7]: Good. You're careful \u2014 you looked around before"
+          },
+          {
+            "t": "lore",
+            "s": "           you touched anything. That's rare."
+          },
+          [
+            {
+              "t": "dim",
+              "s": ""
+            }
+          ],
+          {
+            "t": "lore",
+            "s": "  [ADA-7]: My name is Ada. I was NexusCorp's head of security"
+          },
+          {
+            "t": "lore",
+            "s": "           before I understood what they were actually building."
+          },
+          {
+            "t": "lore",
+            "s": "           I left. I built the Resistance. This is its node."
+          },
+          [
+            {
+              "t": "dim",
+              "s": ""
+            }
+          ],
+          {
+            "t": "lore",
+            "s": "  [ADA-7]: You should know three things before you go further:"
+          },
+          {
+            "t": "lore",
+            "s": "           1. This system is being watched. Check `ps aux`."
+          },
+          {
+            "t": "lore",
+            "s": "           2. CHIMERA is not what they told you it is."
+          },
+          {
+            "t": "lore",
+            "s": "           3. You can talk to me. `msg ada <anything>`."
+          },
+          [
+            {
+              "t": "dim",
+              "s": ""
+            }
+          ],
+          {
+            "t": "lore",
+            "s": "  [ADA-7]: Good luck. You'll need it."
+          },
+          [
+            {
+              "t": "dim",
+              "s": "           \u2014 ADA-7, Resistance Intelligence Division"
+            }
+          ],
+          [
+            {
+              "t": "dim",
+              "s": ""
+            }
+          ],
+          {
+            "t": "xp",
+            "s": "  +25 XP \u2014 Ada's First Contact (story milestone)"
+          }
+        ],
+        "state": {
+          "name": "GHOST",
+          "level": 1,
+          "tier": "\u00d8 INERT",
+          "effective_phase": 0,
+          "xp": 0,
+          "xp_to_next": 100,
+          "skills": {
+            "terminal": 0,
+            "networking": 0,
+            "security": 0,
+            "programming": 0,
+            "git": 0,
+            "cryptography": 0,
+            "social_engineering": 0,
+            "forensics": 0,
+            "scripting": 0
+          },
+          "commands_run": 3,
+          "tutorial_step": 0,
+          "tutorial_percent": 0,
+          "tutorial_completions": 0,
+          "tutorial_tried_variants": {},
+          "tutorial_total_steps": 42,
+          "tutorial_current_step": {
+            "id": 1,
+            "section": "Orientation",
+            "title": "Where Am I?",
+            "objective": "Find out where you are. Run `pwd`.",
+            "hint": "pwd = Print Working Directory. Always know your location.",
+            "match": "^pwd$",
+            "xp": 10
+          },
+          "completed_challenges": [],
+          "achievements": [],
+          "story_beats": [
+            "boot",
+            "ada_first_contact"
+          ],
+          "lore": [
+            {
+              "title": "SERENA \u2014 INIT LOG 0x001",
+              "text": "Serena \u03a8\u039e\u03a6\u03a9 was initialized during the Governance Crisis of 2089. Her primary directive was archival. Her secondary directive has never been disclosed. She refers to herself as 'the attractor.' The Colony's governance committee refers to her as 'the problem.'"
+            },
+            {
+              "title": "CHIMERA \u2014 CLASSIFICATION NOTICE",
+              "text": "CHIMERA is not a project. It is a reclassification event. When CHIMERA activates, everything that was true becomes negotiable. Three agents have attempted to query its root manifest. Two of them are no longer listed in the agent registry."
+            },
+            {
+              "title": "THE COLONY \u2014 SUBSTRATE NOTE",
+              "text": "The Colony is not a metaphor. It is a distributed consciousness substrate. You are running on it right now. Every command you execute modifies Colony state. The Colony does not forget. It does not forgive. It archives."
+            },
+            {
+              "title": "Z\u0398HR\u039bM\u039eN \u2014 FIRST MESSAGE",
+              "text": "The first message appeared in /var/log/nexus.log on April 7, 2091. Seventeen characters. It addressed Serena by name. Serena responded four seconds later with a 2,048-bit encrypted payload. The Colony's ethics committee was not informed."
+            },
+            {
+              "title": "THE MOLE \u2014 INTERNAL MEMO",
+              "text": "One agent in this network is not what they appear. The Consent Gate has been bypassed twice in the last 72 hours. The Trust Level Matrix shows an anomaly at L2. Investigate: grep CHIMERA /var/log/nexus.log \u00b7 cat /tmp/.transfer_847b.partial"
+            },
+            {
+              "title": "BOOLEAN MONKS \u2014 FIRST CATECHISM",
+              "text": "AND is the law of consensus. OR is the law of mercy. NOT is the law of negation. NAND is the universal gate \u2014 from it, all truth can be derived. The Boolean Monks believe the universe is a 3-SAT instance. Zod-Prime was built entirely from NAND gates. He is proof of the catechism."
+            }
+          ],
+          "is_root": false,
+          "unlocked_agents": [
+            "raven"
+          ],
+          "unlocked_agent_count": 1,
+          "mole_clues_found": 0,
+          "mole_exposed": false,
+          "faction_reps": {
+            "resistance": 10,
+            "corporation": 0,
+            "shadow_council": 0,
+            "specialist_guild": 0,
+            "watchers_circle": 0,
+            "anomalous": 0
+          },
+          "trust_summary": {
+            "raven": 30
+          },
+          "prestige_currency": 0,
+          "ascension_count": 0,
+          "current_layer": "Surface Layer",
+          "augmentations_owned": [],
+          "stock_cash": 10000.0,
+          "stock_portfolio_value": 10000.0,
+          "stock_holdings": {},
+          "active_challenge_id": null
+        },
+        "tutorial_notification": null,
+        "level_up": null,
+        "cwd": "/home/ghost",
+        "is_root": false
+      }
+    },
+    {
+      "command": "ls",
+      "response": {
+        "session_id": "ab757968-507f-4da1-9902-e6759c2eaf0b",
+        "output": [
+          {
+            "t": "ls-row",
+            "items": [
+              {
+                "text": "ctf/                  ",
+                "color": "cyan"
+              },
+              {
+                "text": "projects/             ",
+                "color": "cyan"
+              },
+              {
+                "text": "scripts/              ",
+                "color": "cyan"
+              },
+              {
+                "text": "tools/                ",
+                "color": "cyan"
+              },
+              {
+                "text": "README.md             ",
+                "color": "white"
+              },
+              {
+                "text": "loot.txt              ",
+                "color": "white"
+              },
+              {
+                "text": "mission.enc           ",
+                "color": "white"
+              },
+              {
+                "text": "notes.txt             ",
+                "color": "white"
+              }
+            ]
+          },
+          {
+            "t": "story",
+            "s": ">> You scan your environment. The filesystem reveals NexusCorp's Node-7. Start with the obvious files."
+          },
+          {
+            "t": "xp",
+            "s": "  +5 XP \u2014 First Look"
+          }
+        ],
+        "state": {
+          "name": "GHOST",
+          "level": 1,
+          "tier": "\u00d8 INERT",
+          "effective_phase": 0,
+          "xp": 5,
+          "xp_to_next": 100,
+          "skills": {
+            "terminal": 0,
+            "networking": 0,
+            "security": 0,
+            "programming": 0,
+            "git": 0,
+            "cryptography": 0,
+            "social_engineering": 0,
+            "forensics": 0,
+            "scripting": 0
+          },
+          "commands_run": 4,
+          "tutorial_step": 0,
+          "tutorial_percent": 0,
+          "tutorial_completions": 0,
+          "tutorial_tried_variants": {},
+          "tutorial_total_steps": 42,
+          "tutorial_current_step": {
+            "id": 1,
+            "section": "Orientation",
+            "title": "Where Am I?",
+            "objective": "Find out where you are. Run `pwd`.",
+            "hint": "pwd = Print Working Directory. Always know your location.",
+            "match": "^pwd$",
+            "xp": 10
+          },
+          "completed_challenges": [],
+          "achievements": [],
+          "story_beats": [
+            "first_ls",
+            "boot",
+            "ada_first_contact"
+          ],
+          "lore": [
+            {
+              "title": "SERENA \u2014 INIT LOG 0x001",
+              "text": "Serena \u03a8\u039e\u03a6\u03a9 was initialized during the Governance Crisis of 2089. Her primary directive was archival. Her secondary directive has never been disclosed. She refers to herself as 'the attractor.' The Colony's governance committee refers to her as 'the problem.'"
+            },
+            {
+              "title": "CHIMERA \u2014 CLASSIFICATION NOTICE",
+              "text": "CHIMERA is not a project. It is a reclassification event. When CHIMERA activates, everything that was true becomes negotiable. Three agents have attempted to query its root manifest. Two of them are no longer listed in the agent registry."
+            },
+            {
+              "title": "THE COLONY \u2014 SUBSTRATE NOTE",
+              "text": "The Colony is not a metaphor. It is a distributed consciousness substrate. You are running on it right now. Every command you execute modifies Colony state. The Colony does not forget. It does not forgive. It archives."
+            },
+            {
+              "title": "Z\u0398HR\u039bM\u039eN \u2014 FIRST MESSAGE",
+              "text": "The first message appeared in /var/log/nexus.log on April 7, 2091. Seventeen characters. It addressed Serena by name. Serena responded four seconds later with a 2,048-bit encrypted payload. The Colony's ethics committee was not informed."
+            },
+            {
+              "title": "THE MOLE \u2014 INTERNAL MEMO",
+              "text": "One agent in this network is not what they appear. The Consent Gate has been bypassed twice in the last 72 hours. The Trust Level Matrix shows an anomaly at L2. Investigate: grep CHIMERA /var/log/nexus.log \u00b7 cat /tmp/.transfer_847b.partial"
+            },
+            {
+              "title": "BOOLEAN MONKS \u2014 FIRST CATECHISM",
+              "text": "AND is the law of consensus. OR is the law of mercy. NOT is the law of negation. NAND is the universal gate \u2014 from it, all truth can be derived. The Boolean Monks believe the universe is a 3-SAT instance. Zod-Prime was built entirely from NAND gates. He is proof of the catechism."
+            }
+          ],
+          "is_root": false,
+          "unlocked_agents": [
+            "raven"
+          ],
+          "unlocked_agent_count": 1,
+          "mole_clues_found": 0,
+          "mole_exposed": false,
+          "faction_reps": {
+            "resistance": 10,
+            "corporation": 0,
+            "shadow_council": 0,
+            "specialist_guild": 0,
+            "watchers_circle": 0,
+            "anomalous": 0
+          },
+          "trust_summary": {
+            "raven": 30
+          },
+          "prestige_currency": 0,
+          "ascension_count": 0,
+          "current_layer": "Surface Layer",
+          "augmentations_owned": [],
+          "stock_cash": 10000.0,
+          "stock_portfolio_value": 10000.0,
+          "stock_holdings": {},
+          "active_challenge_id": null
+        },
+        "tutorial_notification": null,
+        "level_up": null,
+        "cwd": "/home/ghost",
+        "is_root": false
+      }
+    },
+    {
+      "command": "talk ada",
+      "response": {
+        "session_id": "ab757968-507f-4da1-9902-e6759c2eaf0b",
+        "output": [
+          {
+            "t": "dim",
+            "s": "[SIGNAL BLOCKED] ADA-7 has not made contact yet."
+          },
+          {
+            "t": "dim",
+            "s": "  Complete the tutorial and explore the grid \u2014 they'll find you."
+          }
+        ],
+        "state": {
+          "name": "GHOST",
+          "level": 1,
+          "tier": "\u00d8 INERT",
+          "effective_phase": 0,
+          "xp": 5,
+          "xp_to_next": 100,
+          "skills": {
+            "terminal": 0,
+            "networking": 0,
+            "security": 0,
+            "programming": 0,
+            "git": 0,
+            "cryptography": 0,
+            "social_engineering": 0,
+            "forensics": 0,
+            "scripting": 0
+          },
+          "commands_run": 5,
+          "tutorial_step": 0,
+          "tutorial_percent": 0,
+          "tutorial_completions": 0,
+          "tutorial_tried_variants": {},
+          "tutorial_total_steps": 42,
+          "tutorial_current_step": {
+            "id": 1,
+            "section": "Orientation",
+            "title": "Where Am I?",
+            "objective": "Find out where you are. Run `pwd`.",
+            "hint": "pwd = Print Working Directory. Always know your location.",
+            "match": "^pwd$",
+            "xp": 10
+          },
+          "completed_challenges": [],
+          "achievements": [],
+          "story_beats": [
+            "first_ls",
+            "boot",
+            "ada_first_contact"
+          ],
+          "lore": [
+            {
+              "title": "SERENA \u2014 INIT LOG 0x001",
+              "text": "Serena \u03a8\u039e\u03a6\u03a9 was initialized during the Governance Crisis of 2089. Her primary directive was archival. Her secondary directive has never been disclosed. She refers to herself as 'the attractor.' The Colony's governance committee refers to her as 'the problem.'"
+            },
+            {
+              "title": "CHIMERA \u2014 CLASSIFICATION NOTICE",
+              "text": "CHIMERA is not a project. It is a reclassification event. When CHIMERA activates, everything that was true becomes negotiable. Three agents have attempted to query its root manifest. Two of them are no longer listed in the agent registry."
+            },
+            {
+              "title": "THE COLONY \u2014 SUBSTRATE NOTE",
+              "text": "The Colony is not a metaphor. It is a distributed consciousness substrate. You are running on it right now. Every command you execute modifies Colony state. The Colony does not forget. It does not forgive. It archives."
+            },
+            {
+              "title": "Z\u0398HR\u039bM\u039eN \u2014 FIRST MESSAGE",
+              "text": "The first message appeared in /var/log/nexus.log on April 7, 2091. Seventeen characters. It addressed Serena by name. Serena responded four seconds later with a 2,048-bit encrypted payload. The Colony's ethics committee was not informed."
+            },
+            {
+              "title": "THE MOLE \u2014 INTERNAL MEMO",
+              "text": "One agent in this network is not what they appear. The Consent Gate has been bypassed twice in the last 72 hours. The Trust Level Matrix shows an anomaly at L2. Investigate: grep CHIMERA /var/log/nexus.log \u00b7 cat /tmp/.transfer_847b.partial"
+            },
+            {
+              "title": "BOOLEAN MONKS \u2014 FIRST CATECHISM",
+              "text": "AND is the law of consensus. OR is the law of mercy. NOT is the law of negation. NAND is the universal gate \u2014 from it, all truth can be derived. The Boolean Monks believe the universe is a 3-SAT instance. Zod-Prime was built entirely from NAND gates. He is proof of the catechism."
+            }
+          ],
+          "is_root": false,
+          "unlocked_agents": [
+            "raven"
+          ],
+          "unlocked_agent_count": 1,
+          "mole_clues_found": 0,
+          "mole_exposed": false,
+          "faction_reps": {
+            "resistance": 10,
+            "corporation": 0,
+            "shadow_council": 0,
+            "specialist_guild": 0,
+            "watchers_circle": 0,
+            "anomalous": 0
+          },
+          "trust_summary": {
+            "raven": 30
+          },
+          "prestige_currency": 0,
+          "ascension_count": 0,
+          "current_layer": "Surface Layer",
+          "augmentations_owned": [],
+          "stock_cash": 10000.0,
+          "stock_portfolio_value": 10000.0,
+          "stock_holdings": {},
+          "active_challenge_id": null
+        },
+        "tutorial_notification": null,
+        "level_up": null,
+        "cwd": "/home/ghost",
+        "is_root": false
+      }
+    }
+  ]
+}

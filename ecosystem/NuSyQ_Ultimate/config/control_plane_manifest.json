@@ -1,0 +1,87 @@
+{
+  "artifact_authority": "hand-authored machine-consumed manifest",
+  "consumerReadPrecedence": [
+    "state/boot/rosetta_bootstrap.json",
+    "state/registry.json",
+    "state/reports/control_plane_snapshot.json",
+    "focused feeds",
+    "docs fallback"
+  ],
+  "panels": [
+    "NuSyQ Capability Cockpit",
+    "NuSyQ Diagnostics Dashboard",
+    "Culture Ship Control Surface"
+  ],
+  "statusBars": [
+    "mediator.status",
+    "mediator.diagnostics",
+    "mediator.terminals"
+  ],
+  "treeViews": [
+    "repo.roles",
+    "services.health",
+    "deprecated.surfaces"
+  ],
+  "commands": [
+    "powershellMediator.start",
+    "powershellMediator.stop",
+    "powershellMediator.openReports",
+    "powershellMediator.listOllamaModels",
+    "powershellMediator.runChatDevTask",
+    "powershellMediator.openCapabilityCockpit",
+    "powershellMediator.refreshDiagnosticsSnapshot",
+    "powershellMediator.openDiagnosticsDashboard"
+  ],
+  "actions": [
+    "keeper_preflight",
+    "refresh_control_plane_snapshot",
+    "build_rosetta_bootstrap",
+    "export_culture_ship_runtime_descriptor",
+    "rotate_shared_quest_log",
+    "index_obsolete_current_state_archives"
+  ],
+  "probes": [
+    "dev_mentor_health",
+    "simulatedverse_health",
+    "chatdev_adapter_health",
+    "ollama_models",
+    "lm_studio_models",
+    "gitnexus_matrix"
+  ],
+  "outputChannels": [
+    "PowerShell Mediator",
+    "NuSyQ Diagnostics"
+  ],
+  "terminalSurfaces": [
+    "Terminal Keeper",
+    "NuSyQ bridge terminals",
+    "ChatDev task runner"
+  ],
+  "dataStores": [
+    "NuSyQ Rosetta quest ledger",
+    "NuSyQ event ledgers",
+    "Dev-Mentor memory.db",
+    "SimulatedVerse ztp_cache.sqlite3",
+    "NuSyQ-Hub startup log and ecosystem status"
+  ],
+  "watchFiles": [
+    "state/boot/rosetta_bootstrap.json",
+    "state/registry.json",
+    "state/reports/control_plane_snapshot.json",
+    "state/deprecation_registry.json",
+    "state/culture_ship_runtime_descriptor.json",
+    "src/Rosetta_Quest_System/quest_log.jsonl",
+    "state/unified_errors.json",
+    "state/repair_requests.json"
+  ],
+  "permissions": {
+    "writes_state": true,
+    "reads_cross_repo": true,
+    "requires_elevation_for_vhd_compaction": true
+  },
+  "autoRefresh": {
+    "bootstrapSeconds": 1800,
+    "snapshotSeconds": 300,
+    "runtimeDescriptorSeconds": 300
+  }
+}

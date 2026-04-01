@@ -1,0 +1,2 @@
+{"type":"Analysis","job_id":"job_bee0ee1a-2bb3-4c05-bcb9-590995a05303","step":1,"finding":"PU queue processing but no actual work execution","action":"Implement durable worker with real dequeue and proof gates"}
+{"type":"Plan","job_id":"job_bee0ee1a-2bb3-4c05-bcb9-590995a05303","step":2,"implementation":"Worker loop pulls queue, calls agents, verifies proofs","verification":"dequeue_rate>0 and success_rate>0.6"}

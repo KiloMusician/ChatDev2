@@ -1,0 +1,43 @@
+# config/yap_rules.yml
+version: 1
+heuristics:
+  - label: "api_unreachable"
+    contains_any: ["ECONNREFUSED", "API error", "fetch failed", "API failed"]
+    tags:
+      - { key: "severity", value: "critical" }
+      - { key: "system/component", value: "api" }
+
+  - label: "hud_error"
+    contains_any: ["hydrate", "React error", "ErrorBoundary"]
+    tags:
+      - { key: "ui/subsystem", value: "hud" }
+
+  - label: "invariance_dip"
+    contains_any: ["invariance_dip", "T6I", "invariance floor"]
+    tags:
+      - { key: "invariance/T6I", value: "<=0.35" }
+
+  - label: "ic_spike"
+    contains_any: ["ic_spike", "ic1 spike", "ic5 spike"]
+    tags:
+      - { key: "ic/spike", value: true }
+
+  - label: "motif_scarcity"
+    contains_any: ["motif_scarcity", "motif scarce", "motif [0,1,4]"]
+    tags:
+      - { key: "motif", value: "[0,1,4]" }
+
+  - label: "rowgen"
+    contains_any: ["rowgen", "generate rows", "all-interval"]
+    tags:
+      - { key: "row/all_interval", value: true }
+
+  - label: "square"
+    contains_any: ["square", "Schoenberg", "row matrix"]
+    tags:
+      - { key: "square/built", value: true }
+
+  - label: "ops_stall"
+    contains_any: ["stalled", "no tick", "stasis"]
+    tags:
+      - { key: "ops/stall", value: true }

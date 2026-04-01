@@ -1,0 +1,23 @@
+{
+  "name": "NuSyQ-Hub",
+  "version": "0.9.0",
+  "description": "Multi-repository AI orchestration hub",
+  "environment": "development",
+  "debug": false,
+  "log_level": "INFO",
+  "api": {
+    "host": "127.0.0.1",
+    "port": 8000,
+    "cors_origins": ["http://localhost:3000", "http://127.0.0.1:3000"]
+  },
+  "services": {
+    "ollama_url": "http://127.0.0.1:11434",
+    "mcp_server_url": "http://127.0.0.1:8081",
+    "simulatedverse_url": "http://127.0.0.1:5000"
+  },
+  "features": {
+    "auto_healing": true,
+    "background_tasks": true,
+    "consciousness_bridge": true
+  }
+}

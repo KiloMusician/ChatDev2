@@ -1,0 +1,33 @@
+name: TypeScript Node CLI
+type: cli
+language: typescript
+runtime_profile: native_terminal
+description: TypeScript CLI application with type safety and modern tooling.
+metadata:
+  compiler: tsc
+  node_version: ">=18"
+dependencies:
+  - commander
+  - chalk
+  - typescript
+  - "@types/node"
+  - ts-node
+file_structure:
+  README.md: Project overview and usage
+  package.json: NPM package manifest with scripts
+  tsconfig.json: TypeScript compiler configuration
+  src/index.ts: CLI entry point with argument parsing
+  src/commands/health.ts: Health check command
+  src/utils/logger.ts: Logging utility
+  tests/smoke.test.ts: Basic smoke test
+complexity: 4
+requires_multifile: true
+entry_point: src/index.ts
+cli_framework: commander
+packaging: pkg
+generation_hints:
+  - Use strict TypeScript settings (strict: true in tsconfig)
+  - Define interfaces for command options
+  - Use async/await for I/O operations
+  - Export types for external use
+  - Use ES modules (type: module in package.json)

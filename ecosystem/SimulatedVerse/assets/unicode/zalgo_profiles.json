@@ -1,0 +1,37 @@
+{
+  "profiles": {
+    "readable": {
+      "up": 1,
+      "mid": 0,
+      "down": 1,
+      "maxPerChar": 1,
+      "description": "Minimal combining marks for subtle effect"
+    },
+    "subtle": {
+      "up": 2,
+      "mid": 0,
+      "down": 1,
+      "maxPerChar": 2,
+      "description": "Light styling without breaking readability"
+    },
+    "vivid": {
+      "up": 2,
+      "mid": 1,
+      "down": 2,
+      "maxPerChar": 3,
+      "description": "Rich styling with moderate visual impact"
+    },
+    "artful": {
+      "up": 3,
+      "mid": 2,
+      "down": 3,
+      "maxPerChar": 3,
+      "description": "Maximum safe styling for artistic expression"
+    }
+  },
+  "safety": {
+    "maxCombiningMarks": 3,
+    "accessibility": "Always provide plain-text fallbacks",
+    "stripFunction": "stripCombining() removes all combining marks"
+  }
+}

@@ -1,0 +1,67 @@
+name: "JavaScript Browser Game"
+type: "game"
+language: "javascript"
+runtime_profile: "electron_web_wrapper"
+engine: "canvas"
+genre: "arcade"
+description: "A browser-based arcade game using HTML5 Canvas API, featuring sprite-based graphics, collision detection, and game loop architecture"
+complexity: 5
+requires_multifile: true
+target_platforms:
+  - browser
+  - electron
+
+dependencies:
+  - "Modern web browser with ES6+ support"
+
+file_structure:
+  # Core game files
+  "index.html": "Main HTML file with canvas element and game container"
+  "css/style.css": "Game styling, UI layout, and responsive design"
+  "js/game.js": "Main game class, game loop, state management"
+  "js/player.js": "Player character class with movement and collision"
+  "js/enemy.js": "Enemy class with AI behavior"
+  "js/projectile.js": "Bullets, missiles, or thrown objects"
+  "js/particle.js": "Particle system for effects (explosions, trails)"
+  "js/input.js": "Keyboard and mouse input handling"
+  "js/collision.js": "Collision detection utility functions"
+  "js/audio.js": "Sound effect and music management"
+  "js/utils.js": "Helper functions (clamp, lerp, distance, etc.)"
+  
+  # Assets (placeholders - real assets added later)
+  "assets/sprites/player.png": "Player sprite sheet"
+  "assets/sprites/enemy.png": "Enemy sprite sheet"
+  "assets/sounds/shoot.mp3": "Shooting sound effect"
+  "assets/sounds/music.mp3": "Background music loop"
+  
+  # Config and documentation
+  "config.json": "Game configuration (difficulty, spawn rates, etc.)"
+  "README.md": "How to run the game locally and deployment instructions"
+  "package.json": "NPM scripts for development server (optional)"
+
+generation_hints:
+  - "Use requestAnimationFrame for smooth 60fps game loop"
+  - "Implement delta time for frame-rate independent movement"
+  - "Use object pooling to recycle enemies/projectiles for performance"
+  - "Add axis-aligned bounding box (AABB) collision detection"
+  - "Include sprite animation with frame updates"
+  - "Use canvas layers for background, game objects, and UI"
+  - "Add game states: MENU, PLAYING, PAUSED, GAME_OVER"
+  - "Implement score tracking with localStorage high scores"
+  - "Add keyboard controls with preventDefault for arrow keys"
+  - "Include particle effects for explosions and collectibles"
+  - "Make game responsive to window resize"
+  - "Add sound toggle and volume controls"
+
+metadata:
+  canvas_width: 800
+  canvas_height: 600
+  target_fps: 60
+  supports_mobile: true
+  audio_format: "mp3"
+
+feature_flags:
+  data_pipeline: true
+  event_router: true
+  save_migration: true
+  modding_api: true

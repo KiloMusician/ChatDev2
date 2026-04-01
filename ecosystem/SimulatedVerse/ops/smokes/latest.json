@@ -1,0 +1,44 @@
+{
+  "ts": "2025-08-31T01:14:09.816Z",
+  "results": [
+    {
+      "name": "boot",
+      "ok": true,
+      "reason": "",
+      "detail": {
+        "resources": 3
+      }
+    },
+    {
+      "name": "agent_gateway",
+      "ok": true,
+      "reason": "",
+      "detail": {
+        "job_id": "job_8542268d-ee04-49c3-b501-a55f96f1cb20"
+      }
+    },
+    {
+      "name": "worker",
+      "ok": false,
+      "reason": "stopped",
+      "detail": {
+        "jobs_today": 0,
+        "success_rate": 0
+      }
+    },
+    {
+      "name": "proofs",
+      "ok": true,
+      "reason": "2903 total, 2903 today",
+      "detail": {
+        "total": 2903,
+        "today": 2903,
+        "passed": 0,
+        "failed": 2903
+      }
+    }
+  ],
+  "passed": 3,
+  "total": 4,
+  "success_rate": 0.75
+}

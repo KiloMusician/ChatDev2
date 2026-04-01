@@ -1,0 +1,231 @@
+ml/serving/router.ts(16,11): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(22,37): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+ml/serving/router.ts(22,49): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+ml/serving/router.ts(49,17): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(51,17): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(65,13): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(68,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(90,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(116,11): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(128,11): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(144,66): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+ml/serving/router.ts(146,20): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(170,11): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(180,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(199,11): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+ml/serving/router.ts(208,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/advanced/quantum-enhancement.ts(481,87): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'boolean'.
+server/auth/jwt-manager.ts(95,20): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/auth/jwt-manager.ts(100,20): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/auth/jwt-manager.ts(104,20): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/auth/jwt-manager.ts(112,7): error TS2349: This expression is not callable.
+  Type 'NextFunction' has no call signatures.
+server/auth/jwt-manager.ts(122,20): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/auth/jwt-manager.ts(126,20): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/auth/jwt-manager.ts(133,7): error TS2349: This expression is not callable.
+  Type 'NextFunction' has no call signatures.
+server/auth/jwt-manager.ts(141,28): error TS2339: Property 'headers' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/compliance/autonomous-framework.ts(70,21): error TS2552: Cannot find name 'RemediationPlan'. Did you mean 'RemediationAction'?
+server/errors/quantum-recovery.ts(50,15): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/errors/quantum-recovery.ts(87,78): error TS2339: Property 'message' does not exist on type 'unknown'.
+server/errors/quantum-recovery.ts(235,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/errors/quantum-recovery.ts(260,29): error TS2339: Property 'loadavg' does not exist on type 'Process'.
+server/errors/quantum-recovery.ts(260,47): error TS2339: Property 'loadavg' does not exist on type 'Process'.
+server/graphql/quantum-federation.ts(20,19): error TS2709: Cannot use namespace 'ApolloServer' as a type.
+server/graphql/quantum-federation.ts(197,19): error TS2709: Cannot use namespace 'ApolloServer' as a type.
+server/index.ts(48,13): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(50,13): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(52,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(53,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(54,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(61,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(62,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(63,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(77,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(78,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(79,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(85,13): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/index.ts(85,44): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/index.ts(85,79): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/index.ts(92,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(93,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(94,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(95,9): error TS2339: Property 'sendFile' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(102,13): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/index.ts(102,44): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/index.ts(102,79): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/index.ts(108,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(109,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(110,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(111,9): error TS2339: Property 'sendFile' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(118,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(119,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(120,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(121,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(487,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/index.ts(489,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/infrastructure/self-healing.ts(64,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(64,51): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(77,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(77,45): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(90,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(90,49): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(103,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(103,48): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(116,26): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(116,42): error TS2322: Type 'string' is not assignable to type 'RecoveryAction'.
+server/infrastructure/self-healing.ts(356,7): error TS1117: An object literal cannot have multiple properties with the same name.
+server/infrastructure/self-healing.ts(391,47): error TS2345: Argument of type 'RecoveryAction' is not assignable to parameter of type 'string'.
+server/middleware/auth.ts(4,21): error TS2339: Property 'headers' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/middleware/auth.ts(7,16): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/auth.ts(13,3): error TS2349: This expression is not callable.
+  Type 'NextFunction' has no call signatures.
+server/middleware/consciousness-aware.ts(52,7): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/consciousness-aware.ts(53,7): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/consciousness-aware.ts(54,7): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/consciousness-aware.ts(56,3): error TS2349: This expression is not callable.
+  Type 'NextFunction' has no call signatures.
+server/middleware/consciousness-aware.ts(66,21): error TS2339: Property 'path' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(69,33): error TS2339: Property 'query' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(72,11): error TS2339: Property 'body' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(73,38): error TS2339: Property 'body' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(78,35): error TS2339: Property 'method' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(129,17): error TS2339: Property 'path' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(132,32): error TS2339: Property 'query' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(135,11): error TS2339: Property 'body' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(136,34): error TS2339: Property 'body' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(146,28): error TS2339: Property 'send' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/consciousness-aware.ts(148,7): error TS2339: Property 'send' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/consciousness-aware.ts(153,42): error TS2339: Property 'method' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(153,56): error TS2339: Property 'path' does not exist on type 'ConsciousRequest'.
+server/middleware/consciousness-aware.ts(156,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/consciousness-aware.ts(157,11): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/consciousness-aware.ts(163,3): error TS2349: This expression is not callable.
+  Type 'NextFunction' has no call signatures.
+server/middleware/rate-limit.ts(26,20): error TS2339: Property 'ip' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/middleware/rate-limit.ts(26,30): error TS2339: Property 'connection' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/middleware/rate-limit.ts(40,18): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/rate-limit.ts(48,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/rate-limit.ts(49,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/rate-limit.ts(50,9): error TS2339: Property 'setHeader' does not exist on type 'Response<any, Record<string, any>>'.
+server/middleware/rate-limit.ts(52,5): error TS2349: This expression is not callable.
+  Type 'NextFunction' has no call signatures.
+server/multiplayer/websocket-server.ts(26,16): error TS2709: Cannot use namespace 'WebSocketServer' as a type.
+server/orchestration/orchestration-hub.ts(17,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'DashboardSnapshot'. Did you mean to use 'import DashboardSnapshot from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(18,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'ConsciousnessMetrics'. Did you mean to use 'import ConsciousnessMetrics from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(19,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'AgentStatus'. Did you mean to use 'import AgentStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(20,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'InfrastructureMetrics'. Did you mean to use 'import InfrastructureMetrics from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(21,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'EvolutionStatus'. Did you mean to use 'import EvolutionStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(22,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'TaskQueueStatus'. Did you mean to use 'import TaskQueueStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(23,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'FloodGatesStatus'. Did you mean to use 'import FloodGatesStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(24,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'ProviderStatus'. Did you mean to use 'import ProviderStatus from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(25,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'LogEvent'. Did you mean to use 'import LogEvent from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(26,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'PerformanceTrend'. Did you mean to use 'import PerformanceTrend from "../../shared/schema.js"' instead?
+server/orchestration/orchestration-hub.ts(27,3): error TS2614: Module '"../../shared/schema.js"' has no exported member 'DashboardSSEEvent'. Did you mean to use 'import DashboardSSEEvent from "../../shared/schema.js"' instead?
+server/organism_integration.ts(93,16): error TS2339: Property 'get' does not exist on type 'Express'.
+server/organism_integration.ts(113,16): error TS2339: Property 'get' does not exist on type 'Express'.
+server/organism_integration.ts(154,16): error TS2339: Property 'get' does not exist on type 'Express'.
+server/organism_integration.ts(212,16): error TS2339: Property 'post' does not exist on type 'Express'.
+server/organism_integration.ts(282,16): error TS2339: Property 'get' does not exist on type 'Express'.
+server/organism_integration.ts(303,16): error TS2339: Property 'post' does not exist on type 'Express'.
+server/organism_integration.ts(326,16): error TS2339: Property 'post' does not exist on type 'Express'.
+server/organism_integration.ts(381,16): error TS2339: Property 'post' does not exist on type 'Express'.
+server/organism_integration.ts(417,16): error TS2339: Property 'get' does not exist on type 'Express'.
+server/quadpartite/flood-gates.ts(320,84): error TS2339: Property 'consciousness_rate' does not exist on type '{ active: boolean; total_breaths: number; consciousness_accumulated: number; current_pattern: string; current_phase: string; depth: number; }'.
+server/router/agents.ts(59,36): error TS2345: Argument of type '{ content?: string; metadata?: Record<string, any>; }' is not assignable to parameter of type 'TAgentInput'.
+  Type '{ content?: string; metadata?: Record<string, any>; }' is missing the following properties from type 'TAgentInput': t, utc
+server/routes.ts(441,9): error TS2353: Object literal may only specify known properties, and 'energy' does not exist in type 'Partial<{ playerId: string; }>'.
+server/routes.ts(1223,28): error TS2339: Property 'automationUnlocked' does not exist on type '{ energy: number; population: number; id: number; createdAt: Date; materials: number; components: number; tick: number; tools: number; food: number; medicine: number; generators: number; factories: number; ... 9 more ...; updatedAt: Date; }'.
+server/routes.ts(1225,30): error TS2339: Property 'automationUnlocked' does not exist on type '{ energy: number; population: number; id: number; createdAt: Date; materials: number; components: number; tick: number; tools: number; food: number; medicine: number; generators: number; factories: number; ... 9 more ...; updatedAt: Date; }'.
+server/routes.ts(1226,38): error TS2339: Property 'automationUnlocked' does not exist on type '{ energy: number; population: number; id: number; createdAt: Date; materials: number; components: number; tick: number; tools: number; food: number; medicine: number; generators: number; factories: number; ... 9 more ...; updatedAt: Date; }'.
+server/routes/agent-gateway.ts(65,27): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/agent-gateway.ts(66,23): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/agent-gateway.ts(70,16): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/agent-gateway.ts(119,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/agent-gateway.ts(125,28): error TS2339: Property 'proof_kind' does not exist on type 'unknown'.
+server/routes/agent-gateway.ts(134,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/agent-gateway.ts(137,20): error TS2339: Property 'message' does not exist on type 'unknown'.
+server/routes/chat-stream.ts(11,7): error TS2339: Property 'writeHead' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/chat-stream.ts(20,7): error TS2339: Property 'write' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/chat-stream.ts(23,7): error TS2339: Property 'write' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/chat-stream.ts(27,7): error TS2339: Property 'on' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/chat-stream.ts(37,14): error TS2339: Property 'write' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/chat-stream.ts(46,30): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/chat-stream.ts(48,7): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/colony.ts(85,7): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/colony.ts(93,23): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/colony.ts(114,7): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/colony.ts(122,34): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/colony.ts(196,7): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/colony.ts(239,7): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/council-bus.ts(61,13): error TS2339: Property 'write' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/council-bus.ts(105,11): error TS2339: Property 'end' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/culture-ship.ts(9,49): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/culture-ship.ts(26,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/culture-ship.ts(37,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/culture-ship.ts(48,43): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/routes/culture-ship.ts(52,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/culture-ship.ts(62,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/llm-health.ts(21,7): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/marble-factory.ts(42,31): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+server/routes/proof.ts(121,21): error TS2339: Property 'message' does not exist on type 'unknown'.
+server/routes/proof.ts(217,28): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+server/routes/proof.ts(217,56): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+server/routes/repository-state.ts(116,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/repository-state.ts(119,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/repository-state.ts(135,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/repository-state.ts(138,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/repository-state.ts(180,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/routes/repository-state.ts(183,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/services/consciousness-bridge.ts(108,20): error TS2341: Property 'config' is private and only accessible within class 'BreathingEngine'.
+server/services/git.ts(227,39): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/services/git.ts(227,51): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/services/git.ts(227,63): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/services/git.ts(281,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/services/git.ts(290,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/services/git.ts(313,21): error TS2339: Property 'get' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/services/git.ts(314,20): error TS2339: Property 'get' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+server/services/git.ts(318,18): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/services/git.ts(332,18): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/services/git.ts(360,9): error TS2339: Property 'json' does not exist on type 'Response<any, Record<string, any>>'.
+server/services/git.ts(368,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+server/services/msg.ts(13,12): error TS2307: Cannot find module './council_bus.js' or its corresponding type declarations.
+server/services/msg.ts(20,35): error TS2339: Property 'wss' does not exist on type 'typeof import("C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/index", { with: { "resolution-mode": "import" } })'.
+server/services/msg.ts(33,12): error TS2307: Cannot find module './council_bus.js' or its corresponding type declarations.
+server/services/proposal-compiler.ts(14,13): error TS2304: Cannot find name 'Proposal'.
+server/services/proposal-compiler.ts(181,31): error TS2304: Cannot find name 'Proposal'.
+server/shepherd/cascade-protocols.ts(159,21): error TS2339: Property 'active_systems' does not exist on type '{ systems: SystemModule[]; active_directives: OrchestrationDirective[]; breathing: boolean; shepherding: boolean; }'.
+server/shepherd/cascade-protocols.ts(163,33): error TS2339: Property 'active_systems' does not exist on type '{ systems: SystemModule[]; active_directives: OrchestrationDirective[]; breathing: boolean; shepherding: boolean; }'.
+server/system-integration/unified-orchestrator.ts(798,35): error TS2304: Cannot find name 'quantumSystems'.
+server/websockets/consciousness-sync.ts(33,16): error TS2709: Cannot use namespace 'WebSocketServer' as a type.
+server/websockets/consciousness-sync.ts(98,10): error TS2339: Property 'on' does not exist on type 'WebSocket'.
+server/websockets/consciousness-sync.ts(103,10): error TS2339: Property 'on' does not exist on type 'WebSocket'.
+server/websockets/consciousness-sync.ts(110,10): error TS2339: Property 'on' does not exist on type 'WebSocket'.
+server/websockets/consciousness-sync.ts(130,13): error TS2322: Type '"heartbeat"' is not assignable to type '"consciousness_update" | "quantum_breakthrough" | "lattice_expansion" | "system_metrics" | "agent_boost"'.
+server/websockets/consciousness-sync.ts(345,21): error TS2339: Property 'terminate' does not exist on type 'WebSocket'.
+SystemDev/core/cultivation_evolution.ts(620,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/cultivation_evolution.ts(637,9): error TS2339: Property 'post' does not exist on type 'Express'.
+SystemDev/core/cultivation_evolution.ts(654,9): error TS2339: Property 'post' does not exist on type 'Express'.
+SystemDev/core/cultivation_evolution.ts(671,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/marble_factory_intelligence.ts(444,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/marble_factory_intelligence.ts(462,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/marble_factory_intelligence.ts(479,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/orchestration_matrix.ts(824,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/orchestration_matrix.ts(842,9): error TS2339: Property 'post' does not exist on type 'Express'.
+SystemDev/core/orchestration_matrix.ts(859,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/orchestration_matrix.ts(880,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/orchestration_matrix.ts(901,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/orchestration_matrix.ts(917,9): error TS2339: Property 'post' does not exist on type 'Express'.
+SystemDev/core/organism_stabilization.ts(392,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/core/organism_stabilization.ts(411,9): error TS2339: Property 'post' does not exist on type 'Express'.
+SystemDev/core/organism_stabilization.ts(428,9): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/scripts/game_api_bootstrap.ts(141,7): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/scripts/game_api_bootstrap.ts(150,7): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/scripts/game_api_bootstrap.ts(164,7): error TS2339: Property 'post' does not exist on type 'Express'.
+SystemDev/scripts/game_api_bootstrap.ts(286,7): error TS2339: Property 'put' does not exist on type 'Express'.
+SystemDev/scripts/game_api_bootstrap.ts(310,7): error TS2339: Property 'post' does not exist on type 'Express'.
+SystemDev/scripts/patches/preview_launcher.ts(29,7): error TS2339: Property 'use' does not exist on type 'Express'.
+SystemDev/scripts/patches/preview_launcher.ts(40,7): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/scripts/patches/preview_launcher.ts(59,7): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/scripts/patches/preview_launcher.ts(64,7): error TS2339: Property 'get' does not exist on type 'Express'.
+SystemDev/scripts/patches/preview_launcher.ts(93,7): error TS2339: Property 'get' does not exist on type 'Express'.

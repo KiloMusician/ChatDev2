@@ -1,0 +1,46 @@
+[
+  {
+    "id": "forensics_01",
+    "title": "Hidden in Plain Sight",
+    "category": "Forensics",
+    "difficulty": "easy",
+    "description": "A suspicious image file `nexus_logo.png` was intercepted. Examination of the raw bytes shows non-PNG data appended after the IEND marker. Running `strings` on it reveals a hidden message. What does it say?",
+    "solution": "GHOST_WAS_HERE_2026",
+    "hint": "Run `strings` on the file and look for strings that appear after the normal PNG footer. PNG files end with IEND.",
+    "xp": 40,
+    "tags": ["forensics", "steganography", "strings", "easy"]
+  },
+  {
+    "id": "forensics_02",
+    "title": "Log Archaeology",
+    "category": "Forensics",
+    "difficulty": "easy",
+    "description": "The `/var/log/auth.log` shows a brute-force attack. Analyze the timestamps to determine how many failed login attempts were made for user 'root' before the successful authentication.",
+    "solution": "47",
+    "hint": "Use `grep 'Failed password' auth.log | grep 'root' | wc -l` to count failed attempts.",
+    "xp": 35,
+    "tags": ["forensics", "logs", "grep", "easy"]
+  },
+  {
+    "id": "forensics_03",
+    "title": "Deleted But Not Gone",
+    "category": "Forensics",
+    "difficulty": "medium",
+    "description": "A file was deleted from `/tmp/` but the inode data remains in the filesystem journal. The filename started with `.exfil_` and was 847 bytes. What command would you use to recover it from an ext4 journal?",
+    "solution": "extundelete --restore-all /dev/sda1",
+    "hint": "The `extundelete` tool can recover recently deleted files from ext3/ext4 filesystems by examining journal entries.",
+    "xp": 75,
+    "tags": ["forensics", "recovery", "filesystem", "medium"]
+  },
+  {
+    "id": "forensics_04",
+    "title": "Steganographic Payload",
+    "category": "Forensics",
+    "difficulty": "hard",
+    "description": "A PNG image was used to exfiltrate data using LSB steganography. The image is `chimera_note.png`. The steghide passphrase is stored in the EXIF data under the 'Comment' field. What tool extracts EXIF metadata?",
+    "solution": "exiftool chimera_note.png",
+    "hint": "ExifTool reads metadata from image files including hidden comments. After finding the passphrase, use steghide to extract the payload.",
+    "xp": 150,
+    "tags": ["forensics", "steganography", "exif", "hard"]
+  }
+]

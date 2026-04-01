@@ -1,0 +1,1299 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.4.2, pluggy-1.6.0
+benchmark: 5.1.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub
+configfile: pytest.ini
+plugins: anyio-4.11.0, asyncio-1.2.0, benchmark-5.1.0, cov-7.0.0, timeout-2.4.0, requests-mock-1.12.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 30.0s
+timeout method: thread
+timeout func_only: False
+
+----------------------------- live log collection -----------------------------
+2025-12-15 21:20:31 [INFO] Γ£à Configuration loaded from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\settings.json
+2025-12-15 21:20:33 [INFO] Loaded 2 environment variables
+2025-12-15 21:20:33 [INFO] Loaded secrets from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\secrets.json
+2025-12-15 21:20:33 [INFO] Configuration validation passed
+2025-12-15 21:20:34 [WARNING] ΓÜá∩╕Å Analytics system not available
+2025-12-15 21:20:34 [INFO] ≡ƒöº Selection strategy changed to: accuracy_optimized
+2025-12-15 21:20:34 [INFO] ≡ƒºá ZETA04: Enhanced ConversationManager initialized (session: test_zeta04_session)
+2025-12-15 21:20:34 [INFO] ≡ƒÅ╖∩╕Å New conversation theme detected: technical_development
+2025-12-15 21:20:34 [INFO] ≡ƒÅ╖∩╕Å New conversation theme detected: analytical_research
+2025-12-15 21:20:34 [INFO] ≡ƒÆ╛ Stored cross-session memory: memory_20251215_212034
+2025-12-15 21:20:34 [INFO] ≡ƒöì Retrieved 1 relevant memories for query
+2025-12-15 21:20:34 [INFO] ≡ƒöì Retrieved 1 relevant memories for query
+2025-12-15 21:20:34 [INFO] ≡ƒôÜ Loaded persistent session data: 1 memory entries
+2025-12-15 21:20:34 [INFO] ≡ƒôû Auto-loaded recent conversation: conversation_snapshot_20251215_212034.json
+2025-12-15 21:20:34 [INFO] ≡ƒºá ZETA04: Enhanced ConversationManager initialized (session: test_zeta04_session)
+2025-12-15 21:20:35 [INFO] ≡ƒÅù∩╕Å Pipeline initialized with 0 existing projects
+2025-12-15 21:20:35 [INFO] ≡ƒÄ« ZETA21: Game Development Pipeline initialized
+2025-12-15 21:20:35 [INFO] ≡ƒÄ« Created game project: test_pygame_game (pygame)
+2025-12-15 21:20:35 [INFO] ≡ƒÄ« Created game project: test_roguelike_game (pygame)
+2025-12-15 21:20:35 [INFO] ≡ƒÄ« Created game project: test_arcade_game (arcade)
+2025-12-15 21:20:35 [INFO] ≡ƒÜÇ Running game project: test_pygame_game
+collected 555 items
+
+tests/benchmarks/test_latency.py::test_model_load_latency PASSED         [  0%]
+tests/benchmarks/test_latency.py::test_task_execution_latency PASSED     [  0%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file0] PASSED [  0%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file1] PASSED [  0%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file2] PASSED [  0%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file3] PASSED [  1%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file4] PASSED [  1%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file5] PASSED [  1%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file6] PASSED [  1%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file7] PASSED [  1%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file8] PASSED [  1%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file9] PASSED [  2%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file10] PASSED [  2%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file11] PASSED [  2%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file12] PASSED [  2%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file13] PASSED [  2%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file14] PASSED [  3%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file15] PASSED [  3%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file16] PASSED [  3%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file17] PASSED [  3%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file18] PASSED [  3%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file19] PASSED [  3%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file20] PASSED [  4%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file21] PASSED [  4%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file22] PASSED [  4%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file23] PASSED [  4%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file24] PASSED [  4%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file25] PASSED [  5%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file26] PASSED [  5%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file27] PASSED [  5%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file28] PASSED [  5%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file29] PASSED [  5%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file30] PASSED [  5%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file31] PASSED [  6%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file32] PASSED [  6%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file33] PASSED [  6%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file34] PASSED [  6%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file35] PASSED [  6%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file36] PASSED [  7%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file37] PASSED [  7%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file38] PASSED [  7%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file39] PASSED [  7%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file40] PASSED [  7%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file41] PASSED [  7%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file42] PASSED [  8%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file43] PASSED [  8%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file44] PASSED [  8%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file45] PASSED [  8%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file46] PASSED [  8%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file47] PASSED [  9%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file48] PASSED [  9%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file49] PASSED [  9%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file50] PASSED [  9%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file51] PASSED [  9%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file52] PASSED [  9%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file53] PASSED [ 10%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file54] PASSED [ 10%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file55] PASSED [ 10%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file56] PASSED [ 10%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file57] PASSED [ 10%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file58] PASSED [ 10%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file59] PASSED [ 11%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file60] PASSED [ 11%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file61] PASSED [ 11%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file62] PASSED [ 11%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file63] PASSED [ 11%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file64] PASSED [ 12%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file65] PASSED [ 12%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file66] PASSED [ 12%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file67] PASSED [ 12%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file68] PASSED [ 12%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file69] PASSED [ 12%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file70] PASSED [ 13%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file71] PASSED [ 13%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file72] PASSED [ 13%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file73] PASSED [ 13%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file74] PASSED [ 13%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file75] PASSED [ 14%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file76] PASSED [ 14%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file77] PASSED [ 14%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file78] PASSED [ 14%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file79] PASSED [ 14%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file80] PASSED [ 14%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file81] PASSED [ 15%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file82] PASSED [ 15%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file83] PASSED [ 15%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file84] PASSED [ 15%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file85] PASSED [ 15%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file86] PASSED [ 16%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file87] PASSED [ 16%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file88] PASSED [ 16%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file89] PASSED [ 16%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file90] PASSED [ 16%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file91] PASSED [ 16%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file92] PASSED [ 17%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file93] PASSED [ 17%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file94] PASSED [ 17%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file95] PASSED [ 17%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file96] PASSED [ 17%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file97] PASSED [ 18%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file98] PASSED [ 18%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file99] PASSED [ 18%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file100] PASSED [ 18%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file101] PASSED [ 18%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file102] PASSED [ 18%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file103] PASSED [ 19%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file104] PASSED [ 19%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file105] PASSED [ 19%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file106] PASSED [ 19%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file107] PASSED [ 19%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file108] PASSED [ 20%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file109] PASSED [ 20%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file110] PASSED [ 20%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file111] PASSED [ 20%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file112] PASSED [ 20%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file113] PASSED [ 20%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file114] PASSED [ 21%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file115] PASSED [ 21%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file116] PASSED [ 21%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file117] PASSED [ 21%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file118] PASSED [ 21%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file119] PASSED [ 21%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file120] PASSED [ 22%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file121] PASSED [ 22%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file122] PASSED [ 22%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file123] PASSED [ 22%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file124] PASSED [ 22%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file125] PASSED [ 23%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file126] PASSED [ 23%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file127] PASSED [ 23%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file128] PASSED [ 23%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file129] PASSED [ 23%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file130] PASSED [ 23%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file131] PASSED [ 24%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file132] PASSED [ 24%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file133] PASSED [ 24%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file134] PASSED [ 24%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file135] PASSED [ 24%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file136] PASSED [ 25%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file137] PASSED [ 25%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file138] PASSED [ 25%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file139] PASSED [ 25%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file140] PASSED [ 25%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file141] PASSED [ 25%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file142] PASSED [ 26%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file143] PASSED [ 26%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file144] PASSED [ 26%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file145] PASSED [ 26%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file146] PASSED [ 26%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file147] PASSED [ 27%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file148] PASSED [ 27%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file149] PASSED [ 27%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file150] PASSED [ 27%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file151] PASSED [ 27%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file152] PASSED [ 27%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file153] PASSED [ 28%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file154] PASSED [ 28%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file155] PASSED [ 28%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file156] PASSED [ 28%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file157] PASSED [ 28%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file158] PASSED [ 29%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file159] PASSED [ 29%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file160] PASSED [ 29%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file161] PASSED [ 29%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file162] PASSED [ 29%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file163] PASSED [ 29%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file164] PASSED [ 30%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file165] PASSED [ 30%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file166] PASSED [ 30%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file167] PASSED [ 30%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file168] PASSED [ 30%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file169] PASSED [ 30%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file170] PASSED [ 31%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file171] PASSED [ 31%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file172] PASSED [ 31%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file173] PASSED [ 31%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file174] PASSED [ 31%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file175] PASSED [ 32%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file176] PASSED [ 32%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file177] PASSED [ 32%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file178] PASSED [ 32%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file179] PASSED [ 32%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file180] PASSED [ 32%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file181] PASSED [ 33%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file182] PASSED [ 33%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file183] PASSED [ 33%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file184] PASSED [ 33%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file185] PASSED [ 33%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file186] PASSED [ 34%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file187] PASSED [ 34%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file188] PASSED [ 34%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file189] PASSED [ 34%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file190] PASSED [ 34%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file191] PASSED [ 34%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file192] PASSED [ 35%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file193] PASSED [ 35%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file194] PASSED [ 35%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file195] PASSED [ 35%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file196] PASSED [ 35%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file197] PASSED [ 36%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file198] PASSED [ 36%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file199] PASSED [ 36%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file200] PASSED [ 36%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file201] PASSED [ 36%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file202] PASSED [ 36%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file203] PASSED [ 37%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file204] PASSED [ 37%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file205] PASSED [ 37%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file206] PASSED [ 37%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file207] PASSED [ 37%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file208] PASSED [ 38%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file209] PASSED [ 38%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file210] PASSED [ 38%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file211] PASSED [ 38%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file212] PASSED [ 38%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file213] PASSED [ 38%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file214] PASSED [ 39%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file215] PASSED [ 39%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file216] PASSED [ 39%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file217] PASSED [ 39%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file218] PASSED [ 39%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file219] PASSED [ 40%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file220] PASSED [ 40%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file221] PASSED [ 40%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file222] PASSED [ 40%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file223] PASSED [ 40%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file224] PASSED [ 40%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file225] PASSED [ 41%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file226] PASSED [ 41%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file227] PASSED [ 41%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file228] PASSED [ 41%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file229] PASSED [ 41%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file230] PASSED [ 41%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file231] PASSED [ 42%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file232] PASSED [ 42%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file233] PASSED [ 42%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file234] PASSED [ 42%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file235] PASSED [ 42%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file236] PASSED [ 43%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file237] PASSED [ 43%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file238] PASSED [ 43%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file239] PASSED [ 43%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file240] PASSED [ 43%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file241] PASSED [ 43%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file242] PASSED [ 44%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file243] PASSED [ 44%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file244] PASSED [ 44%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file245] PASSED [ 44%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file246] PASSED [ 44%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file247] PASSED [ 45%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file248] PASSED [ 45%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file249] PASSED [ 45%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file250] PASSED [ 45%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file251] PASSED [ 45%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file252] PASSED [ 45%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file253] PASSED [ 46%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file254] PASSED [ 46%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file255] PASSED [ 46%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file256] PASSED [ 46%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file257] PASSED [ 46%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file258] PASSED [ 47%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file259] PASSED [ 47%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file260] PASSED [ 47%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file261] PASSED [ 47%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file262] PASSED [ 47%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file263] PASSED [ 47%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file264] PASSED [ 48%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file265] PASSED [ 48%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file266] PASSED [ 48%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file267] PASSED [ 48%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file268] PASSED [ 48%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file269] PASSED [ 49%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file270] PASSED [ 49%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file271] PASSED [ 49%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file272] PASSED [ 49%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file273] PASSED [ 49%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file274] PASSED [ 49%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file275] PASSED [ 50%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file276] PASSED [ 50%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file277] PASSED [ 50%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file278] PASSED [ 50%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file279] PASSED [ 50%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file280] PASSED [ 50%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file281] PASSED [ 51%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file282] PASSED [ 51%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file283] PASSED [ 51%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file284] PASSED [ 51%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file285] PASSED [ 51%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file286] PASSED [ 52%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file287] PASSED [ 52%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file288] PASSED [ 52%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file289] PASSED [ 52%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file290] PASSED [ 52%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file291] PASSED [ 52%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file292] PASSED [ 53%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file293] PASSED [ 53%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file294] PASSED [ 53%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file295] PASSED [ 53%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file296] PASSED [ 53%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file297] PASSED [ 54%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file298] PASSED [ 54%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file299] PASSED [ 54%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file300] PASSED [ 54%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file301] PASSED [ 54%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file302] PASSED [ 54%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file303] PASSED [ 55%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file304] PASSED [ 55%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file305] PASSED [ 55%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file306] PASSED [ 55%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file307] PASSED [ 55%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file308] PASSED [ 56%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file309] PASSED [ 56%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file310] PASSED [ 56%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file311] PASSED [ 56%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file312] PASSED [ 56%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file313] PASSED [ 56%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file314] PASSED [ 57%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file315] PASSED [ 57%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file316] PASSED [ 57%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file317] PASSED [ 57%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file318] PASSED [ 57%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file319] PASSED [ 58%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file320] PASSED [ 58%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file321] PASSED [ 58%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file322] PASSED [ 58%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file323] PASSED [ 58%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file324] PASSED [ 58%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file325] PASSED [ 59%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file326] PASSED [ 59%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file327] PASSED [ 59%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file328] PASSED [ 59%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file329] PASSED [ 59%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file330] PASSED [ 60%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file331] PASSED [ 60%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file332] PASSED [ 60%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file333] PASSED [ 60%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file334] PASSED [ 60%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file335] PASSED [ 60%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file336] PASSED [ 61%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file337] PASSED [ 61%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file338] PASSED [ 61%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file339] PASSED [ 61%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file340] PASSED [ 61%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file341] PASSED [ 61%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file342] PASSED [ 62%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file343] PASSED [ 62%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file344] PASSED [ 62%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file345] PASSED [ 62%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file346] PASSED [ 62%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file347] PASSED [ 63%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file348] PASSED [ 63%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file349] PASSED [ 63%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file350] PASSED [ 63%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file351] PASSED [ 63%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file352] PASSED [ 63%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file353] PASSED [ 64%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file354] PASSED [ 64%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file355] PASSED [ 64%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file356] PASSED [ 64%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file357] PASSED [ 64%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file358] PASSED [ 65%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file359] PASSED [ 65%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file360] PASSED [ 65%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file361] PASSED [ 65%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file362] PASSED [ 65%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file363] PASSED [ 65%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file364] PASSED [ 66%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file365] PASSED [ 66%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file366] PASSED [ 66%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file367] PASSED [ 66%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file368] PASSED [ 66%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file369] PASSED [ 67%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file370] PASSED [ 67%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file371] PASSED [ 67%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file372] PASSED [ 67%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file373] PASSED [ 67%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file374] PASSED [ 67%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file375] PASSED [ 68%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file376] PASSED [ 68%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file377] PASSED [ 68%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file378] PASSED [ 68%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file379] PASSED [ 68%]
+tests/import_smoke/test_py_compile_smoke.py::test_py_compile[py_file380] PASSED [ 69%]
+tests/integration/test_copilot_chatdev_pipeline.py::test_copilot_chatdev_pipeline_code_fix
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:39 [INFO] ≡ƒñû Copilot-ChatDev Agent Bridge initialized
+2025-12-15 21:20:39 [INFO] ≡ƒåò Created collaboration session: collab_20251215_212039
+2025-12-15 21:20:39 [INFO] ≡ƒöä Requested ChatDev debug assistance for session collab_20251215_212039
+PASSED                                                                   [ 69%]
+tests/integration/test_mcp_server.py::test_health_check
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 69%]
+tests/integration/test_mcp_server.py::test_list_tools
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 69%]
+tests/integration/test_mcp_server.py::test_list_tools_content
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 69%]
+tests/integration/test_mcp_server.py::test_execute_tool_missing_name
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 69%]
+tests/integration/test_mcp_server.py::test_execute_tool_not_found
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 70%]
+tests/integration/test_mcp_server.py::test_execute_analyze_repository
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 70%]
+tests/integration/test_mcp_server.py::test_execute_get_context
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 70%]
+tests/integration/test_mcp_server.py::test_execute_orchestrate_task
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 70%]
+tests/integration/test_mcp_server.py::test_execute_generate_code
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 70%]
+tests/integration/test_mcp_server.py::test_execute_check_system_health
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 70%]
+tests/integration/test_mcp_server.py::test_server_status
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:39 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:39 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:39 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:39 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:39 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:39 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:39 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 71%]
+tests/integration/test_mcp_server.py::test_server_metrics
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:40 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:40 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:40 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:40 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:40 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 71%]
+tests/integration/test_mcp_server.py::test_tool_execution_tracking
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:40 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:40 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:40 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:40 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:40 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 71%]
+tests/integration/test_mcp_server.py::test_execute_missing_required_parameter
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:40 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:40 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:40 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:40 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:40 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 71%]
+tests/integration/test_mcp_server.py::test_execution_timing
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Registered MCP tool: analyze_repository
+2025-12-15 21:20:40 [INFO] Registered MCP tool: get_context
+2025-12-15 21:20:40 [INFO] Registered MCP tool: orchestrate_task
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_code
+2025-12-15 21:20:40 [INFO] Registered MCP tool: generate_tests
+2025-12-15 21:20:40 [INFO] Registered MCP tool: check_system_health
+2025-12-15 21:20:40 [INFO] Registered 6 default MCP tools
+2025-12-15 21:20:40 [INFO] MCP Server initialized on localhost:8081
+PASSED                                                                   [ 71%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_bridge_initialization
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_bridge_initialization0
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+PASSED                                                                   [ 72%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_task_submission_creates_file
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_task_submission_creates_f0
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [ERROR] Γ¥î HTTP task submission failed: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+Traceback (most recent call last):
+  File "C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\src\integration\simulatedverse_unified_bridge.py", line 381, in submit_task_http
+    response.raise_for_status()
+  File "C:\Users\keath\AppData\Roaming\Python\Python312\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+PASSED                                                                   [ 72%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_result_polling_timeout
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_result_polling_timeout0
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [ERROR] Γ¥î HTTP task submission failed: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+Traceback (most recent call last):
+  File "C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\src\integration\simulatedverse_unified_bridge.py", line 381, in submit_task_http
+    response.raise_for_status()
+  File "C:\Users\keath\AppData\Roaming\Python\Python312\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+PASSED                                                                   [ 72%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_result_polling_success
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_result_polling_success0
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [ERROR] Γ¥î HTTP task submission failed: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+Traceback (most recent call last):
+  File "C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\src\integration\simulatedverse_unified_bridge.py", line 381, in submit_task_http
+    response.raise_for_status()
+  File "C:\Users\keath\AppData\Roaming\Python\Python312\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+PASSED                                                                   [ 72%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_culture_ship_audit_submission
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_culture_ship_audit_submis0
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [ERROR] Γ¥î HTTP task submission failed: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/culture-ship/execute
+Traceback (most recent call last):
+  File "C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\src\integration\simulatedverse_unified_bridge.py", line 381, in submit_task_http
+    response.raise_for_status()
+  File "C:\Users\keath\AppData\Roaming\Python\Python312\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/culture-ship/execute
+PASSED                                                                   [ 72%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_real_simulatedverse_directories
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\Desktop\SimulatedVerse\SimulatedVerse
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+PASSED                                                                   [ 72%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_task_id_uniqueness
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_task_id_uniqueness0
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [ERROR] Γ¥î HTTP task submission failed: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/agent1/execute
+Traceback (most recent call last):
+  File "C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\src\integration\simulatedverse_unified_bridge.py", line 381, in submit_task_http
+    response.raise_for_status()
+  File "C:\Users\keath\AppData\Roaming\Python\Python312\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/agent1/execute
+SKIPPED (SimulatedVerse HTTP API not available)                          [ 73%]
+tests/integration/test_simulatedverse_bridge_real.py::TestSimulatedVerseBridgeReal::test_metadata_preservation
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Γ£à File system initialized: C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_metadata_preservation0
+2025-12-15 21:20:40 [INFO] Γ£à HTTP API available: http://127.0.0.1:5000
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO] ≡ƒîë SIMULATEDVERSE UNIFIED BRIDGE
+2025-12-15 21:20:40 [INFO] ================================================================================
+2025-12-15 21:20:40 [INFO]   Mode: auto
+2025-12-15 21:20:40 [INFO]   HTTP Available: Γ£à
+2025-12-15 21:20:40 [INFO]   File System Available: Γ£à
+2025-12-15 21:20:40 [INFO]   Agents: 9
+2025-12-15 21:20:40 [INFO] ================================================================================
+
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [ERROR] Γ¥î HTTP task submission failed: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+Traceback (most recent call last):
+  File "C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\src\integration\simulatedverse_unified_bridge.py", line 381, in submit_task_http
+    response.raise_for_status()
+  File "C:\Users\keath\AppData\Roaming\Python\Python312\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://127.0.0.1:5000/api/agents/test-agent/execute
+PASSED                                                                   [ 73%]
+tests/integration/test_unified_ai_context_manager.py::test_context_manager_initialization
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpscorg93o\test_context.db
+PASSED                                                                   [ 73%]
+tests/integration/test_unified_ai_context_manager.py::test_add_context
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp5ey0_v8p\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840527 from copilot (type: code)
+PASSED                                                                   [ 73%]
+tests/integration/test_unified_ai_context_manager.py::test_get_context
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp2n1wvzsn\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: claude_1765858840559 from claude (type: conversation)
+PASSED                                                                   [ 73%]
+tests/integration/test_unified_ai_context_manager.py::test_get_context_cache
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmphuo60yu3\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: ollama_1765858840589 from ollama (type: code)
+PASSED                                                                   [ 74%]
+tests/integration/test_unified_ai_context_manager.py::test_get_contexts_by_type
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpat3apvi5\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840621 from copilot (type: error)
+2025-12-15 21:20:40 [INFO] Added context: ollama_1765858840623 from ollama (type: error)
+2025-12-15 21:20:40 [INFO] Added context: chatdev_1765858840626 from chatdev (type: code)
+PASSED                                                                   [ 74%]
+tests/integration/test_unified_ai_context_manager.py::test_get_contexts_by_system
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp0lu4aph4\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840657 from copilot (type: code)
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840659 from copilot (type: code)
+2025-12-15 21:20:40 [INFO] Added context: ollama_1765858840661 from ollama (type: code)
+PASSED                                                                   [ 74%]
+tests/integration/test_unified_ai_context_manager.py::test_update_system_status
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpsh9y2zci\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Updated copilot status: active
+PASSED                                                                   [ 74%]
+tests/integration/test_unified_ai_context_manager.py::test_update_system_with_output
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpwullot4b\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Updated ollama status: active
+PASSED                                                                   [ 74%]
+tests/integration/test_unified_ai_context_manager.py::test_system_output_limit
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp4h55ssgf\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+2025-12-15 21:20:40 [INFO] Updated chatdev status: active
+PASSED                                                                   [ 74%]
+tests/integration/test_unified_ai_context_manager.py::test_get_all_system_statuses
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp0_u4n_ka\test_context.db
+PASSED                                                                   [ 75%]
+tests/integration/test_unified_ai_context_manager.py::test_create_context_link
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp4baydtq_\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840850 from copilot (type: error)
+2025-12-15 21:20:40 [INFO] Added context: ollama_1765858840853 from ollama (type: code)
+2025-12-15 21:20:40 [INFO] Created link: copilot_1765858840850 -> ollama_1765858840853 (solution_for)
+PASSED                                                                   [ 75%]
+tests/integration/test_unified_ai_context_manager.py::test_get_related_contexts
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp4axyvczo\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840884 from copilot (type: error)
+2025-12-15 21:20:40 [INFO] Added context: ollama_1765858840887 from ollama (type: code)
+2025-12-15 21:20:40 [INFO] Created link: copilot_1765858840884 -> ollama_1765858840887 (solution_for)
+PASSED                                                                   [ 75%]
+tests/integration/test_unified_ai_context_manager.py::test_get_related_contexts_filtered
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpunmn14le\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: chatdev_1765858840920 from chatdev (type: code)
+2025-12-15 21:20:40 [INFO] Added context: ollama_1765858840922 from ollama (type: code)
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840924 from copilot (type: code)
+2025-12-15 21:20:40 [INFO] Created link: chatdev_1765858840920 -> ollama_1765858840922 (caused_by)
+2025-12-15 21:20:40 [INFO] Created link: chatdev_1765858840920 -> copilot_1765858840924 (related)
+PASSED                                                                   [ 75%]
+tests/integration/test_unified_ai_context_manager.py::test_export_context_for_system
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:40 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpyfblh71b\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840960 from copilot (type: code)
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840963 from copilot (type: code)
+2025-12-15 21:20:40 [INFO] Added context: copilot_1765858840964 from copilot (type: code)
+PASSED                                                                   [ 75%]
+tests/integration/test_unified_ai_context_manager.py::test_export_context_with_type_filter
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:41 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpw4hw15zk\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] Added context: ollama_1765858841005 from ollama (type: code)
+2025-12-15 21:20:41 [INFO] Added context: ollama_1765858841009 from ollama (type: code)
+2025-12-15 21:20:41 [INFO] Added context: ollama_1765858841013 from ollama (type: error)
+PASSED                                                                   [ 76%]
+tests/integration/test_unified_ai_context_manager.py::test_context_with_metadata
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:41 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpdf_0v3ww\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] Added context: copilot_1765858841047 from copilot (type: error)
+PASSED                                                                   [ 76%]
+tests/integration/test_unified_ai_context_manager.py::test_context_with_tags
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:41 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmp1udgxp7o\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] Added context: claude_1765858841083 from claude (type: error)
+PASSED                                                                   [ 76%]
+tests/integration/test_unified_ai_context_manager.py::test_default_system_capabilities
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:41 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpwj86z867\test_context.db
+PASSED                                                                   [ 76%]
+tests/integration/test_unified_ai_context_manager.py::test_new_system_creation
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:41 [INFO] Unified AI Context Manager initialized with DB: C:\Users\keath\AppData\Local\Temp\tmpy2nm26qx\test_context.db
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] Updated custom_ai status: active
+PASSED                                                                   [ 76%]
+tests/integration/test_unified_ai_context_manager.py::test_global_context_manager
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] Unified AI Context Manager initialized with DB: data\unified_ai_context.db
+PASSED                                                                   [ 76%]
+tests/llm_testing/test_chatdev_browser.py::test_chatdev_integration
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] ≡ƒñû Copilot-ChatDev Agent Bridge initialized
+2025-12-15 21:20:41 [INFO] ≡ƒñû Copilot-ChatDev Bridge integration initialized
+2025-12-15 21:20:41 [INFO] ≡ƒÜÇ Initializing ChatDev integration...
+2025-12-15 21:20:41 [WARNING] ΓÜá∩╕Å ChatDev launcher not available: attempted relative import with no known parent package
+PASSED                                                                   [ 77%]
+tests/llm_testing/ultimate_gas_test.py::test_chatdev_code_generation
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] Loaded 2 environment variables
+2025-12-15 21:20:41 [INFO] Loaded secrets from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\secrets.json
+2025-12-15 21:20:41 [INFO] Configuration validation passed
+2025-12-15 21:20:41 [INFO] Γ£à KILO-FOOLISH secrets configuration loaded
+2025-12-15 21:20:41 [INFO] Γ£à ChatDev installation validated at C:\Users\keath\NuSyQ\ChatDev
+2025-12-15 21:20:41 [INFO] ≡ƒöæ Retrieved OpenAI API key from KILO-FOOLISH secrets
+2025-12-15 21:20:41 [INFO] Γ£à OpenAI API key configured for ChatDev
+2025-12-15 21:20:41 [INFO] ≡ƒîÉ ChatDev environment configured
+PASSED                                                                   [ 77%]
+tests/llm_testing/ultimate_gas_test.py::test_ollama_integration
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:41 [INFO] Γ£à Configuration loaded from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\settings.json
+2025-12-15 21:20:41 [INFO] Γ£à Configuration loaded from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\settings.json
+2025-12-15 21:20:41 [INFO] ≡ƒöä CONSOLIDATION: Enhanced Ollama-ChatDev integrator initialized
+2025-12-15 21:20:41 [INFO] ≡ƒôü Repository root: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub
+2025-12-15 21:20:41 [INFO] ≡ƒº¬ Testing chamber: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\testing_chamber
+2025-12-15 21:20:41 [INFO] Γ£à Repository awareness initialized
+2025-12-15 21:20:43 [WARNING] Ollama check failed: HTTPConnectionPool(host='127.0.0.1', port=11435): Max retries exceeded with url: /api/tags (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000029E22C2C920>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+SKIPPED (No suitable chat model available in Ollama list)                [ 77%]
+tests/quantum_system_test.py::test_quantum_system
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:43 [INFO] QuantumProblemResolver initialized in simulator mode
+PASSED                                                                   [ 77%]
+tests/system_testing/test_enhanced_placeholders.py::test_advanced_tag_manager PASSED [ 77%]
+tests/system_testing/test_enhanced_placeholders.py::test_secrets_manager PASSED [ 78%]
+tests/system_testing/test_enhanced_placeholders.py::test_wizard_navigator_colors SKIPPED [ 78%]
+tests/test_agent_context_manager.py::test_agent_context_manager_basic PASSED [ 78%]
+tests/test_ai_coordinator_generated.py::test_coordinator_initialization
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:43 [INFO] Γ£à Configuration loaded from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\settings.json
+PASSED                                                                   [ 78%]
+tests/test_ai_coordinator_generated.py::test_provider_registration PASSED [ 78%]
+tests/test_ai_coordinator_generated.py::test_task_routing_to_appropriate_provider PASSED [ 78%]
+tests/test_ai_coordinator_generated.py::test_error_handling_for_missing_provider PASSED [ 79%]
+tests/test_ai_coordinator_generated.py::test_priority_queue_behavior PASSED [ 79%]
+tests/test_anti_recursion.py::test_no_infinite_loops PASSED              [ 79%]
+tests/test_browser_fix.py::test_import PASSED                            [ 79%]
+tests/test_chatdev.py::test_chatdev_status_check PASSED                  [ 79%]
+tests/test_chatdev.py::test_chatdev_api_key_setup_success PASSED         [ 80%]
+tests/test_chatdev.py::test_chatdev_missing_api_key[None] PASSED         [ 80%]
+tests/test_chatdev.py::test_chatdev_invalid_installation
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] Loaded 2 environment variables
+2025-12-15 21:20:44 [INFO] Loaded secrets from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\secrets.json
+2025-12-15 21:20:44 [INFO] Configuration validation passed
+2025-12-15 21:20:44 [INFO] Γ£à KILO-FOOLISH secrets configuration loaded
+PASSED                                                                   [ 80%]
+tests/test_chatdev_launcher.py::test_chatdev_resolve_and_validate
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] Loaded 2 environment variables
+2025-12-15 21:20:44 [INFO] Loaded secrets from C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\config\secrets.json
+2025-12-15 21:20:44 [INFO] Configuration validation passed
+2025-12-15 21:20:44 [INFO] Γ£à KILO-FOOLISH secrets configuration loaded
+2025-12-15 21:20:44 [INFO] Γ£à ChatDev installation validated at C:\Users\keath\AppData\Local\Temp\pytest-of-keath\pytest-40\test_chatdev_resolve_and_valid0\chatdev
+PASSED                                                                   [ 80%]
+tests/test_chatdev_llm_adapter_import.py::test_chatdev_llm_adapter_import
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] [CONSCIOUSNESS:EnhancedCopilotBridge] Bridge activated with session ╬ú╬₧╬¢╬¿_02fe5f4a (score: 0.1)
+2025-12-15 21:20:44 [INFO] [CULTIVATION:EnhancedCopilotBridge] Tool hooks registered for context browser and adventure scripts (score: 0.2)
+PASSED                                                                   [ 80%]
+tests/test_check_src_dirs.py::test_scan_root_respects_allowlist PASSED   [ 80%]
+tests/test_check_src_dirs.py::test_scan_root_flags_unexpected PASSED     [ 81%]
+tests/test_check_src_dirs.py::test_iter_src_skips_excluded PASSED        [ 81%]
+tests/test_colonist_scheduler.py::test_basic_assignment PASSED           [ 81%]
+tests/test_conversation_manager.py::test_create_and_fetch_history
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] ≡ƒôÜ Temple Auto-Storage initialized
+2025-12-15 21:20:44 [INFO]    Auto-archive threshold: 10 messages
+PASSED                                                                   [ 81%]
+tests/test_conversation_manager.py::test_persistence PASSED              [ 81%]
+tests/test_conversation_manager_enhanced.py::TestConversationManagerEnhanced::test_create_conversation_with_task_type PASSED [ 81%]
+tests/test_conversation_manager_enhanced.py::TestConversationManagerEnhanced::test_add_message_with_metadata PASSED [ 82%]
+tests/test_conversation_manager_enhanced.py::TestConversationManagerEnhanced::test_conversation_summary PASSED [ 82%]
+tests/test_conversation_manager_enhanced.py::TestConversationManagerEnhanced::test_get_recent_conversations PASSED [ 82%]
+tests/test_conversation_manager_enhanced.py::TestConversationManagerEnhanced::test_message_history_limit PASSED [ 82%]
+tests/test_conversation_manager_enhanced.py::TestConversationManagerEnhanced::test_persistence PASSED [ 82%]
+tests/test_conversation_manager_enhanced.py::TestContextualMemoryRecall::test_semantic_anchor_extraction PASSED [ 83%]
+tests/test_conversation_manager_enhanced.py::TestContextualMemoryRecall::test_recall_similar_context PASSED [ 83%]
+tests/test_conversation_manager_enhanced.py::TestContextualMemoryRecall::test_cross_session_context_retrieval PASSED [ 83%]
+tests/test_conversation_manager_enhanced.py::TestContextualMemoryRecall::test_memory_recall_with_empty_history PASSED [ 83%]
+tests/test_conversation_manager_enhanced.py::TestContextualMemoryRecall::test_memory_recall_with_high_threshold PASSED [ 83%]
+tests/test_copilot_bridge_cli.py::test_bridge_cli_runs PASSED            [ 83%]
+tests/test_copilot_bridge_cli.py::test_bridge_class_import
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] [CONSCIOUSNESS:EnhancedCopilotBridge] Bridge activated with session ╬ú╬₧╬¢╬¿_e6ccefc3 (score: 0.1)
+2025-12-15 21:20:44 [INFO] [CULTIVATION:EnhancedCopilotBridge] Tool hooks registered for context browser and adventure scripts (score: 0.2)
+PASSED                                                                   [ 84%]
+tests/test_copilot_enhancer.py::test_enhance_workspace_minimal
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] Analyzing workspace structure for Copilot context
+2025-12-15 21:20:44 [INFO] Detected project context: python_ai_research
+PASSED                                                                   [ 84%]
+tests/test_copilot_task_manager.py::test_handle_response_triggers_task PASSED [ 84%]
+tests/test_copilot_task_manager.py::test_chatdev_adapter_triggers_task
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] [CONSCIOUSNESS:EnhancedCopilotBridge] Bridge activated with session ╬ú╬₧╬¢╬¿_2c202f14 (score: 0.1)
+2025-12-15 21:20:44 [INFO] [CULTIVATION:EnhancedCopilotBridge] Tool hooks registered for context browser and adventure scripts (score: 0.2)
+PASSED                                                                   [ 84%]
+tests/test_delta_aggregation.py::test_compute_delta_first_run PASSED     [ 84%]
+tests/test_delta_aggregation.py::test_compute_delta_with_previous_changes PASSED [ 85%]
+tests/test_delta_aggregation.py::test_multi_repo_delta_file_written PASSED [ 85%]
+tests/test_feature_flags.py::test_chatdev_autofix_default_disabled PASSED [ 85%]
+tests/test_feature_flags.py::test_chatdev_autofix_staging_enabled PASSED [ 85%]
+tests/test_generate_prune_plan_autocommit_guard.py::test_generate_prune_plan_autocommit_guard PASSED [ 85%]
+tests/test_generate_prune_plan_script.py::test_generate_prune_plan_script_runs PASSED [ 85%]
+tests/test_get_target_files.py::test_resolves_to_src_for_simple_names PASSED [ 86%]
+tests/test_get_target_files.py::test_explicit_root_preserved PASSED      [ 86%]
+tests/test_get_target_files.py::test_new_file_auto_relocated_to_src PASSED [ 86%]
+tests/test_health_cli.py::test_health_cli_tracing_no_throw FAILED        [ 86%]
+tests/test_health_cli.py::test_health_cli_otel_compose_prints PASSED     [ 86%]
+tests/test_health_cli.py::test_health_cli_stats_exit_code PASSED         [ 87%]
+tests/test_kilo_discovery.py::test_basic_discovery_and_index
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [INFO] KILO-FOOLISH Discovery System initialized
+2025-12-15 21:20:44 [INFO] ≡ƒöì Discovered 3 coordinators components
+2025-12-15 21:20:44 [INFO] ≡ƒöì Found 0 duplicate component groups
+2025-12-15 21:20:44 [INFO] ≡ƒöì Discovered 3 coordinators components
+2025-12-15 21:20:44 [INFO] ≡ƒöì Discovered 0 integrators components
+2025-12-15 21:20:44 [INFO] ≡ƒöì Discovered 3 ai_systems components
+2025-12-15 21:20:44 [INFO] ≡ƒöì Discovered 0 consciousness components
+2025-12-15 21:20:44 [INFO] ≡ƒöì Discovered 0 launchers components
+2025-12-15 21:20:44 [INFO] ≡ƒöì Generated component index: 3 components in 1 files
+PASSED                                                                   [ 87%]
+tests/test_kilo_foolish_master_launcher.py::test_handle_master_choice_exit
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Workflow Orchestrator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\comprehensive_workflow_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å System Tester not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\system_testing_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Repository Navigator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\navigation\\repository_navigator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Quest Engine not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\Rosetta_Quest_System\\quest_engine.py'
+2025-12-15 21:20:44 [INFO] ≡ƒîƒ KILO-FOOLISH Master System Launcher initialized
+PASSED                                                                   [ 87%]
+tests/test_kilo_foolish_master_launcher.py::test_handle_master_choice_overview
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Workflow Orchestrator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\comprehensive_workflow_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å System Tester not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\system_testing_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Repository Navigator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\navigation\\repository_navigator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Quest Engine not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\Rosetta_Quest_System\\quest_engine.py'
+2025-12-15 21:20:44 [INFO] ≡ƒîƒ KILO-FOOLISH Master System Launcher initialized
+PASSED                                                                   [ 87%]
+tests/test_kilo_foolish_master_launcher.py::test_handle_master_choice_validation
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Workflow Orchestrator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\comprehensive_workflow_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å System Tester not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\system_testing_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Repository Navigator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\navigation\\repository_navigator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Quest Engine not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\Rosetta_Quest_System\\quest_engine.py'
+2025-12-15 21:20:44 [INFO] ≡ƒîƒ KILO-FOOLISH Master System Launcher initialized
+2025-12-15 21:20:44 [INFO] ≡ƒöì Performing comprehensive system validation...
+PASSED                                                                   [ 87%]
+tests/test_kilo_foolish_master_launcher.py::test_handle_master_choice_workflow_missing
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Workflow Orchestrator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\comprehensive_workflow_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å System Tester not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\orchestration\\system_testing_orchestrator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Repository Navigator not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\navigation\\repository_navigator.py'
+2025-12-15 21:20:44 [WARNING] ΓÜá∩╕Å Quest Engine not available: [Errno 2] No such file or directory: 'C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\core\\src\\Rosetta_Quest_System\\quest_engine.py'
+2025-12-15 21:20:44 [INFO] ≡ƒîƒ KILO-FOOLISH Master System Launcher initialized
+PASSED                                                                   [ 87%]
+tests/test_maintenance_runner.py::test_maintenance_runner_preview PASSED [ 88%]
+tests/test_maze_classification.py::test_classification_aggregation_and_docs_downgrade PASSED [ 88%]
+tests/test_maze_scanner_run.py::test_maze_scanner_writes_summary_and_finds_treasures PASSED [ 88%]
+tests/test_n8n_base44.py::test_base44_roundtrip PASSED                   [ 88%]
+tests/test_n8n_base44.py::test_n8n_trigger_workflow PASSED               [ 88%]
+tests/test_ollama_integration.py::test_is_ollama_online_true PASSED      [ 89%]
+tests/test_ollama_integration.py::test_is_ollama_online_false PASSED     [ 89%]
+tests/test_ollama_models.py::test_list_ollama_models_success PASSED      [ 89%]
+tests/test_ollama_models.py::test_list_ollama_models_unavailable PASSED  [ 89%]
+tests/test_ollama_selector.py::test_select_optimal_model_code_analysis
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [WARNING] ΓÜá∩╕Å Analytics system not available
+PASSED                                                                   [ 89%]
+tests/test_ollama_selector.py::test_select_optimal_model_fallback
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [WARNING] ΓÜá∩╕Å Analytics system not available
+PASSED                                                                   [ 89%]
+tests/test_ollama_selector.py::test_analyze_message_intent
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [WARNING] ΓÜá∩╕Å Analytics system not available
+PASSED                                                                   [ 90%]
+tests/test_orchestrator_pruning.py::test_orchestrator_generate_prune_plan
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [INFO] Registered AI system: copilot_main (github_copilot)
+2025-12-15 21:20:45 [INFO] Registered AI system: ollama_local (ollama_local)
+2025-12-15 21:20:45 [INFO] Registered AI system: chatdev_agents (chatdev_agents)
+2025-12-15 21:20:45 [INFO] Registered AI system: consciousness_bridge (consciousness_bridge)
+2025-12-15 21:20:45 [INFO] Registered AI system: quantum_resolver (quantum_resolver)
+2025-12-15 21:20:45 [INFO] Initialized 1 default pipelines
+2025-12-15 21:20:45 [INFO] Initialized 2 default tests
+2025-12-15 21:20:45 [INFO] Γ£à Unified AI Orchestrator initialized successfully
+2025-12-15 21:20:45 [INFO]    AI Systems: 5
+2025-12-15 21:20:45 [INFO]    Pipelines: 1
+2025-12-15 21:20:45 [INFO]    Test Cases: 2
+2025-12-15 21:20:45 [WARNING] Prune plan generation unavailable: No module named 'src.tools.prune_plan_generator'
+SKIPPED (Pruner module unavailable or index not found)                   [ 90%]
+tests/test_orchestrator_sns.py::TestSNSCoreHelper::test_convert_to_sns_basic PASSED [ 90%]
+tests/test_orchestrator_sns.py::TestSNSCoreHelper::test_validate_sns_patterns PASSED [ 90%]
+tests/test_orchestrator_sns.py::TestSNSCoreHelper::test_token_comparison_accuracy PASSED [ 90%]
+tests/test_orchestrator_sns.py::TestSNSCoreHelper::test_template_generation PASSED [ 90%]
+tests/test_orchestrator_sns.py::TestOrchestratorSNSIntegration::test_ollama_with_sns_enabled
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:45 [INFO] Registered AI system: copilot_main (github_copilot)
+2025-12-15 21:20:45 [INFO] Registered AI system: ollama_local (ollama_local)
+2025-12-15 21:20:45 [INFO] Registered AI system: chatdev_agents (chatdev_agents)
+2025-12-15 21:20:45 [INFO] Registered AI system: consciousness_bridge (consciousness_bridge)
+2025-12-15 21:20:45 [INFO] Registered AI system: quantum_resolver (quantum_resolver)
+2025-12-15 21:20:45 [INFO] Initialized 1 default pipelines
+2025-12-15 21:20:45 [INFO] Initialized 2 default tests
+2025-12-15 21:20:45 [INFO] Γ£à Unified AI Orchestrator initialized successfully
+2025-12-15 21:20:45 [INFO]    AI Systems: 5
+2025-12-15 21:20:45 [INFO]    Pipelines: 1
+2025-12-15 21:20:45 [INFO]    Test Cases: 2
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [INFO] Executing task test_sns on copilot_main
+PASSED                                                                   [ 91%]
+tests/test_orchestrator_sns.py::TestOrchestratorSNSIntegration::test_ollama_with_sns_disabled
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [INFO] Registered AI system: copilot_main (github_copilot)
+2025-12-15 21:20:45 [INFO] Registered AI system: ollama_local (ollama_local)
+2025-12-15 21:20:45 [INFO] Registered AI system: chatdev_agents (chatdev_agents)
+2025-12-15 21:20:45 [INFO] Registered AI system: consciousness_bridge (consciousness_bridge)
+2025-12-15 21:20:45 [INFO] Registered AI system: quantum_resolver (quantum_resolver)
+2025-12-15 21:20:45 [INFO] Initialized 1 default pipelines
+2025-12-15 21:20:45 [INFO] Initialized 2 default tests
+2025-12-15 21:20:45 [INFO] Γ£à Unified AI Orchestrator initialized successfully
+2025-12-15 21:20:45 [INFO]    AI Systems: 5
+2025-12-15 21:20:45 [INFO]    Pipelines: 1
+2025-12-15 21:20:45 [INFO]    Test Cases: 2
+2025-12-15 21:20:45 [INFO] Executing task test_traditional on copilot_main
+PASSED                                                                   [ 91%]
+tests/test_orchestrator_sns.py::TestOrchestratorSNSIntegration::test_chatdev_with_sns_enabled
+------------------------------- live log setup --------------------------------
+2025-12-15 21:20:45 [INFO] Registered AI system: copilot_main (github_copilot)
+2025-12-15 21:20:45 [INFO] Registered AI system: ollama_local (ollama_local)
+2025-12-15 21:20:45 [INFO] Registered AI system: chatdev_agents (chatdev_agents)
+2025-12-15 21:20:45 [INFO] Registered AI system: consciousness_bridge (consciousness_bridge)
+2025-12-15 21:20:45 [INFO] Registered AI system: quantum_resolver (quantum_resolver)
+2025-12-15 21:20:45 [INFO] Initialized 1 default pipelines
+2025-12-15 21:20:45 [INFO] Initialized 2 default tests
+2025-12-15 21:20:45 [INFO] Γ£à Unified AI Orchestrator initialized successfully
+2025-12-15 21:20:45 [INFO]    AI Systems: 5
+2025-12-15 21:20:45 [INFO]    Pipelines: 1
+2025-12-15 21:20:45 [INFO]    Test Cases: 2
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [INFO] Executing task test_chatdev_sns on copilot_main
+PASSED                                                                   [ 91%]
+tests/test_orchestrator_sns.py::TestSNSABTesting::test_token_savings_range[Analyze code for errors-35] PASSED [ 91%]
+tests/test_orchestrator_sns.py::TestSNSABTesting::test_token_savings_range[Generate comprehensive test suite with fixtures-40] PASSED [ 91%]
+tests/test_orchestrator_sns.py::TestSNSABTesting::test_token_savings_range[Review code and suggest architectural improvements-45] PASSED [ 92%]
+tests/test_orchestrator_sns.py::TestSNSABTesting::test_semantic_equivalence PASSED [ 92%]
+tests/test_orchestrator_sns.py::TestSNSErrorHandling::test_sns_conversion_failure_fallback
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:45 [INFO] Registered AI system: copilot_main (github_copilot)
+2025-12-15 21:20:45 [INFO] Registered AI system: ollama_local (ollama_local)
+2025-12-15 21:20:45 [INFO] Registered AI system: chatdev_agents (chatdev_agents)
+2025-12-15 21:20:45 [INFO] Registered AI system: consciousness_bridge (consciousness_bridge)
+2025-12-15 21:20:45 [INFO] Registered AI system: quantum_resolver (quantum_resolver)
+2025-12-15 21:20:45 [INFO] Initialized 1 default pipelines
+2025-12-15 21:20:45 [INFO] Initialized 2 default tests
+2025-12-15 21:20:45 [INFO] Γ£à Unified AI Orchestrator initialized successfully
+2025-12-15 21:20:45 [INFO]    AI Systems: 5
+2025-12-15 21:20:45 [INFO]    Pipelines: 1
+2025-12-15 21:20:45 [INFO]    Test Cases: 2
+2025-12-15 21:20:45 [INFO] Executing task test_fallback on copilot_main
+PASSED                                                                   [ 92%]
+tests/test_orchestrator_sns.py::TestSNSErrorHandling::test_invalid_sns_validation PASSED [ 92%]
+tests/test_preview_prune_plan_script.py::test_preview_prune_plan_list PASSED [ 92%]
+tests/test_quantum_import.py::test_package_imports_present PASSED        [ 92%]
+tests/test_quantum_import.py::test_bare_module_not_present PASSED        [ 93%]
+tests/test_quicksort.py::test_quicksort_basic PASSED                     [ 93%]
+tests/test_quicksort.py::test_quicksort_strings PASSED                   [ 93%]
+tests/test_repo_scan.py::test_repo_scan_detects_anomalies PASSED         [ 93%]
+tests/test_repo_scan.py::test_repo_scan_respects_depth PASSED            [ 93%]
+tests/test_repository_compendium.py::test_analyze_repository_returns_expected_keys PASSED [ 94%]
+tests/test_repository_compendium.py::test_export_context_package_creates_zip PASSED [ 94%]
+tests/test_scan_and_maze.py::test_scans_disabled_with_sentinel PASSED    [ 94%]
+tests/test_scan_and_maze.py::test_ensure_scan_allowed_force PASSED       [ 94%]
+tests/test_scan_and_maze.py::test_maze_repo_scanner_finds_todo PASSED    [ 94%]
+tests/test_secrets_and_settings.py::test_secrets_manager_singleton PASSED [ 94%]
+tests/test_secrets_and_settings.py::test_get_api_key_none_by_default PASSED [ 95%]
+tests/test_secrets_and_settings.py::test_get_ai_service_config_contains_keys PASSED [ 95%]
+tests/test_secrets_and_settings.py::test_load_settings_merges_defaults PASSED [ 95%]
+tests/test_start_simulatedverse_minimal.py::test_detect_use_npm_run PASSED [ 95%]
+tests/test_start_simulatedverse_minimal.py::test_build_exec_cmd_windows_npm PASSED [ 95%]
+tests/test_start_simulatedverse_minimal.py::test_build_exec_cmd_windows_npx_fallback PASSED [ 96%]
+tests/test_start_simulatedverse_minimal.py::test_build_exec_cmd_unix PASSED [ 96%]
+tests/test_summary_pruner.py::test_prune_plan_generation PASSED          [ 96%]
+tests/test_summary_retrieval.py::test_retrieval_enrichment_direct
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:46 [INFO] Registered AI system: copilot_main (github_copilot)
+2025-12-15 21:20:46 [INFO] Registered AI system: ollama_local (ollama_local)
+2025-12-15 21:20:46 [INFO] Registered AI system: chatdev_agents (chatdev_agents)
+2025-12-15 21:20:46 [INFO] Registered AI system: consciousness_bridge (consciousness_bridge)
+2025-12-15 21:20:46 [INFO] Registered AI system: quantum_resolver (quantum_resolver)
+2025-12-15 21:20:46 [INFO] Initialized 1 default pipelines
+2025-12-15 21:20:46 [INFO] Initialized 2 default tests
+2025-12-15 21:20:46 [INFO] Γ£à Unified AI Orchestrator initialized successfully
+2025-12-15 21:20:46 [INFO]    AI Systems: 5
+2025-12-15 21:20:46 [INFO]    Pipelines: 1
+2025-12-15 21:20:46 [INFO]    Test Cases: 2
+2025-12-15 21:20:46 [INFO] Executing task retrieval_test on copilot_main
+PASSED                                                                   [ 96%]
+tests/test_summary_retrieval.py::test_retrieval_enrichment_queue
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:46 [INFO] Registered AI system: copilot_main (github_copilot)
+2025-12-15 21:20:46 [INFO] Registered AI system: ollama_local (ollama_local)
+2025-12-15 21:20:46 [INFO] Registered AI system: chatdev_agents (chatdev_agents)
+2025-12-15 21:20:46 [INFO] Registered AI system: consciousness_bridge (consciousness_bridge)
+2025-12-15 21:20:46 [INFO] Registered AI system: quantum_resolver (quantum_resolver)
+2025-12-15 21:20:46 [INFO] Initialized 1 default pipelines
+2025-12-15 21:20:46 [INFO] Initialized 2 default tests
+2025-12-15 21:20:46 [INFO] Γ£à Unified AI Orchestrator initialized successfully
+2025-12-15 21:20:46 [INFO]    AI Systems: 5
+2025-12-15 21:20:46 [INFO]    Pipelines: 1
+2025-12-15 21:20:46 [INFO]    Test Cases: 2
+2025-12-15 21:20:46 [INFO] Submitted task retrieval_queue_test
+PASSED                                                                   [ 96%]
+tests/test_summary_retrieval_embeddings.py::test_summary_retrieval_with_embeddings SKIPPED [ 96%]
+tests/test_task_queue.py::test_queue_command_echo PASSED                 [ 97%]
+tests/test_temple_and_monitor.py::test_temple_of_knowledge
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:46 [INFO] Temple of Knowledge - Floor 1: Foundation initialized
+2025-12-15 21:20:46 [INFO]   Knowledge Base: 3 entries
+2025-12-15 21:20:46 [INFO]   OmniTag Archive: 2 tags
+2025-12-15 21:20:46 [INFO]   Agent Registry: 2 agents
+2025-12-15 21:20:46 [INFO] Temple of Knowledge Manager initialized
+2025-12-15 21:20:46 [INFO]   Active Floors: [1]
+2025-12-15 21:20:46 [INFO]   Temple Root: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\data\temple_of_knowledge
+2025-12-15 21:20:46 [INFO] Knowledge stored: Temple System
+2025-12-15 21:20:46 [INFO] OmniTag archived: temple_v1
+2025-12-15 21:20:46 [INFO] OmniTag search: 'knowledge hierarchy' found 1 results
+PASSED                                                                   [ 97%]
+tests/test_temple_and_monitor.py::test_autonomous_monitor_enhancement
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:46 [INFO]   SimulatedVerseBridge not found, using standalone mode
+2025-12-15 21:20:46 [INFO] Warning: SimulatedVerseBridge not found
+2025-12-15 21:20:46 [INFO] Loaded 7 sector definitions
+2025-12-15 21:20:46 [INFO]
+Initializing Configuration Gap Detection...
+2025-12-15 21:20:46 [INFO] Gap Detection Complete: Found 3 gaps across 7 sectors
+2025-12-15 21:20:46 [INFO] Autonomous Monitor Initialized (Enhanced v2.0)
+2025-12-15 21:20:46 [INFO]   Audit Interval: 3600s (60.0 minutes)
+2025-12-15 21:20:46 [INFO]   Queue: Available
+2025-12-15 21:20:46 [INFO]   SimulatedVerse: Disconnected
+2025-12-15 21:20:46 [INFO]   Sector Awareness: Enabled
+2025-12-15 21:20:46 [INFO]   Sectors Loaded: 7
+2025-12-15 21:20:46 [INFO]   Configuration Gaps Detected: 3
+2025-12-15 21:20:46 [INFO] Gap report saved: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\data\sector_gap_report_20251215_212046.json
+PASSED                                                                   [ 97%]
+tests/test_terminal_manager_timeout.py::test_execute_command_timeout
+-------------------------------- live log call --------------------------------
+2025-12-15 21:20:47 [WARNING] ΓÅ░ Command timeout after 1s: python -c "import time; time.sleep(2)"
+PASSED                                                                   [ 97%]
+tests/test_treasure_patterns.py::test_bug_word_boundary_does_not_match_debugging PASSED [ 97%]
+tests/test_treasure_patterns.py::test_todo_and_fixme_detected PASSED     [ 98%]
+tests/test_treasure_seeding.py::test_seed_repo_artifacts_creates_missing PASSED [ 98%]
+tests/test_urgency_and_history.py::test_single_repo_urgency_scoring PASSED [ 98%]
+tests/test_urgency_and_history.py::test_urgency_with_missing_artifacts PASSED [ 98%]
+tests/test_urgency_and_history.py::test_history_append_and_trim PASSED   [ 98%]
+tests/test_urgency_and_history.py::test_multi_repo_urgency_scoring PASSED [ 98%]
+tests/test_urgency_and_history.py::test_multi_repo_history_retention PASSED [ 99%]
+tests/test_urgency_and_history.py::test_adapter_load_history PASSED      [ 99%]
+tests/test_urgency_and_history.py::test_adapter_history_missing_file PASSED [ 99%]
+tests/test_xi_pipeline.py::test_pipeline_success PASSED                  [ 99%]
+tests/test_xi_pipeline.py::test_gate_blocked PASSED                      [ 99%]
+tests/test_xi_pipeline.py::test_shadow_merge PASSED                      [100%]
+
+============================== warnings summary ===============================
+..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygame\pkgdata.py:25
+  C:\Users\keath\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygame\pkgdata.py:25: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+    from pkg_resources import resource_stream, resource_exists
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.10-final-0 _______________
+
+Name                                  Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------
+src\__init__.py                          18      2      2      1    85%   23->exit, 25-28
+src\tagging\advanced_tag_manager.py     150     18     62     29    77%   57->59, 59->61, 61->63, 63->66, 72->71, 79, 87-90, 112, 123, 134, 145, 161->163, 163->165, 165->167, 167->169, 169->173, 173->182, 175->177, 178, 180, 197->202, 202->205, 205->209, 213, 215->221, 222, 239->245, 249, 252->259, 259->271, 289, 296, 303, 310
+src\utils\base44.py                      35      4     14      5    82%   8, 16->21, 18, 27, 41
+src\utils\sorting.py                     13      1      4      1    88%   8
+src\xi_nusyq\pipeline.py                 55      5     14      2    90%   57-58, 65, 107-108
+---------------------------------------------------------------------------------
+TOTAL                                   271     30     96     38    81%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+Required test coverage of 70% reached. Total coverage: 80.93%
+
+---------------------------------------------------------------------------------------------------------------- benchmark: 2 tests ----------------------------------------------------------------------------------------------------------------
+Name (time in ns)                           Min                        Max                       Mean                  StdDev                     Median                     IQR              Outliers             OPS            Rounds  Iterations
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+test_model_load_latency                 83.3330 (1.0)          17,300.0008 (1.0)             127.2293 (1.0)          125.1160 (1.0)             116.6666 (1.0)           33.3336 (1.0)      5525;10489  7,859,821.8316 (1.0)      196079          30
+test_task_execution_latency     10,059,399.9960 (>1000.0)  10,727,299.9885 (620.08)   10,367,036.8431 (>1000.0)  178,274.5736 (>1000.0)  10,383,299.9885 (>1000.0)  308,750.0081 (>1000.0)        39;0         96.4596 (0.00)         95           1
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Legend:
+  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
+  OPS: Operations Per Second, computed as 1 / Mean
+=========================== short test summary info ===========================
+FAILED tests/test_health_cli.py::test_health_cli_tracing_no_throw - Attribute...
+============ 1 failed, 549 passed, 5 skipped, 1 warning in 17.37s =============

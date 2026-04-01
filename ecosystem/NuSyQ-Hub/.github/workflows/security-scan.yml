@@ -1,0 +1,30 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [master, main, develop]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Python syntax check
+        run: |
+          find . -name "*.py" -not -path "./venv*" -not -path "./.git*" | xargs -I {} python -m py_compile {}
+        continue-on-error: true
+
+      - name: Run secret detection
+        uses: trufflesecurity/trufflehog@v3  # Pinned to v3 stable — was @main (floating)
+        with:
+          path: ./
+          base: main
+          head: HEAD
+
+      - name: Run dependency check
+        uses: pypa/gh-action-pip-audit@v1.1.0
+        with:
+          inputs: requirements.txt
+        continue-on-error: true

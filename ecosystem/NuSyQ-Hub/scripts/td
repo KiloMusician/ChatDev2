@@ -1,0 +1,23 @@
+#!/bin/bash
+# Terminal Depths Universal Command
+# Add to PATH to use 'td' from any terminal
+# Installation: ln -s $(pwd)/scripts/td /usr/local/bin/td
+
+NUSYQ_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON="${PYTHON:-python3}"
+
+# Detect if running in VS Code
+if [ "$TERM_PROGRAM" = "vscode" ]; then
+    SURFACE="vscode"
+else
+    SURFACE="terminal"
+fi
+
+# Detect if running in container
+if [ -f /.dockerenv ]; then
+    SURFACE="terminal"
+fi
+
+exec "$PYTHON" -m scripts.terminal_depths_launcher \
+    --surface "$SURFACE" \
+    "$@"

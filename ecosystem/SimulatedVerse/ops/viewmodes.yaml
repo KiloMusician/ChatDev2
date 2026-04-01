@@ -1,0 +1,63 @@
+# ΞNuSyQ-Prime ViewModes - Scoped Workspace Configuration
+# OWNERS: team/infra, ai/prime
+# TAGS: infra, scope, workspace, anti-bloat
+# STABILITY: stable
+# INTEGRATIONS: agent/gateway, testing/chamber, ops/proof
+
+version: 1
+
+modes:
+  everything:
+    include: ["**/*"]
+    exclude: ["node_modules/**", "dist/**", ".cache/**", "ops/local/**", ".git/**"]
+    tags_any: []
+    
+  system:
+    include: ["server/**", "ops/**", "bootstrap/**", "config/**", "shared/schema.ts"]
+    exclude: ["server/routes/sim/**", "server/routes/chatdev/**"]
+    tags_any: ["infra", "ops", "gateway", "proof", "worker", "cadence", "system"]
+    
+  game:
+    include: ["client/src/**", "content/**", "PreviewUI/**"]
+    exclude: ["client/src/pages/AdminConsole.tsx", "client/src/pages/ChatDevConsole.tsx"]
+    tags_any: ["game", "hud", "ui", "content", "render", "input", "gameplay"]
+    
+  simulation:
+    include: ["server/routes/sim/**", "shared/sim/**", "GameDev/**"]
+    tags_any: ["sim", "state", "loop", "mechanics", "balance"]
+    
+  enhancements:
+    include: ["server/routes/chatdev/**", "ml/**", "notebooks/**", "integrations/**", "agents/**"]
+    tags_any: ["chatdev", "ollama", "ml", "analytics", "jupyter", "agent", "pipeline"]
+    
+  knowledge:
+    include: ["docs/**", "knowledge/**", "obsidian/**", "sectors/**", "modules/culture_ship/**"]
+    tags_any: ["docs", "pantheon", "lore", "sectors", "house", "knowledge", "culture"]
+    
+  env:
+    include: ["config/env/**", ".env*", "server/config/**"]
+    tags_any: ["env", "secrets", "config"]
+    
+  userprofile:
+    include: ["server/user/**", "client/src/user/**", "client/src/pages/SettingsPanel.tsx"]
+    tags_any: ["user", "profile", "settings", "auth"]
+
+combos:
+  game+sim:
+    modes: ["game", "simulation"]
+    
+  game+enhance+knowledge:
+    modes: ["game", "enhancements", "knowledge"]
+    
+  system+ops:
+    modes: ["system", "env"]
+    
+  full+dev:
+    modes: ["system", "game", "simulation", "enhancements"]
+
+policies:
+  no_create_when_update_exists: true
+  enforce_rosetta_headers: true
+  run_smokes_before_merge: true
+  max_scope_files: 500
+  proof_required: true

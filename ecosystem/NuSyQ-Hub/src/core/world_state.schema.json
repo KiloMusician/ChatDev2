@@ -1,0 +1,533 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NuSyQ-Hub World State Schema",
+  "description": "Unified world state that fuses Context, RepoGraph, Runtime, Telemetry, Memory, Policy, and Objective into a single typed record. This is the state tensor that all orchestration decisions operate upon.",
+  "type": "object",
+  "required": [
+    "timestamp",
+    "decision_epoch",
+    "observations",
+    "signals",
+    "coherence",
+    "runtime_state"
+  ],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when this world state was computed."
+    },
+    "decision_epoch": {
+      "type": "integer",
+      "description": "Monotonic epoch counter. Incremented each decision cycle.",
+      "minimum": 0
+    },
+    "observations": {
+      "type": "object",
+      "description": "Raw multi-source observations before coherence reconciliation.",
+      "properties": {
+        "context": {
+          "type": "object",
+          "description": "Chat/request context and user intent.",
+          "properties": {
+            "user_message": {
+              "type": "string"
+            },
+            "request_type": {
+              "type": "string",
+              "enum": [
+                "analysis",
+                "generation",
+                "review",
+                "healing",
+                "exploration",
+                "strategic"
+              ]
+            },
+            "workspace_folders": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Active workspace folder paths."
+            },
+            "active_file": {
+              "type": ["string", "null"]
+            },
+            "terminal_context": {
+              "type": "object",
+              "properties": {
+                "last_commands": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "cwd": {
+                  "type": "string"
+                },
+                "terminals_active": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "repo_graph": {
+          "type": "object",
+          "description": "Git repository structure and state.",
+          "properties": {
+            "repos": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "current_branch": {
+                    "type": "string"
+                  },
+                  "default_branch": {
+                    "type": "string"
+                  },
+                  "uncommitted_changes": {
+                    "type": "integer"
+                  },
+                  "untracked_files": {
+                    "type": "integer"
+                  },
+                  "last_commit": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "runtime_state": {
+          "type": "object",
+          "description": "Operational state of local agents, services, processes.",
+          "properties": {
+            "agents": {
+              "type": "object",
+              "description": "Availability and latency of each orchestrable agent.",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "online": {
+                    "type": "boolean"
+                  },
+                  "latency_ms": {
+                    "type": "number"
+                  },
+                  "models_available": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "last_probe": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "failure_mode": {
+                    "type": ["string", "null"]
+                  }
+                }
+              }
+            },
+            "services": {
+              "type": "array",
+              "description": "External services (docker containers, OpenClaw, n8n, etc.).",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["running", "stopped", "failed", "unknown"]
+                  },
+                  "port": {
+                    "type": ["integer", "null"]
+                  },
+                  "health": {
+                    "type": ["string", "null"]
+                  }
+                }
+              }
+            },
+            "queued_tasks": {
+              "type": "integer",
+              "description": "Number of pending background tasks."
+            },
+            "resource_usage": {
+              "type": "object",
+              "properties": {
+                "memory_percent": {
+                  "type": "number"
+                },
+                "cpu_percent": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "diagnostics": {
+          "type": "object",
+          "description": "Code quality and error reports from multiple tools.",
+          "properties": {
+            "linting_errors": {
+              "type": "integer"
+            },
+            "type_checking_errors": {
+              "type": "integer"
+            },
+            "test_failures": {
+              "type": "integer"
+            },
+            "security_issues": {
+              "type": "integer"
+            },
+            "by_file": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string"
+                  },
+                  "errors": {
+                    "type": "integer"
+                  },
+                  "warnings": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "signals": {
+      "type": "object",
+      "description": "Multi-source fact stream with provenance and confidence.",
+      "properties": {
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "timestamp",
+              "source",
+              "confidence",
+              "value"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "UUID for this fact."
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "source": {
+                "type": "string",
+                "description": "Where this fact came from (tool, log, probe, etc.).",
+                "enum": [
+                  "git_diff",
+                  "file_system",
+                  "agent_probe",
+                  "quest_log",
+                  "config",
+                  "diagnostic_tool",
+                  "linter",
+                  "type_checker",
+                  "user_input"
+                ]
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "description": "How much do we trust this signal? 0.0=stale/unreliable, 1.0=definitive."
+              },
+              "value": {
+                "description": "The actual fact (can be any JSON value)."
+              },
+              "ttl_seconds": {
+                "type": "integer",
+                "description": "How long is this fact valid? Null=indefinite."
+              }
+            }
+          }
+        }
+      }
+    },
+    "coherence": {
+      "type": "object",
+      "description": "Signal reconciliation and contradiction detection results.",
+      "properties": {
+        "reconciled_facts": {
+          "type": "array",
+          "description": "After merging conflicting signals, the canonical facts.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "Fact category (e.g., 'error_count', 'agent_status', 'policy_status')."
+              },
+              "value": {
+                "description": "Reconciled value."
+              },
+              "source_precedence": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Sources used to reconcile, in order of authority."
+              }
+            }
+          }
+        },
+        "contradictions": {
+          "type": "array",
+          "description": "Signals that conflict and their resolution.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "signals": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string"
+                    },
+                    "value": {},
+                    "confidence": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "resolved_to": {
+                "description": "The canonical value chosen."
+              },
+              "reasoning": {
+                "type": "string",
+                "description": "Why this resolution was chosen."
+              }
+            }
+          }
+        },
+        "signal_drift": {
+          "type": "array",
+          "description": "Signals that changed significantly since last epoch.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "previous_value": {},
+              "current_value": {},
+              "change_magnitude": {
+                "type": "number",
+                "description": "0.0-1.0 normalized change."
+              },
+              "alert_level": {
+                "type": "string",
+                "enum": ["info", "warning", "critical"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "runtime_state": {
+      "type": "object",
+      "description": "Aggregated operational state for decision-making.",
+      "properties": {
+        "agent_capabilities": {
+          "type": "object",
+          "description": "What each agent can do, and how well.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "capabilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "success_rate": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0
+              },
+              "avg_latency_ms": {
+                "type": "number"
+              },
+              "cost_tier": {
+                "type": "string",
+                "enum": ["low", "medium", "high"]
+              }
+            }
+          }
+        },
+        "available_memory": {
+          "type": "object",
+          "properties": {
+            "quest_log": {
+              "type": "object",
+              "description": "Access to the event-sourced quest memory.",
+              "properties": {
+                "total_quests": {
+                  "type": "integer"
+                },
+                "pending": {
+                  "type": "integer"
+                },
+                "active": {
+                  "type": "integer"
+                },
+                "completed": {
+                  "type": "integer"
+                },
+                "recent_events": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "action_receipts": {
+              "type": "object",
+              "description": "Recent action execution history.",
+              "properties": {
+                "total_actions": {
+                  "type": "integer"
+                },
+                "successful": {
+                  "type": "integer"
+                },
+                "failed": {
+                  "type": "integer"
+                },
+                "recent": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "policy_state": {
+      "type": "object",
+      "description": "Current policy constraints and their evaluation.",
+      "properties": {
+        "active_policies": {
+          "type": "array",
+          "description": "Which instruction-sets are active?",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resource_budgets": {
+          "type": "object",
+          "properties": {
+            "token_budget_remaining": {
+              "type": "integer"
+            },
+            "time_budget_remaining_s": {
+              "type": "integer"
+            },
+            "cpu_budget_remaining": {
+              "type": "number"
+            }
+          }
+        },
+        "safety_gates": {
+          "type": "object",
+          "properties": {
+            "allow_mutations": {
+              "type": "boolean"
+            },
+            "require_culture_ship_approval": {
+              "type": "boolean"
+            },
+            "max_risk_score": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "description": "Current goal/quest context driving decisions.",
+      "properties": {
+        "user_intent": {
+          "type": "string",
+          "description": "What the user asked for, in natural language."
+        },
+        "quest_id": {
+          "type": ["string", "null"],
+          "description": "If this is part of an active quest."
+        },
+        "required_capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "What skills are needed to accomplish this."
+        },
+        "success_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "How will we know when this is done?"
+        },
+        "time_sensitivity": {
+          "type": "string",
+          "enum": ["low", "normal", "high", "critical"]
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "generated_by": {
+          "type": "string",
+          "description": "Which agent/system built this state record."
+        },
+        "build_duration_ms": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

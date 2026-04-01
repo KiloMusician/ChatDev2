@@ -1,0 +1,6 @@
+FROM python:3.11-slim
+WORKDIR /app
+RUN pip install --no-cache-dir fastapi uvicorn[standard] aiohttp redis pydantic
+COPY scripts/nusyq_bridge.py ./bridge.py
+EXPOSE 9876
+CMD ["python", "bridge.py"]

@@ -1,0 +1,151 @@
+# ΔΨΣ Service Dependency Graph
+# Used by the Telephone Operator / Dependency Resolver to ensure services
+# start in the correct order and register with the service registry.
+#
+# The gateway (port 5000) is the single external entry point.
+# All internal services register here and are routed via path prefixes.
+
+gateway:
+  description: "Main API gateway — DevMentor/Terminal Depths (Replit external)"
+  port_env: DEVMENTOR_PORT
+  default_port: 5000
+  health_endpoint: /api/health
+  capabilities: [http, websocket, game, auth]
+  tags: [critical, external]
+  requires: []
+  start_command: "python -m cli.devmentor serve --host 0.0.0.0 --port {port}"
+
+redis:
+  description: "In-memory pub/sub for Lattice events and agent coordination"
+  port_env: REDIS_PORT
+  default_port: 6379
+  health_endpoint: /
+  capabilities: [pubsub, cache, kv]
+  tags: [optional, infrastructure]
+  requires: []
+  start_command: "redis-server --port {port}"
+
+health-server:
+  description: "Offline-first health/metrics server (stdlib only)"
+  port_env: HEALTH_PORT
+  default_port: 3000
+  health_endpoint: /health
+  capabilities: [health, metrics, offline]
+  tags: [critical, offline]
+  requires: []
+  start_command: "python scripts/health_server.py --port {port}"
+
+model-router:
+  description: "Intelligent model selection and routing (Ollama / LM Studio)"
+  port_env: MODEL_ROUTER_PORT
+  default_port: 9001
+  health_endpoint: /health
+  capabilities: [ml, routing, ollama, lm_studio]
+  tags: [optional, ai]
+  requires: []
+  start_command: "python scripts/model_router.py --port {port}"
+
+ollama:
+  description: "Local LLM inference server"
+  port_env: OLLAMA_PORT
+  default_port: 11434
+  health_endpoint: /api/tags
+  capabilities: [llm, embeddings, inference, offline]
+  tags: [optional, ai, local]
+  requires: []
+  start_command: "ollama serve"
+
+rimapi-bridge:
+  description: "RimWorld → Lattice bridge (pawn state, incidents, crashes)"
+  port_env: RIMAPI_PORT
+  default_port: 8765
+  health_endpoint: /health
+  capabilities: [rimworld, bridge, lattice]
+  tags: [optional, game]
+  requires: [redis]
+  start_command: "python scripts/rimapi_bridge.py --port {port}"
+
+gordon-orchestrator:
+  description: "Autonomous orchestrator daemon (monitors services, CHUG cycles)"
+  port_env: GORDON_PORT
+  default_port: 8200
+  health_endpoint: /health
+  capabilities: [orchestration, monitoring, chug]
+  tags: [optional, daemon]
+  requires: [gateway, redis]
+  start_command: "python scripts/gordon_orchestrator.py --port {port}"
+
+serena-analytics:
+  description: "Serena analytics and drift detection daemon"
+  port_env: SERENA_ANALYTICS_PORT
+  default_port: 8201
+  health_endpoint: /health
+  capabilities: [analytics, drift, serena]
+  tags: [optional, daemon]
+  requires: [gateway]
+  start_command: "python scripts/serena_analytics.py --port {port}"
+
+culture-ship:
+  description: "GSV Sublime Optimization meta-controller"
+  port_env: CULTURE_SHIP_PORT
+  default_port: 8202
+  health_endpoint: /health
+  capabilities: [strategy, ai_council, culture]
+  tags: [optional, daemon]
+  requires: [gateway, redis]
+  start_command: "python scripts/culture_ship.py --port {port}"
+
+skyclaw-scanner:
+  description: "Filesystem and colony anomaly scanner"
+  port_env: SKYCLAW_PORT
+  default_port: 8203
+  health_endpoint: /health
+  capabilities: [scanning, anomaly, filesystem]
+  tags: [optional, daemon]
+  requires: [gateway]
+  start_command: "python scripts/skyclaw_scanner.py --port {port}"
+
+ml-registry:
+  description: "ML model registry REST service (Phase 1)"
+  port_env: ML_REGISTRY_PORT
+  default_port: 8300
+  health_endpoint: /health
+  capabilities: [ml, registry, models]
+  tags: [optional, ml]
+  requires: []
+  start_command: "python -c \"from services.model_registry import initialise; initialise()\""
+
+# ── Routing table for the gateway ──────────────────────────────────────────
+# When the gateway receives a request, it routes by path prefix.
+# The gateway IS the DevMentor FastAPI app on port 5000.
+# Internal routing to other services is done via X-Service-Name header
+# or by path prefix (future gateway middleware).
+
+gateway_routes:
+  - path: /api/game
+    service: gateway
+    note: "Game engine — handled internally by FastAPI"
+  - path: /api/ml
+    service: gateway
+    note: "ML services — handled internally"
+  - path: /api/lattice
+    service: gateway
+    note: "Lattice knowledge graph — handled internally"
+  - path: /api/nusyq
+    service: gateway
+    note: "NuSyQ bridge — handled internally"
+  - path: /api/council
+    service: gateway
+    note: "AI Council — handled internally"
+  - path: /api/agent
+    service: gateway
+    note: "Agent identity — handled internally"
+  - path: /api/services
+    service: gateway
+    note: "Service registry — handled internally"
+  - path: /api/health
+    service: health-server
+    fallback: gateway
+  - path: /ws/game
+    service: gateway
+    note: "WebSocket game bridge"

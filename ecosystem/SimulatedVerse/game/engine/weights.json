@@ -1,0 +1,21 @@
+{
+  "llm_enabled": false,
+  "token_budget": { "window": "session", "max_tokens": 0, "burst": 0 },
+  "retry_backoff_ms": [200, 500, 1200],
+  "interrupt_bias": 0.15,
+  "task_weight": {
+    "fix:errors": 1.0,
+    "tests:green": 0.9,
+    "perf:hot": 0.8,
+    "mobile:ui": 0.8,
+    "ascii:ux": 0.7,
+    "idl:mechanics": 0.7,
+    "exp:lore": 0.5,
+    "docs:track": 0.6,
+    "sync:gh": 0.6
+  },
+  "auto_adjust": {
+    "on_interrupt": { "task_weight.perf:hot": 0.1, "task_weight.mobile:ui": 0.1 },
+    "on_token_spend": { "llm_enabled": true, "token_budget.max_tokens": 8000, "token_budget.burst": 2000 }
+  }
+}

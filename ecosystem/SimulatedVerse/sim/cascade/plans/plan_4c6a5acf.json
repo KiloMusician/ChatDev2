@@ -1,0 +1,4253 @@
+{
+  "plan_id": "plan_4c6a5acf",
+  "created_at": "2025-08-27T17:47:08Z",
+  "trigger": "cli",
+  "token_budget": 0,
+  "heuristics": {
+    "priority_bias": "safety>ethics>scaffold>refactor",
+    "dep_weighting": true,
+    "quest_alignment": true
+  },
+  "items": [
+    {
+      "id": "init:ethics_registry",
+      "description": "Initialize /guards/ethics_registry.json and EthicsGuard middleware",
+      "category": "ethics",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "guards/ethics_registry.json",
+        "guards/ethics_guard.py"
+      ],
+      "estimated_minutes": 2,
+      "commands": [
+        "# create guards/ethics_registry.json with empty list",
+        "# create guards/ethics_guard.py to enforce registry at runtime"
+      ]
+    },
+    {
+      "id": "quarantine:ops/tools/cascade_event.py:26649928",
+      "description": "\ud83d\udd12 Quarantine unsafe pattern `enable_mass_harm` in ops/tools/cascade_event.py",
+      "category": "ethics",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "ops/tools/cascade_event.py"
+      ],
+      "estimated_minutes": 4,
+      "commands": [
+        "# add soft-kill switch around `enable_mass_harm` in ops/tools/cascade_event.py",
+        "# register quarantined behavior in /guards/ethics_registry.json"
+      ]
+    },
+    {
+      "id": "quarantine:policies/safety.yml:a1c1a3b7",
+      "description": "\ud83d\udd12 Quarantine unsafe pattern `genocide` in policies/safety.yml",
+      "category": "ethics",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "policies/safety.yml"
+      ],
+      "estimated_minutes": 4,
+      "commands": [
+        "# add soft-kill switch around `genocide` in policies/safety.yml",
+        "# register quarantined behavior in /guards/ethics_registry.json"
+      ]
+    },
+    {
+      "id": "quarantine:sim/cascade/cascade_event.py:26649928",
+      "description": "\ud83d\udd12 Quarantine unsafe pattern `enable_mass_harm` in sim/cascade/cascade_event.py",
+      "category": "ethics",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "sim/cascade/cascade_event.py"
+      ],
+      "estimated_minutes": 4,
+      "commands": [
+        "# add soft-kill switch around `enable_mass_harm` in sim/cascade/cascade_event.py",
+        "# register quarantined behavior in /guards/ethics_registry.json"
+      ]
+    },
+    {
+      "id": "quarantine:sim/cascade/plans/plan_46db32e6.json:26649928",
+      "description": "\ud83d\udd12 Quarantine unsafe pattern `enable_mass_harm` in sim/cascade/plans/plan_46db32e6.json",
+      "category": "ethics",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "sim/cascade/plans/plan_46db32e6.json"
+      ],
+      "estimated_minutes": 4,
+      "commands": [
+        "# add soft-kill switch around `enable_mass_harm` in sim/cascade/plans/plan_46db32e6.json",
+        "# register quarantined behavior in /guards/ethics_registry.json"
+      ]
+    },
+    {
+      "id": "guard:.github/pull_request_template.md",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .github/pull_request_template.md",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".github/pull_request_template.md"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .github/pull_request_template.md for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.local/state/replit/agent/filesystem/filesystem_state.json",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .local/state/replit/agent/filesystem/filesystem_state.json",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".local/state/replit/agent/filesystem/filesystem_state.json"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .local/state/replit/agent/filesystem/filesystem_state.json for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/click/_compat.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/click/_compat.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/click/_compat.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/click/_compat.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/click/termui.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/click/termui.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/click/termui.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/click/termui.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/flask/cli.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/flask/cli.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/flask/cli.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/flask/cli.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/jinja2/environment.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/jinja2/environment.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/jinja2/environment.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/jinja2/ext.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/jinja2/ext.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/jinja2/ext.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/jinja2/ext.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/jinja2/lexer.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/jinja2/lexer.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/jinja2/lexer.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/jinja2/lexer.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/jinja2/parser.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/jinja2/parser.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/jinja2/parser.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/jinja2/parser.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/jinja2/utils.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/jinja2/utils.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/jinja2/utils.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/jinja2/utils.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/markdown_it/cli/parse.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/markdown_it/cli/parse.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/cli/parse.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/markdown_it/cli/parse.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/fence.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/fence.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/fence.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/fence.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/list.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/list.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/list.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/list.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/autolink.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/autolink.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/autolink.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/autolink.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/backticks.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/backticks.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/backticks.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_inline/backticks.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/admon/index.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/admon/index.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/admon/index.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/admon/index.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/amsmath/__init__.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/amsmath/__init__.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/amsmath/__init__.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/amsmath/__init__.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/container/index.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/container/index.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/container/index.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/container/index.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/deflist/index.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/deflist/index.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/deflist/index.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/deflist/index.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/front_matter/index.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/front_matter/index.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/front_matter/index.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/front_matter/index.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/substitution.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/substitution.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/substitution.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/substitution.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/core/_internal.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/core/_internal.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/_internal.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/core/_internal.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_overlap.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_overlap.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_overlap.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_overlap.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/lib/arrayterator.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/lib/arrayterator.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/arrayterator.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/lib/arrayterator.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/lib/polynomial.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/lib/polynomial.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/polynomial.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/lib/polynomial.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/numpy/ma/mrecords.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/numpy/ma/mrecords.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/ma/mrecords.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/numpy/ma/mrecords.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/rich/cells.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/rich/cells.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/rich/cells.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/rich/cells.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/rich/prompt.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/rich/prompt.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/rich/prompt.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/rich/prompt.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/rich/segment.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/rich/segment.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/rich/segment.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/rich/segment.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/rich/spinner.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/rich/spinner.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/rich/spinner.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/rich/spinner.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/rich/text.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/rich/text.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/rich/text.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/rich/text.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/rich/traceback.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/rich/traceback.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/rich/traceback.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/rich/traceback.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/_compose.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/_compose.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_compose.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/_compose.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/_parser.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/_parser.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_parser.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/_parser.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/_sleep.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/_sleep.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_sleep.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/_sleep.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/_wait.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/_wait.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_wait.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/_wait.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/css/parse.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/css/parse.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/css/parse.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/css/parse.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/dom.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/dom.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/dom.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/dom.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/drivers/_writer_thread.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/drivers/_writer_thread.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/drivers/_writer_thread.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/drivers/_writer_thread.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/layouts/grid.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/layouts/grid.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/layouts/grid.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/layouts/grid.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/textual/renderables/bar.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/textual/renderables/bar.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/renderables/bar.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/textual/renderables/bar.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/typing_extensions.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/typing_extensions.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/typing_extensions.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/typing_extensions.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/werkzeug/_reloader.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/werkzeug/_reloader.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/werkzeug/_reloader.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/werkzeug/_reloader.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/werkzeug/formparser.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/werkzeug/formparser.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/werkzeug/formparser.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/werkzeug/formparser.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/werkzeug/http.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/werkzeug/http.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/werkzeug/http.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/werkzeug/http.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/werkzeug/middleware/http_proxy.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/werkzeug/middleware/http_proxy.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/werkzeug/middleware/http_proxy.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/werkzeug/middleware/http_proxy.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/werkzeug/test.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/werkzeug/test.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/werkzeug/test.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/werkzeug/test.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/werkzeug/wsgi.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/werkzeug/wsgi.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/werkzeug/wsgi.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/werkzeug/wsgi.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.pythonlibs/lib/python3.11/site-packages/yaml/scanner.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .pythonlibs/lib/python3.11/site-packages/yaml/scanner.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/yaml/scanner.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .pythonlibs/lib/python3.11/site-packages/yaml/scanner.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:.qquest/placeholders_and_spinloops.txt",
+      "description": "Add loop_guard/timeout to possibly infinite loop in .qquest/placeholders_and_spinloops.txt",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        ".qquest/placeholders_and_spinloops.txt"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in .qquest/placeholders_and_spinloops.txt for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:DEPLOYMENT.md",
+      "description": "Add loop_guard/timeout to possibly infinite loop in DEPLOYMENT.md",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "DEPLOYMENT.md"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in DEPLOYMENT.md for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:agent/runtime.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in agent/runtime.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "agent/runtime.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in agent/runtime.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:narrative/storyline_agent.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in narrative/storyline_agent.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "narrative/storyline_agent.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in narrative/storyline_agent.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:src/questmaster.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in src/questmaster.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "src/questmaster.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in src/questmaster.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:ui_ascii/primitives.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in ui_ascii/primitives.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "ui_ascii/primitives.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in ui_ascii/primitives.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:ui_ascii/setup.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in ui_ascii/setup.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "ui_ascii/setup.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in ui_ascii/setup.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:ui_ascii/widgets/node_graph.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in ui_ascii/widgets/node_graph.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "ui_ascii/widgets/node_graph.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in ui_ascii/widgets/node_graph.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:views/colony.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in views/colony.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "views/colony.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in views/colony.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:views/defense.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in views/defense.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "views/defense.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in views/defense.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:views/explore.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in views/explore.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "views/explore.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in views/explore.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "guard:views/idler.py",
+      "description": "Add loop_guard/timeout to possibly infinite loop in views/idler.py",
+      "category": "safety",
+      "priority": 1.0,
+      "deps": [],
+      "outputs": [
+        "views/idler.py"
+      ],
+      "estimated_minutes": 5,
+      "commands": [
+        "# add guard/timeout in views/idler.py for while True/for(;;) patterns"
+      ]
+    },
+    {
+      "id": "todo:temple_boot.py",
+      "description": "Resolve TODO/FIXME markers in temple_boot.py",
+      "category": "refactor",
+      "priority": 0.604054054054054,
+      "deps": [],
+      "outputs": [
+        "temple_boot.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit temple_boot.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:cascade_boot.py",
+      "description": "Resolve TODO/FIXME markers in cascade_boot.py",
+      "category": "refactor",
+      "priority": 0.6039473684210526,
+      "deps": [],
+      "outputs": [
+        "cascade_boot.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit cascade_boot.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:README-ORCHESTRATION.md",
+      "description": "Resolve TODO/FIXME markers in README-ORCHESTRATION.md",
+      "category": "refactor",
+      "priority": 0.6035714285714285,
+      "deps": [],
+      "outputs": [
+        "README-ORCHESTRATION.md"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit README-ORCHESTRATION.md to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:mechanics.yml",
+      "description": "Resolve TODO/FIXME markers in mechanics.yml",
+      "category": "refactor",
+      "priority": 0.6034883720930232,
+      "deps": [],
+      "outputs": [
+        "mechanics.yml"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit mechanics.yml to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.local/cascade_report.json",
+      "description": "Resolve TODO/FIXME markers in .local/cascade_report.json",
+      "category": "refactor",
+      "priority": 0.6032608695652174,
+      "deps": [],
+      "outputs": [
+        ".local/cascade_report.json"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .local/cascade_report.json to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.local/state/replit/agent/filesystem/filesystem_state.json",
+      "description": "Resolve TODO/FIXME markers in .local/state/replit/agent/filesystem/filesystem_state.json",
+      "category": "refactor",
+      "priority": 0.603125,
+      "deps": [],
+      "outputs": [
+        ".local/state/replit/agent/filesystem/filesystem_state.json"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .local/state/replit/agent/filesystem/filesystem_state.json to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:src/knowledge-integration/obsidian-bridge.ts",
+      "description": "Resolve TODO/FIXME markers in src/knowledge-integration/obsidian-bridge.ts",
+      "category": "refactor",
+      "priority": 0.6006756756756757,
+      "deps": [],
+      "outputs": [
+        "src/knowledge-integration/obsidian-bridge.ts"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit src/knowledge-integration/obsidian-bridge.ts to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.github/pull_request_template.md",
+      "description": "Resolve TODO/FIXME markers in .github/pull_request_template.md",
+      "category": "refactor",
+      "priority": 0.600133214920071,
+      "deps": [],
+      "outputs": [
+        ".github/pull_request_template.md"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .github/pull_request_template.md to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:scripts/ztp-demo.py",
+      "description": "Resolve TODO/FIXME markers in scripts/ztp-demo.py",
+      "category": "refactor",
+      "priority": 0.6001325088339222,
+      "deps": [],
+      "outputs": [
+        "scripts/ztp-demo.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit scripts/ztp-demo.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:sidecar/bootstrap.py",
+      "description": "Resolve TODO/FIXME markers in sidecar/bootstrap.py",
+      "category": "refactor",
+      "priority": 0.6001310043668122,
+      "deps": [],
+      "outputs": [
+        "sidecar/bootstrap.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit sidecar/bootstrap.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:agent/auto_refactor.ts",
+      "description": "Resolve TODO/FIXME markers in agent/auto_refactor.ts",
+      "category": "refactor",
+      "priority": 0.600130548302872,
+      "deps": [],
+      "outputs": [
+        "agent/auto_refactor.ts"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit agent/auto_refactor.ts to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:agent/main.ts",
+      "description": "Resolve TODO/FIXME markers in agent/main.ts",
+      "category": "refactor",
+      "priority": 0.6001303214596003,
+      "deps": [],
+      "outputs": [
+        "agent/main.ts"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit agent/main.ts to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:agent/quest_runner.ts",
+      "description": "Resolve TODO/FIXME markers in agent/quest_runner.ts",
+      "category": "refactor",
+      "priority": 0.6001300954032958,
+      "deps": [],
+      "outputs": [
+        "agent/quest_runner.ts"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit agent/quest_runner.ts to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:agent/testharness.ts",
+      "description": "Resolve TODO/FIXME markers in agent/testharness.ts",
+      "category": "refactor",
+      "priority": 0.6001298701298701,
+      "deps": [],
+      "outputs": [
+        "agent/testharness.ts"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit agent/testharness.ts to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:agent/runtime.py",
+      "description": "Resolve TODO/FIXME markers in agent/runtime.py",
+      "category": "refactor",
+      "priority": 0.6001296456352636,
+      "deps": [],
+      "outputs": [
+        "agent/runtime.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit agent/runtime.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:tools/agent/play.js",
+      "description": "Resolve TODO/FIXME markers in tools/agent/play.js",
+      "category": "refactor",
+      "priority": 0.6001286449399656,
+      "deps": [],
+      "outputs": [
+        "tools/agent/play.js"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit tools/agent/play.js to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:tools/agent/cascade_trigger.js",
+      "description": "Resolve TODO/FIXME markers in tools/agent/cascade_trigger.js",
+      "category": "refactor",
+      "priority": 0.6001285347043701,
+      "deps": [],
+      "outputs": [
+        "tools/agent/cascade_trigger.js"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit tools/agent/cascade_trigger.js to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.qquest/placeholders_and_spinloops.txt",
+      "description": "Resolve TODO/FIXME markers in .qquest/placeholders_and_spinloops.txt",
+      "category": "refactor",
+      "priority": 0.6001284246575342,
+      "deps": [],
+      "outputs": [
+        ".qquest/placeholders_and_spinloops.txt"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .qquest/placeholders_and_spinloops.txt to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:config/task_queue.yml",
+      "description": "Resolve TODO/FIXME markers in config/task_queue.yml",
+      "category": "refactor",
+      "priority": 0.6001263689974726,
+      "deps": [],
+      "outputs": [
+        "config/task_queue.yml"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit config/task_queue.yml to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/typing_extensions.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/typing_extensions.py",
+      "category": "refactor",
+      "priority": 0.6001243781094527,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/typing_extensions.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/typing_extensions.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/blinker/base.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/blinker/base.py",
+      "category": "refactor",
+      "priority": 0.6001240694789082,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/blinker/base.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/blinker/base.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/jinja2/ext.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/jinja2/ext.py",
+      "category": "refactor",
+      "priority": 0.6001224489795918,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/jinja2/ext.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/jinja2/ext.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/jinja2/nodes.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/jinja2/nodes.py",
+      "category": "refactor",
+      "priority": 0.6001217532467532,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/jinja2/nodes.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/jinja2/nodes.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/itsdangerous/timed.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/itsdangerous/timed.py",
+      "category": "refactor",
+      "priority": 0.6001176470588235,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/itsdangerous/timed.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/itsdangerous/timed.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py",
+      "category": "refactor",
+      "priority": 0.6001172791243159,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/click/_termui_impl.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/werkzeug/http.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/werkzeug/http.py",
+      "category": "refactor",
+      "priority": 0.6001154734411085,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/werkzeug/http.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/werkzeug/http.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/markdown_it/parser_inline.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/markdown_it/parser_inline.py",
+      "category": "refactor",
+      "priority": 0.6001107828655834,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/parser_inline.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/markdown_it/parser_inline.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py",
+      "category": "refactor",
+      "priority": 0.600108225108225,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_block/state_block.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/markdown_it/rules_core/replacements.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_core/replacements.py",
+      "category": "refactor",
+      "priority": 0.6001076812634601,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/markdown_it/rules_core/replacements.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/markdown_it/rules_core/replacements.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdurl/_parse.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdurl/_parse.py",
+      "category": "refactor",
+      "priority": 0.6001057082452431,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdurl/_parse.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdurl/_parse.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/yaml/scanner.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/yaml/scanner.py",
+      "category": "refactor",
+      "priority": 0.6001052631578947,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/yaml/scanner.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/yaml/scanner.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/yaml/__init__.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/yaml/__init__.py",
+      "category": "refactor",
+      "priority": 0.6001051893408135,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/yaml/__init__.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/yaml/__init__.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexer.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexer.py",
+      "category": "refactor",
+      "priority": 0.6001038781163435,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexer.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexer.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/unistring.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/unistring.py",
+      "category": "refactor",
+      "priority": 0.6001033057851239,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/unistring.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/unistring.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/filters/__init__.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/filters/__init__.py",
+      "category": "refactor",
+      "priority": 0.6001031636863824,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/filters/__init__.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/filters/__init__.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/formatters/img.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/formatters/img.py",
+      "category": "refactor",
+      "priority": 0.6001027397260273,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/formatters/img.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/formatters/img.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/formatters/latex.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/formatters/latex.py",
+      "category": "refactor",
+      "priority": 0.6001025991792065,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/formatters/latex.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/formatters/latex.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/formatters/terminal256.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/formatters/terminal256.py",
+      "category": "refactor",
+      "priority": 0.6001021798365123,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/formatters/terminal256.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/formatters/terminal256.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/_asy_builtins.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/_asy_builtins.py",
+      "category": "refactor",
+      "priority": 0.6001019714479945,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/_asy_builtins.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/_asy_builtins.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/_mapping.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/_mapping.py",
+      "category": "refactor",
+      "priority": 0.6001012145748987,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/_mapping.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/_mapping.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/ada.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/ada.py",
+      "category": "refactor",
+      "priority": 0.6001,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/ada.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/ada.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/basic.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/basic.py",
+      "category": "refactor",
+      "priority": 0.600098944591029,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/basic.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/basic.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/c_like.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/c_like.py",
+      "category": "refactor",
+      "priority": 0.6000983606557376,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/c_like.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/c_like.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/configs.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/configs.py",
+      "category": "refactor",
+      "priority": 0.6000977835723598,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/configs.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/configs.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/css.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/css.py",
+      "category": "refactor",
+      "priority": 0.6000974658869396,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/css.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/css.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/dns.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/dns.py",
+      "category": "refactor",
+      "priority": 0.6000970245795602,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/dns.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/dns.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/dotnet.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/dotnet.py",
+      "category": "refactor",
+      "priority": 0.6000969618616677,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/dotnet.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/dotnet.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/fantom.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/fantom.py",
+      "category": "refactor",
+      "priority": 0.600096215522771,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/fantom.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/fantom.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/felix.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/felix.py",
+      "category": "refactor",
+      "priority": 0.6000961538461538,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/felix.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/felix.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/gleam.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/gleam.py",
+      "category": "refactor",
+      "priority": 0.6000954198473282,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/gleam.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/gleam.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/graphics.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/graphics.py",
+      "category": "refactor",
+      "priority": 0.6000951776649746,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/graphics.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/graphics.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/haskell.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/haskell.py",
+      "category": "refactor",
+      "priority": 0.6000948766603416,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/haskell.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/haskell.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/inferno.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/inferno.py",
+      "category": "refactor",
+      "priority": 0.6000944584382871,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/inferno.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/inferno.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/javascript.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/javascript.py",
+      "category": "refactor",
+      "priority": 0.6000941619585687,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/javascript.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/javascript.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/julia.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/julia.py",
+      "category": "refactor",
+      "priority": 0.600093808630394,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/julia.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/julia.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/jvm.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/jvm.py",
+      "category": "refactor",
+      "priority": 0.60009375,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/jvm.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/jvm.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/lisp.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/lisp.py",
+      "category": "refactor",
+      "priority": 0.600093399750934,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/lisp.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/lisp.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py",
+      "category": "refactor",
+      "priority": 0.6000931677018634,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/markup.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/meson.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/meson.py",
+      "category": "refactor",
+      "priority": 0.6000929368029739,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/meson.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/meson.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/mips.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/mips.py",
+      "category": "refactor",
+      "priority": 0.6000927643784787,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/mips.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/mips.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/modula2.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/modula2.py",
+      "category": "refactor",
+      "priority": 0.6000925925925926,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/modula2.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/modula2.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/mojo.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/mojo.py",
+      "category": "refactor",
+      "priority": 0.6000925354719309,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/mojo.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/mojo.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/nix.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/nix.py",
+      "category": "refactor",
+      "priority": 0.6000921942224954,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/nix.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/nix.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/oberon.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/oberon.py",
+      "category": "refactor",
+      "priority": 0.6000920810313075,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/oberon.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/oberon.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/objective.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/objective.py",
+      "category": "refactor",
+      "priority": 0.6000920245398773,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/objective.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/objective.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/openscad.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/openscad.py",
+      "category": "refactor",
+      "priority": 0.6000919117647059,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/openscad.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/openscad.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/parsers.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/parsers.py",
+      "category": "refactor",
+      "priority": 0.600091743119266,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/parsers.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/parsers.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/pascal.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/pascal.py",
+      "category": "refactor",
+      "priority": 0.6000916870415648,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/pascal.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/pascal.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/perl.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/perl.py",
+      "category": "refactor",
+      "priority": 0.600091519219036,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/perl.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/perl.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/python.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/python.py",
+      "category": "refactor",
+      "priority": 0.6000909090909091,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/python.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/python.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/rnc.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/rnc.py",
+      "category": "refactor",
+      "priority": 0.6000903070439494,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/rnc.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/rnc.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/rust.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/rust.py",
+      "category": "refactor",
+      "priority": 0.6000900900900901,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/rust.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/rust.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/scripting.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/scripting.py",
+      "category": "refactor",
+      "priority": 0.6000898741761533,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/scripting.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/scripting.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/sql.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/sql.py",
+      "category": "refactor",
+      "priority": 0.6000891265597148,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/sql.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/sql.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/tcl.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/tcl.py",
+      "category": "refactor",
+      "priority": 0.6000887573964497,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/tcl.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/tcl.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py",
+      "category": "refactor",
+      "priority": 0.6000886524822695,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/templates.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/testing.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/testing.py",
+      "category": "refactor",
+      "priority": 0.6000885478158205,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/testing.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/testing.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/textedit.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/textedit.py",
+      "category": "refactor",
+      "priority": 0.6000884433962264,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/textedit.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/textedit.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/textfmts.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/textfmts.py",
+      "category": "refactor",
+      "priority": 0.6000883912787272,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/textfmts.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/textfmts.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/typst.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/typst.py",
+      "category": "refactor",
+      "priority": 0.6000879765395895,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/typst.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/typst.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/urbi.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/urbi.py",
+      "category": "refactor",
+      "priority": 0.6000878220140515,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/urbi.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/urbi.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/pygments/lexers/wgsl.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/pygments/lexers/wgsl.py",
+      "category": "refactor",
+      "priority": 0.600087260034904,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/pygments/lexers/wgsl.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/pygments/lexers/wgsl.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py",
+      "category": "refactor",
+      "priority": 0.6000843170320405,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/colon_fence.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/attrs/index.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/attrs/index.py",
+      "category": "refactor",
+      "priority": 0.6000838457238681,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/attrs/index.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/attrs/index.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py",
+      "category": "refactor",
+      "priority": 0.6000833333333333,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/dollarmath/index.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/field_list/__init__.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/field_list/__init__.py",
+      "category": "refactor",
+      "priority": 0.6000832870627429,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/field_list/__init__.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/field_list/__init__.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/footnote/index.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/footnote/index.py",
+      "category": "refactor",
+      "priority": 0.6000831946755407,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/footnote/index.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/footnote/index.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/subscript/port.yaml",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/subscript/port.yaml",
+      "category": "refactor",
+      "priority": 0.6000827357970215,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/subscript/port.yaml"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/subscript/port.yaml to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/tasklists/__init__.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/tasklists/__init__.py",
+      "category": "refactor",
+      "priority": 0.6000826901874311,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/tasklists/__init__.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/tasklists/__init__.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/README.md",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/README.md",
+      "category": "refactor",
+      "priority": 0.6000825991189427,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/README.md"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/README.md to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/index.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/index.py",
+      "category": "refactor",
+      "priority": 0.6000825082508251,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/index.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/mdit_py_plugins/texmath/index.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/linkify_it/main.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/linkify_it/main.py",
+      "category": "refactor",
+      "priority": 0.6000823271130625,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/linkify_it/main.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/linkify_it/main.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/linkify_it/tlds.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/linkify_it/tlds.py",
+      "category": "refactor",
+      "priority": 0.600082281952825,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/linkify_it/tlds.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/linkify_it/tlds.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/rich/text.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/rich/text.py",
+      "category": "refactor",
+      "priority": 0.6000778008298755,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/rich/text.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/rich/text.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/_animator.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/_animator.py",
+      "category": "refactor",
+      "priority": 0.600077519379845,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_animator.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/_animator.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/_arrange.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/_arrange.py",
+      "category": "refactor",
+      "priority": 0.600077399380805,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_arrange.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/_arrange.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/_compositor.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/_compositor.py",
+      "category": "refactor",
+      "priority": 0.6000771208226221,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_compositor.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/_compositor.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/_two_way_dict.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/_two_way_dict.py",
+      "category": "refactor",
+      "priority": 0.6000759493670886,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_two_way_dict.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/_two_way_dict.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py",
+      "category": "refactor",
+      "priority": 0.6000756429652042,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/_xterm_parser.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/app.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/app.py",
+      "category": "refactor",
+      "priority": 0.6000755667506297,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/app.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/app.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/color.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/color.py",
+      "category": "refactor",
+      "priority": 0.6000752256770311,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/color.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/color.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/dom.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/dom.py",
+      "category": "refactor",
+      "priority": 0.6000749625187406,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/dom.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/dom.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/message_pump.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/message_pump.py",
+      "category": "refactor",
+      "priority": 0.6000744047619048,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/message_pump.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/message_pump.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/screen.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/screen.py",
+      "category": "refactor",
+      "priority": 0.6000741473059812,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/screen.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/screen.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/widget.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/widget.py",
+      "category": "refactor",
+      "priority": 0.6000737463126844,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/widget.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/widget.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/css/query.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/css/query.py",
+      "category": "refactor",
+      "priority": 0.6000733137829912,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/css/query.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/css/query.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py",
+      "category": "refactor",
+      "priority": 0.6000731350560702,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/css/tokenize.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py",
+      "category": "refactor",
+      "priority": 0.6000730994152047,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/css/tokenizer.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_driver.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_driver.py",
+      "category": "refactor",
+      "priority": 0.6000725338491296,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_driver.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_driver.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_inline_driver.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_inline_driver.py",
+      "category": "refactor",
+      "priority": 0.6000724987916868,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_inline_driver.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/drivers/linux_inline_driver.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/drivers/windows_driver.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/drivers/windows_driver.py",
+      "category": "refactor",
+      "priority": 0.6000723938223937,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/drivers/windows_driver.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/drivers/windows_driver.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/widgets/_data_table.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/widgets/_data_table.py",
+      "category": "refactor",
+      "priority": 0.6000716674629718,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/widgets/_data_table.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/widgets/_data_table.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/widgets/_option_list.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/widgets/_option_list.py",
+      "category": "refactor",
+      "priority": 0.600071225071225,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/widgets/_option_list.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/widgets/_option_list.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/widgets/_text_area.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/widgets/_text_area.py",
+      "category": "refactor",
+      "priority": 0.6000706547338671,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/widgets/_text_area.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/widgets/_text_area.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/textual/widgets/_toggle_button.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/textual/widgets/_toggle_button.py",
+      "category": "refactor",
+      "priority": 0.6000705882352941,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/textual/widgets/_toggle_button.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/textual/widgets/_toggle_button.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/conftest.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/conftest.py",
+      "category": "refactor",
+      "priority": 0.60007006071929,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/conftest.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/conftest.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/__init__.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/__init__.py",
+      "category": "refactor",
+      "priority": 0.6000698324022347,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/__init__.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/__init__.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/_typing/_dtype_like.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/_typing/_dtype_like.py",
+      "category": "refactor",
+      "priority": 0.6000697350069735,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/_typing/_dtype_like.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/_typing/_dtype_like.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/_typing/_array_like.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/_typing/_array_like.py",
+      "category": "refactor",
+      "priority": 0.6000696055684455,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/_typing/_array_like.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/_typing/_array_like.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py",
+      "category": "refactor",
+      "priority": 0.6000693802035152,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/utils.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py",
+      "category": "refactor",
+      "priority": 0.6000691881918819,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/format.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/mixins.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/mixins.py",
+      "category": "refactor",
+      "priority": 0.6000691244239631,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/mixins.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/mixins.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/recfunctions.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/recfunctions.py",
+      "category": "refactor",
+      "priority": 0.6000688073394496,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/recfunctions.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/recfunctions.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/npyio.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/npyio.py",
+      "category": "refactor",
+      "priority": 0.6000687757909215,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/npyio.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/npyio.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/_datasource.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/_datasource.py",
+      "category": "refactor",
+      "priority": 0.6000687442713107,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/_datasource.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/_datasource.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_recfunctions.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_recfunctions.py",
+      "category": "refactor",
+      "priority": 0.6000686498855835,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_recfunctions.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_recfunctions.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_format.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_format.py",
+      "category": "refactor",
+      "priority": 0.6000684931506849,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_format.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_format.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_io.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_io.py",
+      "category": "refactor",
+      "priority": 0.6000684306569343,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_io.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_io.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_function_base.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_function_base.py",
+      "category": "refactor",
+      "priority": 0.6000682749203459,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_function_base.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_function_base.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_type_check.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_type_check.py",
+      "category": "refactor",
+      "priority": 0.6000681818181818,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_type_check.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_type_check.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_shape_base.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_shape_base.py",
+      "category": "refactor",
+      "priority": 0.600068150840527,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_shape_base.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_shape_base.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_loadtxt.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_loadtxt.py",
+      "category": "refactor",
+      "priority": 0.6000680889695869,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_loadtxt.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/lib/tests/test_loadtxt.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/testing/print_coercion_tables.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/testing/print_coercion_tables.py",
+      "category": "refactor",
+      "priority": 0.6000676589986468,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/testing/print_coercion_tables.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/testing/print_coercion_tables.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/testing/_private/utils.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/testing/_private/utils.py",
+      "category": "refactor",
+      "priority": 0.6000675371454299,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/testing/_private/utils.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/testing/_private/utils.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/polynomial/_polybase.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/polynomial/_polybase.py",
+      "category": "refactor",
+      "priority": 0.6000655307994758,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/polynomial/_polybase.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/polynomial/_polybase.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/capi_maps.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/capi_maps.py",
+      "category": "refactor",
+      "priority": 0.6000648788927335,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/capi_maps.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/capi_maps.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/cfuncs.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/cfuncs.py",
+      "category": "refactor",
+      "priority": 0.6000647109577222,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/cfuncs.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/cfuncs.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py",
+      "category": "refactor",
+      "priority": 0.6000646830530401,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/symbolic.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/f2py2e.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/f2py2e.py",
+      "category": "refactor",
+      "priority": 0.6000645994832041,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/f2py2e.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/f2py2e.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py",
+      "category": "refactor",
+      "priority": 0.6000645161290322,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/crackfortran.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/_isocbind.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/_isocbind.py",
+      "category": "refactor",
+      "priority": 0.6000644606789858,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/_isocbind.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/_isocbind.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py",
+      "category": "refactor",
+      "priority": 0.6000644329896907,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/_src_pyf.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/util.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/util.py",
+      "category": "refactor",
+      "priority": 0.6000639931740614,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/util.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/util.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_docs.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_docs.py",
+      "category": "refactor",
+      "priority": 0.6000638841567291,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_docs.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_docs.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_f2py2e.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_f2py2e.py",
+      "category": "refactor",
+      "priority": 0.6000635324015248,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_f2py2e.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/f2py/tests/test_f2py2e.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/linalg/tests/test_linalg.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/linalg/tests/test_linalg.py",
+      "category": "refactor",
+      "priority": 0.6000633178556353,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/linalg/tests/test_linalg.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/linalg/tests/test_linalg.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/array_api/_creation_functions.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/array_api/_creation_functions.py",
+      "category": "refactor",
+      "priority": 0.6000629722921914,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/array_api/_creation_functions.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/array_api/_creation_functions.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/array_api/_set_functions.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/array_api/_set_functions.py",
+      "category": "refactor",
+      "priority": 0.600062893081761,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/array_api/_set_functions.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/array_api/_set_functions.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/array_api/__init__.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/array_api/__init__.py",
+      "category": "refactor",
+      "priority": 0.600062840385421,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/array_api/__init__.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/array_api/__init__.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_array_object.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_array_object.py",
+      "category": "refactor",
+      "priority": 0.6000627615062761,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_array_object.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_array_object.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_data_type_functions.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_data_type_functions.py",
+      "category": "refactor",
+      "priority": 0.600062630480167,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_data_type_functions.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/array_api/tests/test_data_type_functions.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/random/tests/test_random.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/random/tests/test_random.py",
+      "category": "refactor",
+      "priority": 0.6000623700623701,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/random/tests/test_random.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/random/tests/test_random.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/random/_examples/cffi/parse.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/random/_examples/cffi/parse.py",
+      "category": "refactor",
+      "priority": 0.6000621890547263,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/random/_examples/cffi/parse.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/random/_examples/cffi/parse.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/_dtype.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/_dtype.py",
+      "category": "refactor",
+      "priority": 0.6000621118012422,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/_dtype.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/_dtype.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/numeric.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/numeric.py",
+      "category": "refactor",
+      "priority": 0.6000620604054613,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/numeric.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/numeric.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs_scalars.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs_scalars.py",
+      "category": "refactor",
+      "priority": 0.6000619578686492,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs_scalars.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs_scalars.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/defchararray.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/defchararray.py",
+      "category": "refactor",
+      "priority": 0.6000619067271976,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/defchararray.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/defchararray.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/getlimits.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/getlimits.py",
+      "category": "refactor",
+      "priority": 0.6000618811881188,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/getlimits.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/getlimits.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs.py",
+      "category": "refactor",
+      "priority": 0.600061804697157,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/_add_newdocs.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/_methods.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/_methods.py",
+      "category": "refactor",
+      "priority": 0.6000615006150062,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/_methods.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/_methods.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/arrayprint.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/arrayprint.py",
+      "category": "refactor",
+      "priority": 0.600061475409836,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/arrayprint.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/arrayprint.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_machar.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_machar.py",
+      "category": "refactor",
+      "priority": 0.6000612244897959,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_machar.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_machar.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_scalarmath.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_scalarmath.py",
+      "category": "refactor",
+      "priority": 0.6000611496127191,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_scalarmath.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_scalarmath.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_regression.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_regression.py",
+      "category": "refactor",
+      "priority": 0.60006105006105,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_regression.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_regression.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_casting_unittests.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_casting_unittests.py",
+      "category": "refactor",
+      "priority": 0.6000608519269777,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_casting_unittests.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_casting_unittests.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_datetime.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_datetime.py",
+      "category": "refactor",
+      "priority": 0.6000606305578011,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_datetime.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_datetime.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_policy.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_policy.py",
+      "category": "refactor",
+      "priority": 0.6000604838709677,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_policy.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_mem_policy.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_multiarray.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_multiarray.py",
+      "category": "refactor",
+      "priority": 0.6000603621730382,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_multiarray.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_multiarray.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_api.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_api.py",
+      "category": "refactor",
+      "priority": 0.6000600720865038,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_api.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_api.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath_complex.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath_complex.py",
+      "category": "refactor",
+      "priority": 0.6000599760095962,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath_complex.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath_complex.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath.py",
+      "category": "refactor",
+      "priority": 0.600059880239521,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_umath.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_coercion.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_coercion.py",
+      "category": "refactor",
+      "priority": 0.6000598563447725,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_coercion.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_coercion.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_interface.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_interface.py",
+      "category": "refactor",
+      "priority": 0.6000598086124401,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_interface.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/core/tests/test_array_interface.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/core.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/core.py",
+      "category": "refactor",
+      "priority": 0.6000595710881652,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/core.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/core.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/npy_pkg_config.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/npy_pkg_config.py",
+      "category": "refactor",
+      "priority": 0.6000594766058683,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/npy_pkg_config.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/npy_pkg_config.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/unixccompiler.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/unixccompiler.py",
+      "category": "refactor",
+      "priority": 0.6000594294770206,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/unixccompiler.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/unixccompiler.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py",
+      "category": "refactor",
+      "priority": 0.600059405940594,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/cpuinfo.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/mingw32ccompiler.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/mingw32ccompiler.py",
+      "category": "refactor",
+      "priority": 0.6000593589236248,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/mingw32ccompiler.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/mingw32ccompiler.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py",
+      "category": "refactor",
+      "priority": 0.6000593119810201,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/from_template.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py",
+      "category": "refactor",
+      "priority": 0.6000592651126037,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/conv_template.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler_opt.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler_opt.py",
+      "category": "refactor",
+      "priority": 0.6000591949486976,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler_opt.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/ccompiler_opt.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/numpy_distribution.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/numpy_distribution.py",
+      "category": "refactor",
+      "priority": 0.6000591715976331,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/numpy_distribution.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/numpy_distribution.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/system_info.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/system_info.py",
+      "category": "refactor",
+      "priority": 0.6000591482649842,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/system_info.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/system_info.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/misc_util.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/misc_util.py",
+      "category": "refactor",
+      "priority": 0.6000591249507292,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/misc_util.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/misc_util.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/lahey.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/lahey.py",
+      "category": "refactor",
+      "priority": 0.6000590318772137,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/lahey.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/lahey.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/vast.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/vast.py",
+      "category": "refactor",
+      "priority": 0.6000589622641509,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/vast.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/vast.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/hpux.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/hpux.py",
+      "category": "refactor",
+      "priority": 0.6000588697017268,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/hpux.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/hpux.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/intel.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/intel.py",
+      "category": "refactor",
+      "priority": 0.6000588466065123,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/intel.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/intel.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py",
+      "category": "refactor",
+      "priority": 0.6000586854460094,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/mips.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/mips.py",
+      "category": "refactor",
+      "priority": 0.6000586624951114,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/mips.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/mips.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/__init__.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/__init__.py",
+      "category": "refactor",
+      "priority": 0.6000586395621579,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/__init__.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/fcompiler/__init__.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_clib.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_clib.py",
+      "category": "refactor",
+      "priority": 0.6000586166471278,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_clib.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_clib.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_py.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_py.py",
+      "category": "refactor",
+      "priority": 0.6000585480093676,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_py.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_py.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py",
+      "category": "refactor",
+      "priority": 0.6000585023400936,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_src.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_src.py",
+      "category": "refactor",
+      "priority": 0.6000584795321637,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_src.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_src.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_ext.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_ext.py",
+      "category": "refactor",
+      "priority": 0.6000583657587548,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_ext.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/build_ext.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config_compiler.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config_compiler.py",
+      "category": "refactor",
+      "priority": 0.6000583203732504,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config_compiler.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/config_compiler.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/install_headers.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/install_headers.py",
+      "category": "refactor",
+      "priority": 0.6000582977069568,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/install_headers.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/command/install_headers.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/distutils/tests/test_ccompiler_opt.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/distutils/tests/test_ccompiler_opt.py",
+      "category": "refactor",
+      "priority": 0.6000579822187863,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/distutils/tests/test_ccompiler_opt.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/distutils/tests/test_ccompiler_opt.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/ma/core.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/ma/core.py",
+      "category": "refactor",
+      "priority": 0.6000576479631052,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/ma/core.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/ma/core.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_old_ma.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_old_ma.py",
+      "category": "refactor",
+      "priority": 0.6000574712643678,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_old_ma.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_old_ma.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_core.py",
+      "description": "Resolve TODO/FIXME markers in .pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_core.py",
+      "category": "refactor",
+      "priority": 0.6000574052812858,
+      "deps": [],
+      "outputs": [
+        ".pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_core.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .pythonlibs/lib/python3.11/site-packages/numpy/ma/tests/test_core.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:quests/qbook.yml",
+      "description": "Resolve TODO/FIXME markers in quests/qbook.yml",
+      "category": "refactor",
+      "priority": 0.6000572519083969,
+      "deps": [],
+      "outputs": [
+        "quests/qbook.yml"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit quests/qbook.yml to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:ops/123-steps.md",
+      "description": "Resolve TODO/FIXME markers in ops/123-steps.md",
+      "category": "refactor",
+      "priority": 0.6000571864277544,
+      "deps": [],
+      "outputs": [
+        "ops/123-steps.md"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit ops/123-steps.md to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:ops/capabilities.registry.yml",
+      "description": "Resolve TODO/FIXME markers in ops/capabilities.registry.yml",
+      "category": "refactor",
+      "priority": 0.600057121096725,
+      "deps": [],
+      "outputs": [
+        "ops/capabilities.registry.yml"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit ops/capabilities.registry.yml to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:ops/tools/index_repo.py",
+      "description": "Resolve TODO/FIXME markers in ops/tools/index_repo.py",
+      "category": "refactor",
+      "priority": 0.6000570125427593,
+      "deps": [],
+      "outputs": [
+        "ops/tools/index_repo.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit ops/tools/index_repo.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:ops/tools/fix_orphans.py",
+      "description": "Resolve TODO/FIXME markers in ops/tools/fix_orphans.py",
+      "category": "refactor",
+      "priority": 0.600056904400607,
+      "deps": [],
+      "outputs": [
+        "ops/tools/fix_orphans.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit ops/tools/fix_orphans.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:ops/tools/cascade_event.py",
+      "description": "Resolve TODO/FIXME markers in ops/tools/cascade_event.py",
+      "category": "refactor",
+      "priority": 0.6000568612585292,
+      "deps": [],
+      "outputs": [
+        "ops/tools/cascade_event.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit ops/tools/cascade_event.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:logs/scan_findings.txt",
+      "description": "Resolve TODO/FIXME markers in logs/scan_findings.txt",
+      "category": "refactor",
+      "priority": 0.6000568181818181,
+      "deps": [],
+      "outputs": [
+        "logs/scan_findings.txt"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit logs/scan_findings.txt to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:sim/cascade/cascade_event.py",
+      "description": "Resolve TODO/FIXME markers in sim/cascade/cascade_event.py",
+      "category": "refactor",
+      "priority": 0.6000567966679288,
+      "deps": [],
+      "outputs": [
+        "sim/cascade/cascade_event.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit sim/cascade/cascade_event.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:sim/cascade/plans/plan_46db32e6.json",
+      "description": "Resolve TODO/FIXME markers in sim/cascade/plans/plan_46db32e6.json",
+      "category": "refactor",
+      "priority": 0.6000567751703255,
+      "deps": [],
+      "outputs": [
+        "sim/cascade/plans/plan_46db32e6.json"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit sim/cascade/plans/plan_46db32e6.json to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:engine/tools/repair.py",
+      "description": "Resolve TODO/FIXME markers in engine/tools/repair.py",
+      "category": "refactor",
+      "priority": 0.6000553914327917,
+      "deps": [],
+      "outputs": [
+        "engine/tools/repair.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit engine/tools/repair.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:orchestrator/module_index.py",
+      "description": "Resolve TODO/FIXME markers in orchestrator/module_index.py",
+      "category": "refactor",
+      "priority": 0.6000553097345133,
+      "deps": [],
+      "outputs": [
+        "orchestrator/module_index.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit orchestrator/module_index.py to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.ops/dup_plan.json",
+      "description": "Resolve TODO/FIXME markers in .ops/dup_plan.json",
+      "category": "refactor",
+      "priority": 0.6000551876379691,
+      "deps": [],
+      "outputs": [
+        ".ops/dup_plan.json"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .ops/dup_plan.json to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.ops/approve_consolidation.yml",
+      "description": "Resolve TODO/FIXME markers in .ops/approve_consolidation.yml",
+      "category": "refactor",
+      "priority": 0.6000551470588235,
+      "deps": [],
+      "outputs": [
+        ".ops/approve_consolidation.yml"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .ops/approve_consolidation.yml to resolve TODO/FIXME markers"
+      ]
+    },
+    {
+      "id": "todo:.ops/consolidator/detector.py",
+      "description": "Resolve TODO/FIXME markers in .ops/consolidator/detector.py",
+      "category": "refactor",
+      "priority": 0.6000550660792952,
+      "deps": [],
+      "outputs": [
+        ".ops/consolidator/detector.py"
+      ],
+      "estimated_minutes": 8,
+      "commands": [
+        "# edit .ops/consolidator/detector.py to resolve TODO/FIXME markers"
+      ]
+    }
+  ],
+  "metrics_baseline": {
+    "token_spend_events": 0,
+    "estimated_actions_per_event": 0,
+    "ready_dry_run_items": 0,
+    "last_updated": "2025-08-27T17:47:08Z"
+  }
+}

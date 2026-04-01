@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevMentor — Control Hub</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" role="complementary" aria-label="Navigation">
+      <div class="brand">
+        <div class="logo-mark" aria-hidden="true">DM</div>
+        <div>
+          <div class="brand-name">DevMentor</div>
+          <div class="brand-sub">Control Hub</div>
+        </div>
+      </div>
+
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <button class="navitem active" data-view="dashboard" aria-label="Dashboard">
+          <span class="nav-icon" aria-hidden="true">◈</span> Dashboard
+        </button>
+        <button class="navitem" data-view="tutorials" aria-label="Tutorials">
+          <span class="nav-icon" aria-hidden="true">◎</span> Tutorials
+        </button>
+        <button class="navitem" data-view="actions" aria-label="Actions">
+          <span class="nav-icon" aria-hidden="true">◆</span> Actions
+        </button>
+        <button class="navitem" data-view="logs" aria-label="Live Logs">
+          <span class="nav-icon" aria-hidden="true">▶</span> Live Logs
+        </button>
+        <button class="navitem" data-view="state" aria-label="State">
+          <span class="nav-icon" aria-hidden="true">◇</span> State
+        </button>
+      </nav>
+
+      <div class="sidebar-sep" aria-hidden="true"></div>
+
+      <div class="nav" style="padding-top:0">
+        <a href="/game" class="navitem game-link" aria-label="Enter Terminal Depths game">
+          <span class="nav-icon" aria-hidden="true">▓</span>
+          <span>Terminal Depths</span>
+          <span class="nav-badge" aria-label="Play">PLAY</span>
+        </a>
+        <a href="/game-cli" class="navitem game-link alt" aria-label="Enter xterm client">
+          <span class="nav-icon" aria-hidden="true">⌨</span>
+          <span>xterm Client</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="hint-box">
+          Primary runtime: <code>VS Code</code> via Tasks + scripts.<br>
+          This UI is an optional accelerator.
+        </div>
+        <div id="auth-status" class="auth-status" aria-live="polite"></div>
+      </div>
+    </aside>
+
+    <main class="main" role="main">
+      <header class="topbar" role="banner">
+        <div class="breadcrumb" id="crumb" aria-live="polite">Dashboard</div>
+        <div class="topbar-actions">
+          <button class="topbtn" id="btn-status" title="Generate status report">Status</button>
+          <button class="topbtn" id="btn-validate" title="Validate workspace">Validate</button>
+          <a class="topbtn" href="/api/export.zip" title="Export workspace ZIP" aria-label="Export ZIP">Export ZIP</a>
+          <button class="topbtn icon-btn" id="refreshBtn" aria-label="Refresh dashboard">↻</button>
+        </div>
+      </header>
+
+      <section class="content-area" id="content-area" aria-label="Main content">
+        <div id="view-dashboard" class="view" role="region" aria-label="Dashboard"></div>
+        <div id="view-tutorials" class="view hidden" role="region" aria-label="Tutorials"></div>
+        <div id="view-actions" class="view hidden" role="region" aria-label="Actions"></div>
+        <div id="view-logs" class="view hidden" role="region" aria-label="Live Logs"></div>
+        <div id="view-state" class="view hidden" role="region" aria-label="State"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

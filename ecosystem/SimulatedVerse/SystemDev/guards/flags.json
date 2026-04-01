@@ -1,0 +1,25 @@
+{
+  "active_ui": "legacy",
+  "milestones": {
+    "UI_M0_BOOT": true,
+    "UI_M1_PANELS": false,
+    "UI_M2_ADVISOR": false,
+    "UI_M3_HOLO": false,
+    "UI_M4_CHATDEV": false,
+    "UI_M5_COMPOSER": false
+  },
+  "research_gates": {
+    "UI_M1_PANELS": "cognitics.nanofab_online",
+    "UI_M2_ADVISOR": "cognitics.agent_core",
+    "UI_M3_HOLO": "cognitics.holo_weave",
+    "UI_M4_CHATDEV": "cognitics.symbiosis",
+    "UI_M5_COMPOSER": "cognitics.culture_ship_singularity"
+  },
+  "debug": {
+    "force_ui": null,
+    "bypass_research": false,
+    "log_routing": true
+  },
+  "updated": "2025-09-03T16:30:00.000Z",
+  "version": "1.0.0"
+}

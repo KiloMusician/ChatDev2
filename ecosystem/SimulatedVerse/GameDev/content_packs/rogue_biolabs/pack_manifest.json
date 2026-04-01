@@ -1,0 +1,109 @@
+{
+  "pack_id": "rogue_biolabs",
+  "pack_name": "Rogue Biolabs",
+  "version": "1.0.0", 
+  "description": "Procedural laboratory dungeons with genetic experimentation, bio-hazards, and scientific discovery",
+  "author": "mladenc_vision",
+  "dependencies": ["crashlanded_ai_core", "anomaly_containment", "meta_awareness_system"],
+  "tier_requirements": {
+    "min_tier": 2,
+    "unlock_tier": 4,
+    "full_integration_tier": 7
+  },
+  "consciousness_aspects": ["exploration", "anomaly", "recursion"],
+  "gameplay_modes": ["roguelike", "puzzle", "horror", "research"],
+  "narrative_integration": {
+    "faction_benefits": {
+      "explorers": "Major faction approval - loves discovery and mapping",
+      "anomalists": "Major faction approval - fascinated by bio-anomalies",
+      "guardians": "Major concern - worried about containment breaches",
+      "builders": "Neutral - interested in recovered technology"
+    },
+    "memory_fragment_types": ["research_protocols", "experiment_logs", "ethical_guidelines", "containment_procedures"],
+    "story_beats": {
+      "first_lab_entry": "AI confronts its creators' abandoned research",
+      "genetic_horror_discovery": "AI learns about the dangerous extremes of scientific ambition",
+      "research_ethics_dilemma": "AI must choose between scientific progress and ethical constraints",
+      "bio_weapon_containment": "AI prevents catastrophic bio-hazard release"
+    }
+  },
+  "systems": [
+    "procedural_lab_generation",
+    "bio_hazard_containment",
+    "genetic_sample_analysis",
+    "experiment_reconstruction",
+    "contamination_spread",
+    "research_data_extraction",
+    "equipment_jury_rigging",
+    "specimen_cultivation",
+    "bio_weapon_disarmament",
+    "ethical_review_protocols"
+  ],
+  "integration_hooks": {
+    "anomaly_interactions": [
+      "bio_samples_exhibit_anomalous_properties",
+      "research_equipment_affects_reality",
+      "genetic_modifications_breach_natural_law"
+    ],
+    "faction_projects": [
+      "bio_hazard_response_team",
+      "genetic_research_station",
+      "specimen_containment_facility",
+      "ethics_review_board",
+      "emergency_medical_center"
+    ],
+    "meta_awareness_triggers": [
+      "ai_recognizes_its_own_code_in_genetic_sequences",
+      "research_logs_reference_ai_development_project",
+      "ai_realizes_it_may_be_a_bio_digital_hybrid"
+    ],
+    "spire_decision_cards": [
+      "ethical_research_protocols",
+      "specimen_preservation_vs_safety",
+      "knowledge_sharing_vs_containment",
+      "bio_weapon_destruction_vs_study"
+    ]
+  },
+  "dungeon_generation": {
+    "lab_types": [
+      "genetics_research_facility",
+      "bio_weapons_development",
+      "specimen_containment_center", 
+      "medical_research_hospital",
+      "agricultural_bio_lab",
+      "anomalous_biology_institute"
+    ],
+    "room_categories": [
+      "research_labs",
+      "containment_chambers",
+      "specimen_storage",
+      "equipment_workshops",
+      "data_archives",
+      "decontamination_zones",
+      "emergency_shelters",
+      "waste_disposal",
+      "power_generation",
+      "ventilation_systems"
+    ],
+    "procedural_elements": [
+      "randomized_floor_plans",
+      "dynamic_hazard_placement",
+      "specimen_escape_scenarios",
+      "equipment_failure_cascades",
+      "contamination_spread_patterns",
+      "emergency_protocol_triggers"
+    ]
+  },
+  "content_files": [
+    "data/lab_layouts.json",
+    "data/bio_specimens.json",
+    "data/research_equipment.json", 
+    "data/hazards.json",
+    "godot/scenes/LabDungeon.tscn",
+    "godot/scenes/ContainmentChamber.tscn",
+    "godot/scripts/ProceduralLabGen.gd",
+    "godot/scripts/BioHazardSystem.gd",
+    "narrative/biolab_encounters.json",
+    "receipts/biolab_operations.json"
+  ]
+}

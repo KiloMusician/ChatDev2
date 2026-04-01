@@ -1,0 +1,148 @@
+{
+  "quest_id": "BATCH_4c_LOGGING_CONSOLIDATION",
+  "title": "Batch 4c: Logging Consolidation via Three Before New",
+  "status": "completed",
+  "xp_earned": 75,
+  "date_started": "2025-01-05",
+  "date_completed": "2025-01-05",
+  "duration_hours": 4.5,
+  "protocol": "Three Before New v4",
+  "batch": "4c",
+  "category": "consolidation",
+  "focus": "logging_fixes",
+
+  "summary": {
+    "tools_consolidated": 4,
+    "original_lines": 660,
+    "canonical_lines": 520,
+    "shim_lines_per_tool": 13,
+    "total_after": 572,
+    "code_reduction_percent": 13,
+    "modes_implemented": 5,
+    "backward_compatibility": "100%"
+  },
+
+  "deliverables": [
+    {
+      "name": "scripts/unified_logging_fixer.py",
+      "type": "canonical_runner",
+      "lines": 520,
+      "modes": ["calls", "fstrings", "syntax", "modernize", "full"],
+      "status": "created_and_formatted"
+    },
+    {
+      "name": "scripts/fix_logging_calls.py",
+      "type": "shim",
+      "lines": 13,
+      "delegates_to": "unified_logging_fixer --mode calls",
+      "status": "created"
+    },
+    {
+      "name": "scripts/fix_logging_fstrings.py",
+      "type": "shim",
+      "lines": 13,
+      "delegates_to": "unified_logging_fixer --mode fstrings",
+      "status": "created"
+    },
+    {
+      "name": "scripts/fix_logging_syntax_errors.py",
+      "type": "shim",
+      "lines": 13,
+      "delegates_to": "unified_logging_fixer --mode syntax",
+      "status": "created"
+    },
+    {
+      "name": "scripts/fix_logging_v2.py",
+      "type": "shim",
+      "lines": 13,
+      "delegates_to": "unified_logging_fixer --mode modernize",
+      "status": "created"
+    },
+    {
+      "name": "docs/THREE_BEFORE_NEW_BATCH_4c_LOGGING_DISCOVERY.md",
+      "type": "documentation",
+      "purpose": "discovery_and_strategy",
+      "status": "created"
+    },
+    {
+      "name": "docs/BATCH_4c_LOGGING_CONSOLIDATION_COMPLETE.md",
+      "type": "documentation",
+      "purpose": "completion_report",
+      "status": "created"
+    }
+  ],
+
+  "testing": {
+    "functional_tests": [
+      "--list-modes (SUCCESS)",
+      "--dry-run mode (SUCCESS)",
+      "--verbose output (SUCCESS)",
+      "Shim delegation test (SUCCESS)",
+      "Error handling test (SUCCESS)"
+    ],
+    "command_examples_tested": 6,
+    "backward_compatibility_verified": true
+  },
+
+  "batch_4_summary": {
+    "batches_completed": 3,
+    "total_tools_consolidated": 21,
+    "total_original_lines": "2500+",
+    "total_canonical_lines": 1300,
+    "average_code_reduction": "48%",
+    "architecture": "3 canonical CLIs + 20 backward-compatible shims",
+    "user_impact": "21 separate commands → 3 unified commands + backward compat"
+  },
+
+  "phase_breakdown": [
+    {
+      "phase": "Design",
+      "duration_hours": 1,
+      "status": "completed"
+    },
+    {
+      "phase": "Implementation",
+      "duration_hours": 2.5,
+      "status": "completed"
+    },
+    {
+      "phase": "Testing",
+      "duration_hours": 0.5,
+      "status": "completed"
+    },
+    {
+      "phase": "Documentation",
+      "duration_hours": 0.5,
+      "status": "completed"
+    }
+  ],
+
+  "completion_evidence": [
+    "unified_logging_fixer.py created with 5 operational modes",
+    "All 4 shims created and tested",
+    "Black formatting applied",
+    "CLI --list-modes working correctly",
+    "Dry-run testing successful",
+    "Backward compatibility 100% verified",
+    "Comprehensive documentation created"
+  ],
+
+  "success_criteria_met": {
+    "canonical_runner_created": true,
+    "all_shims_created": true,
+    "functional_testing": true,
+    "backward_compatibility": true,
+    "code_formatted": true,
+    "documentation_complete": true
+  },
+
+  "references": [
+    "docs/THREE_BEFORE_NEW_BATCH_4c_LOGGING_DISCOVERY.md",
+    "docs/BATCH_4c_LOGGING_CONSOLIDATION_COMPLETE.md",
+    "docs/THREE_BEFORE_NEW_PROTOCOL.md",
+    "docs/BATCH_4a_EXECUTION_SUMMARY.md",
+    "docs/BATCH_4b_IMPLEMENTATION_STATUS.md"
+  ],
+
+  "next_action": "Commit Batch 4c + finalize Batch 4 consolidation"
+}

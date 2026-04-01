@@ -1,0 +1,13 @@
+{
+  "name": "challenge_generator",
+  "version": "1.0.0",
+  "description": "Generate CTF challenges using the LLM for Terminal Depths.",
+  "entry_point": "plugin.py",
+  "category": "content",
+  "enabled": true,
+  "config_schema": {
+    "category": "networking|linux|cryptography|web|misc",
+    "difficulty": "easy|medium|hard|expert",
+    "count": "integer (default 1)"
+  }
+}

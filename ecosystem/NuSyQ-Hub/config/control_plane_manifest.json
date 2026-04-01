@@ -1,0 +1,95 @@
+{
+  "_meta": {
+    "format": "control_plane_manifest_v1",
+    "generated": "2026-03-31",
+    "purpose": "Interface routing for cockpit and mediator. Maps surface types to data sources and commands."
+  },
+
+  "data_sources": {
+    "boot_capsule": {
+      "primary": "state/boot/rosetta_bootstrap.json",
+      "fallback": "state/boot/ROSETTA_BOOT.txt",
+      "refresh": "manual or on repo role change"
+    },
+    "ecosystem_registry": {
+      "primary": "state/ecosystem_registry.json",
+      "description": "Active system/module registry"
+    },
+    "model_registry": {
+      "primary": "state/registry.json",
+      "description": "LM Studio GGUF model inventory"
+    },
+    "runtime_snapshot": {
+      "primary": "state/world_state_snapshot.json",
+      "description": "Live runtime agent probe results"
+    },
+    "control_plane_snapshot": {
+      "primary": "state/reports/control_plane_snapshot.json",
+      "description": "Aggregated control-plane health report"
+    },
+    "quest_log": {
+      "primary": "src/Rosetta_Quest_System/quest_log.jsonl",
+      "description": "Append-only quest and action log"
+    }
+  },
+
+  "cockpit_surfaces": {
+    "status_bar": {
+      "data": "state/world_state_snapshot.json",
+      "fields": ["runtime_state.agents", "decision_epoch"],
+      "refresh_ms": 30000
+    },
+    "repo_roles_panel": {
+      "data": "state/boot/rosetta_bootstrap.json",
+      "fields": ["repo_role_map"],
+      "type": "tree_view"
+    },
+    "known_issues_panel": {
+      "data": "state/boot/rosetta_bootstrap.json",
+      "fields": ["known_issues"],
+      "type": "tree_view"
+    },
+    "quest_panel": {
+      "data": "src/Rosetta_Quest_System/quest_log.jsonl",
+      "type": "output_channel"
+    },
+    "runtime_health_panel": {
+      "data": "state/world_state_snapshot.json",
+      "fields": ["observations.runtime_state"],
+      "type": "webview"
+    }
+  },
+
+  "command_routing": {
+    "nusyq.showStatus": {
+      "handler": "readWorldStateSnapshot",
+      "data": "state/world_state_snapshot.json"
+    },
+    "nusyq.showRepoRoles": {
+      "handler": "readBootCapsule",
+      "data": "state/boot/rosetta_bootstrap.json"
+    },
+    "nusyq.refreshStatus": {
+      "handler": "runScript",
+      "script": "src/start_nusyq.py",
+      "args": ["probe"]
+    },
+    "nusyq.cultureShip.audit": {
+      "handler": "terminalRoute",
+      "terminal": "Culture Ship",
+      "note": "runtime_owner=SimulatedVerse, control_owner=NuSyQ-Hub"
+    }
+  },
+
+  "load_order": [
+    "state/boot/rosetta_bootstrap.json",
+    "state/ecosystem_registry.json",
+    "state/world_state_snapshot.json",
+    "state/reports/control_plane_snapshot.json"
+  ],
+
+  "culture_ship_authority": {
+    "runtime_owner": "SimulatedVerse",
+    "control_owner": "NuSyQ-Hub"
+  }
+}

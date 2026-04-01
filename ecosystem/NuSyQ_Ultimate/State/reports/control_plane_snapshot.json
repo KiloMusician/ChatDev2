@@ -1,0 +1,485 @@
+{
+  "generated_at": "2026-03-31T09:37:29Z",
+  "source_hashes": {
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json": "cf9e2ba5f5ca9aae15e0a9569d0691873a89e3a2fc506022100ea9ae8f26b68c",
+    "/mnt/c/Users/keath/NuSyQ/state/registry.json": "07e29dde3fba1c31e6af3692a6ce26e6b44eaec6affd1bc5fd035e7a6c16a0ed",
+    "/mnt/c/Users/keath/NuSyQ/state/boot/rosetta_bootstrap.json": "e9671bcb0267c7b20802bf4b184206c797af96618927fdbb3e7b31f15d717a95",
+    "/mnt/c/Users/keath/NuSyQ/state/deprecation_registry.json": "bfa3abe800fcb2fecc15fee59f343c0b51478dc99d112f9b1ff3c608ed83aa8c",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_index.json": "1ef7af04ddc7ef56ec32c5cba4df3393abd29179c5e6d92d3ef37c6e8b7b9660",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log_rotation_status.json": "90dc1bd5481ac7559e959475cbd5bd7af23ae086e9a3f1de35e6e09ccd2596a0",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/scripts/build_control_plane_snapshot.py": "e0665f3f2dff00877468466020f0d85710e72f4de663384e8789e8bd5c18db0f",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension/package.json": "81772e18e26e80436b5f46f0bfed0d00e69b80c36c82b82f83d2118271c97bdf",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/extensions/agent-dashboard/package.json": "96ca82ef58c2f15f5b18173fa1c0e26689ca4f1da5df24af3031ed977cdf0a38",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/integration/vscode_extension/package.json": "08722b0c13877fee8d45394914c4de223a166611804bd76d666e795c28e9a537",
+    "/mnt/c/Users/keath/Dev-Mentor/.vscode/tasks.json": "184a78e4915b5b1e62dea1ff7df97bcd7ea1c511dbe7e0b919025b7e9b6a14b4"
+  },
+  "source_paths": [
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json",
+    "/mnt/c/Users/keath/NuSyQ/state/registry.json",
+    "/mnt/c/Users/keath/NuSyQ/state/boot/rosetta_bootstrap.json",
+    "/mnt/c/Users/keath/NuSyQ/state/deprecation_registry.json",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_index.json",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log_rotation_status.json",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/scripts/build_control_plane_snapshot.py",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension/package.json",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/extensions/agent-dashboard/package.json",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/integration/vscode_extension/package.json",
+    "/mnt/c/Users/keath/Dev-Mentor/.vscode/tasks.json"
+  ],
+  "stale_after_seconds": 300,
+  "generator_version": "control-plane-snapshot-v1",
+  "summary": {
+    "status": "ready",
+    "healthy_services": 6,
+    "total_services": 6
+  },
+  "control_plane": {
+    "runtime_owner": "simulatedverse",
+    "control_owner": "nusyq_hub",
+    "bootstrap_present": true,
+    "registry_present": true,
+    "deprecations_present": true
+  },
+  "culture_ship": {
+    "runtime_descriptor_status": "ready",
+    "runtime_owner": "simulatedverse",
+    "control_owner": "nusyq_hub"
+  },
+  "ide_surfaces": {
+    "canonical_cockpit": "powershellMediator.openCapabilityCockpit",
+    "mediator_command_count": 8,
+    "mediator_commands": [
+      "powershellMediator.start",
+      "powershellMediator.stop",
+      "powershellMediator.openReports",
+      "powershellMediator.listOllamaModels",
+      "powershellMediator.runChatDevTask",
+      "powershellMediator.refreshDiagnosticsSnapshot",
+      "powershellMediator.openDiagnosticsDashboard",
+      "powershellMediator.openCapabilityCockpit"
+    ],
+    "mediator_setting_count": 7,
+    "legacy_dashboard_command_count": 3,
+    "legacy_dashboard_commands": [
+      "agentDashboard.open",
+      "agentDashboard.refresh",
+      "agentDashboard.runErrorReport"
+    ],
+    "chatdev_extension_command_count": 2,
+    "chatdev_extension_commands": [
+      "startChatDevParty",
+      "launchChatDevTask"
+    ],
+    "dev_mentor_task_count": 57,
+    "dev_mentor_task_sample": [
+      "\ud83d\ude80 Bootstrap: Full (Services + CLI)",
+      "\ud83c\udfae Bootstrap: Services Only",
+      "\ud83d\udcbb Bootstrap: CLI Client",
+      "\ud83d\uded1 Shutdown",
+      "\ud83d\udcca Docker: Status",
+      "DevMentor: Start/Resume",
+      "DevMentor: Next Step",
+      "DevMentor: Diagnose Environment",
+      "DevMentor: Validate Current Challenge",
+      "DevMentor: Export Portable ZIP",
+      "DevMentor: Import Portable ZIP",
+      "TD: Enter Terminal Depths"
+    ]
+  },
+  "storage_surfaces": {
+    "tracked_surface_count": 11,
+    "existing_surface_count": 11,
+    "sqlite_db_count": 2,
+    "legacy_current_state_archive_count": 85,
+    "surfaces": {
+      "rosetta_quest_log": {
+        "owner": "nusyq",
+        "label": "Rosetta Quest Ledger",
+        "path": "/mnt/c/Users/keath/NuSyQ/src/Rosetta_Quest_System/quest_log.jsonl",
+        "kind": "jsonl_ledger",
+        "authority": "append-only canonical memory",
+        "note": "Primary continuity ledger for cross-session discoveries and task breadcrumbs.",
+        "exists": true,
+        "size_bytes": 774,
+        "updated_at": "2026-03-31T09:23:13Z"
+      },
+      "event_ledgers": {
+        "owner": "nusyq",
+        "label": "NuSyQ Event Ledgers",
+        "path": "/mnt/c/Users/keath/NuSyQ/Reports/events",
+        "kind": "jsonl_event_directory",
+        "authority": "supporting event archive",
+        "note": "Historical event streams and operational traces.",
+        "exists": true,
+        "size_bytes": null,
+        "updated_at": "2026-03-29T14:04:17Z"
+      },
+      "hub_ecosystem_status": {
+        "owner": "nusyq_hub",
+        "label": "Hub Ecosystem Status",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/ecosystem_status.json",
+        "kind": "json_status",
+        "authority": "supporting status artifact",
+        "note": "Legacy-supporting ecosystem status surface still referenced by operator flows.",
+        "exists": true,
+        "size_bytes": 4835,
+        "updated_at": "2026-03-29T14:48:55Z"
+      },
+      "hub_startup_log": {
+        "owner": "nusyq_hub",
+        "label": "Hub Startup Log",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/config/startup_log.jsonl",
+        "kind": "jsonl_log",
+        "authority": "supporting startup trace",
+        "note": "Startup/session trace for Hub-side activation and orchestration.",
+        "exists": true,
+        "size_bytes": 3064,
+        "updated_at": "2026-03-29T14:48:51Z"
+      },
+      "hub_archive_index": {
+        "owner": "nusyq_hub",
+        "label": "Obsolete Current State Archive Index",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_index.json",
+        "kind": "json_index",
+        "authority": "generated canonical archive summary",
+        "note": "Canonical compact index for obsolete current_state archives.",
+        "exists": true,
+        "size_bytes": 4486,
+        "updated_at": "2026-03-31T09:36:43Z"
+      },
+      "hub_archive_summary": {
+        "owner": "nusyq_hub",
+        "label": "Obsolete Current State Archive Summary",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_summary.md",
+        "kind": "markdown_summary",
+        "authority": "generated canonical archive summary",
+        "note": "Human-readable summary for obsolete current_state archives.",
+        "exists": true,
+        "size_bytes": 1297,
+        "updated_at": "2026-03-31T09:36:43Z"
+      },
+      "dev_mentor_memory_db": {
+        "owner": "dev_mentor",
+        "label": "Dev-Mentor Memory DB",
+        "path": "/mnt/c/Users/keath/Dev-Mentor/var/memory.db",
+        "kind": "sqlite_db",
+        "authority": "repo-local runtime memory",
+        "note": "Dev-Mentor local memory/state database.",
+        "exists": true,
+        "size_bytes": 20480,
+        "updated_at": "2026-03-25T06:12:24Z"
+      },
+      "simulatedverse_cache_db": {
+        "owner": "simulatedverse",
+        "label": "SimulatedVerse ZTP Cache",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ztp_cache.sqlite3",
+        "kind": "sqlite_db",
+        "authority": "runtime cache",
+        "note": "Simulation/runtime-side cache database.",
+        "exists": true,
+        "size_bytes": 12288,
+        "updated_at": "2026-03-31T00:31:27Z"
+      },
+      "simulatedverse_quest_rotation_status": {
+        "owner": "simulatedverse",
+        "label": "Shared Quest Rotation Status",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log_rotation_status.json",
+        "kind": "json_status",
+        "authority": "generated maintenance status",
+        "note": "Latest shared quest rotation recommendation or receipt.",
+        "exists": true,
+        "size_bytes": 740,
+        "updated_at": "2026-03-31T09:34:48Z"
+      },
+      "simulatedverse_quest_rotation_policy": {
+        "owner": "simulatedverse",
+        "label": "Shared Quest Rotation Policy",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/QUEST_LOG_ROTATION_POLICY.md",
+        "kind": "markdown_policy",
+        "authority": "hand-authored operational policy",
+        "note": "Canonical policy for rotating the shared cultivation quest log.",
+        "exists": true,
+        "size_bytes": 949,
+        "updated_at": "2026-03-31T09:31:53Z"
+      },
+      "simulatedverse_shared_quest_log": {
+        "owner": "simulatedverse",
+        "label": "SimulatedVerse Shared Quest Log",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log.jsonl",
+        "kind": "jsonl_ledger",
+        "authority": "supporting runtime ledger",
+        "note": "Runtime-adjacent shared cultivation quest trail.",
+        "exists": true,
+        "size_bytes": 19973683,
+        "updated_at": "2026-03-31T00:30:37Z"
+      }
+    },
+    "legacy_current_state_archives": {
+      "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/archive/obsolete",
+      "sample": [
+        "current_state_2026-01-06_114433.md",
+        "current_state_2026-01-04_063603.md",
+        "current_state_2026-01-03_055555.md",
+        "current_state_2026-01-02_134839.md",
+        "current_state_2026-01-02_132406.md"
+      ]
+    }
+  },
+  "services": {
+    "dev_mentor": {
+      "ok": true,
+      "detail": "HTTP 200",
+      "summary": {
+        "ok": true,
+        "uptime_s": 31343,
+        "game_engine": true,
+        "active_game_sessions": 12
+      }
+    },
+    "simulatedverse": {
+      "ok": true,
+      "detail": "HTTP 200",
+      "summary": {
+        "status": "healthy",
+        "ok": true,
+        "mode": "minimal",
+        "agents": 9,
+        "timestamp": 1774949838576
+      }
+    },
+    "chatdev_adapter": {
+      "ok": true,
+      "detail": "HTTP 200",
+      "summary": {
+        "agents": [
+          "raven",
+          "mladenc",
+          "librarian",
+          "artificer",
+          "alchemist",
+          "protagonist"
+        ]
+      }
+    },
+    "ollama": {
+      "ok": true,
+      "detail": "HTTP 200",
+      "summary": {
+        "models": [
+          {
+            "name": "nomic-embed-text:latest",
+            "model": "nomic-embed-text:latest",
+            "modified_at": "2026-03-25T19:21:22.580884032-06:00",
+            "size": 274302450,
+            "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "nomic-bert",
+              "families": [
+                "nomic-bert"
+              ],
+              "parameter_size": "137M",
+              "quantization_level": "F16"
+            }
+          },
+          {
+            "name": "qwen3-vl:8b",
+            "model": "qwen3-vl:8b",
+            "modified_at": "2026-03-24T02:08:04.978255462-06:00",
+            "size": 6140415879,
+            "digest": "901cae73216286ea8c5aba8b46d307ff7188f737285ec500c795a12f05225d28",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "qwen3vl",
+              "families": [
+                "qwen3vl"
+              ],
+              "parameter_size": "8.8B",
+              "quantization_level": "Q4_K_M"
+            }
+          },
+          {
+            "name": "gpt-3.5-turbo-16k:latest",
+            "model": "gpt-3.5-turbo-16k:latest",
+            "modified_at": "2026-02-08T02:26:21.865575693-07:00",
+            "size": 8988124298,
+            "digest": "9ec8897f747e246e970bc5cfdda85d22f1123dc2e3d34978a010a75968716849",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "qwen2",
+              "families": [
+                "qwen2"
+              ],
+              "parameter_size": "14.8B",
+              "quantization_level": "Q4_K_M"
+            }
+          },
+          {
+            "name": "llama3.1:8b",
+            "model": "llama3.1:8b",
+            "modified_at": "2026-01-27T14:11:39.186906227-07:00",
+            "size": 4920753328,
+            "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "llama",
+              "families": [
+                "llama"
+              ],
+              "parameter_size": "8.0B",
+              "quantization_level": "Q4_K_M"
+            }
+          },
+          {
+            "name": "phi3.5:latest",
+            "model": "phi3.5:latest",
+            "modified_at": "2026-01-27T14:07:21.358745049-07:00",
+            "size": 2176178843,
+            "digest": "61819fb370a3c1a9be6694869331e5f85f867a079e9271d66cb223acb81d04ba",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "phi3",
+              "families": [
+                "phi3"
+              ],
+              "parameter_size": "3.8B",
+              "quantization_level": "Q4_0"
+            }
+          },
+          {
+            "name": "starcoder2:15b",
+            "model": "starcoder2:15b",
+            "modified_at": "2026-01-27T14:05:33.139042942-07:00",
+            "size": 9065413313,
+            "digest": "21ae152d49e026b721a52cda94b32f95b3c9719d5eb71ea670e4fa60efde276b",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "starcoder2",
+              "families": [
+                "starcoder2"
+              ],
+              "parameter_size": "16B",
+              "quantization_level": "Q4_0"
+            }
+          },
+          {
+            "name": "deepseek-coder-v2:16b",
+            "model": "deepseek-coder-v2:16b",
+            "modified_at": "2026-01-27T13:57:57.435174827-07:00",
+            "size": 8905126121,
+            "digest": "63fb193b3a9b4322a18e8c6b250ca2e70a5ff531e962dbf95ba089b2566f2fa5",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "deepseek2",
+              "families": [
+                "deepseek2"
+              ],
+              "parameter_size": "15.7B",
+              "quantization_level": "Q4_0"
+            }
+          },
+          {
+            "name": "codellama:7b",
+            "model": "codellama:7b",
+            "modified_at": "2026-01-27T13:50:28.958807195-07:00",
+            "size": 3825910662,
+            "digest": "8fdf8f752f6e80de33e82f381aba784c025982752cd1ae9377add66449d2225f",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "llama",
+              "families": null,
+              "parameter_size": "7B",
+              "quantization_level": "Q4_0"
+            }
+          },
+          {
+            "name": "gemma2:9b",
+            "model": "gemma2:9b",
+            "modified_at": "2026-01-08T13:20:16.705707596-07:00",
+            "size": 5443152417,
+            "digest": "ff02c3702f322b9e075e9568332d96c0a7028002f1a5a056e0a6784320a4db0b",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "gemma2",
+              "families": [
+                "gemma2"
+              ],
+              "parameter_size": "9.2B",
+              "quantization_level": "Q4_0"
+            }
+          },
+          {
+            "name": "qwen2.5-coder:7b",
+            "model": "qwen2.5-coder:7b",
+            "modified_at": "2026-01-08T13:15:51.235073576-07:00",
+            "size": 4683087561,
+            "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "qwen2",
+              "families": [
+                "qwen2"
+              ],
+              "parameter_size": "7.6B",
+              "quantization_level": "Q4_K_M"
+            }
+          },
+          {
+            "name": "qwen2.5-coder:14b",
+            "model": "qwen2.5-coder:14b",
+            "modified_at": "2026-01-08T13:14:07.534605362-07:00",
+            "size": 8988124298,
+            "digest": "9ec8897f747e246e970bc5cfdda85d22f1123dc2e3d34978a010a75968716849",
+            "details": {
+              "parent_model": "",
+              "format": "gguf",
+              "family": "qwen2",
+              "families": [
+                "qwen2"
+              ],
+              "parameter_size": "14.8B",
+              "quantization_level": "Q4_K_M"
+            }
+          }
+        ]
+      }
+    },
+    "lm_studio": {
+      "ok": true,
+      "detail": "Windows localhost fallback",
+      "summary": {
+        "ok": true,
+        "status": 200,
+        "target": "http://127.0.0.1:1234/v1/models"
+      }
+    },
+    "gitnexus": {
+      "ok": true,
+      "detail": "local CLI fallback",
+      "summary": {
+        "ok": true,
+        "probe": "local_cli",
+        "repo_count": 6
+      }
+    }
+  },
+  "warnings": [],
+  "advisories": [
+    "legacy current_state archive pressure: 85 files under NuSyQ-Hub/archive/obsolete",
+    "simulatedverse shared quest log needs rotation; run the canonical quest-log rotation tool"
+  ],
+  "errors": [],
+  "resource_pressure": {
+    "note": "See CONCEPT / Keeper for machine-authoritative pressure state."
+  }
+}

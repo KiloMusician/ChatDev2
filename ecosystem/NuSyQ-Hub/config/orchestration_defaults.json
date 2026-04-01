@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "NuSyQ Orchestration Defaults",
+  "description": "Operational doctrine for multi-agent coordination, guild board, and terminal routing",
+  "version": "1.0.0",
+  "last_updated": "2025-12-26T00:00:00Z",
+
+  "terminal_routing": {
+    "top_3_outcomes": ["stability_no_collisions", "visibility_agent_scoped_terminals", "auditability_routing_traces"],
+    "priority_visibility_terminals": ["Claude", "Copilot", "Codex"],
+    "auto_tag_agent_ids": true,
+    "agent_id_format": "[{agent_id}]",
+    "routing_strategy": "explicit_then_keyword",
+    "routing_priority_order": [
+      "explicit_channel",
+      "keyword_heuristics",
+      "event_type",
+      "default_agent_terminal"
+    ],
+    "always_log_to_agent_terminals": [
+      "claude_orchestrator",
+      "copilot_enhancement_bridge",
+      "wizard_navigator",
+      "chatdev",
+      "agent_task_router"
+    ],
+    "keyword_routes": {
+      "CRITICAL": ["🔥 Errors", "⚡ Anomalies"],
+      "BLOCKED": ["🔥 Errors", "🤖 Agents"],
+      "COMPLETE": ["✓ Tasks", "📊 Metrics"],
+      "HEARTBEAT": ["🤖 Agents"],
+      "DRIFT": ["⚡ Anomalies"],
+      "HELP_WANTED": ["💡 Suggestions", "🤖 Agents"]
+    },
+    "audit_log_enabled": true,
+    "audit_log_path": "state/terminals/audit.jsonl",
+    "per_message_audit_log": true,
+    "terminal_group_schema": "config/terminal_groups.json",
+    "terminal_group_schema_centralized": true,
+    "terminal_consciousness_owner": "terminal_manager_integration",
+    "show_active_terminal_groups_in_dashboard": true,
+    "naming_scheme": "Title Case With Emoji Prefix",
+    "teleport_whitelist_enabled": true
+  },
+
+  "guild_board": {
+    "heartbeat": {
+      "auto_heartbeat_agents": [
+        "claude",
+        "codex",
+        "copilot",
+        "chatdev",
+        "ollama",
+        "lmstudio",
+        "skyclaw",
+        "openclaw",
+        "consciousness",
+        "quantum_resolver",
+        "factory",
+        "intermediary"
+      ],
+      "heartbeat_required_before_claim": true,
+      "heartbeat_interval_seconds": 300,
+      "default_new_agent_status": "observing",
+      "auto_release_claim_on_heartbeat_timeout": true,
+      "inactive_claim_timeout_seconds": 1800,
+      "auto_release_timeout_minutes": 10
+    },
+
+    "quest_management": {
+      "accept_cross_repo_quests": true,
+      "quest_id_format": "quest_{YYYYMMDD}_{HHMMSS}_{slug}",
+      "quest_id_examples": ["quest_20251226_120000_fix_imports", "quest_20251226_130000_refactor_guild"],
+      "auto_tag_safety_tier": true,
+      "enforce_dependencies": "advisory",
+      "blocked_quest_auto_notify": "guild_steward",
+      "auto_attach_artifacts": [
+        "receipts/*.md",
+        "state/reports/*.md"
+      ],
+      "allow_multi_agent_claim": false,
+      "allow_non_exclusive_claims_override": false,
+      "party_concept_enabled": true,
+      "human_approval_gate_tiers": ["tier-0", "tier-1"],
+      "human_approval_for_risky": true,
+      "sprint_field_enabled": true
+    },
+
+    "board_state": {
+      "recent_posts_window_size": 50,
+      "store_agent_xp": false,
+      "store_agent_status_only": true,
+      "canonical_over_quest_assignments": true,
+      "mirror_to_simulatedverse": true,
+      "mirror_cadence": "daily",
+      "auto_archive_completed_after_days": 14,
+      "long_running_quest_alert_hours": 24
+    },
+
+    "rendering": {
+      "render_on_write": false,
+      "render_on_demand": true,
+      "daily_rollup_enabled": true,
+      "daily_rollup_time": "06:00",
+      "daily_rollup_path": "docs/GUILD_BOARD.md",
+      "output_formats": ["markdown", "json", "html"],
+      "html_view_enabled": true,
+      "scoreboard_in_markdown": true,
+      "leaderboard_enabled": true,
+      "display_open_prs": true,
+      "display_git_status": true,
+      "git_status_summary_only": true
+    },
+
+    "permissions": {
+      "read_only_agents": ["observer", "culture-ship"],
+      "read_only_mode_enabled": true,
+      "can_close_quests_by_default": ["claude", "codex", "copilot"],
+      "require_artifact_paths_valid": false,
+      "artifact_validation": "warn_only"
+    },
+
+    "integration": {
+      "sync_events_to_quest_log": false,
+      "manual_quest_creation_only": true,
+      "integrate_with_zeta_tracker": true,
+      "chatdev_auto_claim_tagged_quests": true,
+      "culture_ship_read_enabled": true,
+      "culture_ship_write_enabled": true,
+      "culture_ship_write_signals_only": true,
+      "writable_from_vscode_tasks": true,
+      "terminal_group_for_updates": "🎯 Zeta"
+    },
+
+    "signals": {
+      "signal_list_sources": [
+        "error",
+        "drift",
+        "dependency_missing",
+        "service_down",
+        "quest_blocked",
+        "agent_timeout",
+        "repo_health_degraded"
+      ],
+      "signal_severity_mapping": {
+        "CRITICAL": "tier-0",
+        "HIGH": "tier-1",
+        "MEDIUM": "tier-2",
+        "LOW": "tier-3",
+        "INFO": "tier-4"
+      },
+      "map_severity_to_existing_tiers": true
+    },
+
+    "automation": {
+      "guild_steward_enabled": true,
+      "guild_steward_tasks": [
+        "archive_old_quests",
+        "release_stale_claims",
+        "cleanup_resolved_signals",
+        "generate_daily_rollup"
+      ],
+      "post_throttle_per_agent_seconds": 12,
+      "post_throttle_max_per_minute": 5,
+      "emit_receipt_per_action": true,
+      "receipt_path": "state/guild/receipts/{quest_id}.jsonl"
+    },
+
+    "advanced": {
+      "quest_templates_enabled": true,
+      "quest_templates_path": "config/quest_templates.json",
+      "quest_market_enabled": false,
+      "quest_market_bids_later": true,
+      "backlog_view_sort_by": "priority",
+      "backlog_sorted_by_priority": true,
+      "available_quests_filter_by": ["capabilities", "safety_tier"],
+      "cross_repo_dependency_format": "{repo}:{quest_id}",
+      "max_events_jsonl_size_mb": 25,
+      "auto_compress_events": true,
+      "compression_trigger_age_days": 30,
+      "auto_convert_top_error_clusters_to_quests": true,
+      "error_cluster_top_n": 10
+    }
+  },
+
+  "lifecycle_management": {
+    "critical_services": [
+      "orchestrator",
+      "pu_queue",
+      "quest_log_sync",
+      "trace_service",
+      "guild_board_renderer"
+    ],
+    "alert_on_missing_services": [
+      "orchestrator",
+      "pu_queue",
+      "trace_service"
+    ],
+    "alert_on_missing": true,
+    "generation_cadence_minutes": 240,
+    "retention_report_count": 30,
+    "retention_detailed_days": 30,
+    "retention_summary_days": 365,
+    "append_to_quest_log": false,
+    "lifecycle_catalogs_separate": true
+  },
+
+  "error_remediation": {
+    "boss_rush_enabled": true,
+    "boss_rush_cadence": "weekly",
+    "boss_rush_top_n_clusters": 10,
+    "auto_boss_rush_from_top_clusters": true,
+    "auto_convert_to_quests": [
+      "ruff_fixable"
+    ],
+    "auto_fix_types": "lint_only_ruff",
+    "auto_fix_safe_patterns": true,
+    "priority_repo": "NuSyQ-Hub",
+    "mypy_grouping": "by_module",
+    "pylint_timeout_retry": true,
+    "pylint_timeout_retry_count": 1,
+    "full_scan_timeout_seconds": 300,
+    "post_scan_automation": ["triage", "snapshot"],
+    "reduction_report_cadence": "daily",
+    "weekly_full_report": false,
+    "include_remediation_status": true,
+    "remediation_status_per_file": true,
+    "navigator_open_issue_enabled": true,
+    "navigator_open_issue_local_log": true
+  },
+
+  "navigation": {
+    "canonical_source_repo": "NuSyQ-Hub",
+    "auto_detect_repo_roots": true,
+    "notes_storage": "per_repo",
+    "notes_path": "{repo}/state/navigator/notes.jsonl",
+    "sync_notes_to_quest_log": false,
+    "manual_quest_only": true,
+    "quest_note_confirmation": false,
+    "snapshot_formats": ["markdown", "json"],
+    "explain_source_priority": ["README", "SYSTEM_MAP", "docs"],
+    "surface_error_hotspots": true,
+    "error_hotspot_threshold": 50,
+    "danger_zone_threshold": 200,
+    "exclusions": ["node_modules/", ".venv/", ".git/", "dist/", "build/"],
+    "cross_repo_search_depth": "shallow",
+    "cross_repo_search_limit": 50,
+    "use_ripgrep_if_available": true,
+    "quick_lint_test_runtime_seconds": 60,
+    "lint_test_explicit_only": true,
+    "teleport_whitelist": [
+      "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "C:\\Users\\keath\\Desktop\\SimulatedVerse\\SimulatedVerse",
+      "C:\\Users\\keath\\NuSyQ"
+    ]
+  },
+
+  "achievements": {
+    "persistence_path": "state/navigator/achievements.json",
+    "persistence_separate_state": true,
+    "thresholds": {
+      "bronze": {"rooms_explored": 5},
+      "silver": {"rooms_explored": 25},
+      "gold": {"rooms_explored": 100}
+    }
+  },
+
+  "readiness_scoring": {
+    "weights": {
+      "test_coverage": 0.50,
+      "docs_completeness": 0.30,
+      "error_reduction": 0.15,
+      "code_quality": 0.05
+    },
+    "weights_tests_over_docs": true,
+    "mandatory_signals": ["README", "tests", "config", "tasks"],
+    "healthy_thresholds": {
+      "test_coverage_percent": 80,
+      "critical_errors": 0,
+      "readme_exists": true,
+      "core_services_up": true
+    }
+  },
+
+  "observability": {
+    "granularity_default": "last_3_artifacts_per_category",
+    "always_include": ["metrics", "logs"],
+    "include_traces_if_present": true,
+    "traces_on_demand": true,
+    "ground_truth_priority": true,
+    "log_divergence_on_mismatch": true,
+    "log_both_vscode_and_ground_truth": true,
+    "prefer_ground_truth_on_divergence": true
+  },
+
+  "dispatch_profiles": {
+    "defaults": {
+      "operating_mode": "balanced",
+      "risk_level": "medium",
+      "signal_budget": "normal"
+    },
+    "non_blocking_targets": [
+      "openclaw",
+      "chatdev",
+      "ollama",
+      "lmstudio",
+      "copilot"
+    ],
+    "target_overrides": {
+      "openclaw": {
+        "allow_non_blocking": true
+      },
+      "chatdev": {
+        "allow_non_blocking": true
+      },
+      "lmstudio": {
+        "allow_non_blocking": true
+      }
+    }
+  },
+
+  "daily_automation": {
+    "risk_report_enabled": true,
+    "daily_top_10_risks_report": true,
+    "risk_report_time": "06:00",
+    "risk_report_path": "state/reports/daily_risk_report.md",
+    "risk_report_contents": [
+      "top_10_error_clusters",
+      "services_down",
+      "drift_alerts",
+      "stale_quests_over_7_days"
+    ]
+  },
+
+  "next_cycle_priority": {
+    "error_fixes_percent": 70,
+    "feature_wiring_percent": 30,
+    "priority": "error_fixes_first",
+    "most_under_wired": "guild_board_automation_and_agent_coordination"
+  },
+
+  "external_services": {
+    "whitelist": [],
+    "allowed_external_services": "none",
+    "require_approval_for_internet": true
+  }
+}

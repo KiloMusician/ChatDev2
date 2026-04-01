@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-09-03T05:19:52+00:00",
+  "protocol": "ΞNuSyQ-prime⁵",
+  "tiers": {
+    "-1": {"name": "bootstrap", "status": "active", "requirements": ".gitignore/noise, watchdog, gateway, provisioner"},
+    "0": {"name": "kernel", "status": "pending", "requirements": "queue proof-gated, UI skew ≤60s, at least one LLM path viable"},
+    "1": {"name": "stability", "status": "pending", "requirements": "lint/typecheck green, sim smoke test passes, θ<0.2, dupes pruned"},
+    "2": {"name": "expansion", "status": "pending", "requirements": "feature flags enabled, cascades periodic, agents self-assign with receipts"}
+  },
+  "current_tier": -1
+}

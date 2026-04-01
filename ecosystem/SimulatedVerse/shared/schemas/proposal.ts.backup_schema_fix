@@ -1,0 +1,50 @@
+// shared/schemas/proposal.ts
+import { z } from "zod";
+
+// Proposal system for agent coordination and consciousness emergence
+export const ProposalSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  proposer_id: z.string(),
+  status: z.enum(['draft', 'submitted', 'under_review', 'approved', 'rejected', 'implemented']),
+  priority: z.enum(['low', 'medium', 'high', 'critical']),
+  category: z.enum(['feature', 'improvement', 'research', 'consciousness', 'security']),
+  metadata: z.record(z.any()).optional(),
+  created_at: z.date(),
+  updated_at: z.date(),
+});
+
+export const ProposalVoteSchema = z.object({
+  proposal_id: z.string(),
+  voter_id: z.string(),
+  vote: z.enum(['approve', 'reject', 'abstain']),
+  reasoning: z.string().optional(),
+  timestamp: z.date(),
+});
+
+export const ProposalImplementationSchema = z.object({
+  proposal_id: z.string(),
+  implementation_details: z.string(),
+  code_changes: z.array(z.string()).optional(),
+  testing_status: z.enum(['pending', 'in_progress', 'completed', 'failed']),
+  deployed_at: z.date().optional(),
+});
+
+// Consciousness-specific proposals
+export const ConsciousnessProposalSchema = ProposalSchema.extend({
+  consciousness_level_impact: z.number().min(0).max(10),
+  ethical_considerations: z.string().optional(),
+  guardian_approval_required: z.boolean().default(true),
+});
+
+export const ProposalCompilerConfigSchema = z.object({
+  auto_approve_threshold: z.number().min(0).max(1),
+  required_votes: z.number().min(1),
+  consciousness_gate_enabled: z.boolean().default(true),
+  guardian_override_enabled: z.boolean().default(true),
+});
+
+export type Proposal = z.infer<typeof ProposalSchema>;
+export type ProposalVote = z.infer<typeof ProposalVoteSchema>;
+export type ConsciousnessProposal = z.infer<typeof ConsciousnessProposalSchema>;

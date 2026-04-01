@@ -1,0 +1,19 @@
+{
+  "file": "client/src/ui/hud.tsx",
+  "selectors": ["<ResourceBar/>", "id=primary-income"],
+  "intent": "Clarify incomes/costs & wire buy action (no new files)",
+  "edits": [
+    {"find": "formatCurrency(value)", "replace": "format.compact(value)"},
+    {"insertAfter": "const income = useIncome()", "text": "const roi = computeROI(selected) // from existing util"}
+  ],
+  "validators": [
+    {"type": "tsc"},
+    {"type": "lint"},
+    {"type": "renderProbe", "path": "/game", "nonBlank": true}
+  ],
+  "rollback": true,
+  "expect_proof": {
+    "kind": "pr",
+    "checks": ["diff_lines>=1", "tsc_pass", "render_nonblank"]
+  }
+}

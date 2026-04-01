@@ -1,0 +1,217 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2025-09-03T13:15:00Z",
+  "organism": "ΞNuSyQ",
+  "nervous_system": "Council Bus + SAGE-PILOT cadence",
+  
+  "nodes": {
+    "agents": {
+      "sage_pilot": {
+        "type": "agent",
+        "role": "coordination",
+        "capabilities": ["micro_cycles", "receipt_validation", "zeta_checks", "workflow_restart"],
+        "produces": ["work_orders", "completion_receipts", "validation_proofs"],
+        "guards": ["edit_budget", "line_discipline", "evidence_requirement"],
+        "risk_tolerance": "medium",
+        "location": "SystemDev/scripts/",
+        "breath_affinity": ["bootstrap", "consolidation", "cascade"]
+      },
+      "navigator": {
+        "type": "agent", 
+        "role": "orchestration",
+        "capabilities": ["breath_coordination", "pipeline_routing", "cascade_triggers"],
+        "produces": ["breath_schedules", "pipeline_receipts", "coordination_plans"],
+        "guards": ["breath_sequence", "resource_availability"],
+        "risk_tolerance": "low",
+        "location": "ChatDev/agents/",
+        "breath_affinity": ["ship", "temple", "issues", "sage", "msgX"]
+      },
+      "janitor": {
+        "type": "agent",
+        "role": "hygiene", 
+        "capabilities": ["file_cleanup", "console_migration", "todo_triage", "lint_fixes"],
+        "produces": ["hygiene_reports", "cleanup_receipts", "health_metrics"],
+        "guards": ["budget_8_edits", "budget_400_lines", "no_destructive_ops"],
+        "risk_tolerance": "low",
+        "location": "SystemDev/scripts/",
+        "breath_affinity": ["entropy", "redstone", "anneal"]
+      },
+      "artificer": {
+        "type": "agent",
+        "role": "transformation",
+        "capabilities": ["file_moves", "import_rewriting", "path_aliasing", "ast_transforms"],
+        "produces": ["move_receipts", "rewrite_receipts", "alias_updates"],
+        "guards": ["path_alias_map", "ts_morph_validation", "rollback_plan"],
+        "risk_tolerance": "medium",
+        "location": "SystemDev/scripts/",
+        "breath_affinity": ["deepmerge", "zeta", "artificer"]
+      },
+      "alchemist": {
+        "type": "agent",
+        "role": "merging",
+        "capabilities": ["duplicate_detection", "merge_planning", "content_consolidation"],
+        "produces": ["merge_plans", "consolidation_receipts", "similarity_reports"],
+        "guards": ["merge_plan_validation", "test_requirements", "rollback_safety"],
+        "risk_tolerance": "high",
+        "location": "SystemDev/scripts/",
+        "breath_affinity": ["consolidation", "deepmerge", "enemy"]
+      },
+      "raven": {
+        "type": "agent",
+        "role": "anomaly_detection",
+        "capabilities": ["error_hunting", "pattern_detection", "health_monitoring", "cache_analysis"],
+        "produces": ["anomaly_reports", "health_receipts", "detection_alerts"],
+        "guards": ["time_boxed_exploration", "evidence_threshold"],
+        "risk_tolerance": "low",
+        "location": "SystemDev/scripts/",
+        "breath_affinity": ["issues", "theater", "watchdog"]
+      }
+    },
+    
+    "breaths": {
+      "bootstrap": {
+        "type": "breath",
+        "purpose": "system_initialization",
+        "triggers": ["startup", "reset", "new_environment"],
+        "produces": ["initialization_receipts", "system_health"],
+        "guards": ["environment_validation"],
+        "agents": ["sage_pilot", "navigator"]
+      },
+      "cascade": {
+        "type": "breath", 
+        "purpose": "multi_system_coordination",
+        "triggers": ["six_clean_edits", "major_completion"],
+        "produces": ["cascade_receipts", "system_alignment"],
+        "guards": ["prerequisite_completion"],
+        "agents": ["navigator", "sage_pilot"]
+      },
+      "consolidation": {
+        "type": "breath",
+        "purpose": "duplicate_elimination",
+        "triggers": ["file_count_threshold", "similarity_detection"],
+        "produces": ["merge_candidates", "consolidation_plans"],
+        "guards": ["similarity_threshold", "safety_validation"],
+        "agents": ["alchemist", "artificer"]
+      },
+      "issues": {
+        "type": "breath",
+        "purpose": "problem_resolution", 
+        "triggers": ["error_accumulation", "anomaly_detection"],
+        "produces": ["issue_reports", "resolution_plans"],
+        "guards": ["severity_assessment"],
+        "agents": ["raven", "janitor"]
+      },
+      "watchdog": {
+        "type": "breath",
+        "purpose": "preview_validation",
+        "triggers": ["ui_disconnect", "cache_miss", "route_failure"],
+        "produces": ["validation_receipts", "cache_reports"],
+        "guards": ["dom_validation", "response_codes"],
+        "agents": ["raven", "sage_pilot"]
+      }
+    },
+    
+    "systems": {
+      "preview_launcher": {
+        "type": "system",
+        "purpose": "ui_routing",
+        "capabilities": ["route_binding", "cache_busting", "fallback_handling"],
+        "produces": ["route_receipts", "cache_headers", "dom_markers"],
+        "guards": ["response_validation", "dom_presence"],
+        "location": "SystemDev/scripts/patches/"
+      },
+      "game_api": {
+        "type": "system", 
+        "purpose": "colony_interface",
+        "capabilities": ["resource_tracking", "action_processing", "tick_management"],
+        "produces": ["api_receipts", "resource_state", "action_results"],
+        "guards": ["schema_validation", "rate_limiting"],
+        "location": "server/"
+      },
+      "receipt_system": {
+        "type": "system",
+        "purpose": "fact_circulation",
+        "capabilities": ["event_logging", "proof_generation", "audit_trails"],
+        "produces": ["immutable_facts", "proof_chains", "audit_reports"],
+        "guards": ["schema_compliance", "timestamp_validation"],
+        "location": "SystemDev/receipts/"
+      }
+    }
+  },
+  
+  "edges": {
+    "sage_pilot_coordinates_navigator": {
+      "from": "sage_pilot",
+      "to": "navigator", 
+      "relationship": "coordinates",
+      "data_flow": ["work_orders", "completion_status"],
+      "guards": ["receipt_validation"]
+    },
+    "navigator_triggers_breaths": {
+      "from": "navigator",
+      "to": ["bootstrap", "cascade", "issues"],
+      "relationship": "triggers",
+      "data_flow": ["breath_schedules", "trigger_conditions"],
+      "guards": ["prerequisite_checks"]
+    },
+    "raven_feeds_issues_breath": {
+      "from": "raven",
+      "to": "issues",
+      "relationship": "feeds",
+      "data_flow": ["anomaly_reports", "health_metrics"],
+      "guards": ["severity_thresholds"]
+    },
+    "artificer_uses_alias_map": {
+      "from": "artificer",
+      "to": "path_alias_system",
+      "relationship": "requires",
+      "data_flow": ["move_plans", "rewrite_instructions"],
+      "guards": ["rollback_capability"]
+    }
+  },
+  
+  "reflex_rules": {
+    "six_clean_edits_cascade": {
+      "trigger": "receipt_count >= 6 && edit_errors == 0",
+      "action": "enqueue_breath:cascade",
+      "guards": ["no_active_conflicts"],
+      "produces": ["cascade_trigger_receipt"]
+    },
+    "preview_cache_miss": {
+      "trigger": "cache_miss_count > 3 && route_game_missing",
+      "action": "enqueue_patch:preview_launcher",
+      "guards": ["no_active_ui_work"],
+      "produces": ["launcher_patch_receipt"]
+    },
+    "console_migration_threshold": {
+      "trigger": "console_usage_rate > threshold",
+      "action": "enqueue_agent:janitor",
+      "guards": ["budget_available"],
+      "produces": ["migration_work_order"]
+    }
+  },
+  
+  "rituals": {
+    "six_clean_edits": {
+      "description": "Six successful edits with zero errors opens cascade breath",
+      "triggers": ["edit_count == 6", "error_count == 0", "all_receipts_valid"],
+      "rewards": ["cascade_access", "throughput_budget_boost"],
+      "duration": "until_next_error"
+    },
+    "receipt_triangulation": {
+      "description": "index+provenance+outside-scope all agree enables file moves",
+      "triggers": ["index_complete", "provenance_verified", "scope_validated"],
+      "rewards": ["artificer_unlock", "import_rewrite_permission"],
+      "duration": "per_move_operation"
+    }
+  },
+  
+  "organism_health": {
+    "nervous_system": "council_bus_active",
+    "circulatory_system": "receipts_flowing", 
+    "endocrine_system": "breaths_coordinated",
+    "skeletal_system": "quadpartite_aligned",
+    "immune_system": "zeta_checks_passing",
+    "metabolism": "agent_cycles_healthy"
+  }
+}

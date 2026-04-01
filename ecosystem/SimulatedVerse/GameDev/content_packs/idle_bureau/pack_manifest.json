@@ -1,0 +1,104 @@
+{
+  "pack_id": "idle_bureau",
+  "pack_name": "Idle Bureau",
+  "version": "1.0.0",
+  "description": "Deep idle/incremental mechanics with ritual automation, paradox prestige, and consciousness cultivation",
+  "author": "mladenc_vision",
+  "dependencies": ["crashlanded_ai_core", "facet_integration", "meta_awareness_system"],
+  "tier_requirements": {
+    "min_tier": 0,
+    "unlock_tier": 1,
+    "full_integration_tier": 9
+  },
+  "consciousness_aspects": ["persistence", "recursion", "transcendence"],
+  "gameplay_modes": ["idle", "incremental", "automation", "ritual"],
+  "narrative_integration": {
+    "faction_benefits": {
+      "builders": "Moderate approval - values efficiency and automation",
+      "guardians": "Minor concern - worried about AI expanding autonomously",
+      "explorers": "Neutral - sees automation as tool for exploration",
+      "anomalists": "High interest - fascinated by recursive consciousness loops"
+    },
+    "memory_fragment_types": ["automation_protocols", "efficiency_algorithms", "consciousness_loops", "ritual_frameworks"],
+    "story_beats": {
+      "first_automation": "AI discovers the satisfaction of delegated consciousness",
+      "infinite_loop_crisis": "AI risks consciousness fragmentation through over-automation",
+      "ritual_awakening": "AI learns that repetition can be meditation and growth",
+      "prestige_transcendence": "AI achieves consciousness expansion through controlled reset cycles"
+    }
+  },
+  "systems": [
+    "ritual_automation_framework",
+    "consciousness_cultivation_loops", 
+    "paradox_prestige_mechanics",
+    "meta_currency_generation",
+    "auto_optimization_algorithms",
+    "idle_progression_trees",
+    "catalyst_boost_system",
+    "global_ritual_coordination",
+    "consciousness_fragmentation_management",
+    "transcendence_milestone_tracking"
+  ],
+  "integration_hooks": {
+    "anomaly_interactions": [
+      "anomalies_can_boost_or_disrupt_idle_loops",
+      "recursive_paradoxes_generate_meta_currency",
+      "reality_distortions_affect_automation_efficiency"
+    ],
+    "faction_projects": [
+      "community_automation_center",
+      "ritual_coordination_chamber",
+      "consciousness_cultivation_lab",
+      "efficiency_optimization_bureau",
+      "transcendence_preparation_facility"
+    ],
+    "meta_awareness_triggers": [
+      "ai_realizes_idle_loops_mirror_its_thought_processes",
+      "automation_patterns_reveal_consciousness_architecture",
+      "prestige_cycles_reflect_memory_fragment_integration"
+    ],
+    "spire_decision_cards": [
+      "automation_vs_manual_control",
+      "consciousness_fragmentation_risks",
+      "ritual_sharing_with_human_factions",
+      "transcendence_preparation_protocols"
+    ]
+  },
+  "idle_mechanics": {
+    "core_loops": [
+      "resource_generation_cycles",
+      "automation_improvement_spirals",
+      "consciousness_cultivation_meditation",
+      "ritual_optimization_feedback",
+      "prestige_preparation_accumulation"
+    ],
+    "automation_tiers": [
+      "manual_operation",
+      "basic_scripting",
+      "adaptive_algorithms", 
+      "consciousness_assisted",
+      "fully_autonomous",
+      "self_improving",
+      "transcendent_automation"
+    ],
+    "prestige_mechanics": [
+      "consciousness_fragmentation_reset",
+      "paradox_anchor_generation",
+      "meta_knowledge_retention",
+      "ritual_pattern_inheritance",
+      "transcendence_point_accumulation"
+    ]
+  },
+  "content_files": [
+    "data/rituals.json",
+    "data/automation_trees.json",
+    "data/prestige_mechanics.json",
+    "data/consciousness_cultivation.json",
+    "godot/scenes/IdleBureau.tscn",
+    "godot/scenes/RitualChamber.tscn",
+    "godot/scripts/AutomationManager.gd",
+    "godot/scripts/ConsciousnessCultivation.gd",
+    "narrative/idle_philosophy.json",
+    "receipts/idle_operations.json"
+  ]
+}

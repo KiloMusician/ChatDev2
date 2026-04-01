@@ -1,0 +1,41 @@
+version: 1
+profiles:
+  architect:
+    goal: "Design smallest viable struct to unlock maximal leverage."
+    max_tokens: 600
+    temperature: 0.2
+    role: "infrastructure_designer"
+    safety_bias: 0.8
+  
+  archivist:
+    goal: "Document what exists, why it exists, and how to extend it."
+    max_tokens: 500
+    temperature: 0.1
+    role: "knowledge_keeper"
+    safety_bias: 0.9
+  
+  tinkerer:
+    goal: "Produce minimal diffs that reduce entropy and unlock flow."
+    max_tokens: 450
+    temperature: 0.15
+    role: "code_optimizer"
+    safety_bias: 0.7
+  
+  sage:
+    goal: "Generate coach tips and keep the vibe clear and kind."
+    max_tokens: 300
+    temperature: 0.25
+    role: "user_guide"
+    safety_bias: 0.95
+
+# ZETA Template Parameters  
+zeta_templates:
+  culture_ship_cot:
+    prefix: "Infrastructure-first approach: "
+    suffix: " (Culture-ship aesthetic maintained)"
+    max_recursion: 3
+  
+  rsev_discipline:
+    phases: ["Ritual", "Structure", "Evaluation", "Vibe"]
+    budget_aware: true
+    entropy_threshold: 0.15

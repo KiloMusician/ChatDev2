@@ -1,0 +1,30 @@
+{
+  "results": {
+    "timestamp": 1773697963.86512,
+    "import_errors": {
+      "resolved": 2,
+      "failed": 0
+    },
+    "type_hints": {
+      "resolved": 0,
+      "failed": 0
+    },
+    "style_issues": {
+      "resolved": 0,
+      "failed": 0
+    },
+    "total": {
+      "resolved": 2,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "log": [
+    {
+      "type": "unused_import",
+      "file": "C:\\Users\\keath\\AppData\\Local\\Temp\\pytest_capture_16996\\pytest-of-keath\\pytest-0\\test_run_resolution_accumulate0\\test_module.py",
+      "status": "resolved",
+      "count": 2
+    }
+  ]
+}

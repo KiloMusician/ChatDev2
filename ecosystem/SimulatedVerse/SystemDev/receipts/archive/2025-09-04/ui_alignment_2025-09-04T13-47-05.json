@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-09-04T13:47:05.000Z",
+  "action": "preview_ui_truthing",
+  "operation": "temple_alignment_SystemDev_ChatDev_GameDev_PreviewUI",
+  "route_verification": {
+    "dev_menu": "/dev → 404_ENOENT_dist_index_html_missing",
+    "game_main": "/game → static_fallback_colony_interface_not_react",
+    "root": "/ → ΞNuSyQ_Culture_Ship_Interface_html_served",
+    "issue": "react_build_missing_dist_index_html"
+  },
+  "component_mapping": {
+    "dev_menu_canonical": "client/src/components/DevMenuExtended.tsx",
+    "dev_menu_preview": "PreviewUI/web/dev/DevMenu.tsx", 
+    "game_main_canonical": "PreviewUI/web/core/GameShell.tsx",
+    "game_alt": "client/src/components/GameShell.tsx",
+    "status": "dual_implementations_need_alignment"
+  },
+  "feature_flags_verification": {
+    "source": "client/src/config/flags.ts",
+    "culture_ship_flags": "comprehensive_23_flags",
+    "localStorage_integration": "APP_MODE_UI_VERSION_working", 
+    "progressive_unlock": "consciousnessGating_true",
+    "status": "feature_flags_comprehensive_and_functional"
+  },
+  "store_lsp_fix": {
+    "error": "onboardingCompleted_missing_in_PlayerState",
+    "fix_applied": "added_onboardingCompleted_false_to_initialState",
+    "status": "store_error_fixed"
+  },
+  "asset_coexistence": {
+    "ascii": "client/src/ui/ascii/ verified_6_files",
+    "pixel": "needs_investigation",
+    "dual_mode_adapter": "client/src/ui/ascii/engine.ts_available",
+    "status": "ascii_confirmed_pixel_unknown"
+  },
+  "build_fix_initiated": "npm_run_build_executing",
+  "next_phase": "chatdev_boss_rush_trials"
+}

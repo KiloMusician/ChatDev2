@@ -1,0 +1,64 @@
+{
+  "schemas": {
+    "MegaTag": {
+      "description": "A schema defining the structure and properties of a MegaTag.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the MegaTag."
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the MegaTag."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["contextual", "symbolic", "cognitive"],
+          "description": "The type of MegaTag, indicating its purpose."
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs representing additional attributes of the MegaTag."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp indicating when the MegaTag was created."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp indicating the last time the MegaTag was updated."
+        }
+      },
+      "required": ["id", "name", "type", "created_at"]
+    },
+    "MegaTagCollection": {
+      "description": "A schema defining a collection of MegaTags.",
+      "type": "object",
+      "properties": {
+        "collection_id": {
+          "type": "string",
+          "description": "Unique identifier for the MegaTag collection."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/schemas/MegaTag"
+          },
+          "description": "Array of MegaTags belonging to this collection."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp indicating when the collection was created."
+        }
+      },
+      "required": ["collection_id", "tags", "created_at"]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "timestamp": 1756823755000,
+  "processes": {
+    "sage_autonomous": {"status": "idle", "count": 0},
+    "express_server": {"status": "active", "count": 3}
+  },
+  "health": {
+    "total_node_processes": 16,
+    "memory_usage": "checking",
+    "port_bindings": "5000:active"
+  }
+}

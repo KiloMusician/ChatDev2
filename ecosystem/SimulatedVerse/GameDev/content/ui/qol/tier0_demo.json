@@ -1,0 +1,168 @@
+{
+  "id": "tier0_demo",
+  "name": "Spin Up Nanofab - Tutorial Mission",
+  "description": "Learn the basics by building your first nanofab unit and unlocking the panelized interface",
+  "type": "guided_tutorial",
+  "tier": 0,
+  "estimated_duration": "5-10 minutes",
+  "starting_resources": {
+    "materials": 500,
+    "components": 100,
+    "energy": 200,
+    "research_points": 600
+  },
+  "starting_buildings": [
+    {
+      "type": "basic_shelter",
+      "position": [0, 0],
+      "health": 100
+    }
+  ],
+  "objectives": [
+    {
+      "id": "research_power",
+      "type": "research",
+      "target": "basic_power",
+      "description": "Research basic power generation",
+      "hint": "Click the Research tab and select 'Basic Power' to begin research",
+      "reward": {
+        "type": "ui_unlock",
+        "id": "power_tab"
+      }
+    },
+    {
+      "id": "build_generator",
+      "type": "build",
+      "target": "power_generator",
+      "description": "Build a power generator",
+      "hint": "Use the Build menu to place a power generator near your shelter",
+      "requires": ["research_power"],
+      "reward": {
+        "type": "resource",
+        "resources": { "energy": 100 }
+      }
+    },
+    {
+      "id": "research_lab",
+      "type": "build",
+      "target": "research_lab",
+      "description": "Build a research laboratory",
+      "hint": "Research labs accelerate your technological progress",
+      "requires": ["build_generator"],
+      "reward": {
+        "type": "research_boost",
+        "multiplier": 2.0,
+        "duration": 300
+      }
+    },
+    {
+      "id": "research_nanofab",
+      "type": "research",
+      "target": "cognitics.nanofab_online",
+      "description": "Research nanofabrication technology",
+      "hint": "This will unlock advanced manufacturing and improve your interface",
+      "requires": ["research_lab"],
+      "reward": {
+        "type": "milestone_unlock",
+        "milestone": "UI_M1_PANELS"
+      }
+    },
+    {
+      "id": "build_nanofab",
+      "type": "build",
+      "target": "nanofab_unit",
+      "description": "Build your first nanofab unit",
+      "hint": "The nanofab will transform your colony's capabilities",
+      "requires": ["research_nanofab"],
+      "reward": {
+        "type": "mission_complete",
+        "unlock_next": "defense_tutorial"
+      }
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "trigger": "mission_start",
+      "type": "popup",
+      "title": "Welcome to Colony Management",
+      "content": "You've crash-landed and need to build a sustainable colony. Let's start by researching basic power generation.",
+      "highlight": "#research-tab"
+    },
+    {
+      "trigger": "objective:research_power:start",
+      "type": "tooltip",
+      "target": "#research-basic-power",
+      "content": "Click here to begin researching basic power. This will unlock the ability to build power generators."
+    },
+    {
+      "trigger": "objective:research_power:complete",
+      "type": "popup",
+      "title": "Research Complete!",
+      "content": "Excellent! You can now build power generators. Power is essential for running advanced buildings.",
+      "highlight": "#build-tab"
+    },
+    {
+      "trigger": "objective:build_generator:start",
+      "type": "tooltip",
+      "target": "#build-power-generator",
+      "content": "Build a power generator to provide electricity for your colony. Place it near your shelter for easy access."
+    },
+    {
+      "trigger": "objective:research_nanofab:complete",
+      "type": "popup",
+      "title": "Interface Evolution!",
+      "content": "Your nanofab research has unlocked an improved interface! Notice how the UI has evolved with new panels and capabilities.",
+      "highlight": ".new-panels"
+    },
+    {
+      "trigger": "objective:build_nanofab:complete",
+      "type": "celebration",
+      "title": "Mission Complete!",
+      "content": "Congratulations! You've successfully built your first nanofab unit. Your colony is now ready for the next challenges.",
+      "effects": ["confetti", "achievement_sound"],
+      "next_mission": "defense_tutorial"
+    }
+  ],
+  "ui_transformations": [
+    {
+      "trigger": "objective:research_power:complete",
+      "changes": [
+        { "type": "enable_tab", "id": "power" },
+        { "type": "show_tooltip", "target": ".power-buildings", "content": "Power buildings are now available!" }
+      ]
+    },
+    {
+      "trigger": "objective:research_nanofab:complete", 
+      "changes": [
+        { "type": "milestone_unlock", "milestone": "UI_M1_PANELS" },
+        { "type": "panel_evolution", "from": "basic", "to": "panelized" },
+        { "type": "enable_feature", "features": ["tooltips_plus", "batch_buy", "cost_breakdown"] }
+      ]
+    }
+  ],
+  "failure_conditions": [
+    {
+      "type": "resource_depletion",
+      "resource": "energy",
+      "threshold": 0,
+      "grace_period": 60,
+      "hint": "Your energy is critically low! Build more power generators or reduce consumption."
+    },
+    {
+      "type": "time_limit",
+      "duration": 1800,
+      "soft_limit": true,
+      "hint": "This tutorial is taking a while. Need help? Check the hint system."
+    }
+  ],
+  "success_rewards": {
+    "permanent_unlocks": ["UI_M1_PANELS", "tooltips_plus", "batch_buy"],
+    "bonus_resources": {
+      "materials": 200,
+      "components": 50,
+      "research_points": 100
+    },
+    "achievements": ["first_nanofab", "tutorial_master"],
+    "next_available": ["defense_tutorial", "exploration_basics"]
+  }
+}

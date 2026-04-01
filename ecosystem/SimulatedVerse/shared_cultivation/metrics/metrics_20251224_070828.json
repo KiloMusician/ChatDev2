@@ -1,0 +1,47 @@
+{
+  "generated_at": "2025-12-24T07:08:28.788479",
+  "quest_metrics": {
+    "total_entries": 575,
+    "intent_events": 1,
+    "other_events": 574,
+    "intent_types_breakdown": {
+      "system_health_achieved": 1
+    }
+  },
+  "work_queue_metrics": {
+    "total_items": 3,
+    "queued": 2,
+    "in_progress": 0,
+    "completed": 0,
+    "failed": 1,
+    "completion_rate": 0.0,
+    "priority_breakdown": {
+      "normal": 3
+    },
+    "created_at": "2025-12-24T06:59:05.563645",
+    "last_updated": "2025-12-24T07:08:05.275699"
+  },
+  "session_metrics": {
+    "total_sessions": 1,
+    "total_intent_events_captured": 1,
+    "total_items_promoted": 3,
+    "avg_events_per_session": 1.0
+  },
+  "system_health": {
+    "latest_broken_files": 0,
+    "latest_working_files": 0,
+    "latest_health_score": 0,
+    "trend": [
+      {
+        "iteration": 1,
+        "broken_files": 0,
+        "working_files": 0,
+        "health_score": 0
+      }
+    ]
+  },
+  "recommendations": [
+    "\u26a0\ufe0f Work queue completion rate below 50% - review failed items",
+    "\u274c Some work items failed - investigate errors"
+  ]
+}

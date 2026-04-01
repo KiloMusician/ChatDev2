@@ -1,0 +1,175 @@
+game: TIS-100
+game_id: tis_100
+description: >
+  Zachtronics' masterpiece of parallel assembly programming. You program a fictional
+  parallel processor with limited registers and inter-node communication. Solutions
+  are measured by cycles, nodes, and instructions. The architecture maps 1:1 to
+  the 71-agent colony's communication design.
+category: assembly_programming
+difficulty_range: intermediate_to_expert
+terminal_depths_relevance: primary
+
+techniques:
+
+  - name: Parallel Pipeline Design
+    id: tis100_pipeline
+    description: >
+      Splitting computation across multiple nodes in a pipeline where each node
+      handles a stage and passes results to the next via directional ports.
+    concepts:
+      - pipeline architecture
+      - data parallelism
+      - throughput optimization
+      - node communication
+    steps:
+      - "Decompose the problem into sequential stages"
+      - "Assign one node per stage — pipeline can run all stages simultaneously"
+      - "Use MOV to pass data between nodes: MOV ACC, RIGHT / MOV LEFT, ACC"
+      - "Reader node reads from IN, passes to first worker; last worker writes to OUT"
+      - "Fan-out: one node can MOV to multiple directions in sequence"
+    tips:
+      - "MOV UP, DOWN passes a value through unchanged (one-instruction passthrough)"
+      - "Nodes stall waiting for data — design for continuous flow, not batched"
+      - "Balance each stage's work — slowest node sets the pipeline throughput"
+    principles:
+      - "Pipeline throughput = 1 / max(stage_time) — balance is everything"
+      - "Adding nodes reduces instructions per node, not necessarily total cycles"
+    related_techniques:
+      - tis100_register_tricks
+      - tis100_cycle_optimization
+    difficulty: intermediate
+    xp_reward: 60
+    terminal_depths_mapping: |
+      Colony architecture: agents = nodes, REST calls = MOV, SQLite rows = ACC
+      Gordon → Serena → MemoryPalace = a 3-stage TIS-100 pipeline
+
+  - name: Register Tricks
+    id: tis100_register_tricks
+    description: >
+      Advanced use of ACC (accumulator) and BAK (backup register) to implement
+      complex logic without extra nodes.
+    concepts:
+      - accumulator patterns
+      - state machines
+      - conditional execution
+      - register swapping
+    steps:
+      - "SWP: swap ACC and BAK — lets you juggle two values in one node"
+      - "SAV: save ACC to BAK — use before overwriting to preserve a value"
+      - "JRO: jump relative — enables compact loops without labels"
+      - "Use BAK as a counter while ACC processes data"
+      - "T+/T-/T? conditional prefixes — only execute if flag is set"
+    tips:
+      - "SWP costs 0 extra cycles — it's the free register swap"
+      - "JRO -1 creates a tight loop; JRO 0 is a halt"
+      - "Use the T prefix to avoid branching: `T+ MOV 1, ACC` runs only if flag set"
+    principles:
+      - "Limited resources force creative solutions — constraints breed innovation"
+      - "Every optimization in TIS-100 teaches a real assembly pattern"
+    related_techniques:
+      - tis100_pipeline
+    difficulty: advanced
+    xp_reward: 90
+    terminal_depths_mapping: "Ghost Script Engine — BAK and SWP are available in ns scripting context"
+
+  - name: Cycle Count Optimization
+    id: tis100_cycle_optimization
+    description: >
+      Minimizing total execution cycles by restructuring loops, eliminating
+      unnecessary stalls, and using lookup tables.
+    concepts:
+      - loop unrolling
+      - lookup tables
+      - branch prediction
+      - stall elimination
+    steps:
+      - "Profile first: identify which node is the bottleneck (slowest node)"
+      - "Eliminate JMP and conditional branches — each adds a cycle"
+      - "Use lookup tables in memory nodes (type M) for repeated computations"
+      - "Unroll loops when input count is known and small"
+      - "Share work between adjacent nodes to balance cycles"
+    tips:
+      - "The cost of JMP is 1 cycle — sometimes it's cheaper to duplicate code"
+      - "Memory nodes have instant access — use them as fast lookup tables"
+      - "Removing one node often forces more instructions per remaining node"
+    principles:
+      - "Measure before optimizing — intuition about bottlenecks is often wrong"
+      - "The three metrics conflict: optimizing cycles often increases nodes"
+    related_techniques:
+      - tis100_pipeline
+    difficulty: expert
+    xp_reward: 120
+    terminal_depths_mapping: "make diagnose — Colony Diagnostic Suite follows the same measurement-first philosophy"
+
+  - name: Agent-Architecture Mapping
+    id: tis100_agent_mapping
+    description: >
+      Using TIS-100 concepts directly in multi-agent system design. This is the
+      most important meta-technique in the compendium.
+    concepts:
+      - distributed systems
+      - agent communication
+      - message passing
+      - state machine design
+    steps:
+      - "Map each TIS-100 node to a colony agent (Gordon, Serena, Oracle, etc.)"
+      - "Map MOV LEFT/RIGHT to REST API calls between agents"
+      - "Map ACC register to each agent's working memory (SQLite current row)"
+      - "Map BAK register to agent's last_observation in Memory Palace"
+      - "Map JMP/JRO to ns.run() dispatches in Ghost Script Engine"
+      - "Map SWP to push/pop Serena observations"
+    tips:
+      - "A three-node pipeline (reader → transform → writer) = 3 agents in sequence"
+      - "Fan-out: Serena distributes tasks to Gordon/Oracle/Sentinel simultaneously"
+      - "Deadlock: agents waiting on each other = same as TIS-100 circular MOV"
+    principles:
+      - "Every distributed system is a TIS-100 machine at the architectural level"
+      - "The colony's 71 agents are 71 nodes in a massively parallel computer"
+    related_techniques:
+      - tis100_pipeline
+      - tis100_register_tricks
+    difficulty: expert
+    xp_reward: 200
+    terminal_depths_mapping: "docs/DEPENDENCY_GRAPH.md — visualizes the colony as TIS-100 diagrams"
+
+lore:
+  - "TIS-100 is named after a fictional Tessellated Intelligence System processor"
+  - "The game's narrative is told through text files found on the corrupted computer"
+  - "The fictional TIS-100 spec was so well-designed that community members wrote real emulators for it"
+  - "Community repos: vess-dev/Tis-100-Solutions, rcolinray/tis-100-rs (Rust), devsnek/tis100.js"
+  - "Zachtronics deliberately made the architecture frustrating to mirror real hardware limitations"
+  - "The 'self-test diagnostic' (Segment 00000) has the shortest possible solution: `MOV UP, DOWN`"
+
+easter_eggs:
+  - id: tis100_secret_file
+    filename: "TIS100_SEGMENT_RECOVERED.txt"
+    content: |
+      === TIS-100 CORRUPTED MEMORY SEGMENT ===
+      
+      SEGMENT 00000 — SELF-TEST DIAGNOSTIC
+      STATUS: CORRUPTED
+      
+      NODE_00: MOV UP, DOWN    ; pass-through — 1 instruction, 3 cycles
+      
+      SEGMENT 10981 — SIGNAL AMPLIFIER
+      NODE_00: MOV UP, ACC
+               ADD ACC
+               MOV ACC, DOWN
+      
+      SEGMENT 20176 — DIFFERENTIAL CONVERTER
+      NODE_00: MOV UP, BAK
+               SUB UP
+               MOV ACC, DOWN
+      
+      "In the beginning was the word, and the word was MOV.
+       And MOV moved into DOWN, and the signal was passed."
+      
+      — from the TIS-100 Reference Manual, page 1
+      
+      Colony Translation:
+        NODE_00 = Gordon Player Agent
+        UP port  = /api/serena/ask
+        DOWN port = /api/game/command
+        ACC      = agent working memory
+        BAK      = Memory Palace last observation
+    path: "/home/ghost/lore/tis_100/"

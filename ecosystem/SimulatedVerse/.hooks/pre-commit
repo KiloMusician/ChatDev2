@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+fail=0
+changed=$(git diff --cached --name-only --diff-filter=ACM | tr -d '\r')
+
+for f in $changed; do
+  # skip generated
+  if [[ "$f" == NEXUS/* ]] || [[ "$f" == .snapshot/* ]]; then continue; fi
+  if [[ -f "$f" ]]; then
+    # must carry Rosetta header in first 120 lines (commented YAML ok)
+    head -n 120 "$f" | grep -q "ROSETTA ---" || {
+      echo "[ROSETTA] Missing header: $f"
+      fail=1
+    }
+  fi
+done
+
+if [[ $fail -ne 0 ]]; then
+  echo "✖ Pre-commit failed. Add Rosetta header (see /NEXUS/schemas/rosetta-header.schema.json)."
+  exit 1
+fi
+
+# rebuild nexus datasets for agents & ChatDev
+if [[ -x scripts/build_nexus_index.py ]]; then
+  scripts/build_nexus_index.py || true
+fi

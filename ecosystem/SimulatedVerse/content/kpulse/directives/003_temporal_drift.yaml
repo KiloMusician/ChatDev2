@@ -1,0 +1,15 @@
+id: "003_temporal_drift"
+name: "Temporal Drift Initiation"
+tier: 8
+effects:
+  - kind: "boost"
+    tau_mult: 1.0005
+spawns:
+  - when: { energy_gte: 50 }
+    create:
+      id: "008_fractal_growth"
+      name: "Fractal Growth Unlocked"
+      tier: 8
+      effects:
+        - kind: "energy"
+          dE: 0.5

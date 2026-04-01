@@ -1,0 +1,34 @@
+{
+  "timestamp": "2025-09-05T11:42:45.179Z",
+  "mode": "exact",
+  "files_scanned": 2003,
+  "duplicates_found": 2,
+  "bytes_redundant": 545,
+  "groups": [
+    {
+      "hash": "49b893ecbbb6c429bbcbba76ae469fa4b5eff38e6b5c7a0d3883eb8a9dd2d840",
+      "paths": [
+        "scripts/SystemDev/receipts/convergence_validation_1756907485107.json",
+        "scripts/SystemDev/reports/final_convergence_status.json"
+      ],
+      "size": 453,
+      "type": "exact"
+    },
+    {
+      "hash": "a6ffc17aa4f2dfbe54ebfba618a3970a5a7ebd8609c327a54858f3b08b357a2d",
+      "paths": [
+        "reports/outside_scope_probe_2025-09-03T10-46-49-484Z.json",
+        "reports/outside_scope_probe_2025-09-04T13-44-07-258Z.json",
+        "scripts/SystemDev/reports/outside_scope_probe_2025-09-03T22-57-38-930Z.json"
+      ],
+      "size": 46,
+      "type": "exact"
+    }
+  ],
+  "recommendations": [
+    "Found 2 exact duplicate groups - safe to consolidate",
+    "Exact: Keep scripts/SystemDev/receipts/convergence_validation_1756907485107.json, move others to attic/dup/",
+    "Exact: Keep reports/outside_scope_probe_2025-09-03T10-46-49-484Z.json, move others to attic/dup/",
+    "Potential space savings: 1 KB"
+  ]
+}

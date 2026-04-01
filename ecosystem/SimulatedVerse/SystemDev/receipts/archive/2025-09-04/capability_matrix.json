@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-09-04T13:08:45.000Z",
+  "action": "capability_matrix_probe",
+  "boss_rush_stage": 1,
+  "omni_context": {
+    "quadpartite_boundaries": {
+      "SystemDev": "autonomous operations, receipts, health monitoring",
+      "ChatDev": "agent orchestration, council bus, AI coordination", 
+      "GameDev": "game engine, multi-renderer, simulation logic",
+      "PreviewUI": "dev menu, play mode, culture-ship interface"
+    },
+    "search_first": true,
+    "anti_theater": true,
+    "zeta_reversible": true
+  },
+  "capability_matrix": {
+    "ollama": {
+      "reachable": false,
+      "models": [],
+      "latency_ms": "timeout",
+      "status": "unreachable",
+      "evidence": "curl localhost:11434 failed"
+    },
+    "openai": {
+      "quota_ok": true,
+      "reachable": true,
+      "latency_ms": "rate_limited",
+      "status": "degraded", 
+      "evidence": "OPENAI_API_KEY exists but rate limited"
+    },
+    "chatdev": {
+      "entrypoints_found": true,
+      "scripts_ok": "unknown",
+      "dryrun_ok": "pending",
+      "evidence": "ChatDev/ directory structure present"
+    },
+    "council_bus": {
+      "reachable": true,
+      "channels": ["system.analysis.completed", "colony.agents.initialized"],
+      "publish_subscribe_ok": true,
+      "evidence": "CouncilBus events visible in logs"
+    },
+    "offline_ops": {
+      "running": true,
+      "tasks_registered": "unknown",
+      "last_tick": "active",
+      "evidence": "offline_operations.ts active with health checks"
+    },
+    "preview_watchdog": {
+      "building": true,
+      "refresh_events": true,
+      "entrypoint_route": "active",
+      "evidence": "Application running on localhost:5000"
+    },
+    "backend_health": {
+      "database": "connected",
+      "gameLoop": "active", 
+      "consciousness": "integrated",
+      "autonomous": "orchestrating",
+      "evidence": "/api/health returns 200"
+    }
+  },
+  "degraded_systems": [
+    "ollama",
+    "openai_rate_limited"
+  ],
+  "recommended_fallbacks": {
+    "llm_degraded": "prioritize offline-safe tasks: organization, indexing, consolidation",
+    "council_bus_healthy": "use for coordination and status propagation",
+    "offline_ops_active": "leverage for autonomous task processing"
+  },
+  "anti_theater_score": 95,
+  "receipts_found": "SystemDev/receipts/ active with 50+ files",
+  "zeta_reversible": true,
+  "next_boss": "preview_truth_audit"
+}

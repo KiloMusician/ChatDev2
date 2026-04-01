@@ -1,0 +1,20 @@
+{"id":"RAVEN-A01","type":"FeaturePU","title":"Define agents/raven/manifest.json with purpose, scope, capabilities, risk class","section":"A","priority":"critical"}
+{"id":"RAVEN-A02","type":"FeaturePU","title":"Implement agents/raven/index.ts exporting plan(), act(), reflect(), learn()","section":"A","priority":"critical"}
+{"id":"RAVEN-A03","type":"FeaturePU","title":"Add raven.config.ts (models, context windows, budgets, routing rules)","section":"A","priority":"critical"}
+{"id":"RAVEN-A04","type":"FeaturePU","title":"Create agents/raven/skills/ registry (fs, git, test, doc, refactor, balance, sim)","section":"A","priority":"high"}
+{"id":"RAVEN-A05","type":"FeaturePU","title":"Provide agents/raven/adapters/llm.ts supporting local (Ollama) → paid fallback (gated)","section":"A","priority":"critical"}
+{"id":"RAVEN-B21","type":"RefactorPU","title":"Introduce policies/branch_lanes.yaml (feat/fix/refactor/agent/docs)","section":"B","priority":"critical"}
+{"id":"RAVEN-B22","type":"RefactorPU","title":"Require Raven to never push main; PRs only; small diffs; 1 concern/PR","section":"B","priority":"critical"}
+{"id":"RAVEN-B25","type":"RefactorPU","title":"Budget guard middleware for /api/raven/* with daily/PR caps","section":"B","priority":"critical"}
+{"id":"RAVEN-B26","type":"TestPU","title":"No Lies verifier: forbid green messages without artifacts (diff, test, URL)","section":"B","priority":"critical"}
+{"id":"RAVEN-C41","type":"FeaturePU","title":"Build import graph graph/codegraph.sqlite (ts-ast + tsserver)","section":"C","priority":"high"}
+{"id":"RAVEN-C44","type":"FeaturePU","title":"Index content embeddings (per file, per section) with tags (domain, layer)","section":"C","priority":"high"}
+{"id":"RAVEN-D61","type":"FeaturePU","title":"Planner = (goal, constraints, graph) → DAG of PUs (≤ 200 nodes)","section":"D","priority":"critical"}
+{"id":"RAVEN-D62","type":"FeaturePU","title":"Each PU typed: DocPU, TestPU, RefactorPU, FixturePU, GamePU","section":"D","priority":"critical"}
+{"id":"RAVEN-E81","type":"FeaturePU","title":"Translate PU → branch → commits (atomic; small)","section":"E","priority":"critical"}
+{"id":"RAVEN-E90","type":"FeaturePU","title":"If CI green & policy ok → add automerge label","section":"E","priority":"critical"}
+{"id":"RAVEN-F101","type":"FeaturePU","title":"Add sim/harness.ts (deterministic ticks, seed)","section":"F","priority":"high"}
+{"id":"RAVEN-G121","type":"FeaturePU","title":"TokenGuard cascade: local → distilled → paid (off by default)","section":"G","priority":"critical"}
+{"id":"RAVEN-H141","type":"TestPU","title":"No-Lies smoke suite hits all public routes + critical commands","section":"H","priority":"critical"}
+{"id":"RAVEN-H150","type":"TestPU","title":"Require artifact presence for any success toast","section":"H","priority":"critical"}
+{"id":"RAVEN-BOOTSTRAP","type":"FeaturePU","title":"Bootstrap Raven: Set RAVEN_ENABLED=true, wire registerRavenRoutes(app), point at Ollama","section":"INIT","priority":"maximum"}

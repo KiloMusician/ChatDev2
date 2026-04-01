@@ -1,0 +1,49 @@
+{
+  "name": "development",
+  "version": "1.0.0",
+  "description": "Development profile with all features enabled",
+  
+  "enabledModules": [
+    "root",
+    "energy", 
+    "progression",
+    "ui",
+    "narrative",
+    "automation"
+  ],
+  
+  "requiredSecrets": [],
+  
+  "optionalSecrets": [
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY"
+  ],
+  
+  "features": {
+    "hotReload": true,
+    "debugMode": true,
+    "safeMode": false,
+    "mockProviders": true,
+    "traceMode": false,
+    "councilValidation": false
+  },
+  
+  "limits": {
+    "tokenBudgetDaily": 50000,
+    "aiCallsPerHour": 100,
+    "maxModulesActive": 10
+  },
+  
+  "ui": {
+    "showHUD": true,
+    "enableASCII": true,
+    "logLevel": "debug",
+    "lagRadar": true
+  },
+  
+  "automation": {
+    "enableScheduler": true,
+    "maxConcurrentTasks": 5,
+    "taskTimeout": 30000
+  }
+}

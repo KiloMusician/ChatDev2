@@ -1,0 +1,21 @@
+{
+  "entryGlobs": ["src/**/*.{ts,tsx,js,jsx,mjs,cjs}", "app/**/*.{ts,tsx,js,jsx}"],
+  "includeGlobs": ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
+  "excludeGlobs": ["node_modules/**", "dist/**", "build/**", ".git/**", "reports/**", "tmp/**"],
+  "placeholderPatterns": ["TODO", "FIXME", "PLACEHOLDER", "XXX", "TBD", "STUB", "NotImplemented"],
+  "importFileExtensions": [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"],
+  "preferCanonicalDir": "src",
+  "dedupeStrategy": "reexport",
+  "renameRules": {
+    "vagueNames": ["util", "helpers", "index2", "misc", "tmp", "temp"],
+    "prefixByType": { "component": "Ui", "hook": "use", "service": "Svc", "config": "Cfg" }
+  },
+  "softlockHeuristics": {
+    "tightLoops": true,
+    "unawaitedPromises": true,
+    "blockingTimers": true,
+    "infiniteRecursion": true
+  },
+  "report": { "maxSnippets": 10, "keepPatches": true, "maxDuplicateGroups": 20 },
+  "safety": { "dryRunDefault": true, "createBackups": true, "maxFileWrite": 500 }
+}

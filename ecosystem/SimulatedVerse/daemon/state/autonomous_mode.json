@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-09-03T05:23:18+00:00",
+  "mode": "autonomous_continuous",
+  "protocol": "ΞNuSyQ-prime⁵", 
+  "stop_conditions": [
+    "disk_full",
+    "cortex_repeated_fail_3x",
+    "destructive_diff_detected",
+    "daemon/stop_file_exists"
+  ],
+  "safety_active": true,
+  "max_cycles": "∞",
+  "current_cycle": 1
+}

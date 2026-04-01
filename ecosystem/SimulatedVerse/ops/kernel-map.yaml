@@ -1,0 +1,24 @@
+kernel:
+  - path: packages/core
+    purpose: "domain primitives, schemas (zod/ajv), event types"
+  - path: packages/llm
+    purpose: "llm gateway & cascade (ollama-first, cloud fallback)"
+  - path: ops
+    purpose: "orchestration (SAGE, watchdogs, auditor, anneal)"
+  - path: apps/web
+    purpose: "UI (HUD, Admin, Console, Status panes)"
+  - path: apps/sim
+    purpose: "Simulation/game loop (roguelike/idle/TD)"
+
+guardrails:
+  # modules that everything may depend on (allowed imports)
+  allowed_import_roots:
+    - packages/core
+    - packages/llm
+    - ops/lib
+  # disallow UI → ops or UI → sim compile-time references (use APIs/events)
+  disallow_edges:
+    - from: apps/web
+      to: ops/**
+    - from: apps/web
+      to: apps/sim/**

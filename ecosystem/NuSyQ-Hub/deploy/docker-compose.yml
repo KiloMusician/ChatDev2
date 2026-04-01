@@ -1,0 +1,64 @@
+# Modern Docker Compose file for NuSyQ-Hub development
+# Using Compose Specification (no version field required)
+# Builds the service from repository root with live editing support
+
+services:
+  nusyq-hub:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        INSTALL_ALEMBIC: "yes"
+      cache_from:
+        - nusyq-hub:dev
+      target: development
+    image: nusyq-hub:dev
+    container_name: nusyq-hub-dev
+    environment:
+      PYTHONUNBUFFERED: "1"
+      LOG_LEVEL: INFO
+      ENVIRONMENT: development
+      DOCKER_BUILDKIT: "1"
+      COMPOSE_DOCKER_CLI_BUILD: "1"
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspace
+        consistency: cached
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import requests; requests.get(\"http://localhost:5000/health\", timeout=5)' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - nusyq-net
+    profiles:
+      - dev
+      - full
+
+networks:
+  nusyq-net:
+    name: nusyq-dev-network
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-nusyq-dev
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
+
+# Usage (Docker Compose V2):
+#   docker compose -f deploy/docker-compose.yml up --build
+#   docker compose -f deploy/docker-compose.yml --profile dev up
+#
+# Notes:
+# - Modern Compose Specification (no version field needed)
+# - BuildKit enabled for faster builds with layer caching
+# - Repository mounted at /workspace for live editing
+# - Use profiles to control which services start
+# - Health checks use Python for better accuracy
+# - See docker-compose.dev.yml for full development stack with observability

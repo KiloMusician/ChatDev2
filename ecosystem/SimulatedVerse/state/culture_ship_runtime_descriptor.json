@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-03-31T09:09:09Z",
+  "source_hashes": {
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/package.json": "b046e12cc3204e63e7acc3c2fce22de5b54fde851835930b83bd8302996844f9",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ops/ensure-local-surfaces.sh": "04361f33b4a083273a0eeb689c8f2cb4da93b14c85dee96e3fa7ca43a996ad40",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ops/health-checks.sh": "ec7dadd098a6be05ccbf2a135fe78d68119ecd817252591337214bc4ee99b8c5",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/minimal_server.ts": "34bcda0901cb54608b3b8d778d9744a4fdd308c75df24b395c211c0dbae91967",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/full_server.ts": "2ba6326c18e5f989f45661aecdbb5951c2864c64b3b51f56737f04f59d2573cf",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/modules/culture_ship/manifest.yml": "a25ccf35ca4d727fc48b3feda890a35c80549265fbd946288dad14b831e214e4",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/ship_state.json": "e3449520674cb8066a1334e6fd67ef934142bf1bdc3fb9f91df7a3eea3f1ce0c",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/.ship/memory.json": "e0e10283f8636a2e5d60dabb4f72466aa3885f833865d9c6c6d2874ea34b0fd5",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/packages/chatdev-adapter/registry.ts": "4dac6eaf71335b88d8fc4851470808832127649c4092168072edaada092d3fae",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/packages/chatdev-adapter/server.ts": "8e9a17bbafbde3c43ea7437160549ac6f705eedd7a3e1b7e22425a433c95edce",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ops/chatdev/health.ts": "b80a39a1ae7cf9b7fc8e9bd1ff2839ca4d5e16e739b8a5fb6a2e03599e993d48"
+  },
+  "source_paths": [
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/package.json",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ops/ensure-local-surfaces.sh",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ops/health-checks.sh",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/minimal_server.ts",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/full_server.ts",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/modules/culture_ship/manifest.yml",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/ship_state.json",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/.ship/memory.json",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/packages/chatdev-adapter/registry.ts",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/packages/chatdev-adapter/server.ts",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ops/chatdev/health.ts"
+  ],
+  "stale_after_seconds": 900,
+  "generator_version": "culture-ship-runtime-v1",
+  "runtime_owner": "simulatedverse",
+  "control_owner": "nusyq_hub",
+  "status": "ready",
+  "runtime_status": {
+    "mode": "minimal",
+    "host": "127.0.0.1",
+    "host_resolves": true,
+    "port": 5002,
+    "health_url": "http://127.0.0.1:5002/api/health",
+    "ready_url": "http://127.0.0.1:5002/readyz",
+    "ok": true,
+    "detail": "HTTP 200",
+    "reported_mode": "minimal"
+  },
+  "chatdev": {
+    "port": 4466,
+    "agents_url": "http://127.0.0.1:4466/chatdev/agents",
+    "ok": true,
+    "detail": "HTTP 200",
+    "agents": [
+      "raven",
+      "mladenc",
+      "librarian",
+      "artificer",
+      "alchemist",
+      "protagonist"
+    ]
+  },
+  "culture_ship": {
+    "manifest_version": "0.1.0",
+    "capabilities": [
+      "planning.cascade",
+      "analyze.duplicates",
+      "analyze.imports",
+      "analyze.softlocks",
+      "surgeon.rename_rewire",
+      "ui.ascii_hud"
+    ],
+    "policies": {
+      "infrastructure_first": true,
+      "local_first": true,
+      "reversible": true,
+      "token_default": false
+    },
+    "last_tick": {
+      "when": "2025-08-29T10:18:30.374Z",
+      "mode": "verify",
+      "stats": {
+        "queued": 0,
+        "done": 0
+      }
+    },
+    "soft_lock_active": false,
+    "prefer_zero_token": true,
+    "drivers": {
+      "pilotEnabled": true,
+      "taskmasterEnabled": true,
+      "councilEnabled": true,
+      "librarianEnabled": true,
+      "intermediaryEnabled": true
+    },
+    "endpoints": [
+      "/api/health",
+      "/readyz",
+      "/healthz",
+      "/api/culture-ship/health-cycle",
+      "/api/culture-ship/consciousness",
+      "/api/consciousness/culture-ship/status"
+    ],
+    "commands": {
+      "dev:minimal": "cross-env NODE_ENV=development TMPDIR=/tmp PORT=5002 SIMULATEDVERSE_PORT=5002 node --env-file=.env --import tsx/esm server/minimal_server.ts",
+      "surfaces:ensure": "bash ops/ensure-local-surfaces.sh",
+      "ops:health": "bash ops/health-checks.sh",
+      "chatdev:health": "npx --yes tsx ops/chatdev/health.ts"
+    }
+  }
+}

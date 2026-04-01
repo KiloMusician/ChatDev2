@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>TK_UseLatticeTerminal</defName>
+    <label>use Lattice terminal</label>
+    <description>Interface with a Lattice Terminal or Console to upload experience logs to the Terminal Depths ecosystem.</description>
+    <driverClass>TerminalKeeper.JobDriver_UseLatticeTerminal</driverClass>
+    <reportString>interfacing with the Lattice terminal.</reportString>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+    <collideWithPawns>false</collideWithPawns>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>TK_DownloadBlueprint</defName>
+    <label>download AI blueprint</label>
+    <description>Download a colony blueprint from the AI Council via the Lattice Console.</description>
+    <driverClass>TerminalKeeper.JobDriver_DownloadBlueprint</driverClass>
+    <reportString>downloading AI Council blueprint.</reportString>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+    <collideWithPawns>false</collideWithPawns>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>TK_CouncilVoteSession</defName>
+    <label>AI Council vote</label>
+    <description>Participate in an AI Council strategy vote via the Lattice Console. The result may redirect colony priorities.</description>
+    <driverClass>TerminalKeeper.JobDriver_CouncilVoteSession</driverClass>
+    <reportString>attending AI Council session.</reportString>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+    <collideWithPawns>false</collideWithPawns>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+</Defs>

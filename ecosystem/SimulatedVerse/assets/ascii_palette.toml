@@ -1,0 +1,23 @@
+[blocks]
+solid = "█"
+shade_light = "░"
+shade_mid   = "▒"
+shade_dark  = "▓"
+quad        = "▖▗▘▙"
+half        = { up = "▀", down = "▄", left = "▌", right = "▐" }
+braille     = "⠀⠁⠂⠄⡀⠈⠐⠠⢀⣀"  # representative set
+
+[colors]
+accent_a = [  50, 200, 255 ]
+accent_b = [ 255, 120,  80 ]
+good     = [ 120, 220, 120 ]
+warn     = [ 255, 210,  90 ]
+bad      = [ 255,  90, 120 ]
+text_bright = [ 255, 255, 255 ]
+text_dim = [ 128, 128, 128 ]
+
+[unicode_sets]
+box        = "│─┌┐└┘├┤┬┴┼"
+arrows     = "←↑→↓↖↗↘↙"
+runes      = "ᚠᚢᚦᚨᚱᚲ"
+sextants   = "🬀🬁🬂🬃🬄🬅🬆🬇"  # Symbols for Legacy Computing (if supported)

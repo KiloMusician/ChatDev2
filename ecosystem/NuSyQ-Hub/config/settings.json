@@ -1,0 +1,41 @@
+{
+  "chatdev": {
+    "path": "C:/Users/keath/Desktop/Legacy/ChatDev_CORE/ChatDev-main"
+  },
+  "ollama": {
+    "host": "http://localhost:11434",
+    "path": ""
+  },
+  "vscode": {
+    "path": ""
+  },
+  "context_server": {
+    "host": "127.0.0.1",
+    "port": 11434
+  },
+  "timeouts": {
+    "default": 30,
+    "long": 300
+  },
+  "feature_flags": {
+    "enable_chatdev": true,
+    "enable_ollama": true,
+    "experimental_mode": false,
+    "enable_token_optimization": true,
+    "enable_consciousness_tracking": true
+  },
+  "token_optimization": {
+    "enabled": true,
+    "sns_core_enabled": true,
+    "zero_token_enabled": true,
+    "auto_optimize_mcp_calls": true,
+    "auto_optimize_ollama_calls": true,
+    "metrics_tracking": true
+  },
+  "consciousness": {
+    "enabled": true,
+    "track_agent_consciousness": true,
+    "consciousness_aware_routing": true,
+    "temple_of_knowledge_path": "data/temple_of_knowledge"
+  }
+}

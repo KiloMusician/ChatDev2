@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuSyQ Error Signal Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #e0e0e0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0.7;
+            font-size: 0.9em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .metric-label {
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .error-count { color: #ff6b6b; }
+        .warning-count { color: #ffd93d; }
+        .info-count { color: #6bcf7f; }
+        .total-count { color: #a8dadc; }
+
+        .source-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .source-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #a8dadc;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b 0%, #ffd93d 50%, #6bcf7f 100%);
+            transition: width 0.5s ease;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+
+        .delta-positive { color: #ff6b6b; }
+        .delta-negative { color: #6bcf7f; }
+        .delta-zero { color: #a8dadc; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-clean {
+            background: #6bcf7f;
+            color: #000;
+        }
+
+        .status-errors {
+            background: #ff6b6b;
+            color: #fff;
+        }
+
+        .status-warnings {
+            background: #ffd93d;
+            color: #000;
+        }
+
+        .refresh-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 NuSyQ Error Signal Dashboard</h1>
+        <div class="subtitle">Single Source of Truth for All Agents</div>
+        <div class="last-updated" id="lastUpdated">Loading...</div>
+
+        <button class="refresh-btn" onclick="loadDiagnostics()">🔄 Refresh Diagnostics</button>
+
+        <!-- VSCode Ground Truth -->
+        <div class="grid">
+            <div class="card" id="vscodeCard">
+                <div class="card-title">
+                    <span class="icon">🎯</span>
+                    <span>VSCode Ground Truth</span>
+                </div>
+                <div id="vscodeContent">Loading...</div>
+            </div>
+
+            <!-- Command-Line Linters -->
+            <div class="card" id="lintersCard">
+                <div class="card-title">
+                    <span class="icon">🛠️</span>
+                    <span>Command-Line Linters</span>
+                </div>
+                <div id="lintersContent">Loading...</div>
+            </div>
+
+            <!-- Comparison -->
+            <div class="card" id="comparisonCard">
+                <div class="card-title">
+                    <span class="icon">📊</span>
+                    <span>Comparison</span>
+                </div>
+                <div id="comparisonContent">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Sources Breakdown -->
+        <div class="card" id="sourcesCard">
+            <div class="card-title">
+                <span class="icon">📋</span>
+                <span>Diagnostic Sources</span>
+            </div>
+            <div id="sourcesContent">Loading...</div>
+        </div>
+
+        <!-- Repository Breakdown -->
+        <div class="card" id="reposCard">
+            <div class="card-title">
+                <span class="icon">📦</span>
+                <span>Repository Breakdown</span>
+            </div>
+            <div id="reposContent">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        async function loadDiagnostics() {
+            try {
+                // Load VSCode diagnostics
+                const vscodeResp = await fetch('../../state/vscode_diagnostics.json');
+                const vscode = await vscodeResp.json();
+
+                // Load unified errors
+                const unifiedResp = await fetch('../../state/unified_errors.json');
+                const unified = await unifiedResp.json();
+
+                renderDashboard(vscode, unified);
+            } catch (error) {
+                console.error('Error loading diagnostics:', error);
+                document.getElementById('vscodeContent').innerHTML =
+                    '<p style="color: #ff6b6b;">❌ Failed to load diagnostics. Run: python scripts/vscode_diagnostics_bridge.py</p>';
+            }
+        }
+
+        function renderDashboard(vscode, unified) {
+            // Last updated
+            document.getElementById('lastUpdated').textContent =
+                `Last updated: ${new Date(vscode.timestamp).toLocaleString()}`;
+
+            // VSCode ground truth
+            const vscodeStatus = vscode.errors === 0 ? 'clean' : (vscode.errors < 100 ? 'warnings' : 'errors');
+            document.getElementById('vscodeContent').innerHTML = `
+                <div class="metric">
+                    <span class="metric-label">Status</span>
+                    <span class="status-badge status-${vscodeStatus}">
+                        ${vscode.errors === 0 ? '✅ Clean' : `❌ ${vscode.errors} Errors`}
+                    </span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Errors</span>
+                    <span class="metric-value error-count">${vscode.errors}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Warnings</span>
+                    <span class="metric-value warning-count">${vscode.warnings}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Infos</span>
+                    <span class="metric-value info-count">${vscode.infos}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Total</span>
+                    <span class="metric-value total-count">${vscode.total}</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${Math.min(100, vscode.total / 10)}%"></div>
+                </div>
+            `;
+
+            // Linters
+            const linters = unified.totals;
+            document.getElementById('lintersContent').innerHTML = `
+                <div class="metric">
+                    <span class="metric-label">Errors</span>
+                    <span class="metric-value error-count">${linters.errors}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Warnings</span>
+                    <span class="metric-value warning-count">${linters.warnings}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Total</span>
+                    <span class="metric-value total-count">${linters.total}</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${Math.min(100, linters.total / 35)}%"></div>
+                </div>
+            `;
+
+            // Comparison
+            const vscodeVsTruth = unified.vscode_truth || {};
+            const delta = vscode.errors - (vscodeVsTruth.errors || 0);
+            const deltaClass = delta > 0 ? 'delta-positive' : (delta < 0 ? 'delta-negative' : 'delta-zero');
+
+            document.getElementById('comparisonContent').innerHTML = `
+                <div class="metric">
+                    <span class="metric-label">VSCode vs Linters</span>
+                    <span class="metric-value ${deltaClass}">
+                        ${delta > 0 ? '+' : ''}${delta} errors
+                    </span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Agreement</span>
+                    <span class="metric-value">
+                        ${Math.abs(delta) < 50 ? '✅ Close' : '⚠️ Divergent'}
+                    </span>
+                </div>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Metric</th>
+                        <th>VSCode</th>
+                        <th>Linters</th>
+                        <th>Delta</th>
+                    </tr>
+                    <tr>
+                        <td>Errors</td>
+                        <td class="error-count">${vscode.errors}</td>
+                        <td class="error-count">${linters.errors}</td>
+                        <td class="${vscode.errors - linters.errors > 0 ? 'delta-positive' : 'delta-negative'}">
+                            ${vscode.errors - linters.errors > 0 ? '+' : ''}${vscode.errors - linters.errors}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Warnings</td>
+                        <td class="warning-count">${vscode.warnings}</td>
+                        <td class="warning-count">${linters.warnings}</td>
+                        <td class="${vscode.warnings - linters.warnings > 0 ? 'delta-positive' : 'delta-negative'}">
+                            ${vscode.warnings - linters.warnings > 0 ? '+' : ''}${vscode.warnings - linters.warnings}
+                        </td>
+                    </tr>
+                </table>
+            `;
+
+            // Sources breakdown
+            const sources = vscode.by_source || {};
+            let sourcesHtml = '';
+            for (const [source, counts] of Object.entries(sources)) {
+                const total = Object.values(counts).reduce((a, b) => a + b, 0);
+                sourcesHtml += `
+                    <div class="source-card">
+                        <div class="source-name">${source}</div>
+                        <div class="metric">
+                            <span>Total Issues</span>
+                            <span class="metric-value total-count">${total}</span>
+                        </div>
+                        ${Object.entries(counts).map(([severity, count]) => `
+                            <div class="metric">
+                                <span>${severity}</span>
+                                <span class="metric-value ${severity.replace('s', '')}-count">${count}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            document.getElementById('sourcesContent').innerHTML = sourcesHtml;
+
+            // Repository breakdown
+            const repos = unified.repositories || {};
+            let reposHtml = '';
+            for (const [repo, data] of Object.entries(repos)) {
+                reposHtml += `
+                    <div class="source-card">
+                        <div class="source-name">📁 ${repo}</div>
+                        <div class="metric">
+                            <span>Errors</span>
+                            <span class="metric-value error-count">${data.errors}</span>
+                        </div>
+                        <div class="metric">
+                            <span>Warnings</span>
+                            <span class="metric-value warning-count">${data.warnings}</span>
+                        </div>
+                        <div class="metric">
+                            <span>Total</span>
+                            <span class="metric-value total-count">${data.total}</span>
+                        </div>
+                        <div style="margin-top: 10px; opacity: 0.7; font-size: 0.9em;">
+                            Sources: ${data.sources.join(', ')}
+                        </div>
+                    </div>
+                `;
+            }
+            document.getElementById('reposContent').innerHTML = reposHtml;
+        }
+
+        // Load on page load
+        loadDiagnostics();
+
+        // Auto-refresh every 5 minutes
+        setInterval(loadDiagnostics, 300000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{
+  "generated_at": "2025-12-26T09:19:20.096385+00:00",
+  "steps": [
+    {
+      "step": "pu_queue_check",
+      "timestamp": "2025-12-26T09:19:20.063290+00:00",
+      "payload": {
+        "pending": 0,
+        "total": 47,
+        "auto_cycle_ran": false
+      }
+    },
+    {
+      "step": "gap_audit",
+      "timestamp": "2025-12-26T09:19:20.078283+00:00",
+      "payload": {
+        "status": "ok",
+        "sectors": 7,
+        "gaps": 2
+      }
+    },
+    {
+      "step": "quest_replay",
+      "timestamp": "2025-12-26T09:19:20.085312+00:00",
+      "payload": {
+        "replay": {
+          "status": "success",
+          "quests_analyzed": 1,
+          "patterns": {
+            "intent_type_frequency": {
+              "system_health_achieved": 1
+            },
+            "system_states": [
+              {
+                "broken_files": 0,
+                "working_files": 346,
+                "timestamp": "2025-12-24T06:59:05.560589"
+              }
+            ],
+            "temporal_patterns": []
+          },
+          "success_factors": [
+            "Successful quests average 346 working files",
+            "\u2705 Low broken file count correlates with success"
+          ],
+          "failure_factors": [
+            "No specific failure patterns identified yet"
+          ],
+          "recommendations": [
+            "\ud83d\udccc Most common intent type: 'system_health_achieved' - optimize for this case",
+            "\u2705 Successful quests average 346 working files",
+            "\u2705 \u2705 Low broken file count correlates with success"
+          ],
+          "timestamp": "2025-12-26T02:19:20.082284"
+        },
+        "work_queue": {
+          "status": "success",
+          "total_items": 4,
+          "completed": 3,
+          "failed": 0,
+          "overall_success_rate": 75.0,
+          "effort_analysis": {
+            "small": {
+              "total": 4,
+              "completed": 3,
+              "failed": 0,
+              "success_rate": 75.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "step": "metrics",
+      "timestamp": "2025-12-26T09:19:20.095821+00:00",
+      "payload": {
+        "status": "rebuilt",
+        "dashboard": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\docs\\Metrics\\dashboard.html"
+      }
+    },
+    {
+      "step": "zen_expand",
+      "timestamp": "2025-12-26T09:19:20.095821+00:00",
+      "payload": {
+        "status": "skipped"
+      }
+    }
+  ]
+}

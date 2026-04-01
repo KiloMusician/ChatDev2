@@ -1,0 +1,78 @@
+{
+  "basic_shelter": {
+    "costs": [
+      { "type": "resource", "id": "materials", "amount": 50 }
+    ],
+    "tier": 0,
+    "category": "survival",
+    "description": "Basic protection from the elements",
+    "effects": ["Provides shelter for 2 colonists", "Reduces weather damage by 50%"]
+  },
+  "power_generator": {
+    "costs": [
+      { "type": "resource", "id": "materials", "amount": 100 },
+      { "type": "resource", "id": "components", "amount": 25 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "basic_power" }
+    ],
+    "tier": 1,
+    "category": "power",
+    "description": "Generates electrical power for the colony",
+    "effects": ["Produces 50 power/sec", "Enables powered buildings"]
+  },
+  "nanofab_unit": {
+    "costs": [
+      { "type": "resource", "id": "materials", "amount": 200 },
+      { "type": "resource", "id": "components", "amount": 100 },
+      { "type": "energy", "id": "power", "amount": 100 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "cognitics.nanofab_online" }
+    ],
+    "tier": 2,
+    "category": "manufacturing",
+    "description": "Advanced molecular manufacturing unit",
+    "effects": ["Unlocks UI_M1_PANELS milestone", "Enables batch manufacturing", "2x component production speed"]
+  },
+  "research_lab": {
+    "costs": [
+      { "type": "resource", "id": "materials", "amount": 150 },
+      { "type": "resource", "id": "components", "amount": 50 }
+    ],
+    "requirements": [
+      { "type": "building", "id": "power_generator" }
+    ],
+    "tier": 1,
+    "category": "research",
+    "description": "Dedicated facility for scientific research",
+    "effects": ["Generates 2 research points/sec", "Unlocks advanced research trees"]
+  },
+  "defense_turret": {
+    "costs": [
+      { "type": "resource", "id": "materials", "amount": 75 },
+      { "type": "resource", "id": "components", "amount": 40 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "basic_defense" }
+    ],
+    "tier": 1,
+    "category": "defense",
+    "description": "Automated defensive turret",
+    "effects": ["Attacks hostile entities within range", "25 damage per shot", "360° rotation"]
+  },
+  "agent_pod": {
+    "costs": [
+      { "type": "resource", "id": "materials", "amount": 300 },
+      { "type": "resource", "id": "components", "amount": 150 },
+      { "type": "research", "id": "points", "amount": 250 }
+    ],
+    "requirements": [
+      { "type": "research", "id": "cognitics.agent_core" }
+    ],
+    "tier": 2,
+    "category": "cognitics",
+    "description": "Autonomous agent deployment system",
+    "effects": ["Unlocks UI_M2_ADVISOR milestone", "Spawns AI assistant agent", "Enables automated tasks"]
+  }
+}

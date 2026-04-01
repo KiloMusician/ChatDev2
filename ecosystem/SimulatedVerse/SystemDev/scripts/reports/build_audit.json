@@ -1,0 +1,26 @@
+{
+  "timestamp": 1756943415851,
+  "source_files": {
+    "total": 0,
+    "by_extension": {},
+    "by_directory": {}
+  },
+  "bundle_analysis": {
+    "entry_points": [],
+    "included_modules": [],
+    "excluded_modules": [],
+    "missing_dependencies": []
+  },
+  "coverage": {
+    "percentage": 0,
+    "included_count": 0,
+    "total_count": 0
+  },
+  "recommendations": [
+    "Low bundle coverage detected. Consider reviewing build configuration.",
+    "No entry points found. Ensure main application files are properly configured."
+  ],
+  "warnings": [
+    "Very low bundle coverage. Build may not include critical modules."
+  ]
+}

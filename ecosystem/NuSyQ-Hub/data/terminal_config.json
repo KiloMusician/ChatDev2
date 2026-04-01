@@ -1,0 +1,125 @@
+{
+  "last_updated": "2026-01-16T05:51:07.200942",
+  "terminals": {
+    "Claude": {
+      "name": "Claude",
+      "purpose": "Claude Code CLI agent interactions",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Claude-1768567867",
+      "created_at": "2026-01-16T05:51:07.195942"
+    },
+    "Copilot": {
+      "name": "Copilot",
+      "purpose": "GitHub Copilot agent actions",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Copilot-1768567867",
+      "created_at": "2026-01-16T05:51:07.196942"
+    },
+    "Codex": {
+      "name": "Codex",
+      "purpose": "OpenAI Codex agent operations",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Codex-1768567867",
+      "created_at": "2026-01-16T05:51:07.197942"
+    },
+    "ChatDev": {
+      "name": "ChatDev",
+      "purpose": "ChatDev multi-agent workflows",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "ChatDev-1768567867",
+      "created_at": "2026-01-16T05:51:07.197942"
+    },
+    "AI-Council": {
+      "name": "AI-Council",
+      "purpose": "Multi-AI coordination",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "AI-Council-1768567867",
+      "created_at": "2026-01-16T05:51:07.198941"
+    },
+    "Intermediary": {
+      "name": "Intermediary",
+      "purpose": "Background agent helper",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Intermediary-1768567867",
+      "created_at": "2026-01-16T05:51:07.198941"
+    },
+    "Errors": {
+      "name": "Errors",
+      "purpose": "System errors and exceptions",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Errors-1768567867",
+      "created_at": "2026-01-16T05:51:07.199942"
+    },
+    "Suggestions": {
+      "name": "Suggestions",
+      "purpose": "Agent suggestions",
+      "required": false,
+      "shell": "pwsh",
+      "persistent_id": null,
+      "created_at": null
+    },
+    "Tasks": {
+      "name": "Tasks",
+      "purpose": "Task queue and execution logs",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Tasks-1768567867",
+      "created_at": "2026-01-16T05:51:07.199942"
+    },
+    "Zeta": {
+      "name": "Zeta",
+      "purpose": "Zeta progress tracking",
+      "required": false,
+      "shell": "pwsh",
+      "persistent_id": null,
+      "created_at": null
+    },
+    "Agents": {
+      "name": "Agents",
+      "purpose": "General agent coordination",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Agents-1768567867",
+      "created_at": "2026-01-16T05:51:07.200942"
+    },
+    "Metrics": {
+      "name": "Metrics",
+      "purpose": "System metrics and telemetry",
+      "required": false,
+      "shell": "pwsh",
+      "persistent_id": null,
+      "created_at": null
+    },
+    "Anomalies": {
+      "name": "Anomalies",
+      "purpose": "Anomaly detection",
+      "required": false,
+      "shell": "pwsh",
+      "persistent_id": null,
+      "created_at": null
+    },
+    "Future": {
+      "name": "Future",
+      "purpose": "Future enhancements and R&D",
+      "required": false,
+      "shell": "pwsh",
+      "persistent_id": null,
+      "created_at": null
+    },
+    "Main": {
+      "name": "Main",
+      "purpose": "Primary system output",
+      "required": true,
+      "shell": "pwsh",
+      "persistent_id": "Main-1768567867",
+      "created_at": "2026-01-16T05:51:07.200942"
+    }
+  }
+}

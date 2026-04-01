@@ -1,0 +1,38 @@
+{
+  "scanRoots": ["attic", "containment", "attic/quarantine"],
+  "activeRoots": ["apps", "packages", "ops", "client", "server", "system", "scripts"],
+  "reportDir": "reports/triage",
+  "maxBytesKnowledge": 5242880,
+  "maxBytesAbility": 2097152,
+  "spamMinLines": 5000,
+  "dupBlockBytes": 65536,
+  "nearDupShingle": 8,
+  "codeExt": [".ts", ".tsx", ".js", ".jsx", ".py", ".json", ".yaml", ".yml", ".md", ".txt", ".gd", ".tscn", ".toml"],
+  "abilityHints": [
+    "OmniTag", "MegaTag", "RosettaStone", "QGL", "Msg⛛", "ΞNuSyQ", "SystemRoot",
+    "CultureShip", "Council", "SAGE", "ChatDev", "Ollama", "Provision", "ETag",
+    "Kardeshev", "Pantheon", "Vantages", "Idler", "ColonySim", "Tripartite", "Quadpartite"
+  ],
+  "abilityRegex": [
+    "(class|function|def)\\s+[A-Z][A-Za-z0-9_]+",
+    "export\\s+(const|function|class)\\s+",
+    "interface\\s+[A-Z][A-Za-z0-9_]+",
+    "const\\s+[A-Z_]{3,}\\s*=",
+    "godot|gdscript|extends|func\\s+[A-Za-z_][A-Za-z0-9_]*"
+  ],
+  "knowledgeRegex": [
+    "^(#|//|/\\*|\\*)\\s*(Spec|Design|Protocol|Playbook|Manifesto|Lexicon|Glossary)",
+    "(Lexicon|Glossary|Protocol|Playbook|Temple|Vantage|Council|Culture[- ]?Ship)",
+    "(OmniTag|MegaTag|RosettaStone|QGL)"
+  ],
+  "spamRegex": [
+    "(^|\\s)(lorem ipsum|asdf|qwerty|zzzz|null null null|test test test)(\\s|$)",
+    "(PLACEHOLDER|TODO|FIXME){3,}",
+    "(====+|----+|\\*\\*\\*\\*\\*){5,}"
+  ],
+  "reintegrationTargets": {
+    "abilities": "packages/abilities",
+    "knowledge": "knowledge/lexicon",
+    "spam": "attic/spam"
+  }
+}

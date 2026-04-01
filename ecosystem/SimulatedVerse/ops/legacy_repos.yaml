@@ -1,0 +1,15 @@
+repos:
+  - name: nusyq-legacy-1
+    url: https://github.com/corelink-foundation/nusyq-hub.git
+    sparse:
+      - "ml"
+      - "notebooks"
+      - "pipeline"
+      - "models"
+      - "docs"
+  - name: nusyq-legacy-2
+    url: https://github.com/corelink-foundation/legacy-ml.git
+    sparse:
+      - "ml"
+      - "ai"
+      - "lab"

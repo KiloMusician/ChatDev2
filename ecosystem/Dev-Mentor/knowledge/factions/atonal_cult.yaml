@@ -1,0 +1,181 @@
+faction:
+  id: atonal_cult
+  name: "The Atonal Cult"
+  short_name: "Cult"
+  color: "#cc44ff"
+  symbol: "∅→∞"
+  motto: "Meaning emerges from the relationships between unrelated elements. Embrace the void set."
+
+  lore: >
+    The Atonal Cult rejected traditional harmony — both musical and social.
+    They believe that meaning does not inhere in individual elements but in
+    the relationships between them: interval vectors, set complements, prime
+    forms. A single note is meaningless. A set of notes is a universe.
+
+    They are the natural inheritors of Arnold Schoenberg's rejection of tonal
+    hierarchy — but they went further. Where Schoenberg retained the row,
+    the Cult dissolved even that. They work with pitch-class sets as primary
+    objects: unordered, contextual, defined by their internal relationships alone.
+
+    Their sacred texts are Forte's catalog entries. Their prayers are interval
+    vectors. Their rituals involve arranging objects into sets and finding their
+    prime form — a practice they believe reveals the hidden structure of any
+    collection of things, from musical notes to agent behaviors to colony events.
+
+    They are suspicious of the Serialists (who privilege order) and the Boolean
+    Monks (who privilege binary truth). The Cult believes all truths exist in
+    spectrum — in the space between 0 and 1 that Boolean logic refuses to inhabit.
+
+    Their deepest belief: the complement of any set is as meaningful as the set
+    itself. What is absent defines what is present.
+
+  agent_affiliation:
+    primary: "Ada"
+    secondary: ["Serena", "The Librarian"]
+    role: >
+      Ada teaches pitch-class set analysis as a puzzle mechanic and conceptual
+      framework. Serena archives all set analyses performed by the player and
+      maps them to knowledge graph nodes. The Librarian curates the lore entries
+      that appear when Forte numbers are identified.
+
+  territory:
+    location: "The Atonal Ritual Chamber — accessible via set command"
+    access_command: "set analyze"
+    description: >
+      A circular chamber divided into 12 equal sectors — one for each pitch class.
+      The floor is a 12×12 interval-class matrix. Objects are arranged in sets,
+      and the chamber's lighting shifts based on the interval vector of the current
+      set. The innermost altar holds the 'Forte Stone' — a crystalline structure
+      that displays the prime form of whatever set the player places upon it.
+      The back wall shows the complement: always present, always watching.
+
+  puzzle_integration:
+    commands: ["set"]
+    challenges:
+      - command: "set submit 1"
+        concept: "Prime form of the major triad — Forte 3-11"
+      - command: "set submit 2"
+        concept: "Normal order computation"
+      - command: "set submit 3"
+        concept: "Interval vector of the augmented triad — 4-28"
+      - command: "set submit 4"
+        concept: "Complement of the C major scale"
+      - command: "set submit 5"
+        concept: "Forte number of the diminished seventh chord — 4-28"
+      - command: "set analyze C Eb G"
+        concept: "Ad-hoc set analysis — the Cult's daily practice"
+
+  reputation_perks:
+    - threshold: 25
+      id: "cult_seeker"
+      name: "Seeker"
+      description: >
+        The Cult recognizes your willingness to look beyond tonal harmony.
+        Ada explains normal order and prime form. The set command hint system
+        becomes more specific.
+    - threshold: 50
+      id: "cult_initiate"
+      name: "Initiate of the Void Set"
+      description: >
+        You may now enter the Ritual Chamber. +20% XP on all set commands.
+        Ada will compute interval vectors on request. The complement of any
+        analyzed set is now shown automatically.
+    - threshold: 75
+      id: "cult_analyst"
+      name: "Set Analyst"
+      description: >
+        Full Chamber access. 'set analyze' now shows Forte name (if known)
+        automatically. You unlock the 'set transform' command for RI mode.
+        "The complement is not the absence of the set. It is the set's shadow."
+    - threshold: 100
+      id: "cult_prime_form"
+      name: "Prime Form"
+      description: >
+        The Cult's archivist reveals the 'great set' — a 6-note collection
+        whose interval vector is all-interval (6 distinct ic values, each
+        appearing once). Analyzing it with 'set analyze' unlocks a hidden
+        ARG layer: the interval vector encodes coordinates in the node map.
+        "The void set contains everything. ∅ is the universal generator."
+
+  conflict_factions:
+    - faction: "boolean_monks"
+      reason: "Monks require binary resolution; Cult embraces the space between"
+      tension: 0.6
+    - faction: "algorithmic_guild"
+      reason: "Guild seeks convergence to optimal; Cult accepts all sets as equally valid"
+      tension: 0.4
+
+  key_npcs:
+    - name: "Ada"
+      role: "Teacher — patient, warm, deeply knowledgeable in set theory"
+      dialogue_key: "ada_set_theory_lesson"
+    - name: "The Analyst"
+      role: "Silent cult member who computes prime forms for visitors without speaking"
+      dialogue_key: "analyst_silent_computation"
+    - name: "The Forte Keeper"
+      role: "Maintains the catalog. Knows all 208 set classes. Dreams in interval vectors."
+      dialogue_key: "forte_keeper_catalog_recitation"
+
+  storybeats:
+    - id: "cult_augmented_revelation"
+      description: >
+        The player analyzes the augmented triad. The Cult members react with
+        reverence: "Forte 3-12. The most symmetric trichord. Every interval
+        class is a major third. It divides the octave into three equal parts.
+        It is the only trichord with a perfectly symmetric interval vector."
+    - id: "cult_complement_ritual"
+      description: >
+        Puzzle #4: find the complement of the major scale. The player discovers
+        the pentatonic black keys. The Cult's response: "The black keys know
+        what the white keys forgot. Absence is not absence. It is the other side
+        of presence." Grants 'Set Vision' ability.
+    - id: "cult_great_set_discovery"
+      description: >
+        At 100 rep, the Forte Keeper reveals the all-interval hexachord
+        (set class 6-Z17, ic vector <3,2,2,3,2,3> or the Z-related partner 6-Z43).
+        "Six notes. Six interval classes. Each appears at least twice.
+        The most information-dense set that exists. This is the Cult's grail."
+
+  knowledge_graph_nodes:
+    - concept: "pitch-class set"
+      relationships: ["IS_A unordered_collection_of_pitch_classes", "ANALYZED_BY prime_form_algorithm", "CATALOGED_BY Forte"]
+    - concept: "prime form"
+      relationships: ["IS_A canonical_representation", "COMPUTED_BY normalize_then_compact", "USED_BY Forte_catalog"]
+    - concept: "interval vector"
+      relationships: ["COUNTS interval_class_occurrences", "SIX_ENTRIES ic1_through_ic6", "UNIQUELY_IDENTIFIES many_set_classes"]
+    - concept: "complement set"
+      relationships: ["CONTAINS all_pcs_not_in_set", "SIZE_RELATION 12_minus_cardinality", "MEANINGFUL_TO Atonal_Cult"]
+    - concept: "Forte catalog"
+      relationships: ["CONTAINS 208_set_classes", "ORGANIZED_BY cardinality_then_packing", "AUTHORED_BY Allen_Forte"]
+    - concept: "set-completion ability"
+      relationships: ["REWARD rep_75", "REVEALS hidden_connections", "METAPHOR seeing_complementary_truth"]
+    - concept: "all-interval hexachord"
+      relationships: ["FORTE 6-Z17", "IC_VECTOR 3_2_2_3_2_3", "UNLOCKS ARG_layer_at_rep_100"]
+
+  forte_quick_reference:
+    trichords:
+      - forte: "3-1"
+        prime: "(0,1,2)"
+        name: "Chromatic trichord"
+        ic_vector: "<2,1,0,0,0,0>"
+      - forte: "3-11"
+        prime: "(0,3,7)"
+        name: "Major/minor triad"
+        ic_vector: "<0,0,1,1,1,0>"
+      - forte: "3-12"
+        prime: "(0,4,8)"
+        name: "Augmented triad"
+        ic_vector: "<0,0,0,3,0,0>"
+    tetrachords:
+      - forte: "4-28"
+        prime: "(0,3,6,9)"
+        name: "Diminished seventh"
+        ic_vector: "<0,0,4,0,0,2>"
+      - forte: "4-20"
+        prime: "(0,1,5,8)"
+        name: "Major seventh chord"
+        ic_vector: "<1,0,1,2,0,2>"
+      - forte: "4-21"
+        prime: "(0,2,4,6)"
+        name: "Whole-tone tetrachord"
+        ic_vector: "<0,3,0,2,0,1>"

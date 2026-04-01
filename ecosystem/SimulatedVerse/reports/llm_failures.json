@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-09-03T04:50:40+00:00",
+  "protocol": "ΞNuSyQ-prime⁴",
+  "backends": {
+    "ollama": {
+      "status": "unreachable",
+      "code": "ECONN",
+      "ρ_b": 1.0,
+      "next_eta": "2025-09-03T04:55:40+00:00"
+    },
+    "gateway": {
+      "status": "fallback_ready", 
+      "code": "available",
+      "ρ_b": 0.0
+    },
+    "openai": {
+      "status": "rate_limited",
+      "code": "429",
+      "ρ_b": 0.8,
+      "next_eta": "2025-09-03T05:00:40+00:00"
+    }
+  },
+  "cascade_result": "OPENAI_FALLBACK_ONCE",
+  "tier0_principle": "down_not_terminal"
+}

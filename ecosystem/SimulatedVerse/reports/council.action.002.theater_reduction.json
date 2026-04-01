@@ -1,0 +1,11 @@
+{
+  "id": "action.theater_score_reduction", 
+  "who": "Raven",
+  "intent": "Reduce theater score from 1.00 to <0.2 with measurable artifacts",
+  "target": "3853 placeholders + 3851 TODOs + 1257 hardcoded errors",
+  "proof_gate": "Theater score <0.2 AND working code replaces stubs AND tests pass",
+  "eta": "45 minutes",
+  "cooldown": "progressive per fix",
+  "priority": 2,
+  "blockers_addressed": ["high_theater_score", "placeholder_explosion", "broken_error_handling"]
+}

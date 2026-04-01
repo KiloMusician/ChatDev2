@@ -1,0 +1,15 @@
+id: "004_pantheon_birth"
+name: "ASCII Pantheon: Birth"
+tier: 8
+effects:
+  - kind: "unlock"
+    key: "pantheon.visible"
+spawns:
+  - when: { energy_gte: 75 }
+    create:
+      id: "009_pantheon_whisper"
+      name: "Pantheon Whisper"
+      tier: 8
+      effects:
+        - kind: "boost"
+          tau_mult: 1.0015

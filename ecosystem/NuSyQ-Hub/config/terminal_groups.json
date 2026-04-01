@@ -1,0 +1,266 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-12-26T00:00:00Z",
+  "agent_terminals": {
+    "claude": {
+      "name": "🤖 Claude",
+      "purpose": "Claude agent execution, analysis, code generation",
+      "icon": "robot",
+      "color": "terminal.ansiCyan",
+      "auto_commands": [
+        "echo '=== Claude Agent Terminal ==='",
+        "echo 'Monitoring: code changes, analysis output'"
+      ],
+      "routes": ["claude", "claude logs", "anthropic", "sonnet", "claude_code"],
+      "persistent": true
+    },
+    "copilot": {
+      "name": "🧩 Copilot",
+      "purpose": "GitHub Copilot agent execution, suggestions, completions",
+      "icon": "github-action",
+      "color": "terminal.ansiGreen",
+      "auto_commands": [
+        "echo '=== Copilot Agent Terminal ==='",
+        "echo 'Monitoring: suggestions, completions, refactorings'"
+      ],
+      "routes": ["copilot", "github_copilot", "gh_copilot", "github copilot"],
+      "persistent": true
+    },
+    "codex": {
+      "name": "🧠 Codex",
+      "purpose": "OpenAI Codex agent execution, transformations",
+      "icon": "code",
+      "color": "terminal.ansiMagenta",
+      "auto_commands": [
+        "echo '=== Codex Agent Terminal ==='",
+        "echo 'Monitoring: code transformations, migrations'"
+      ],
+      "routes": ["codex", "openai_codex", "gpt_code", "openai", "gpt"],
+      "persistent": true
+    },
+    "chatdev": {
+      "name": "🏗️ ChatDev",
+      "purpose": "ChatDev multi-agent team coordination",
+      "icon": "organization",
+      "color": "terminal.ansiYellow",
+      "auto_commands": [
+        "echo '=== ChatDev Multi-Agent Terminal ==='",
+        "echo 'Monitoring: CEO, CTO, Designer, Coder, Tester comms'"
+      ],
+      "routes": ["chatdev", "chat dev", "multi_agent", "software_company"],
+      "persistent": true
+    },
+    "ai_council": {
+      "name": "🏛️ AI Council",
+      "purpose": "AI Council deliberations and consensus runs",
+      "icon": "law",
+      "color": "terminal.ansiBlue",
+      "auto_commands": [
+        "echo '=== AI Council Deliberation Terminal ==='",
+        "echo 'Monitoring: votes, debates, consensus decisions'"
+      ],
+      "routes": ["council", "ai_council", "consensus", "deliberation", "vote"],
+      "persistent": true
+    },
+    "intermediary": {
+      "name": "🔗 Intermediary",
+      "purpose": "Cross-agent communication, routing, coordination",
+      "icon": "git-pull-request",
+      "color": "terminal.ansiWhite",
+      "auto_commands": [
+        "echo '=== Intermediary Communication Hub ==='",
+        "echo 'Monitoring: inter-agent messages, coordination events'"
+      ],
+      "routes": ["intermediary", "router", "bridge", "coordinator", "handoff"],
+      "persistent": true
+    },
+    "culture_ship": {
+      "name": "🛡️ Culture Ship",
+      "purpose": "Culture ship strategy, oversight, and ecosystem guidance",
+      "icon": "shield",
+      "color": "terminal.ansiBlue",
+      "auto_commands": [
+        "echo '=== Culture Ship Terminal ==='",
+        "echo 'Monitoring: strategic audits, governance, ecosystem guidance'"
+      ],
+      "routes": ["culture_ship", "culture ship", "strategic_advisor", "strategic advisor"],
+      "agents": ["Culture Ship"],
+      "persistent": true
+    },
+    "moderator": {
+      "name": "⚖️ Moderator",
+      "purpose": "Moderation, review, and governance workflows",
+      "icon": "law",
+      "color": "terminal.ansiYellow",
+      "auto_commands": [
+        "echo '=== Moderator Terminal ==='",
+        "echo 'Monitoring: moderation, review, and governance actions'"
+      ],
+      "routes": ["moderator", "moderation", "governance"],
+      "agents": ["Moderator"],
+      "persistent": true
+    },
+    "chatgpt_bridge": {
+      "name": "🌉 ChatGPT Bridge",
+      "purpose": "ChatGPT bridge status, routing, and bridge-side telemetry",
+      "icon": "globe",
+      "color": "terminal.ansiWhite",
+      "auto_commands": [
+        "echo '=== ChatGPT Bridge Terminal ==='",
+        "echo 'Monitoring: bridge routing and ChatGPT bridge telemetry'"
+      ],
+      "routes": ["chatgpt_bridge", "chatgpt bridge", "chatgpt"],
+      "agents": ["ChatGPT Bridge"],
+      "persistent": true
+    },
+    "simulatedverse": {
+      "name": "🎮 SimulatedVerse",
+      "purpose": "SimulatedVerse bridge, world-state sync, and game/runtime telemetry",
+      "icon": "game",
+      "color": "terminal.ansiMagenta",
+      "auto_commands": [
+        "echo '=== SimulatedVerse Terminal ==='",
+        "echo 'Monitoring: world-state sync and SimulatedVerse telemetry'"
+      ],
+      "routes": ["simulatedverse", "simulated verse", "simverse"],
+      "agents": ["SimulatedVerse"],
+      "persistent": true
+    },
+    "ollama": {
+      "name": "🦙 Ollama",
+      "purpose": "Ollama local model runtime and local-model telemetry",
+      "icon": "server",
+      "color": "terminal.ansiGreen",
+      "auto_commands": [
+        "echo '=== Ollama Terminal ==='",
+        "echo 'Monitoring: local models, responses, and runtime telemetry'"
+      ],
+      "routes": ["ollama", "local_llm", "local model"],
+      "agents": ["Ollama"],
+      "persistent": true
+    },
+    "lm_studio": {
+      "name": "🎨 LM Studio",
+      "purpose": "LM Studio OpenAI-compatible runtime and local-model telemetry",
+      "icon": "paintcan",
+      "color": "terminal.ansiCyan",
+      "auto_commands": [
+        "echo '=== LM Studio Terminal ==='",
+        "echo 'Monitoring: OpenAI-compatible runtime and LM Studio telemetry'"
+      ],
+      "routes": ["lm_studio", "lm studio", "lmstudio", "openai_compatible"],
+      "agents": ["LM Studio"],
+      "persistent": true
+    }
+  },
+  "operational_terminals": {
+    "errors": {
+      "name": "🔥 Errors",
+      "purpose": "Error output, exceptions, failures across all agents",
+      "icon": "bug",
+      "color": "terminal.ansiRed",
+      "auto_commands": ["echo '=== Error Monitor Active ==='"],
+      "routes": ["error", "exception", "failed", "stderr", "traceback"],
+      "persistent": true
+    },
+    "suggestions": {
+      "name": "💡 Suggestions",
+      "purpose": "Next steps, recommendations from all agents",
+      "icon": "lightbulb",
+      "color": "terminal.ansiYellow",
+      "auto_commands": ["echo '=== Suggestion Stream Active ==='"],
+      "routes": ["suggest", "recommend", "next_steps", "hint", "todo"],
+      "persistent": true
+    },
+    "tasks": {
+      "name": "✅ Tasks",
+      "purpose": "Task execution, work queue, PU processing",
+      "icon": "checklist",
+      "color": "terminal.ansiCyan",
+      "auto_commands": ["echo '=== Task Execution Monitor ==='"],
+      "routes": ["task", "pu_queue", "work_queue", "processing", "job"],
+      "persistent": true
+    },
+    "tests": {
+      "name": "🧪 Tests",
+      "purpose": "Test execution, pytest output, coverage and test diagnostics",
+      "icon": "beaker",
+      "color": "terminal.ansiGreen",
+      "auto_commands": ["echo '=== Test Runner Monitor ==='"],
+      "routes": [
+        "pytest",
+        "tests/",
+        "test suite",
+        "coverage",
+        "xfailed",
+        "xpassed",
+        "test run"
+      ],
+      "persistent": true
+    },
+    "zeta": {
+      "name": "🎯 Zeta",
+      "purpose": "Zeta orchestration, autonomous cycles, meta-operations",
+      "icon": "target",
+      "color": "terminal.ansiMagenta",
+      "auto_commands": ["echo '=== Zeta Autonomous Control ==='"],
+      "routes": ["zeta", "autonomous", "orchestrat", "cycle", "meta"],
+      "persistent": true
+    },
+    "agents": {
+      "name": "🤖 Agents",
+      "purpose": "Multi-agent coordination, AI systems",
+      "icon": "robot",
+      "color": "terminal.ansiGreen",
+      "auto_commands": ["echo '=== Agent Coordination Hub ==='"],
+      "routes": ["agent", "ai_", "ollama", "multi-agent"],
+      "persistent": true
+    },
+    "metrics": {
+      "name": "📊 Metrics",
+      "purpose": "Cultivation metrics, health monitoring, dashboards",
+      "icon": "graph",
+      "color": "terminal.ansiBlue",
+      "auto_commands": ["echo '=== Metrics & Health Monitor ==='"],
+      "routes": ["metric", "health", "dashboard", "monitor", "stats"],
+      "persistent": true
+    },
+    "anomalies": {
+      "name": "⚡ Anomalies",
+      "purpose": "Unusual events, orphaned processes, unexpected behaviors",
+      "icon": "zap",
+      "color": "terminal.ansiRed",
+      "auto_commands": ["echo '=== Anomaly Detection Active ==='"],
+      "routes": ["anomaly", "orphan", "unexpected", "zombie", "leak"],
+      "persistent": true
+    },
+    "future": {
+      "name": "🔮 Future",
+      "purpose": "Planned features, upcoming tasks, development roadmap",
+      "icon": "crystal_ball",
+      "color": "terminal.ansiWhite",
+      "auto_commands": ["echo '=== Future Development Stream ==='"],
+      "routes": ["future", "planned", "roadmap", "upcoming", "vision"],
+      "persistent": true
+    },
+    "main": {
+      "name": "🏠 Main",
+      "purpose": "Default terminal for general operations",
+      "icon": "home",
+      "color": "terminal.ansiWhite",
+      "auto_commands": ["echo '=== Main Terminal ==='"],
+      "routes": ["main", "default", "general", "snapshot", "status", "info"],
+      "persistent": true
+    },
+    "system": {
+      "name": "🖥️ System",
+      "purpose": "System status, diagnostics, and orchestration health",
+      "icon": "desktop-download",
+      "color": "terminal.ansiBlue",
+      "auto_commands": ["echo '=== System Terminal ==='"],
+      "routes": ["system", "doctor", "health", "status", "snapshot"],
+      "agents": ["MetaClaw", "OpenClaw", "SkyClaw"],
+      "persistent": true
+    }
+  }
+}

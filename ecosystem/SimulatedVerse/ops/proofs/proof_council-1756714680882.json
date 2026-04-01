@@ -1,0 +1,36 @@
+{
+  "id": "proof_council-1756714680882",
+  "job_id": "council-1756714680882",
+  "actor": "council",
+  "kind": "file",
+  "path": "ops/proofs/proof_council-1756714680882.json",
+  "sha256": "e7862d77c2df69c2410c4a2d68e86c98fa2dbfafa400d5b6fd0a96cdc14015e7",
+  "size": 1400,
+  "created_at": "2025-09-01T08:18:00.964Z",
+  "checks": [
+    {
+      "name": "exists",
+      "ok": true
+    },
+    {
+      "name": "schema",
+      "ok": true
+    },
+    {
+      "name": "nonempty",
+      "ok": false
+    }
+  ],
+  "verdict": "fail",
+  "proof": {
+    "job_id": "council-1756714680882",
+    "agent": "council",
+    "files": [],
+    "created_at": "2025-09-01T08:18:00.963Z",
+    "runner_exit_code": 1,
+    "runner_stdout": "",
+    "runner_stderr": "node:internal/modules/esm/get_format:189\n  throw new ERR_UNKNOWN_FILE_EXTENSION(ext, filepath);\n        ^\n\nTypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension \".ts\" for /home/runner/workspace/agents/council/index.ts\n    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:189:9)\n    at defaultGetFormat (node:internal/modules/esm/get_format:232:36)\n    at defaultLoad (node:internal/modules/esm/load:145:22)\n    at async ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:477:45)\n    at async ModuleJob._link (node:internal/modules/esm/module_job:110:19) {\n  code: 'ERR_UNKNOWN_FILE_EXTENSION'\n}\n\nNode.js v20.19.3\n"
+  },
+  "file_count": 0,
+  "total_bytes": 0
+}

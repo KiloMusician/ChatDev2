@@ -1,0 +1,211 @@
+{
+  "chatdev_autofix": {
+    "description": "Enable ChatDev auto-fix capabilities.",
+    "default": false,
+    "staging": true
+  },
+  "sns_enabled": {
+    "description": "Enable SNS-CORE notation for token optimization (60-85% reduction).",
+    "default": false,
+    "staging": true,
+    "production": true,
+    "token_savings_target": "60-85%",
+    "min_prompt_length": 50,
+    "note": "Enabled 2026-03-04. ChatDev pilot successful. See docs/diagnostics/ZERO_TOKEN_ENHANCEMENTS_ANALYSIS.md",
+    "enabled_date": "2026-03-04"
+  },
+  "sns_pilot_chatdev": {
+    "description": "SNS-CORE pilot for ChatDev agent-to-agent communication only.",
+    "default": true,
+    "staging": true,
+    "production": true,
+    "token_savings_target": "60-85%",
+    "scope": "chatdev_only",
+    "pilot_duration_days": 7,
+    "enabled_date": "2025-12-30"
+  },
+  "sns_metrics_collection": {
+    "description": "Collect token usage metrics for SNS vs traditional prompts.",
+    "default": true,
+    "staging": true,
+    "production": true,
+    "metrics": [
+      "token_count_before",
+      "token_count_after",
+      "latency_ms",
+      "accuracy_score"
+    ]
+  },
+  "chatdev_mcp_enabled": {
+    "description": "Expose ChatDev as MCP server for uniform agent coordination",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": true,
+    "requires_acl": false,
+    "dependencies": ["mcp_server_running"],
+    "documentation": "docs/integration/CHATDEV_MCP_SERVER.md",
+    "enabled_date": "2026-02-11",
+    "status": "production-ready",
+    "phase_a_complete": "2025-01-04"
+  },
+  "testing_chamber_enabled": {
+    "description": "Allow Testing Chamber operations for isolated prototyping",
+    "default": true,
+    "development": true,
+    "requires_acl": false,
+    "documentation": "docs/Testing_Chamber_Pattern.md"
+  },
+  "consensus_mode_enabled": {
+    "description": "Multi-model consensus experiments across Ollama models",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "requires_acl": false,
+    "dependencies": ["ollama_running"],
+    "documentation": "docs/workflows/consensus_orchestration.md",
+    "enabled_date": "2026-03-15",
+    "note": "Enabled: Ollama confirmed online (10 models) + lmstudio online"
+  },
+  "quantum_resolver_enabled": {
+    "description": "Quantum problem resolution for advanced self-healing",
+    "default": true,
+    "development": true,
+    "production": true,
+    "requires_acl": false,
+    "documentation": "src/healing/quantum_problem_resolver.py"
+  },
+  "chatdev_tools_enabled": {
+    "description": "Allow ChatDev agents to invoke Hub utilities as tools",
+    "default": false,
+    "development": true,
+    "requires_acl": true,
+    "dependencies": ["chatdev_mcp_enabled"],
+    "documentation": "docs/integration/CHATDEV_TOOLS.md"
+  },
+  "project_auto_index_enabled": {
+    "description": "Auto-index completed ChatDev projects to RAG/quest system",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": true,
+    "requires_acl": false,
+    "dependencies": ["chatdev_running"],
+    "documentation": "docs/integration/CHATDEV_RAG_INTEGRATION.md",
+    "enabled_date": "2026-03-15",
+    "note": "Enabled: integrates with 4-tier embedding fallback (sentence-transformers/HF/OpenAI/Ollama)"
+  },
+  "overnight_safe_mode": {
+    "description": "Restricted operations for autonomous overnight work",
+    "default": false,
+    "development": true,
+    "production": true,
+    "requires_acl": false,
+    "documentation": ".github/instructions/COPILOT_INSTRUCTIONS_CONFIG.instructions.md"
+  },
+  "acl_enabled": {
+    "description": "Global ACL enforcement for sensitive integrations",
+    "default": false,
+    "development": true,
+    "staging": true,
+    "production": true,
+    "requires_acl": false
+  },
+  "chatdev_git_mode_enabled": {
+    "description": "Enable Git-aware ChatDev runs that commit generated projects",
+    "default": false,
+    "development": true,
+    "staging": true,
+    "requires_acl": true,
+    "dependencies": ["chatdev_mcp_enabled"]
+  },
+  "mcp_registry_enabled": {
+    "description": "Expose MCP registry/market JSON for orchestrator auto-routing",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "requires_acl": false
+  },
+  "trust_artifacts_enabled": {
+    "description": "Enable artifact ledger + run manifest + replay bundle for every agent run",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": false,
+    "requires_acl": false
+  },
+  "gateway_router_enabled": {
+    "description": "Enable universal LLM gateway and SwarmRouter facade over AgentRegistry/MCP",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": false,
+    "requires_acl": false
+  },
+  "sandbox_runner_enabled": {
+    "description": "Enable per-task sandbox/containers for agent runs",
+    "default": false,
+    "development": true,
+    "staging": true,
+    "requires_acl": true
+  },
+  "planning_discipline_enabled": {
+    "description": "Enable dual-plan + early-test + cost/time telemetry scaffolding",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": false,
+    "requires_acl": false
+  },
+  "mission_control_enabled": {
+    "description": "Enable Mission Control report generation and observability stubs",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": true,
+    "requires_acl": false,
+    "phase_8_complete": "2025-01-04"
+  },
+  "knowledge_reuse_enabled": {
+    "description": "Enable artifact ingest, pattern catalog, Three-Before-New checks",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": false,
+    "requires_acl": false
+  },
+  "policy_audit_enabled": {
+    "description": "Enable safety preflight/policy/PII checks before risky actions",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": false,
+    "requires_acl": true
+  },
+  "attestation_enabled": {
+    "description": "Enable manifest attestation/signing for runs",
+    "default": false,
+    "development": true,
+    "staging": true,
+    "production": false,
+    "requires_acl": true
+  },
+  "chatdev_ci_smoke_enabled": {
+    "description": "Allow slim ChatDev smoke tests via dockerized runner",
+    "default": false,
+    "development": true,
+    "requires_acl": false
+  },
+  "mjolnir_protocol_enabled": {
+    "description": "Enable MJOLNIR Protocol unified agent dispatch (ask/council/parallel/chain/delegate/queue/status)",
+    "default": true,
+    "development": true,
+    "staging": true,
+    "production": true,
+    "requires_acl": false,
+    "dependencies": [],
+    "documentation": "scripts/nusyq_dispatch.py",
+    "enabled_date": "2026-02-26",
+    "note": "Wraps AgentTaskRouter + GuildBoard + SNS-Core behind single CLI. Per-request --sns flag; global sns_enabled NOT required."
+  }
+}

@@ -1,0 +1,198 @@
+{
+  // ── Terminal Keeper: Lattice Colonists — RimWorld Development Workspace ────
+  // Focused view for working on the RimWorld mod + its AI bridge.
+  //
+  // What this workspace is for:
+  //   - TerminalKeeper C# mod development (mods/TerminalKeeper/)
+  //   - RimWorld ↔ Terminal Depths REST bridge
+  //   - Local LLM routing (RimGPT / RimTalk / RimChat → Ollama proxy)
+  //   - Mod compatibility layers (Harmony, HugsLib, JecsTools, VanillaExpanded)
+  //
+  // Port map:
+  //   7337  — Terminal Depths API (game commands, pawn registration, XP sync)
+  //   8000  — NuSyQ-Hub Agent API (agent mesh)
+  //   11434 — Ollama (local LLM — qwen2.5-coder:14b, qwen3-vl:8b)
+  //   1234  — LM Studio (openai/gpt-oss-20b, nomic-embed-text)
+  // ──────────────────────────────────────────────────────────────────────────
+
+  "folders": [
+    {
+      "name": "Dev-Mentor (TerminalKeeper host)",
+      "path": "C:/Users/keath/Dev-Mentor"
+    },
+    {
+      "name": "NuSyQ-Hub",
+      "path": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub"
+    }
+  ],
+
+  "settings": {
+    // ── Python ──────────────────────────────────────────────────────────────
+    "python.defaultInterpreterPath": "C:/Users/keath/AppData/Local/Programs/Python/Python312/python.exe",
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+
+    // ── C# (TerminalKeeper mod) ─────────────────────────────────────────────
+    // OmniSharp path — needed for C# IntelliSense in the mod source
+    // "omnisharp.dotnetPath": "C:/Program Files/dotnet/dotnet.exe",
+
+    // ── Git ──────────────────────────────────────────────────────────────────
+    "git.confirmSync": false,
+    "git.openRepositoryInParentFolders": "never",
+    "git.autoRepositoryDetection": false,
+
+    // ── Terminal ─────────────────────────────────────────────────────────────
+    "terminal.integrated.defaultProfile.windows": "TK: Dev",
+    "terminal.integrated.profiles.windows": {
+      "TK: Dev": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "terminal",
+        "color": "terminal.ansiGreen",
+        "env": {
+          "PYTHONPATH": "C:/Users/keath/Dev-Mentor",
+          "DM_ROLE": "rimworld_dev"
+        }
+      },
+      "TK: Game Server": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": [
+          "--login", "-i", "-c",
+          "cd C:/Users/keath/Dev-Mentor && python -m cli.devmentor serve --port 7337; exec bash"
+        ],
+        "icon": "game",
+        "color": "terminal.ansiMagenta",
+        "env": { "PYTHONPATH": "C:/Users/keath/Dev-Mentor", "PORT": "7337" }
+      },
+      "TK: RimWorld Logs": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": [
+          "--login", "-i", "-c",
+          "tail -f 'C:/Users/keath/AppData/LocalLow/Ludeon Studios/RimWorld by Ludeon Studios/Player.log'; exec bash"
+        ],
+        "icon": "output",
+        "color": "terminal.ansiYellow"
+      },
+      "TK: Mod Build": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": [
+          "--login", "-i", "-c",
+          "cd C:/Users/keath/Dev-Mentor/mods/TerminalKeeper && dotnet build Source/; exec bash"
+        ],
+        "icon": "wrench",
+        "color": "terminal.ansiCyan"
+      }
+    },
+
+    // ── File excludes ─────────────────────────────────────────────────────────
+    "files.watcherExclude": {
+      "**/.git/**":             true,
+      "**/node_modules/**":     true,
+      "**/__pycache__/**":      true,
+      "**/var/**":              true,
+      "**/state/**":            true,
+      "**/Assemblies/**":       true
+    },
+    "files.exclude": {
+      "**/__pycache__":         true,
+      "**/node_modules":        true
+    },
+
+    // ── Dev Containers (suppress for RimWorld dev — not containerized) ────────
+    "remote.autoForwardPorts": false
+  },
+
+  "extensions": {
+    "recommendations": [
+      // ── Python ───────────────────────────────────────────────────────────
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "charliermarsh.ruff",
+      // ── C# (TerminalKeeper mod source) ───────────────────────────────────
+      "ms-dotnettools.csharp",
+      "ms-dotnettools.csdevkit",
+      // ── AI ───────────────────────────────────────────────────────────────
+      "github.copilot",
+      "github.copilot-chat",
+      "continue.continue",
+      // ── XML (RimWorld Defs / Patches) ─────────────────────────────────────
+      "redhat.vscode-xml",
+      "redhat.vscode-yaml",
+      // ── Git ───────────────────────────────────────────────────────────────
+      "eamodio.gitlens"
+    ]
+  },
+
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "TerminalKeeper: Test Pawn Registration",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder:Dev-Mentor (TerminalKeeper host)}/scripts/test_rimworld_bridge.py",
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder:Dev-Mentor (TerminalKeeper host)}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:Dev-Mentor (TerminalKeeper host)}",
+          "TERMINAL_DEPTHS_URL": "http://localhost:7337"
+        }
+      },
+      {
+        "name": "Game Server :7337 (debug)",
+        "type": "python",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": ["app.backend.main:app", "--host", "0.0.0.0", "--port", "7337", "--reload"],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder:Dev-Mentor (TerminalKeeper host)}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:Dev-Mentor (TerminalKeeper host)}",
+          "PYTHONUNBUFFERED": "1"
+        }
+      }
+    ]
+  },
+
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "▶ Game Server :7337",
+        "type": "shell",
+        "command": "python -m cli.devmentor serve --port 7337",
+        "options": {
+          "cwd": "C:/Users/keath/Dev-Mentor",
+          "env": { "PYTHONPATH": "C:/Users/keath/Dev-Mentor" }
+        },
+        "presentation": { "reveal": "always", "panel": "dedicated" },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "🔨 Mod Build (dotnet)",
+        "type": "shell",
+        "command": "dotnet build Source/ --configuration Release",
+        "options": { "cwd": "C:/Users/keath/Dev-Mentor/mods/TerminalKeeper" },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": ["$msCompile"]
+      },
+      {
+        "label": "📋 RimWorld Logs (tail)",
+        "type": "shell",
+        "command": "tail -f \"C:/Users/keath/AppData/LocalLow/Ludeon Studios/RimWorld by Ludeon Studios/Player.log\"",
+        "presentation": { "reveal": "always", "panel": "dedicated" },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "🔌 Pawn: Register Test Agent",
+        "type": "shell",
+        "command": "curl -s -X POST http://localhost:7337/api/game/command -H 'Content-Type: application/json' -d '{\"session_id\":\"rimworld-test\",\"command\":\"status\"}' | python -m json.tool",
+        "options": { "cwd": "C:/Users/keath/Dev-Mentor" },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      }
+    ]
+  }
+}

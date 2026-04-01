@@ -1,0 +1,15 @@
+model_list:
+  - model_name: local/primary
+    litellm_params:
+      model: openai/gpt-3.5-turbo
+      api_base: http://127.0.0.1:11434/v1     # example: your local OpenAI-compatible endpoint
+      api_key: sk-local
+  - model_name: local/fallback
+    litellm_params:
+      model: openai/gpt-3.5-turbo
+      api_base: http://127.0.0.1:5005/v1      # a second backend (KoboldCpp/TGI/etc.)
+      api_key: sk-local
+
+router:
+  strategy: latency
+  models: [local/primary, local/fallback]

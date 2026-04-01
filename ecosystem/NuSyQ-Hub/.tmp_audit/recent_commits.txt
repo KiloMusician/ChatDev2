@@ -1,0 +1,1746 @@
+b4bc92e 2025-10-29 02:16:41 -0600 KiloMusician feat(godot-preview): add IncrementalBridge autoload, smoke script, and CI workflow (branch-only preview)
+A	.github/workflows/godot-idle-smoke.yml
+A	THIRD_PARTY.md
+A	docs/idle-merge.md
+
+47c977a 2025-10-27 20:55:00 -0600 Keath fix(PathIntelligence): avoid invalid escape sequences in docs by using forward-slash examples
+M	src/system/PathIntelligence.py
+
+dc8692d 2025-10-27 20:41:07 -0600 Keath fix(scripts): replace broken chatdev_workflow_integration_analysis with stub to avoid compile errors
+M	src/scripts/chatdev_workflow_integration_analysis.py
+
+7c69c9a 2025-10-27 20:36:34 -0600 Keath ci: make friendly diagnostics checkout PR head and use compileall fallback
+M	.github/workflows/friendly-diagnostics.yml
+
+bf11e17 2025-10-27 20:14:53 -0600 Keath ci: checkout canonical master in friendly diagnostics job to ensure helpers/tests present
+M	.github/workflows/friendly-diagnostics.yml
+
+04bd6f9 2025-10-27 20:12:00 -0600 Keath ci: make pytest fallback ignore repo addopts and disable coverage plugin
+M	.github/workflows/friendly-diagnostics.yml
+
+4df7d07 2025-10-27 20:08:12 -0600 Keath ci: make friendly diagnostics workflow robust (fallback to quick pytest if helper script missing)
+M	.github/workflows/friendly-diagnostics.yml
+
+afe69e1 2025-10-27 20:01:13 -0600 Keath ci: add non-blocking friendly diagnostics workflow (runs friendly_test_runner --quick)
+A	.github/workflows/friendly-diagnostics.yml
+
+2ea9cae 2025-10-11 10:00:23 -0600 Keath config: Add sector definitions and service configuration
+A	config/sector_definitions.yaml
+A	config/service_urls.json
+A	data/autonomous_monitor_config.json
+A	data/unified_pu_queue.json
+
+5fd94ef 2025-10-11 10:00:23 -0600 Keath docs: Add phase reports, system documentation, and Copilot config
+A	.github/copilot-instructions.md
+A	.vscode/copilot-config.json
+A	COMPREHENSIVE_WORK_BACKLOG.md
+A	GIT_AND_EXTENSION_AUDIT.md
+A	MASTER_REPOSITORY_INVENTORY.md
+A	REPOSITORY_WORK_SUMMARY.md
+A	THEATER_SCORE_CLARIFICATION.md
+A	THREE_REPOSITORY_INTEGRATION_MASTER_PLAN.md
+A	docs/AUTONOMOUS_MONITOR_DEPLOYMENT_SUCCESS.md
+A	docs/AUTONOMOUS_SYSTEM_DEPLOYMENT_SUMMARY.md
+A	docs/AUTONOMOUS_SYSTEM_SUCCESS_SUMMARY.md
+A	docs/CODE_QUALITY_REMEDIATION_REPORT.md
+A	docs/COMPLETE_GATED_TOOLS_ACTIVATION_REPORT.md
+A	docs/COMPREHENSIVE_MODERNIZATION_AUDIT.md
+A	docs/OPTION_5_AUTONOMOUS_SYSTEM_PROPOSAL.md
+A	docs/PHASE_1_DEBUGGING_COMPLETE.md
+A	docs/PHASE_2_CONFIG_FIXES_COMPLETE.md
+A	docs/QUICK_START_TEMPLE_MONITOR.md
+A	docs/SYSTEMATIC_DEBUGGING_REPORT.md
+A	docs/TEMPLE_AND_MONITOR_IMPLEMENTATION_SUMMARY.md
+A	docs/TESTING_CHAMBER_QUICK_REFERENCE.md
+
+2eaa54f 2025-10-11 10:00:23 -0600 Keath test: Add comprehensive test coverage for temple and coordinator
+A	tests/test_ai_coordinator_generated.py
+A	tests/test_temple_and_monitor.py
+
+9ad584d 2025-10-11 10:00:22 -0600 Keath feat: Add testing chamber, temple, and automation infrastructure
+A	initialize_temple_and_monitor.py
+A	ollama_port_standardizer.py
+A	pytest.ini
+A	src/automation/auto_theater_audit.py
+A	src/automation/autonomous_monitor.py
+A	src/automation/autonomous_orchestrator.py
+A	src/automation/chatdev_orchestration.py
+A	src/automation/ollama_validation_pipeline.py
+A	src/automation/unified_pu_queue.py
+A	src/consciousness/temple_of_knowledge/__init__.py
+A	src/consciousness/temple_of_knowledge/floor_1_foundation.py
+A	src/consciousness/temple_of_knowledge/temple_manager.py
+A	src/evolution/consolidated_system.py
+A	src/evolution/progress_tracker.py
+A	src/evolution/system_evolution_auditor.py
+A	src/main.py
+A	src/orchestration/chamber_promotion_manager.py
+A	src/real_time_context_monitor.py
+A	src/unified_documentation_engine.py
+A	testing_chamber/configs/chamber_config.json
+A	testing_chamber/configs/promotion_rules.yaml
+A	testing_chamber/ops/diffs/.gitkeep
+A	testing_chamber/ops/smokes/.gitkeep
+
+5b632eb 2025-10-11 09:01:18 -0600 Keath feat: enable DeepScan for improved code quality analysis
+M	NuSyQ-Hub.code-workspace
+
+4f8ed2e 2025-08-16 14:56:50 -0600 KiloMusician Add CI workflows, onboarding docs, and audit scripts
+A	.github/workflows/ai_analysis.yml
+A	.github/workflows/ai_code_review.yml
+A	.github/workflows/manual_ai_analysis.yml
+A	.github/workflows/quality_check.yml
+A	.github/workflows/quality_check_simple.yml
+M	.gitignore
+A	.tmp_audit/agent_probe.txt
+A	.tmp_audit/branch.txt
+A	.tmp_audit/deletions_60d.txt
+A	.tmp_audit/diff_origin_master.txt
+A	.tmp_audit/dups_by_content.txt
+A	.tmp_audit/dups_by_name.txt
+A	.tmp_audit/kilo_refs.txt
+A	.tmp_audit/recent_commits.txt
+A	.tmp_audit/status.txt
+M	.vscode/tasks.json
+M	config/secrets.json
+A	docs/OLLAMA_AUTOMATION_GUIDE.md
+A	docs/OPERATIONAL_RUNBOOK.md
+A	docs/SECRETS.md
+A	docs/onboarding/Copilot_Chat_Context_Template.md
+A	docs/onboarding/LLM_Context_Awareness_Prompt.md
+A	docs/onboarding/Ollama_Integration_Enhancement.md
+A	docs/onboarding/Quick_System_Prompt_Template.md
+A	docs/onboarding/Tool_Mastery_Reference.md
+A	docs/onboarding/VSCode_Agent_Onboarding.md
+A	ersmalikDesktopNuSyQ-Hubscriptsgit_audit_noninteractive.ps1'
+A	"hell\357\200\242,"
+A	"ion\357\200\242\357\200\272 \357\200\2422.0.0\357\200\242,"
+A	scripts/ci/gpt_runner.py
+A	scripts/ci/import_checker.py
+A	scripts/ci/ollama_ai_runner.py
+A	scripts/ci/test_ai_pipeline.py
+A	scripts/ensure_ollama_host.py
+A	scripts/git_audit_noninteractive.ps1
+A	scripts/ops/set_github_secret.ps1
+A	scripts/ops/set_repo_secrets.ps1
+A	scripts/ops/test_local_cli.ps1
+A	scripts/run_audit_stepwise.ps1
+A	scripts/run_audit_task.ps1
+A	src/tools/conflict_detector.py
+A	src/tools/conflict_report.md
+A	src/utils/stream_utils.py
+A	"\357\200\272 ["
+
+aceb7a5 2025-08-15 17:35:07 -0600 KiloMusician Resolve merge markers in .gitignore (merge-cleanup)
+M	.gitignore
+
+9aa4174 2025-08-15 16:35:32 -0600 KiloMusician Refactor: Reorganize project into a modular architecture
+A	.vscode/settings_fixed.json
+A	NuSyQ-Hub-TEMP.code-workspace
+A	ai/__init__.py
+M	chatdev_workflow_integration_analysis.py
+A	consciousness/__init__.py
+A	copilot/__init__.py
+A	core/__init__.py
+M	execute_repository_organization.py
+A	integration/__init__.py
+M	main.py
+A	ml/__init__.py
+M	simple_browser_launcher.py
+M	src/__init__.py
+M	src/copilot/__init__.py
+M	src/integration/Enhanced-Shell-Integration.ps1
+M	src/integration/Ollama_Integration_Hub.py
+A	src/integration/pwsh_output_helpers.ps1
+M	src/setup/Activate.ps1
+A	system/__init__.py
+M	system_verification.py
+A	tagging/__init__.py
+A	tools/check_core_imports.py
+A	tools/check_module_origin.py
+A	tools/compile_and_report.py
+A	tools/compile_ollama_check.py
+A	tools/confirm_update.py
+A	tools/consolidate_duplicates.py
+A	tools/debug_import.py
+A	tools/dump_lines.py
+A	tools/exec_and_capture.py
+A	tools/find_broken_imports.py
+A	tools/find_duplicates.py
+A	tools/import_ollama_test.py
+A	tools/inspect_file_stats.py
+A	tools/inspect_indent.py
+A	tools/line_debug.py
+A	tools/pycompile_capture.py
+A	tools/resolve_named_duplicates.py
+A	tools/resolve_named_duplicates_dryrun.py
+A	tools/run_and_capture_check.py
+A	tools/run_check_and_dump.py
+A	tools/run_imports_and_write_results.py
+A	tools/run_verification_direct.py
+A	tools/terminal_diagnostic.py
+A	tools/try_top_level_imports_shim_test.py
+A	utils/__init__.py
+
+e9e95da 2025-08-15 15:36:23 -0600 KiloMusician Add compatibility wrappers for script delegation
+M	chatdev_integration_implementation.py
+M	chatdev_integration_success_summary.py
+M	complete_function_registry.py
+
+e1e9d2d 2025-08-14 19:53:51 -0600 KiloMusician docs: add development setup instructions
+M	CONTRIBUTING.md
+M	README.md
+
+33263c4 2025-08-14 18:30:33 -0600 KiloMusician Remove legacy enhancement files and update VS Code configs
+M	.vscode/COMPREHENSIVE_ENHANCEMENT_REPORT.md
+M	.vscode/copilot_context.json
+M	.vscode/copilot_enhancement_commands.md
+M	.vscode/extensions.json
+M	.vscode/launch.json
+M	.vscode/quest_integration_enhancement.md
+M	.vscode/tasks.json
+M	KILO_Core/KILO_CORE_SYSTEMS_CONTEXT.md
+M	basic_test.py
+M	chatdev_integration_implementation.py
+M	chatdev_integration_success_summary.py
+M	docs/Core/megatag_specifications.md
+A	docs/PERFORMANCE_SUBPROCESS_OPTIMIZATION_COMPLETE.md
+M	next_steps_priority_assessment.py
+M	party_system_test_launcher.py
+M	quick_start.py
+M	repository_dictionary_demo.py
+M	scripts/agent_git_helper.py
+M	scripts/lint_test_check.py
+M	scripts/performance_monitor.py
+M	scripts/project_navigator.py
+M	simple_browser_launcher.py
+M	src/LOGGING/infrastructure/modular_logging_system.py
+M	src/Rosetta_Quest_System/quest_proof_of_concept.py
+M	src/core/performance_monitor.py
+M	src/enhancements/collaborative_intelligence.py
+M	src/enhancements/context_retention.py
+M	src/enhancements/search_amplification.py
+M	src/integration/__main__.py
+M	src/interface/ContextBrowser_DesktopApp.py
+M	src/interface/launch_context_browser_app.py
+M	src/orchestration/multi_ai_orchestrator.py
+M	src/protocols/healing_protocols.py
+M	src/scripts/copilot_agent_launcher.py
+M	src/scripts/party_system_test_launcher.py
+M	src/scripts/simple_browser_launcher.py
+M	src/tagging/systematic_file_editor.py
+M	src/tools/maze_solver.py
+A	src/tools/performance_optimizer.py
+M	src/utils/contextual_output.py
+M	src/utils/github_integration_auditor.py
+M	src/utils/setup_enhanced_navigator.py
+M	src/utils/stubs/repository_compendium_stub.py
+M	src/utils/validators.py
+M	system_verification.py
+M	test_ai_coordinator.py
+M	test_anti_recursion.py
+M	test_browser_fix.py
+M	test_ollama_integration.py
+M	tests/test_anti_recursion.py
+M	tests/test_browser_fix.py
+
+fd0eb37 2025-08-14 17:11:45 -0600 KiloMusician Merge pull request #68 from KiloMusician/codex/optimize-task-assignment-system
+d0d7638 2025-08-14 17:11:21 -0600 KiloMusician fix: place future import at top
+M	src/ai/conversation_manager.py
+
+59f7248 2025-08-14 17:04:19 -0600 KiloMusician Simplify safe_print error handling in maze_solver.py
+M	src/tools/maze_solver.py
+
+0c0b0c4 2025-08-14 16:36:44 -0600 KiloMusician Add test for MazeRepoScanner summary and treasure finding
+A	tests/test_maze_scanner_run.py
+
+7811460 2025-08-14 08:20:30 -0600 KiloMusician Add systematic module docstrings and guidance annotations
+A	docs/ANNOTATION_TASKS.md
+M	src/tools/ChatDev-Party-System.py
+M	src/tools/chatdev_testing_chamber.py
+M	src/tools/extract_commands.py
+M	src/tools/launch-adventure.py
+M	src/tools/log_indexer.py
+M	src/tools/maze_solver.py
+M	src/tools/repo_scan.py
+M	src/tools/run_and_capture.py
+M	src/tools/structure_organizer.py
+M	src/tools/wizard_navigator.py
+M	src/utils/file_organization_auditor.py
+M	src/utils/generate_structure_tree.py
+M	src/utils/quick_github_audit.py
+M	src/utils/quick_import_fix.py
+M	src/utils/repository_analyzer.py
+
+1aa8999 2025-08-14 07:20:15 -0600 KiloMusician Merge branch 'master' of https://github.com/KiloMusician/NuSyQ-Hub
+f2d5966 2025-08-14 07:20:00 -0600 KiloMusician Add colonist-style agent/task scheduler and tests
+A	src/orchestration/README_colonist_scheduler.md
+A	src/orchestration/colonist_scheduler.py
+M	src/tools/run_and_capture.py
+A	tests/test_colonist_scheduler.py
+
+98004be 2025-08-14 07:18:48 -0600 KiloMusician Merge pull request #67 from KiloMusician/codex/analyze-errors-in-nusyq-hub-interaction
+d9be18e 2025-08-14 07:18:30 -0600 KiloMusician Add functional quicksort utility and tests
+A	src/utils/sorting.py
+A	tests/test_quicksort.py
+
+1bffce9 2025-08-14 07:11:25 -0600 KiloMusician Improve error handling and logging in maze_solver
+M	src/tools/maze_solver.py
+
+d7833e4 2025-08-14 06:57:29 -0600 KiloMusician Add nightly scan workflow and workflow documentation
+A	.github/workflows/nightly_scan.yml
+M	.vscode/tasks.json
+A	docs/Checklists/COPILOT_CHATDEV_WORKFLOW.md
+A	docs/Checklists/NIGHTLY_SCANNER_CI.md
+A	docs/WORKFLOW_OVERVIEW.md
+A	src/orchestration/ingest_maze_summary.py
+M	src/tools/run_and_capture.py
+
+5d4e706 2025-08-14 06:48:08 -0600 KiloMusician Add repository maze scanner tools and VS Code task
+M	.vscode/tasks.json
+M	src/integration/copilot_chatdev_bridge.py
+A	src/tools/README.md
+A	src/tools/log_indexer.py
+A	src/tools/maze_solver.py
+A	src/tools/run_and_capture.py
+
+565e284 2025-08-14 06:46:30 -0600 KiloMusician Merge pull request #66 from KiloMusician/codex/optimize-nusyq-hub-operations-and-workflow
+d7aca42 2025-08-14 06:46:08 -0600 KiloMusician docs: expand workflow and checklist
+M	ENHANCED_SYSTEM_TODO_QUEST_LOG.md
+M	docs/Checklists/PROJECT_STATUS_CHECKLIST.md
+M	docs/workflows/copilot_chatdev.md
+
+5384d12 2025-08-14 06:36:20 -0600 KiloMusician Merge pull request #65 from KiloMusician/codex/manage-feature-flags-for-new-capabilities
+21619c1 2025-08-14 06:36:00 -0600 KiloMusician Add feature flag infrastructure for ChatDev autofix
+A	config/feature_flags.json
+A	docs/feature_flags.md
+M	src/integration/chatdev_integration.py
+A	src/system/feature_flags.py
+A	tests/test_feature_flags.py
+
+908fd91 2025-08-14 06:20:46 -0600 KiloMusician Merge branch 'master' of https://github.com/KiloMusician/NuSyQ-Hub
+8aec24f 2025-08-14 06:20:37 -0600 KiloMusician Remove OmniTag metadata and dedupe_print usage
+M	src/utils/Repository-Context-Compendium-System.py
+M	src/utils/setup_chatdev_integration.py
+
+9589d80 2025-08-14 06:17:51 -0600 KiloMusician Merge pull request #64 from KiloMusician/codex/remove-existing_system_bridge.py-if-unused-qgtuyp
+46d57d6 2025-08-14 06:16:09 -0600 KiloMusician Remove unused existing system bridge
+M	CHANGELOG.md
+M	COMPLETE_FUNCTION_REGISTRY.md
+M	REPO_STRUCTURE.md
+M	docs/Archive/Archive/depreciated/currentstate.md
+M	docs/Archive/RepositoryDEPRECIATED/COMPLETE_REPOSITORY/Repository&venv_kilo.txt
+M	docs/Archive/RepositoryDEPRECIATED/KILO-FOOLISH_Repository.txt
+M	docs/Archive/RepositoryDEPRECIATED/REPOSITORY_TREE_WITH_COMMENTS.md
+M	docs/Reports/python_file_classification_report.md
+M	docs/Repository/Structure_Tree.md
+M	docs/Vault/Structure_Tree.md
+M	docs/depreciated/Structure_Tree.instructions.md
+M	docs/reports/SYSTEMATIC_SRC_AUDIT_REPORT.json
+M	docs/reports/system_analysis/SYSTEMATIC_SRC_AUDIT_REPORT.json
+M	docs/reports/system_analysis/system_health_assessment_20250803_220613.json
+M	function_registry_data.json
+D	src/integration/existing_system_bridge.py
+
+10e47e0 2025-08-14 06:15:11 -0600 KiloMusician Merge pull request #60 from KiloMusician/codex/add-task-history-logging-and-cli
+efb329e 2025-08-14 06:14:55 -0600 KiloMusician docs: record task execution history
+A	docs/tasks_history.md
+M	scripts/cli.py
+
+5d35b33 2025-08-14 06:11:59 -0600 KiloMusician Merge pull request #58 from KiloMusician/codex/add-badges-and-documentation-links-to-readme
+a2f1d09 2025-08-14 06:11:45 -0600 KiloMusician docs: add badges and resource links
+M	README.md
+
+561341f 2025-08-14 06:11:25 -0600 KiloMusician Merge pull request #57 from KiloMusician/codex/add-setup-script-and-example-env-file
+7720b6e 2025-08-14 06:11:03 -0600 KiloMusician feat: add environment setup helper
+A	.env.example
+M	README.md
+A	scripts/setup_env.sh
+
+bd77917 2025-08-14 06:10:53 -0600 KiloMusician Merge pull request #56 from KiloMusician/codex/create-documentation-for-copilot-chatdev-integration
+5b1dd2b 2025-08-14 06:08:58 -0600 KiloMusician docs: add Copilot-ChatDev workflow guide
+A	docs/workflows/copilot_chatdev.md
+
+5924482 2025-08-14 06:08:22 -0600 KiloMusician Merge pull request #55 from KiloMusician/codex/create-developer-extensions-documentation
+c1990bf 2025-08-14 06:07:55 -0600 KiloMusician docs: add CopilotExtension developer guide
+A	docs/developer_extensions.md
+
+f85e487 2025-08-14 06:07:29 -0600 KiloMusician Merge pull request #54 from KiloMusician/codex/add-benchmarks-for-latency-measurement
+4865194 2025-08-14 06:07:01 -0600 KiloMusician Add latency benchmarks and report
+A	docs/reports/benchmark.md
+M	pyproject.toml
+M	requirements.txt
+A	tests/benchmarks/test_latency.py
+
+21c43d1 2025-08-14 06:06:39 -0600 KiloMusician Merge pull request #53 from KiloMusician/codex/add-integration-tests-for-chatdev-pipeline
+a36be06 2025-08-14 06:06:16 -0600 KiloMusician test: add Copilot-ChatDev pipeline integration
+A	tests/integration/test_copilot_chatdev_pipeline.py
+
+6336e82 2025-08-14 06:05:18 -0600 KiloMusician Merge pull request #51 from KiloMusician/codex/adopt-google-or-numpy-docstring-style
+2890b9a 2025-08-14 06:04:27 -0600 KiloMusician style: enforce Google docstrings and add API docs generation
+M	CONTRIBUTING.md
+A	docs/api/.gitignore
+A	docs/api/_templates/.gitkeep
+A	docs/api/conf.py
+A	docs/api/index.rst
+M	pyproject.toml
+A	scripts/generate_api_docs.py
+M	src/utils/helpers.py
+
+664dc80 2025-08-14 06:04:01 -0600 KiloMusician Merge pull request #50 from KiloMusician/codex/introduce-logging-in-all-modules
+bcb0ea8 2025-08-14 06:03:30 -0600 KiloMusician Add structured logging
+M	main.py
+M	src/ai/ai_coordinator.py
+M	src/utils/graceful_shutdown.py
+
+76a6c37 2025-08-14 06:02:56 -0600 KiloMusician Merge pull request #49 from KiloMusician/codex/remove-markers-from-chatdev-files
+6fe4344 2025-08-14 06:02:26 -0600 KiloMusician Remove hyphen markers from ChatDev launcher
+M	src/integration/chatdev_launcher.py
+
+f8e416f 2025-08-14 06:00:49 -0600 KiloMusician Merge pull request #47 from KiloMusician/codex/add-extension-hooks-for-context-injection
+78adb90 2025-08-14 06:00:22 -0600 KiloMusician feat: add context extension hooks for ChatDev
+A	config/context_config.json
+A	context.json
+A	src/context/__init__.py
+A	src/context/context_manager.py
+A	src/context/extensions/__init__.py
+A	src/context/extensions/file_summaries.py
+A	src/context/extensions/repo_stats.py
+
+2768bc6 2025-08-14 05:57:45 -0600 KiloMusician Merge pull request #43 from KiloMusician/codex/implement-configurable-timeouts-for-tasks
+4c5abd8 2025-08-14 05:57:11 -0600 KiloMusician feat: add timeout termination and standardized error payload
+M	src/system/terminal_manager.py
+A	tests/test_terminal_manager_timeout.py
+
+a96fe8e 2025-08-14 05:55:42 -0600 KiloMusician Merge pull request #41 from KiloMusician/codex/cache-ollama-list-results
+dbe1fd2 2025-08-14 05:55:08 -0600 KiloMusician feat: cache ollama list results
+M	src/ai/ollama_model_manager.py
+
+69f0c6d 2025-08-14 05:53:11 -0600 KiloMusician Merge pull request #38 from KiloMusician/codex/implement-background-task-queue-with-status
+cf0aaf8 2025-08-14 05:52:52 -0600 KiloMusician Add background task queue for asynchronous jobs
+M	src/system/__init__.py
+A	src/system/task_queue.py
+A	tests/test_task_queue.py
+
+6a75330 2025-08-14 05:52:28 -0600 KiloMusician Merge pull request #37 from KiloMusician/codex/implement-repo_scan-command-for-chatdev
+577c2e1 2025-08-14 05:52:09 -0600 KiloMusician feat: add repository scan command
+A	src/tools/repo_scan.py
+A	tests/test_repo_scan.py
+
+34e9c64 2025-08-14 05:51:45 -0600 KiloMusician Merge pull request #36 from KiloMusician/codex/implement-routing-for-chatdev-issues
+044b713 2025-08-14 05:51:29 -0600 KiloMusician Route ChatDev issues to fix handler
+M	src/integration/copilot_chatdev_bridge.py
+
+4c85ed6 2025-08-14 05:51:05 -0600 KiloMusician Merge pull request #35 from KiloMusician/codex/introduce-task-routing-for-operations
+5ef66dc 2025-08-14 05:50:44 -0600 KiloMusician test: verify Copilot task routing
+M	src/copilot/__init__.py
+A	src/copilot/task_manager.py
+M	src/integration/chatdev_llm_adapter.py
+A	tests/test_copilot_task_manager.py
+
+e113972 2025-08-14 05:50:16 -0600 KiloMusician Merge pull request #34 from KiloMusician/codex/refactor-path-handling-in-chatdev_launcher
+877dd9b 2025-08-14 05:49:44 -0600 KiloMusician refactor: use configurable paths
+M	src/ai/ollama_chatdev_integrator.py
+M	src/consciousness/quantum_problem_resolver_unified.py
+M	src/diagnostics/broken_paths_analyzer.py
+M	src/healing/repository_health_restorer.py
+M	src/integration/chatdev_launcher.py
+M	src/integration/settings.json
+M	src/interface/environment_diagnostic_enhanced.py
+M	src/orchestration/chatdev_testing_chamber.py
+M	src/scripts/chatdev_workflow_integration_analysis.py
+M	src/scripts/chatdev_workflow_integration_analysis_clean.py
+M	src/scripts/empirical_llm_test.py
+M	src/scripts/generate_directory_notebooks.py
+M	src/system/terminal_manager.py
+M	src/system/terminal_manager_integration.py
+M	src/tools/health_restorer.py
+M	src/utils/config_dataclasses.py
+M	src/utils/extract_commands_summary.py
+M	src/utils/file_organization_auditor.py
+M	src/utils/import_health_checker.py
+M	src/utils/quick_import_fix.py
+
+2a22e58 2025-08-14 05:49:12 -0600 KiloMusician Merge pull request #33 from KiloMusician/codex/consolidate-config-files-into-settings.json
+1201a67 2025-08-14 05:48:54 -0600 KiloMusician feat: add settings loader utility
+M	config/settings.json
+M	src/utils/__init__.py
+A	src/utils/settings.py
+
+560d1ef 2025-08-14 05:48:34 -0600 KiloMusician Merge pull request #32 from KiloMusician/codex/implement-copilotextension-in-chatdev_extension.py
+0213b3b 2025-08-14 05:48:00 -0600 KiloMusician feat: add chatdev copilot extension
+A	src/copilot/extensions/__init__.py
+A	src/copilot/extensions/chatdev_extension.py
+
+10a104f 2025-08-14 05:47:31 -0600 KiloMusician Merge pull request #30 from KiloMusician/codex/implement-chatdev_service-lifecycle-methods
+316e362 2025-08-14 05:45:48 -0600 KiloMusician Merge pull request #23 from KiloMusician/codex/add-commands-for-chatdev-in-extension
+3ec6238 2025-08-14 05:42:50 -0600 KiloMusician Merge pull request #31 from KiloMusician/codex/suggest-repository-organization-and-optimization
+626402e 2025-08-14 05:41:00 -0600 KiloMusician Add n8n client and Base44 utilities
+A	docs/integrations/n8n_base44_integration.md
+M	src/integration/__init__.py
+A	src/integration/n8n_integration.py
+A	src/utils/base44.py
+A	tests/test_n8n_base44.py
+
+554fa8c 2025-08-14 05:40:26 -0600 KiloMusician feat: add ChatDev service wrapper
+A	src/integration/chatdev_service.py
+
+c695aef 2025-08-14 05:09:03 -0600 KiloMusician Add systematic OmniTag metadata to Python files
+M	.vscode/tasks.json
+M	KILO_Core/__init__.py
+M	KILO_Core/secrets.py
+M	LOGGING/__init__.py
+M	LOGGING/infrastructure/modular_logging_system.py
+M	archive/launchers/copilot_agent_launcher_v1.py
+M	basic_test.py
+M	chatdev_integration_implementation.py
+M	chatdev_integration_success_summary.py
+M	docs/Core/context_server.py
+M	docs/Core/megatag_specifications.md
+M	next_steps_priority_assessment.py
+M	party_system_test_launcher.py
+M	quick_start.py
+M	repository_dictionary_demo.py
+M	scripts/agent_git_helper.py
+M	scripts/cli.py
+M	scripts/codex_integration.py
+M	scripts/enhance_copilot_context.py
+M	scripts/fix_ollama_hosts.py
+M	scripts/lint_test_check.py
+M	scripts/llm_task_suggester.py
+M	scripts/performance_monitor.py
+M	scripts/project_navigator.py
+M	simple_browser_launcher.py
+M	src/LOGGING/infrastructure/modular_logging_system.py
+M	src/Rosetta_Quest_System/quest_proof_of_concept.py
+M	src/__init__.py
+M	src/ai/ChatDev-Party-System.py
+M	src/ai/__init__.py
+M	src/ai/chatdev_phase_orchestrator.py
+M	src/ai/conversation_manager.py
+M	src/ai/ollama_hub.py
+M	src/ai/ollama_integration.py
+M	src/ai/ollama_model_manager.py
+M	src/ai/symbolic_cognition.py
+M	src/analysis/__init__.py
+M	src/analysis/broken_paths_analyzer.py
+M	src/analytics/model_selection_analytics.py
+M	src/consciousness/quantum_problem_resolver_unified.py
+M	src/consciousness/the_oldest_house.py
+M	src/copilot/__init__.py
+M	src/copilot/bridge_cli.py
+M	src/copilot/enhanced_bridge.py
+M	src/core/__init__.py
+M	src/core/__init___.py
+M	src/core/config_manager.py
+M	src/core/context_server.py
+M	src/core/job_tracker.py
+M	src/core/performance_monitor.py
+M	src/core/quantum_problem_resolver_transcendent.py
+M	src/core/quantum_problem_resolver_unified.py
+M	src/diagnostics/__init__.py
+M	src/diagnostics/broken_paths_analyzer.py
+M	src/diagnostics/comprehensive_integration_validator.py
+M	src/diagnostics/comprehensive_test_runner.py
+M	src/diagnostics/direct_repository_audit.py
+M	src/diagnostics/quantum_system_complete_overview.py
+M	src/diagnostics/quick_integration_check.py
+M	src/diagnostics/quick_quest_audit.py
+M	src/diagnostics/quick_system_analyzer.py
+M	src/diagnostics/repository_syntax_analyzer.py
+M	src/diagnostics/system_health_assessor.py
+M	src/diagnostics/systematic_src_audit.py
+M	src/enhancements/IntelligentCommentary.py
+M	src/enhancements/__init__.py
+M	src/enhancements/collaborative_intelligence.py
+M	src/enhancements/context_retention.py
+M	src/enhancements/search_amplification.py
+M	src/game_development/zeta21_game_pipeline.py
+M	src/healing/ArchitectureWatcher.py
+M	src/healing/__init__.py
+M	src/healing/entropy_reverser.py
+M	src/healing/evolution_catalyst.py
+M	src/healing/quantum_problem_resolver.py
+M	src/healing/quantum_problem_resolver_clean.py
+M	src/healing/system_regenerator.py
+M	src/integration/__init__.py
+M	src/integration/__main__.py
+M	src/integration/chatdev_environment_patcher.py
+M	src/integration/chatdev_llm_adapter.py
+M	src/integration/consciousness_bridge.py
+M	src/integration/legacy_transformer.py
+M	src/integration/oldest_house_interface.py
+M	src/integration/ollama_integration.py
+M	src/integration/quantum_resolver_adapter.py
+M	src/integration/repository_harmonizer.py
+M	src/interface/ContextBrowser_DesktopApp.py
+M	src/interface/environment_diagnostic_enhanced.py
+M	src/interface/launch_context_browser_app.py
+M	src/memory/__init__.py
+M	src/memory/contextual_memory.py
+M	src/memory/memory_palace.py
+M	src/memory/semantic_clusters.py
+M	src/navigation/wizard_navigator.py
+M	src/navigation/wizard_navigator/__init__.py
+M	src/navigation/wizard_navigator/graph.py
+M	src/navigation/wizard_navigator/room.py
+M	src/navigation/wizard_navigator/wizard_navigator.py
+M	src/orchestration/__init__.py
+M	src/orchestration/multi_ai_orchestrator.py
+M	src/orchestration/snapshot_maintenance_system.py
+M	src/protocols/healing_protocols.py
+M	src/quantum/__init__.py
+M	src/quantum/__main__.py
+M	src/quantum/consciousness_substrate.py
+M	src/quantum/import_numpy_as_np.py
+M	src/quantum/multidimensional_processor.py
+M	src/quantum/quantum_cognition_engine.py
+M	src/quantum/quantum_overview.py
+M	src/quantum/quantum_problem_resolver.py
+M	src/quantum/quantum_problem_resolver_test.py
+M	src/scripts/ai_intermediary_checkin.py
+M	src/scripts/chatdev_integration_implementation.py
+M	src/scripts/chatdev_integration_success_summary.py
+M	src/scripts/copilot_agent_launcher.py
+M	src/scripts/empirical_llm_test.py
+M	src/scripts/llm_validation_test.py
+M	src/scripts/next_steps_priority_assessment.py
+M	src/scripts/party_system_test_launcher.py
+M	src/scripts/quest_analyzer.py
+M	src/scripts/safe_consolidation.py
+M	src/scripts/simple_browser_launcher.py
+M	src/security/secure_api_manager.py
+M	src/setup/secrets.py
+M	src/spine/__init__.py
+M	src/spine/civilization_orchestrator.py
+M	src/spine/culture_consciousness.py
+M	src/spine/kardeshev_optimizer.py
+M	src/spine/reality_weaver.py
+M	src/spine/transcendent_spine_core.py
+M	src/system/PathIntelligence.py
+M	src/system/RepositoryCoordinator.py
+M	src/system/__init__.py
+M	src/system/rpg_inventory.py
+M	src/tagging/import_asyncio.py
+M	src/tagging/megatag_processor.py
+M	src/tagging/omnitag_system.py
+A	src/tagging/systematic_file_editor.py
+A	src/tagging/tagging_framework.py
+M	src/tools/ChatDev-Party-System.py
+M	src/tools/chatdev_testing_chamber.py
+M	src/tools/consolidation_planner.py
+M	src/tools/launch-adventure.py
+M	src/tools/safe_consolidator.py
+M	src/tools/structure_organizer.py
+M	src/tools/wizard_navigator.py
+M	src/ui/__init__.py
+M	src/utils/#_CLI_Interface_for_Dependency_Resolver.py
+M	src/utils/Repository-Context-Compendium-System.py
+M	src/utils/Repository-Pandas-Library.py
+M	src/utils/__init__.py
+M	src/utils/contextual_output.py
+M	src/utils/extract_commands_summary.py
+M	src/utils/file_organization_auditor.py
+M	src/utils/generate_structure_tree.py
+M	src/utils/generate_structure_tree2BAK.py
+M	src/utils/generate_structure_treeBAK.py
+M	src/utils/github_instructions_enhancer.py
+M	src/utils/github_integration_auditor.py
+M	src/utils/github_validation_suite.py
+M	src/utils/helpers.py
+M	src/utils/import_health_checker.py
+M	src/utils/memory_serializers.py
+M	src/utils/quick_github_audit.py
+M	src/utils/quick_import_fix.py
+M	src/utils/setup_chatdev_integration.py
+M	src/utils/setup_enhanced_navigator.py
+M	src/utils/stubs/repository_compendium_stub.py
+M	src/utils/validators.py
+A	systematic_tagging_results_NuSyQ-Hub.json
+M	templates/utility_scripts/create_snapshot.py
+M	templates/utility_scripts/directory_audit_tool.py
+M	templates/utility_scripts/verify_coverage.py
+M	test_ai_coordinator.py
+M	test_anti_recursion.py
+M	test_browser_fix.py
+M	test_ollama_integration.py
+M	tests/__init__.py
+M	tests/consciousness_validation.py
+M	tests/integration_tests.py
+M	tests/llm_testing/simple_test.py
+M	tests/llm_testing/test_chatdev_browser.py
+M	tests/llm_testing/ultimate_gas_test.py
+M	tests/spine_tests.py
+M	tests/system_testing/test_enhanced_placeholders.py
+M	tests/test_anti_recursion.py
+M	tests/test_browser_fix.py
+M	tests/test_chatdev.py
+M	tests/test_chatdev_llm_adapter_import.py
+M	tests/test_conversation_manager.py
+M	tests/test_copilot_bridge_cli.py
+M	tests/test_get_target_files.py
+M	tests/test_github_validation.py
+M	tests/test_import.py
+M	tests/test_minimal.py
+M	tests/test_repository_compendium.py
+M	tests/test_requests.py
+M	tests/test_zeta03_model_selection.py
+M	tests/test_zeta04_conversation_management.py
+M	tests/test_zeta21_game_pipeline.py
+
+570ce26 2025-08-14 04:20:11 -0600 KiloMusician Add expanded file categorization MegaTag examples
+M	docs/Core/megatag_specifications.md
+
+80d1c9e 2025-08-14 04:19:57 -0600 KiloMusician Add system verification, quick start, and test scripts
+M	.vscode/extensions.json
+M	.vscode/tasks.json
+M	KILO_Core/KILO_CORE_SYSTEMS_CONTEXT.md
+A	basic_test.py
+M	main.py
+A	quick_start.py
+M	src/ai/ai_coordinator.py
+A	system_verification.py
+A	test_ai_coordinator.py
+A	test_ollama_integration.py
+
+c06e932 2025-08-14 02:58:39 -0600 KiloMusician Integrate quest system and enhance VS Code tooling
+A	.vscode/COMPREHENSIVE_ENHANCEMENT_REPORT.md
+M	.vscode/copilot_context.json
+M	.vscode/launch.json
+A	.vscode/quest_integration_enhancement.md
+M	.vscode/tasks.json
+A	ENHANCED_SYSTEM_TODO_QUEST_LOG.md
+A	src/Rosetta_Quest_System/quest_proof_of_concept.py
+M	src/utils/setup_enhanced_navigator.py
+
+0bac4d4 2025-08-14 02:13:06 -0600 KiloMusician Merge branch 'master' of https://github.com/KiloMusician/NuSyQ-Hub
+7fa4f13 2025-08-14 02:12:56 -0600 KiloMusician Add snapshot workspace and deduplicate console output
+A	.vscode/copilot_enhancement_commands.md
+A	.vscode/extensions.json
+M	.vscode/launch.json
+M	.vscode/tasks.json
+A	src/tools/NUSYQ-WORKSPACE/.snapshots/config.json
+A	src/tools/NUSYQ-WORKSPACE/.snapshots/readme.md
+A	src/tools/NUSYQ-WORKSPACE/.snapshots/sponsors.md
+A	src/tools/NUSYQ-WORKSPACE/NUSYQ-WORKSPACE.code-workspace
+M	src/tools/extract_commands.py
+M	src/utils/Repository-Context-Compendium-System.py
+M	src/utils/setup_chatdev_integration.py
+
+a775b3f 2025-08-14 01:57:11 -0600 KiloMusician Merge pull request #29 from KiloMusician/codex/explore-ai-integrations-for-copilot
+e3d8dc3 2025-08-14 01:51:19 -0600 KiloMusician feat: add internal LLM task suggester
+A	docs/LLMTaskFlow.md
+A	scripts/llm_task_suggester.py
+
+c86ac49 2025-08-14 01:01:31 -0600 KiloMusician Merge pull request #20 from KiloMusician/codex/expose-cli-or-vs-code-command-for-bridge
+9ef3bd1 2025-08-14 01:01:05 -0600 KiloMusician Merge pull request #18 from KiloMusician/codex/extend-conversation-manager-and-add-tests
+bc2ba45 2025-08-14 01:00:49 -0600 KiloMusician Merge pull request #14 from KiloMusician/codex/create-ollama_models.json-and-update-class
+25018ad 2025-08-14 00:59:40 -0600 KiloMusician Merge pull request #21 from KiloMusician/codex/remove-existing_system_bridge.py-if-unused
+e2f78e1 2025-08-14 00:59:18 -0600 KiloMusician Merge pull request #24 from KiloMusician/codex/implement-ollama-integration-in-vs-code
+f73ff1d 2025-08-14 00:58:02 -0600 KiloMusician Merge pull request #28 from KiloMusician/codex/implement-copilot-enhancement-feature
+92ca0ae 2025-08-14 00:57:14 -0600 KiloMusician Add VS Code Copilot enhancement bridge
+A	.vscode/launch.json
+A	docs/CopilotEnhancementBridge.md
+A	scripts/enhance_copilot_context.py
+A	vscode-extension/package.json
+A	vscode-extension/src/extension.ts
+A	vscode-extension/src/shim.d.ts
+A	vscode-extension/tsconfig.json
+
+e271159 2025-08-14 00:55:18 -0600 KiloMusician feat(vscode): add Ollama model selector
+A	docs/OllamaIntegration.md
+A	vscode-extension/src/ollama.ts
+
+a2a7c2c 2025-08-14 00:54:45 -0600 KiloMusician feat: add ChatDev VS Code commands
+A	docs/ChatDevVSCode.md
+A	src/integration/vscode-extension/extension.js
+A	src/integration/vscode-extension/package.json
+
+239b42e 2025-08-14 00:53:51 -0600 KiloMusician Remove unused existing system bridge
+M	CHANGELOG.md
+M	COMPLETE_FUNCTION_REGISTRY.md
+M	REPO_STRUCTURE.md
+M	docs/Archive/Archive/depreciated/currentstate.md
+M	docs/Archive/RepositoryDEPRECIATED/COMPLETE_REPOSITORY/Repository&venv_kilo.txt
+M	docs/Archive/RepositoryDEPRECIATED/KILO-FOOLISH_Repository.txt
+M	docs/Archive/RepositoryDEPRECIATED/REPOSITORY_TREE_WITH_COMMENTS.md
+M	docs/Reports/python_file_classification_report.md
+M	docs/Repository/Structure_Tree.md
+M	docs/Vault/Structure_Tree.md
+M	docs/depreciated/Structure_Tree.instructions.md
+M	docs/reports/SYSTEMATIC_SRC_AUDIT_REPORT.json
+M	docs/reports/system_analysis/SYSTEMATIC_SRC_AUDIT_REPORT.json
+M	docs/reports/system_analysis/system_health_assessment_20250803_220613.json
+M	function_registry_data.json
+D	src/integration/existing_system_bridge.py
+
+6da43bc 2025-08-14 00:53:28 -0600 KiloMusician feat: add copilot enhancement bridge CLI
+M	src/copilot/__init__.py
+A	src/copilot/bridge_cli.py
+M	src/copilot/copilot_enhancement_bridge.py
+A	tests/test_copilot_bridge_cli.py
+
+e2bbbe9 2025-08-14 00:52:30 -0600 KiloMusician feat: add conversation persistence
+M	src/ai/ai_intermediary.py
+M	src/ai/conversation_manager.py
+A	tests/test_conversation_manager.py
+
+5bb23c2 2025-08-14 00:32:13 -0600 KiloMusician Restructure and enhance repository organization
+M	AGENTS.md
+M	README.md
+M	REPO_STRUCTURE.md
+M	docs/Agent-Sessions/SESSION_2025-08-13.md
+M	docs/Checklists/PROJECT_STATUS_CHECKLIST.md
+M	docs/Checklists/ZETA_DEVELOPMENT_CHECKLIST.md
+A	src/LOGGING/infrastructure/modular_logging_system.py
+M	src/enhancements/collaborative_intelligence.py
+M	src/enhancements/context_retention.py
+M	src/enhancements/search_amplification.py
+M	src/integration/Ollama_Integration_Hub.py
+M	src/scripts/enhanced_agent_launcher.py
+M	src/system/dictionary/repository_dictionary.py
+M	src/tools/extract_commands.py
+M	src/utils/github_integration_auditor.py
+
+b2b4cb4 2025-08-13 22:53:24 -0600 KiloMusician Merge branch 'master' of https://github.com/KiloMusician/NuSyQ-Hub
+1f41985 2025-08-13 22:07:24 -0600 KiloMusician Add agent session infra, graceful shutdown, and config dataclasses
+A	Enhanced-Shell-Integration.ps1
+A	chatdev_integration_implementation.py
+A	chatdev_integration_success_summary.py
+A	docs/Agent-Sessions/AGENT_INSTRUCTIONS.md
+A	docs/Agent-Sessions/SESSION_2025-08-13.md
+M	docs/Checklists/ZETA_DEVELOPMENT_CHECKLIST.md
+D	docs/Reports/ROOT_DIRECTORY_CLEANUP_COMPLETION_REPORT.md
+A	next_steps_priority_assessment.py
+A	party_system_test_launcher.py
+A	scripts/agent_git_helper.py
+A	scripts/cli.py
+A	simple_browser_launcher.py
+M	src/core/performance_monitor.py
+M	src/integration/chatdev_launcher.py
+M	src/system/process_manager.py
+M	src/utils/Repository-Context-Compendium-System.py
+A	src/utils/config_dataclasses.py
+A	src/utils/constants.py
+A	src/utils/contextual_output.py
+M	src/utils/extract_commands_summary.py
+A	src/utils/graceful_shutdown.py
+M	src/utils/import_health_checker.py
+A	test_anti_recursion.py
+A	test_browser_fix.py
+A	tests/fixtures/README.md
+A	tests/fixtures/sample_configs/test_config.json
+
+07d8f61 2025-08-13 21:59:26 -0600 KiloMusician Merge pull request #15 from KiloMusician/codex/update-get_target_files-path-verification
+8a78cd4 2025-08-13 21:58:53 -0600 KiloMusician Merge pull request #13 from KiloMusician/codex/create-agents.md-for-repository-guidelines
+eaaa57c 2025-08-13 21:57:43 -0600 KiloMusician Merge pull request #16 from KiloMusician/codex/track-api-usage-and-implement-fallback
+0edb995 2025-08-13 21:53:49 -0600 KiloMusician feat: add token usage fallback
+M	enhanced_agent_launcher.py
+
+2064d7e 2025-08-13 21:53:32 -0600 KiloMusician Resolve target file paths within src
+M	copilot_agent_launcher.py
+A	tests/test_get_target_files.py
+
+ca43f5d 2025-08-13 21:47:36 -0600 KiloMusician Add Ollama model config with defaults and documentation
+A	config/ollama_models.json
+A	docs/ollama_models_config.md
+M	src/integration/ollama_integration.py
+
+0a53e52 2025-08-13 21:47:11 -0600 KiloMusician Add repository AGENTS guidelines and reference in Copilot config
+M	.github/copilot.yaml
+A	AGENTS.md
+
+212ed82 2025-08-13 20:07:59 -0600 KiloMusician Initial project setup with CI, linting, and scripts
+A	.flake8
+A	.pre-commit-config.yaml
+A	CHANGELOG.md
+A	CONTRIBUTING.md
+A	Dockerfile
+M	README.md
+A	docs/Checklists/PROJECT_STATUS_CHECKLIST.md
+A	docs/Checklists/TODO_TO_ISSUES.md
+A	docs/env.md
+A	pyproject.toml
+M	requirements.txt
+A	scripts/lint_test_check.py
+A	scripts/performance_monitor.py
+A	scripts/project_navigator.py
+M	src/integration/chatdev_llm_adapter.py
+A	src/utils/validators.py
+
+f0f7dca 2025-08-13 20:05:44 -0600 KiloMusician Merge pull request #8 from KiloMusician/codex/refactor-test_chatdev.py-to-use-mocks-12gc0k
+e8b6e56 2025-08-13 20:05:30 -0600 KiloMusician Merge pull request #12 from KiloMusician/codex/organize-report-files-and-update-readme
+f5eb9c8 2025-08-13 20:05:07 -0600 KiloMusician Merge pull request #10 from KiloMusician/codex/create-init.py-for-copilot-package
+fdf8365 2025-08-13 20:04:45 -0600 KiloMusician Merge pull request #9 from KiloMusician/codex/refactor-requirements.txt-and-add-locking-script
+3005e84 2025-08-13 20:04:03 -0600 KiloMusician Merge pull request #7 from KiloMusician/codex/refactor-test_chatdev.py-to-use-mocks
+9bcc625 2025-08-13 20:03:42 -0600 KiloMusician Merge pull request #6 from KiloMusician/codex/remove-head-limit-in-security-scan
+b00aa73 2025-08-13 20:03:22 -0600 KiloMusician Merge pull request #5 from KiloMusician/codex/remove-line-changes-in-chatdev_llm_adapter.py
+1170de0 2025-08-13 20:03:07 -0600 KiloMusician Merge pull request #4 from KiloMusician/codex/update-chatdev_launcher.py-for-configurable-path
+6042229 2025-08-13 20:02:51 -0600 KiloMusician Merge pull request #3 from KiloMusician/dependabot/github_actions/actions/setup-python-5
+9aa63d1 2025-08-13 20:02:34 -0600 KiloMusician Merge pull request #2 from KiloMusician/dependabot/github_actions/pypa/gh-action-pip-audit-1.1.0
+2d1dcbd 2025-08-13 20:01:58 -0600 KiloMusician Merge pull request #1 from KiloMusician/dependabot/github_actions/actions/checkout-4
+cd75082 2025-08-13 19:59:28 -0600 KiloMusician chore: relocate reports to docs and update references
+M	.gitignore
+M	README.md
+R100	reports/AGENT_CLAUDE_COMPREHENSIVE_ANALYSIS_REPORT.md	docs/reports/AGENT_CLAUDE_COMPREHENSIVE_ANALYSIS_REPORT.md
+R100	DEPENDENCY_MAPPING_REPORT.md	docs/reports/DEPENDENCY_MAPPING_REPORT.md
+R100	ITERATION_COMPLETE_COMPREHENSIVE_SUCCESS.md	docs/reports/ITERATION_COMPLETE_COMPREHENSIVE_SUCCESS.md
+R100	reports/REPORTING_SYSTEMS_CONTEXT.md	docs/reports/REPORTING_SYSTEMS_CONTEXT.md
+R100	REPOSITORY_ORGANIZATIONAL_ANALYSIS_COMPLETE.md	docs/reports/REPOSITORY_ORGANIZATIONAL_ANALYSIS_COMPLETE.md
+R100	REPOSITORY_ORGANIZATION_ANALYSIS_AND_FIXES.md	docs/reports/REPOSITORY_ORGANIZATION_ANALYSIS_AND_FIXES.md
+R100	ROOT_DIRECTORY_CLEANUP_ANALYSIS.md	docs/reports/ROOT_DIRECTORY_CLEANUP_ANALYSIS.md
+R100	ROOT_DIRECTORY_CLEANUP_COMPLETION_REPORT.md	docs/reports/ROOT_DIRECTORY_CLEANUP_COMPLETION_REPORT.md
+R100	SYSTEMATIC_SRC_AUDIT_REPORT.json	docs/reports/SYSTEMATIC_SRC_AUDIT_REPORT.json
+R100	ULTIMATE_DEPENDENCY_MAP.json	docs/reports/ULTIMATE_DEPENDENCY_MAP.json
+R100	ZETA41_INTEGRATION_MASTERY_REPORT.md	docs/reports/ZETA41_INTEGRATION_MASTERY_REPORT.md
+R100	reports/analysis/AI_INTERMEDIARY_CHECKIN_REPORT.md	docs/reports/analysis/AI_INTERMEDIARY_CHECKIN_REPORT.md
+R100	reports/analysis/ANALYSIS_SYSTEMS_CONTEXT.md	docs/reports/analysis/ANALYSIS_SYSTEMS_CONTEXT.md
+R100	reports/analysis/EMPIRICAL_LLM_ANALYSIS_FINAL.md	docs/reports/analysis/EMPIRICAL_LLM_ANALYSIS_FINAL.md
+R100	broken_paths_analysis.json	docs/reports/broken_paths_analysis.json
+R100	reports/diagnostics/DIAGNOSTICS_SYSTEMS_CONTEXT.md	docs/reports/diagnostics/DIAGNOSTICS_SYSTEMS_CONTEXT.md
+R100	reports/diagnostics/TERMINAL_TROUBLESHOOTING_RESOLUTION_REPORT.md	docs/reports/diagnostics/TERMINAL_TROUBLESHOOTING_RESOLUTION_REPORT.md
+R100	quick_system_analysis_20250807_052432.json	docs/reports/quick_system_analysis_20250807_052432.json
+R100	quick_system_analysis_20250807_052610.json	docs/reports/quick_system_analysis_20250807_052610.json
+R100	reports/rpg_integration_status.json	docs/reports/rpg_integration_status.json
+R100	reports/system_analysis/SAFE_CONSOLIDATION_REPORT.json	docs/reports/system_analysis/SAFE_CONSOLIDATION_REPORT.json
+R100	reports/system_analysis/SRC_DIRECTORY_ANALYSIS_REPORT.md	docs/reports/system_analysis/SRC_DIRECTORY_ANALYSIS_REPORT.md
+R100	reports/system_analysis/SRC_DIRECTORY_ERROR_RESOLUTION_REPORT.md	docs/reports/system_analysis/SRC_DIRECTORY_ERROR_RESOLUTION_REPORT.md
+R100	reports/system_analysis/SYSTEMATIC_SRC_AUDIT_REPORT.json	docs/reports/system_analysis/SYSTEMATIC_SRC_AUDIT_REPORT.json
+R100	reports/system_analysis/comprehensive_workflow_results_full_workflow_20250803_214508.json	docs/reports/system_analysis/comprehensive_workflow_results_full_workflow_20250803_214508.json
+R100	reports/system_analysis/quick_system_analysis_20250803_215532.json	docs/reports/system_analysis/quick_system_analysis_20250803_215532.json
+R100	reports/system_analysis/quick_system_analysis_20250803_220106.json	docs/reports/system_analysis/quick_system_analysis_20250803_220106.json
+R100	reports/system_analysis/system_health_assessment_20250803_220613.json	docs/reports/system_analysis/system_health_assessment_20250803_220613.json
+
+fc10b42 2025-08-13 19:58:37 -0600 KiloMusician Add copilot package initializer
+A	src/copilot/__init__.py
+
+80b10fb 2025-08-13 19:58:18 -0600 KiloMusician Add dev extras and dependency update script
+A	docs/dependency_management.md
+A	pyproject.toml
+M	requirements.txt
+A	scripts/update_dependencies.sh
+
+534f6b8 2025-08-13 19:57:07 -0600 KiloMusician test: mock ChatDev launcher
+M	tests/test_chatdev.py
+
+8a38b4e 2025-08-13 19:56:48 -0600 KiloMusician test: mock ChatDev launcher
+M	tests/test_chatdev.py
+
+cd0b091 2025-08-13 19:52:42 -0600 KiloMusician chore: check all python files in security scan
+M	.github/workflows/security-scan.yml
+
+fe4af08 2025-08-13 19:52:24 -0600 KiloMusician Add regression test for ChatDev adapter
+M	src/integration/chatdev_llm_adapter.py
+A	tests/test_chatdev_llm_adapter_import.py
+
+472a1a4 2025-08-13 19:51:39 -0600 KiloMusician feat: make ChatDev path configurable
+M	README.md
+M	src/integration/chatdev_launcher.py
+
+752c1ee 2025-08-13 19:33:04 -0600 KiloMusician Refactor path handling and add helpers module
+M	src/integration/chatdev_launcher.py
+A	src/utils/helpers.py
+
+8c0d4fa 2025-08-13 19:22:23 -0600 KiloMusician Add integration entrypoint, settings, and stubs
+A	src/integration/__main__.py
+M	src/integration/chatdev_launcher.py
+A	src/integration/settings.json
+M	src/system/dictionary/consciousness_bridge.py
+
+3b928d5 2025-08-13 18:30:43 -0600 KiloMusician Add function registry, system dictionary, and reorganize repo
+M	.github/WORKFLOWS.md
+M	.github/workflows/WORKFLOWS.md
+A	.snapshots/config.json
+A	.snapshots/readme.md
+M	.vscode/tasks.json
+A	COMPLETE_FUNCTION_REGISTRY.md
+A	PATH_FIXES_SUMMARY.md
+A	complete_function_registry.py
+A	execute_function_registry.py
+A	execute_repository_organization.py
+A	function_registry_data.json
+D	orchestration_state.json
+D	quick_system_analysis_20250807_052432.json
+D	quick_system_analysis_20250807_052610.json
+R100	DEPENDENCY_MAPPING_REPORT.md	reports/DEPENDENCY_MAPPING_REPORT.md
+R100	ITERATION_COMPLETE_COMPREHENSIVE_SUCCESS.md	reports/ITERATION_COMPLETE_COMPREHENSIVE_SUCCESS.md
+R100	REPOSITORY_ORGANIZATIONAL_ANALYSIS_COMPLETE.md	reports/REPOSITORY_ORGANIZATIONAL_ANALYSIS_COMPLETE.md
+R100	REPOSITORY_ORGANIZATION_ANALYSIS_AND_FIXES.md	reports/REPOSITORY_ORGANIZATION_ANALYSIS_AND_FIXES.md
+R100	ROOT_DIRECTORY_CLEANUP_ANALYSIS.md	reports/ROOT_DIRECTORY_CLEANUP_ANALYSIS.md
+R100	ROOT_DIRECTORY_CLEANUP_COMPLETION_REPORT.md	reports/ROOT_DIRECTORY_CLEANUP_COMPLETION_REPORT.md
+R100	SYSTEMATIC_SRC_AUDIT_REPORT.json	reports/SYSTEMATIC_SRC_AUDIT_REPORT.json
+R100	System_Status_Context_Dashboard.md	reports/System_Status_Context_Dashboard.md
+R100	System_Status_Context_Dashboard_Integrated.md	reports/System_Status_Context_Dashboard_Integrated.md
+R100	ULTIMATE_DEPENDENCY_MAP.json	reports/ULTIMATE_DEPENDENCY_MAP.json
+R097	ZETA41_INTEGRATION_MASTERY_REPORT.md	reports/ZETA41_INTEGRATION_MASTERY_REPORT.md
+A	repository_dictionary_demo.py
+R100	broken_paths_analysis.json	src/analysis/broken_paths_analysis.json
+R100	chatdev_integration_analysis.json	src/analysis/chatdev_integration_analysis.json
+R100	chatdev_integration_implementation_plan.json	src/analysis/chatdev_integration_implementation_plan.json
+R100	chatdev_integration_success_summary.json	src/analysis/chatdev_integration_success_summary.json
+R100	next_steps_assessment_20250812_162622.json	src/analysis/next_steps_assessment_20250812_162622.json
+R100	Enhanced-Shell-Integration.ps1	src/integration/Enhanced-Shell-Integration.ps1
+R100	chatdev_integration_implementation.py	src/scripts/chatdev_integration_implementation.py
+R100	chatdev_integration_success_summary.py	src/scripts/chatdev_integration_success_summary.py
+A	src/scripts/chatdev_workflow_integration_analysis.py
+A	src/scripts/chatdev_workflow_integration_analysis_clean.py
+R098	copilot_agent_launcher.py	src/scripts/copilot_agent_launcher.py
+R098	enhanced_agent_launcher.py	src/scripts/enhanced_agent_launcher.py
+R099	enhanced_copilot_launcher.py	src/scripts/enhanced_copilot_launcher.py
+R100	next_steps_priority_assessment.py	src/scripts/next_steps_priority_assessment.py
+R097	party_system_test_launcher.py	src/scripts/party_system_test_launcher.py
+R096	simple_browser_launcher.py	src/scripts/simple_browser_launcher.py
+A	src/system/dictionary/README.md
+A	src/system/dictionary/__init__.py
+A	src/system/dictionary/consciousness_bridge.py
+A	src/system/dictionary/repository_dictionary.py
+A	src/system/dictionary/system_organizer.py
+A	src/system/dictionary/unified_mapper.py
+M	src/tools/kilo_dev_launcher.py
+M	src/utils/directory_context_generator.py
+M	src/utils/setup_chatdev_integration.py
+A	test_repository_systems.py
+R098	test_anti_recursion.py	tests/test_anti_recursion.py
+R096	test_browser_fix.py	tests/test_browser_fix.py
+R100	test_github_validation.py	tests/test_github_validation.py
+
+904c83b 2025-08-13 16:49:50 -0600 KiloMusician Focused on Development
+M	.github/instructions/Github-Copilot-Config-3.instructions.md
+M	.gitignore
+M	DEPENDENCY_MAPPING_REPORT.md
+A	Enhanced-Shell-Integration.ps1
+M	KILO-FOOLISH.code-workspace
+A	REPO_STRUCTURE.md
+M	ROOT_DIRECTORY_CLEANUP_ANALYSIS.md
+A	System_Status_Context_Dashboard.md
+A	System_Status_Context_Dashboard_Integrated.md
+M	ULTIMATE_DEPENDENCY_MAP.json
+A	chatdev_integration_analysis.json
+A	chatdev_integration_implementation.py
+A	chatdev_integration_implementation_plan.json
+A	chatdev_integration_success_summary.json
+A	chatdev_integration_success_summary.py
+A	chatdev_workflow_integration_analysis.py
+A	chatdev_workflow_integration_analysis_clean.py
+M	data/ai_intermediary_status.json
+M	data/development_velocity_tracking.json
+M	data/monitoring_dashboard.json
+M	data/performance_trend_analysis.json
+M	data/terminal_consciousness.json
+M	data/terminal_sessions.json
+M	data/zeta05_mastery_certificate.json
+A	data/zeta06_mastery_certificate.json
+M	data/zeta_progress_analytics.json
+A	docs/Archive/Archive/.snapshots/config.json
+A	docs/Archive/Archive/.snapshots/readme.md
+A	docs/Archive/Archive/.snapshots/sponsors.md
+M	docs/Checklists/ZETA_DEVELOPMENT_CHECKLIST.md
+M	docs/Core/megatag_specifications.md
+M	docs/Repository/Structure_Tree.md
+M	docs/Vault/Structure_Tree.md
+M	docs/depreciated/Structure_Tree.instructions.md
+A	docs/guidance/interactive_terminal_techniques.md
+A	main.py
+A	next_steps_assessment_20250812_162622.json
+A	next_steps_priority_assessment.py
+A	party_system_test_launcher.py
+A	scripts/update_powershell_profile.ps1
+A	simple_browser_launcher.py
+A	src/ai/chatdev_phase_orchestrator.py
+M	src/analysis/comprehensive_repository_analyzer.py
+A	src/analytics/model_selection_analytics.py
+M	src/copilot/copilot_enhancement_bridge.py
+M	src/copilot/copilot_workspace_enhancer.py
+M	src/core/config_manager.py
+M	src/core/performance_monitor.py
+M	src/data/DATA_MANAGEMENT_CONTEXT.md
+A	src/game_development/zeta21_game_pipeline.py
+M	src/integration/Ollama_Integration_Hub.py
+M	src/integration/advanced_chatdev_copilot_integration.py
+M	src/integration/chatdev_launcher.py
+A	src/interface/ContextBrowser_DesktopApp.py
+A	src/interface/Enhanced-Interactive-Context-Browser-Fixed.py
+M	src/interface/Enhanced-Interactive-Context-Browser.py
+A	src/interface/Launch-ContextBrowserApp.ps1
+A	src/interface/launch_context_browser_app.py
+M	src/orchestration/multi_ai_orchestrator.py
+R061	src/data/healing_protocols	src/protocols/healing_protocols.py
+M	src/setup/enhanced_session_startup.ps1
+M	src/system/terminal_manager_integration.py
+M	src/utils/stubs/repository_compendium_stub.py
+A	test_anti_recursion.py
+A	test_browser_fix.py
+A	tests/test_zeta03_model_selection.py
+A	tests/test_zeta04_conversation_management.py
+A	tests/test_zeta21_game_pipeline.py
+
+dbfe582 2025-08-08 15:10:37 +0000 dependabot[bot] Bump actions/setup-python from 4 to 5
+M	.github/workflows/ci.yml
+
+98b522e 2025-08-08 15:10:34 +0000 dependabot[bot] Bump pypa/gh-action-pip-audit from 1.0.8 to 1.1.0
+M	.github/workflows/security-scan.yml
+
+4a76358 2025-08-08 15:10:31 +0000 dependabot[bot] Bump actions/checkout from 3 to 4
+M	.github/workflows/ci.yml
+
+bcdd57e 2025-08-08 09:04:42 -0600 KiloMusician Initial clean commit after removing large files
+A	.copilot_kilo/COPILOT_KILO_CONTEXT.md
+A	.editorconfig
+A	.gitattributes
+A	.github/CODEOWNERS
+A	.github/GITHUB_INTEGRATION_CONTEXT.md
+A	.github/ISSUE_TEMPLATE/bug_report.md
+A	.github/ISSUE_TEMPLATE/feature_request.md
+A	.github/PULL_REQUEST_TEMPLATE.md
+A	.github/REPO_STRUCTURE.md
+A	.github/WORKFLOWS.md
+A	.github/copilot.yaml
+A	.github/dependabot.yml
+A	.github/instructions/Advanced-Copilot-Integration.instructions.md
+A	.github/instructions/CONTEXT_REGISTRY.md
+A	.github/instructions/GITHUB_INSTRUCTIONS_CONTEXT.md
+A	.github/instructions/Github-Copilot-Config-3.instructions.md
+A	.github/instructions/Github-Copilot-Config.instructions.md
+A	.github/instructions/Structure_Tree.instructions.md
+A	.github/instructions/intelligence-discovery.md
+A	.github/instructions/repository-context.md
+A	.github/labeler.yml
+A	.github/prompts/GITHUB_PROMPTS_CONTEXT.md
+A	.github/prompts/interaction-templates.md
+A	.github/workflows/GITHUB_WORKFLOWS_CONTEXT.md
+A	.github/workflows/WORKFLOWS.md
+A	.github/workflows/ci.yml
+A	.github/workflows/security-scan.yml
+A	.gitignore
+A	.snapshots/SNAPSHOTS_MANAGEMENT_CONTEXT.md
+A	.snapshots/directory_coverage_snapshot_20250803_210457.json
+A	.snapshots/directory_coverage_snapshot_20250803_211355.json
+A	.snapshots/maintenance_report_20250803_211355.json
+A	.snapshots/sponsors.md
+A	.vscode/Settings/VSCODE_EXTENDED_SETTINGS_CONTEXT.md
+A	.vscode/Settings/settings.json
+A	.vscode/VSCODE_CONFIGURATION_CONTEXT.md
+A	.vscode/ai_copilot.json
+A	.vscode/blockchain_copilot.json
+A	.vscode/consciousness_copilot.json
+A	.vscode/copilot_context.json
+A	.vscode/copilot_templates/ai.md
+A	.vscode/copilot_templates/base.md
+A	.vscode/copilot_templates/quantum.md
+A	.vscode/quantum_copilot.json
+A	.vscode/sessions.json
+A	.vscode/tasks.json
+A	DEPENDENCY_MAPPING_REPORT.md
+A	ITERATION_COMPLETE_COMPREHENSIVE_SUCCESS.md
+A	KILO-FOOLISH.code-workspace
+A	KILO_Core/KILO_CORE_SYSTEMS_CONTEXT.md
+A	KILO_Core/__init__.py
+A	KILO_Core/secrets.py
+A	KILOsystem_access_point.txt
+A	Kilo_Foolish_README.md
+A	LICENSE
+A	LOGGING/__init__.py
+A	LOGGING/infrastructure/KILO_LOGGING_SYSTEMS_CONTEXT.md
+A	LOGGING/infrastructure/LOGGING_GLOBAL_SYSTEMS_CONTEXT.md
+A	LOGGING/infrastructure/LOGGING_SYSTEMS_CONTEXT.md
+A	LOGGING/infrastructure/UNIFIED_LOGGING_ARCHITECTURE.md
+A	LOGGING/infrastructure/__init__.py
+A	LOGGING/infrastructure/modular_logging_system.py
+A	NuSyQ-Hub-Obsidian/.obsidian/OBSIDIAN_KNOWLEDGE_CONTEXT.md
+A	NuSyQ-Hub-Obsidian/.obsidian/app.json
+A	NuSyQ-Hub-Obsidian/.obsidian/appearance.json
+A	NuSyQ-Hub-Obsidian/.obsidian/community-plugins.json
+A	NuSyQ-Hub-Obsidian/.obsidian/config/app.json
+A	NuSyQ-Hub-Obsidian/.obsidian/core-plugins.json
+A	NuSyQ-Hub-Obsidian/.obsidian/graph.json
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/chatgpt-md/main.js
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/chatgpt-md/manifest.json
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/obsidian-importer/main.js
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/obsidian-importer/manifest.json
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/obsidian-importer/styles.css
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/open-vscode/main.js
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/open-vscode/manifest.json
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/vscode-editor/main.js
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/vscode-editor/manifest.json
+A	NuSyQ-Hub-Obsidian/.obsidian/plugins/vscode-editor/styles.css
+A	NuSyQ-Hub-Obsidian/.obsidian/workspace.json
+A	NuSyQ-Hub-Obsidian/Dashboard.md
+A	NuSyQ-Hub-Obsidian/Welcome.md
+A	NuSyQ-Hub-Obsidian/create a link.md
+A	NuSyQ-Hub.code-workspace
+A	README.md
+A	REPOSITORY_ORGANIZATIONAL_ANALYSIS_COMPLETE.md
+A	REPOSITORY_ORGANIZATION_ANALYSIS_AND_FIXES.md
+A	ROOT_DIRECTORY_CLEANUP_ANALYSIS.md
+A	ROOT_DIRECTORY_CLEANUP_COMPLETION_REPORT.md
+A	SYSTEMATIC_SRC_AUDIT_REPORT.json
+A	Transcendent_Spine/TRANSCENDENT_SPINE_CONTEXT.md
+A	Transcendent_Spine/kilo-foolish-transcendent-spine/srcDEPRECIATED/DEPRECATED_SOURCE_CONTEXT.md
+A	Transcendent_Spine/kilo-foolish-transcendent-spine/srcDEPRECIATED/setup/DEPRECATED_SETUP_CONTEXT.md
+A	Transcendent_Spine/kilo-foolish-transcendent-spine/srcDEPRECIATED/setup/NuSyQ-Hub.code-workspace
+A	ULTIMATE_DEPENDENCY_MAP.json
+A	ZETA41_INTEGRATION_MASTERY_REPORT.md
+A	agent_output/analysis_context_review_20250807_022348.json
+A	agent_output/analysis_context_review_20250807_022435.json
+A	agent_output/chatdev_task_review_20250807_022348.txt
+A	agent_output/chatdev_task_review_20250807_022435.txt
+A	agent_output/collaboration_debug_20250807_025656.json
+A	agent_output/collaboration_enhance_20250807_024859.json
+A	agent_output/collaboration_review_20250807_023752.json
+A	agent_output/collaboration_review_20250807_023838.json
+A	archive/launchers/LAUNCHER_EVOLUTION_ARCHIVE.md
+A	archive/launchers/copilot_agent_launcher_v1.py
+A	archive/launchers/enhanced_copilot_launcher_v2.py
+A	broken_paths_analysis.json
+A	config/CONFIGURATION_SYSTEMS_CONTEXT.md
+A	config/KILO_CORE_SCRIPTS_INVENTORY.json
+A	config/ROOT_LEVEL_FILES.ini
+A	config/The-Living-Ecosystem-v2.ini
+A	config/The-Living-Ecosystem.ini
+A	config/ZETA_PROGRESS_TRACKER.json
+A	config/app.json
+A	config/appearance.json
+A	config/bridge_config.yaml
+A	config/broken_paths_report.json
+A	config/civilization_parameters.json
+A	config/config.json
+A	config/coordinator_config.json
+A	config/core-plugins.json
+A	config/executed_commands.json
+A	config/file_organization_report.json
+A	config/kilo_validation_report_20250803_081735.json
+A	config/kilo_validation_report_20250803_081937.json
+A	config/megatag_schemas.json
+A	config/omnitag_patterns.json
+A	config/organization_rules.json
+A	config/quantum_states.toml
+A	config/quantum_system_analysis_20250803_063843.json
+A	config/questlines.json
+A	config/quests.json
+A	config/rpg_inventory.json
+A	config/secrets.json
+A	config/settings.json
+A	config/spine_configuration.yaml
+A	config/startup_log.json
+A	config/user_profile.extended.json
+A	config/wizard_navigator_123_results.json
+A	config/workspace.json
+A	copilot_agent_launcher.py
+A	copilot_memory/consciousness_memory.db
+A	data/DATA_MANAGEMENT_CONTEXT.md
+A	data/ai_intermediary_status.json
+A	data/context.md
+A	data/development_velocity_tracking.json
+A	data/logs/direct_repository_audit.json
+A	data/monitoring_dashboard.json
+A	data/performance_trend_analysis.json
+A	data/quest_management/QUEST_COMPLETION_REPORT.md
+A	data/quest_management/QUEST_SELECTION_MENU.md
+A	data/quest_management/RECOMMENDED_ACTIONS_COMPLETED.md
+A	data/system_capability_inventory.json
+A	data/system_capability_inventory_report.md
+A	data/terminal_consciousness.json
+A	data/terminal_output_cache/5e7cc444-4f49-46eb-be44-484f9176ef38_1754302711.json
+A	data/terminal_output_cache/e1f99135-c9d1-4c66-a138-11936e24894f_1754303395.json
+A	data/terminal_sessions.json
+A	data/zeta05_mastery_certificate.json
+A	data/zeta_progress_analytics.json
+A	docs/AI/AI_Intermediary.md
+A	docs/AI/AI_SYSTEMS_CONTEXT.md
+A	docs/AI/ollama-models.txt
+A	docs/Analysis/QUANTUM_SYSTEM_COMPLETE_DOCUMENTATION.md
+A	docs/Analysis/ROOT_DIRECTORY_CLEANUP_ANALYSIS.md
+A	docs/Analysis/SKEPTICAL_LLM_SUBSYSTEM_ANALYSIS.md
+A	docs/Archive/Archive/# Code Citations2.md
+A	docs/Archive/Archive/# Ollama Direct Commands Reference.md
+A	docs/Archive/Archive/ARCHIVE_SYSTEMS_CONTEXT.md
+A	docs/Archive/Archive/COMMANDS_LIST.md
+A	docs/Archive/Archive/Deepseek.txt
+A	docs/Archive/Archive/Extended_Developer_Alamanac.md
+A	docs/Archive/Archive/KILO-Foolish.txt
+A	"docs/Archive/Archive/[Msg\342\233\233{42\342\206\227\357\270\217\316\243\342\210\236]\316\236NuSyQ (1).txt"
+A	"docs/Archive/Archive/[\360\237\234\201\316\236\342\237\206\342\247\240\342\250\202SystemRoot\316\236\316\246\316\243\316\233\342\237\262\316\236\316\233\316\250\316\243\316\236\316\230\316\233\316\250\316\230\316\243\316\236\316\233\342\237\241\316\236\316\230\316\246\316\233\316\243] (1).txt"
+A	docs/Archive/Archive/depreciated/ActivateBAK.md
+A	docs/Archive/Archive/depreciated/COMMANDS_LIST2(old).md
+A	docs/Archive/Archive/depreciated/Copilot_instructions(example).md
+A	docs/Archive/Archive/depreciated/DEPRECIATED_SYSTEMS_CONTEXT.md
+A	docs/Archive/Archive/depreciated/REPOSITORY_STRUCTURE_PROPOSAL.md
+A	docs/Archive/Archive/depreciated/ai_coordinatorLEGACY.md
+A	docs/Archive/Archive/depreciated/commands_list(old).md
+A	docs/Archive/Archive/depreciated/currentstate.md
+A	docs/Archive/Archive/depreciated/purpose.md
+A	docs/Archive/Archive/depreciated/requirementsDEPRECIATED.txt
+A	docs/Archive/Archive/depreciated/setup.ps1.backup
+A	docs/Archive/Archive/depreciated/wizard_navigatorBAK.md
+A	docs/Archive/Archive/depreciated/wizard_navigator_legacy.txt
+A	docs/Archive/RepositoryDEPRECIATED/COMPLETE_REPOSITORY/COMPLETE_REPOSITORY_SYSTEMS_CONTEXT.md
+A	docs/Archive/RepositoryDEPRECIATED/COMPLETE_REPOSITORY/Repository&venv_kilo.txt
+A	docs/Archive/RepositoryDEPRECIATED/ChatDev_Structure/CHATDEV_STRUCTURE_SYSTEMS_CONTEXT.md
+A	docs/Archive/RepositoryDEPRECIATED/ChatDev_Structure/ChatDev_Repository.txt
+A	docs/Archive/RepositoryDEPRECIATED/KILO-FOOLISH_Repository.txt
+A	docs/Archive/RepositoryDEPRECIATED/REPOSITORY_SYSTEMS_CONTEXT.md
+A	docs/Archive/RepositoryDEPRECIATED/REPOSITORY_TREE_WITH_COMMENTS.md
+A	docs/Archive/RepositoryDEPRECIATED/TREE.md
+A	docs/Archive/RepositoryDEPRECIATED/currentstate.txt
+A	docs/Archive/rtf_Files/Idler_high_level_overview.rtf
+A	docs/Archive/rtf_Files/OmniTag.rtf
+A	docs/Archive/rtf_Files/RTF_FILES_SYSTEMS_CONTEXT.md
+A	docs/Archive/rtf_Files/Repository_Template3.rtf
+A	"docs/Archive/rtf_Files/\316\236NuSyQ\342\202\201-Hub\342\202\201.rtf"
+A	docs/BROKEN/Instructions-BROKEN/COPILOT_INSTRUCTIONS_CONFIG.instructions.md
+A	docs/BROKEN/Instructions-BROKEN/FILE_PRESERVATION_MANDATE.instructions.md
+A	docs/BROKEN/Instructions-BROKEN/NuSyQ-Hub_INSTRUCTIONS.instructions.md
+A	docs/BROKEN/Instructions-BROKEN/instructions.md
+A	docs/BROKEN/Instructions-BROKEN/instructions_documentation.md
+A	docs/BROKEN/prompts-BROKEN/NuSyQ_Prompt-Hub.prompt.md
+A	docs/BROKEN/workflows-BROKEN/coverage-verification.yml
+A	docs/BROKEN/workflows-BROKEN/kilo-foolish-integration.yml
+A	docs/BROKEN/workflows-BROKEN/security-scan.yml
+A	docs/Checklists/ZETA_DEVELOPMENT_CHECKLIST.md
+A	docs/Citations/# Code Citations.md
+A	docs/Citations/Contribution.md
+A	docs/Context/DOCUMENTATION_SYSTEMS_CONTEXT.md
+A	docs/Context/context.md
+A	docs/Context/migration.md
+A	"docs/Core/# \360\237\232\200 KILO-FOOLISH Quick Start.md"
+A	docs/Core/ChatDev-wiki.md
+A	docs/Core/NuSyQRosettaStone.txt
+A	docs/Core/context_server.py
+A	docs/Core/copilot_enhancement_bridge.md
+A	docs/Core/enhancement_guide.md
+A	docs/Core/megatag_specifications.md
+A	docs/Core/omnitag_documentation.md
+A	docs/GODOT-Integration-Project/godot-integration-project.md
+A	docs/Kardashev/Kardashev.md
+A	docs/Kardashev/kardashev_detailed_log.md
+A	docs/Kardashev/kardashev_detailed_log_tagged.md
+A	docs/Notebooks/NuSyQ-Hub_Master_Navigator.ipynb
+A	docs/Notebooks/directory_config.ipynb
+A	docs/Notebooks/directory_data.ipynb
+A	docs/Notebooks/directory_docs.ipynb
+A	docs/Notebooks/directory_notebooks/root_level_overview.ipynb
+A	docs/Notebooks/directory_src.ipynb
+A	docs/Notebooks/ollama_system_mapping.ipynb
+A	docs/Notes/Ideas.txt
+A	docs/Notes/NOTES_SYSTEMS_CONTEXT.md
+A	docs/Notes/Notes1.txt
+A	docs/Notes/answers_to_my_questions.txt
+A	docs/Obsidian_Vault_Index.md
+A	docs/Planning-Modules/loading_bar_protocol.md
+A	docs/REPOSITORY_ARCHITECTURE_CODEX.yaml
+A	docs/Reports/CHATDEV_ENHANCEMENT_REPORT.md
+A	docs/Reports/CONSOLIDATION_ANALYSIS_REPORT.md
+A	docs/Reports/COORDINATION_REPORT.md
+A	docs/Reports/DIRECTORY_CONTEXT_GENERATION_REPORT.md
+A	docs/Reports/ENHANCED_CONTEXT_GENERATION_REPORT.md
+A	docs/Reports/FILE_REPAIR_PROGRESS_REPORT.md
+A	docs/Reports/KILO_FOOLISH_QOL_MISSION_COMPLETE_SUCCESS_REPORT.md
+A	docs/Reports/PHASE_1_QOL_SUCCESS_REPORT.md
+A	docs/Reports/PLACEHOLDER_ENHANCEMENT_REPORT.md
+A	docs/Reports/REPOSITORY_ORGANIZATION_SUCCESS.md
+A	docs/Reports/REQUIREMENTS_CONSOLIDATION_REPORT.md
+A	docs/Reports/RESTORATION_SUCCESS_REPORT.md
+A	docs/Reports/ROOT_DIRECTORY_CLEANUP_COMPLETION_REPORT.md
+A	docs/Reports/ROSETTA_QUEST_STATUS_REPORT.md
+A	docs/Reports/SCRIPTS_REFERENCES_UPDATE_SUCCESS_REPORT.md
+A	docs/Reports/SYSTEMATIC_SRC_AUDIT_RESULTS.md
+A	docs/Reports/SYSTEM_MASTERY_ACHIEVED.md
+A	docs/Reports/ZETA_PROGRESS_SESSION_REPORT.md
+A	docs/Reports/administrative_access_status_report.md
+A	docs/Reports/copilot_terminal_access_analysis.md
+A	docs/Reports/github_instructions_integration_20250805_231131.md
+A	docs/Reports/github_integration_audit_20250805_230458.md
+A	docs/Reports/github_validation_20250805_231422.md
+A	docs/Reports/github_validation_20250805_231434.md
+A	docs/Reports/integration_status_final_analysis.md
+A	docs/Reports/kilo_validation_report_20250803_081735.md
+A	docs/Reports/kilo_validation_report_20250803_081937.md
+A	docs/Reports/python_file_classification_report.md
+A	docs/Reports/repository_organization_complete.md
+A	docs/Reports/src_audit_continuation_report.md
+A	docs/Reports/systematic_audit_phase1_complete.md
+A	docs/Repository/Structure_Tree.md
+A	docs/Rosetta-Quests/ACTIVE_AVAILABLE_QUESTS_REPORT.md
+A	docs/Rosetta-Quests/quest_ChatDevOllamaAdapter.md
+A	docs/SRC/# Add missing Python analysis methods.txt
+A	docs/SRC/# Enhanced Repository Analyzer.txt
+A	docs/SRC/# KILO-FOOLISH Ollama Integration Creato.txt
+A	docs/SRC/# KILO-FOOLISH Ollama Integration Interf.txt
+A	docs/SRC/# KILO-FOOLISH Reality Check - Deep Error.txt
+A	docs/SRC/# KILO-FOOLISH System Test Script.txt
+A	docs/SRC/Untitled-1.txt
+A	docs/SRC/import pandas as pd.txt
+A	docs/Summaries/ENHANCEMENT_SESSION_SUMMARY.md
+A	docs/TO-DO/FILE_NAMING_QOL_IMPROVEMENT_PLAN.md
+A	docs/TO-DO/LIVING_ECOSYSTEM_ANALYSIS.md
+A	docs/TO-DO/SNAPSHOT_SYSTEM_MAINTENANCE_STRATEGY.md
+A	docs/TO-DO/TO-DO.md
+A	docs/TO-DO/to-do(100).txt
+A	docs/Vault/Dr.Smith.txt
+A	docs/Vault/GPTGO.txt
+A	docs/Vault/Idler_high_level_overview.txt
+A	docs/Vault/OmniTag.txt
+A	docs/Vault/Repository_Template3.txt
+A	docs/Vault/Structure_Tree.md
+A	docs/Vault/message1.txt
+A	docs/Vault/message2.txt
+A	docs/Vault/output.txt
+A	"docs/Vault/\316\236NuSyQ\342\202\201-Hub\342\202\201.txt"
+A	docs/depreciated/Github-Copilot-Config.instructions.txt
+A	docs/depreciated/Structure_Tree.instructions.md
+A	docs/depreciated/generate_structure_tree.txt
+A	docs/docs-ChatDev-Remnants/manual.md
+A	docs/docs-ChatDev-Remnants/meta.txt
+A	docs/docs-ChatDev-Remnants/sponsors.md
+A	docs/docs-logs/2025-07-22.md
+A	docs/docs-logs/CHATDEV_INTEGRATION_TEST_SUCCESS.md
+A	docs/docs-logs/CONSOLIDATION_PROGRESS_LOG.md
+A	docs/docs-logs/POWERSHELL_SCRIPTS_ORGANIZATION_SUCCESS.md
+A	docs/docs-logs/SNAPSHOT_IMPLEMENTATION_COMPLETE.md
+A	docs/docs-logs/broken_paths_summary.md
+A	docs/errors/LAST ERRORTEXT PY.txt
+A	docs/errors/wizard_navigator_errors.txt
+A	docs/game-development/GAME_DEVELOPMENT_SYSTEMS_CONTEXT.md
+A	docs/game-development/rimdoc1.md
+A	docs/guidance/(CodeAbstraction Example)2. copilot instructions.txt
+A	docs/guidance/123-step-development-checklist(ALTERNATE).md
+A	docs/guidance/123-step-development-checklist.md
+A	docs/guidance/AI_Hub.md
+A	docs/guidance/Complete_Development_Cycle_Checklist.md
+A	docs/guidance/GUIDANCE_SYSTEMS_CONTEXT.md
+A	docs/guidance/Staunch_overview.md
+A	docs/guidance/code_cultivation.md
+A	docs/guidance/jenky.md
+A	"docs/guidance/prot\303\251g\303\251.md"
+A	docs/system-info/Environment.md
+A	docs/system-info/SYSTEM_INFO.md
+A	docs/system-info/SYSTEM_INFO_SYSTEMS_CONTEXT.md
+A	docs/tasks/chatdev_task_interactive_browser.md
+A	enhanced_agent_launcher.py
+A	enhanced_copilot_launcher.py
+A	logs/storage/LOGS_STORAGE_CONTEXT.md
+A	logs/storage/comprehensive_test_audit.json
+A	logs/storage/data_logs/LOGS_SYSTEMS_CONTEXT.md
+A	logs/storage/data_logs/system_enhancement_session_20250803.json
+A	logs/storage/discovery/DISCOVERY_LOGS_CONTEXT.md
+A	logs/storage/reports_logs/LOGS_SYSTEMS_CONTEXT.md
+A	notebooks/REPO_STRUCTURE.md
+A	notebooks/repository_code_output_formatter.ipynb
+A	orchestration_state.json
+A	quick_system_analysis_20250807_052432.json
+A	quick_system_analysis_20250807_052610.json
+A	reports/AGENT_CLAUDE_COMPREHENSIVE_ANALYSIS_REPORT.md
+A	reports/REPORTING_SYSTEMS_CONTEXT.md
+A	reports/analysis/AI_INTERMEDIARY_CHECKIN_REPORT.md
+A	reports/analysis/ANALYSIS_SYSTEMS_CONTEXT.md
+A	reports/analysis/EMPIRICAL_LLM_ANALYSIS_FINAL.md
+A	reports/diagnostics/DIAGNOSTICS_SYSTEMS_CONTEXT.md
+A	reports/diagnostics/TERMINAL_TROUBLESHOOTING_RESOLUTION_REPORT.md
+A	reports/rpg_integration_status.json
+A	reports/system_analysis/SAFE_CONSOLIDATION_REPORT.json
+A	reports/system_analysis/SRC_DIRECTORY_ANALYSIS_REPORT.md
+A	reports/system_analysis/SRC_DIRECTORY_ERROR_RESOLUTION_REPORT.md
+A	reports/system_analysis/SYSTEMATIC_SRC_AUDIT_REPORT.json
+A	reports/system_analysis/comprehensive_workflow_results_full_workflow_20250803_214508.json
+A	reports/system_analysis/quick_system_analysis_20250803_215532.json
+A	reports/system_analysis/quick_system_analysis_20250803_220106.json
+A	reports/system_analysis/system_health_assessment_20250803_220613.json
+A	requirements.txt
+A	run_ultimate_test.bat
+A	scripts/codex_integration.py
+A	scripts/fix_ollama_hosts.py
+A	src/DIRECTORY_CONTEXT.md
+A	src/Rosetta_Quest_System/ROSETTA_QUEST_CONTEXT.md
+A	src/Rosetta_Quest_System/Rosetta_Stone_Integration.ps1
+A	src/Rosetta_Quest_System/__init__.py
+A	src/Rosetta_Quest_System/quest_engine.py
+A	src/Rosetta_Quest_System/quest_log.jsonl
+A	src/__init__.py
+A	src/ai/AI_SYSTEMS_CONTEXT.md
+A	src/ai/ChatDev-Party-System.py
+A	src/ai/RoadmapAssistant.ps1.backup
+A	src/ai/__init__.py
+A	src/ai/ai_coordinator.py
+A	src/ai/ai_intermediary.py
+A	src/ai/conversation_manager.py
+A	src/ai/ollama_chatdev_integrator.py
+A	src/ai/ollama_hub.py
+A	src/ai/ollama_integration.py
+A	src/ai/ollama_model_manager.py
+A	src/ai/symbolic_cognition.py
+A	src/analysis/ANALYSIS_SYSTEMS_CONTEXT.md
+A	src/analysis/__init__.py
+A	src/analysis/broken_paths_analyzer.py
+A	src/analysis/comprehensive_repository_analyzer.py
+A	src/analysis/health_verifier.py
+A	src/analysis/quantum_analyzer.py
+A	src/analysis/repository_analyzer.py
+A	src/blockchain/BLOCKCHAIN_SYSTEMS_CONTEXT.md
+A	src/blockchain/__init__.py
+A	src/blockchain/quantum_consciousness_blockchain.py
+A	src/cloud/CLOUD_SYSTEMS_CONTEXT.md
+A	src/cloud/__init__.py
+A	src/cloud/quantum_cloud_orchestrator.py
+A	src/consciousness/CONSCIOUSNESS_SYSTEMS_CONTEXT.md
+A	src/consciousness/quantum_problem_resolver_unified.py
+A	src/consciousness/the_oldest_house.py
+A	src/context.md
+A	src/copilot/COPILOT_SYSTEMS_CONTEXT.md
+A	src/copilot/copilot_enhancement_bridge.py
+A	src/copilot/copilot_workspace_enhancer.py
+A	src/copilot/enhanced_bridge.py
+A	src/copilot/megatag_processor.py
+A	src/copilot/omnitag_system.py
+A	src/copilot/symbolic_cognition.py
+A	src/copilot/vscode_integration.py
+A	src/copilot/workspace_enhancer.py
+A	src/core/AIContextGenerator.ps1
+A	src/core/CORE_SYSTEMS_CONTEXT.md
+A	src/core/__init__.py
+A	src/core/__init___.py
+A	src/core/config_manager.py
+A	src/core/context_server.py
+A	src/core/coordinator_config.json
+A	src/core/job_tracker.py
+A	src/core/kilo_foolish_master_launcher.py
+A	src/core/main.py
+A	src/core/organization_rules.json
+A	src/core/performance_monitor.py
+A	src/core/performance_monitor_mastery.py
+A	src/core/quantum_problem_resolver_transcendent.py
+A	src/core/quantum_problem_resolver_unified.py
+A	src/data/DATA_MANAGEMENT_CONTEXT.md
+A	src/data/consciousness_matrices
+A	src/data/evolution_patterns
+A	src/data/healing_protocols
+A	src/diagnostics/DIAGNOSTICS_SYSTEMS_CONTEXT.md
+A	src/diagnostics/DiagnoseSecrets.ps1
+A	src/diagnostics/ErrorDetector.ps1
+A	src/diagnostics/ErrorDetector.ps1.backup
+A	src/diagnostics/ImportHealthCheck.ps1
+A	src/diagnostics/__init__.py
+A	src/diagnostics/broken_paths_analyzer.py
+A	src/diagnostics/chatdev_capabilities_test.py
+A	src/diagnostics/comprehensive_integration_validator.py
+A	src/diagnostics/comprehensive_quantum_analysis.py
+A	src/diagnostics/comprehensive_test_runner.py
+A	src/diagnostics/diagnose-api-keys.ps1
+A	src/diagnostics/direct_repository_audit.py
+A	src/diagnostics/health_verification.py
+A	src/diagnostics/kilo_infrastructure_validator.py
+A	src/diagnostics/quantum_system_complete_overview.py
+A	src/diagnostics/quest_based_auditor.py
+A	src/diagnostics/quick_integration_check.py
+A	src/diagnostics/quick_quest_audit.py
+A	src/diagnostics/quick_system_analyzer.py
+A	src/diagnostics/repository_syntax_analyzer.py
+A	src/diagnostics/system_health_assessor.py
+A	src/diagnostics/system_integration_checker.py
+A	src/diagnostics/systematic_src_audit.py
+A	src/enhancements/ENHANCEMENT_SYSTEMS_CONTEXT.md
+A	src/enhancements/IntelligentCommentary.py
+A	src/enhancements/__init__.py
+A	src/enhancements/collaborative_intelligence.py
+A	src/enhancements/context_retention.py
+A	src/enhancements/search_amplification.py
+A	src/healing/ArchitectureWatcher.py
+A	src/healing/HEALING_SYSTEMS_CONTEXT.md
+A	src/healing/__init__.py
+A	src/healing/entropy_reverser.py
+A	src/healing/evolution_catalyst.py
+A	src/healing/fix-coordinator-errors.ps1
+A	src/healing/quantum_problem_resolver.py
+A	src/healing/quantum_problem_resolver_clean.py
+A	src/healing/repository_health_restorer.py
+A	src/healing/system_regenerator.py
+A	src/integration/CONTEXT.md
+A	src/integration/INTEGRATION_SYSTEMS_CONTEXT.md
+A	src/integration/Ollama_Integration_Hub.py
+A	src/integration/Update-ChatDev-to-use-Ollama.py
+A	src/integration/__init__.py
+A	src/integration/advanced_chatdev_copilot_integration.py
+A	src/integration/chatdev_environment_patcher.py
+A	src/integration/chatdev_integration.py
+A	src/integration/chatdev_launcher.py
+A	src/integration/chatdev_llm_adapter.py
+A	src/integration/consciousness_bridge.py
+A	src/integration/copilot_chatdev_bridge.py
+A	src/integration/existing_system_bridge.py
+A	src/integration/legacy_transformer.py
+A	src/integration/oldest_house_interface.py
+A	src/integration/ollama_integration.py
+A	src/integration/quantum_bridge.py
+A	src/integration/quantum_kilo_integration_bridge.py
+A	src/integration/quantum_resolver_adapter.py
+A	src/integration/repository_harmonizer.py
+A	src/interface/Enhanced-Interactive-Context-Browser-v2.py
+A	src/interface/Enhanced-Interactive-Context-Browser.py
+A	src/interface/Enhanced-Wizard-Navigator.py
+A	src/interface/INTERFACE_SYSTEMS_CONTEXT.md
+A	src/interface/Interactive-Context-Browser.py
+A	src/interface/environment_diagnostic_enhanced.py
+A	src/memory/MEMORY_SYSTEMS_CONTEXT.md
+A	src/memory/__init__.py
+A	src/memory/contextual_memory.py
+A	src/memory/memory_palace.py
+A	src/memory/semantic_clusters.py
+A	src/ml/ML_SYSTEMS_CONTEXT.md
+A	src/ml/__init__.py
+A	src/ml/consciousness_enhanced_ml.py
+A	src/ml/neural_quantum_bridge.py
+A	src/ml/pattern_consciousness_analyzer.py
+A	src/ml/quantum_ml_processor.py
+A	src/navigation/NAVIGATION_SYSTEMS_CONTEXT.md
+A	src/navigation/repository_navigator.py
+A	src/navigation/wizard_navigator.py
+A	src/navigation/wizard_navigator/__init__.py
+A	src/navigation/wizard_navigator/graph.py
+A	src/navigation/wizard_navigator/room.py
+A	src/navigation/wizard_navigator/wizard_navigator.py
+A	src/orchestration/ORCHESTRATION_SYSTEMS_CONTEXT.md
+A	src/orchestration/__init__.py
+A	src/orchestration/chatdev_testing_chamber.py
+A	src/orchestration/comprehensive_workflow_orchestrator.py
+A	src/orchestration/kilo_ai_orchestration_master.py
+A	src/orchestration/multi_ai_orchestrator.py
+A	src/orchestration/quantum_workflow_automation.py
+A	src/orchestration/quantum_workflows.py
+A	src/orchestration/snapshot_maintenance_system.py
+A	src/orchestration/system_testing_orchestrator.py
+A	src/quantum/QUANTUM_SYSTEMS_CONTEXT.md
+A	src/quantum/__init__.py
+A	src/quantum/__main__.py
+A	src/quantum/consciousness_substrate.py
+A	src/quantum/demo_interactive.py
+A	src/quantum/import_numpy_as_np.py
+A	src/quantum/multidimensional_processor.py
+A	src/quantum/quantum_cognition_engine.py
+A	src/quantum/quantum_demo_interactive.py
+A	src/quantum/quantum_music_analysis.py
+A	src/quantum/quantum_overview.py
+A	src/quantum/quantum_problem_resolver.py
+A	src/quantum/quantum_problem_resolver_test.py
+A	src/quantum/quantum_quick_start_guide.py
+A	src/quantum/quick_start_guide.py
+A	src/scripts/ai_intermediary_checkin.py
+A	src/scripts/empirical_llm_test.py
+A	src/scripts/generate_directory_notebooks.py
+A	src/scripts/llm_validation_test.py
+A	src/scripts/quest_analyzer.py
+A	src/scripts/safe_consolidation.py
+A	src/security/SECURITY_SYSTEMS_CONTEXT.md
+A	src/security/SecretsManager.ps1
+A	src/security/secrets.template.ps1
+A	src/security/secure_api_manager.py
+A	src/setup/Activate.ps1
+A	src/setup/InstallVSCodeExtensions.ps1
+A	src/setup/IntelligentCommentary.ps1
+A	src/setup/NuSyQ-Hub.code-workspace
+A	src/setup/SETUP_SYSTEMS_CONTEXT.md
+A	src/setup/enhanced_session_startup.ps1
+A	src/setup/environment.ps1
+A	src/setup/integrated_workflow_setup_command.ps1
+A	src/setup/project.ps1
+A	src/setup/project_configuration_constants.ps1
+A	src/setup/secrets.py
+A	src/setup/setup-architecture-intelligence.ps1
+A	src/setup/setup-architecture-intelligence_copy.ps1
+A	src/setup/setup-coordinator.ps1
+A	src/setup/setup-intelligent-commentary.ps1
+A	src/setup/setup-kilo-foolish.ps1
+A	src/setup/setup-path-intelligence.ps1
+A	src/setup/setup.ps1
+A	src/spine/SPINE_SYSTEMS_CONTEXT.md
+A	src/spine/__init__.py
+A	src/spine/civilization_orchestrator.py
+A	src/spine/culture_consciousness.py
+A	src/spine/kardeshev_optimizer.py
+A	src/spine/reality_weaver.py
+A	src/spine/repository_spine.ps1
+A	src/spine/transcendent_spine_core.py
+A	src/system/PathIntelligence.ps1
+A	src/system/PathIntelligence.py
+A	src/system/RepositoryCoordinator.ps1
+A	src/system/RepositoryCoordinator.py
+A	src/system/SYSTEM_MANAGEMENT_CONTEXT.md
+A	src/system/__init__.py
+A	src/system/capability_inventory.py
+A	src/system/data/system_capability_inventory.json
+A	src/system/directory_structure.json
+A	src/system/process_manager.py
+A	src/system/reports/rpg_integration_status.json
+A	src/system/rpg_inventory.py
+A	src/system/system_snapshot_generator.py
+A	src/system/terminal_manager.py
+A	src/system/terminal_manager_integration.py
+A	src/tagging/TAGGING_SYSTEMS_CONTEXT.md
+A	src/tagging/advanced_tag_manager.py
+A	src/tagging/bridge_validators.py
+A	src/tagging/import_asyncio.py
+A	src/tagging/megatag_processor.py
+A	src/tagging/omnitag_system.py
+A	src/tagging/tag_processors.py
+A	src/tools/ChatDev-Party-System.py
+A	src/tools/DEVELOPMENT_TOOLS_CONTEXT.md
+A	src/tools/chatdev_testing_chamber.py
+A	src/tools/consolidation_planner.py
+A	src/tools/extract_commands.py
+A	src/tools/health_restorer.py
+A	src/tools/kilo_dev_launcher.py
+A	src/tools/kilo_discovery_system.py
+A	src/tools/launch-adventure.py
+A	src/tools/safe_consolidator.py
+A	src/tools/structure_organizer.py
+A	src/tools/wizard_navigator.py
+A	src/ui/USER_INTERFACE_CONTEXT.md
+A	src/ui/__init__.py
+A	src/utils/#_CLI_Interface_for_Dependency_Resolver.py
+A	src/utils/Repository-Context-Compendium-System.py
+A	src/utils/Repository-Pandas-Library.py
+A	src/utils/UTILITY_SYSTEMS_CONTEXT.md
+A	src/utils/__init__.py
+A	src/utils/classify_python_files.py
+A	src/utils/directory_context_generator.py
+A	src/utils/directory_context_generator_simplified.py
+A	src/utils/enhanced_directory_context_generator.py
+A	src/utils/extract_commands_summary.py
+A	src/utils/file_organization_auditor.py
+A	src/utils/generate_structure_tree.py
+A	src/utils/generate_structure_tree2BAK.py
+A	src/utils/generate_structure_treeBAK.py
+A	src/utils/github_instructions_enhancer.py
+A	src/utils/github_integration_auditor.py
+A	src/utils/github_validation_suite.py
+A	src/utils/import_health_checker.py
+A	src/utils/memory_serializers.py
+A	src/utils/quick_github_audit.py
+A	src/utils/quick_import_fix.py
+A	src/utils/repository_analyzer.py
+A	src/utils/repository_structure_tree.ipynb
+A	src/utils/setup_chatdev_integration.py
+A	src/utils/setup_enhanced_navigator.py
+A	src/utils/stubs/repository_compendium_stub.py
+A	templates/TEMPLATES_CONTEXT.md
+A	templates/utility_scripts/UTILITY_SCRIPTS_CONTEXT.md
+A	templates/utility_scripts/create_snapshot.py
+A	templates/utility_scripts/directory_audit_tool.py
+A	templates/utility_scripts/verify_coverage.py
+A	test_github_validation.py
+A	test_llm_systems.bat
+A	tests/TESTING_SYSTEMS_CONTEXT.md
+A	tests/__init__.py
+A	tests/consciousness_validation.py
+A	tests/integration_tests.py
+A	tests/llm_testing/simple_test.py
+A	tests/llm_testing/test_chatdev_browser.py
+A	tests/llm_testing/ultimate_gas_test.py
+A	tests/quantum_system_test.py
+A	tests/spine_tests.py
+A	tests/system_testing/test_enhanced_placeholders.py
+A	tests/test_chatdev.py
+A	tests/test_import.py
+A	tests/test_minimal.py
+A	tests/test_repository_compendium.py
+A	tests/test_requests.py
+A	web/WEB_INTERFACE_CONTEXT.md
+A	web/modular_window_system.js

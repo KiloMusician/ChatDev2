@@ -1,0 +1,24 @@
+{
+  "policy_version": "1.0",
+  "mode": "zero_token_preferred",
+  "token_budget": {
+    "daily_limit": 1000,
+    "per_request_limit": 100,
+    "emergency_reserve": 500
+  },
+  "escalation_rules": {
+    "local_first": true,
+    "require_authorization": true,
+    "log_all_requests": true
+  },
+  "approved_use_cases": [
+    "critical_bug_fixes",
+    "complex_algorithm_generation", 
+    "advanced_ai_integration"
+  ],
+  "blocked_use_cases": [
+    "simple_documentation",
+    "basic_code_formatting",
+    "trivial_refactoring"
+  ]
+}

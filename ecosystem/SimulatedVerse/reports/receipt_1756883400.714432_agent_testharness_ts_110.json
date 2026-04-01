@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-09-03T07:10:44+00:00",
+  "title": "Fix: const progressThreshold = Math.min(5, Math.max(1, totalQuests * 0.2)); // Allow up to 20% TODO quests",
+  "file": "agent/testharness.ts",
+  "line": 110,
+  "result": "patched"
+}

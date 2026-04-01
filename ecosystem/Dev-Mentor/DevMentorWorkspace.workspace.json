@@ -1,0 +1,74 @@
+{
+  "name": "DevMentor Workspace",
+  "version": "1.0.0",
+  "folders": [
+    {
+      "name": "Dev-Mentor",
+      "path": "C:/Users/keath/Dev-Mentor"
+    },
+    {
+      "name": "NuSyQ-Hub",
+      "path": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub"
+    },
+    {
+      "name": "SimulatedVerse",
+      "path": "C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse"
+    },
+    {
+      "name": "NuSyQ",
+      "path": "C:/Users/keath/NuSyQ"
+    },
+    {
+      "name": "prime_anchor",
+      "path": "C:/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/prime_anchor"
+    }
+  ],
+  "environment": {
+    "global": {
+      "PYTHONPATH": "C:/Users/keath/Dev-Mentor",
+      "PYTHONUNBUFFERED": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PREFER_LOCAL": "1"
+    },
+    "model_config": {
+      "OLLAMA_HOST": "http://localhost:11434",
+      "LMSTUDIO_HOST": "http://localhost:1234",
+      "DEFAULT_MODEL": "qwen2.5-coder:14b"
+    }
+  },
+  "services": {
+    "terminal-depths-backend": {
+      "required": true,
+      "startup_priority": 1,
+      "port": 7337,
+      "health_endpoint": "http://localhost:7337/api/health",
+      "command": "python -m cli.devmentor serve --port 7337",
+      "cwd": "${workspace:Dev-Mentor}",
+      "environment": {}
+    },
+    "ollama": {
+      "required": false,
+      "startup_priority": 2,
+      "port": 11434,
+      "health_endpoint": "http://localhost:11434/",
+      "command": "ollama serve",
+      "environment": {}
+    },
+    "nusyq-hub-api": {
+      "required": false,
+      "startup_priority": 3,
+      "port": 8000,
+      "health_endpoint": "http://localhost:8000/health",
+      "command": "python -m uvicorn src.api.main:app --port 8000 --host 0.0.0.0",
+      "cwd": "${workspace:NuSyQ-Hub}",
+      "environment": {}
+    },
+    "lm-studio": {
+      "required": false,
+      "startup_priority": 4,
+      "port": 1234,
+      "health_endpoint": "http://localhost:1234/v1/models",
+      "environment": {}
+    }
+  }
+}

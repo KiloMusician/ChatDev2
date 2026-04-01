@@ -1,0 +1,28 @@
+{
+  "name": "chatdev-vscode-extension",
+  "displayName": "ChatDev VSCode Integration",
+  "version": "0.0.1",
+  "publisher": "nusyq",
+  "engines": { "vscode": "^1.80.0" },
+  "main": "./extension.js",
+  "files": [
+    "extension.js",
+    "package.json"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "startChatDevParty",
+        "title": "Start ChatDev Party"
+      },
+      {
+        "command": "launchChatDevTask",
+        "title": "Launch ChatDev Task"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "echo \"No tests\""
+  },
+  "categories": ["Other"]
+}

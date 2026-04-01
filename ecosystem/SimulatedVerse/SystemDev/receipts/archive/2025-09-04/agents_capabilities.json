@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-09-04T14:02:25.000Z",
+  "breath": "ΞΘΛΔ_agents_sage",
+  "navigator_artificer": "mapping_capabilities",
+  "agent_capability_matrix": {
+    "librarian": {
+      "llm_required": false,
+      "offline_ops": true,
+      "file_ops": true,
+      "graph_ops": true,
+      "import_rewrite": false,
+      "test_runner": false,
+      "status": "first_responder",
+      "location": "ChatDev/agents/librarian/"
+    },
+    "artificer": {
+      "llm_required": true,
+      "offline_ops": false,
+      "file_ops": true,
+      "graph_ops": false,
+      "import_rewrite": true,
+      "test_runner": false,
+      "status": "llm_dependent",
+      "location": "ChatDev/agents/artificer/"
+    },
+    "alchemist": {
+      "llm_required": true,
+      "offline_ops": false,
+      "file_ops": false,
+      "graph_ops": true,
+      "import_rewrite": false,
+      "test_runner": true,
+      "status": "llm_dependent",
+      "location": "ChatDev/agents/alchemist/"
+    },
+    "janitor": {
+      "llm_required": false,
+      "offline_ops": true,
+      "file_ops": true,
+      "graph_ops": false,
+      "import_rewrite": false,
+      "test_runner": false,
+      "status": "first_responder",
+      "location": "ChatDev/agents/janitor/"
+    },
+    "raven": {
+      "llm_required": true,
+      "offline_ops": false,
+      "file_ops": false,
+      "graph_ops": true,
+      "import_rewrite": false,
+      "test_runner": false,
+      "status": "llm_dependent",
+      "location": "ChatDev/agents/raven/"
+    },
+    "navigator": {
+      "llm_required": false,
+      "offline_ops": true,
+      "file_ops": true,
+      "graph_ops": true,
+      "import_rewrite": true,
+      "test_runner": false,
+      "status": "first_responder_active",
+      "location": "integrated_replit_navigator"
+    }
+  },
+  "first_responders": ["librarian", "janitor", "navigator"],
+  "llm_dependent": ["artificer", "alchemist", "raven"],
+  "current_llm_status": {
+    "ollama": "unreachable",
+    "openai": "rate_limited",
+    "fallback_mode": "offline_operations_only"
+  },
+  "council_bus_channels": [
+    "system.analysis.completed",
+    "colony.agents.initialized",
+    "chatdev.capability.matrix"
+  ],
+  "offline_task_queue": {
+    "active": true,
+    "tasks_processed": "consciousness_driven",
+    "real_development_intelligence": true
+  },
+  "recommendation": "prioritize_first_responders_for_immediate_tasks"
+}

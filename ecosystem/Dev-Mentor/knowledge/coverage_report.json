@@ -1,0 +1,150 @@
+{
+  "timestamp": "2026-03-17T08:46:50Z",
+  "commands": {
+    "total": 182,
+    "via_api": 0,
+    "stubs": 72
+  },
+  "ns_api": {
+    "total_methods": 28,
+    "methods": [
+      "tprint",
+      "tprintRaw",
+      "print",
+      "ls",
+      "read",
+      "write",
+      "fileExists",
+      "rm",
+      "mv",
+      "getScriptName",
+      "getPlayer",
+      "getHostname",
+      "getServer",
+      "getSkill",
+      "hack",
+      "scan",
+      "nmap",
+      "addXP",
+      "completeChallenge",
+      "exec",
+      "run",
+      "sleep",
+      "getState",
+      "spawn",
+      "getTime",
+      "formatNum",
+      "llm",
+      "aiChat"
+    ]
+  },
+  "gaps": {
+    "missing_commands": [
+      "ls",
+      "cat",
+      "grep",
+      "find",
+      "ps",
+      "sudo",
+      "ssh",
+      "nc",
+      "nmap",
+      "curl",
+      "wget",
+      "python3",
+      "pip",
+      "git",
+      "vim",
+      "nano",
+      "awk",
+      "sed",
+      "cut",
+      "sort",
+      "uniq",
+      "wc",
+      "head",
+      "tail",
+      "chmod",
+      "chown",
+      "tar",
+      "zip",
+      "unzip",
+      "diff",
+      "ping",
+      "ifconfig",
+      "ip",
+      "ss",
+      "netstat",
+      "traceroute",
+      "dig",
+      "nslookup",
+      "whois",
+      "tcpdump",
+      "strace",
+      "ltrace",
+      "gdb",
+      "objdump",
+      "strings",
+      "hexdump",
+      "xxd",
+      "base64",
+      "openssl",
+      "gpg",
+      "ssh-keygen",
+      "htpasswd",
+      "devmode",
+      "inspect",
+      "spawn",
+      "teleport",
+      "generate",
+      "script",
+      "tutorial",
+      "skills",
+      "achievements",
+      "talk",
+      "hack",
+      "exploit",
+      "exfil",
+      "ascend"
+    ],
+    "missing_ns_methods": [],
+    "total_expected": 66,
+    "total_found": 0,
+    "coverage_pct": 0.0
+  },
+  "files": {
+    "commands.py": {
+      "bytes": 202578,
+      "lines": 4209
+    },
+    "scripting.py": {
+      "bytes": 12505,
+      "lines": 297
+    },
+    "filesystem.py": {
+      "bytes": 74596,
+      "lines": 1290
+    },
+    "gamestate.py": {
+      "bytes": 27136,
+      "lines": 512
+    },
+    "session.py": {
+      "bytes": 20306,
+      "lines": 469
+    },
+    "story.py": {
+      "bytes": 45845,
+      "lines": 957
+    },
+    "npcs.py": {
+      "bytes": 6544,
+      "lines": 118
+    },
+    "tutorial.py": {
+      "bytes": 10174,
+      "lines": 111
+    }
+  },
+  "total_lines": 7963
+}

@@ -1,0 +1,129 @@
+# NuSyQ-Hub Agent Services - Docker Compose Configuration
+#
+# This compose file deploys all agent and ecosystem services as microservices:
+# - Ollama (local LLM inference)
+# - Agent Registry (capability discovery and routing)
+# - Orchestration Bridge (multi-agent coordination)
+# - Ecosystem Services (consciousness, quantum, simverse, etc.)
+# - Observability (OpenTelemetry collector, Jaeger)
+#
+# Usage:
+#   docker-compose -f deploy/docker-compose.agents.yml up -d
+#   docker-compose -f deploy/docker-compose.agents.yml down
+
+services:
+  # Ollama - Local LLM Inference
+  ollama:
+    image: ollama/ollama:0.4.7
+    container_name: nusyq-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - nusyq-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # OpenTelemetry Collector
+  otel-collector:
+    image: otel/opentelemetry-collector:0.102.0
+    container_name: nusyq-otel-collector
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ../config/otel-collector.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "4318:4318"   # OTLP HTTP receiver
+      - "4317:4317"   # OTLP gRPC receiver
+      - "8888:8888"   # Prometheus metrics
+      - "13133:13133" # Health check
+    networks:
+      - nusyq-network
+    restart: unless-stopped
+
+  # Jaeger - Distributed Tracing UI
+  jaeger:
+    image: jaegertracing/all-in-one:1.57.0
+    container_name: nusyq-jaeger
+    ports:
+      - "16686:16686" # Jaeger UI
+      - "14268:14268" # Jaeger collector
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - nusyq-network
+    restart: unless-stopped
+
+  # Agent Registry API (Future: Expose as REST API)
+  # agent-registry:
+  #   build:
+  #     context: ..
+  #     dockerfile: deploy/Dockerfile.agent-registry
+  #   container_name: nusyq-agent-registry
+  #   ports:
+  #     - "5001:5001"
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #     - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+  #   volumes:
+  #     - ../data:/app/data
+  #   networks:
+  #     - nusyq-network
+  #   depends_on:
+  #     - otel-collector
+  #     - ollama
+  #   restart: unless-stopped
+
+  # Orchestration Bridge API (Future: Expose as REST API)
+  # orchestration-bridge:
+  #   build:
+  #     context: ..
+  #     dockerfile: deploy/Dockerfile.orchestration-bridge
+  #   container_name: nusyq-orchestration
+  #   ports:
+  #     - "5002:5002"
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #     - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+  #     - OLLAMA_URL=http://ollama:11434
+  #   volumes:
+  #     - ../data:/app/data
+  #   networks:
+  #     - nusyq-network
+  #   depends_on:
+  #     - agent-registry
+  #     - ollama
+  #   restart: unless-stopped
+
+  # Jupyter Lab (for interactive notebooks)
+  jupyter:
+    image: jupyter/scipy-notebook:python-3.11
+    container_name: nusyq-jupyter
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - GRANT_SUDO=yes
+    volumes:
+      - ../docs/Notebooks:/home/jovyan/work/notebooks
+      - ../data:/home/jovyan/work/data:ro
+      - ../src:/home/jovyan/work/src:ro
+    networks:
+      - nusyq-network
+    restart: unless-stopped
+    command: start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''
+
+networks:
+  nusyq-network:
+    driver: bridge
+    name: nusyq-network
+
+volumes:
+  ollama_models:
+    name: nusyq-ollama-models

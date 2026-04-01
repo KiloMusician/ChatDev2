@@ -1,0 +1,86 @@
+name: SimulatedVerse Minimal Integration
+
+on:
+  push:
+    branches:
+      - master
+      - codex/*
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  integration-simulatedverse-minimal:
+    name: Integration - SimulatedVerse Minimal
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHONPATH: .
+      SIMULATEDVERSE_PATH: ${{ github.workspace }}/SimulatedVerse/SimulatedVerse
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; else pip install -r requirements.txt || true; fi
+
+      - name: Install SimulatedVerse node modules
+        run: |
+          cd SimulatedVerse/SimulatedVerse
+          npm ci
+
+      - name: Start Simulated Culture Ship Agent
+        run: |
+          export SIMULATEDVERSE_ROOT="${{ github.workspace }}/SimulatedVerse/SimulatedVerse"
+          nohup python scripts/simulate_culture_ship_agent.py > simulate_agent.log 2>&1 & echo $! > simulate_agent.pid || true
+
+      - name: Start SimulatedVerse minimal server
+        run: |
+          export SIMULATEDVERSE_PATH="${{ github.workspace }}/SimulatedVerse/SimulatedVerse"
+          nohup python scripts/start_simulatedverse_minimal.py --force --timeout 60 > simmin.log 2>&1 & echo $! > simmin.pid || true
+
+      - name: Wait for SimulatedVerse health
+        run: |
+          for i in {1..30}; do
+            if curl -sf http://localhost:5000/api/health; then
+              echo "SimulatedVerse is healthy"; break
+            else
+              echo "Waiting for SimulatedVerse to be healthy... ($i)"; sleep 2
+            fi
+          done
+
+      - name: Run tests
+        run: |
+          python -m pytest -q
+        env:
+          SIMULATEDVERSE_PATH: ${{ github.workspace }}/SimulatedVerse/SimulatedVerse
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: simulatedverse-logs
+          path: |
+            simmin.log
+            simulate_agent.log
+            simmin_stdout.log
+            simmin_stderr.log
+
+      - name: Kill background processes
+        if: always()
+        run: |
+          # Attempt to kill started processes safely
+          if [ -f simulate_agent.pid ]; then kill -9 $(cat simulate_agent.pid) || true; fi
+          if [ -f simmin.pid ]; then kill -9 $(cat simmin.pid) || true; fi
+          ps aux | grep -E "tsx|node" || true

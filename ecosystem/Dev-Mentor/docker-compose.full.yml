@@ -1,0 +1,365 @@
+# ============================================================================
+# TERMINAL DEPTHS + NUSYQ + SIMULATEDVERSE + CHATDEV
+# Complete Full-Stack Orchestration
+# ============================================================================
+# Activates: 
+#   - Dev-Mentor (Terminal Depths backend + CLI)
+#   - NuSyQ Hub (Multi-AI orchestration)
+#   - SimulatedVerse (Autonomous world engine)
+#   - ChatDev (5-agent autonomous dev company)
+#   - Ollama (37.5GB model suite)
+#   - RimWorld Game + noVNC
+#   - PostgreSQL + Redis (shared data layer)
+#   - n8n (workflow automation)
+# ============================================================================
+
+
+
+services:
+  # ============================================================================
+  # CORE AI INFRASTRUCTURE
+  # ============================================================================
+
+  # Ollama: 37.5GB Model Suite
+  ollama:
+    image: ollama/ollama:latest
+    container_name: terminal-depths-ollama
+    ports:
+      - "11434:11434"
+    environment:
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_MODELS: "/root/.ollama/models"
+    volumes:
+      - ollama-models:/root/.ollama
+    networks:
+      - terminal-depths-net
+    profiles: ["full"]
+
+  # ============================================================================
+  # DEV-MENTOR / TERMINAL DEPTHS
+  # ============================================================================
+
+  dev-mentor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: terminal-depths-backend
+    ports:
+      - "7337:7337"
+    depends_on:
+      - ollama
+    environment:
+      TD_ENDPOINT: "http://ollama:11434/api/generate"
+      PYTHONUNBUFFERED: "1"
+      PORT: "7337"
+      NUSYQ_HUB_URL: "http://nusyq-hub-dev:8000"
+      REDIS_URL: "redis://nusyq-redis:6379/0"
+    volumes:
+      - ./app:/app/app
+      - ./cli:/app/cli
+      - ./agents:/app/agents
+      - ./mcp:/app/mcp
+      - ./scripts:/app/scripts
+      - terminal-depths-sessions:/app/sessions
+      - terminal-depths-state:/app/state
+    networks:
+      - terminal-depths-net
+      - deploy_nusyq-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7337/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # RimWorld/noVNC: Game Environment
+  rimworld:
+    build:
+      context: .
+      dockerfile: Dockerfile.rimworld
+    container_name: terminal-depths-rimworld
+    ports:
+      - "9000:9000"
+      - "5900:5900"
+    environment:
+      PYTHONUNBUFFERED: "1"
+      GAME_API: "http://dev-mentor:7337"
+    volumes:
+      - ./state:/app/state
+      - ./config:/app/config
+    networks:
+      - terminal-depths-net
+    profiles: ["full", "games"]
+
+  # ============================================================================
+  # NUSYQ HUB INTEGRATION (Existing Network Connection)
+  # ============================================================================
+
+  nusyq-bridge:
+    image: python:3.11-slim
+    container_name: nusyq-bridge
+    ports:
+      - "9876:9876"
+    environment:
+      NUSYQ_HUB_URL: "http://nusyq-hub-dev:8000"
+      DEV_MENTOR_URL: "http://dev-mentor:7337"
+      CHATDEV_ENABLED: "true"
+      MCP_SERVER_URL: "http://mcp-server:8765"
+    volumes:
+      - ./scripts/nusyq_bridge.py:/app/bridge.py
+      - nusyq-state:/nusyq/state
+    networks:
+      - terminal-depths-net
+      - deploy_nusyq-net
+    command: python /app/bridge.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9876/readyz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      - dev-mentor
+    profiles: ["full"]
+
+  # ============================================================================
+  # CHATDEV: 5-Agent Autonomous Development Company
+  # ============================================================================
+
+  chatdev:
+    build:
+      context: .
+      dockerfile: Dockerfile.chatdev
+    container_name: chatdev-orchestrator
+    ports:
+      - "7338:7338"
+    environment:
+      CHATDEV_COMPANY_NAME: "Terminal_Depths_AutoDev"
+      CHATDEV_MODE: "online"
+      CHATDEV_VERBOSE: "true"
+      OLLAMA_HOST: "http://ollama:11434"
+      OLLAMA_MODEL: "qwen2.5-coder:14b"
+      CLAUDE_MODEL: "${CLAUDE_MODEL:-claude-3-5-sonnet-20241022}"
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY}"
+      WORKSPACE: "/workspace/ChatDev"
+      REDIS_URL: "redis://nusyq-redis:6379/1"
+      TERMINAL_DEPTHS_URL: "http://dev-mentor:7337"
+    volumes:
+      - chatdev-workspace:/workspace/ChatDev
+      - terminal-depths-state:/state
+      - ./scripts/chatdev_tasks.json:/tasks.json
+    networks:
+      - terminal-depths-net
+    depends_on:
+      - ollama
+      - nusyq-redis
+    profiles: ["full", "ai-agents"]
+    restart: unless-stopped
+
+  # ============================================================================
+  # MCP SERVER: Multi-Tool Orchestration
+  # ============================================================================
+
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    container_name: terminal-depths-mcp
+    ports:
+      - "8765:8765"
+    environment:
+      MCP_PORT: "8765"
+      PYTHONUNBUFFERED: "1"
+      NUSYQ_HUB_URL: "http://nusyq-hub-dev:8000"
+      OLLAMA_HOST: "http://ollama:11434"
+    volumes:
+      - ./mcp:/app/mcp
+      - ./state:/app/state
+      - terminal-depths-state:/mcp/state
+    networks:
+      - terminal-depths-net
+      - deploy_nusyq-net
+    depends_on:
+      - ollama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8765/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    profiles: ["full", "mcp"]
+    restart: unless-stopped
+
+  # ============================================================================
+  # SIMULATEDVERSE / CYBER TERMINAL (if available)
+  # ============================================================================
+
+  simulatedverse:
+    image: simulatedverse:latest
+    container_name: cyber-terminal
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: "production"
+      PORT: "5000"
+      WORLD_API: "http://dev-mentor:7337"
+      CHATDEV_ENABLED: "true"
+      MCP_ENABLED: "true"
+    volumes:
+      - simulatedverse-state:/app/dist/state
+    networks:
+      - terminal-depths-net
+    depends_on:
+      - dev-mentor
+      - chatdev
+    profiles: ["full", "worlds"]
+    restart: unless-stopped
+
+  # ============================================================================
+  # SHARED DATA LAYER
+  # ============================================================================
+
+  nusyq-redis:
+    image: redis:7-alpine
+    container_name: terminal-depths-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - nusyq-redis-data:/data
+    networks:
+      - terminal-depths-net
+      - deploy_nusyq-net
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    profiles: ["full", "data"]
+
+  nusyq-postgres:
+    image: postgres:15-alpine
+    container_name: terminal-depths-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: "terminal_depths"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-terminal_depths_secure}"
+      POSTGRES_DB: "terminal_depths_db"
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+    volumes:
+      - nusyq-postgres-data:/var/lib/postgresql/data
+    networks:
+      - terminal-depths-net
+      - deploy_nusyq-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U terminal_depths -d terminal_depths_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles: ["full", "data"]
+
+  # ============================================================================
+  # WORKFLOW AUTOMATION (n8n)
+  # ============================================================================
+
+  n8n-terminal:
+    image: n8nio/n8n:latest
+    container_name: terminal-depths-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      N8N_HOST: "0.0.0.0"
+      N8N_PORT: "5678"
+      N8N_PROTOCOL: "http"
+      N8N_WEBHOOK_URL: "http://localhost:5678"
+      N8N_BASIC_AUTH_ACTIVE: "false"
+      DB_TYPE: "postgresdb"
+      DB_POSTGRESDB_HOST: "nusyq-postgres"
+      DB_POSTGRESDB_PORT: "5432"
+      DB_POSTGRESDB_DATABASE: "n8n_db"
+      DB_POSTGRESDB_USER: "n8n"
+      DB_POSTGRESDB_PASSWORD: "${N8N_PASSWORD:-n8n_secure}"
+    volumes:
+      - n8n-data:/home/node/.n8n
+    networks:
+      - terminal-depths-net
+      - deploy_nusyq-net
+    depends_on:
+      - nusyq-postgres
+    profiles: ["full", "automation"]
+    restart: unless-stopped
+
+  # ============================================================================
+  # JUPYTER LAB: Interactive Development & Analysis
+  # ============================================================================
+
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    container_name: terminal-depths-jupyter
+    ports:
+      - "8888:8888"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "${JUPYTER_TOKEN:-terminal_depths_token}"
+    volumes:
+      - ./Jupyter:/home/jovyan/work
+      - terminal-depths-state:/home/jovyan/state
+    networks:
+      - terminal-depths-net
+    profiles: ["full", "dev"]
+
+  # ============================================================================
+  # LM STUDIO API (Optional: Runs on Host)
+  # Note: If LM Studio is running on host, connect via network bridge
+  # ============================================================================
+
+  lm-studio-bridge:
+    image: python:3.11-slim
+    container_name: lm-studio-bridge
+    ports:
+      - "1234:1234"
+    environment:
+      LM_STUDIO_HOST: "host.docker.internal"
+      LM_STUDIO_PORT: "1234"
+      BRIDGE_ENABLED: "true"
+    volumes:
+      - ./scripts/lm_studio_bridge.py:/app/bridge.py
+    networks:
+      - terminal-depths-net
+    command: python /app/bridge.py
+    profiles: ["full", "lm-studio"]
+
+# ============================================================================
+# VOLUMES
+# ============================================================================
+
+volumes:
+  ollama-models:
+  terminal-depths-sessions:
+  terminal-depths-state:
+  simulatedverse-state:
+  nusyq-state:
+  nusyq-redis-data:
+  nusyq-postgres-data:
+  n8n-data:
+  chatdev-workspace:
+
+# ============================================================================
+# NETWORKS
+# ============================================================================
+
+networks:
+  terminal-depths-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.0.0/16
+
+  # NuSyQ integration network.
+  # If the NuSyQ stack is running separately, you can attach:
+  #   docker network connect deploy_nusyq-net terminal-depths-backend
+  # Otherwise this bridge is auto-created and services stay isolated.
+  deploy_nusyq-net:
+    driver: bridge
+    name: deploy_nusyq-net

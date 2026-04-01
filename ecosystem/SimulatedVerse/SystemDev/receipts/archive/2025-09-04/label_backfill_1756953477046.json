@@ -1,0 +1,29 @@
+{
+  "timestamp": 1756953471338,
+  "operation": "label_backfill",
+  "files_processed": 63423,
+  "labels_assigned": 39,
+  "coverage_percentage": 0,
+  "namespace_distribution": {
+    "tools.development": 17,
+    "unknown": 63384,
+    "pkg.node": 2,
+    "ours.chatdev": 1,
+    "ours.gamedev": 1,
+    "ours.previewui": 2,
+    "ours.systemdev": 1,
+    "ours.client": 1,
+    "ours.server": 10,
+    "ours.shared": 4
+  },
+  "errors": [
+    "Failed to process .local/state/replit/agent/..latest.json.XXTypIKQnJm5Sd99UIcQ2~: Error: ENOENT: no such file or directory, stat '.local/state/replit/agent/..latest.json.XXTypIKQnJm5Sd99UIcQ2~'"
+  ],
+  "recommendations": [
+    "63384 files need manual namespace classification",
+    "334 experimental files - consider stability review",
+    "63413 files require caution for moves - use Artificer"
+  ],
+  "labels_index_location": "SystemDev/reports/labels.index.json",
+  "status": "completed_with_errors"
+}

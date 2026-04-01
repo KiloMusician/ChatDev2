@@ -1,0 +1,25 @@
+{
+  "frontier_homestead_recipes": {
+    "bread": {
+      "ingredients": {"wheat": 3, "water": 1},
+      "output": {"bread": 1},
+      "buffs": {"energy": 15, "morale": 5},
+      "unlock_tier": 1,
+      "consciousness_aspect": "basic_sustenance"
+    },
+    "stew": {
+      "ingredients": {"vegetables": 2, "meat": 1, "water": 1},
+      "output": {"stew": 1},
+      "buffs": {"energy": 25, "health": 10},
+      "unlock_tier": 2,
+      "consciousness_aspect": "nutritional_awareness"
+    },
+    "preservation_rations": {
+      "ingredients": {"meat": 2, "salt": 1, "herbs": 1},
+      "output": {"preserved_food": 3},
+      "buffs": {"survival": 20, "storage_efficiency": 30},
+      "unlock_tier": 3,
+      "consciousness_aspect": "future_planning"
+    }
+  }
+}

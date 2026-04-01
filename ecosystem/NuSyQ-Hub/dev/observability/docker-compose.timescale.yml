@@ -1,0 +1,19 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg14
+    environment:
+      - POSTGRES_DB=consciousness
+      - POSTGRES_USER=nusyq
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-nusyq}
+    ports:
+      - "5432:5432"
+    volumes:
+      # Use a named volume to avoid Windows/WSL permission issues during initdb
+      - timescaledb-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nusyq -d consciousness"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  timescaledb-data:

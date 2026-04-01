@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "mode": "strict",
+  "localPlanners": {
+    "ruleBasedDecision": true,
+    "heuristicProcessing": true,
+    "symbolicReasoning": true
+  },
+  "guardianEthics": {
+    "lifeFirst": true,
+    "containmentOverDestruction": true,
+    "humanOversight": true
+  },
+  "offlineCapabilities": [
+    "file_organization",
+    "duplicate_detection",
+    "log_consolidation",
+    "config_healing",
+    "index_rebuilding",
+    "system_cultivation",
+    "free_task_harvesting",
+    "receipt_archival",
+    "health_monitoring"
+  ]
+}

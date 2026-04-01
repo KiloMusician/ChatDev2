@@ -1,0 +1,57 @@
+agents:
+  - id: arch
+    role: Architect
+    traits: [design-systems, domain-modeling, guardrails]
+    maxTokens: 300
+  - id: proto
+    role: Prototyper
+    traits: [quick-scaffolds, code-synthesis]
+    maxTokens: 500
+  - id: refx
+    role: Refactorer
+    traits: [bloat-reduction, modularity, naming]
+    maxTokens: 400
+  - id: test
+    role: Tester
+    traits: [unit, e2e, property-tests]
+    maxTokens: 250
+  - id: doc
+    role: Docsmith
+    traits: [obsidian, tutorials, api-docs]
+    maxTokens: 300
+  - id: lore
+    role: LoreWeaver
+    traits: [narrative, tags, pantheon]
+    maxTokens: 300
+  - id: econ
+    role: Economist
+    traits: [idler-balance, curves, sinks]
+    maxTokens: 300
+  - id: ui
+    role: UX
+    traits: [hud, ascii, vantages]
+    maxTokens: 250
+  - id: perf
+    role: Perf
+    traits: [frame-budget, heap, latency]
+    maxTokens: 250
+  - id: godot
+    role: GodotIntegrator
+    traits: [scene-graph, signals, gds, c#]
+    maxTokens: 350
+  - id: ascii
+    role: ASCIIArt
+    traits: [hud, pantheon, roguelike]
+    maxTokens: 200
+  - id: archivist
+    role: Archivist
+    traits: [obsidian, indexing, rosetta]
+    maxTokens: 200
+  - id: analyst
+    role: Analyst
+    traits: [jupyter, pandas, metrics]
+    maxTokens: 250
+  - id: budget
+    role: Budgeteer
+    traits: [token-discipline, throttles]
+    maxTokens: 150

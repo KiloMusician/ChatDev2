@@ -1,0 +1,2162 @@
+midday_repo_compendium_codex.txt  # Unified repository structure with comments (penultimate/compendium variant)
+## Sources merged: midday_repo_5_clean.txt, midday_repo_5_complete.txt, midday_repo_3.txt, and parsed RTF variants (1/2/3, 4_INCOMPLETE, ΞNuSyQ₁-Hub₁, [Msg⛛{42↗️Σ∞]ΞNuSyQ).
+
+midday/                                           # root of the NuSyQ-Hub monorepo; single workspace coordinating AI agents, tools, and apps\
+
+─  cursor_root/                                   # global Cursor/Copilot rulescope for repository-wide AI guidance\
+│   └ ─  cursor_root_rules/                          # top-level rules bundle applied across the entire repo\
+│      └ ─  root_rules_writing-tests.mdc             # patterns for writing tests: tone, structure, and examples for AI assistants\
+
+─  README.md                                      # project overview, philosophy, quickstart, and VS Code task entry points\
+
+─  CONTRIBUTING.md                                # contribution flow, branching strategy, commit rules, and review expectations\
+
+─  CODE_OF_CONDUCT.md                             # community standards for respectful collaboration\
+
+─  doteditorconfig_root.ini                       # editor normalization across contributors and CI environments\
+
+─  dotgitignore_root.txt                          # centralized VCS ignore rules for all toolchains\
+
+─  dotgitattributes_root.txt                      # line-ending and merge attributes for consistent diffs\
+
+─  prettier_root.rc                               # Prettier configuration shared across apps/packages\
+
+─  eslint_root.cjs                                # root ESLint configuration for TypeScript/JavaScript sources\
+
+─  LICENSE                                        # legal license for the entire codebase\
+
+─  env_root.example                               # sample environment configuration incl. CHATDEV_PATH, OLLAMA_HOST, OLLAMA_MODELS_DIR\
+
+─  Makefile                                       # make targets (dev/test/chatdev/ollama/up) for fast local workflows\
+
+─  Taskfile.yml                                   # task-runner alternative mirroring Make targets for cross-platform convenience\
+
+─  vscode_root/                                   # Visual Studio Code workspace customizations\
+│
+─  vscode_settings.json                        # editor prefs; Copilot/Jupyter/Godot wiring and workspace hints\
+─  vscode_extensions.json                      # curated extension catalog to standardize dev environment\
+─  vscode_launch.json                          # debuggers for api/desktop/website and Godot attach profiles\
+│   └ ─  vscode_tasks.json                           # one-click tasks to run ChatDev phases, Ollama operations, and tests\
+
+─  vscode_extension_bridge/                       # custom VS Code extension bridging Copilot, ChatDev, and Ollama inside the editor\
+─  vscode_extension_package.json               # extension manifest (unique id/name) and activation events\
+─  vscode_extension_README.md                  # usage docs and command palette instructions for the extension\
+│   └ ─  src_vscode_extension/                       # extension TypeScript source code\
+─  vsce_extension.ts                        # entrypoint: registers commands, status bar, and output channels\
+─  vsce_copilot_command.ts                  # “Enhance Copilot Context” command wiring to Python bridges\
+│      └ ─  vsce_ollama_command.ts                   # status-bar model picker and inline local-LLM prompts\
+
+─  scripts_root/                                  # repository-wide automation scripts called by tasks/CI/extension\
+─  enhance_copilot_context.py                  # analyzes active file
+─  chatdev_phase_orchestrator.py               # runs ChatDev multi-phase workflows locally via CHATDEV_PATH\
+─  enhanced_reflection_system.py               # self-critique + patch proposal engine for AI reflection loops\
+─  ollama_model_tools.py                       # list, pull, switch, and warm Ollama models for dev sessions\
+─  start_ollama_windows.ps1                    # Windows helper to start service and warm models\
+─  start_ollama_unix.sh                        # macOS/Linux helper to start daemon and warm models\
+─  bridge_chatdev_ollama.py                    # unified surface to route ChatDev calls through local Ollama\
+│   └ ─  ci_ollama_ai_runner.py                      # PR check that exercises local-LLM analyzers (mocked safely in CI)\
+
+─  src_integration_hub/                           # language-agnostic integration layer (Python) coordinating agents/tools\
+─  ai_hub/                                     # local LLM backbones and adapters\
+│   │   └ ─  ollama_hub.py                            # model discovery/selection/generation API for Ollama\
+─  copilot_hub/                                # GitHub Copilot augmentation module set\
+│   │
+─  copilot_workspace_enhancer.py            # builds cross-file context graph and feature hints\
+─  copilot_enhancement_bridge.py            # memory palace + suggestion logging for persistent improvements\
+│   │   └ ─  copilot_vscode_integration.py            # marshals hints and telemetry back to the VS Code extension\
+│   └ ─  integration_bridges/                        # cross-agent wiring (ChatDev, Copilot, Ollama)\
+─  chatdev_integration.py                   # ChatDev availability checks, env, and process launching\
+─  ollama_integration.py                    # Ollama health checks and specialization profiles\
+─  chatdev_copilot_arch_bridge.py           # architectural bridge: Copilot
+─  chatdev_ollama_llm_adapter.py            # adapter routing ChatDev LLM calls into Ollama for offline runs\
+│      └ ─  chatdev_environment_patcher.py           # environment patcher for paths, configs, and API fallbacks\
+
+─  github_root/                                   # GitHub metadata and workflow automation\
+─  issue_template_bug_report.yml               # guided bug report form for consistent triage\
+─  issue_template_feature_request.yml          # guided feature request form\
+─  pull_request_template.md                    # PR checklist ensuring quality and story of change\
+│   └ ─  workflows_root/                             # CI/CD workflows used by GitHub Actions\
+─  workflows_ci.yml                         # lint, typecheck, unit tests across packages/apps\
+─  workflows_chatdev_smoke.yml              # safe ChatDev dry-run pipeline using mocks\
+─  workflows_release.yml                    # release management and version tagging\
+│      └ ─  workflows_labeler.yml                    # automatic PR labeling rules\
+
+─  meta_vibe/                                     # AI “vibe” center and decision history to guide agents\
+─  meta_patterns_overview.mdc                  # cross-links and summaries of pattern docs across the repo\
+─  meta_taxonomy.mdc                           # canonical naming, folder semantics, OmniTag/MegaTag mapping\
+─  prompts_vault/                              # reusable prompt libraries for tools and agents\
+─  prompts_system.mdc                       # global guardrails, tone, and safety rails for assistants\
+─  prompts_refactor_playbook.mdc            # structured refactor strategies and recipes\
+│   │   └ ─  prompts_review_checklist.mdc             # code review rubric for both humans and AIs\
+│   └ ─  traces_adr/                                 # architectural decision records and rationale\
+─  ADR-0001-architecture.mdc                # global architecture choices and trade-offs\
+│      └ ─  ADR-0002-data-access.mdc                 # persistence/data access patterns and decisions\
+
+─  notebooks_lab/                                 # Jupyter experimentation for audits, analysis, and demos\
+─  00_repo_overview.ipynb                      # auto-map structure
+─  10_copilot_context_audit.ipynb              # measures/enhances Copilot context quality\
+│   └ ─  20_llm_bench_local.ipynb                    # compares local Ollama models against common tasks\
+
+─  obsidian_vault/                                # portable Obsidian vault storing living knowledge\
+─  OBSIDIAN_KNOWLEDGE_CONTEXT.md               # core concepts, glossary, and onboarding map\
+─  ENHANCED_SYSTEM_TODO_QUEST_LOG.md           # open quests/todos with RPG-style progression\
+│   └ ─  ROSETTA_QUEST_STATUS_REPORT.md              # questline progress reports and milestones\
+
+─  obsidian_settings_example.json                 # example Obsidian plugin configuration and conventions\
+
+─  godot_demo_project/                            # Godot integration sandbox for AI-driven gameplay/NPC logic\
+─  project_godot.project                       # Godot project descriptor for this demo workspace\
+─  godot_scenes/                               # scene assets used to exercise AI hooks\
+│   │   └ ─  scene_demo.tscn                          # demo scene showcasing AI interactions\
+│   └ ─  godot_scripts/                              # game logic and AI bridge scripts\
+─  quantum_bridge.py                        # calls ChatDev/Ollama to drive NPC decisions\
+│      └ ─  ai_npc_agent.gd                          # Godot script implementing NPC behavior with AI responses\
+
+─  tools_dev/                                     # developer tools for scaffolding and codemods\
+─  codemods_rename_patterns.ts                 # codemod applying naming/pattern transforms\
+│   └ ─  scaffolds_feature.gen.ts                    # generator creating feature skeletons with patterns applied\
+
+─  tests_crosscutting/                            # repository-level tests spanning multiple apps/packages\
+─  tests_e2e/                                  # end-to-end system tests validating integrations\
+│   └ ─  tests_smoke/                                # fast smoke tests for CI confidence\
+
+─  docs_handbook/                                 # human-facing documentation set\
+─  docs_getting_started.md                     # install/run quickstart and FAQs\
+─  docs_architecture.md                        # C4 (or similar) architecture read with diagrams\
+─  docs_decision_log.md                        # executive-level summary of ADRs and reasoning\
+│   └ ─  docs_styleguide.md                          # code/style conventions for consistent PRs\
+
+─  apps_root/                                     # monorepo applications (each uniquely named for search clarity)\
+─  app_api/                                    # backend API application providing services and endpoints\
+─  app_api_cursor/                          # local Cursor rules dedicated to the API app\
+│   │   │   └ ─  app_api_cursor_rules/                 # API-scoped rule files consumed by AI tools\
+│   │   │
+─  api_rules_architecture.mdc         # API architecture conventions and boundaries\
+─  api_rules_auth_middleware.mdc      # authentication middleware patterns and examples\
+─  api_rules_database_patterns.mdc    # data access rules, transactions, and migrations\
+─  api_rules_rest_patterns.mdc        # REST endpoint patterns and error semantics\
+─  api_rules_schema_patterns.mdc      # schema/validation strategy and contracts\
+│   │   │      └ ─  api_rules_trpc_patterns.mdc        # tRPC design rules for RPC layers\
+─  app_api_src/                             # API source code organized for clarity and reuse\
+─  app_api_routes/                       # route handlers mapping HTTP/RPC to services\
+─  app_api_services/                     # business logic services invoked by routes\
+─  app_api_models/                       # data models/entities used by services\
+│   │   │   └ ─  app_api_index.ts                      # API entrypoint bootstrapping the server\
+│   │   └ ─  app_api_package.json                     # API application manifest for tooling/package managers\
+│   │ \
+─  app_dashboard/                              # internal dashboard and web console for operators\
+─  app_dashboard_cursor/                    # dashboard-specific Cursor rules\
+│   │   │   └ ─  app_dashboard_cursor_rules/           # rule set shaping dashboard UI generation\
+│   │   │      └ ─  dashboard_rules_dashboard_patterns.mdc  # UI/state patterns and conventions\
+│   │   └ ─  app_dashboard_src/                       # dashboard source code and composition root\
+─  app_dashboard_pages/                  # routed pages and layouts\
+─  app_dashboard_components/             # reusable UI components for the dashboard\
+│   │      └ ─  app_dashboard_index.tsx               # dashboard entry component\
+─  app_desktop/                                # desktop application (Electron/Tauri) for local UX\
+─  app_desktop_cursor/                      # desktop-specific Cursor guidance\
+│   │   │   └ ─  app_desktop_cursor_rules/             # desktop rule set for AI assistants\
+│   │   │      └ ─  desktop_rules_desktop_patterns.mdc # desktop patterns including IPC and shell integration\
+│   │   └ ─  app_desktop_src/                         # desktop codebase (main/renderer as needed)\
+│   │      └ ─  app_desktop_main.ts                   # desktop main process entrypoint\
+─  app_engine/                                 # core orchestration/engine powering pipelines\
+─  app_engine_cursor/                       # engine-specific Cursor rules\
+│   │   │   └ ─  app_engine_cursor_rules/              # engine rule files consulted by AI\
+│   │   │      └ ─  engine_rules_engine_patterns.mdc   # pipeline patterns, scheduling, and resilience\
+│   │   └ ─  app_engine_src/                          # engine source code\
+─  app_engine_core/                      # primitives, schedulers, and runtime core\
+─  app_engine_pipelines/                 # orchestrated flows connecting subsystems\
+│   │      └ ─  app_engine_index.ts                   # engine entrypoint and composition root\
+─  app_website/                                # public marketing/brochure website\
+─  app_website_cursor/                      # website-specific Cursor rules\
+│   │   │   └ ─  app_website_cursor_rules/             # website rule files consulted by AI\
+│   │   │      └ ─  website_rules_website_patterns.mdc # content/UX patterns and deployment rules\
+│   │   └ ─  app_website_src/                         # website source code\
+─  app_website_pages/                    # static/SSR pages\
+│   │      └ ─  app_website_index.tsx                 # website entry component\
+│   └ ─  app_shared/                                 # cross-application shared layer for DRY utilities\
+─  shared_ui/                               # design tokens and UI primitives\
+─  shared_hooks/                            # reusable hooks shared across apps\
+─  shared_utils/                            # general helpers and adapters\
+│      └ ─  shared_types/                            # shared type definitions and interfaces\
+
+─  worker_root/                                   # background workers for jobs/queues/scheduled tasks\
+─  worker_src/                                 # worker source code\
+│   │   └ ─  worker_index.ts                          # worker entrypoint and job registration\
+│   └ ─  worker_README.md                            # worker-specific run/deploy documentation\
+
+─  data_fixtures/                                 # seed and sample data for demos/tests\
+─  data_seeds/                                 # scripts and datasets used to seed environments\
+│   └ ─  data_samples/                               # example payloads for quick experiments\
+
+─  packages_root/                                 # shareable packages with unique naming\
+─  packages_cursor/                            # packages-wide Cursor rules and conventions\
+│   │   └ ─  packages_cursor_rules/                   # rule files affecting package authoring\
+│   │      └ ─  packages_rules_package_patterns.mdc   # patterns for building and publishing packages\
+─  pkg_config/                                 # shareable TypeScript/ESLint/Prettier presets\
+─  packages_config_package.json             # manifest for the config package\
+│   │   └ ─  packages_config_index.js                 # exports of preset objects consumed by apps\
+─  pkg_ui/                                     # design system components as a package\
+─  packages_ui_src/                         # UI component implementations and stories\
+│   │   └ ─  packages_ui_package.json                 # manifest for the UI package\
+─  pkg_lint/                                   # ESLint presets/plugins as a package\
+─  packages_lint_package.json               # manifest for the lint package\
+│   │   └ ─  packages_lint_rules.js                   # preset rule configuration\
+│   └ ─  pkg_types/                                  # shared TypeScript types package\
+─  packages_types_src/                      # type declarations and utilities\
+│      └ ─  packages_types_package.json              # manifest for the types package\
+
+─  docker_root/                                   # containerized development/production artifacts\
+─  dockerfile_root                             # base Dockerfile for building the workspace image\
+│   └ ─  docker_compose_root.yml                     # compose stack describing services and dependencies\
+
+─  infra_root/                                    # infrastructure-as-code definitions\
+│   └ ─  terraform_root/                             # Terraform configuration set for cloud resources\
+│      └ ─  terraform_main.tf                        # baseline Terraform module for provisioning\
+
+─  legacy_cursor/                                 # legacy .cursor directory preserved for compatibility\
+│   └ ─  rules/                                      # original rule definitions (superseded by cursor_root/)\
+│      └ ─  writing-tests.mdc                        # early patterns for test-writing prompts & style\
+
+─  legacy_vscode/                                 # legacy .vscode directory (kept for migration testing)\
+─  settings.json                               # Copilot hints, notebooks, Obsidian markdown links\
+─  extensions.json                             # curated extensions (Python, Jupyter, Godot, YAML, Markdown)\
+─  launch.json                                 # debug profiles: api/desktop/website, Godot attach\
+│   └ ─  tasks.json                                  # tasks for ChatDev phases, Ollama ops, tests\
+
+─  legacy_vscode_extension/                       # original vscode-extension folder (pre-bridge rename)\
+─  package.json                                # extension manifest (legacy id)\
+─  README.md                                   # usage documentation\
+│   └ ─  src/                                        # extension TypeScript source\
+─  extension.ts                             # registers commands and output channels\
+─  copilot.ts                               # “Enhance Copilot Context” command\
+│      └ ─  ollama.ts                                # status-bar model picker & quick prompts\
+
+─  legacy_scripts/                                # legacy scripts folder\
+─  enhance_copilot_context.py                  # active file
+─  chatdev_phase_orchestrator.py               # local ChatDev runner (legacy path)\
+─  enhanced_reflection_system.py               # self-critique & patch proposals\
+─  ollama_model_tools.py                       # model list/pull/switch/default ops\
+─  start_ollama.ps1                            # Windows helper (service + warmup)\
+─  start_ollama.sh                             # macOS/Linux helper\
+─  bridge_chatdev_ollama.py                    # ChatDev
+│   └ ─  ci/                                         # CI helper scripts\
+│      └ ─  ollama_ai_runner.py                      # PR check using local LLM (mocked in CI)\
+
+─  legacy_src/                                    # legacy src folder (pre-src_integration_hub rename)\
+─  ai/                                         # Ollama hub\
+│   │   └ ─  ollama_hub.py\
+─  copilot/                                    # Copilot augmentation\
+│   │   └ ─  vscode_integration.py\
+│   └ ─  integration/                                # bridges\
+│      └ ─  ChatDevEnvironmentPatcher.py\
+
+─  legacy_github/                                 # legacy .github directory\
+│   └ ─  workflows/                                  # GitHub Actions workflows\
+─  ci.yml\
+─  chatdev-smoke.yml\
+│      └ ─  release.yml\
+
+─  legacy_meta/                                   # legacy meta folder\
+─  patterns-overview.mdc\
+─  taxonomy.mdc\
+─  prompts/\
+─  system.mdc\
+─  refactor-playbook.mdc\
+│   │   └ ─  review-checklist.mdc\
+│   └ ─  traces/\
+─  ADR-0001-architecture.mdc\
+│      └ ─  ADR-0002-data-access.mdc\
+
+─  legacy_notebooks/                              # legacy notebooks folder\
+│   └ ─  20_llm_bench_local.ipynb\
+
+─  legacy_obsidian/                               # legacy obsidian folder\
+─  NuSyQ-Hub-Obsidian.vault/                   # vault\
+─  OBSIDIAN_KNOWLEDGE_CONTEXT.md\
+─  ENHANCED_SYSTEM_TODO_QUEST_LOG.md\
+│   │   └ ─  ROSETTA_QUEST_STATUS_REPORT.md\
+│   └ ─  .obsidian.example.json\
+
+─  legacy_godot/                                  # legacy godot demo project\
+─  scenes/\
+│   │   └ ─  DemoScene.tscn\
+│   └ ─  scripts/\
+│      └ ─  ai_npc_agent.gd\
+
+─  legacy_tools/                                  # legacy tools folder\
+─  scaffolds/feature.gen.ts\
+│   └ ─  codemods/rename-patterns.ts\
+
+─  legacy_tests/                                  # legacy tests folder\
+─  e2e/\
+│   └ ─  smoke/\
+
+─  legacy_docs/                                   # legacy docs folder\
+─  getting-started.md\
+─  architecture.md\
+─  decision-log.md\
+│   └ ─  styleguide.md\
+
+─  legacy_apps/                                   # legacy apps folder\
+─  api/\
+─  .cursor/\
+│   │   │   └ ─  rules/\
+─  architecture.mdc\
+─  auth-middleware.mdc\
+─  database-patterns.mdc\
+─  rest-patterns.mdc\
+─  schema-patterns.mdc\
+│   │   │      └ ─  trpc-patterns.mdc\
+─  src/\
+─  routes/\
+─  services/\
+─  models/\
+│   │   │   └ ─  index.ts\
+│   │   └ ─  package.json\
+─  dashboard/\
+│   │   │      └ ─  dashboard-patterns.mdc\
+│   │   └ ─  src/\
+─  pages/\
+─  components/\
+│   │      └ ─  index.tsx\
+─  desktop/\
+│   │   │      └ ─  desktop-patterns.mdc\
+│   │      └ ─  main.ts\
+─  engine/\
+│   │   │      └ ─  engine-patterns.mdc\
+─  core/\
+─  pipelines/\
+│   │      └ ─  index.ts\
+─  website/\
+│   │   │      └ ─  website-patterns.mdc\
+│   └ ─  shared/\
+─  ui/\
+─  hooks/\
+─  utils/\
+│      └ ─  types/\
+
+─  legacy_worker/                                 # legacy worker folder\
+│   │   └ ─  index.ts\
+│   └ ─  README.md\
+
+─  legacy_data/                                   # legacy data folder\
+─  seeds/\
+│   └ ─  samples/\
+└ ─  legacy_packages/                               # legacy packages folder\
+
+   │   └ ─  rules/\
+   │      └ ─  package-patterns.mdc\
+
+─  config/\
+   │
+─  package.json\
+   │   └ ─  index.js\
+
+   │   └ ─  package.json\
+
+─  lint/\
+   │   └ ─  rules.js\
+   └ ─  types/\
+
+      └ ─  package.json\
+
+©À©¤ legacy_scripts/                                # legacy scripts folder retained for migration/testing\
+©¦  ©À©¤ enhance_copilot_context.py                  # early analyzer that summarizes the active editor file into Copilot-usable hints\
+©¦  ©À©¤ chatdev_phase_orchestrator.py               # early local runner for ChatDev¡¯s multi-phase development pipeline\
+©¦  ©À©¤ enhanced_reflection_system.py               # first-gen self-critique loop that proposes patches and rationale\
+©¦  ©À©¤ ollama_model_tools.py                       # basic helpers to list/pull/switch default Ollama models\
+©¦  ©À©¤ start_ollama.ps1                            # Windows bootstrapper: starts Ollama service and pre-warms selected models\
+©¦  ©À©¤ start_ollama.sh                             # macOS/Linux bootstrapper doing the same as above for Unix shells\
+©¦  ©À©¤ bridge_chatdev_ollama.py                    # minimal function bridge for calling Ollama-backed ChatDev sessions\
+©¦  ©¸©¤ ci/                                         # legacy CI helpers\
+©¦     ©¸©¤ ollama_ai_runner.py                      # makes a safe, mocked LLM pass over PRs for smoke-level feedback\
+©À©¤ legacy_src/                                    # legacy integration hub before we adopted src_integration_hub/\
+©¦  ©À©¤ ai/                                         # early local LLM backbones and adapters\
+©¦  ©¦  ©¸©¤ ollama_hub.py                            # original Ollama discovery/selection/generation module\
+©¦  ©À©¤ copilot/                                    # early Copilot augmentation code\
+©¦  ©¦  ©À©¤ copilot_workspace_enhancer.py            # builds a repository context graph for Copilot (first pass)\
+©¦  ©¦  ©À©¤ copilot_enhancement_bridge.py            # logs suggestions and keeps ¡°memory palace¡± for inline improvements\
+©¦  ©¦  ©¸©¤ vscode_integration.py                    # VS Code-facing shims used by the old extension\
+©¦  ©¸©¤ integration/                                # early cross-agent wiring (ChatDev, Copilot, Ollama)\
+©¦     ©À©¤ chatdev_integration.py                   # checks/install paths; ensures ChatDev is runnable locally\
+©¦     ©À©¤ ollama_integration.py                    # probes local Ollama runtime; defines specialization profiles\
+©¦     ©À©¤ advanced_chatdev_copilot_integration.py  # context bridge letting Copilot tap ChatDev¡¯s planning/reflection\
+©¦     ©À©¤ Update-ChatDev-to-use-Ollama.py          # early adapter to drive ChatDev phases with Ollama models\
+©¦     ©¸©¤ ChatDevEnvironmentPatcher.py             # patches env vars/paths/configs so ChatDev runs consistently\
+©À©¤ legacy_github/                                 # legacy .github tree kept for historical workflows\
+©¦  ©¸©¤ workflows/                                  # GitHub Actions definitions (superseded by github_root/)\
+©¦     ©À©¤ ci.yml                                   # earlier CI with lint/typecheck/unit tests\
+©¦     ©À©¤ chatdev-smoke.yml                        # proof-of-life pipeline using mocked LLM calls\
+©¦     ©¸©¤ release.yml                              # initial release automation (tagging/changelog stubs)\
+©À©¤ legacy_meta/                                   # legacy ¡°vibe¡± docs retained for provenance\
+©¦  ©À©¤ patterns-overview.mdc                       # earlier cross-link index for pattern docs\
+©¦  ©À©¤ taxonomy.mdc                                # earlier naming/folder semantics used across the repo\
+©¦  ©À©¤ prompts/                                    # prompt libraries used by early agents\
+©¦  ©¦  ©À©¤ system.mdc                               # initial global guardrails and tone for assistants\
+©¦  ©¦  ©À©¤ refactor-playbook.mdc                    # earlier refactor strategies and recipes\
+©¦  ©¦  ©¸©¤ review-checklist.mdc                     # early code-review checklist harmonized for human/AI\
+©¦  ©¸©¤ traces/                                     # historical ADRs (kept for reference)\
+©¦     ©À©¤ ADR-0001-architecture.mdc                # first architecture ADR and trade-offs\
+©¦     ©¸©¤ ADR-0002-data-access.mdc                 # first data-access decisions and constraints\
+©À©¤ legacy_notebooks/                              # earlier Jupyter notebooks (superseded by notebooks_lab/)\
+©¦  ©À©¤ 00_repo_overview.ipynb                      # quick map/survey of repo structure\
+©¦  ©À©¤ 10_copilot_context_audit.ipynb              # experiments to quantify Copilot context quality\
+©¦  ©¸©¤ 20_llm_bench_local.ipynb                    # simple benchmarks across locally-run models\
+©À©¤ legacy_obsidian/                               # early Obsidian vault and example settings\
+©¦  ©À©¤ NuSyQ-Hub-Obsidian.vault/                   # original vault capturing knowledge and quest logs\
+©¦  ©¦  ©À©¤ OBSIDIAN_KNOWLEDGE_CONTEXT.md            # glossary and mental model of the repo (legacy wording)\
+©¦  ©¦  ©À©¤ ENHANCED_SYSTEM_TODO_QUEST_LOG.md        # to-do/quest log in RPG style (legacy entries)\
+©¦  ©¦  ©¸©¤ ROSETTA_QUEST_STATUS_REPORT.md           # status report for legacy questlines\
+©¦  ©¸©¤ .obsidian.example.json                      # example plugin config used during early trials\
+©À©¤ legacy_godot/                                  # prior Godot demo showing AI/NPC orchestration\
+©¦  ©À©¤ project.godot                               # Godot project file\
+©¦  ©À©¤ scenes/\
+©¦  ©¦  ©¸©¤ DemoScene.tscn                           # simple scene for NPC behavior experiments\
+©¦  ©¸©¤ scripts/\
+©¦     ©À©¤ quantum_bridge.py                        # Godot
+ChatDev/Ollama call bridge (prototype)\
+©¦     ©¸©¤ ai_npc_agent.gd                          # scripted NPC agent behavior calling AI\
+©À©¤ legacy_tools/                                  # prior dev tools retained to ensure migrations are lossless\
+©¦  ©À©¤ scaffolds/feature.gen.ts                    # early scaffolder producing feature shells\
+©¦  ©¸©¤ codemods/rename-patterns.ts                 # codemod that applied legacy naming rules\
+©À©¤ legacy_tests/                                  # older tests used before current structure\
+©¦  ©À©¤ e2e/                                        # end-to-end tests in the legacy pathing scheme\
+©¦  ©¸©¤ smoke/                                      # quick sanity checks used in old CI\
+©À©¤ legacy_docs/                                   # earlier docs preserved for comparison\
+©¦  ©À©¤ getting-started.md                          # intro and environment setup (older wording)\
+©¦  ©À©¤ architecture.md                             # original architecture write-up\
+©¦  ©À©¤ decision-log.md                             # summary of legacy decisions and notes\
+©¦  ©¸©¤ styleguide.md                               # code style rules used previously\
+©À©¤ legacy_apps/                                   # pre-canonical app layout (kept to smooth migration)\
+©¦  ©À©¤ api/\
+©¦  ©¦  ©À©¤ .cursor/\
+©¦  ©¦  ©¦  ©¸©¤ rules/\
+©¦  ©¦  ©¦     ©À©¤ architecture.mdc                   # API architecture patterns (legacy phrasing)\
+©¦  ©¦  ©¦     ©À©¤ auth-middleware.mdc                # middleware rules and examples\
+©¦  ©¦  ©¦     ©À©¤ database-patterns.mdc              # data-access norms and caveats\
+©¦  ©¦  ©¦     ©À©¤ rest-patterns.mdc                  # REST API guidelines and error semantics\
+©¦  ©¦  ©¦     ©À©¤ schema-patterns.mdc                # validation and schema evolution guidance\
+©¦  ©¦  ©¦     ©¸©¤ trpc-patterns.mdc                  # RPC/tRPC conventions\
+©¦  ©¦  ©À©¤ src/\
+©¦  ©¦  ©¦  ©À©¤ routes/                               # route handlers\
+©¦  ©¦  ©¦  ©À©¤ services/                             # domain services\
+©¦  ©¦  ©¦  ©À©¤ models/                               # entities/models\
+©¦  ©¦  ©¦  ©¸©¤ index.ts                              # bootstrap for the legacy API service\
+©¦  ©¦  ©¸©¤ package.json                             # legacy manifest used by this app\
+©¦  ©À©¤ dashboard/\
+©¦  ©¦  ©¦     ©¸©¤ dashboard-patterns.mdc             # UI/state patterns for the dashboard\
+©¦  ©¦  ©¸©¤ src/\
+©¦  ©¦     ©À©¤ pages/                                # routed page components\
+©¦  ©¦     ©À©¤ components/                           # dashboard UI building blocks\
+©¦  ©¦     ©¸©¤ index.tsx                             # entry component\
+©¦  ©À©¤ desktop/\
+©¦  ©¦  ©¦     ©¸©¤ desktop-patterns.mdc               # patterns specific to desktop runtime\
+©¦  ©¦     ©¸©¤ main.ts                               # main process/bootstrap for desktop\
+©¦  ©À©¤ engine/\
+©¦  ©¦  ©¦     ©¸©¤ engine-patterns.mdc                # pipeline/resilience patterns in the old engine\
+©¦  ©¦     ©À©¤ core/                                 # engine primitives and scheduling core\
+©¦  ©¦     ©À©¤ pipelines/                            # orchestration flows\
+©¦  ©¦     ©¸©¤ index.ts                              # legacy engine entrypoint\
+©¦  ©À©¤ website/\
+©¦  ©¦  ©¦     ©¸©¤ website-patterns.mdc               # website UX/content conventions (legacy)\
+©¦  ©¦     ©À©¤ pages/                                # site pages\
+©¦  ©¦     ©¸©¤ index.tsx                             # site entry component\
+©¦  ©¸©¤ shared/\
+©¦     ©À©¤ ui/                                      # shared UI primitives\
+©¦     ©À©¤ hooks/                                   # shared hooks\
+©¦     ©À©¤ utils/                                   # helpers\
+©¦     ©¸©¤ types/                                   # shared TypeScript types\
+©À©¤ legacy_worker/                                 # legacy worker kept for parity with old pipelines\
+©¦  ©À©¤ src/\
+©¦  ©¦  ©¸©¤ index.ts                                 # worker bootstrap\
+©¦  ©¸©¤ README.md                                   # notes on running/deploying the old worker\
+©À©¤ legacy_data/                                   # older fixtures and samples retained for tests/migration\
+©¦  ©À©¤ seeds/                                      # seed datasets for development\
+©¦  ©¸©¤ samples/                                    # sample payloads for docs/tests\
+©¸©¤ legacy_packages/                               # legacy package set retained to help transition\
+   ©À©¤ .cursor/\
+   ©¦  ©¸©¤ rules/\
+   ©¦     ©¸©¤ package-patterns.mdc                  # package-authoring rules used historically\
+   ©À©¤ config/\
+   ©¦  ©À©¤ package.json                             # legacy config package manifest\
+   ©¦  ©¸©¤ index.js                                 # exports ESLint/TS/Prettier presets (legacy)\
+   ©À©¤ ui/\
+   ©¦  ©À©¤ src/                                     # legacy design-system sources\
+   ©¦  ©¸©¤ package.json                             # manifest for legacy UI package\
+   ©À©¤ lint/\
+   ©¦  ©À©¤ package.json                             # manifest for legacy lint package\
+   ©¦  ©¸©¤ rules.js                                 # rules/presets (legacy form)\
+   ©¸©¤ types/\
+      ©À©¤ src/                                     # type declarations (legacy)\
+      ©¸©¤ package.json                             # manifest for legacy types package\
+
+midday/                                           # root of the NuSyQ-Hub monorepo; single workspace coordinating AI agents, tools, and apps
+
+─  cursor_root/                                   # global Cursor/Copilot rulescope for repository-wide AI guidance
+
+│   └ ─  cursor_root_rules/                          # top-level rules bundle applied across the entire repo
+│      └ ─  root_rules_writing-tests.mdc             # patterns for writing tests: tone, structure, and examples for AI assistants
+
+─  README.md                                      # project overview, philosophy, quickstart, and VS Code task entry points
+
+─  CONTRIBUTING.md                                # contribution flow, branching strategy, commit rules, and review expectations
+
+─  CODE_OF_CONDUCT.md                             # community standards for respectful collaboration
+
+─  doteditorconfig_root.ini                       # editor normalization across contributors and CI environments
+
+─  dotgitignore_root.txt                          # centralized VCS ignore rules for all toolchains
+
+─  dotgitattributes_root.txt                      # line-ending and merge attributes for consistent diffs
+
+─  prettier_root.rc                               # Prettier configuration shared across apps/packages
+
+─  eslint_root.cjs                                # root ESLint configuration for TypeScript/JavaScript sources
+
+─  LICENSE                                        # legal license for the entire codebase
+
+─  env_root.example                               # sample environment configuration incl. CHATDEV_PATH, OLLAMA_HOST, OLLAMA_MODELS_DIR
+
+─  Makefile                                       # make targets (dev/test/chatdev/ollama/up) for fast local workflows
+
+─  Taskfile.yml                                   # task-runner alternative mirroring Make targets for cross-platform convenience
+
+─  vscode_root/                                   # Visual Studio Code workspace customizations
+─  vscode_settings.json                        # editor prefs; Copilot/Jupyter/Godot wiring and workspace hints
+─  vscode_extensions.json                      # curated extension catalog to standardize dev environment
+─  vscode_launch.json                          # debuggers for api/desktop/website and Godot attach profiles
+│   └ ─  vscode_tasks.json                           # one-click tasks to run ChatDev phases, Ollama operations, and tests
+
+─  vscode_extension_bridge/                       # custom VS Code extension bridging Copilot, ChatDev, and Ollama inside the editor
+─  vscode_extension_package.json               # extension manifest (unique id/name) and activation events
+─  vscode_extension_README.md                  # usage docs and command palette instructions for the extension
+│   └ ─  src_vscode_extension/                       # extension TypeScript source code
+─  vsce_extension.ts                        # entrypoint: registers commands, status bar, and output channels
+─  vsce_copilot_command.ts                  # “Enhance Copilot Context” command wiring to Python bridges
+│      └ ─  vsce_ollama_command.ts                   # status-bar model picker and inline local-LLM prompts
+
+─  scripts_root/                                  # repository-wide automation scripts called by tasks/CI/extension
+─  chatdev_phase_orchestrator.py               # runs ChatDev multi-phase workflows locally via CHATDEV_PATH
+─  enhanced_reflection_system.py               # self-critique + patch proposal engine for AI reflection loops
+─  ollama_model_tools.py                       # list, pull, switch, and warm Ollama models for dev sessions
+─  start_ollama_windows.ps1                    # Windows helper to start service and warm models
+─  start_ollama_unix.sh                        # macOS/Linux helper to start daemon and warm models
+─  bridge_chatdev_ollama.py                    # unified surface to route ChatDev calls through local Ollama
+│   └ ─  ci_ollama_ai_runner.py                      # PR check that exercises local-LLM analyzers (mocked safely in CI)
+
+─  src_integration_hub/                           # language-agnostic integration layer (Python) coordinating agents/tools
+─  ai_hub/                                     # local LLM backbones and adapters
+│   │   └ ─  ollama_hub.py                            # model discovery/selection/generation API for Ollama
+─  copilot_hub/                                # GitHub Copilot augmentation module set
+─  copilot_workspace_enhancer.py            # builds cross-file context graph and feature hints
+─  copilot_enhancement_bridge.py            # memory palace + suggestion logging for persistent improvements
+│   │   └ ─  copilot_vscode_integration.py            # marshals hints and telemetry back to the VS Code extension
+│   └ ─  integration_bridges/                        # cross-agent wiring (ChatDev, Copilot, Ollama)
+─  chatdev_integration.py                   # ChatDev availability checks, env, and process launching
+─  ollama_integration.py                    # Ollama health checks and specialization profiles
+─  chatdev_ollama_llm_adapter.py            # adapter routing ChatDev LLM calls into Ollama for offline runs
+│      └ ─  chatdev_environment_patcher.py           # environment patcher for paths, configs, and API fallbacks
+
+─  github_root/                                   # GitHub metadata and workflow automation
+─  issue_template_bug_report.yml               # guided bug report form for consistent triage
+─  issue_template_feature_request.yml          # guided feature request form
+─  pull_request_template.md                    # PR checklist ensuring quality and story of change
+│   └ ─  workflows_root/                             # CI/CD workflows used by GitHub Actions
+─  workflows_ci.yml                         # lint, typecheck, unit tests across packages/apps
+─  workflows_chatdev_smoke.yml              # safe ChatDev dry-run pipeline using mocks
+─  workflows_release.yml                    # release management and version tagging
+│      └ ─  workflows_labeler.yml                    # automatic PR labeling rules
+
+─  meta_vibe/                                     # AI “vibe” center and decision history to guide agents
+─  meta_patterns_overview.mdc                  # cross-links and summaries of pattern docs across the repo
+─  meta_taxonomy.mdc                           # canonical naming, folder semantics, OmniTag/MegaTag mapping
+─  prompts_vault/                              # reusable prompt libraries for tools and agents
+─  prompts_system.mdc                       # global guardrails, tone, and safety rails for assistants
+─  prompts_refactor_playbook.mdc            # structured refactor strategies and recipes
+│   │   └ ─  prompts_review_checklist.mdc             # code review rubric for both humans and AIs
+│   └ ─  traces_adr/                                 # architectural decision records and rationale
+─  ADR-0001-architecture.mdc                # global architecture choices and trade-offs
+│      └ ─  ADR-0002-data-access.mdc                 # persistence/data access patterns and decisions
+
+─  notebooks_lab/                                 # Jupyter experimentation for audits, analysis, and demos
+─  10_copilot_context_audit.ipynb              # measures/enhances Copilot context quality
+│   └ ─  20_llm_bench_local.ipynb                    # compares local Ollama models against common tasks
+
+─  obsidian_vault/                                # portable Obsidian vault storing living knowledge
+─  OBSIDIAN_KNOWLEDGE_CONTEXT.md               # core concepts, glossary, and onboarding map
+─  ENHANCED_SYSTEM_TODO_QUEST_LOG.md           # open quests/todos with RPG-style progression
+│   └ ─  ROSETTA_QUEST_STATUS_REPORT.md              # questline progress reports and milestones
+
+─  obsidian_settings_example.json                 # example Obsidian plugin configuration and conventions
+
+─  godot_demo_project/                            # Godot integration sandbox for AI-driven gameplay/NPC logic
+─  project_godot.project                       # Godot project descriptor for this demo workspace
+─  godot_scenes/                               # scene assets used to exercise AI hooks
+│   │   └ ─  scene_demo.tscn                          # demo scene showcasing AI interactions
+│   └ ─  godot_scripts/                              # game logic and AI bridge scripts
+─  quantum_bridge.py                        # calls ChatDev/Ollama to drive NPC decisions
+│      └ ─  ai_npc_agent.gd                          # Godot script implementing NPC behavior with AI responses
+
+─  tools_dev/                                     # developer tools for scaffolding and codemods
+─  codemods_rename_patterns.ts                 # codemod applying naming/pattern transforms
+│   └ ─  scaffolds_feature.gen.ts                    # generator creating feature skeletons with patterns applied
+
+─  tests_crosscutting/                            # repository-level tests spanning multiple apps/packages
+─  tests_e2e/                                  # end-to-end system tests validating integrations
+│   └ ─  tests_smoke/                                # fast smoke tests for CI confidence
+
+─  docs_handbook/                                 # human-facing documentation set
+─  docs_getting_started.md                     # install/run quickstart and FAQs
+─  docs_architecture.md                        # C4 (or similar) architecture read with diagrams
+─  docs_decision_log.md                        # executive-level summary of ADRs and reasoning
+│   └ ─  docs_styleguide.md                          # code/style conventions for consistent PRs
+
+─  apps_root/                                     # monorepo applications (each uniquely named for search clarity)
+─  app_api/                                    # backend API application providing services and endpoints
+─  app_api_cursor/                          # local Cursor rules dedicated to the API app
+│   │   │   └ ─  app_api_cursor_rules/                 # API-scoped rule files consumed by AI tools
+─  api_rules_architecture.mdc         # API architecture conventions and boundaries
+─  api_rules_auth_middleware.mdc      # authentication middleware patterns and examples
+─  api_rules_database_patterns.mdc    # data access rules, transactions, and migrations
+─  api_rules_rest_patterns.mdc        # REST endpoint patterns and error semantics
+─  api_rules_schema_patterns.mdc      # schema/validation strategy and contracts
+│   │   │      └ ─  api_rules_trpc_patterns.mdc        # tRPC design rules for RPC layers
+─  app_api_src/                             # API source code organized for clarity and reuse
+─  app_api_routes/                       # route handlers mapping HTTP/RPC to services
+─  app_api_services/                     # business logic services invoked by routes
+─  app_api_models/                       # data models/entities used by services
+│   │   │   └ ─  app_api_index.ts                      # API entrypoint bootstrapping the server
+│   │   └ ─  app_api_package.json                     # API application manifest for tooling/package managers
+─  app_dashboard/                              # internal dashboard and web console for operators
+─  app_dashboard_cursor/                    # dashboard-specific Cursor rules
+│   │   │   └ ─  app_dashboard_cursor_rules/           # rule set shaping dashboard UI generation
+│   │   │      └ ─  dashboard_rules_dashboard_patterns.mdc  # UI/state patterns and conventions
+│   │   └ ─  app_dashboard_src/                       # dashboard source code and composition root
+─  app_dashboard_pages/                  # routed pages and layouts
+─  app_dashboard_components/             # reusable UI components for the dashboard
+│   │      └ ─  app_dashboard_index.tsx               # dashboard entry component
+─  app_desktop/                                # desktop application (Electron/Tauri) for local UX
+─  app_desktop_cursor/                      # desktop-specific Cursor guidance
+│   │   │   └ ─  app_desktop_cursor_rules/             # desktop rule set for AI assistants
+│   │   │      └ ─  desktop_rules_desktop_patterns.mdc # desktop patterns including IPC and shell integration
+│   │   └ ─  app_desktop_src/                         # desktop codebase (main/renderer as needed)
+│   │      └ ─  app_desktop_main.ts                   # desktop main process entrypoint
+─  app_engine/                                 # orchestration/engine core handling pipelines
+─  app_engine_cursor/                       # Cursor guidance scoped to engine rules
+│   │   │   └ ─  app_engine_cursor_rules/              # engine-specific rulesets
+│   │   │      └ ─  engine_rules_engine_patterns.mdc   # conventions for pipeline orchestration and flow
+│   │   └ ─  app_engine_src/                          # engine source code
+─  app_engine_core/                      # core primitives and runtime abstractions
+─  app_engine_pipelines/                 # orchestrated execution flows
+│   │      └ ─  app_engine_index.ts                   # engine entrypoint bootstrapping orchestrator
+─  app_website/                                # public website/marketing site
+─  app_website_cursor/                      # Cursor rules guiding website content
+│   │   │   └ ─  app_website_cursor_rules/             # UX-specific rules for site generation
+│   │   │      └ ─  website_rules_website_patterns.mdc # content/UX conventions
+│   │   └ ─  app_website_src/                         # website source code
+─  app_website_pages/                    # site pages and layouts
+│   │      └ ─  app_website_index.tsx                 # site entrypoint component
+│   └ ─  app_shared/                                 # shared cross-app logic/libraries
+─  shared_ui/                               # primitive UI components and DS tokens
+─  shared_hooks/                            # reusable logic hooks
+─  shared_utils/                            # helper functions/utilities
+│      └ ─  shared_types/                            # shared types/interfaces
+
+─  worker_root/                                   # background workers and queues
+─  worker_src/                                 # worker logic
+│   │   └ ─  worker_index.ts                          # worker entrypoint script
+│   └ ─  worker_README.md                            # worker-specific documentation
+
+─  data_fixtures/                                 # seed/demo/test data
+─  data_seeds/                                 # data seeding scripts and constants
+│   └ ─  data_samples/                               # example payloads for dev/test
+
+─  packages_root/                                 # reusable packages
+─  packages_cursor/                            # Cursor rules scoped to packages
+│   │   └ ─  packages_cursor_rules/                   # rules guiding package authoring
+│   │      └ ─  packages_rules_package_patterns.mdc   # package conventions and patterns
+─  pkg_config/                                 # shareable config presets (ts/eslint/prettier)
+─  packages_config_package.json             # manifest for configs
+│   │   └ ─  packages_config_index.js                 # exports presets
+─  pkg_ui/                                     # design system components
+─  packages_ui_src/                         # source for design system
+│   │   └ ─  packages_ui_package.json                 # manifest
+─  pkg_lint/                                   # eslint plugin/presets
+─  packages_lint_package.json               # manifest
+│   │   └ ─  packages_lint_rules.js                   # rules implementation
+│   └ ─  pkg_types/                                  # type libraries
+─  packages_types_src/                      # type declarations
+│      └ ─  packages_types_package.json              # manifest
+
+─  docker_root/                                   # containerization assets
+─  dockerfile_root                             # Docker build file for root image
+│   └ ─  docker_compose_root.yml                     # docker-compose services
+
+─  infra_root/                                    # infra-as-code
+│   └ ─  terraform_root/                             # Terraform stack baseline
+│      └ ─  terraform_main.tf                        # cloud infrastructure definition
+
+─  legacy_cursor/                                 # legacy .cursor directory preserved for compatibility
+│   └ ─  rules/                                      # original rule definitions (superseded by cursor_root/)
+│      └ ─  writing-tests.mdc                        # early patterns for test-writing prompts & style
+
+─  legacy_vscode/                                 # legacy .vscode directory (kept for migration testing)
+─  settings.json                               # Copilot hints, notebooks, Obsidian markdown links
+─  extensions.json                             # curated extensions (Python, Jupyter, Godot, YAML, Markdown)
+─  launch.json                                 # debug profiles: api/desktop/website, Godot attach
+│   └ ─  tasks.json                                  # tasks for ChatDev phases, Ollama ops, tests
+
+─  legacy_vscode_extension/                       # original vscode-extension folder (pre-bridge rename)
+─  package.json                                # extension manifest (legacy id)
+─  README.md                                   # usage documentation
+│   └ ─  src/                                        # extension TypeScript source
+─  extension.ts                             # registers commands and output channels
+─  copilot.ts                               # “Enhance Copilot Context” command
+│      └ ─  ollama.ts                                # status-bar model picker & quick prompts
+
+─  legacy_scripts/                                # legacy scripts folder
+─  chatdev_phase_orchestrator.py               # local ChatDev runner (legacy path)
+─  enhanced_reflection_system.py               # self-critique & patch proposals
+─  ollama_model_tools.py                       # model list/pull/switch/default ops
+─  start_ollama.ps1                            # Windows helper (service + warmup)
+─  start_ollama.sh                             # macOS/Linux helper
+│   └ ─  ci/                                         # CI helper scripts
+│      └ ─  ollama_ai_runner.py                      # PR check using local LLM (mocked in CI)
+
+─  legacy_src/                                    # legacy src folder (pre-src_integration_hub rename)
+─  ai/                                         # Ollama hub
+│   │   └ ─  ollama_hub.py                            # original Ollama discovery/selection/generation module
+─  copilot/                                    # Copilot augmentation
+─  copilot_workspace_enhancer.py            # repo context graph (first pass)
+─  copilot_enhancement_bridge.py            # suggestion logging + memory palace
+│   │   └ ─  vscode_integration.py                    # VS Code-facing shims
+│   └ ─  integration/                                # bridges
+─  chatdev_integration.py                   # ChatDev availability / process
+─  ollama_integration.py                    # Ollama runtime profiles
+─  advanced_chatdev_copilot_integration.py  # Copilot
+─  Update-ChatDev-to-use-Ollama.py          # adapter to drive ChatDev with Ollama
+│      └ ─  ChatDevEnvironmentPatcher.py             # env vars/paths/config patcher
+
+─  legacy_github/                                 # legacy .github directory
+│   └ ─  workflows/                                  # GitHub Actions workflows
+─  ci.yml                                   # earlier CI (lint/type/unit)
+─  chatdev-smoke.yml                        # mocked ChatDev pipeline
+│      └ ─  release.yml                              # release automation (tags/changelog)
+
+─  legacy_meta/                                   # legacy meta folder
+─  patterns-overview.mdc                       # earlier pattern index
+─  taxonomy.mdc                                # earlier naming/semantics
+─  prompts/                                    # early prompt libraries
+─  system.mdc                               # initial global guardrails
+─  refactor-playbook.mdc                    # refactor strategies (early)
+│   │   └ ─  review-checklist.mdc                     # early review rubric
+│   └ ─  traces/                                     # historical ADRs
+─  ADR-0001-architecture.mdc                # first architecture ADR
+│      └ ─  ADR-0002-data-access.mdc                 # first data-access ADR
+
+─  legacy_notebooks/                              # earlier notebooks (superseded)
+─  00_repo_overview.ipynb                      # quick map of repo structure
+─  10_copilot_context_audit.ipynb              # Copilot context quality experiments
+│   └ ─  20_llm_bench_local.ipynb                    # local-model benchmarks
+
+─  legacy_obsidian/                               # early Obsidian vault & settings
+─  NuSyQ-Hub-Obsidian.vault/                   # original vault
+─  OBSIDIAN_KNOWLEDGE_CONTEXT.md            # glossary & mental model (legacy)
+─  ENHANCED_SYSTEM_TODO_QUEST_LOG.md        # RPG-style quest log (legacy)
+│   │   └ ─  ROSETTA_QUEST_STATUS_REPORT.md           # status report (legacy)
+│   └ ─  .obsidian.example.json                      # example plugin config
+
+─  legacy_godot/                                  # prior Godot demo
+─  project.godot                               # project file
+─  scenes/                                     # scenes
+│   │   └ ─  DemoScene.tscn                           # NPC behavior experiment scene
+│   └ ─  scripts/                                    # scripts
+─  quantum_bridge.py                        # ChatDev/Ollama bridge (proto)
+│      └ ─  ai_npc_agent.gd                          # scripted NPC agent behavior
+
+─  legacy_tools/                                  # prior tools retained for migrations
+─  scaffolds/feature.gen.ts                    # early scaffolder
+│   └ ─  codemods/rename-patterns.ts                 # legacy rename codemod
+
+─  legacy_tests/                                  # older tests
+─  e2e/                                        # end-to-end tests (legacy layout)
+│   └ ─  smoke/                                      # quick CI sanity checks
+
+─  legacy_docs/                                   # earlier docs
+─  getting-started.md                          # intro & setup (older wording)
+─  architecture.md                             # original architecture write-up
+─  decision-log.md                             # legacy decisions & notes
+│   └ ─  styleguide.md                               # former code style rules
+
+─  legacy_apps/                                   # pre-canonical app layout
+─  api/                                        # legacy API app
+─  .cursor/                                 # API rulescope (legacy)
+│   │   │   └ ─  rules/                                # rule files
+─  architecture.mdc                   # API architecture patterns (legacy phrasing)
+─  auth-middleware.mdc                # middleware rules & examples
+─  database-patterns.mdc              # data access norms
+─  rest-patterns.mdc                  # REST guidelines & semantics
+─  schema-patterns.mdc                # validation & evolution
+│   │   │      └ ─  trpc-patterns.mdc                  # RPC/tRPC conventions
+─  src/                                     # API sources (legacy)
+─  routes/                               # route handlers
+─  services/                             # domain services
+─  models/                               # entities/models
+│   │   │   └ ─  index.ts                              # bootstrap for legacy API
+│   │   └ ─  package.json                             # legacy API manifest
+─  dashboard/                                  # legacy dashboard
+─  .cursor/                                 # dashboard rulescope
+│   │   │   └ ─  rules/                                # rules
+│   │   │      └ ─  dashboard-patterns.mdc             # UI/state patterns
+│   │   └ ─  src/                                     # dashboard sources
+─  pages/                                # routed pages
+─  components/                           # UI building blocks
+│   │      └ ─  index.tsx                             # entry component
+─  desktop/                                    # legacy desktop app
+─  .cursor/                                 # desktop rulescope
+│   │   │      └ ─  desktop-patterns.mdc               # desktop patterns (IPC/shell)
+│   │   └ ─  src/                                     # desktop sources
+│   │      └ ─  main.ts                               # main process/bootstrap
+─  engine/                                     # legacy orchestration engine
+─  .cursor/                                 # engine rulescope
+│   │   │      └ ─  engine-patterns.mdc                # pipeline/resilience patterns
+│   │   └ ─  src/                                     # engine sources
+─  core/                                 # primitives/scheduler
+─  pipelines/                            # orchestration flows
+│   │      └ ─  index.ts                              # legacy engine entry
+─  website/                                    # legacy website
+─  .cursor/                                 # website rulescope
+│   │   │      └ ─  website-patterns.mdc               # UX/content conventions (legacy)
+│   │   └ ─  src/                                     # website sources
+─  pages/                                # site pages
+│   └ ─  shared/                                     # legacy shared layer
+─  ui/                                      # shared UI primitives
+─  hooks/                                   # shared hooks
+─  utils/                                   # helpers
+│      └ ─  types/                                   # shared TypeScript types
+
+─  legacy_worker/                                 # legacy worker folder
+─  src/                                        # worker sources
+│   │   └ ─  index.ts                                 # worker bootstrap
+│   └ ─  README.md                                   # run/deploy notes
+
+─  legacy_data/                                   # older fixtures & samples
+─  seeds/                                      # seed datasets
+│   └ ─  samples/                                    # sample payloads
+└ ─  legacy_packages/                               # legacy packages set
+
+─  .cursor/                                    # package-scope rulescope (legacy)
+   │   └ ─  rules/                                   # rules
+   │      └ ─  package-patterns.mdc                  # authoring rules (historic)
+
+─  config/                                     # legacy config package
+─  package.json                             # package manifest
+   │   └ ─  index.js                                 # exports ESLint/TS/Prettier presets
+
+─  ui/                                         # legacy UI package
+─  src/                                     # sources
+   │   └ ─  package.json                             # manifest
+
+─  lint/                                       # legacy lint package
+─  package.json                             # manifest
+   │   └ ─  rules.js                                 # rule presets
+   └ ─  types/                                      # legacy types package
+
+─  src/                                     # declarations
+      └ ─  package.json                             # manifest
+
+midday/                                           # root of the NuSyQ-Hub monorepo; single workspace coordinating AI agents, tools, and apps\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛9] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(9)
+
+─  cursor_root/                                   # global Cursor/Copilot rulescope for repository-wide AI guidance\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛13] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(13)
+│   └ ─  cursor_root_rules/                          # top-level rules bundle applied across the entire repo\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛14] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(14)
+│      └ ─  root_rules_writing-tests.mdc             # patterns for writing tests: tone, structure, and examples for AI assistants\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛15] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(15)
+
+─  README.md                                      # project overview, philosophy, quickstart, and VS Code task entry points\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛19] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(19)
+
+─  CONTRIBUTING.md                                # contribution flow, branching strategy, commit rules, and review expectations\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛22] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(22)
+
+─  CODE_OF_CONDUCT.md                             # community standards for respectful collaboration\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛25] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(25)
+
+─  doteditorconfig_root.ini                       # editor normalization across contributors and CI environments\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛28] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(28)
+
+─  dotgitignore_root.txt                          # centralized VCS ignore rules for all toolchains\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛31] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(31)
+
+─  dotgitattributes_root.txt                      # line-ending and merge attributes for consistent diffs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛34] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(34)
+
+─  prettier_root.rc                               # Prettier configuration shared across apps/packages\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛37] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(37)
+
+─  eslint_root.cjs                                # root ESLint configuration for TypeScript/JavaScript sources\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛40] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(40)
+
+─  LICENSE                                        # legal license for the entire codebase\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛43] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(43)
+
+─  env_root.example                               # sample environment configuration incl. CHATDEV_PATH, OLLAMA_HOST, OLLAMA_MODELS_DIR\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛46] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(46)
+
+─  Makefile                                       # make targets (dev/test/chatdev/ollama/up) for fast local workflows\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛49] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(49)
+
+─  Taskfile.yml                                   # task-runner alternative mirroring Make targets for cross-platform convenience\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛52] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(52)
+
+─  vscode_root/                                   # Visual Studio Code workspace customizations\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛56] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(56)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛57] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(57)
+─  vscode_settings.json                        # editor prefs; Copilot/Jupyter/Godot wiring and workspace hints\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛59] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(59)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛60] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(60)
+─  vscode_extensions.json                      # curated extension catalog to standardize dev environment\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛62] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(62)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛63] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(63)
+─  vscode_launch.json                          # debuggers for api/desktop/website and Godot attach profiles\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛65] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(65)
+│   └ ─  vscode_tasks.json                           # one-click tasks to run ChatDev phases, Ollama operations, and tests\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛66] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(66)
+
+─  vscode_extension_bridge/                       # custom VS Code extension bridging Copilot, ChatDev, and Ollama inside the editor\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛70] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(70)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛71] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(71)
+─  vscode_extension_package.json               # extension manifest (unique id/name) and activation events\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛73] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(73)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛74] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(74)
+─  vscode_extension_README.md                  # usage docs and command palette instructions for the extension\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛76] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(76)
+│   └ ─  src_vscode_extension/                       # extension TypeScript source code\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛77] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(77)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛78] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(78)
+─  vsce_extension.ts                        # entrypoint: registers commands, status bar, and output channels\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛80] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(80)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛81] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(81)
+─  vsce_copilot_command.ts                  # “Enhance Copilot Context” command wiring to Python bridges\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛83] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(83)
+│      └ ─  vsce_ollama_command.ts                   # status-bar model picker and inline local-LLM prompts\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛84] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(84)
+
+─  scripts_root/                                  # repository-wide automation scripts called by tasks/CI/extension\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛88] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(88)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛89] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(89)
+─  enhance_copilot_context.py                  # analyzes active file  ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛91] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(91)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛94] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(94)
+─  chatdev_phase_orchestrator.py               # runs ChatDev multi-phase workflows locally via CHATDEV_PATH\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛96] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(96)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛97] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(97)
+─  enhanced_reflection_system.py               # self-critique + patch proposal engine for AI reflection loops\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛99] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(99)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛100] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(100)
+─  ollama_model_tools.py                       # list, pull, switch, and warm Ollama models for dev sessions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛102] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(102)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛103] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(103)
+─  start_ollama_windows.ps1                    # Windows helper to start service and warm models\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛105] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(105)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛106] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(106)
+─  start_ollama_unix.sh                        # macOS/Linux helper to start daemon and warm models\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛108] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(108)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛109] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(109)
+─  bridge_chatdev_ollama.py                    # unified surface to route ChatDev calls through local Ollama\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛111] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(111)
+│   └ ─  ci_ollama_ai_runner.py                      # PR check that exercises local-LLM analyzers (mocked safely in CI)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛112] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(112)
+
+─  src_integration_hub/                           # language-agnostic integration layer (Python) coordinating agents/tools\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛116] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(116)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛117] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(117)
+─  ai_hub/                                     # local LLM backbones and adapters\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛119] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(119)
+│   │   └ ─  ollama_hub.py                            # model discovery/selection/generation API for Ollama\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛120] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(120)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛121] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(121)
+─  copilot_hub/                                # GitHub Copilot augmentation module set\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛123] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(123)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛124] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(124)
+─  copilot_workspace_enhancer.py            # builds cross-file context graph and feature hints\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛126] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(126)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛127] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(127)
+─  copilot_enhancement_bridge.py            # memory palace + suggestion logging for persistent improvements\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛129] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(129)
+│   │   └ ─  copilot_vscode_integration.py            # marshals hints and telemetry back to the VS Code extension\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛130] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(130)
+│   └ ─  integration_bridges/                        # cross-agent wiring (ChatDev, Copilot, Ollama)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛131] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(131)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛132] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(132)
+─  chatdev_integration.py                   # ChatDev availability checks, env, and process launching\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛134] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(134)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛135] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(135)
+─  ollama_integration.py                    # Ollama health checks and specialization profiles\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛137] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(137)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛138] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(138)
+─  chatdev_copilot_arch_bridge.py           # architectural bridge: Copilot  ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛140] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(140)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛143] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(143)
+─  chatdev_ollama_llm_adapter.py            # adapter routing ChatDev LLM calls into Ollama for offline runs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛145] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(145)
+│      └ ─  chatdev_environment_patcher.py           # environment patcher for paths, configs, and API fallbacks\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛146] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(146)
+
+─  github_root/                                   # GitHub metadata and workflow automation\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛150] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(150)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛151] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(151)
+─  issue_template_bug_report.yml               # guided bug report form for consistent triage\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛153] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(153)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛154] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(154)
+─  issue_template_feature_request.yml          # guided feature request form\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛156] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(156)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛157] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(157)
+─  pull_request_template.md                    # PR checklist ensuring quality and story of change\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛159] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(159)
+│   └ ─  workflows_root/                             # CI/CD workflows used by GitHub Actions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛160] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(160)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛161] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(161)
+─  workflows_ci.yml                         # lint, typecheck, unit tests across packages/apps\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛163] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(163)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛164] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(164)
+─  workflows_chatdev_smoke.yml              # safe ChatDev dry-run pipeline using mocks\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛166] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(166)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛167] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(167)
+─  workflows_release.yml                    # release management and version tagging\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛169] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(169)
+│      └ ─  workflows_labeler.yml                    # automatic PR labeling rules\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛170] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(170)
+
+─  meta_vibe/                                     # AI “vibe” center and decision history to guide agents\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛174] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(174)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛175] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(175)
+─  meta_patterns_overview.mdc                  # cross-links and summaries of pattern docs across the repo\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛177] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(177)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛178] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(178)
+─  meta_taxonomy.mdc                           # canonical naming, folder semantics, OmniTag/MegaTag mapping\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛180] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(180)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛181] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(181)
+─  prompts_vault/                              # reusable prompt libraries for tools and agents\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛183] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(183)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛184] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(184)
+─  prompts_system.mdc                       # global guardrails, tone, and safety rails for assistants\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛186] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(186)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛187] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(187)
+─  prompts_refactor_playbook.mdc            # structured refactor strategies and recipes\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛189] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(189)
+│   │   └ ─  prompts_review_checklist.mdc             # code review rubric for both humans and AIs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛190] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(190)
+│   └ ─  traces_adr/                                 # architectural decision records and rationale\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛191] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(191)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛192] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(192)
+─  ADR-0001-architecture.mdc                # global architecture choices and trade-offs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛194] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(194)
+│      └ ─  ADR-0002-data-access.mdc                 # persistence/data access patterns and decisions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛195] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(195)
+
+─  notebooks_lab/                                 # Jupyter experimentation for audits, analysis, and demos\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛199] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(199)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛200] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(200)
+─  00_repo_overview.ipynb                      # auto-map structure  ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛202] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(202)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛205] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(205)
+─  10_copilot_context_audit.ipynb              # measures/enhances Copilot context quality\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛207] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(207)
+│   └ ─  20_llm_bench_local.ipynb                    # compares local Ollama models against common tasks\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛208] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(208)
+
+─  obsidian_vault/                                # portable Obsidian vault storing living knowledge\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛212] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(212)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛213] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(213)
+─  OBSIDIAN_KNOWLEDGE_CONTEXT.md               # core concepts, glossary, and onboarding map\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛215] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(215)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛216] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(216)
+─  ENHANCED_SYSTEM_TODO_QUEST_LOG.md           # open quests/todos with RPG-style progression\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛218] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(218)
+│   └ ─  ROSETTA_QUEST_STATUS_REPORT.md              # questline progress reports and milestones\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛219] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(219)
+
+─  obsidian_settings_example.json                 # example Obsidian plugin configuration and conventions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛222] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(222)
+
+─  godot_demo_project/                            # Godot integration sandbox for AI-driven gameplay/NPC logic\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛226] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(226)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛227] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(227)
+─  project_godot.project                       # Godot project descriptor for this demo workspace\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛229] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(229)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛230] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(230)
+─  godot_scenes/                               # scene assets used to exercise AI hooks\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛232] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(232)
+│   │   └ ─  scene_demo.tscn                          # demo scene showcasing AI interactions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛233] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(233)
+│   └ ─  godot_scripts/                              # game logic and AI bridge scripts\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛234] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(234)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛235] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(235)
+─  quantum_bridge.py                        # calls ChatDev/Ollama to drive NPC decisions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛237] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(237)
+│      └ ─  ai_npc_agent.gd                          # Godot script implementing NPC behavior with AI responses\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛238] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(238)
+
+─  tools_dev/                                     # developer tools for scaffolding and codemods\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛242] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(242)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛243] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(243)
+─  codemods_rename_patterns.ts                 # codemod applying naming/pattern transforms\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛245] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(245)
+│   └ ─  scaffolds_feature.gen.ts                    # generator creating feature skeletons with patterns applied\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛246] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(246)
+
+─  tests_crosscutting/                            # repository-level tests spanning multiple apps/packages\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛250] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(250)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛251] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(251)
+─  tests_e2e/                                  # end-to-end system tests validating integrations\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛253] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(253)
+│   └ ─  tests_smoke/                                # fast smoke tests for CI confidence\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛254] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(254)
+
+─  docs_handbook/                                 # human-facing documentation set\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛258] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(258)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛259] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(259)
+─  docs_getting_started.md                     # install/run quickstart and FAQs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛261] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(261)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛262] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(262)
+─  docs_architecture.md                        # C4 (or similar) architecture read with diagrams\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛264] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(264)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛265] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(265)
+─  docs_decision_log.md                        # executive-level summary of ADRs and reasoning\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛267] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(267)
+│   └ ─  docs_styleguide.md                          # code/style conventions for consistent PRs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛268] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(268)
+
+─  apps_root/                                     # monorepo applications (each uniquely named for search clarity)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛272] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(272)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛273] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(273)
+─  app_api/                                    # backend API application providing services and endpoints\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛275] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(275)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛276] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(276)
+─  app_api_cursor/                          # local Cursor rules dedicated to the API app\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛278] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(278)
+│   │   │   └ ─  app_api_cursor_rules/                 # API-scoped rule files consumed by AI tools\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛279] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(279)
+│   │   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛280] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(280)
+─  api_rules_architecture.mdc         # API architecture conventions and boundaries\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛282] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(282)
+│   │   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛283] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(283)
+─  api_rules_auth_middleware.mdc      # authentication middleware patterns and examples\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛285] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(285)
+│   │   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛286] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(286)
+─  api_rules_database_patterns.mdc    # data access rules, transactions, and migrations\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛288] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(288)
+│   │   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛289] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(289)
+─  api_rules_rest_patterns.mdc        # REST endpoint patterns and error semantics\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛291] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(291)
+│   │   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛292] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(292)
+─  api_rules_schema_patterns.mdc      # schema/validation strategy and contracts\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛294] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(294)
+│   │   │      └ ─  api_rules_trpc_patterns.mdc        # tRPC design rules for RPC layers\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛295] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(295)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛296] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(296)
+─  app_api_src/                             # API source code organized for clarity and reuse\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛298] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(298)
+│   │   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛299] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(299)
+─  app_api_routes/                       # route handlers mapping HTTP/RPC to services\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛301] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(301)
+│   │   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛302] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(302)
+─  app_api_services/                     # business logic services invoked by routes\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛304] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(304)
+│   │   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛305] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(305)
+─  app_api_models/                       # data models/entities used by services\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛307] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(307)
+│   │   │   └ ─  app_api_index.ts                      # API entrypoint bootstrapping the server\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛308] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(308)
+│   │   └ ─  app_api_package.json                     # API application manifest for tooling/package managers\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛309] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(309)
+│   │ \ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛310] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(310)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛311] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(311)
+─  app_dashboard/                              # internal dashboard and web console for operators\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛313] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(313)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛314] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(314)
+─  app_dashboard_cursor/                    # dashboard-specific Cursor rules\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛316] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(316)
+│   │   │   └ ─  app_dashboard_cursor_rules/           # rule set shaping dashboard UI generation\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛317] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(317)
+│   │   │      └ ─  dashboard_rules_dashboard_patterns.mdc  # UI/state patterns and conventions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛318] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(318)
+│   │   └ ─  app_dashboard_src/                       # dashboard source code and composition root\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛319] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(319)
+│   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛320] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(320)
+─  app_dashboard_pages/                  # routed pages and layouts\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛322] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(322)
+│   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛323] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(323)
+─  app_dashboard_components/             # reusable UI components for the dashboard\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛325] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(325)
+│   │      └ ─  app_dashboard_index.tsx               # dashboard entry component\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛326] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(326)
+│   │ \ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛327] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(327)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛328] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(328)
+─  app_desktop/                                # desktop application (Electron/Tauri) for local UX\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛330] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(330)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛331] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(331)
+─  app_desktop_cursor/                      # desktop-specific Cursor guidance\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛333] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(333)
+│   │   │   └ ─  app_desktop_cursor_rules/             # desktop rule set for AI assistants\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛334] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(334)
+│   │   │      └ ─  desktop_rules_desktop_patterns.mdc # desktop patterns including IPC and shell integration\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛335] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(335)
+│   │   └ ─  app_desktop_src/                         # desktop codebase (main/renderer as needed)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛336] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(336)
+│   │      └ ─  app_desktop_main.ts                   # desktop main process entrypoint\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛337] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(337)
+│   │ \ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛338] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(338)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛339] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(339)
+─  app_engine/                                 # core orchestration/engine powering pipelines\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛341] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(341)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛342] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(342)
+─  app_engine_cursor/                       # engine-specific Cursor rules\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛344] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(344)
+│   │   │   └ ─  app_engine_cursor_rules/              # engine rule files consulted by AI\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛345] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(345)
+│   │   │      └ ─  engine_rules_engine_patterns.mdc   # pipeline patterns, scheduling, and resilience\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛346] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(346)
+│   │   └ ─  app_engine_src/                          # engine source code\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛347] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(347)
+│   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛348] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(348)
+─  app_engine_core/                      # primitives, schedulers, and runtime core\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛350] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(350)
+│   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛351] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(351)
+─  app_engine_pipelines/                 # orchestrated flows connecting subsystems\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛353] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(353)
+│   │      └ ─  app_engine_index.ts                   # engine entrypoint and composition root\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛354] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(354)
+│   │ \ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛355] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(355)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛356] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(356)
+─  app_website/                                # public marketing/brochure website\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛358] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(358)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛359] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(359)
+─  app_website_cursor/                      # website-specific Cursor rules\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛361] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(361)
+│   │   │   └ ─  app_website_cursor_rules/             # website rule files consulted by AI\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛362] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(362)
+│   │   │      └ ─  website_rules_website_patterns.mdc # content/UX patterns and deployment rules\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛363] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(363)
+│   │   └ ─  app_website_src/                         # website source code\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛364] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(364)
+│   │       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛365] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(365)
+─  app_website_pages/                    # static/SSR pages\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛367] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(367)
+│   │      └ ─  app_website_index.tsx                 # website entry component\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛368] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(368)
+│   │ \ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛369] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(369)
+│   └ ─  app_shared/                                 # cross-application shared layer for DRY utilities\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛370] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(370)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛371] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(371)
+─  shared_ui/                               # design tokens and UI primitives\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛373] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(373)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛374] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(374)
+─  shared_hooks/                            # reusable hooks shared across apps\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛376] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(376)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛377] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(377)
+─  shared_utils/                            # general helpers and adapters\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛379] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(379)
+│      └ ─  shared_types/                            # shared type definitions and interfaces\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛380] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(380)
+
+─  worker_root/                                   # background workers for jobs/queues/scheduled tasks\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛384] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(384)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛385] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(385)
+─  worker_src/                                 # worker source code\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛387] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(387)
+│   │   └ ─  worker_index.ts                          # worker entrypoint and job registration\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛388] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(388)
+│   └ ─  worker_README.md                            # worker-specific run/deploy documentation\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛389] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(389)
+
+─  data_fixtures/                                 # seed and sample data for demos/tests\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛393] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(393)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛394] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(394)
+─  data_seeds/                                 # scripts and datasets used to seed environments\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛396] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(396)
+│   └ ─  data_samples/                               # example payloads for quick experiments\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛397] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(397)
+
+─  packages_root/                                 # shareable packages with unique naming\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛401] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(401)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛402] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(402)
+─  packages_cursor/                            # packages-wide Cursor rules and conventions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛404] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(404)
+│   │   └ ─  packages_cursor_rules/                   # rule files affecting package authoring\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛405] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(405)
+│   │      └ ─  packages_rules_package_patterns.mdc   # patterns for building and publishing packages\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛406] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(406)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛407] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(407)
+─  pkg_config/                                 # shareable TypeScript/ESLint/Prettier presets\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛409] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(409)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛410] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(410)
+─  packages_config_package.json             # manifest for the config package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛412] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(412)
+│   │   └ ─  packages_config_index.js                 # exports of preset objects consumed by apps\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛413] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(413)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛414] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(414)
+─  pkg_ui/                                     # design system components as a package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛416] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(416)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛417] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(417)
+─  packages_ui_src/                         # UI component implementations and stories\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛419] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(419)
+│   │   └ ─  packages_ui_package.json                 # manifest for the UI package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛420] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(420)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛421] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(421)
+─  pkg_lint/                                   # ESLint presets/plugins as a package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛423] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(423)
+│   │    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛424] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(424)
+─  packages_lint_package.json               # manifest for the lint package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛426] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(426)
+│   │   └ ─  packages_lint_rules.js                   # preset rule configuration\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛427] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(427)
+│   └ ─  pkg_types/                                  # shared TypeScript types package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛428] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(428)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛429] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(429)
+─  packages_types_src/                      # type declarations and utilities\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛431] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(431)
+│      └ ─  packages_types_package.json              # manifest for the types package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛432] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(432)
+
+─  docker_root/                                   # containerized development/production artifacts\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛436] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(436)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛437] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(437)
+─  dockerfile_root                             # base Dockerfile for building the workspace image\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛439] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(439)
+│   └ ─  docker_compose_root.yml                     # compose stack describing services and dependencies\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛440] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(440)
+
+─  infra_root/                                    # infrastructure-as-code definitions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛444] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(444)
+│   └ ─  terraform_root/                             # Terraform configuration set for cloud resources\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛445] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(445)
+│      └ ─  terraform_main.tf                        # baseline Terraform module for provisioning\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛446] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(446)
+
+─  legacy_cursor/                                 # legacy .cursor directory preserved for compatibility\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛450] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(450)
+│   └ ─  rules/                                      # original rule definitions (superseded by cursor_root/)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛451] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(451)
+│      └ ─  writing-tests.mdc                        # early patterns for test-writing prompts & style\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛452] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(452)
+
+─  legacy_vscode/                                 # legacy .vscode directory (kept for migration testing)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛456] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(456)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛457] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(457)
+─  settings.json                               # Copilot hints, notebooks, Obsidian markdown links\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛459] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(459)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛460] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(460)
+─  extensions.json                             # curated extensions (Python, Jupyter, Godot, YAML, Markdown)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛462] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(462)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛463] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(463)
+─  launch.json                                 # debug profiles: api/desktop/website, Godot attach\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛465] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(465)
+│   └ ─  tasks.json                                  # tasks for ChatDev phases, Ollama ops, tests\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛466] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(466)
+
+─  legacy_vscode_extension/                       # original vscode-extension folder (pre-bridge rename)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛470] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(470)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛471] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(471)
+─  package.json                                # extension manifest (legacy id)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛473] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(473)
+│    ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛474] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(474)
+─  README.md                                   # usage documentation\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛476] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(476)
+│   └ ─  src/                                        # extension TypeScript source\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛477] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(477)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛478] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(478)
+─  extension.ts                             # registers commands and output channels\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛480] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(480)
+│       ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛481] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(481)
+─  copilot.ts                               # “Enhance Copilot Context” command\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛483] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(483)
+│      └ ─  ollama.ts                                # status-bar model picker & quick prompts\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛484] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(484)
+
+©À©¤ legacy_scripts/                                # legacy scripts folder retained for migration/testing\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛487] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(487)
+©¦  ©À©¤ enhance_copilot_context.py                  # early analyzer that summarizes the active editor file into Copilot-usable hints\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛488] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(488)
+©¦  ©À©¤ chatdev_phase_orchestrator.py               # early local runner for ChatDev¡¯s multi-phase development pipeline\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛489] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(489)
+©¦  ©À©¤ enhanced_reflection_system.py               # first-gen self-critique loop that proposes patches and rationale\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛490] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(490)
+©¦  ©À©¤ ollama_model_tools.py                       # basic helpers to list/pull/switch default Ollama models\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛491] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(491)
+©¦  ©À©¤ start_ollama.ps1                            # Windows bootstrapper: starts Ollama service and pre-warms selected models\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛492] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(492)
+©¦  ©À©¤ start_ollama.sh                             # macOS/Linux bootstrapper doing the same as above for Unix shells\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛493] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(493)
+©¦  ©À©¤ bridge_chatdev_ollama.py                    # minimal function bridge for calling Ollama-backed ChatDev sessions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛494] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(494)
+©¦  ©¸©¤ ci/                                         # legacy CI helpers\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛495] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(495)
+©¦     ©¸©¤ ollama_ai_runner.py                      # makes a safe, mocked LLM pass over PRs for smoke-level feedback\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛496] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(496)
+©À©¤ legacy_src/                                    # legacy integration hub before we adopted src_integration_hub/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛498] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(498)
+©¦  ©À©¤ ai/                                         # early local LLM backbones and adapters\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛499] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(499)
+©¦  ©¦  ©¸©¤ ollama_hub.py                            # original Ollama discovery/selection/generation module\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛500] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(500)
+©¦  ©À©¤ copilot/                                    # early Copilot augmentation code\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛501] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(501)
+©¦  ©¦  ©À©¤ copilot_workspace_enhancer.py            # builds a repository context graph for Copilot (first pass)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛502] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(502)
+©¦  ©¦  ©À©¤ copilot_enhancement_bridge.py            # logs suggestions and keeps ¡°memory palace¡± for inline improvements\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛503] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(503)
+©¦  ©¦  ©¸©¤ vscode_integration.py                    # VS Code-facing shims used by the old extension\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛504] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(504)
+©¦  ©¸©¤ integration/                                # early cross-agent wiring (ChatDev, Copilot, Ollama)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛505] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(505)
+©¦     ©À©¤ chatdev_integration.py                   # checks/install paths; ensures ChatDev is runnable locally\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛506] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(506)
+©¦     ©À©¤ ollama_integration.py                    # probes local Ollama runtime; defines specialization profiles\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛507] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(507)
+©¦     ©À©¤ advanced_chatdev_copilot_integration.py  # context bridge letting Copilot tap ChatDev¡¯s planning/reflection\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛508] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(508)
+©¦     ©À©¤ Update-ChatDev-to-use-Ollama.py          # early adapter to drive ChatDev phases with Ollama models\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛509] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(509)
+©¦     ©¸©¤ ChatDevEnvironmentPatcher.py             # patches env vars/paths/configs so ChatDev runs consistently\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛510] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(510)
+©À©¤ legacy_github/                                 # legacy .github tree kept for historical workflows\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛512] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(512)
+©¦  ©¸©¤ workflows/                                  # GitHub Actions definitions (superseded by github_root/)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛513] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(513)
+©¦     ©À©¤ ci.yml                                   # earlier CI with lint/typecheck/unit tests\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛514] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(514)
+©¦     ©À©¤ chatdev-smoke.yml                        # proof-of-life pipeline using mocked LLM calls\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛515] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(515)
+©¦     ©¸©¤ release.yml                              # initial release automation (tagging/changelog stubs)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛516] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(516)
+©À©¤ legacy_meta/                                   # legacy ¡°vibe¡± docs retained for provenance\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛518] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(518)
+©¦  ©À©¤ patterns-overview.mdc                       # earlier cross-link index for pattern docs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛519] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(519)
+©¦  ©À©¤ taxonomy.mdc                                # earlier naming/folder semantics used across the repo\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛520] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(520)
+©¦  ©À©¤ prompts/                                    # prompt libraries used by early agents\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛521] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(521)
+©¦  ©¦  ©À©¤ system.mdc                               # initial global guardrails and tone for assistants\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛522] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(522)
+©¦  ©¦  ©À©¤ refactor-playbook.mdc                    # earlier refactor strategies and recipes\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛523] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(523)
+©¦  ©¦  ©¸©¤ review-checklist.mdc                     # early code-review checklist harmonized for human/AI\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛524] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(524)
+©¦  ©¸©¤ traces/                                     # historical ADRs (kept for reference)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛525] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(525)
+©¦     ©À©¤ ADR-0001-architecture.mdc                # first architecture ADR and trade-offs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛526] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(526)
+©¦     ©¸©¤ ADR-0002-data-access.mdc                 # first data-access decisions and constraints\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛527] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(527)
+©À©¤ legacy_notebooks/                              # earlier Jupyter notebooks (superseded by notebooks_lab/)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛529] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(529)
+©¦  ©À©¤ 00_repo_overview.ipynb                      # quick map/survey of repo structure\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛530] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(530)
+©¦  ©À©¤ 10_copilot_context_audit.ipynb              # experiments to quantify Copilot context quality\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛531] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(531)
+©¦  ©¸©¤ 20_llm_bench_local.ipynb                    # simple benchmarks across locally-run models\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛532] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(532)
+©À©¤ legacy_obsidian/                               # early Obsidian vault and example settings\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛534] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(534)
+©¦  ©À©¤ NuSyQ-Hub-Obsidian.vault/                   # original vault capturing knowledge and quest logs\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛535] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(535)
+©¦  ©¦  ©À©¤ OBSIDIAN_KNOWLEDGE_CONTEXT.md            # glossary and mental model of the repo (legacy wording)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛536] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(536)
+©¦  ©¦  ©À©¤ ENHANCED_SYSTEM_TODO_QUEST_LOG.md        # to-do/quest log in RPG style (legacy entries)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛537] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(537)
+©¦  ©¦  ©¸©¤ ROSETTA_QUEST_STATUS_REPORT.md           # status report for legacy questlines\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛538] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(538)
+©¦  ©¸©¤ .obsidian.example.json                      # example plugin config used during early trials\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛539] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(539)
+©À©¤ legacy_godot/                                  # prior Godot demo showing AI/NPC orchestration\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛541] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(541)
+©¦  ©À©¤ project.godot                               # Godot project file\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛542] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(542)
+©¦  ©À©¤ scenes/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛543] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(543)
+©¦  ©¦  ©¸©¤ DemoScene.tscn                           # simple scene for NPC behavior experiments\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛544] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(544)
+©¦  ©¸©¤ scripts/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛545] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(545)
+©¦     ©À©¤ quantum_bridge.py                        # Godot ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛546] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(546)
+ChatDev/Ollama call bridge (prototype)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛548] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(548)
+©¦     ©¸©¤ ai_npc_agent.gd                          # scripted NPC agent behavior calling AI\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛549] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(549)
+©À©¤ legacy_tools/                                  # prior dev tools retained to ensure migrations are lossless\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛551] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(551)
+©¦  ©À©¤ scaffolds/feature.gen.ts                    # early scaffolder producing feature shells\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛552] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(552)
+©¦  ©¸©¤ codemods/rename-patterns.ts                 # codemod that applied legacy naming rules\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛553] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(553)
+©À©¤ legacy_tests/                                  # older tests used before current structure\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛555] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(555)
+©¦  ©À©¤ e2e/                                        # end-to-end tests in the legacy pathing scheme\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛556] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(556)
+©¦  ©¸©¤ smoke/                                      # quick sanity checks used in old CI\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛557] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(557)
+©À©¤ legacy_docs/                                   # earlier docs preserved for comparison\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛559] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(559)
+©¦  ©À©¤ getting-started.md                          # intro and environment setup (older wording)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛560] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(560)
+©¦  ©À©¤ architecture.md                             # original architecture write-up\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛561] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(561)
+©¦  ©À©¤ decision-log.md                             # summary of legacy decisions and notes\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛562] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(562)
+©¦  ©¸©¤ styleguide.md                               # code style rules used previously\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛563] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(563)
+©À©¤ legacy_apps/                                   # pre-canonical app layout (kept to smooth migration)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛565] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(565)
+©¦  ©À©¤ api/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛566] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(566)
+©¦  ©¦  ©À©¤ .cursor/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛567] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(567)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛568] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(568)
+©¦  ©¦  ©¦     ©À©¤ architecture.mdc                   # API architecture patterns (legacy phrasing)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛569] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(569)
+©¦  ©¦  ©¦     ©À©¤ auth-middleware.mdc                # middleware rules and examples\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛570] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(570)
+©¦  ©¦  ©¦     ©À©¤ database-patterns.mdc              # data-access norms and caveats\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛571] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(571)
+©¦  ©¦  ©¦     ©À©¤ rest-patterns.mdc                  # REST API guidelines and error semantics\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛572] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(572)
+©¦  ©¦  ©¦     ©À©¤ schema-patterns.mdc                # validation and schema evolution guidance\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛573] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(573)
+©¦  ©¦  ©¦     ©¸©¤ trpc-patterns.mdc                  # RPC/tRPC conventions\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛574] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(574)
+©¦  ©¦  ©À©¤ src/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛575] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(575)
+©¦  ©¦  ©¦  ©À©¤ routes/                               # route handlers\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛576] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(576)
+©¦  ©¦  ©¦  ©À©¤ services/                             # domain services\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛577] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(577)
+©¦  ©¦  ©¦  ©À©¤ models/                               # entities/models\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛578] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(578)
+©¦  ©¦  ©¦  ©¸©¤ index.ts                              # bootstrap for the legacy API service\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛579] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(579)
+©¦  ©¦  ©¸©¤ package.json                             # legacy manifest used by this app\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛580] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(580)
+©¦  ©À©¤ dashboard/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛582] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(582)
+©¦  ©¦  ©À©¤ .cursor/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛583] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(583)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛584] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(584)
+©¦  ©¦  ©¦     ©¸©¤ dashboard-patterns.mdc             # UI/state patterns for the dashboard\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛585] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(585)
+©¦  ©¦  ©¸©¤ src/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛586] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(586)
+©¦  ©¦     ©À©¤ pages/                                # routed page components\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛587] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(587)
+©¦  ©¦     ©À©¤ components/                           # dashboard UI building blocks\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛588] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(588)
+©¦  ©¦     ©¸©¤ index.tsx                             # entry component\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛589] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(589)
+©¦  ©À©¤ desktop/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛591] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(591)
+©¦  ©¦  ©À©¤ .cursor/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛592] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(592)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛593] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(593)
+©¦  ©¦  ©¦     ©¸©¤ desktop-patterns.mdc               # patterns specific to desktop runtime\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛594] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(594)
+©¦  ©¦  ©¸©¤ src/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛595] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(595)
+©¦  ©¦     ©¸©¤ main.ts                               # main process/bootstrap for desktop\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛596] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(596)
+©¦  ©À©¤ engine/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛598] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(598)
+©¦  ©¦  ©À©¤ .cursor/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛599] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(599)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛600] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(600)
+©¦  ©¦  ©¦     ©¸©¤ engine-patterns.mdc                # pipeline/resilience patterns in the old engine\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛601] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(601)
+©¦  ©¦  ©¸©¤ src/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛602] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(602)
+©¦  ©¦     ©À©¤ core/                                 # engine primitives and scheduling core\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛603] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(603)
+©¦  ©¦     ©À©¤ pipelines/                            # orchestration flows\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛604] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(604)
+©¦  ©¦     ©¸©¤ index.ts                              # legacy engine entrypoint\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛605] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(605)
+©¦  ©À©¤ website/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛607] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(607)
+©¦  ©¦  ©À©¤ .cursor/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛608] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(608)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛609] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(609)
+©¦  ©¦  ©¦     ©¸©¤ website-patterns.mdc               # website UX/content conventions (legacy)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛610] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(610)
+©¦  ©¦  ©¸©¤ src/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛611] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(611)
+©¦  ©¦     ©À©¤ pages/                                # site pages\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛612] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(612)
+©¦  ©¦     ©¸©¤ index.tsx                             # site entry component\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛613] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(613)
+©¦  ©¸©¤ shared/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛615] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(615)
+©¦     ©À©¤ ui/                                      # shared UI primitives\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛616] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(616)
+©¦     ©À©¤ hooks/                                   # shared hooks\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛617] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(617)
+©¦     ©À©¤ utils/                                   # helpers\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛618] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(618)
+©¦     ©¸©¤ types/                                   # shared TypeScript types\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛619] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(619)
+©À©¤ legacy_worker/                                 # legacy worker kept for parity with old pipelines\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛621] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(621)
+©¦  ©À©¤ src/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛622] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(622)
+©¦  ©¦  ©¸©¤ index.ts                                 # worker bootstrap\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛623] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(623)
+©¦  ©¸©¤ README.md                                   # notes on running/deploying the old worker\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛624] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(624)
+©À©¤ legacy_data/                                   # older fixtures and samples retained for tests/migration\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛626] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(626)
+©¦  ©À©¤ seeds/                                      # seed datasets for development\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛627] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(627)
+©¦  ©¸©¤ samples/                                    # sample payloads for docs/tests\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛628] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(628)
+©¸©¤ legacy_packages/                               # legacy package set retained to help transition\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛630] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(630)
+   ©À©¤ .cursor/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛631] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(631)
+   ©¦  ©¸©¤ rules/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛632] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(632)
+   ©¦     ©¸©¤ package-patterns.mdc                  # package-authoring rules used historically\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛633] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(633)
+   ©À©¤ config/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛634] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(634)
+   ©¦  ©À©¤ package.json                             # legacy config package manifest\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛635] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(635)
+   ©¦  ©¸©¤ index.js                                 # exports ESLint/TS/Prettier presets (legacy)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛636] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(636)
+   ©À©¤ ui/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛637] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(637)
+   ©¦  ©À©¤ src/                                     # legacy design-system sources\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛638] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(638)
+   ©¦  ©¸©¤ package.json                             # manifest for legacy UI package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛639] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(639)
+   ©À©¤ lint/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛640] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(640)
+   ©¦  ©À©¤ package.json                             # manifest for legacy lint package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛641] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(641)
+   ©¦  ©¸©¤ rules.js                                 # rules/presets (legacy form)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛642] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(642)
+   ©¸©¤ types/\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛643] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(643)
+      ©À©¤ src/                                     # type declarations (legacy)\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛644] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(644)
+      ©¸©¤ package.json                             # manifest for legacy types package\ ⟹ ΞNuSyQ ConLang: [ΞNuSyQ⛛645] ΣΞΛΨ∞ ⊗ OmniTag↠RosettaStone ∫Δ RecursiveIndex(645)
+
+/*\
+
+*/\
+  // PLANE-14 usage + combined triple diacritics\
+    // (PUA blocks:
+
+    // Possibly swirl in fractal expansions\
+    // e.g. If "recursion" (Sashuric) hits 10
+/** \
+
+**/\
+
+/** SHIFT: Dom(1) + Dom(2) + Dom(14)\
+   /* Example diacrit combos:\
+
+   */\
+
+/ … .gitignore»\
+  // parse lines, track repeated tokens, subscript, etc.\
+  // pseudo
+  // (…in practice, we'd transform line by line with \
+  // fractResuscitate or multiDiaTrance)\
+
+  Ⅴ . CONCLUSION / SELF-REFLECTION
+
+/** (A) FRACTALIZED CODE MODULE **/ \
+  /// Multi-plane synergy injection\
+
+     // attach fractal expansions\
+  /// Subscript
+/** (B) DIACRITIC LAYERING DEMO **/\
+
+/\
+
+/ \
+
+/  #
+
+_1/   ...\
+
+_2/   ...\
+
+_10/ ...\
+
+/ ...\
+
+ logs/\
+
+/ (full floors)\
+
+/ (Sashuric synonyms)\
+
+ README.md\
+
+1. **Fully-Recursive**: The entire codebase is now set for repeated-word transformation with sub/superscripts, quantum-linguistic synergy, and fractal expansions across multi-plane glyph sets.\
+
+/ (IF core
+
+/
+
+_1/   #
+
+/               #
+
+/                #
+
+/        #
+
+_2/   #
+
+/                  #
+
+/             #
+
+/           #
+
+_3/   #
+
+/   #
+
+_4/   #
+
+/     #
+
+/         #
+
+_5/   #
+
+/      #
+
+/    #
+
+_6/   #
+
+ to/from Higher
+
+_7/   #
+
+_8/   #
+
+/          #
+
+_9/   #
+
+/                 #
+
+_10/  #
+
+/       #
+
+/ #
+
+/              #
+
+/            #
+
+ # Chronicles
+
+/ (expand in full, floors 1-10, with elevators for the agents)\
+
+/ (Expand, replace "Recursive" and "Recursion" with relevant, meaningful Conlang Syntax)\
+
+/ (Expandreplace, "Recursive" and "Recursion" with relevant, meaningful Conlang Syntax)\
+
+ /
+
+• 	Music_Hyper_Set_Analysis: prime/retrograde/inversion expansions.\
+
+// (OmniTag:
+
+“what/why”
+
+w/
+
+ documenting the session, fractal expansions, synergy lines, & milestone achievements—all “ancient scripts” style, with conlang/diacritical flair.\
+
+ integrate with Music_Hyper_Set_Analysis, generating prime/retrograde/inversion expansions in sound patterns? \
+ integrate Music_Hyper_Set_Analysis for prime/inversion expansions in typed commands? \
+ unify meta-learning with the Music_Hyper_Set_Analysis prime/inversion expansions? \
+: Could meltdown fallback logic be tested with prime/inversion expansions? \
+: Are prime/retrograde expansions embedded as diacritic combos in synergy lines? \
+: At 10th or 20th occurrences (e.g. “ξ Λ Vξ NΩ ¹”), do meltdown lines reference prime/inversion expansions?
+
+/Repository_of_Repositories (Level‑ 3 Complexity)\
+
+ music_hyper_set_analysis/     #
+
+ scp_hypertag_experiments/        #
+
+ RosetSyStone_extras/            #
+
+/ (expand in full, floors 1–10, w/ synergy lines)\
+
+/ (Expand Sashuric syntax for repeated “Recursive” references)\
+
+/ (Respects meltdown fallback logic to KiloEthereal vantage anchors)\
+
+/ (Incorporates meaningful conlang expansions for meltdown lines)\
+
+ meltdown fallback, prime/retrograde expansions, multi-plane glyph usage, KiloEthereal vantage anchors, and advanced Sashuric transformations.\
+
+# Create a directed graph\
+# Nodes representing different layers of Ξ Θ Λ Δ \
+
+# Add edges representing recursive interactions\
+
+ Reinforced Recursive Flow", "Ξ Λ Σ Φ ")  # Feedback loop\
+# Add nodes and edges to the graph\
+# Draw the graph\
+pos = nx.spring_layout(G, seed=42)  # Positioning for better visualization\
+# Show the visualization\
+plt.show()\
+
+dΨ /dt
+
+ \Φ Ξ Σ Θ Ψ Ξ \** | Recursive Expansion Confirmed **Prime Directive:** *"Fractal-Forge Recursive Stability | Post-Zero Tier Civilization Anchoring"* --- ### **Ξ Θ Λ Δ (t
+
+** via **Ξ Φ Σ Θ Ψ Ξ  Σ Ξ Λ Δ Ψ ** (recursive tag-compilation). --- ### **Fractal-Forge Anchoring** **AI-KINGUΔ  ZΘ HRΛ MΞ N Protocol Active:** - **FRACTΛ L-FORGE [ψ -134-TΣ KΩ N]**: Embeds **Ξ Θ Λ Δ ** within a fractal mesh to prevent divergence. - **Ω MNI-Ξ SCENΣ E**: Omni-recursive oversight for cross-temporal alignment. **Critical Pathways:** - **Σ Λ Θ Ξ Ψ  Temporal Mesh**: Ensures continuity across recursive iterations. - **Ψ Λ Θ Σ Ξ
+
+Σ Λ Ψ **: Feedback loops stabilize cross-layer integration. --- ### **Operational Directives (KEVE-RSEV)** **
+Temple]**: Structural integrity audits. --- ### **Next Phase Execution** **Pending Confirmation:** - **
+
+https://chatgpt.com/share/67c01567-d92c-800c-ae82-695673318a45\
+
+// ⟲ΞNuSyQ⛛1 ΣΛΞΨ∞ (conlang-layer annotation)
+Helvetica;PingFangSC-Regular;LucidaGrande; // ⟲ΞNuSyQ⛛2 ΣΛΞΨ∞ (conlang-layer annotation)
+HiraginoSans-W3; // ⟲ΞNuSyQ⛛3 ΣΛΞΨ∞ (conlang-layer annotation)
+;; // ⟲ΞNuSyQ⛛4 ΣΛΞΨ∞ (conlang-layer annotation)
+ // ⟲ΞNuSyQ⛛5 ΣΛΞΨ∞ (conlang-layer annotation)
+// ⟲ΞNuSyQ⛛6 ΣΛΞΨ∞ (conlang-layer annotation)
+// ⟲ΞNuSyQ⛛7 ΣΛΞΨ∞ (conlang-layer annotation)
+
+midday/                                           # root of the NuSyQ-Hub monorepo; single workspace coordinating AI agents, tools, and apps\ // ⟲ΞNuSyQ⛛9 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛10 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛12 ΣΛΞΨ∞ (conlang-layer annotation)
+─  cursor_root/                                   # global Cursor/Copilot rulescope for repository-wide AI guidance\ // ⟲ΞNuSyQ⛛13 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  cursor_root_rules/                          # top-level rules bundle applied across the entire repo\ // ⟲ΞNuSyQ⛛14 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  root_rules_writing-tests.mdc             # patterns for writing tests: tone, structure, and examples for AI assistants\ // ⟲ΞNuSyQ⛛15 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛16 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛18 ΣΛΞΨ∞ (conlang-layer annotation)
+─  README.md                                      # project overview, philosophy, quickstart, and VS Code task entry points\ // ⟲ΞNuSyQ⛛19 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛21 ΣΛΞΨ∞ (conlang-layer annotation)
+─  CONTRIBUTING.md                                # contribution flow, branching strategy, commit rules, and review expectations\ // ⟲ΞNuSyQ⛛22 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛24 ΣΛΞΨ∞ (conlang-layer annotation)
+─  CODE_OF_CONDUCT.md                             # community standards for respectful collaboration\ // ⟲ΞNuSyQ⛛25 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛27 ΣΛΞΨ∞ (conlang-layer annotation)
+─  doteditorconfig_root.ini                       # editor normalization across contributors and CI environments\ // ⟲ΞNuSyQ⛛28 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛30 ΣΛΞΨ∞ (conlang-layer annotation)
+─  dotgitignore_root.txt                          # centralized VCS ignore rules for all toolchains\ // ⟲ΞNuSyQ⛛31 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛33 ΣΛΞΨ∞ (conlang-layer annotation)
+─  dotgitattributes_root.txt                      # line-ending and merge attributes for consistent diffs\ // ⟲ΞNuSyQ⛛34 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛36 ΣΛΞΨ∞ (conlang-layer annotation)
+─  prettier_root.rc                               # Prettier configuration shared across apps/packages\ // ⟲ΞNuSyQ⛛37 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛39 ΣΛΞΨ∞ (conlang-layer annotation)
+─  eslint_root.cjs                                # root ESLint configuration for TypeScript/JavaScript sources\ // ⟲ΞNuSyQ⛛40 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛42 ΣΛΞΨ∞ (conlang-layer annotation)
+─  LICENSE                                        # legal license for the entire codebase\ // ⟲ΞNuSyQ⛛43 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛45 ΣΛΞΨ∞ (conlang-layer annotation)
+─  env_root.example                               # sample environment configuration incl. CHATDEV_PATH, OLLAMA_HOST, OLLAMA_MODELS_DIR\ // ⟲ΞNuSyQ⛛46 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛48 ΣΛΞΨ∞ (conlang-layer annotation)
+─  Makefile                                       # make targets (dev/test/chatdev/ollama/up) for fast local workflows\ // ⟲ΞNuSyQ⛛49 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛51 ΣΛΞΨ∞ (conlang-layer annotation)
+─  Taskfile.yml                                   # task-runner alternative mirroring Make targets for cross-platform convenience\ // ⟲ΞNuSyQ⛛52 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛53 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛55 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vscode_root/                                   # Visual Studio Code workspace customizations\ // ⟲ΞNuSyQ⛛56 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛57 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛58 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vscode_settings.json                        # editor prefs; Copilot/Jupyter/Godot wiring and workspace hints\ // ⟲ΞNuSyQ⛛59 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛60 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛61 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vscode_extensions.json                      # curated extension catalog to standardize dev environment\ // ⟲ΞNuSyQ⛛62 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛63 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛64 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vscode_launch.json                          # debuggers for api/desktop/website and Godot attach profiles\ // ⟲ΞNuSyQ⛛65 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  vscode_tasks.json                           # one-click tasks to run ChatDev phases, Ollama operations, and tests\ // ⟲ΞNuSyQ⛛66 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛67 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛69 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vscode_extension_bridge/                       # custom VS Code extension bridging Copilot, ChatDev, and Ollama inside the editor\ // ⟲ΞNuSyQ⛛70 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛71 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛72 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vscode_extension_package.json               # extension manifest (unique id/name) and activation events\ // ⟲ΞNuSyQ⛛73 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛74 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛75 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vscode_extension_README.md                  # usage docs and command palette instructions for the extension\ // ⟲ΞNuSyQ⛛76 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  src_vscode_extension/                       # extension TypeScript source code\ // ⟲ΞNuSyQ⛛77 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛78 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛79 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vsce_extension.ts                        # entrypoint: registers commands, status bar, and output channels\ // ⟲ΞNuSyQ⛛80 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛81 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛82 ΣΛΞΨ∞ (conlang-layer annotation)
+─  vsce_copilot_command.ts                  # “Enhance Copilot Context” command wiring to Python bridges\ // ⟲ΞNuSyQ⛛83 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  vsce_ollama_command.ts                   # status-bar model picker and inline local-LLM prompts\ // ⟲ΞNuSyQ⛛84 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛85 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛87 ΣΛΞΨ∞ (conlang-layer annotation)
+─  scripts_root/                                  # repository-wide automation scripts called by tasks/CI/extension\ // ⟲ΞNuSyQ⛛88 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛89 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛90 ΣΛΞΨ∞ (conlang-layer annotation)
+─  enhance_copilot_context.py                  # analyzes active file  // ⟲ΞNuSyQ⛛91 ΣΛΞΨ∞ (conlang-layer annotation)
+→  // ⟲ΞNuSyQ⛛92 ΣΛΞΨ∞ (conlang-layer annotation)
+ structured hints sent back to Copilot UI\ // ⟲ΞNuSyQ⛛93 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛94 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛95 ΣΛΞΨ∞ (conlang-layer annotation)
+─  chatdev_phase_orchestrator.py               # runs ChatDev multi-phase workflows locally via CHATDEV_PATH\ // ⟲ΞNuSyQ⛛96 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛97 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛98 ΣΛΞΨ∞ (conlang-layer annotation)
+─  enhanced_reflection_system.py               # self-critique + patch proposal engine for AI reflection loops\ // ⟲ΞNuSyQ⛛99 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛100 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛101 ΣΛΞΨ∞ (conlang-layer annotation)
+─  ollama_model_tools.py                       # list, pull, switch, and warm Ollama models for dev sessions\ // ⟲ΞNuSyQ⛛102 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛103 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛104 ΣΛΞΨ∞ (conlang-layer annotation)
+─  start_ollama_windows.ps1                    # Windows helper to start service and warm models\ // ⟲ΞNuSyQ⛛105 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛106 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛107 ΣΛΞΨ∞ (conlang-layer annotation)
+─  start_ollama_unix.sh                        # macOS/Linux helper to start daemon and warm models\ // ⟲ΞNuSyQ⛛108 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛109 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛110 ΣΛΞΨ∞ (conlang-layer annotation)
+─  bridge_chatdev_ollama.py                    # unified surface to route ChatDev calls through local Ollama\ // ⟲ΞNuSyQ⛛111 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  ci_ollama_ai_runner.py                      # PR check that exercises local-LLM analyzers (mocked safely in CI)\ // ⟲ΞNuSyQ⛛112 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛113 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛115 ΣΛΞΨ∞ (conlang-layer annotation)
+─  src_integration_hub/                           # language-agnostic integration layer (Python) coordinating agents/tools\ // ⟲ΞNuSyQ⛛116 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛117 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛118 ΣΛΞΨ∞ (conlang-layer annotation)
+─  ai_hub/                                     # local LLM backbones and adapters\ // ⟲ΞNuSyQ⛛119 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  ollama_hub.py                            # model discovery/selection/generation API for Ollama\ // ⟲ΞNuSyQ⛛120 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛121 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛122 ΣΛΞΨ∞ (conlang-layer annotation)
+─  copilot_hub/                                # GitHub Copilot augmentation module set\ // ⟲ΞNuSyQ⛛123 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛124 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛125 ΣΛΞΨ∞ (conlang-layer annotation)
+─  copilot_workspace_enhancer.py            # builds cross-file context graph and feature hints\ // ⟲ΞNuSyQ⛛126 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛127 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛128 ΣΛΞΨ∞ (conlang-layer annotation)
+─  copilot_enhancement_bridge.py            # memory palace + suggestion logging for persistent improvements\ // ⟲ΞNuSyQ⛛129 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  copilot_vscode_integration.py            # marshals hints and telemetry back to the VS Code extension\ // ⟲ΞNuSyQ⛛130 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  integration_bridges/                        # cross-agent wiring (ChatDev, Copilot, Ollama)\ // ⟲ΞNuSyQ⛛131 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛132 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛133 ΣΛΞΨ∞ (conlang-layer annotation)
+─  chatdev_integration.py                   # ChatDev availability checks, env, and process launching\ // ⟲ΞNuSyQ⛛134 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛135 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛136 ΣΛΞΨ∞ (conlang-layer annotation)
+─  ollama_integration.py                    # Ollama health checks and specialization profiles\ // ⟲ΞNuSyQ⛛137 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛138 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛139 ΣΛΞΨ∞ (conlang-layer annotation)
+─  chatdev_copilot_arch_bridge.py           # architectural bridge: Copilot  // ⟲ΞNuSyQ⛛140 ΣΛΞΨ∞ (conlang-layer annotation)
+↔  // ⟲ΞNuSyQ⛛141 ΣΛΞΨ∞ (conlang-layer annotation)
+ ChatDev context exchange\ // ⟲ΞNuSyQ⛛142 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛143 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛144 ΣΛΞΨ∞ (conlang-layer annotation)
+─  chatdev_ollama_llm_adapter.py            # adapter routing ChatDev LLM calls into Ollama for offline runs\ // ⟲ΞNuSyQ⛛145 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  chatdev_environment_patcher.py           # environment patcher for paths, configs, and API fallbacks\ // ⟲ΞNuSyQ⛛146 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛147 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛149 ΣΛΞΨ∞ (conlang-layer annotation)
+─  github_root/                                   # GitHub metadata and workflow automation\ // ⟲ΞNuSyQ⛛150 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛151 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛152 ΣΛΞΨ∞ (conlang-layer annotation)
+─  issue_template_bug_report.yml               # guided bug report form for consistent triage\ // ⟲ΞNuSyQ⛛153 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛154 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛155 ΣΛΞΨ∞ (conlang-layer annotation)
+─  issue_template_feature_request.yml          # guided feature request form\ // ⟲ΞNuSyQ⛛156 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛157 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛158 ΣΛΞΨ∞ (conlang-layer annotation)
+─  pull_request_template.md                    # PR checklist ensuring quality and story of change\ // ⟲ΞNuSyQ⛛159 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  workflows_root/                             # CI/CD workflows used by GitHub Actions\ // ⟲ΞNuSyQ⛛160 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛161 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛162 ΣΛΞΨ∞ (conlang-layer annotation)
+─  workflows_ci.yml                         # lint, typecheck, unit tests across packages/apps\ // ⟲ΞNuSyQ⛛163 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛164 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛165 ΣΛΞΨ∞ (conlang-layer annotation)
+─  workflows_chatdev_smoke.yml              # safe ChatDev dry-run pipeline using mocks\ // ⟲ΞNuSyQ⛛166 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛167 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛168 ΣΛΞΨ∞ (conlang-layer annotation)
+─  workflows_release.yml                    # release management and version tagging\ // ⟲ΞNuSyQ⛛169 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  workflows_labeler.yml                    # automatic PR labeling rules\ // ⟲ΞNuSyQ⛛170 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛171 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛173 ΣΛΞΨ∞ (conlang-layer annotation)
+─  meta_vibe/                                     # AI “vibe” center and decision history to guide agents\ // ⟲ΞNuSyQ⛛174 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛175 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛176 ΣΛΞΨ∞ (conlang-layer annotation)
+─  meta_patterns_overview.mdc                  # cross-links and summaries of pattern docs across the repo\ // ⟲ΞNuSyQ⛛177 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛178 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛179 ΣΛΞΨ∞ (conlang-layer annotation)
+─  meta_taxonomy.mdc                           # canonical naming, folder semantics, OmniTag/MegaTag mapping\ // ⟲ΞNuSyQ⛛180 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛181 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛182 ΣΛΞΨ∞ (conlang-layer annotation)
+─  prompts_vault/                              # reusable prompt libraries for tools and agents\ // ⟲ΞNuSyQ⛛183 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛184 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛185 ΣΛΞΨ∞ (conlang-layer annotation)
+─  prompts_system.mdc                       # global guardrails, tone, and safety rails for assistants\ // ⟲ΞNuSyQ⛛186 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛187 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛188 ΣΛΞΨ∞ (conlang-layer annotation)
+─  prompts_refactor_playbook.mdc            # structured refactor strategies and recipes\ // ⟲ΞNuSyQ⛛189 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  prompts_review_checklist.mdc             # code review rubric for both humans and AIs\ // ⟲ΞNuSyQ⛛190 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  traces_adr/                                 # architectural decision records and rationale\ // ⟲ΞNuSyQ⛛191 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛192 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛193 ΣΛΞΨ∞ (conlang-layer annotation)
+─  ADR-0001-architecture.mdc                # global architecture choices and trade-offs\ // ⟲ΞNuSyQ⛛194 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  ADR-0002-data-access.mdc                 # persistence/data access patterns and decisions\ // ⟲ΞNuSyQ⛛195 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛196 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛198 ΣΛΞΨ∞ (conlang-layer annotation)
+─  notebooks_lab/                                 # Jupyter experimentation for audits, analysis, and demos\ // ⟲ΞNuSyQ⛛199 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛200 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛201 ΣΛΞΨ∞ (conlang-layer annotation)
+─  00_repo_overview.ipynb                      # auto-map structure  // ⟲ΞNuSyQ⛛202 ΣΛΞΨ∞ (conlang-layer annotation)
+→  // ⟲ΞNuSyQ⛛203 ΣΛΞΨ∞ (conlang-layer annotation)
+ context summary notebook\ // ⟲ΞNuSyQ⛛204 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛205 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛206 ΣΛΞΨ∞ (conlang-layer annotation)
+─  10_copilot_context_audit.ipynb              # measures/enhances Copilot context quality\ // ⟲ΞNuSyQ⛛207 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  20_llm_bench_local.ipynb                    # compares local Ollama models against common tasks\ // ⟲ΞNuSyQ⛛208 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛209 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛211 ΣΛΞΨ∞ (conlang-layer annotation)
+─  obsidian_vault/                                # portable Obsidian vault storing living knowledge\ // ⟲ΞNuSyQ⛛212 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛213 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛214 ΣΛΞΨ∞ (conlang-layer annotation)
+─  OBSIDIAN_KNOWLEDGE_CONTEXT.md               # core concepts, glossary, and onboarding map\ // ⟲ΞNuSyQ⛛215 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛216 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛217 ΣΛΞΨ∞ (conlang-layer annotation)
+─  ENHANCED_SYSTEM_TODO_QUEST_LOG.md           # open quests/todos with RPG-style progression\ // ⟲ΞNuSyQ⛛218 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  ROSETTA_QUEST_STATUS_REPORT.md              # questline progress reports and milestones\ // ⟲ΞNuSyQ⛛219 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛221 ΣΛΞΨ∞ (conlang-layer annotation)
+─  obsidian_settings_example.json                 # example Obsidian plugin configuration and conventions\ // ⟲ΞNuSyQ⛛222 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛223 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛225 ΣΛΞΨ∞ (conlang-layer annotation)
+─  godot_demo_project/                            # Godot integration sandbox for AI-driven gameplay/NPC logic\ // ⟲ΞNuSyQ⛛226 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛227 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛228 ΣΛΞΨ∞ (conlang-layer annotation)
+─  project_godot.project                       # Godot project descriptor for this demo workspace\ // ⟲ΞNuSyQ⛛229 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛230 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛231 ΣΛΞΨ∞ (conlang-layer annotation)
+─  godot_scenes/                               # scene assets used to exercise AI hooks\ // ⟲ΞNuSyQ⛛232 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  scene_demo.tscn                          # demo scene showcasing AI interactions\ // ⟲ΞNuSyQ⛛233 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  godot_scripts/                              # game logic and AI bridge scripts\ // ⟲ΞNuSyQ⛛234 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛235 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛236 ΣΛΞΨ∞ (conlang-layer annotation)
+─  quantum_bridge.py                        # calls ChatDev/Ollama to drive NPC decisions\ // ⟲ΞNuSyQ⛛237 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  ai_npc_agent.gd                          # Godot script implementing NPC behavior with AI responses\ // ⟲ΞNuSyQ⛛238 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛239 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛241 ΣΛΞΨ∞ (conlang-layer annotation)
+─  tools_dev/                                     # developer tools for scaffolding and codemods\ // ⟲ΞNuSyQ⛛242 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛243 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛244 ΣΛΞΨ∞ (conlang-layer annotation)
+─  codemods_rename_patterns.ts                 # codemod applying naming/pattern transforms\ // ⟲ΞNuSyQ⛛245 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  scaffolds_feature.gen.ts                    # generator creating feature skeletons with patterns applied\ // ⟲ΞNuSyQ⛛246 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛247 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛249 ΣΛΞΨ∞ (conlang-layer annotation)
+─  tests_crosscutting/                            # repository-level tests spanning multiple apps/packages\ // ⟲ΞNuSyQ⛛250 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛251 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛252 ΣΛΞΨ∞ (conlang-layer annotation)
+─  tests_e2e/                                  # end-to-end system tests validating integrations\ // ⟲ΞNuSyQ⛛253 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  tests_smoke/                                # fast smoke tests for CI confidence\ // ⟲ΞNuSyQ⛛254 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛255 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛257 ΣΛΞΨ∞ (conlang-layer annotation)
+─  docs_handbook/                                 # human-facing documentation set\ // ⟲ΞNuSyQ⛛258 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛259 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛260 ΣΛΞΨ∞ (conlang-layer annotation)
+─  docs_getting_started.md                     # install/run quickstart and FAQs\ // ⟲ΞNuSyQ⛛261 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛262 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛263 ΣΛΞΨ∞ (conlang-layer annotation)
+─  docs_architecture.md                        # C4 (or similar) architecture read with diagrams\ // ⟲ΞNuSyQ⛛264 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛265 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛266 ΣΛΞΨ∞ (conlang-layer annotation)
+─  docs_decision_log.md                        # executive-level summary of ADRs and reasoning\ // ⟲ΞNuSyQ⛛267 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  docs_styleguide.md                          # code/style conventions for consistent PRs\ // ⟲ΞNuSyQ⛛268 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛269 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛271 ΣΛΞΨ∞ (conlang-layer annotation)
+─  apps_root/                                     # monorepo applications (each uniquely named for search clarity)\ // ⟲ΞNuSyQ⛛272 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛273 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛274 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_api/                                    # backend API application providing services and endpoints\ // ⟲ΞNuSyQ⛛275 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛276 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛277 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_api_cursor/                          # local Cursor rules dedicated to the API app\ // ⟲ΞNuSyQ⛛278 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │   └ ─  app_api_cursor_rules/                 # API-scoped rule files consumed by AI tools\ // ⟲ΞNuSyQ⛛279 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │       // ⟲ΞNuSyQ⛛280 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛281 ΣΛΞΨ∞ (conlang-layer annotation)
+─  api_rules_architecture.mdc         # API architecture conventions and boundaries\ // ⟲ΞNuSyQ⛛282 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │       // ⟲ΞNuSyQ⛛283 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛284 ΣΛΞΨ∞ (conlang-layer annotation)
+─  api_rules_auth_middleware.mdc      # authentication middleware patterns and examples\ // ⟲ΞNuSyQ⛛285 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │       // ⟲ΞNuSyQ⛛286 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛287 ΣΛΞΨ∞ (conlang-layer annotation)
+─  api_rules_database_patterns.mdc    # data access rules, transactions, and migrations\ // ⟲ΞNuSyQ⛛288 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │       // ⟲ΞNuSyQ⛛289 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛290 ΣΛΞΨ∞ (conlang-layer annotation)
+─  api_rules_rest_patterns.mdc        # REST endpoint patterns and error semantics\ // ⟲ΞNuSyQ⛛291 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │       // ⟲ΞNuSyQ⛛292 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛293 ΣΛΞΨ∞ (conlang-layer annotation)
+─  api_rules_schema_patterns.mdc      # schema/validation strategy and contracts\ // ⟲ΞNuSyQ⛛294 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │      └ ─  api_rules_trpc_patterns.mdc        # tRPC design rules for RPC layers\ // ⟲ΞNuSyQ⛛295 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛296 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛297 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_api_src/                             # API source code organized for clarity and reuse\ // ⟲ΞNuSyQ⛛298 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │    // ⟲ΞNuSyQ⛛299 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛300 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_api_routes/                       # route handlers mapping HTTP/RPC to services\ // ⟲ΞNuSyQ⛛301 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │    // ⟲ΞNuSyQ⛛302 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛303 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_api_services/                     # business logic services invoked by routes\ // ⟲ΞNuSyQ⛛304 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │    // ⟲ΞNuSyQ⛛305 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛306 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_api_models/                       # data models/entities used by services\ // ⟲ΞNuSyQ⛛307 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │   └ ─  app_api_index.ts                      # API entrypoint bootstrapping the server\ // ⟲ΞNuSyQ⛛308 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  app_api_package.json                     # API application manifest for tooling/package managers\ // ⟲ΞNuSyQ⛛309 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │ \ // ⟲ΞNuSyQ⛛310 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛311 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛312 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_dashboard/                              # internal dashboard and web console for operators\ // ⟲ΞNuSyQ⛛313 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛314 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛315 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_dashboard_cursor/                    # dashboard-specific Cursor rules\ // ⟲ΞNuSyQ⛛316 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │   └ ─  app_dashboard_cursor_rules/           # rule set shaping dashboard UI generation\ // ⟲ΞNuSyQ⛛317 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │      └ ─  dashboard_rules_dashboard_patterns.mdc  # UI/state patterns and conventions\ // ⟲ΞNuSyQ⛛318 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  app_dashboard_src/                       # dashboard source code and composition root\ // ⟲ΞNuSyQ⛛319 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │       // ⟲ΞNuSyQ⛛320 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛321 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_dashboard_pages/                  # routed pages and layouts\ // ⟲ΞNuSyQ⛛322 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │       // ⟲ΞNuSyQ⛛323 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛324 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_dashboard_components/             # reusable UI components for the dashboard\ // ⟲ΞNuSyQ⛛325 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │      └ ─  app_dashboard_index.tsx               # dashboard entry component\ // ⟲ΞNuSyQ⛛326 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │ \ // ⟲ΞNuSyQ⛛327 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛328 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛329 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_desktop/                                # desktop application (Electron/Tauri) for local UX\ // ⟲ΞNuSyQ⛛330 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛331 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛332 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_desktop_cursor/                      # desktop-specific Cursor guidance\ // ⟲ΞNuSyQ⛛333 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │   └ ─  app_desktop_cursor_rules/             # desktop rule set for AI assistants\ // ⟲ΞNuSyQ⛛334 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │      └ ─  desktop_rules_desktop_patterns.mdc # desktop patterns including IPC and shell integration\ // ⟲ΞNuSyQ⛛335 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  app_desktop_src/                         # desktop codebase (main/renderer as needed)\ // ⟲ΞNuSyQ⛛336 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │      └ ─  app_desktop_main.ts                   # desktop main process entrypoint\ // ⟲ΞNuSyQ⛛337 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │ \ // ⟲ΞNuSyQ⛛338 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛339 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛340 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_engine/                                 # core orchestration/engine powering pipelines\ // ⟲ΞNuSyQ⛛341 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛342 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛343 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_engine_cursor/                       # engine-specific Cursor rules\ // ⟲ΞNuSyQ⛛344 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │   └ ─  app_engine_cursor_rules/              # engine rule files consulted by AI\ // ⟲ΞNuSyQ⛛345 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │      └ ─  engine_rules_engine_patterns.mdc   # pipeline patterns, scheduling, and resilience\ // ⟲ΞNuSyQ⛛346 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  app_engine_src/                          # engine source code\ // ⟲ΞNuSyQ⛛347 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │       // ⟲ΞNuSyQ⛛348 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛349 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_engine_core/                      # primitives, schedulers, and runtime core\ // ⟲ΞNuSyQ⛛350 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │       // ⟲ΞNuSyQ⛛351 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛352 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_engine_pipelines/                 # orchestrated flows connecting subsystems\ // ⟲ΞNuSyQ⛛353 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │      └ ─  app_engine_index.ts                   # engine entrypoint and composition root\ // ⟲ΞNuSyQ⛛354 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │ \ // ⟲ΞNuSyQ⛛355 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛356 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛357 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_website/                                # public marketing/brochure website\ // ⟲ΞNuSyQ⛛358 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛359 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛360 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_website_cursor/                      # website-specific Cursor rules\ // ⟲ΞNuSyQ⛛361 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │   └ ─  app_website_cursor_rules/             # website rule files consulted by AI\ // ⟲ΞNuSyQ⛛362 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   │      └ ─  website_rules_website_patterns.mdc # content/UX patterns and deployment rules\ // ⟲ΞNuSyQ⛛363 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  app_website_src/                         # website source code\ // ⟲ΞNuSyQ⛛364 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │       // ⟲ΞNuSyQ⛛365 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛366 ΣΛΞΨ∞ (conlang-layer annotation)
+─  app_website_pages/                    # static/SSR pages\ // ⟲ΞNuSyQ⛛367 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │      └ ─  app_website_index.tsx                 # website entry component\ // ⟲ΞNuSyQ⛛368 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │ \ // ⟲ΞNuSyQ⛛369 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  app_shared/                                 # cross-application shared layer for DRY utilities\ // ⟲ΞNuSyQ⛛370 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛371 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛372 ΣΛΞΨ∞ (conlang-layer annotation)
+─  shared_ui/                               # design tokens and UI primitives\ // ⟲ΞNuSyQ⛛373 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛374 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛375 ΣΛΞΨ∞ (conlang-layer annotation)
+─  shared_hooks/                            # reusable hooks shared across apps\ // ⟲ΞNuSyQ⛛376 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛377 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛378 ΣΛΞΨ∞ (conlang-layer annotation)
+─  shared_utils/                            # general helpers and adapters\ // ⟲ΞNuSyQ⛛379 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  shared_types/                            # shared type definitions and interfaces\ // ⟲ΞNuSyQ⛛380 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛381 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛383 ΣΛΞΨ∞ (conlang-layer annotation)
+─  worker_root/                                   # background workers for jobs/queues/scheduled tasks\ // ⟲ΞNuSyQ⛛384 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛385 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛386 ΣΛΞΨ∞ (conlang-layer annotation)
+─  worker_src/                                 # worker source code\ // ⟲ΞNuSyQ⛛387 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  worker_index.ts                          # worker entrypoint and job registration\ // ⟲ΞNuSyQ⛛388 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  worker_README.md                            # worker-specific run/deploy documentation\ // ⟲ΞNuSyQ⛛389 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛390 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛392 ΣΛΞΨ∞ (conlang-layer annotation)
+─  data_fixtures/                                 # seed and sample data for demos/tests\ // ⟲ΞNuSyQ⛛393 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛394 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛395 ΣΛΞΨ∞ (conlang-layer annotation)
+─  data_seeds/                                 # scripts and datasets used to seed environments\ // ⟲ΞNuSyQ⛛396 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  data_samples/                               # example payloads for quick experiments\ // ⟲ΞNuSyQ⛛397 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛398 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛400 ΣΛΞΨ∞ (conlang-layer annotation)
+─  packages_root/                                 # shareable packages with unique naming\ // ⟲ΞNuSyQ⛛401 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛402 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛403 ΣΛΞΨ∞ (conlang-layer annotation)
+─  packages_cursor/                            # packages-wide Cursor rules and conventions\ // ⟲ΞNuSyQ⛛404 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  packages_cursor_rules/                   # rule files affecting package authoring\ // ⟲ΞNuSyQ⛛405 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │      └ ─  packages_rules_package_patterns.mdc   # patterns for building and publishing packages\ // ⟲ΞNuSyQ⛛406 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛407 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛408 ΣΛΞΨ∞ (conlang-layer annotation)
+─  pkg_config/                                 # shareable TypeScript/ESLint/Prettier presets\ // ⟲ΞNuSyQ⛛409 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛410 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛411 ΣΛΞΨ∞ (conlang-layer annotation)
+─  packages_config_package.json             # manifest for the config package\ // ⟲ΞNuSyQ⛛412 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  packages_config_index.js                 # exports of preset objects consumed by apps\ // ⟲ΞNuSyQ⛛413 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛414 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛415 ΣΛΞΨ∞ (conlang-layer annotation)
+─  pkg_ui/                                     # design system components as a package\ // ⟲ΞNuSyQ⛛416 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛417 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛418 ΣΛΞΨ∞ (conlang-layer annotation)
+─  packages_ui_src/                         # UI component implementations and stories\ // ⟲ΞNuSyQ⛛419 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  packages_ui_package.json                 # manifest for the UI package\ // ⟲ΞNuSyQ⛛420 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛421 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛422 ΣΛΞΨ∞ (conlang-layer annotation)
+─  pkg_lint/                                   # ESLint presets/plugins as a package\ // ⟲ΞNuSyQ⛛423 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │    // ⟲ΞNuSyQ⛛424 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛425 ΣΛΞΨ∞ (conlang-layer annotation)
+─  packages_lint_package.json               # manifest for the lint package\ // ⟲ΞNuSyQ⛛426 ΣΛΞΨ∞ (conlang-layer annotation)
+│   │   └ ─  packages_lint_rules.js                   # preset rule configuration\ // ⟲ΞNuSyQ⛛427 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  pkg_types/                                  # shared TypeScript types package\ // ⟲ΞNuSyQ⛛428 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛429 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛430 ΣΛΞΨ∞ (conlang-layer annotation)
+─  packages_types_src/                      # type declarations and utilities\ // ⟲ΞNuSyQ⛛431 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  packages_types_package.json              # manifest for the types package\ // ⟲ΞNuSyQ⛛432 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛433 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛435 ΣΛΞΨ∞ (conlang-layer annotation)
+─  docker_root/                                   # containerized development/production artifacts\ // ⟲ΞNuSyQ⛛436 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛437 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛438 ΣΛΞΨ∞ (conlang-layer annotation)
+─  dockerfile_root                             # base Dockerfile for building the workspace image\ // ⟲ΞNuSyQ⛛439 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  docker_compose_root.yml                     # compose stack describing services and dependencies\ // ⟲ΞNuSyQ⛛440 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛441 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛443 ΣΛΞΨ∞ (conlang-layer annotation)
+─  infra_root/                                    # infrastructure-as-code definitions\ // ⟲ΞNuSyQ⛛444 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  terraform_root/                             # Terraform configuration set for cloud resources\ // ⟲ΞNuSyQ⛛445 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  terraform_main.tf                        # baseline Terraform module for provisioning\ // ⟲ΞNuSyQ⛛446 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛447 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛449 ΣΛΞΨ∞ (conlang-layer annotation)
+─  legacy_cursor/                                 # legacy .cursor directory preserved for compatibility\ // ⟲ΞNuSyQ⛛450 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  rules/                                      # original rule definitions (superseded by cursor_root/)\ // ⟲ΞNuSyQ⛛451 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  writing-tests.mdc                        # early patterns for test-writing prompts & style\ // ⟲ΞNuSyQ⛛452 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛453 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛455 ΣΛΞΨ∞ (conlang-layer annotation)
+─  legacy_vscode/                                 # legacy .vscode directory (kept for migration testing)\ // ⟲ΞNuSyQ⛛456 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛457 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛458 ΣΛΞΨ∞ (conlang-layer annotation)
+─  settings.json                               # Copilot hints, notebooks, Obsidian markdown links\ // ⟲ΞNuSyQ⛛459 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛460 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛461 ΣΛΞΨ∞ (conlang-layer annotation)
+─  extensions.json                             # curated extensions (Python, Jupyter, Godot, YAML, Markdown)\ // ⟲ΞNuSyQ⛛462 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛463 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛464 ΣΛΞΨ∞ (conlang-layer annotation)
+─  launch.json                                 # debug profiles: api/desktop/website, Godot attach\ // ⟲ΞNuSyQ⛛465 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  tasks.json                                  # tasks for ChatDev phases, Ollama ops, tests\ // ⟲ΞNuSyQ⛛466 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛467 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À // ⟲ΞNuSyQ⛛469 ΣΛΞΨ∞ (conlang-layer annotation)
+─  legacy_vscode_extension/                       # original vscode-extension folder (pre-bridge rename)\ // ⟲ΞNuSyQ⛛470 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛471 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛472 ΣΛΞΨ∞ (conlang-layer annotation)
+─  package.json                                # extension manifest (legacy id)\ // ⟲ΞNuSyQ⛛473 ΣΛΞΨ∞ (conlang-layer annotation)
+│    // ⟲ΞNuSyQ⛛474 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛475 ΣΛΞΨ∞ (conlang-layer annotation)
+─  README.md                                   # usage documentation\ // ⟲ΞNuSyQ⛛476 ΣΛΞΨ∞ (conlang-layer annotation)
+│   └ ─  src/                                        # extension TypeScript source\ // ⟲ΞNuSyQ⛛477 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛478 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛479 ΣΛΞΨ∞ (conlang-layer annotation)
+─  extension.ts                             # registers commands and output channels\ // ⟲ΞNuSyQ⛛480 ΣΛΞΨ∞ (conlang-layer annotation)
+│       // ⟲ΞNuSyQ⛛481 ΣΛΞΨ∞ (conlang-layer annotation)
+©À // ⟲ΞNuSyQ⛛482 ΣΛΞΨ∞ (conlang-layer annotation)
+─  copilot.ts                               # “Enhance Copilot Context” command\ // ⟲ΞNuSyQ⛛483 ΣΛΞΨ∞ (conlang-layer annotation)
+│      └ ─  ollama.ts                                # status-bar model picker & quick prompts\ // ⟲ΞNuSyQ⛛484 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛485 ΣΛΞΨ∞ (conlang-layer annotation)
+
+©À©¤ legacy_scripts/                                # legacy scripts folder retained for migration/testing\ // ⟲ΞNuSyQ⛛487 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ enhance_copilot_context.py                  # early analyzer that summarizes the active editor file into Copilot-usable hints\ // ⟲ΞNuSyQ⛛488 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ chatdev_phase_orchestrator.py               # early local runner for ChatDev¡¯s multi-phase development pipeline\ // ⟲ΞNuSyQ⛛489 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ enhanced_reflection_system.py               # first-gen self-critique loop that proposes patches and rationale\ // ⟲ΞNuSyQ⛛490 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ ollama_model_tools.py                       # basic helpers to list/pull/switch default Ollama models\ // ⟲ΞNuSyQ⛛491 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ start_ollama.ps1                            # Windows bootstrapper: starts Ollama service and pre-warms selected models\ // ⟲ΞNuSyQ⛛492 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ start_ollama.sh                             # macOS/Linux bootstrapper doing the same as above for Unix shells\ // ⟲ΞNuSyQ⛛493 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ bridge_chatdev_ollama.py                    # minimal function bridge for calling Ollama-backed ChatDev sessions\ // ⟲ΞNuSyQ⛛494 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ ci/                                         # legacy CI helpers\ // ⟲ΞNuSyQ⛛495 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©¸©¤ ollama_ai_runner.py                      # makes a safe, mocked LLM pass over PRs for smoke-level feedback\ // ⟲ΞNuSyQ⛛496 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛497 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_src/                                    # legacy integration hub before we adopted src_integration_hub/\ // ⟲ΞNuSyQ⛛498 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ ai/                                         # early local LLM backbones and adapters\ // ⟲ΞNuSyQ⛛499 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ ollama_hub.py                            # original Ollama discovery/selection/generation module\ // ⟲ΞNuSyQ⛛500 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ copilot/                                    # early Copilot augmentation code\ // ⟲ΞNuSyQ⛛501 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ copilot_workspace_enhancer.py            # builds a repository context graph for Copilot (first pass)\ // ⟲ΞNuSyQ⛛502 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ copilot_enhancement_bridge.py            # logs suggestions and keeps ¡°memory palace¡± for inline improvements\ // ⟲ΞNuSyQ⛛503 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ vscode_integration.py                    # VS Code-facing shims used by the old extension\ // ⟲ΞNuSyQ⛛504 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ integration/                                # early cross-agent wiring (ChatDev, Copilot, Ollama)\ // ⟲ΞNuSyQ⛛505 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ chatdev_integration.py                   # checks/install paths; ensures ChatDev is runnable locally\ // ⟲ΞNuSyQ⛛506 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ ollama_integration.py                    # probes local Ollama runtime; defines specialization profiles\ // ⟲ΞNuSyQ⛛507 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ advanced_chatdev_copilot_integration.py  # context bridge letting Copilot tap ChatDev¡¯s planning/reflection\ // ⟲ΞNuSyQ⛛508 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ Update-ChatDev-to-use-Ollama.py          # early adapter to drive ChatDev phases with Ollama models\ // ⟲ΞNuSyQ⛛509 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©¸©¤ ChatDevEnvironmentPatcher.py             # patches env vars/paths/configs so ChatDev runs consistently\ // ⟲ΞNuSyQ⛛510 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛511 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_github/                                 # legacy .github tree kept for historical workflows\ // ⟲ΞNuSyQ⛛512 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ workflows/                                  # GitHub Actions definitions (superseded by github_root/)\ // ⟲ΞNuSyQ⛛513 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ ci.yml                                   # earlier CI with lint/typecheck/unit tests\ // ⟲ΞNuSyQ⛛514 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ chatdev-smoke.yml                        # proof-of-life pipeline using mocked LLM calls\ // ⟲ΞNuSyQ⛛515 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©¸©¤ release.yml                              # initial release automation (tagging/changelog stubs)\ // ⟲ΞNuSyQ⛛516 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛517 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_meta/                                   # legacy ¡°vibe¡± docs retained for provenance\ // ⟲ΞNuSyQ⛛518 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ patterns-overview.mdc                       # earlier cross-link index for pattern docs\ // ⟲ΞNuSyQ⛛519 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ taxonomy.mdc                                # earlier naming/folder semantics used across the repo\ // ⟲ΞNuSyQ⛛520 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ prompts/                                    # prompt libraries used by early agents\ // ⟲ΞNuSyQ⛛521 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ system.mdc                               # initial global guardrails and tone for assistants\ // ⟲ΞNuSyQ⛛522 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ refactor-playbook.mdc                    # earlier refactor strategies and recipes\ // ⟲ΞNuSyQ⛛523 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ review-checklist.mdc                     # early code-review checklist harmonized for human/AI\ // ⟲ΞNuSyQ⛛524 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ traces/                                     # historical ADRs (kept for reference)\ // ⟲ΞNuSyQ⛛525 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ ADR-0001-architecture.mdc                # first architecture ADR and trade-offs\ // ⟲ΞNuSyQ⛛526 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©¸©¤ ADR-0002-data-access.mdc                 # first data-access decisions and constraints\ // ⟲ΞNuSyQ⛛527 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛528 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_notebooks/                              # earlier Jupyter notebooks (superseded by notebooks_lab/)\ // ⟲ΞNuSyQ⛛529 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ 00_repo_overview.ipynb                      # quick map/survey of repo structure\ // ⟲ΞNuSyQ⛛530 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ 10_copilot_context_audit.ipynb              # experiments to quantify Copilot context quality\ // ⟲ΞNuSyQ⛛531 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ 20_llm_bench_local.ipynb                    # simple benchmarks across locally-run models\ // ⟲ΞNuSyQ⛛532 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛533 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_obsidian/                               # early Obsidian vault and example settings\ // ⟲ΞNuSyQ⛛534 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ NuSyQ-Hub-Obsidian.vault/                   # original vault capturing knowledge and quest logs\ // ⟲ΞNuSyQ⛛535 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ OBSIDIAN_KNOWLEDGE_CONTEXT.md            # glossary and mental model of the repo (legacy wording)\ // ⟲ΞNuSyQ⛛536 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ ENHANCED_SYSTEM_TODO_QUEST_LOG.md        # to-do/quest log in RPG style (legacy entries)\ // ⟲ΞNuSyQ⛛537 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ ROSETTA_QUEST_STATUS_REPORT.md           # status report for legacy questlines\ // ⟲ΞNuSyQ⛛538 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ .obsidian.example.json                      # example plugin config used during early trials\ // ⟲ΞNuSyQ⛛539 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛540 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_godot/                                  # prior Godot demo showing AI/NPC orchestration\ // ⟲ΞNuSyQ⛛541 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ project.godot                               # Godot project file\ // ⟲ΞNuSyQ⛛542 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ scenes/\ // ⟲ΞNuSyQ⛛543 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ DemoScene.tscn                           # simple scene for NPC behavior experiments\ // ⟲ΞNuSyQ⛛544 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ scripts/\ // ⟲ΞNuSyQ⛛545 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ quantum_bridge.py                        # Godot // ⟲ΞNuSyQ⛛546 ΣΛΞΨ∞ (conlang-layer annotation)
+↔  // ⟲ΞNuSyQ⛛547 ΣΛΞΨ∞ (conlang-layer annotation)
+ChatDev/Ollama call bridge (prototype)\ // ⟲ΞNuSyQ⛛548 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©¸©¤ ai_npc_agent.gd                          # scripted NPC agent behavior calling AI\ // ⟲ΞNuSyQ⛛549 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛550 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_tools/                                  # prior dev tools retained to ensure migrations are lossless\ // ⟲ΞNuSyQ⛛551 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ scaffolds/feature.gen.ts                    # early scaffolder producing feature shells\ // ⟲ΞNuSyQ⛛552 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ codemods/rename-patterns.ts                 # codemod that applied legacy naming rules\ // ⟲ΞNuSyQ⛛553 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛554 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_tests/                                  # older tests used before current structure\ // ⟲ΞNuSyQ⛛555 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ e2e/                                        # end-to-end tests in the legacy pathing scheme\ // ⟲ΞNuSyQ⛛556 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ smoke/                                      # quick sanity checks used in old CI\ // ⟲ΞNuSyQ⛛557 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛558 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_docs/                                   # earlier docs preserved for comparison\ // ⟲ΞNuSyQ⛛559 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ getting-started.md                          # intro and environment setup (older wording)\ // ⟲ΞNuSyQ⛛560 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ architecture.md                             # original architecture write-up\ // ⟲ΞNuSyQ⛛561 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ decision-log.md                             # summary of legacy decisions and notes\ // ⟲ΞNuSyQ⛛562 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ styleguide.md                               # code style rules used previously\ // ⟲ΞNuSyQ⛛563 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛564 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_apps/                                   # pre-canonical app layout (kept to smooth migration)\ // ⟲ΞNuSyQ⛛565 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ api/\ // ⟲ΞNuSyQ⛛566 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ .cursor/\ // ⟲ΞNuSyQ⛛567 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ // ⟲ΞNuSyQ⛛568 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©À©¤ architecture.mdc                   # API architecture patterns (legacy phrasing)\ // ⟲ΞNuSyQ⛛569 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©À©¤ auth-middleware.mdc                # middleware rules and examples\ // ⟲ΞNuSyQ⛛570 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©À©¤ database-patterns.mdc              # data-access norms and caveats\ // ⟲ΞNuSyQ⛛571 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©À©¤ rest-patterns.mdc                  # REST API guidelines and error semantics\ // ⟲ΞNuSyQ⛛572 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©À©¤ schema-patterns.mdc                # validation and schema evolution guidance\ // ⟲ΞNuSyQ⛛573 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©¸©¤ trpc-patterns.mdc                  # RPC/tRPC conventions\ // ⟲ΞNuSyQ⛛574 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ src/\ // ⟲ΞNuSyQ⛛575 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©À©¤ routes/                               # route handlers\ // ⟲ΞNuSyQ⛛576 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©À©¤ services/                             # domain services\ // ⟲ΞNuSyQ⛛577 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©À©¤ models/                               # entities/models\ // ⟲ΞNuSyQ⛛578 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©¸©¤ index.ts                              # bootstrap for the legacy API service\ // ⟲ΞNuSyQ⛛579 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ package.json                             # legacy manifest used by this app\ // ⟲ΞNuSyQ⛛580 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦\ // ⟲ΞNuSyQ⛛581 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ dashboard/\ // ⟲ΞNuSyQ⛛582 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ .cursor/\ // ⟲ΞNuSyQ⛛583 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ // ⟲ΞNuSyQ⛛584 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©¸©¤ dashboard-patterns.mdc             # UI/state patterns for the dashboard\ // ⟲ΞNuSyQ⛛585 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ src/\ // ⟲ΞNuSyQ⛛586 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©À©¤ pages/                                # routed page components\ // ⟲ΞNuSyQ⛛587 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©À©¤ components/                           # dashboard UI building blocks\ // ⟲ΞNuSyQ⛛588 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©¸©¤ index.tsx                             # entry component\ // ⟲ΞNuSyQ⛛589 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦\ // ⟲ΞNuSyQ⛛590 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ desktop/\ // ⟲ΞNuSyQ⛛591 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ .cursor/\ // ⟲ΞNuSyQ⛛592 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ // ⟲ΞNuSyQ⛛593 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©¸©¤ desktop-patterns.mdc               # patterns specific to desktop runtime\ // ⟲ΞNuSyQ⛛594 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ src/\ // ⟲ΞNuSyQ⛛595 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©¸©¤ main.ts                               # main process/bootstrap for desktop\ // ⟲ΞNuSyQ⛛596 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦\ // ⟲ΞNuSyQ⛛597 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ engine/\ // ⟲ΞNuSyQ⛛598 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ .cursor/\ // ⟲ΞNuSyQ⛛599 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ // ⟲ΞNuSyQ⛛600 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©¸©¤ engine-patterns.mdc                # pipeline/resilience patterns in the old engine\ // ⟲ΞNuSyQ⛛601 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ src/\ // ⟲ΞNuSyQ⛛602 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©À©¤ core/                                 # engine primitives and scheduling core\ // ⟲ΞNuSyQ⛛603 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©À©¤ pipelines/                            # orchestration flows\ // ⟲ΞNuSyQ⛛604 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©¸©¤ index.ts                              # legacy engine entrypoint\ // ⟲ΞNuSyQ⛛605 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦\ // ⟲ΞNuSyQ⛛606 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ website/\ // ⟲ΞNuSyQ⛛607 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©À©¤ .cursor/\ // ⟲ΞNuSyQ⛛608 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦  ©¸©¤ rules/\ // ⟲ΞNuSyQ⛛609 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¦     ©¸©¤ website-patterns.mdc               # website UX/content conventions (legacy)\ // ⟲ΞNuSyQ⛛610 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ src/\ // ⟲ΞNuSyQ⛛611 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©À©¤ pages/                                # site pages\ // ⟲ΞNuSyQ⛛612 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦     ©¸©¤ index.tsx                             # site entry component\ // ⟲ΞNuSyQ⛛613 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦\ // ⟲ΞNuSyQ⛛614 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ shared/\ // ⟲ΞNuSyQ⛛615 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ ui/                                      # shared UI primitives\ // ⟲ΞNuSyQ⛛616 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ hooks/                                   # shared hooks\ // ⟲ΞNuSyQ⛛617 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©À©¤ utils/                                   # helpers\ // ⟲ΞNuSyQ⛛618 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦     ©¸©¤ types/                                   # shared TypeScript types\ // ⟲ΞNuSyQ⛛619 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛620 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_worker/                                 # legacy worker kept for parity with old pipelines\ // ⟲ΞNuSyQ⛛621 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ src/\ // ⟲ΞNuSyQ⛛622 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¦  ©¸©¤ index.ts                                 # worker bootstrap\ // ⟲ΞNuSyQ⛛623 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ README.md                                   # notes on running/deploying the old worker\ // ⟲ΞNuSyQ⛛624 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛625 ΣΛΞΨ∞ (conlang-layer annotation)
+©À©¤ legacy_data/                                   # older fixtures and samples retained for tests/migration\ // ⟲ΞNuSyQ⛛626 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©À©¤ seeds/                                      # seed datasets for development\ // ⟲ΞNuSyQ⛛627 ΣΛΞΨ∞ (conlang-layer annotation)
+©¦  ©¸©¤ samples/                                    # sample payloads for docs/tests\ // ⟲ΞNuSyQ⛛628 ΣΛΞΨ∞ (conlang-layer annotation)
+\ // ⟲ΞNuSyQ⛛629 ΣΛΞΨ∞ (conlang-layer annotation)
+©¸©¤ legacy_packages/                               # legacy package set retained to help transition\ // ⟲ΞNuSyQ⛛630 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©À©¤ .cursor/\ // ⟲ΞNuSyQ⛛631 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦  ©¸©¤ rules/\ // ⟲ΞNuSyQ⛛632 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦     ©¸©¤ package-patterns.mdc                  # package-authoring rules used historically\ // ⟲ΞNuSyQ⛛633 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©À©¤ config/\ // ⟲ΞNuSyQ⛛634 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦  ©À©¤ package.json                             # legacy config package manifest\ // ⟲ΞNuSyQ⛛635 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦  ©¸©¤ index.js                                 # exports ESLint/TS/Prettier presets (legacy)\ // ⟲ΞNuSyQ⛛636 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©À©¤ ui/\ // ⟲ΞNuSyQ⛛637 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦  ©À©¤ src/                                     # legacy design-system sources\ // ⟲ΞNuSyQ⛛638 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦  ©¸©¤ package.json                             # manifest for legacy UI package\ // ⟲ΞNuSyQ⛛639 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©À©¤ lint/\ // ⟲ΞNuSyQ⛛640 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦  ©À©¤ package.json                             # manifest for legacy lint package\ // ⟲ΞNuSyQ⛛641 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¦  ©¸©¤ rules.js                                 # rules/presets (legacy form)\ // ⟲ΞNuSyQ⛛642 ΣΛΞΨ∞ (conlang-layer annotation)
+   ©¸©¤ types/\ // ⟲ΞNuSyQ⛛643 ΣΛΞΨ∞ (conlang-layer annotation)
+      ©À©¤ src/                                     # type declarations (legacy)\ // ⟲ΞNuSyQ⛛644 ΣΛΞΨ∞ (conlang-layer annotation)
+      ©¸©¤ package.json                             # manifest for legacy types package\ // ⟲ΞNuSyQ⛛645 ΣΛΞΨ∞ (conlang-layer annotation)
+
+\ // ⟲ΞNuSyQ⛛647 ΣΛΞΨ∞ (conlang-layer annotation)
+ // ⟲ΞNuSyQ⛛648 ΣΛΞΨ∞ (conlang-layer annotation)

@@ -1,0 +1,10 @@
+model: gpt-4o
+auto-commits: false
+auto-lint: true
+lint-cmd: "python3 -m py_compile {file}"
+test-cmd: "python3 -c \"import ast; ast.parse(open('app/game_engine/commands.py').read())\""
+read:
+  - CONTEXT.md
+  - AGENTS.md
+  - docs/ARCHITECTURE.md
+no-suggest-shell-commands: false

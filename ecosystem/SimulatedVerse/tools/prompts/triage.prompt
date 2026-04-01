@@ -1,0 +1,8 @@
+Identify ONLY:
+- placeholders/incomplete stubs
+- confusing or overly complex sections (why)
+- infinite/long-running loops without backoff/await
+- unsafe calls (blocking I/O in UI, eval/exec, broad catch)
+- broken/relative imports likely to fail
+Return:
+- bullet list: {line}:{short finding}

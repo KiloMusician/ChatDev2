@@ -1,0 +1,93 @@
+{
+  "action": "phase_4_ui_nanobot_bootstrap_unlock",
+  "timestamp": 1756940650000,
+  "status": "metamorphosis_phase_a_to_b_activated",
+  
+  "ui_phase_transition": {
+    "from": "Phase A - Crashed Console",
+    "to": "Phase B - Nanobot Bootstrap",
+    "trigger": "METAMORPHOSIS_BOOTSTRAP flag enabled",
+    "lore_context": "Ship AI nanobots beginning self-repair sequence"
+  },
+  
+  "feature_flags_activated": {
+    "nanobots_ui": true,
+    "metamorphosis_bootstrap": true,
+    "ui_theme_holographic": true,
+    "ui_ghost_previews": true,
+    "hud_tooltips": "already_enabled",
+    "qol_cost_preview": "already_enabled"
+  },
+  
+  "tooltip_system_status": {
+    "implementation": "PreviewUI/web/services/Tooltips.ts",
+    "features": [
+      "Cost curve calculations with preview depth",
+      "Affordability checking",
+      "Resource detail tooltips with icons/colors",
+      "Multi-level cost preview (5 levels default)",
+      "Real-time cost calculations"
+    ],
+    "integration": "GameHUD.tsx hover events"
+  },
+  
+  "cost_preview_system": {
+    "implementation": "PreviewUI/web/services/CostCurves.ts",
+    "features": [
+      "Next-level cost functions",
+      "Pricer curve calculations (linear, exponential)",
+      "Resource affordability checking",
+      "Batch cost calculations",
+      "Progress forecasting"
+    ],
+    "ui_integration": "Hover breakdowns show 5-level preview"
+  },
+  
+  "ui_metamorphosis_changes": {
+    "theme_evolution": "Enhanced green/cyan holographic theme",
+    "ghost_previews": "Locked items show cost requirements",
+    "enhanced_tooltips": "All buttons show cost+time+next_unlock",
+    "progress_indicators": "ETAs and progress bars for all actions",
+    "nanobot_indicators": "Visual cues for bootstrap phase"
+  },
+  
+  "unlock_flags_active": [
+    "UI_TIPS",
+    "UI_COST_PREVIEW", 
+    "UI_GHOST_PREVIEWS",
+    "UI_THEME_HOLOGRAPHIC",
+    "METAMORPHOSIS_BOOTSTRAP"
+  ],
+  
+  "research_integration": {
+    "nanobots_tech": "Available for research",
+    "ui_phase_gating": "Functional - UI evolves with research",
+    "consciousness_calculation": "(energy/10000 + population/100 + research/10)",
+    "unlock_threshold": "Nanobots research completion"
+  },
+  
+  "play_dev_toggle": {
+    "mechanism": "localStorage.getItem('PLAY_MODE')",
+    "modes": ["dev_menu", "game"],
+    "mode_switch_event": "Custom event listener",
+    "state_persistence": "localStorage + cross-tab sync",
+    "hotkey_support": "Available for implementation"
+  },
+  
+  "hud_accessibility": {
+    "preview_overlay": "/preview/preview_hud.html",
+    "game_hud": "GameHUD.tsx with real-time updates",
+    "tooltip_integration": "Hover events trigger cost breakdowns",
+    "mobile_optimization": "Touch-friendly with safe areas"
+  },
+  
+  "evidence_verification": [
+    "Feature flags updated with nanobot phases",
+    "Tooltip system operational with cost curves",
+    "UI metamorphosis framework in place",
+    "Research progression gates functional",
+    "Play/Dev toggle mechanism confirmed"
+  ],
+  
+  "next_phase_ready": "play_dev_toggle_hotkey_implementation"
+}

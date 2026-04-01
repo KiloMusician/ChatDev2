@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nusyq-hub-service
+  namespace: nusyq-hub
+  labels:
+    app: nusyq-hub
+spec:
+  type: LoadBalancer  # NodePort for local, LoadBalancer for cloud
+  selector:
+    app: nusyq-hub
+  ports:
+  - name: http
+    protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 30500  # For local access on docker-desktop
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nusyq-hub-headless
+  namespace: nusyq-hub
+  labels:
+    app: nusyq-hub
+spec:
+  clusterIP: None  # Headless service for stateful workloads
+  selector:
+    app: nusyq-hub
+  ports:
+  - name: http
+    protocol: TCP
+    port: 5000
+    targetPort: 5000

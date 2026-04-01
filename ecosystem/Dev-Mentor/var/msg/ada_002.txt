@@ -1,0 +1,23 @@
+FROM: ADA-7 <ada@resistance-net.onion>
+TO: ghost@node-7.nexus
+DATE: 2026-01-07T06:31:00Z
+SUBJECT: CHIMERA Architecture
+
+Ghost,
+
+Here's what I know about CHIMERA's structure:
+
+  - 847 sensor endpoints across the city grid
+  - Central control at chimera-control:8443
+  - Auth token hidden in /proc/1337/environ
+  - Master config at /opt/chimera/config/master.conf
+
+NexusCorp uses this data for "predictive enforcement." 
+People get arrested BEFORE they've done anything.
+
+The master.key in /opt/chimera/keys/ is what locks the whole thing.
+Get it. Use it.
+
+You'll need root first. Check `sudo -l`.
+
+— ADA

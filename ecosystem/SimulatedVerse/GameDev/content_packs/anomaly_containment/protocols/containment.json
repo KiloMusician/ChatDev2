@@ -1,0 +1,14 @@
+{
+  "containment_protocols": {
+    "standard": {
+      "name": "Standard Containment",
+      "procedures": ["isolate", "monitor", "document"],
+      "equipment": ["containment_field", "sensors"]
+    },
+    "emergency": {
+      "name": "Emergency Containment", 
+      "procedures": ["immediate_isolation", "evacuation", "alert_command"],
+      "equipment": ["emergency_fields", "evacuation_systems"]
+    }
+  }
+}

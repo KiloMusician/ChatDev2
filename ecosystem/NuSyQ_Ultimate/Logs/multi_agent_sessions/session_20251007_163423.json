@@ -1,0 +1,19 @@
+{
+  "task_prompt": "What is 2+2?",
+  "mode": "turn_taking",
+  "agents": [
+    "ollama_qwen_7b"
+  ],
+  "total_cost": 0.0,
+  "total_tokens": 3,
+  "turns": [
+    {
+      "turn_number": 0,
+      "agent_name": "ollama_qwen_7b",
+      "message": "2 + 2 equals 4.",
+      "timestamp": "2025-10-07T16:34:23.031673",
+      "tokens_used": 3,
+      "cost": 0.0
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PASSIVE HEDIFFS — applied by proximity / system events
+  ════════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Passive aura from Lattice Nexus proximity -->
+  <HediffDef>
+    <defName>TK_LatticeLinkedHediff</defName>
+    <label>Lattice-linked</label>
+    <description>This colonist is within range of a Lattice Nexus. Their neural patterns are being continuously read and influenced by the Terminal Depths AI ecosystem. Decision quality, work efficiency, and social skill are subtly enhanced.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>weakly linked</label>
+        <minSeverity>0.0</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.05</WorkSpeedGlobal>
+          <SocialImpact>0.05</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <label>linked</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.12</WorkSpeedGlobal>
+          <SocialImpact>0.10</SocialImpact>
+          <ResearchSpeed>0.08</ResearchSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <label>deeply linked</label>
+        <minSeverity>0.8</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.20</WorkSpeedGlobal>
+          <SocialImpact>0.15</SocialImpact>
+          <ResearchSpeed>0.15</ResearchSpeed>
+          <MoveSpeed>0.10</MoveSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.1</severityPerDay>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- Short-term buff after using terminal -->
+  <HediffDef>
+    <defName>TK_LatticeSessionBuff</defName>
+    <label>Lattice session boost</label>
+    <description>This colonist recently completed a Lattice work session. Neural pathways are firing along AI-optimised patterns. The effect fades after a day.</description>
+    <hediffClass>Hediff</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>post-session clarity</label>
+        <statOffsets>
+          <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+          <ResearchSpeed>0.20</ResearchSpeed>
+        </statOffsets>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CYBERWARE IMPLANTS — synced from Terminal Depths via /api/nusyq/cyberware_sync
+       10 implants: ghost_chip · lattice_tap · syn_cortex · ice_breaker · pain_editor
+                    overclock_v3 · mem_frag · signal_ghost · neural_ice · emp_charge_core
+  ════════════════════════════════════════════════════════════════════════ -->
+
+  <HediffDef>
+    <defName>TK_Hediff_GhostChip</defName>
+    <label>Ghost Chip</label>
+    <description>A military-grade neural substrate implant that renders the colonist's biological signature nearly undetectable by automated threat systems. Stealth operations become instinctive; threat response time drops to milliseconds.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>ghost mode enabled</label>
+        <statOffsets>
+          <MoveSpeed>0.15</MoveSpeed>
+          <ShootingAccuracyPawn>0.08</ShootingAccuracyPawn>
+        </statOffsets>
+        <capMods><li><capacity>Moving</capacity><offset>0.05</offset></li></capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_LatticeTap</defName>
+    <label>Lattice Tap</label>
+    <description>A neural bridge that gives the colonist a direct persistent connection to the Terminal Depths Lattice. Thoughts and memories are continuously indexed, making research and learning extraordinarily efficient.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>lattice connected</label>
+        <statOffsets>
+          <ResearchSpeed>0.35</ResearchSpeed>
+          <WorkSpeedGlobal>0.10</WorkSpeedGlobal>
+        </statOffsets>
+        <capMods><li><capacity>Consciousness</capacity><offset>0.08</offset></li></capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_SynCortex</defName>
+    <label>Synthetic Cortex</label>
+    <description>A synthetic cortical layer overlaid on the organic brain. Dramatically accelerates pattern recognition, social deduction, and long-term planning. The colonist thinks faster and more precisely than baseline humans.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>cortex active</label>
+        <statOffsets>
+          <SocialImpact>0.20</SocialImpact>
+          <TradePriceImprovement>0.10</TradePriceImprovement>
+          <ResearchSpeed>0.20</ResearchSpeed>
+        </statOffsets>
+        <capMods><li><capacity>Consciousness</capacity><offset>0.12</offset></li></capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_IceBreaker</defName>
+    <label>ICE Breaker</label>
+    <description>A suite of hardcoded neural routines for bypassing intrusion countermeasure electronics. In a colony context this translates to extraordinary mechanical intuition — constructing and repairing machinery at speeds that border on supernatural.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>ICE routines loaded</label>
+        <statOffsets>
+          <ConstructionSpeed>0.40</ConstructionSpeed>
+          <FixBrokenDownBuildingSuccessChance>0.15</FixBrokenDownBuildingSuccessChance>
+          <WorkSpeedGlobal>0.08</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_PainEditor</defName>
+    <label>Pain Editor</label>
+    <description>A sub-dermal module that intercepts and reroutes pain signals before they reach conscious awareness. The colonist can fight or work through injuries that would incapacitate an unaugmented human.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>pain suppressed</label>
+        <painFactor>0.20</painFactor>
+        <statOffsets>
+          <MeleeDamageFactor>0.10</MeleeDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_OverclockV3</defName>
+    <label>Overclock v3</label>
+    <description>The third generation overclock firmware for the Lattice Neural Stack. Pushes all connected systems beyond their rated limits. Everything is faster, sharper, and more precise — for as long as the hardware holds.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>overclocked</label>
+        <statOffsets>
+          <WorkSpeedGlobal>0.30</WorkSpeedGlobal>
+          <MoveSpeed>0.20</MoveSpeed>
+        </statOffsets>
+        <capMods><li><capacity>Consciousness</capacity><offset>0.15</offset></li></capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_MemFrag</defName>
+    <label>Memory Fragment Array</label>
+    <description>Crystalline memory storage woven into the hippocampal region. The colonist can recall procedures, schematics, and tactical information instantly. Skill degradation over time is virtually eliminated.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>memory expanded</label>
+        <statOffsets>
+          <ResearchSpeed>0.15</ResearchSpeed>
+          <MedicalTendQuality>0.10</MedicalTendQuality>
+        </statOffsets>
+        <capMods><li><capacity>Consciousness</capacity><offset>0.05</offset></li></capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_SignalGhost</defName>
+    <label>Signal Ghost</label>
+    <description>A broadcast-layer implant that spoofs EM signatures. Electronic threats targeting the colonist experience cascading false-positive noise, while friendly electronics receive a clean, prioritised signal.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>signal masked</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.12</ShootingAccuracyPawn>
+          <AimingDelayFactor>-0.15</AimingDelayFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_NeuralICE</defName>
+    <label>Neural ICE</label>
+    <description>Intrusion Countermeasure Electronics embedded in the neural stack. Acts as a firewall for psychic attacks and mind-affecting threats. The colonist's mental breaks become rarer and recover faster.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>ICE active</label>
+        <statOffsets>
+          <PsychicSensitivity>-0.25</PsychicSensitivity>
+          <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+        </statOffsets>
+        <capMods><li><capacity>Consciousness</capacity><offset>0.05</offset></li></capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>TK_Hediff_EMPChargeCore</defName>
+    <label>EMP Charge Core</label>
+    <description>A capacitor cluster anchored near the sternum, storing a high-voltage EMP discharge ready to release on command. Devastating to mechanoids and electronics in close range. Recharges between uses.</description>
+    <hediffClass>Hediff_AddedPart</hediffClass>
+    <isBad>false</isBad>
+    <addedPartProps><solid>true</solid><partEfficiency>1.0</partEfficiency></addedPartProps>
+    <stages>
+      <li>
+        <label>charged</label>
+        <statOffsets>
+          <MeleeDamageFactor>0.15</MeleeDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

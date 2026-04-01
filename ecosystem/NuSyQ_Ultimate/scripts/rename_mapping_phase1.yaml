@@ -1,0 +1,50 @@
+# Phase 1: Root-Level .md File Renaming
+# Generated: 2025-10-07
+# Purpose: Eliminate duplicate names, add depth/context
+
+# Rename Mapping Format:
+# old_name: new_name
+
+root_md_renames:
+  # Session Documents
+  "SESSION_SUMMARY_2025-10-07.md": "Session_Documentation_Audit_Summary_20251007.md"
+  "SESSION_COMPLETE_TIMEOUT_REPLACEMENT.md": "Session_Timeout_Replacement_Complete_20251007.md"
+  "REPOSITORY_STATUS_2025-10-07.md": "Session_Repository_Status_20251007.md"
+
+  # Status/Milestone Documents
+  "TIMEOUT_REPLACEMENT_COMPLETE.md": "NuSyQ_Timeout_Replacement_Complete_20251007.md"
+  "DOCUMENTATION_INFRASTRUCTURE_COMPLETE.md": "NuSyQ_Documentation_Infrastructure_Complete_20251007.md"
+  "MODERNIZATION_COMPLETE.md": "NuSyQ_Modernization_Complete_20251006.md"
+  "ADAPTIVE_TIMEOUT_COMPLETE.md": "NuSyQ_Adaptive_Timeout_Complete_20251006.md"
+
+  # In Progress Documents
+  "TIMEOUT_REPLACEMENT_PROGRESS.md": "NuSyQ_Timeout_Replacement_InProgress_20251007.md"
+
+  # Plan Documents
+  "SYSTEMATIC_TIMEOUT_REPLACEMENT_PLAN.md": "NuSyQ_Timeout_Replacement_Plan_20251007.md"
+
+  # Reference Documents
+  "OMNITAG_SYSTEM_SUMMARY.md": "NuSyQ_OmniTag_System_Reference.md"
+  "QUICK_REFERENCE_DOCUMENTATION.md": "NuSyQ_Documentation_Quick_Reference.md"
+  "QUICK_STATUS.md": "NuSyQ_System_Quick_Status.md"
+
+  # Audit Documents
+  "REPOSITORY_DOCUMENTATION_AUDIT.md": "Audit_Documentation_Infrastructure_20251007.md"
+  "DOCUMENTATION_SESSION_SUMMARY.md": "Audit_Documentation_Session_Summary_20251007.md"
+
+  # Archive Documents
+  "DOCUMENTATION_REORGANIZATION_SUMMARY.md": "Archive_Documentation_Reorganization_Summary.md"
+
+  # Guide Documents
+  "CONTRIBUTING.md": "Guide_Contributing_AllUsers.md"
+
+  # Knowledge Base (keep as-is - unique name)
+  # "KnowledgeBase.md": "KnowledgeBase.md"  # SKIP - already good
+
+  # Root README (add context)
+  "README.md": "NuSyQ_Root_README.md"
+
+# Statistics:
+# Total files: 18
+# Renamed: 17
+# Kept as-is: 1 (KnowledgeBase.md)

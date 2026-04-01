@@ -1,0 +1,30 @@
+---
+applyTo: '**'
+---
+Provide project context and coding guidelines that AI should follow when generating code, answering questions, or reviewing changes.
+
+# 🛡️ File Preservation Guideline
+**GUIDING PRINCIPLE**: As a general rule, existing files should be enhanced rather than deleted or completely replaced. This approach preserves accumulated system knowledge and evolutionary history.
+
+### **Flexibility and Progress Framework**
+
+This is a **guideline**, not an absolute rule. Progress should never be blocked.
+
+**When to Consider Replacement/Deletion:**
+- If a file causes persistent, unresolvable errors.
+- If refactoring would be significantly more complex than replacement.
+- If a file's functionality is being cleanly consolidated into a new module.
+- If development is blocked by preserving problematic code.
+
+**Decision Framework:**
+1.  **First Attempt**: Try targeted enhancement with minimal changes.
+2.  **If Blocked**: Document the issues preventing enhancement in a commit message or quest log.
+3.  **Last Resort**: Replace or delete the file, providing a clear rationale for the action.
+
+---
+
+### **Problem Resolution Protocols (Preferred Approach)**
+
+#### For Syntax Errors or Bugs:
+- **PREFER**: Targeted fixes that preserve surrounding context and original intent.
+- **ACCEPTABLE**: Refactoring problematic sections with improved structure, while documenting the change.

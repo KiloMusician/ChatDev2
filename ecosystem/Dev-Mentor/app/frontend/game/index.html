@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terminal Depths — DevMentor Game Layer</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ── SYSTEM BOOT OVERLAY ─────────────────────────────────────────────── -->
+<div id="boot-overlay" aria-label="System boot sequence" role="status">
+  <div id="boot-inner">
+    <pre id="boot-header">
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║   NEXUSCORP / LATTICE OS  v2.3  ·  NuSyQ Cascade Layer 0        ║
+  ║   Node: GHOST@terminal-depths-node-7                             ║
+  ╚══════════════════════════════════════════════════════════════════╝</pre>
+    <div id="boot-lines"></div>
+    <div id="boot-status">
+      <span id="boot-spinner">▌</span>
+      <span id="boot-msg">Initializing subsystems...</span>
+    </div>
+    <div id="boot-skip">[ Press <kbd>Enter</kbd> or <kbd>Esc</kbd> to skip ]</div>
+  </div>
+</div>
+<!-- ── END BOOT OVERLAY ────────────────────────────────────────────────── -->
+
+<div id="header">
+  <span class="logo">▓ TERMINAL DEPTHS</span>
+  <span class="tagline">Node-7 · NexusCorp Grid · Educational Simulation</span>
+  <div class="header-controls">
+    <button class="icon-btn sound-btn" id="btn-sfx" title="Toggle SFX (key clicks)" aria-label="Toggle key click SFX">⌨</button>
+    <button class="icon-btn sound-btn" id="btn-ambient" title="Toggle ambient music" aria-label="Toggle ambient music">♪</button>
+    <button class="icon-btn sound-btn" id="btn-theme" title="Cycle theme (Cyberpunk/Matrix/Amber/Ice)" aria-label="Cycle theme">CYBERPUNK</button>
+    <a href="/" class="nav-back">← DevMentor Console</a>
+  </div>
+</div>
+
+<div id="faction-bar" aria-label="Faction status bar">
+  <span id="faction-label">NO FACTION</span>
+  <span id="faction-stage">☀ HYDROGEN · Lv 1</span>
+  <span id="faction-dp">0 DP</span>
+  <span id="faction-trace" title="Trace level">TRACE: 0%</span>
+  <span id="containment-timer" class="containment-stable" title="72-hour containment run. Type 'timer' for details.">⏱ --:--:--</span>
+  <span id="faction-palette-hint" title="Open command palette (Ctrl+K)">⌘K</span>
+</div>
+
+<div id="cmd-palette-overlay" aria-hidden="true" role="dialog" aria-label="Command palette">
+  <div id="cmd-palette">
+    <input id="palette-input" type="text" autocomplete="off" placeholder="Search commands… (ESC to close)" aria-label="Search commands"/>
+    <div id="palette-results"></div>
+    <div id="palette-hint">↑↓ navigate · Enter execute · ESC close · Ctrl+K toggle</div>
+  </div>
+</div>
+
+<div id="layout">
+  <!-- LEFT: TERMINAL -->
+  <div id="terminal-panel">
+    <div id="location-bar">
+      <span id="cwd-display">~</span>
+      <span>·</span>
+      <span id="level-display">LVL 1</span>
+      <span>·</span>
+      <span id="xp-display">0 XP</span>
+    </div>
+    <div id="term-tab-bar">
+      <!-- populated by U2 multi-tab system in game.js -->
+    </div>
+    <div id="output" role="log" aria-live="polite" aria-label="Terminal output"></div>
+    <div id="input-row">
+      <span id="prompt">ghost@node-7:~$</span>
+      <input id="cmd-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus aria-label="Terminal command input"/>
+    </div>
+  </div>
+
+  <!-- RESIZE HANDLE -->
+  <div id="resize-handle" title="Drag to resize panels" aria-hidden="true"></div>
+
+  <!-- RIGHT: INFO PANEL -->
+  <div id="right-panel">
+    <div id="tabs" role="tablist" aria-label="Info panels">
+      <div class="tab active" data-tab="objective" role="tab" aria-selected="true" tabindex="0">OBJ</div>
+      <div class="tab" data-tab="stats" role="tab" aria-selected="false" tabindex="-1">STATS</div>
+      <div class="tab" data-tab="tutorial" role="tab" aria-selected="false" tabindex="-1">TUT</div>
+      <div class="tab" data-tab="challenges" role="tab" aria-selected="false" tabindex="-1">CHAL</div>
+      <div class="tab" data-tab="lore" role="tab" aria-selected="false" tabindex="-1">LORE</div>
+      <div class="tab" data-tab="map" role="tab" aria-selected="false" tabindex="-1">MAP</div>
+      <div class="tab" data-tab="timeline" role="tab" aria-selected="false" tabindex="-1">LOG</div>
+      <div class="tab" data-tab="skills" role="tab" aria-selected="false" tabindex="-1">TREE</div>
+      <div class="tab" data-tab="quest" role="tab" aria-selected="false" tabindex="-1">QUEST</div>
+      <div class="tab" data-tab="dash" role="tab" aria-selected="false" tabindex="-1">DASH</div>
+    </div>
+    <div id="tab-content" role="tabpanel">
+      <!-- injected by JS -->
+    </div>
+  </div>
+</div>
+
+<div id="toast" aria-live="assertive" aria-atomic="true"></div>
+<div id="size-nudge" aria-live="polite"></div>
+
+<script src="filesystem.js"></script>
+<script src="gamestate.js"></script>
+<script src="npcs.js"></script>
+<script src="story.js"></script>
+<script src="tutorial.js"></script>
+<script src="commands.js"></script>
+<script src="sound.js"></script>
+<script src="game.js"></script>
+<script src="watcher.js"></script>
+<script src="panels.js"></script>
+<script src="simulation_bridge.js"></script>
+</body>
+</html>

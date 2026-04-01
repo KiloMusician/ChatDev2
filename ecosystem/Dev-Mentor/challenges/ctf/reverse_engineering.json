@@ -1,0 +1,46 @@
+[
+  {
+    "id": "re_01",
+    "title": "String Hunt",
+    "category": "Reverse Engineering",
+    "difficulty": "easy",
+    "description": "A binary `nexus_agent` was found on the CHIMERA node. Running `strings` on it reveals hardcoded credentials. The password is embedded as a sequence of ASCII chars. Locate the flag string which follows the pattern `FLAG{...}`.",
+    "solution": "FLAG{str1ngs_4r3_p0w3rful}",
+    "hint": "Use `strings nexus_agent | grep FLAG` to extract all readable string sequences and filter for the flag pattern.",
+    "xp": 30,
+    "tags": ["reverse_engineering", "strings", "binary", "easy"]
+  },
+  {
+    "id": "re_02",
+    "title": "Disassembly Novice",
+    "category": "Reverse Engineering",
+    "difficulty": "medium",
+    "description": "A function in `chimera_core.elf` checks a password character by character. The disassembly shows `cmp eax, 0x4e657875` at the comparison. What 4-byte string is being compared? (Assume little-endian x86)",
+    "solution": "uxeN",
+    "hint": "In little-endian x86, bytes are stored in reverse order. Convert hex 0x4e657875 to ASCII bytes reversed: 75='u', 78='x', 65='e', 4e='N'.",
+    "xp": 90,
+    "tags": ["reverse_engineering", "disassembly", "x86", "endianness", "medium"]
+  },
+  {
+    "id": "re_03",
+    "title": "Anti-Debug Bypass",
+    "category": "Reverse Engineering",
+    "difficulty": "hard",
+    "description": "A protected binary calls `ptrace(PTRACE_TRACEME, 0, 0, 0)` at startup to detect debuggers. If ptrace returns -1, it exits. What technique or tool option would you use to bypass this anti-debugging check in GDB?",
+    "solution": "set follow-fork-mode child",
+    "hint": "GDB has built-in mechanisms to handle ptrace-based anti-debugging. Look at how to intercept the ptrace syscall or use the `catch syscall ptrace` command.",
+    "xp": 160,
+    "tags": ["reverse_engineering", "anti-debug", "gdb", "hard"]
+  },
+  {
+    "id": "re_04",
+    "title": "Packed Binary",
+    "category": "Reverse Engineering",
+    "difficulty": "hard",
+    "description": "The `nexus_payload.exe` binary is packed with UPX. The entry point jumps to a decompression stub before executing the real code. What command unpacks a UPX-compressed binary in place?",
+    "solution": "upx -d nexus_payload.exe",
+    "hint": "UPX is a popular executable packer with its own unpacking capability. The `-d` flag performs decompression.",
+    "xp": 140,
+    "tags": ["reverse_engineering", "upx", "packing", "hard"]
+  }
+]

@@ -20,6 +20,10 @@ const routes = [
     {
         path: '/workflows/:name?',
         component: () => import('../pages/WorkflowWorkbench.vue')
+    },
+    {
+        path: '/ecosystem',
+        component: () => import('../pages/EcosystemView.vue')
     }
 ]
 

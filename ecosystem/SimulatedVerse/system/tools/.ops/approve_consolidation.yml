@@ -1,0 +1,24 @@
+# ΞNuSyQ Consolidation Approval
+# Review .ops/dup_summary.md before approving
+
+approve: true
+mode: APPLY_SAFE  # Only apply high-confidence changes (≥0.9)
+
+# What will be done:
+# - Clean up empty files in non-critical paths
+# - Flag placeholder files for completion
+# - Safe file renames for better clarity
+# - NO destructive changes without explicit confirmation
+
+notes: |
+  Safe consolidation approved after reviewing:
+  - 0 duplicate groups (codebase is well-organized)
+  - 6 empty files (mostly Python lib __init__.py files)
+  - 36 placeholder files (including ΞNuSyQ core TODOs)
+  - 0 vague-named files (naming is already clear)
+  
+  Priority focus on ΞNuSyQ-specific placeholders:
+  - temple_boot.py (16KB TODO)
+  - src/nusyq-framework/scp-containment.ts (16KB TODO)
+  - sidecar/bootstrap.py (7KB TODO)
+  - agent/quest_runner.ts (7KB TODO)

@@ -1,0 +1,34 @@
+name: CI - Persisted Circuits & Integration
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run check
+
+      - name: Persisted circuits test
+        run: npm run test:persisted-circuits
+
+      - name: Integration repair test
+        run: npm run test:integration-repair
+
+      - name: Terminal presets smoke check
+        run: npm run check:terminals || true

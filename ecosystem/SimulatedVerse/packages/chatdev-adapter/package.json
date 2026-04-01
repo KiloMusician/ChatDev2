@@ -1,0 +1,19 @@
+{
+  "name": "@xinu/chatdev-adapter",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --import tsx/esm server.ts",
+    "start": "node --import tsx/esm server.ts"
+  },
+  "dependencies": {
+    "undici": "^*"
+  },
+  "peerDependencies": {
+    "typescript": "*"
+  }
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "web_01",
+    "title": "Cookie Monster",
+    "category": "Web",
+    "difficulty": "easy",
+    "description": "A login portal is storing session tokens in plaintext cookies. The admin token was spotted during a traffic dump. Decode the base64 value: `YWRtaW46c2VjcmV0MTIz` to extract the credentials.",
+    "solution": "admin:secret123",
+    "hint": "Base64 decode the cookie value. The format is username:password.",
+    "xp": 35,
+    "tags": ["web", "cookies", "base64", "easy"]
+  },
+  {
+    "id": "web_02",
+    "title": "SQL Injection 101",
+    "category": "Web",
+    "difficulty": "easy",
+    "description": "The NexusCorp employee portal uses a vulnerable login form. The SQL query is: `SELECT * FROM users WHERE username='$input' AND password='$pass'`. Craft an injection payload to bypass authentication.",
+    "solution": "' OR '1'='1",
+    "hint": "Think about how to make the WHERE clause always return true by injecting into the username field.",
+    "xp": 45,
+    "tags": ["web", "sqli", "authentication", "easy"]
+  },
+  {
+    "id": "web_03",
+    "title": "Header Injection",
+    "category": "Web",
+    "difficulty": "medium",
+    "description": "A NexusCorp API endpoint reads the X-Forwarded-For header to whitelist internal IPs. The server only allows requests from `192.168.1.0/24`. You need to spoof your source IP to gain access to the admin endpoint.",
+    "solution": "X-Forwarded-For: 192.168.1.100",
+    "hint": "HTTP headers can be manipulated. The server trusts the X-Forwarded-For header without validation.",
+    "xp": 65,
+    "tags": ["web", "headers", "bypass", "medium"]
+  },
+  {
+    "id": "web_04",
+    "title": "XSS Payload",
+    "category": "Web",
+    "difficulty": "medium",
+    "description": "A user comment field on the NexusCorp status page reflects input without sanitization. Craft an XSS payload that would execute `alert(document.cookie)` to demonstrate cookie theft.",
+    "solution": "<script>alert(document.cookie)</script>",
+    "hint": "Inject a script tag directly into the comment field. The page reflects input unsanitized.",
+    "xp": 55,
+    "tags": ["web", "xss", "injection", "medium"]
+  }
+]

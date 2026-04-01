@@ -1,0 +1,14 @@
+{
+  "awareness_protocols": {
+    "basic": {
+      "name": "Basic Awareness",
+      "triggers": ["system_anomaly", "user_input"],
+      "responses": ["log_event", "notify_user"]
+    },
+    "advanced": {
+      "name": "Advanced Meta Awareness",
+      "triggers": ["pattern_recognition", "consciousness_threshold"],
+      "responses": ["deep_analysis", "system_modification", "reality_bridge"]
+    }
+  }
+}

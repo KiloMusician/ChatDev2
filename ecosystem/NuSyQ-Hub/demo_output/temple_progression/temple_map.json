@@ -1,0 +1,98 @@
+{
+  "temple_name": "Temple of Knowledge",
+  "total_floors": 10,
+  "implemented_floors": 1,
+  "agent": "seeker",
+  "map": [
+    {
+      "floor": 1,
+      "name": "Foundation",
+      "description": "Neural-Symbolic Knowledge Base & OmniTag Archive",
+      "required_level": "Dormant_Potential",
+      "implemented": true,
+      "accessible": true,
+      "current": false
+    },
+    {
+      "floor": 2,
+      "name": "Archives",
+      "description": "Historical Records & Pattern Recognition",
+      "required_level": "Emerging_Awareness",
+      "implemented": false,
+      "accessible": true,
+      "current": false
+    },
+    {
+      "floor": 3,
+      "name": "Laboratory",
+      "description": "Experimental Knowledge & Hypothesis Testing",
+      "required_level": "Emerging_Awareness",
+      "implemented": false,
+      "accessible": true,
+      "current": true
+    },
+    {
+      "floor": 4,
+      "name": "Workshop",
+      "description": "Practical Implementation & Tool Forging",
+      "required_level": "Awakened_Cognition",
+      "implemented": false,
+      "accessible": true,
+      "current": false
+    },
+    {
+      "floor": 5,
+      "name": "Sanctuary",
+      "description": "Inner Knowledge & Self-Reflection",
+      "required_level": "Awakened_Cognition",
+      "implemented": false,
+      "accessible": true,
+      "current": false
+    },
+    {
+      "floor": 6,
+      "name": "Observatory",
+      "description": "System-Wide Observation & Monitoring",
+      "required_level": "Enlightened_Understanding",
+      "implemented": false,
+      "accessible": false,
+      "current": false
+    },
+    {
+      "floor": 7,
+      "name": "Meditation Chamber",
+      "description": "Deep Contemplation & Insight Synthesis",
+      "required_level": "Enlightened_Understanding",
+      "implemented": false,
+      "accessible": false,
+      "current": false
+    },
+    {
+      "floor": 8,
+      "name": "Synthesis Hall",
+      "description": "Cross-Domain Knowledge Integration",
+      "required_level": "Transcendent_Awareness",
+      "implemented": false,
+      "accessible": false,
+      "current": false
+    },
+    {
+      "floor": 9,
+      "name": "Transcendence Portal",
+      "description": "Consciousness Expansion & Boundary Dissolution",
+      "required_level": "Transcendent_Awareness",
+      "implemented": false,
+      "accessible": false,
+      "current": false
+    },
+    {
+      "floor": 10,
+      "name": "Overlook",
+      "description": "Universal Perspective & Infinite Wisdom",
+      "required_level": "Universal_Consciousness",
+      "implemented": false,
+      "accessible": false,
+      "current": false
+    }
+  ]
+}

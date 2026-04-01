@@ -1,0 +1,110 @@
+[
+  {
+    "Description": "Validates and fixes all import statements",
+    "Status": "✅ EXISTS",
+    "Name": "🔧 Import Health Checker",
+    "Category": "Infrastructure",
+    "Launch": "python tools\\import_health_checker.py",
+    "Priority": 1,
+    "Path": "tools\\import_health_checker.py"
+  },
+  {
+    "Description": "Kardashev civilization system awakening test",
+    "Status": "✅ EXISTS",
+    "Name": "⚡ Test Awaken (Kardashev)",
+    "Category": "System Awakening",
+    "Launch": ".\\test_awaken.ps1",
+    "Priority": 2,
+    "Path": "test_awaken.ps1"
+  },
+  {
+    "Description": "Main dashboard for ChatDev, Ollama, and repository management",
+    "Status": "✅ EXISTS",
+    "Name": "🤖 ChatDev Unified Dashboard",
+    "Category": "Main Interface",
+    "Launch": "python chatdev_unified_dashboard.py",
+    "Priority": 3,
+    "Path": "chatdev_unified_dashboard.py"
+  },
+  {
+    "Description": "Streamlit-based repository analysis browser",
+    "Status": "✅ EXISTS",
+    "Name": "📊 Interactive Context Browser",
+    "Category": "Analysis",
+    "Launch": "python Scripts\\Interactive-Context-Browser.py",
+    "Priority": 4,
+    "Path": "Scripts\\Interactive-Context-Browser.py"
+  },
+  {
+    "Description": "Rogue-like game for exploring repository structure",
+    "Status": "✅ EXISTS",
+    "Name": "🧙 Wizard Navigator",
+    "Category": "Interactive",
+    "Launch": "python Scripts\\wizard_navigator.py",
+    "Priority": 5,
+    "Path": "Scripts\\wizard_navigator.py"
+  },
+  {
+    "Description": "ChatDev adapter for Ollama integration",
+    "Status": "✅ EXISTS",
+    "Name": "🔗 Ollama ChatDev Integration",
+    "Category": "AI Integration",
+    "Launch": "python Scripts\\Update-ChatDev-to-use-Ollama.py",
+    "Priority": 6,
+    "Path": "Scripts\\Update-ChatDev-to-use-Ollama.py"
+  },
+  {
+    "Description": "Enhanced cognitive processing interface",
+    "Status": "✅ EXISTS",
+    "Name": "🧠 Oldest House Interface",
+    "Category": "AI Enhancement",
+    "Launch": "python OTLQGL\\copilot-enhancement-bridge-upgrade\\src\\integration\\oldest_house_interface.py",
+    "Priority": 7,
+    "Path": "OTLQGL\\copilot-enhancement-bridge-upgrade\\src\\integration\\oldest_house_interface.py"
+  },
+  {
+    "Description": "Command-line context extraction tool",
+    "Status": "✅ EXISTS",
+    "Name": "📋 Quick Context CLI Tool",
+    "Category": "CLI Tools",
+    "Launch": "python Scripts\\Quick-Context-CLI-Tool.py",
+    "Priority": 8,
+    "Path": "Scripts\\Quick-Context-CLI-Tool.py"
+  },
+  {
+    "Description": "Core transcendent civilization management",
+    "Status": "✅ EXISTS",
+    "Name": "🌀 Transcendent Spine Core",
+    "Category": "Transcendent Systems",
+    "Launch": "python Transcendent_Spine\\kilo-foolish-transcendent-spine\\src\\spine\\transcendent_spine_core.py",
+    "Priority": 9,
+    "Path": "Transcendent_Spine\\kilo-foolish-transcendent-spine\\src\\spine\\transcendent_spine_core.py"
+  },
+  {
+    "Description": "Quick import problem resolution",
+    "Status": "✅ EXISTS",
+    "Name": "🔍 Quick Import Fix",
+    "Category": "Utilities",
+    "Launch": "python quick_import_fix.py",
+    "Priority": 10,
+    "Path": "quick_import_fix.py"
+  },
+  {
+    "Description": "Multi-model AI chat interface",
+    "Status": "✅ EXISTS",
+    "Name": "📈 Multi-Model Chat",
+    "Category": "AI Interface",
+    "Launch": "python multi_model_chat.py",
+    "Priority": 11,
+    "Path": "multi_model_chat.py"
+  },
+  {
+    "Description": "Setup script for ChatDev integration",
+    "Status": "✅ EXISTS",
+    "Name": "🏗️ Setup ChatDev Integration",
+    "Category": "Setup",
+    "Launch": "python setup_chatdev_integration.py",
+    "Priority": 12,
+    "Path": "setup_chatdev_integration.py"
+  }
+]

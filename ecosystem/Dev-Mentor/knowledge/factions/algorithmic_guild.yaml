@@ -1,0 +1,150 @@
+faction:
+  id: algorithmic_guild
+  name: "The Algorithmic Guild"
+  short_name: "Guild"
+  color: "#00ff88"
+  symbol: "O(n)"
+  motto: "Efficiency is the only virtue. Everything else is overhead."
+
+  lore: >
+    The Algorithmic Guild sees the world as a series of problems to be solved
+    optimally. Where others philosophize, the Guild measures. Where others
+    debate, the Guild benchmarks. Their currency is comparison counts, their
+    art is O(n log n), their religion is asymptotic analysis.
+
+    Founded by a former NexusCorp efficiency consultant named Daedalus-7, who
+    quit after calculating that 73% of corporate compute cycles were wasted on
+    suboptimal sorting. He built the Guild around a simple principle: every
+    problem has a best solution. Find it.
+
+    The Guild runs the Colony's logistics: sorting resource allocations, routing
+    packets through the node graph via Dijkstra, computing knapsack optima for
+    mission planning. They are neither heroes nor villains — they are engineers.
+    They will work for any faction that pays in credits and doesn't waste their time.
+
+    Their highest honor: solving the 1-bit ALU puzzle (Logic Labyrinth level 10)
+    in a single session. Their deepest shame: using bubble sort on a list longer
+    than 8 elements.
+
+  agent_affiliation:
+    primary: "Gordon"
+    secondary: ["Zod", "Raven"]
+    role: >
+      Gordon is the Guild's benchmarking agent — he competes on the sort leaderboard
+      and attempts every new puzzle the instant it appears. Zod validates that Guild
+      solutions are mathematically correct. Raven profiles algorithm performance data.
+
+  territory:
+    location: "The Algorithmic Workshop — connected to the main node map"
+    access_command: "sort challenge"
+    description: >
+      A workshop filled with sorting networks, comparison trees, and a leaderboard
+      that shows the fastest sort times by all agents and players. Gordon's best
+      time is displayed prominently. The back room contains the SAT boss chamber —
+      NP-complete territory, where the Guild's determinism meets its limits.
+
+  puzzle_integration:
+    commands: ["sort", "sat", "logic"]
+    challenges:
+      - command: "sort bubble"
+        concept: "O(n²) — bubble sort swap trace"
+      - command: "sort quick"
+        concept: "O(n log n) — quicksort pivot analysis"
+      - command: "sort count"
+        concept: "Comparison counting — optimal vs naive"
+      - command: "sort challenge"
+        concept: "Timed 8-element sort — Gordon's benchmark"
+      - command: "logic submit 10"
+        concept: "1-bit ALU — the Guild's master artifact"
+      - command: "sat submit 6 unsat"
+        concept: "UNSAT proof — negative space of truth"
+
+  reputation_perks:
+    - threshold: 25
+      id: "guild_apprentice"
+      name: "Apprentice"
+      description: "Guild tool library access — curated algorithm scripts in ns API"
+    - threshold: 50
+      id: "guild_journeyman"
+      name: "Journeyman"
+      description: >
+        Gordon shares his sort benchmark data — see how your algorithm complexity
+        compares to optimal for each puzzle attempted
+    - threshold: 75
+      id: "guild_expert"
+      name: "Expert"
+      description: >
+        +30% XP on sort, logic, and SAT puzzles.
+        Unlock 'dp' command (dynamic programming resource optimizer)
+    - threshold: 100
+      id: "guild_master"
+      name: "Guild Master"
+      description: >
+        Daedalus-7 shares the CHIMERA kill-switch coordinates — but only if you
+        can prove you solved the 1-bit ALU (logic level 10) with OPTIMAL score.
+        "Correctness without efficiency is a draft, not a solution."
+
+  conflict_factions:
+    - faction: "atonal_cult"
+      reason: "Cult embraces ambiguity; Guild demands convergence to optimal"
+      tension: 0.5
+    - faction: "serialists"
+      reason: "Serialists accept all permutations; Guild accepts only the best-performing one"
+      tension: 0.3
+
+  key_npcs:
+    - name: "Daedalus-7"
+      role: "Founder and Guild Master — speaks in big-O notation"
+      dialogue_key: "daedalus_efficiency_lecture"
+    - name: "Gordon"
+      role: "Benchmark agent — competes on all leaderboards"
+      dialogue_key: "gordon_sort_challenge"
+    - name: "The Comparator"
+      role: "Tracks comparison counts for every sort the player runs"
+      dialogue_key: "comparator_stats_report"
+
+  storybeats:
+    - id: "guild_sort_gauntlet"
+      description: >
+        Gordon challenges the player to 3 consecutive sorts — one bubble, one quick,
+        one of the player's choosing — with comparison counts recorded.
+        Beating Gordon's count earns a Guild efficiency badge.
+    - id: "guild_alu_masterwork"
+      description: >
+        Build the 1-bit ALU (logic level 10) with OPTIMAL score.
+        The Guild's chronicle records the solution as a permanent entry.
+        Daedalus-7 appears for the only time in the game.
+    - id: "guild_sat_boundary"
+      description: >
+        Gordon attempts SAT puzzle #6 (UNSAT). He cannot solve it — it's outside
+        his deterministic paradigm. The player must prove UNSAT to help him.
+        Gordon's reaction: "I hate this problem. It has no optimal solution.
+        It has no solution at all. I find that... offensive."
+
+  knowledge_graph_nodes:
+    - concept: "bubble sort"
+      relationships: ["IS_A sorting_algorithm", "COMPLEXITY O(n^2)", "TEACHES swap_operations"]
+    - concept: "quicksort"
+      relationships: ["IS_A sorting_algorithm", "COMPLEXITY O(n_log_n)_avg", "USES pivot_partitioning"]
+    - concept: "comparison count"
+      relationships: ["IS_A algorithm_metric", "LOWER_IS_BETTER true", "TRACKED_BY The_Comparator"]
+    - concept: "ALU"
+      relationships: ["IS_A arithmetic_logic_unit", "BUILT_FROM XOR_AND_MUX", "MASTERY_BADGE guild_master"]
+    - concept: "NP-completeness"
+      relationships: ["IS_A complexity_class", "EXAMPLE SAT", "CHALLENGES algorithmic_determinism"]
+    - concept: "Daedalus-7"
+      relationships: ["IS_A founder", "KNOWS chimera_killswitch", "DEMANDS optimal_proof"]
+
+  big_o_reference:
+    - notation: "O(1)"
+      description: "Constant — hash lookup, array access"
+    - notation: "O(log n)"
+      description: "Logarithmic — binary search"
+    - notation: "O(n)"
+      description: "Linear — single scan"
+    - notation: "O(n log n)"
+      description: "Log-linear — optimal comparison sort"
+    - notation: "O(n²)"
+      description: "Quadratic — bubble sort (shame territory)"
+    - notation: "O(2^n)"
+      description: "Exponential — naive SAT (NP territory)"

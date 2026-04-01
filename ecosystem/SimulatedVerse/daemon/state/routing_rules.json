@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-09-03T05:21:46+00:00",
+  "rules": {
+    "repo_audit.json": "expand_tasks_max_3",
+    "llm_failures.json": "schedule_retry_eta_adaptive",
+    "sim_proof.json": "open_followups_crashes_perf",
+    "*receipt*.json": "acknowledge_continue_flow",
+    "agents_matrix.json": "update_agent_routing",
+    "cycle-*.json": "extract_next_actions"
+  },
+  "max_tasks_per_cycle": 3,
+  "immediate_execution": true
+}

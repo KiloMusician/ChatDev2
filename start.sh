@@ -13,8 +13,16 @@ for i in $(seq 1 30); do
   sleep 1
 done
 
+# ── NuSyQ Ecosystem Services ──────────────────────────────────────────────
+if [ -d "ecosystem" ]; then
+  echo "Starting NuSyQ ecosystem services..."
+  bash ecosystem/start_services.sh &
+  ECOSYSTEM_PID=$!
+fi
+
 # Start frontend on port 5000 (Vite proxies /api and /ws to backend)
 cd frontend && npm run dev
 
-# If frontend exits, kill backend
+# Cleanup on exit
 kill $BACKEND_PID 2>/dev/null
+kill $ECOSYSTEM_PID 2>/dev/null

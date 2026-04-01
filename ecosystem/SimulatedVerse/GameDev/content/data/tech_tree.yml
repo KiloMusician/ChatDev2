@@ -1,0 +1,205 @@
+# Technology Tree - Literal research progression that unlocks UI phases and mechanics
+
+techs:
+  # Tier 0 - Foundation
+  basic_automation:
+    name: "Basic Automation"
+    description: "Automate simple resource gathering"
+    cost:
+      research: 10
+    time_seconds: 30
+    prerequisites: []
+    unlocks:
+      - automation_ui_hints
+      - basic_auto_purchase
+    effects:
+      - type: feature_unlock
+        value: basic_automation
+  
+  materials_processing:
+    name: "Materials Processing"
+    description: "Unlock materials as a resource type"
+    cost:
+      research: 15
+    time_seconds: 45
+    prerequisites: []
+    unlocks:
+      - materials_resource
+      - basic_buildings
+    effects:
+      - type: resource_unlock
+        value: materials
+
+  # Tier 1 - QoL and UI Phase Shift
+  nanobots:
+    name: "Nanobot Fabrication"
+    description: "Microscopic assemblers that enhance your interface"
+    cost:
+      research: 25
+      materials: 10
+    time_seconds: 60
+    prerequisites:
+      - basic_automation
+      - materials_processing
+    unlocks:
+      - hover_tooltips
+      - eta_predictions
+      - resource_breakdown_ui
+      - ui_phase_1
+    effects:
+      - type: ui_phase_shift
+        value: 1
+      - type: feature_unlock
+        value: nanobots_ui
+
+  advanced_sensors:
+    name: "Advanced Sensors"
+    description: "Enhanced detection and analysis systems"
+    cost:
+      research: 20
+      nanobots: 5
+    time_seconds: 75
+    prerequisites:
+      - nanobots
+    unlocks:
+      - anomaly_detection
+      - performance_monitoring
+    effects:
+      - type: feature_unlock
+        value: advanced_diagnostics
+
+  # Tier 2 - Cognitive Systems
+  civics_kernel:
+    name: "Civics Kernel"
+    description: "Advanced AI for citizen management and coordination"
+    cost:
+      research: 50
+      nanobots: 20
+    time_seconds: 120
+    prerequisites:
+      - nanobots
+      - advanced_sensors
+    unlocks:
+      - citizen_ai_improvements
+      - job_optimization
+      - draggable_ui_windows
+      - in_game_terminal
+      - ui_phase_2
+    effects:
+      - type: ui_phase_shift
+        value: 2
+      - type: feature_unlock
+        value: civics_kernel
+
+  quantum_computing:
+    name: "Quantum Computing"
+    description: "Quantum processors for advanced calculations"
+    cost:
+      research: 75
+      nanobots: 50
+    time_seconds: 180
+    prerequisites:
+      - civics_kernel
+    unlocks:
+      - quantum_optimizations
+      - prestige_system
+    effects:
+      - type: feature_unlock
+        value: quantum_boost
+
+  # Tier 3 - Synthesis and Holographic UI
+  holo_fabrication:
+    name: "Holographic UI Fabrication"
+    description: "Project interfaces directly into 3D space"
+    cost:
+      research: 100
+      nanobots: 100
+      quantum_cores: 10
+    time_seconds: 300
+    prerequisites:
+      - quantum_computing
+    unlocks:
+      - 3d_scene_previews
+      - synthesis_graph_ui
+      - theme_customization
+      - ui_phase_3
+    effects:
+      - type: ui_phase_shift
+        value: 3
+      - type: feature_unlock
+        value: holographic_ui
+
+  # Game-specific tech trees
+  tower_defense_mastery:
+    name: "Tower Defense Mastery"
+    description: "Advanced targeting and upgrade systems"
+    cost:
+      research: 30
+    time_seconds: 90
+    prerequisites:
+      - basic_automation
+    unlocks:
+      - tower_ai_targeting
+      - tower_upgrade_tree
+      - wave_prediction
+    effects:
+      - type: tower_enhancement
+        value: ai_targeting
+
+  colony_optimization:
+    name: "Colony Optimization"
+    description: "Efficient citizen management and resource flow"
+    cost:
+      research: 40
+      nanobots: 15
+    time_seconds: 120
+    prerequisites:
+      - nanobots
+    unlocks:
+      - job_specialization
+      - happiness_algorithms
+      - resource_optimization
+    effects:
+      - type: colony_enhancement
+        value: optimization
+
+# Research categories for UI organization
+categories:
+  foundation:
+    name: "Foundation Technologies"
+    techs: [basic_automation, materials_processing]
+    
+  ui_evolution:
+    name: "Interface Evolution"
+    techs: [nanobots, civics_kernel, holo_fabrication]
+    description: "Each tech literally transforms your interface capabilities"
+    
+  game_mechanics:
+    name: "Game System Mastery"
+    techs: [tower_defense_mastery, colony_optimization]
+    
+  advanced_computing:
+    name: "Advanced Computing"
+    techs: [advanced_sensors, quantum_computing]
+
+# UI Phase progression mapping
+ui_phases:
+  0:
+    name: "Basic Terminal"
+    description: "Minimal HUD, 3 buttons, error logs"
+    unlocked_by: default
+    
+  1:
+    name: "Nanobot-Enhanced Interface" 
+    description: "Hover tooltips, ETA predictions, resource breakdowns"
+    unlocked_by: nanobots
+    
+  2:
+    name: "Cognitive Interface"
+    description: "Draggable windows, in-game terminal, agent NPCs"
+    unlocked_by: civics_kernel
+    
+  3:
+    name: "Holographic Workstation"
+    description: "3D previews, synthesis graphs, advanced theming"
+    unlocked_by: holo_fabrication

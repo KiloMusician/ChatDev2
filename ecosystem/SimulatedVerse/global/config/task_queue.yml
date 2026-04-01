@@ -1,0 +1,127 @@
+meta:
+  name: "NuSyQ Orchestrator Plan"
+  prefer_refactor_over_new: true
+  token_budget_mode: "offline"   # never call networked LLMs here
+  max_batch: 5                   # per run selection
+  log_dir: "./.orchestrator/logs"
+
+weights:
+  # Scoring priorities (higher is better)
+  fix_errors: 5
+  complete_placeholders: 4
+  improve_existing_module: 4
+  add_tests_for_changed_code: 4
+  reduce_duplication: 3
+  docs_and_examples: 3
+  performance_micro: 2
+  new_module: -1                 # slight penalty so we prefer existing infra
+  duplicate_or_conflict: -8
+  risky_or_unreviewed: -6
+
+paths:
+  module_roots:
+    - "src"
+    - "tools"
+    - "ops"
+    - "server"
+    - "client"
+    - "shared"
+  test_roots:
+    - "tests"
+    - "reports"
+  todo_globs:
+    - "**/*.py"
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.js"
+    - "**/*.mjs"
+    - "**/*.md"
+    - "**/*.json"
+    - "**/*.yml"
+
+tasks:
+  # ΞNuSyQ Core System Tasks  
+  - id: T001
+    title: "Fix syntax + typos in ΞNuSyQ engine core"
+    kind: "fix"
+    targets: ["src/engine", "src/bus"]
+    notes: "Scan TODO/FIXME, run unit tests, repair consciousness evolution."
+  - id: T002
+    title: "Complete placeholders in Temple elevator system"
+    kind: "complete"
+    targets: ["src/temple", "src/engine/state.mjs"]
+    notes: "Finish floor unlock logic and knowledge point progression."
+  - id: T003
+    title: "Refactor duplicate resource calculations"
+    kind: "refactor"
+    targets: ["src/engine/scheduler.mjs", "tools/simbot.mjs"]
+    notes: "Consolidate resource generation into reusable module."
+  - id: T004
+    title: "Add tests for consciousness evolution system"
+    kind: "test"
+    targets: ["src/engine/consciousness.mjs", "src/engine/scheduler.mjs"]
+    notes: "Test awareness stage transitions and meta-cognitive thresholds."
+  - id: T005
+    title: "Docs: Three-temple architecture guide"
+    kind: "docs"
+    targets: ["replit.md", "src/temple", "src/house_of_leaves", "src/oldest_house"]
+    notes: "Document Temple/House/Oldest House navigation and ethics."
+  - id: T006
+    title: "Optimize Guardian containment performance"
+    kind: "perf"
+    targets: ["src/oldest_house/containment", "src/guardian"]
+    notes: "Profile threat detection loops and quarantine efficiency."
+  - id: T007
+    title: "Complete House of Leaves maze generation"
+    kind: "complete"
+    targets: ["src/house_of_leaves/maze", "src/house_of_leaves/debug"]
+    notes: "Finish recursive room generation and debug node placement."
+  - id: T008
+    title: "Add mobile UI adaptation layer"
+    kind: "improve"
+    targets: ["src/ui", "client/src"]
+    notes: "Responsive ASCII HUD for mobile/desktop switching."
+
+  # 123 Mechanics Implementation Tasks (Tier I Priority)
+  - id: T009
+    title: "Implement Tier I ASCII foundations (m001-m005)"
+    kind: "new"
+    targets: ["src/mechanics/ascii"]
+    notes: "Start with procedural ASCII rendering, map layers, particles."
+  - id: T010
+    title: "Build core survival loop (m006-m010)"
+    kind: "new" 
+    targets: ["src/sim", "src/ai", "src/world"]
+    notes: "Survival stats, pawn needs, mining, tile physics."
+  - id: T011
+    title: "Establish basic UI systems (m016-m020)"
+    kind: "new"
+    targets: ["src/ui", "src/rpg"]
+    notes: "ASCII HUD, inventory, peaceful idle fallback."
+  - id: T012
+    title: "Integrate mechanics.yml with orchestrator"
+    kind: "integrate"
+    targets: ["orchestrator", "config"]
+    notes: "Teach smart orchestrator to parse and prioritize 123 mechanics."
+    
+  # Incremental Idler Protocol Implementation
+  - id: T013
+    title: "Implement core idle resource generation (m008+m023+m032)"
+    kind: "new"
+    targets: ["src/idle"]
+    notes: "Offline progression, production chains, scalable growth systems."
+  - id: T014
+    title: "Build AI Council decision system"
+    kind: "new"
+    targets: ["src/council"]
+    notes: "Architect, Chronicler, Overseer, Ecologist, Sentinel roles with intermediary."
+  - id: T015
+    title: "Create cascade event trigger system"
+    kind: "new"
+    targets: ["src/events", "src/meta"]
+    notes: "Post-task triggers, recursive optimization, Rube Goldbergian feedback loops."
+  - id: T016
+    title: "Implement mobile-responsive ASCII HUD"
+    kind: "improve"
+    targets: ["src/ui", "client/src"]
+    notes: "Touch gestures, adaptive layouts, battery optimization."

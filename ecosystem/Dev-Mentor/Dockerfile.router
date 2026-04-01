@@ -1,0 +1,23 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r /app/requirements.txt
+
+COPY config/ /app/config/
+COPY services/ /app/services/
+COPY scripts/ /app/scripts/
+
+ENV PYTHONUNBUFFERED=1 \
+    MODEL_ROUTER_PORT=9001 \
+    ROUTER_CONFIG_PATH=/app/config/router.yml
+
+EXPOSE 9001
+
+CMD ["python", "scripts/model_router.py"]

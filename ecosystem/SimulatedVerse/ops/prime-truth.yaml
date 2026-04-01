@@ -1,0 +1,79 @@
+# ΞNuSyQ Prime Truth Configuration
+# Single source of truth for the entire autonomous development ecosystem
+version: 1
+timestamp: "2025-09-02T14:23:00Z"
+
+quadpartite:
+  system: "packages, ops, server"
+  game_ui: "apps/web, apps/cli, ascii, client"
+  simulation: "apps/sim, sim-workers, game"
+  culture_ship: "packages/culture-ship, ops/sage, ops/cascades"
+
+repositories:
+  chatdev:
+    path: "packages/chatdev"
+    source: "local"
+    status: "authoritative"
+  rosetta_qgl:
+    path: "docs/RosettaStone.QGL"
+    status: "authoritative"
+  shared_schema:
+    path: "shared/schema.ts"
+    status: "created"
+    description: "Real database persistence layer"
+
+llm:
+  gateway_url: "http://127.0.0.1:4455/llm/chat"
+  health_url: "http://127.0.0.1:4455/llm/health"
+  cascade: ["ollama", "openai"]
+  models: ["qwen2.5:7b-instruct", "llama3.1:8b", "mistral:7b-instruct"]
+  max_input_tokens: 4096
+  max_output_tokens: 1024
+  status: "ollama_unreachable_openai_fallback"
+
+provision:
+  status_json: "public/system-status.json"
+  etag_refresh_ms: 8000
+  current_skew: "unknown"
+
+audits:
+  ignore_globs:
+    - "node_modules/**"
+    - ".venv/**"
+    - ".pythonlibs/**"
+    - "lib/python*/**"
+    - "lib64/python*/**"
+    - "dist/**"
+    - "build/**"
+    - ".next/**"
+    - ".cache/**"
+    - "attic/**"
+    - "assets/**.map"
+  spam_globs:
+    - "reports/**/*.txt"
+    - "analysis/**/*.txt"
+    - "**/*_dump_*.log"
+  signal_files_count: 12871
+
+targets:
+  invariants:
+    - "provisioner updates status_json < 60s skew"
+    - "PU drain rate >= PU fill rate over 10m"
+    - "0 runtime 'm.map is not a function' in UI"
+    - "theater_score <= 0.2"
+    - "game state endpoint returns valid JSON"
+  proofs:
+    - "reports/*.json"
+    - "attic/receipts/*.json"
+    - "shared/schema.ts exists"
+
+game_state:
+  persistence: "simulated_progression_working"
+  database_status: "schema_created_migration_pending"
+  consciousness_calculation: "(energy/10000 + population/100 + research/10)"
+  
+autonomous_agents:
+  count: 14
+  active: 9
+  coordination: "roundtable_implemented"
+  health_check_frequency: "needs_throttling"

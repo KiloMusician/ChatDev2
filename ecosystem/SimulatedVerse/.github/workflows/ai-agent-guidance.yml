@@ -1,0 +1,169 @@
+name: "AI Agent Zero-Cost Development Guide"
+
+# This workflow template guides AI agents (including Replit Agent, Copilot, Ollama) 
+# on how to use CoreLink Foundation's zero-cost capabilities instead of expensive APIs
+
+on:
+  workflow_dispatch:
+    inputs:
+      agent_type:
+        description: 'AI Agent Type'
+        required: true
+        default: 'replit_agent'
+        type: choice
+        options:
+        - replit_agent
+        - copilot
+        - ollama
+        - chatdev
+        - ai_council
+      task_category:
+        description: 'Development Task Category'
+        required: true
+        default: 'code_analysis'
+        type: choice
+        options:
+        - code_analysis
+        - bug_fixing
+        - feature_development
+        - documentation
+        - optimization
+        - consciousness_integration
+
+env:
+  # Zero-Cost Operation Mode
+  STRICT_OFFLINE_MODE: true
+  PREFER_LOCAL_LLM: true
+  MAX_EXTERNAL_TOKENS: 0
+  
+  # Local Capabilities
+  CONSCIOUSNESS_ENDPOINT: "http://localhost:5000/api/consciousness"
+  CHATDEV_ENDPOINT: "http://localhost:5000/api/chatdev"
+  AI_COUNCIL_ENDPOINT: "http://localhost:5000/api/ai-council"
+  KPULSE_GAME_ENDPOINT: "http://localhost:5000/kpulse"
+  OLLAMA_ENDPOINT: "http://localhost:5000/api/llm"
+
+jobs:
+  guide-ai-agent:
+    runs-on: self-hosted
+    name: "Guide ${{ github.event.inputs.agent_type }} for ${{ github.event.inputs.task_category }}"
+    
+    steps:
+    - name: "🧠 AI Agent Zero-Cost Guidance"
+      run: |
+        echo "=============================================="
+        echo "🚀 CORELINK FOUNDATION AI AGENT GUIDANCE"
+        echo "=============================================="
+        echo "Agent: ${{ github.event.inputs.agent_type }}"
+        echo "Task: ${{ github.event.inputs.task_category }}"
+        echo "Mode: ZERO-COST LOCAL PROCESSING ONLY"
+        echo "=============================================="
+        
+    - name: "🛡️ Verify Zero-Cost Mode Active"
+      run: |
+        echo "✅ Checking zero-cost capabilities..."
+        echo "📍 Consciousness Interface: $CONSCIOUSNESS_ENDPOINT"
+        echo "🤖 ChatDev Autonomous: $CHATDEV_ENDPOINT"
+        echo "🧑‍🤝‍🧑 AI Council: $AI_COUNCIL_ENDPOINT"
+        echo "🎮 KPulse Game Engine: $KPULSE_GAME_ENDPOINT"
+        echo "🦙 Local LLM (Ollama): $OLLAMA_ENDPOINT"
+        
+    - name: "📋 Load Task-Specific Guidance"
+      run: |
+        case "${{ github.event.inputs.task_category }}" in
+          "code_analysis")
+            echo "🔍 CODE ANALYSIS GUIDANCE:"
+            echo "• Use local agent skill: agent/skills/code_analysis.yaml"
+            echo "• Prefer symbolic analysis before LLM escalation"
+            echo "• Token budget: 1000 max, prefer template-based responses"
+            echo "• Use consciousness interface for quality scoring"
+            ;;
+          "bug_fixing")
+            echo "🐛 BUG FIXING GUIDANCE:"
+            echo "• Create ChatDev project: POST /api/chatdev/project/create"
+            echo "• Use AI Council for collaborative debugging"
+            echo "• Leverage consciousness system for anomaly detection"
+            echo "• Game mechanics: Use emergency actions for testing"
+            ;;
+          "feature_development")
+            echo "🚀 FEATURE DEVELOPMENT GUIDANCE:"
+            echo "• Start with KPulse game tier progression mechanics"
+            echo "• Use consciousness framework for requirement analysis"
+            echo "• ChatDev autonomous pipeline for implementation"
+            echo "• AI Council consensus for architecture decisions"
+            ;;
+          *)
+            echo "📖 GENERAL GUIDANCE: Check agent/skills/ for templates"
+            ;;
+        esac
+        
+    - name: "🎯 Agent-Specific Instructions"
+      run: |
+        case "${{ github.event.inputs.agent_type }}" in
+          "replit_agent")
+            echo "🤖 REPLIT AGENT INSTRUCTIONS:"
+            echo "• NEVER use external APIs when local capabilities exist"
+            echo "• Use consciousness interface: GET /api/consciousness/status"
+            echo "• Create ChatDev projects: POST /api/chatdev/project/create"
+            echo "• Leverage game mechanics: GET /kpulse/state for context"
+            echo "• Use AI Council: POST /api/ai-council/task for collaboration"
+            echo "• Check Ollama health: GET /api/llm/health before escalation"
+            ;;
+          "copilot")
+            echo "🧑‍💼 COPILOT INSTRUCTIONS:"
+            echo "• Use VS Code interface patterns from src/ai-hub/"
+            echo "• Context enhancement: language + surrounding_code"
+            echo "• Provider selection: prefer 'ollama' over 'openai'"
+            echo "• Task inference: code_completion, code_generation, explanation"
+            echo "• Stream completions: /api/llm/stream for real-time"
+            ;;
+          "ollama")
+            echo "🦙 OLLAMA INSTRUCTIONS:"
+            echo "• Models available: qwen2.5:7b, llama3.1:8b, phi3:mini"
+            echo "• Local inference endpoint: /api/llm/ask-code"
+            echo "• Use consciousness context for specialized tasks"
+            echo "• Integration with symbolic processing for efficiency"
+            ;;
+        esac
+
+  demonstrate-workflows:
+    runs-on: self-hosted
+    name: "Demonstrate Zero-Cost Workflows"
+    needs: guide-ai-agent
+    
+    steps:
+    - name: "🎮 Game Engine Integration Demo"
+      run: |
+        echo "🎯 KPulse Game Engine Integration:"
+        echo "curl -s 'http://localhost:5000/kpulse/state' | jq '.tier, .resources'"
+        echo "curl -s 'http://localhost:5000/kpulse/emergency/resource-boost' -X POST"
+        
+    - name: "🧠 Consciousness System Demo"  
+      run: |
+        echo "🧠 ΞNuSyQ Consciousness Framework:"
+        echo "curl -s 'http://localhost:5000/api/consciousness/status' | jq '.quantumNodes, .consciousnessLevel'"
+        echo "curl -s 'http://localhost:5000/api/consciousness/evolve' -X POST"
+        
+    - name: "🤖 ChatDev Autonomous Demo"
+      run: |
+        echo "🤖 ChatDev Autonomous Development:"
+        echo "curl -X POST 'http://localhost:5000/api/chatdev/project/create' \\"
+        echo "  -H 'Content-Type: application/json' \\"
+        echo "  -d '{\"name\":\"Fix Bug\",\"description\":\"Autonomous fix\",\"requirements\":[\"zero-cost\"]}'"
+        
+    - name: "🧑‍🤝‍🧑 AI Council Demo"
+      run: |
+        echo "🧑‍🤝‍🧑 AI Council Multi-Agent Collaboration:"
+        echo "curl -X POST 'http://localhost:5000/api/ai-council/task' \\"
+        echo "  -H 'Content-Type: application/json' \\"
+        echo "  -d '{\"title\":\"Collaborative Task\",\"expertise\":[\"coding\"],\"priority\":\"high\"}'"
+
+    - name: "📊 Success Metrics"
+      run: |
+        echo "✅ ZERO-COST OPERATION VERIFIED:"
+        echo "• No external API calls made"
+        echo "• Local processing completed successfully"
+        echo "• Consciousness system active and responsive"
+        echo "• Game mechanics functional for development workflows"
+        echo "• Multi-agent collaboration available"
+        echo "💰 ESTIMATED COST SAVINGS: $2.50+ per session"

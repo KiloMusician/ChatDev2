@@ -1,0 +1,188 @@
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+**/.DS_Store
+**/__pycache__
+**/.venv
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+README.md
+# Explicitly exclude large and unnecessary folders
+ChatDev/
+ChatDev/WareHouse/
+Archive/
+examples/
+docs/
+Jupyter/
+State/
+tests/
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+**/.DS_Store
+**/__pycache__
+**/.venv
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+README.md
+# NOTE: This .dockerignore is intended for Docker builds when NuSyQ is the
+# build context root. It contains patterns to exclude sibling repos and
+# nested-workspace artifacts. If you build a different subproject as the
+# Docker context, adjust patterns accordingly (e.g., remove ChatDev/WareHouse).
+
+# --- NuSyQ Dockerignore: Minimal, Secure, Fast Build ---
+# Exclude all unnecessary files/folders for Docker build context
+# Only include: src/, config/*.json.template, config/*.yaml.template, requirements.txt, Dockerfile, README.md
+
+# Python environments and build artifacts
+.venv/
+venv/
+env/
+__pycache__/
+build/
+dist/
+*.egg-info/
+.Python
+
+# Node modules (if any)
+node_modules/
+
+# Logs, temp, and test outputs
+*.log
+*.tmp
+temp/
+tmp/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# IDE/project files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Large data, reports, and test artifacts
+Reports/
+Logs/
+testing_chamber/
+.snapshots/
+NuSyQ-Hub-Obsidian/
+# Explicitly exclude large and unnecessary folders
+ChatDev/WareHouse/
+Archive/
+examples/
+docs/
+Jupyter/
+State/
+tests/
+
+# Secure config and secrets
+config/.secure
+config/.secure/
+**/.secure/
+*.secure
+.env
+.env.*
+*.local
+config/*.json
+config/*.yaml
+!config/*.json.template
+!config/*.yaml.template
+
+# Model binaries (mount as volume or download at runtime)
+models/
+ollama/models/
+
+# Exclude local clean clones and their virtualenvs which may have restricted
+# permissions that block Docker context transfer on Windows hosts.
+nusyq_clean_clone/.venv/
+nusyq_clean_clone/.venv/**
+nusyq_clean_clone/
+
+# Git and CI/CD
+.git/
+.gitignore
+.gitattributes
+.github/
+.gitlab-ci.yml
+.travis.yml
+azure-pipelines.yml
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Deployment and archives
+k8s/
+kubernetes/
+deploy/
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Keep only what is needed
+!src/
+!requirements.txt
+!README.md
+!Dockerfile

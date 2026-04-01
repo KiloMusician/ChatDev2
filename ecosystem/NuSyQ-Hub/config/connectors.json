@@ -1,0 +1,76 @@
+{
+  "connectors": {
+    "ollama": {
+      "module": "src.integration.ollama_connector",
+      "class": "OllamaConnector",
+      "config": {
+        "name": "ollama",
+        "enabled": true,
+        "endpoint": "http://127.0.0.1:11434",
+        "timeout": 120,
+        "retry_count": 3,
+        "default_model": "qwen2.5-coder:7b",
+        "metadata": {
+          "type": "local_llm",
+          "models_available": [
+            "qwen2.5-coder:7b",
+            "qwen2.5-coder:14b",
+            "deepseek-coder-v2:16b",
+            "codellama:7b",
+            "llama3.1:8b"
+          ]
+        }
+      }
+    },
+    "lmstudio": {
+      "module": "src.integration.lmstudio_connector",
+      "class": "LMStudioConnector",
+      "config": {
+        "name": "lmstudio",
+        "enabled": true,
+        "endpoint": "${LMSTUDIO_BASE_URL:-http://10.0.0.172:1234}",
+        "timeout": 120,
+        "retry_count": 3,
+        "default_model": "gpt-oss-20b",
+        "metadata": {
+          "type": "local_llm",
+          "openai_compatible": true,
+          "models_available": [
+            "gpt-oss-20b",
+            "text-embedding-nomic-embed-text-v1.5"
+          ]
+        }
+      }
+    },
+    "chatdev": {
+      "module": "src.integration.chatdev_resilience_handler",
+      "class": "ResilientChatDevHandler",
+      "config": {
+        "name": "chatdev",
+        "enabled": true,
+        "chatdev_path": "C:/Users/keath/NuSyQ/ChatDev",
+        "run_ollama_path": "C:/Users/keath/NuSyQ/ChatDev/run_ollama.py",
+        "default_model": "qwen2.5-coder:7b",
+        "timeout": 600,
+        "metadata": {
+          "type": "multi_agent",
+          "fallback_enabled": true
+        }
+      }
+    },
+    "mcp_server": {
+      "module": "src.integration.chatdev_mcp_server",
+      "class": "ChatDevMCPServer",
+      "config": {
+        "name": "mcp_server",
+        "enabled": true,
+        "port": 8081,
+        "timeout": 300,
+        "metadata": {
+          "type": "mcp",
+          "feature_flag": "chatdev_mcp_enabled"
+        }
+      }
+    }
+  }
+}

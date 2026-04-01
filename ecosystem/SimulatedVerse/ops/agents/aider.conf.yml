@@ -1,0 +1,6 @@
+model: openrouter/openai/gpt-4o-mini  # name is arbitrary; we override base URL
+openai-api-base: ${OPENAI_BASE_URL}
+openai-api-key: ${OPENAI_API_KEY}
+git: true
+auto-commits: true
+read: .

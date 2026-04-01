@@ -1,0 +1,11 @@
+{
+  "agents": [
+    { "name": "copilot", "status": "idle", "last_seen": "2026-01-24T12:00:00Z" },
+    { "name": "claude", "status": "running", "last_seen": "2026-01-24T12:01:00Z" }
+  ],
+  "quests": [
+    { "id": "q-001", "title": "Sync world state", "status": "in-progress" },
+    { "id": "q-002", "title": "Audit terminals", "status": "queued" }
+  ],
+  "errors": []
+}

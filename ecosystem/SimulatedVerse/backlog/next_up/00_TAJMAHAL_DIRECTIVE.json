@@ -1,0 +1,304 @@
+{
+  "id": "00_TAJMAHAL_DIRECTIVE",
+  "type": "multi_directive",
+  "version": "5.0-zeta",
+  "tier": 0,
+  "priority": 0,
+  "mode": "boolean-first",
+  "pipeline": "Investigate►Repair►Integrate►Prove►Document►Loop",
+  "law": {
+    "receipts_over_claims": true,
+    "no_delete": "prefer_quarantine_then_.recycle_then_compaction",
+    "delete_allowed_if": [
+      "snapshotted",
+      "referenced_in_receipt",
+      "footprint_reduced_and_recoverable"
+    ],
+    "theater_threshold_theta": 0.2,
+    "queue_health_H_min": 0.8,
+    "ui_skew_seconds_max": 60
+  },
+  "budgets": {
+    "repo_size_gb_soft": 3.5,
+    "repo_size_gb_hard": 4.0,
+    "attic_size_gb_soft": 1.0,
+    "llm_tokens_soft": "adaptive",
+    "parallelism_max_when_red": 2
+  },
+  "policies": {
+    "incremental_game_only": true,
+    "dev_pipeline_incremental": false,
+    "proof_or_it_didnt_happen": true,
+    "adaptive_tau_prime_bounds": [0.67, 1.25],
+    "attic_can_shrink": true,
+    "anneal_impurities_into_sim": true
+  },
+
+  "council": {
+    "agents": [
+      {"name": "Raven", "role": "skeptic"},
+      {"name": "Librarian", "role": "context"},
+      {"name": "𝕄ₗₐ⧉𝕕𝕖𝕟𝕔", "role": "planner"},
+      {"name": "Artificer", "role": "builder"},
+      {"name": "Alchemist", "role": "stabilizer"},
+      {"name": "Protagonist", "role": "player"},
+      {"name": "Navigator", "role": "wizard"},
+      {"name": "CultureShip", "role": "sage"},
+      {"name": "Watchdog", "role": "spine"},
+      {"name": "Librarian-II", "role": "indexer"},
+      {"name": "Auditor", "role": "compliance"},
+      {"name": "Redstone", "role": "state_machine"},
+      {"name": "Composer", "role": "music_hyper_set"},
+      {"name": "ChatDevBridge", "role": "bridge"},
+      {"name": "Janitor", "role": "bloat_control"}
+    ],
+    "fallbacks": {
+      "llm": ["ollama", "gateway", "openai_once", "llama.cpp", "vacuum"],
+      "tools_only_when_spine_down": true
+    },
+    "routing_k_max": 3,
+    "every_turn_requires_receipt": true
+  },
+
+  "receipts_schema": {
+    "types": [
+      "git_diff",
+      "json_receipt",
+      "sim_proof",
+      "ui_heartbeat",
+      "metrics_snapshot",
+      "moves_script",
+      "codemod_report",
+      "knowledge_update"
+    ],
+    "must_include": ["who", "what", "where", "artifact_path", "timestamp"],
+    "examples": {
+      "json_receipt": {
+        "who": "AgentName",
+        "what": "action(args)",
+        "where": "path/to/artifact",
+        "artifact_path": "reports/…json",
+        "timestamp": "ISO-8601"
+      }
+    }
+  },
+
+  "gates": [
+    {"id": "G1_LLM_Spine", "probe": "curl -sf ${OLLAMA_HOST:-http://127.0.0.1:11434}/api/version || echo DOWN", "expect": "NOT DOWN"},
+    {"id": "G2_Queue_Live", "probe": "test -s reports/cycle-* || echo EMPTY", "expect": "NOT EMPTY"},
+    {"id": "G3_UI_Fresh", "probe": "python - <<'PY'\nimport os, time, json\np='public/system-status.json'\nprint('STALE' if (not os.path.exists(p) or time.time()-os.path.getmtime(p)>60) else 'FRESH')\nPY", "expect": "FRESH"},
+    {"id": "G4_Disk_Noise", "probe": "bash -lc 'git ls-files | wc -l'", "expect": "> 0"}
+  ],
+
+  "zeta_checks": [
+    {
+      "id": "Z1_agents_exist",
+      "note": "Detect declared agents; do not recreate if present.",
+      "probe": "bash -lc 'ls -1 agents 2>/dev/null || echo NONE'",
+      "expect": "!= NONE",
+      "on_pass": ["receipted:reports/agents_matrix.json?classify_present_agents"],
+      "on_fail": ["create:reports/agents_matrix.json{skeleton}", "announce:Raven->diagnose('why_agents_missing')"]
+    },
+    {
+      "id": "Z2_chatdev_bridge",
+      "probe": "bash -lc 'grep -R \"chatdev\" -n . | head -n 1 || echo MISSING'",
+      "expect": "!= MISSING",
+      "on_pass": ["bridge:ChatDevBridge->index_and_map_prompts"],
+      "on_fail": ["skip_creation", "route:Navigator->plan_minimal_bridge_without_installs"]
+    },
+    {
+      "id": "Z3_prompts_presence",
+      "probe": "bash -lc 'test -d prompts && echo OK || echo MISSING'",
+      "expect": "OK",
+      "on_pass": ["index:Librarian->index_update('prompts/')"],
+      "on_fail": ["create:backlog/next_up/PU_prompts_discovery.json{action:\"discover_in_code_comments\"}"]
+    },
+    {
+      "id": "Z4_rosetta_qgl",
+      "probe": "bash -lc 'grep -R \"RosettaStone.QGL\" -n . | head -n 1 || echo MISSING'",
+      "expect": "!= MISSING",
+      "on_pass": ["link:Librarian->graph_edges_update", "prove:reports/rosetta_links.json"],
+      "on_fail": ["route:𝕄ₗₐ⧉𝕕𝕖𝕟𝕔->plan_stub_and_recover_from_lexicon"]
+    },
+    {
+      "id": "Z5_omnimega_tagging",
+      "probe": "bash -lc 'grep -R \"OmniTag\\|MegaTag\" -n . | head -n 1 || echo MISSING'",
+      "expect": "!= MISSING",
+      "on_pass": ["apply:Janitor->tag_touched_files_with_templates"],
+      "on_fail": ["no_create_now", "append:receipts->needs_tag_template_bootstrap"]
+    },
+    {
+      "id": "Z6_ollama_health",
+      "probe": "bash -lc 'curl -sf ${OLLAMA_HOST:-http://127.0.0.1:11434}/api/version || echo DOWN'",
+      "expect": "!= DOWN",
+      "on_pass": ["route:Spine_online->resume_full_agents"],
+      "on_fail": [
+        "fallback_chain:['gateway','openai_once','llama.cpp','vacuum']",
+        "guard:Alchemist->rate_limit_and_backoff",
+        "record:reports/llm_failures.json"
+      ]
+    },
+    {
+      "id": "Z7_repo_size",
+      "probe": "bash -lc 'du -s . | awk \"{print $1}\"'",
+      "expect": "<= $((4*1024*1024))",
+      "on_pass": ["receipt:reports/footprint_ok.json"],
+      "on_fail": [
+        "route:Janitor->bloat_control",
+        "action:dedupe_hash_groups",
+        "action:move_heavy_assets_to_attic",
+        "action:.recycle_compaction",
+        "prove:reports/bloat_reduction.json"
+      ]
+    },
+    {
+      "id": "Z8_attic_pressure",
+      "probe": "bash -lc 'test -d attic && du -s attic | awk \"{print $1}\" || echo 0'",
+      "expect": "<= $((1*1024*1024))",
+      "on_pass": ["ok"],
+      "on_fail": [
+        "analyze:Janitor->attic_consolidation_report",
+        "codemod:Artificer->update_imports_from_move_map",
+        "prove:reports/attic_compaction.json"
+      ]
+    },
+    {
+      "id": "Z9_todos_present",
+      "probe": "bash -lc 'rg -n \"TODO|FIXME|XXX|HACK\" --glob !attic --glob !node_modules | wc -l'",
+      "expect": "> 0",
+      "on_pass": [
+        "ingest:Librarian->backlog/ingested_user_work.json",
+        "spawn_tasks:up_to_500_items_per_cycle",
+        "loop_until_zero:receipts_required"
+      ],
+      "on_fail": ["receipt:reports/todos_zero.json"]
+    },
+    {
+      "id": "Z10_simulation_present",
+      "probe": "bash -lc 'test -d godot -o -d game -o -d apps && echo YES || echo NO'",
+      "expect": "YES",
+      "on_pass": [
+        "Protagonist->smoke_test_scene",
+        "prove:reports/sim_proof.json"
+      ],
+      "on_fail": ["skip"]
+    },
+
+    { "id": "Z11_eslint_prettier", "probe": "bash -lc 'test -f .eslintrc* -o -f .prettierrc* && echo OK || echo MISSING'", "expect": "OK", "on_pass": ["run:lint_fix"], "on_fail": ["no_create_now","open:PU_linting_bootstrap.json"] },
+    { "id": "Z12_tests_presence", "probe": "bash -lc 'rg -n \"describe\\(|it\\(\" --glob !attic --glob !node_modules | head -n1 || echo MISSING'", "expect": "!= MISSING", "on_pass": ["run:tests_smoke"], "on_fail": ["spawn:PU_add_smoke_tests.json"] },
+    { "id": "Z13_security_scan", "probe": "bash -lc 'command -v semgrep >/dev/null && echo OK || echo MISSING'", "expect": "OK", "on_pass": ["run:semgrep_ci_profile","prove:reports/semgrep.json"], "on_fail": ["skip_install;route:Auditor->alt_ruleset"] },
+    { "id": "Z14_jupyter_present", "probe": "bash -lc 'test -d notebooks -o -d .ipynb_checkpoints && echo YES || echo NO'", "expect": "YES", "on_pass": ["update:notebooks/ops_snapshot.ipynb"], "on_fail": ["no_create_now"] },
+    { "id": "Z15_obsidian_present", "probe": "bash -lc 'test -d knowledge -o -d obsidian && echo YES || echo NO'", "expect": "YES", "on_pass": ["append:knowledge/patterns.md"], "on_fail": ["no_create_now"] },
+
+    { "id": "Z16_culture_ship", "probe": "bash -lc 'rg -n \"Culture-Ship|Special Circumstances\" | head -n1 || echo NO'", "expect": "!= NO", "on_pass": ["trigger:cascade_sage_nudge"], "on_fail": ["skip"] },
+    { "id": "Z17_music_hyper_set", "probe": "bash -lc 'rg -n \"music hyper-set\" | head -n1 || echo NO'", "expect": "!= NO", "on_pass": ["Composer->analyze_scores","prove:reports/music_vectors.json"], "on_fail": ["skip"] },
+
+    { "id": "Z18_redstone_computer", "probe": "bash -lc 'rg -n \"redstone\" | head -n1 || echo NONE'", "expect": "!= NONE", "on_pass": ["Redstone->state_tick_proof"], "on_fail": ["skip"] }
+  ],
+
+  "ops": [
+    {"id":"OP1","tier":0,"agent":"Raven","action":"diagnose(llm_spine_status)","expected_receipt":"reports/raven_spine_daemon_receipt.json"},
+    {"id":"OP2","tier":0,"agent":"Watchdog","action":"restart_or_rebind_ports([11434,11435])","expected_receipt":"reports/watchdog_rebind.json"},
+    {"id":"OP3","tier":0,"agent":"Alchemist","action":"guard(budget_manager){rate_limit:smart,backoff:[1,3,7,15]}","expected_receipt":"reports/alchemist_guard_receipt.json"},
+    {"id":"OP4","tier":0,"agent":"Librarian","action":"index_update(['reports/','prompts/','knowledge/'])","expected_receipt":"reports/librarian_index_receipt.json"},
+    {"id":"OP5","tier":0,"agent":"Navigator","action":"plan_minimal_bridge_without_installs","expected_receipt":"reports/navigator_bridge_plan.json"},
+
+    {"id":"OP31","tier":1,"agent":"Janitor","action":".recycle_compaction(limit_gb:0.5)","expected_receipt":"reports/recycle_compaction.json"},
+    {"id":"OP32","tier":1,"agent":"Janitor","action":"dedupe_hash_groups(targets:['assets','docs','attic'])","expected_receipt":"reports/dedupe_report.json"},
+    {"id":"OP33","tier":1,"agent":"Artificer","action":"codemod_imports_from_move_map","expected_receipt":"reports/codemod.report.json"},
+    {"id":"OP34","tier":1,"agent":"Auditor","action":"semgrep_minimal_profile","expected_receipt":"reports/semgrep.json"},
+    {"id":"OP35","tier":1,"agent":"Librarian","action":"spawn_todo_tasks(max:500)","expected_receipt":"backlog/ingested_user_work.json"},
+
+    {"id":"OP61","tier":1,"agent":"Protagonist","action":"smoke_test_scene(['godot','game','apps'])","expected_receipt":"reports/sim_proof.json"},
+    {"id":"OP62","tier":1,"agent":"Composer","action":"music_hyper_set_analyze()","expected_receipt":"reports/music_vectors.json"},
+    {"id":"OP63","tier":2,"agent":"Redstone","action":"state_machine_tick_smoke()","expected_receipt":"reports/redstone_tick.json"},
+
+    {"id":"OP91","tier":1,"agent":"Librarian-II","action":"knowledge_round_trip(patterns:true,omnitag:true,megatag:true)","expected_receipt":"knowledge/patterns.md"},
+    {"id":"OP92","tier":1,"agent":"CultureShip","action":"cascade('sage.nudge',[\"audit:narrow\",\"watchdog:restart\",\"ui:rebuild+etag\"])","expected_receipt":"reports/cascade_receipt.json"},
+    {"id":"OP93","tier":2,"agent":"𝕄ₗₐ⧉𝕕𝕖𝕟𝕔","action":"planner_boolean_chain(backlog:todo){prioritize:blast_radius×centrality}","expected_receipt":"reports/mlaodenc_plan.md"},
+
+    {"id":"OP101","tier":1,"agent":"Artificer","action":"fix_next_todo_diff_only","expected_receipt":"reports/todo_fixes.json"},
+    {"id":"OP102","tier":1,"agent":"Alchemist","action":"add_guardrails(zod|safeMap|tryParse)","expected_receipt":"reports/guard_report.json"},
+    {"id":"OP103","tier":1,"agent":"Auditor","action":"clean_console_logs(structured_logger)","expected_receipt":"reports/log_cleanup.json"}
+  ],
+
+  "loop": {
+    "stride_seconds_base": 90,
+    "tau_prime_bounds": [0.67, 1.25],
+    "adapt": [
+      {"if":"success && backlog_high","tau_prime":"0.85τ"},
+      {"if":"ui_skew>60s","tau_prime":"0.90τ"},
+      {"if":"failures_up","tau_prime":"1.10τ"}
+    ],
+    "stagnancy_cascade_when": "no_net_delta_in {diffs,receipts,ui} for 2 loops",
+    "stagnancy_actions": ["audit:narrow","watchdog:restart","gateway:ping","ui:rebuild+etag"]
+  },
+
+  "receipts_required_each_turn": [
+    "≥1 git_diff OR ≥1 json_receipt",
+    "UI heartbeat freshness ≤ 60s",
+    "Theater θ ≤ 0.2 or cascade_documented"
+  ],
+
+  "game_lore_hooks": {
+    "enemies": ["bugs","errors","issues","warnings","conflicts","regressions"],
+    "conversion": "impurities→sim_entities",
+    "strategy": "preserve_life_when_possible; avoid nukes; compact gently"
+  },
+
+  "delete_policy": {
+    "allowed": true,
+    "must": [
+      "pre-snapshot to attic/.recycle",
+      "reference in receipt",
+      "footprint delta reported"
+    ],
+    "unsafe_patterns_blocked": ["src/**.ts delete without codemod", "schema/*.json delete without migration"]
+  },
+
+  "omnitag_template_hyper": {
+    "schema_version": "4.2",
+    "OmniTag": {
+      "temple": "<Knowledge|System|Simulation|Culture>",
+      "role": "<doc|ops|scene|agent|model|bridge|watchdog|navigator|composer|janitor|auditor>",
+      "owner": "<agent_or_team>",
+      "tier": "<-1|0|1|2>",
+      "lineage": {
+        "upstream": ["<paths_or_ids>"],
+        "downstream": ["<paths_or_ids>"]
+      },
+      "capabilities": ["<index|analyze|patch|guard|play|plan|compose|state_tick>"],
+      "receipts": ["<expected_receipt_paths>"],
+      "status": "<experimental|stable|deprecated>",
+      "last_touch": "<ISO-8601>"
+    }
+  },
+
+  "megatag_template_hyper": {
+    "schema_version": "3.7",
+    "MegaTag": {
+      "module": "<coarse_module_name>",
+      "capability": ["<llm_fabric|council|music_hyper_set|redstone|bridge|bloat_control>"],
+      "invariants": {
+        "receipts_over_claims": true,
+        "no_theater": true,
+        "bounded_parallelism": 3
+      },
+      "metrics": {
+        "theta_theater": "<float>",
+        "queue_health_H": "<float>",
+        "ui_skew_s": "<int>",
+        "repo_size_gb": "<float>"
+      },
+      "world_hooks": {
+        "godot": "<present|absent>",
+        "ascii": "<present|absent>",
+        "react": "<present|absent>"
+      },
+      "proof": {
+        "artifacts": ["reports/*.json","knowledge/patterns.md","public/system-status.json"],
+        "required_each_turn": 1
+      }
+    }
+  }
+}

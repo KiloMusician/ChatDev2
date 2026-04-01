@@ -1,0 +1,80 @@
+"""
+Script to generate a real-time markdown tree of the repository structure.
+Each directory and file becomes a markdown link relative to the repository root.
+"""
+import json
+import os
+from pathlib import Path
+
+
+def extract_file_comment(file_path):
+    """Extracts the first comment or docstring from a file."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            for line in lines:
+                if line.strip().startswith('#') or line.strip().startswith('"""'):
+                    return line.strip()
+    except Exception as e:
+        return None
+
+
+def build_tree(root_dir: Path, max_depth=5):
+    # Add YAML frontmatter for Copilot instruction context
+    lines = ["---", "applyTo: '**'", "---", "# Repository Structure Tree", "", f"Generated: {Path.cwd()}/{root_dir} structure tree"]
+
+
+    def recurse(path: Path, prefix: str = "", depth: int = 0):
+        # Stop recursion if maximum depth is reached
+        if depth > max_depth:
+            return
+
+        # Exclude version control and cache directories, include all other files
+        children = [c for c in path.iterdir() if c.name not in {'.git', '__pycache__'}]
+
+        # Iterate over filtered children and process each
+        for idx, child in enumerate(sorted(children, key=lambda p: p.name)):
+            # Determine connector style based on position in the list
+            connector = "└── " if idx == len(children) - 1 else "├── "
+
+            # Generate relative path for markdown link
+            rel = child.relative_to(Path.cwd())
+            link = f"[{child.name}]({rel.as_posix()})"
+
+            # Add metadata: show directory or file size
+            if child.is_dir():
+                meta = "(dir)"
+            else:
+                size = child.stat().st_size
+                meta = f"({size} bytes)"
+
+            # Append formatted line to the output
+            lines.append(f"{prefix}{connector}{link} {meta}")
+
+            # If the child is a directory, recurse into it
+            if child.is_dir():
+                ext_prefix = "    " if idx == len(children) - 1 else "│   "
+                recurse(child, prefix + ext_prefix, depth + 1)
+
+    # Start recursion from the root directory
+    recurse(root_dir)
+    return lines
+
+if __name__ == "__main__":
+    repo_root = Path.cwd()
+
+    # Define output file path for the structure tree
+    output = Path(repo_root) / ".github" / "instructions" / "Structure_Tree.instructions.md"
+
+    # Generate the structure tree
+    tree_lines = build_tree(repo_root)
+
+    # Ensure the output directory exists
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    # Write the structure tree to the output file
+    with open(output, "w", encoding="utf-8") as f:
+        f.write("\n".join(tree_lines))
+
+    # Print confirmation message
+    print(f"Structure tree written to {output}")

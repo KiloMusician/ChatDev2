@@ -1,0 +1,31 @@
+### MCP Server Health Check
+# Assumes MCP server is running on default port
+GET http://localhost:8080/health
+
+###
+
+### List Available MCP Tools
+GET http://localhost:8080/tools
+
+###
+
+### Execute MCP Tool
+POST http://localhost:8080/execute
+Content-Type: application/json
+
+{
+  "tool": "example_tool",
+  "parameters": {
+    "param1": "value1"
+  }
+}
+
+###
+
+### Get MCP Server Status
+GET http://localhost:8080/status
+
+###
+
+### MCP Server Metrics
+GET http://localhost:8080/metrics

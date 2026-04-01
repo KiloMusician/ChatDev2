@@ -1,0 +1,89 @@
+[
+  {
+    "id":"AG-01-contract",
+    "title":"Add Agent contract (Zod+TS) with side-effect requirement",
+    "automerge": true,
+    "files":[
+      {"path":"shared/agents/contract.ts","content":"✅ ALREADY CREATED"}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-02-registry",
+    "title":"Add Agent registry auto-discovery loader",
+    "automerge": true,
+    "files":[
+      {"path":"agents/registry.ts","content":"✅ ALREADY CREATED"}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-03-router",
+    "title":"Mount /api/agents health+run endpoints",
+    "automerge": true,
+    "files":[
+      {"path":"server/router/agents.ts","content":"✅ ALREADY CREATED"},
+      {"path":"docs/AGENTS.md","content":"# Agents\\n\\n- Contract: shared/agents/contract.ts\\n- Registry: agents/registry.ts\\n- API: GET /api/agents, GET /api/agents/:id/health, POST /api/agents/:id/run\\n\\nOutputs must include at least one side-effect (artifact, stateDelta, or busEvents)."}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-04-librarian",
+    "title":"Add Librarian agent (manifest+impl) with real artifact side-effect",
+    "automerge": true,
+    "files":[
+      {"path":"agents/librarian/manifest.yaml","content":"✅ ALREADY CREATED"},
+      {"path":"agents/librarian/index.ts","content":"✅ ALREADY CREATED - VERIFIED WORKING"}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-05-tests",
+    "title":"Add vitest harness for Librarian (artifact assertion)",
+    "automerge": true,
+    "files":[
+      {"path":"tests/agents.spec.ts","content":"✅ ALREADY CREATED"}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-06-alchemist",
+    "title":"Add Alchemist agent (CSV→JSON transformation)",
+    "automerge": true,
+    "files":[
+      {"path":"agents/alchemist/manifest.yaml","content":"✅ ALREADY CREATED"},
+      {"path":"agents/alchemist/index.ts","content":"✅ ALREADY CREATED"}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-07-artificer",
+    "title":"Add Artificer agent (code scaffolding)",
+    "automerge": true,
+    "files":[
+      {"path":"agents/artificer/manifest.yaml","content":"✅ ALREADY CREATED"},
+      {"path":"agents/artificer/index.ts","content":"✅ ALREADY CREATED"}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-08-council",
+    "title":"Add Council agent (vote consensus)",
+    "automerge": true,
+    "files":[
+      {"path":"agents/council/manifest.yaml","content":"✅ ALREADY CREATED"},
+      {"path":"agents/council/index.ts","content":"✅ ALREADY CREATED"}
+    ],
+    "labels":["agent","automerge"]
+  },
+  {
+    "id":"AG-09-culture-ship",
+    "title":"Add Culture-Ship agent (lore composition)",
+    "automerge": true,
+    "files":[
+      {"path":"agents/culture-ship/manifest.yaml","content":"✅ ALREADY CREATED"},
+      {"path":"agents/culture-ship/index.ts","content":"✅ ALREADY CREATED"}
+    ],
+    "labels":["agent","automerge"]
+  }
+]

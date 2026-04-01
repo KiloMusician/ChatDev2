@@ -1,0 +1,3 @@
+./ops/chug-runner.ts:129:  if (pr.kind === "hash") return true; // TODO: implement QGL checksum
+./ops/chug-runner.ts:254:      "-E", "(TODO|FIXME|placeholder|pass;?$|throw new Error|hardcoded)",
+./ops/chug-runner.ts:263:      auditResults.pass_statements = lines.filter(l => /pass;?\s*$/.test(l)).length;

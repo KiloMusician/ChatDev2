@@ -1,9 +1,10 @@
 """Aggregates API routers."""
 
-from . import artifacts, batch, execute, health, sessions, uploads, vuegraphs, workflows, websocket
+from . import artifacts, batch, ecosystem, execute, health, sessions, uploads, vuegraphs, workflows, websocket
 
 ALL_ROUTERS = [
     health.router,
+    ecosystem.router,
     vuegraphs.router,
     workflows.router,
     uploads.router,

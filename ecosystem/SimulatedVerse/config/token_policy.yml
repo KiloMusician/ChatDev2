@@ -1,0 +1,33 @@
+# Culture-Ship Token Governance Policy
+default_mode: "off"  # No tokens by default
+max_budget: 100
+soft_limit: 70
+hard_limit: 90
+recovery_rate: 10    # tokens per hour
+escalation_threshold: 5
+
+# Local-first priorities
+local_tools:
+  - ripgrep
+  - ollama
+  - python3
+  - node
+  - sqlite
+
+# Fallback cascade
+providers:
+  - name: "ollama"
+    type: "local"
+    cost: 0
+    priority: 1
+  - name: "openai"
+    type: "remote" 
+    cost: 1
+    priority: 2
+    require_justification: true
+
+# Safety limits
+safety:
+  require_approval_above: 10
+  auto_block_above: 25
+  emergency_stop: true

@@ -1,0 +1,47 @@
+{
+  "action": "phase_0_snap_diagnostic_research_regression",
+  "timestamp": 1756941400000,
+  "status": "research_drop_detected_investigating",
+  
+  "catalog_status": {
+    "total_files": 63295,
+    "delta_from_last": "+9 files",
+    "namespace_health": "ours.* systems stable (22 files)", 
+    "unknown_ratio": "99.93% (normal)",
+    "generation_time": 1756941253907
+  },
+  
+  "build_freshness_verified": {
+    "build_nonce_current": "1756941367686",
+    "ui_title_correct": "ΞNuSyQ — Culture-Ship Interface",
+    "server_restart_confirmed": true,
+    "cache_invalidation": "automatic"
+  },
+  
+  "research_regression_detected": {
+    "research_previous": 22.39,
+    "research_current": 11.27,
+    "delta": "-11.12 points",
+    "possible_causes": [
+      "Civics Kernel unlock occurred (50 point cost)",
+      "Research spend on other tech", 
+      "System reset or save state change",
+      "Unlock triggered automatically"
+    ],
+    "investigation_required": "Check UI phase and unlock status"
+  },
+  
+  "system_health_confirmed": {
+    "lsp_diagnostics": "clean",
+    "organism_health": "100%",
+    "council_bus": "active",
+    "llm_connectivity": "rate_limited_but_functional"
+  },
+  
+  "compelling_signals": [
+    "Research drop suggests potential unlock event",
+    "Need to verify if Civics Kernel unlocked Phase C",
+    "Check UI phase status and new features",
+    "Verify game mechanics still operational"
+  ]
+}

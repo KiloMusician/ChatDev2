@@ -1,0 +1,42 @@
+version: 1
+rules:
+  - name: prefer_symbolic
+    description: "Use algorithmic solutions for deterministic tasks"
+    if: ["task.type in ['math','graph','search+rank','regex','etl','validation']"]
+    then: ["use: symbolic_planner", "llm_calls: 0"]
+
+  - name: cache_first
+    description: "Always check cache before making any LLM calls"
+    if: ["task.has_cache == true"]
+    then: ["return cache", "llm_calls: 0"]
+
+  - name: local_pair
+    description: "Use local models for low-ambiguity tasks"
+    if: ["task.ambiguity <= 0.35"]
+    then: ["use: local_primary", "judge: local_judge"]
+
+  - name: distilled_quick
+    description: "Use small model for simple tasks"
+    if: ["task.complexity == 'simple'", "task.token_estimate < 200"]
+    then: ["use: distilled_aux", "max_tokens: 150"]
+
+  - name: escalate_paid
+    description: "Escalate to paid API only when justified"
+    if: ["judge.conf < budgets.api_escalation_min_conf",
+         "task.info_gain >= budgets.api_escalation_min_info_gain"]
+    then: ["use: paid_fallback", "max_tokens: 600"]
+
+  - name: budget_fence
+    description: "Hard stop when budget exhausted"
+    if: ["today_spent >= budgets.daily_token_limit"]
+    then: ["use: symbolic_fallback", "llm_calls: 0"]
+
+  - name: schema_enforcement
+    description: "Force structured output for narrative/events"
+    if: ["task.type in ['storyteller','events','structured_data']"]
+    then: ["force_json: true", "validate_schema: true"]
+
+  - name: compression_gate
+    description: "Compress prompts over context limit"
+    if: ["task.prompt_tokens > routing.max_context_tokens"]
+    then: ["compress: extractive", "truncate: smart"]

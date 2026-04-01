@@ -1,0 +1,30 @@
+:root{
+  --bg:#0b0e14; --fg:#e6e6e6; --muted:#a4adbb; --accent:#38bdf8; --accent2:#f59e0b; --danger:#ef4444;
+  --panel:#121724; --panel2:#0f1420; --grid:rgba(255,255,255,.06);
+  --mono: 'JetBrains Mono','Fira Code','Noto Sans Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;background:linear-gradient(180deg,#0d1117,#090c11);}
+.brand{font-weight:700;letter-spacing:.5px}
+.nav button{margin-left:.5rem}
+button{background:#1f2937;color:#e5e7eb;border:1px solid #334155;border-radius:.4rem;padding:.4rem .6rem;cursor:pointer}
+button.primary{background:var(--danger);border-color:#7f1d1d}
+button.wide{width:100%}
+button:hover{filter:brightness(1.1)}
+.grid{display:grid;gap:.75rem;padding:.75rem;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;grid-auto-flow:dense}
+.panel{background:var(--panel);border:1px solid #1e293b;border-radius:.6rem;overflow:hidden;display:flex;flex-direction:column}
+.panel.tall{grid-row: span 2}
+.panel-head{padding:.5rem .75rem;border-bottom:1px solid #1e293b;background:var(--panel2);font-family:var(--mono)}
+.panel-foot{padding:.4rem .75rem;border-top:1px solid #1e293b;display:flex;gap:1rem;align-items:center}
+.titlebox{padding:1rem}
+.subtitle{opacity:.8;margin-top:-.5rem;margin-bottom:1rem}
+#ascii{width:100%;height:420px;background:#000;display:block}
+#tasks{list-style:none;margin:0;padding:.5rem;display:flex;flex-direction:column;gap:.4rem}
+#tasks li{padding:.4rem .5rem;border:1px dashed #334155;background:#0c1220;border-radius:.4rem;font-family:var(--mono);white-space:pre-wrap}
+#logs{padding:.6rem;margin:0;background:#08101f;min-height:120px;color:#c7d2fe}
+.foot{display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-top:1px solid #1f2937;background:#0c1118}
+@media (max-width: 840px){
+  .grid{grid-template-columns:1fr}
+  #ascii{height:300px}
+}

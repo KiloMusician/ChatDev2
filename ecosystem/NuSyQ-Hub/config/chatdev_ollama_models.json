@@ -1,0 +1,67 @@
+{
+  "description": "ChatDev Ollama Model Configuration - Installed Models as of Oct 22, 2025",
+  "models": {
+    "primary_coder": {
+      "name": "qwen2.5-coder:7b",
+      "size": "4.7 GB",
+      "role": "Code generation, refactoring, implementation",
+      "temperature": 0.1,
+      "top_p": 0.9
+    },
+    "secondary_coder": {
+      "name": "starcoder2:15b",
+      "size": "9.1 GB",
+      "role": "Code review, architecture, complex problem solving",
+      "temperature": 0.2,
+      "top_p": 0.95
+    },
+    "reasoning": {
+      "name": "gemma2:9b",
+      "size": "5.4 GB",
+      "role": "General reasoning, documentation, planning",
+      "temperature": 0.3,
+      "top_p": 0.9
+    },
+    "specialist": {
+      "name": "codellama:7b",
+      "size": "3.8 GB",
+      "role": "Code analysis, testing, debugging",
+      "temperature": 0.15,
+      "top_p": 0.9
+    },
+    "embedding": {
+      "name": "nomic-embed-text:latest",
+      "size": "274 MB",
+      "role": "Semantic search, context retrieval"
+    }
+  },
+  "agent_assignments": {
+    "CEO": "gemma2:9b",
+    "CTO": "starcoder2:15b",
+    "Programmer": "qwen2.5-coder:7b",
+    "Reviewer": "codellama:7b",
+    "Tester": "codellama:7b",
+    "Designer": "gemma2:9b"
+  },
+  "consensus_pools": {
+    "high_quality": ["qwen2.5-coder:7b", "starcoder2:15b"],
+    "fast_iteration": ["qwen2.5-coder:7b", "codellama:7b"],
+    "architecture": ["starcoder2:15b", "gemma2:9b"],
+    "full_consensus": [
+      "qwen2.5-coder:7b",
+      "starcoder2:15b",
+      "codellama:7b",
+      "gemma2:9b"
+    ]
+  },
+  "ollama_endpoint": "http://localhost:11434",
+  "timeout_seconds": 120,
+  "max_tokens": 4096,
+  "notes": [
+    "All models are installed and validated via 'ollama list'",
+    "Use consensus_pools for multi-model validation",
+    "Primary focus: qwen2.5-coder:7b for fast, high-quality code generation",
+    "Secondary: starcoder2:15b for complex architecture and reasoning",
+    "Embedding model available for RAG and semantic context retrieval"
+  ]
+}

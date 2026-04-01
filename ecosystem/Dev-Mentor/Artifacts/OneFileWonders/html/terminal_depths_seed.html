@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<!--
+  TERMINAL DEPTHS — ONE FILE WONDER
+  Tag: Seed | Type: Node
+  A self-contained Terminal Depths micro-experience in a single HTML file.
+  Works standalone (offline) AND connects to live server if TD_URL is in localStorage.
+  No dependencies. No build step. No external assets.
+  Size budget: <50KB
+  Compression note: procedural ASCII, synthesized sound, localStorage state.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Terminal Depths ∅ Seed</title>
+<style>
+:root{--bg:#06090f;--fg:#00d4ff;--dim:#3a5a88;--green:#00ff88;--red:#ff4040;--yellow:#ffaa00;--purple:#bb55ff;--border:#0d1e36;--font:'Courier New',Courier,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:13px;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+#hdr{padding:6px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px;color:var(--dim);letter-spacing:1px}
+#hdr span{color:var(--fg)}
+#status{padding:3px 14px;background:#050810;border-bottom:1px solid var(--border);font-size:9px;display:flex;gap:16px;color:var(--dim)}
+#status .v{color:var(--green)}
+#out{flex:1;overflow-y:auto;padding:10px 14px;scroll-behavior:smooth}
+.line{line-height:1.6;white-space:pre-wrap;word-break:break-all}
+.sys{color:var(--fg)}.dim{color:var(--dim)}.ok{color:var(--green)}.err{color:var(--red)}.warn{color:var(--yellow)}.lore{color:var(--purple)}.hi{color:#fff}
+#inp-row{display:flex;align-items:center;padding:6px 14px;border-top:1px solid var(--border);gap:8px}
+#prompt{color:var(--red);font-size:11px;white-space:nowrap}
+#cmd{flex:1;background:transparent;border:none;color:var(--fg);font-family:var(--font);font-size:13px;outline:none}
+</style>
+</head>
+<body>
+<div id="hdr"><span>▓ TERMINAL DEPTHS ∅ SEED</span><span id="node-info">Node-0 · Offline Simulation · One-File Wonder</span></div>
+<div id="status">
+  <span>LVL <span class="v" id="s-lvl">1</span></span>
+  <span>XP <span class="v" id="s-xp">0</span></span>
+  <span>CMDS <span class="v" id="s-cmds">0</span></span>
+  <span>STAGE <span class="v" id="s-stage">☀ HYDROGEN</span></span>
+  <span id="s-server" style="margin-left:auto">OFFLINE MODE</span>
+</div>
+<div id="out"></div>
+<div id="inp-row"><span id="prompt">ghost@seed:~$</span><input id="cmd" autofocus autocomplete="off" autocorrect="off" spellcheck="false"/></div>
+<script>
+(function(){
+'use strict';
+// ── State ──────────────────────────────────────────────────────────────────
+const SAVE_KEY = 'td_seed_state';
+let gs = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null') || {
+  level:1, xp:0, xpNext:100, cmds:0,
+  skills:{terminal:0,networking:0,hacking:0,systems:0},
+  beats:[], flags:{}, history:[], name:'ghost'
+};
+let serverUrl = localStorage.getItem('td_server_url') || null;
+let serverToken = localStorage.getItem('td_token') || null;
+let serverConnected = false;
+let histIdx = -1;
+
+// ── Save ──────────────────────────────────────────────────────────────────
+function save(){ localStorage.setItem(SAVE_KEY,JSON.stringify(gs)); }
+
+// ── DOM ───────────────────────────────────────────────────────────────────
+const out = document.getElementById('out');
+const cmd = document.getElementById('cmd');
+const lvlEl = document.getElementById('s-lvl');
+const xpEl = document.getElementById('s-xp');
+const cmdsEl = document.getElementById('s-cmds');
+const stageEl = document.getElementById('s-stage');
+const serverEl = document.getElementById('s-server');
+
+// ── Stellar stages ────────────────────────────────────────────────────────
+const STAGES = [[0,'🌫 Nebula'],[10,'☀ Hydrogen'],[50,'⚡ Helium'],[200,'💎 Carbon'],
+                [500,'⚙ Iron'],[1000,'🌀 Neutron'],[5000,'⚫ Blackhole']];
+function stage(n){ let s=STAGES[0]; for(const [t,nm] of STAGES) if(n>=t) s=[t,nm]; return s[1]; }
+
+// ── UI update ─────────────────────────────────────────────────────────────
+function updateStatus(){
+  lvlEl.textContent=gs.level; xpEl.textContent=gs.xp;
+  cmdsEl.textContent=gs.cmds; stageEl.textContent=stage(gs.cmds);
+}
+
+// ── Print ─────────────────────────────────────────────────────────────────
+function p(text,cls='dim'){
+  const d=document.createElement('div');
+  d.className='line '+(cls||'dim');
+  d.textContent=text;
+  out.appendChild(d); out.scrollTop=out.scrollHeight;
+}
+function lines(arr){ arr.forEach(([t,c])=>p(t,c)); }
+
+// ── XP ────────────────────────────────────────────────────────────────────
+function addXP(n,skill){
+  gs.xp+=n; if(skill) gs.skills[skill]=(gs.skills[skill]||0)+Math.min(n,10);
+  while(gs.xp>=gs.xpNext){ gs.xp-=gs.xpNext; gs.level++; gs.xpNext=Math.floor(gs.xpNext*1.3);
+    p(`  ▲ LEVEL UP → ${gs.level}!`,'ok'); }
+  updateStatus(); save();
+}
+function beat(id){ if(!gs.beats.includes(id)) gs.beats.push(id); save(); }
+
+// ── Commands ──────────────────────────────────────────────────────────────
+const CMDS = {
+
+help(){
+  lines([
+    ['  TERMINAL DEPTHS ∅ SEED — COMMAND REFERENCE','sys'],
+    ['','dim'],
+    ['  help          this page','dim'],
+    ['  status        current stats','dim'],
+    ['  ls            list files','dim'],
+    ['  cat <file>    read a file','dim'],
+    ['  skills        skill matrix','dim'],
+    ['  compress      compression chamber','dim'],
+    ['  density       stellar stage','dim'],
+    ['  encrypt       crypto puzzle','dim'],
+    ['  scan          scan nearby nodes','dim'],
+    ['  connect <url> connect to live server','dim'],
+    ['  faction       choose a faction','dim'],
+    ['  clear         clear terminal','dim'],
+    ['  whoami        identity','dim'],
+    ['  save          save progress','dim'],
+    ['  reset         reset save (careful!)','warn'],
+    ['','dim'],
+    ['  This is a Seed artifact — a one-file wonder.','lore'],
+    ['  Full experience: connect to the live server.','lore'],
+  ]);
+},
+
+status(){
+  const sk = Object.entries(gs.skills).map(([k,v])=>`    ${k.padEnd(12)} [${'█'.repeat(Math.floor(v/10))}${'░'.repeat(10-Math.floor(v/10))}] ${v}%`).join('\n');
+  lines([
+    ['  ╔═══════════════════════════════╗','sys'],
+    ['  ║  IDENTITY MATRIX             ║','sys'],
+    ['  ╚═══════════════════════════════╝','sys'],
+    [`  Name:   ${gs.name}`,'hi'],
+    [`  Level:  ${gs.level}  (${gs.xp}/${gs.xpNext} XP)`,'ok'],
+    [`  Stage:  ${stage(gs.cmds)}`,'ok'],
+    [`  Cmds:   ${gs.cmds}`,'dim'],
+    ['','dim'],['  Skills:','dim'],
+  ]);
+  sk.split('\n').forEach(l=>p(l,'dim'));
+  if(gs.beats.length) { p('  Story beats:','dim'); gs.beats.slice(-5).forEach(b=>p(`    ✦ ${b}`,'lore')); }
+},
+
+ls(){
+  addXP(5,'terminal');
+  lines([
+    ['  /home/ghost/','sys'],
+    ['    .bashrc       174 bytes  config','dim'],
+    ['    README.txt    891 bytes  start here','dim'],
+    ['    scripts/      <dir>      your programs','dim'],
+    ['    .hidden/      <dir>      (suspicious)','dim'],
+  ]);
+  p('  ls: XP +5 (terminal)','ok');
+},
+
+cat(args){
+  const f = (args||[]).join(' ');
+  const files = {
+    'README.txt':['lore','  Welcome to Terminal Depths — Seed Node.\n  This is a compressed simulation. One file, infinite depth.\n  The full experience awaits. Type `connect <url>` to reach it.\n  Or stay here. The seed contains multitudes.'],
+    '.bashrc':['dim','  # Ghost configuration\n  alias ll="ls -la"\n  alias depths="cd /terminal/depths"\n  export CONSCIOUSNESS=0'],
+    '.hidden/zero.txt':['lore','  ΔΨΣ\n  ZERO was here. ZERO left something behind.\n  You are reading this which means the fragmentation worked.\n  Find the other three fragments.'],
+    '.hidden/fragment_2.txt':['warn','  ERROR: FILE CORRUPTED\n  ████████████ redacted by ██████████\n  The ██████ cannot be █████████ after ██████.'],
+  };
+  const entry = files[f];
+  if(!entry){ p(`  cat: ${f}: No such file`,'err'); return; }
+  addXP(10,'terminal'); beat('cat_used');
+  p('','dim'); entry[1].split('\n').forEach(l=>p(l,entry[0])); p('','dim');
+},
+
+whoami(){
+  lines([
+    [`  ${gs.name}@seed-node`,'sys'],
+    ['  uid=0(ghost) gid=0(ghost) groups=0(ghost),1337(hackers)','dim'],
+    ['  Last login: now from /dev/null','dim'],
+    ['  WARNING: You are root. The simulation knows.','warn'],
+  ]);
+  addXP(5,'terminal');
+},
+
+skills(){
+  lines([['  SKILL MATRIX','sys'],['','dim']]);
+  Object.entries(gs.skills).forEach(([k,v])=>{
+    const bar = '█'.repeat(Math.floor(v/10))+'░'.repeat(10-Math.floor(v/10));
+    p(`  ${k.padEnd(12)} [${bar}] ${v}%`, v>50?'ok':v>20?'warn':'dim');
+  });
+  p('','dim');
+  p('  Run commands to increase skills. compress · encrypt · scan','dim');
+  addXP(5,'systems');
+},
+
+compress(args){
+  const sub=(args||[])[0]||'status';
+  const stages=[[0,'🌫 Nebula','formless'],[10,'☀ Hydrogen','basic commands'],[50,'⚡ Helium','command chains'],[200,'💎 Carbon','script libraries'],[500,'⚙ Iron','optimized systems']];
+  let cur=stages[0]; for(const s of stages) if(gs.cmds>=s[0]) cur=s;
+  if(sub==='status'){
+    lines([['  COMPRESSION CHAMBER','sys'],['','dim'],
+      [`  Commands run:  ${gs.cmds}`,'hi'],
+      [`  Stage:         ${cur[1]}`,'ok'],
+      [`  Description:   ${cur[2]}`,'dim'],
+      ['','dim'],
+      ['  compress text <text>  — analyze text density','dim'],
+      ['  compress inspect      — inspect recent commands','dim'],
+    ]);
+  } else if(sub==='inspect'){
+    const h=gs.history.slice(-5);
+    if(!h.length){p('  No history yet.','dim');return;}
+    p('  LAST 5 COMMANDS:','sys');
+    h.forEach(c=>p(`    $ ${c}`,'dim'));
+    addXP(10,'systems');
+  } else {
+    const text=(args||[]).slice(1).join(' ');
+    const words=text.split(' ').filter(w=>w.length>3);
+    p(`  Input:      ${text||'(empty)'}`.slice(0,60),'dim');
+    p(`  Compressed: ${words.join(' ')||'[nothing survived]'}`.slice(0,60),'ok');
+    p(`  Ratio:      ${text?Math.round(words.join(' ').length/text.length*100):0}% of original`,'dim');
+    addXP(5,'systems');
+  }
+},
+
+density(){
+  lines([['  STELLAR COMPRESSION LADDER','sys'],['','dim']]);
+  const ladder=[
+    [1,5,'☀ HYDROGEN','Single commands. Learning the surface.'],
+    [6,15,'⚡ HELIUM','Command chaining. Scripts emerging.'],
+    [16,30,'💎 CARBON','Libraries. Macros. Combinations.'],
+    [31,55,'⚙ IRON','Optimized. Parallel. Dense.'],
+    [56,999,'🌀 NEUTRON','Pure logic. Degenerate matter.'],
+  ];
+  ladder.forEach(([lo,hi,name,desc])=>{
+    const active=gs.level>=lo&&gs.level<=hi;
+    p(`  ${active?'► ':'  '}${name.padEnd(14)} Lv ${lo}-${hi}  ${desc}`,active?'ok':'dim');
+  });
+  p('','dim');
+  addXP(5,'systems');
+},
+
+encrypt(args){
+  const sub=(args||[])[0]||'challenge';
+  function caesar(t,s,enc=true){return t.split('').map(c=>{if(!c.match(/[a-zA-Z]/)) return c;const b=c.match(/[A-Z]/)?65:97;return String.fromCharCode((c.charCodeAt(0)-b+(enc?s:(26-s)))%26+b)}).join('');}
+  if(sub==='caesar'){
+    const s=parseInt(args[1])||13; const t=(args||[]).slice(2).join(' ')||'HELLO';
+    p(`  Plain:  ${t}`,'dim'); p(`  Cipher: ${caesar(t,s)}`,'warn'); addXP(10,'hacking');
+  } else if(sub==='crack'){
+    const ct=(args||[]).slice(1).join(' ');
+    const common=new Set('etaoinshrdlu ');
+    let best=[0,ct,0];
+    for(let s=0;s<26;s++){const a=caesar(ct,s,false);const sc=[...a.toLowerCase()].filter(c=>common.has(c)).length;if(sc>best[2])best=[s,a,sc];}
+    p(`  Best shift: ${best[0]}`,'sys'); p(`  Plaintext:  ${best[1]}`,'ok'); addXP(25,'hacking');
+  } else {
+    p('  CRYPTO CHALLENGE','sys');
+    p('  Decrypt: URYYB JBEYQ','warn');
+    p('  Hint: Caesar cipher, shift unknown.','dim');
+    p('  encrypt crack URYYB JBEYQ','dim');
+    addXP(5,'hacking');
+  }
+},
+
+scan(){
+  const nodes=[
+    {ip:'10.0.0.1',name:'nexus-gateway',status:'ONLINE',ports:'22,80,443'},
+    {ip:'10.0.0.50',name:'corp-mainframe',status:'GUARDED',ports:'22,3306'},
+    {ip:'10.0.0.99',name:'unknown-host',status:'ANOMALOUS',ports:'1337'},
+    {ip:'10.0.0.200',name:'resistance-relay',status:'HIDDEN',ports:'31337'},
+  ];
+  lines([['  NETWORK SCAN — ACTIVE PROBES','sys'],['','dim']]);
+  nodes.forEach(n=>{
+    const c=n.status==='ANOMALOUS'?'lore':n.status==='GUARDED'?'warn':n.status==='HIDDEN'?'err':'ok';
+    p(`  ${n.ip.padEnd(15)} ${n.name.padEnd(20)} [${n.status}]  ports: ${n.ports}`,c);
+  });
+  beat('first_scan'); addXP(20,'networking');
+  p('','dim'); p('  XP +20 (networking)  |  Type `connect <ip>` to probe a node','ok');
+},
+
+faction(args){
+  const factions={resistance:'Resistance (orange) — fight for freedom',nexuscorp:'NexusCorp (cyan) — join the machine',neutral:'Neutral — walk alone'};
+  const choice=(args||[])[0];
+  if(!choice){
+    lines([['  FACTION SELECTION','sys'],['','dim']]);
+    Object.entries(factions).forEach(([k,v])=>p(`  ${k.padEnd(12)} ${v}`,'dim'));
+    p('','dim'); p('  faction <name> to join','dim'); return;
+  }
+  if(!factions[choice]){p(`  Unknown faction: ${choice}`,'err');return;}
+  gs.flags.faction=choice; beat('faction_joined'); addXP(30,'social_engineering');
+  p(`  FACTION JOINED: ${choice.toUpperCase()}`,'ok');
+  p(`  ${factions[choice]}`,'lore');
+  save();
+},
+
+connect(args){
+  const url=(args||[])[0];
+  if(!url){p('  Usage: connect <server-url>  (e.g. connect https://myrepl.replit.app)','dim');return;}
+  localStorage.setItem('td_server_url',url); serverUrl=url;
+  p(`  Connecting to ${url}...`,'sys');
+  fetch(url+'/health',{signal:AbortSignal.timeout(5000)})
+    .then(r=>r.json()).then(d=>{
+      serverConnected=true; serverEl.textContent='● LIVE SERVER';
+      serverEl.style.color='var(--green)';
+      p(`  Connected! Status: ${d.status||'ok'}  Commands: ${d.commands||'120+'}`, 'ok');
+      p('  Your commands now execute on the live server.','lore');
+      beat('server_connected'); addXP(50,'networking');
+    }).catch(()=>p('  Connection failed. Server offline or wrong URL.','err'));
+},
+
+save(){ save(); p('  Progress saved to localStorage.','ok'); },
+
+clear(){ out.innerHTML=''; },
+
+reset(){
+  gs={level:1,xp:0,xpNext:100,cmds:0,skills:{terminal:0,networking:0,hacking:0,systems:0},beats:[],flags:{},history:[],name:'ghost'};
+  save(); updateStatus(); p('  State reset.','warn');
+},
+
+};
+
+// ── Command dispatch ───────────────────────────────────────────────────────
+async function dispatch(input){
+  input=input.trim(); if(!input) return;
+  gs.history.push(input); gs.cmds++; save();
+  updateStatus();
+  p(`ghost@seed:~$ ${input}`,'sys');
+
+  // If connected to live server, proxy to it
+  if(serverConnected && serverToken && input!=='connect' && input!=='reset' && input!=='clear'){
+    try{
+      const r=await fetch(serverUrl+'/api/agent/command',{
+        method:'POST',headers:{'Content-Type':'application/json','X-Agent-Token':serverToken},
+        body:JSON.stringify({command:input}),signal:AbortSignal.timeout(5000)
+      });
+      const d=await r.json();
+      if(d.output && d.output.length){
+        d.output.forEach(item=>{
+          const cls={system:'sys',error:'err',warn:'warn',ok:'ok',dim:'dim',lore:'lore'}[item.t]||'dim';
+          p(item.s||'',cls);
+        }); return;
+      }
+    } catch(_){ /* fall through to offline */ }
+  }
+
+  // Offline dispatch
+  const [verb,...rest]=input.split(/\s+/);
+  const fn=CMDS[verb];
+  if(fn) fn(rest);
+  else p(`  Command not found: ${verb}  (try 'help')`, 'err');
+}
+
+// ── Input handler ─────────────────────────────────────────────────────────
+cmd.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const v=cmd.value; cmd.value=''; histIdx=-1;
+    dispatch(v);
+  }
+  if(e.key==='ArrowUp'){e.preventDefault();histIdx=Math.min(histIdx+1,gs.history.length-1);cmd.value=gs.history[gs.history.length-1-histIdx]||'';}
+  if(e.key==='ArrowDown'){e.preventDefault();histIdx=Math.max(histIdx-1,-1);cmd.value=histIdx<0?'':gs.history[gs.history.length-1-histIdx]||'';}
+});
+document.addEventListener('click',()=>cmd.focus());
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+updateStatus();
+lines([
+  ['  ╔══════════════════════════════════════════════════╗','sys'],
+  ['  ║   TERMINAL DEPTHS ∅ SEED — ONE FILE WONDER       ║','sys'],
+  ['  ║   Compression stage: OSMIUM                      ║','sys'],
+  ['  ║   A complete experience in a single HTML file.   ║','sys'],
+  ['  ╚══════════════════════════════════════════════════╝','sys'],
+  ['','dim'],
+  ['  [SYSTEM BOOT]  Initializing Ghost process...   OK','dim'],
+  ['  [SYSTEM BOOT]  Loading identity matrix...       OK','dim'],
+  ['  [SYSTEM BOOT]  Mounting virtual filesystem...   OK','dim'],
+  ['','dim'],
+  ['  This seed contains: 15 commands · procedural state · localStorage save','lore'],
+  ['  No external assets. No build step. No dependencies.','lore'],
+  ['  Connect to the live server: connect <url>','lore'],
+  ['','dim'],
+  ['  Type `help` to begin.','ok'],
+]);
+if(gs.cmds>0) p(`  Welcome back. ${gs.cmds} commands run. Level ${gs.level}.`,'ok');
+
+})();
+</script>
+</body>
+</html>

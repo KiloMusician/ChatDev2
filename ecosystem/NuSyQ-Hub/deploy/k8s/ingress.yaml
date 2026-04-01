@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nusyq-hub-ingress
+  namespace: nusyq-hub
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # Set true in production
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nusyq-hub.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nusyq-hub-service
+            port:
+              number: 5000
+  # Uncomment for TLS in production
+  # tls:
+  # - hosts:
+  #   - nusyq-hub.local
+  #   secretName: nusyq-hub-tls

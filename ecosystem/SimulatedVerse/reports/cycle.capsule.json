@@ -1,0 +1,52 @@
+{
+  "time": "2025-09-02T19:05:07+00:00",
+  "cycle_timestamp": 1756839907,
+  "wall_time_minutes": 5,
+  "tiers": {
+    "-1": "blocked (LLM spine down, gateway failed)",
+    "0": "ready (UI fresh, queue healthy, tests baseline)",
+    "1": "ready (sim boots, invariants pass, protagonist OK)",
+    "2": "blocked (theater score 1.000, feature deploy impossible)"
+  },
+  "llm": {
+    "ollama": false,
+    "openai": false,
+    "budget": {"in": 2457, "out": 614},
+    "retries": 5
+  },
+  "ui": {
+    "freshness_s": 153,
+    "flashing": false,
+    "errors": []
+  },
+  "queue": {
+    "in": 4,
+    "out": 0,
+    "stalled": 4,
+    "new_fixpus": 4
+  },
+  "audit": {
+    "dupe_groups": 305,
+    "spam": 1000,
+    "placeholders": 3853,
+    "theater_score": 1.000
+  },
+  "jobs": {
+    "active": 1,
+    "dormant": 1,
+    "deprecated": 0,
+    "orphans": 2
+  },
+  "actions": [
+    {"id": "action.llm_spine_recovery", "who": "Artificer", "intent": "Restore LLM connectivity", "result": "in_progress", "receipts": ["llm_heal_strategy"]},
+    {"id": "action.theater_score_reduction", "who": "Raven", "intent": "Reduce theater 1.00→0.2", "result": "in_progress", "receipts": ["audit_findings"]},
+    {"id": "action.ui_freshness_restoration", "who": "Alchemist", "intent": "Fix system-status staleness", "result": "completed", "receipts": ["ui_freshness_restored"]}
+  ],
+  "next": [
+    "1. Execute theater reduction: Fix 1257 hardcoded errors with working implementations",
+    "2. Restore LLM spine: Implement 60% budget reduction + exponential backoff", 
+    "3. Address 3853 placeholders: Replace stubs with functional code",
+    "4. Clean 879 console.logs: Implement production logging system",
+    "5. Run protagonist ping: Validate 30s gameplay with fun-pulse metrics"
+  ]
+}

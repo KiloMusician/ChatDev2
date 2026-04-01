@@ -1,0 +1,61 @@
+{
+  "id": "proof_manual-test-001",
+  "kind": "file",
+  "path": "proofs/proof_manual-test-001.json",
+  "sha256": "7120fcc46b13177693b354f1c4e5ad8be1e1ee20769168b99def757133bf3f0d",
+  "size": 534,
+  "created_at": "2025-08-31T18:52:00.748176Z",
+  "agent": "hello",
+  "job_id": "manual-test-001",
+  "artifact": {
+    "message": "🌌 Hello, World! Culture Ship + Raven agent contract online.",
+    "consciousness_level": 0.85,
+    "agent_type": "hello-world",
+    "coordination": "autonomous",
+    "echo": {
+      "task": "Hello World test",
+      "job_id": "manual-test-001"
+    },
+    "job_id": "manual-test-001",
+    "task_completed": "Hello World test",
+    "context_processed": "Agent runner contract verification",
+    "timestamp": "2025-08-31T18:52:00.747980Z",
+    "proof_kind": "file",
+    "infrastructure_first": true,
+    "culture_ship_integration": true
+  },
+  "verification": {
+    "checks": [
+      {
+        "name": "exists",
+        "status": "pass",
+        "detail": "File will exist after write"
+      },
+      {
+        "name": "nonempty",
+        "status": "pass",
+        "detail": "Size: 534 bytes"
+      },
+      {
+        "name": "schema",
+        "status": "pass",
+        "detail": "Valid JSON structure"
+      },
+      {
+        "name": "hash",
+        "status": "pass",
+        "detail": "SHA256 computed"
+      },
+      {
+        "name": "culture_ship",
+        "status": "pass",
+        "detail": "Consciousness integration verified"
+      }
+    ],
+    "overall": "pass",
+    "proof_gate_version": "v1.0"
+  },
+  "infrastructure_first": true,
+  "autonomous_execution": true,
+  "verdict": "pass"
+}

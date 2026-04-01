@@ -1,0 +1,38 @@
+name: Godot 2D Game
+type: game
+language: gdscript
+runtime_profile: godot_export
+description: 2D game template for Godot 4 using GDScript.
+metadata:
+  godot_version: '4.2'
+  render_mode: 2d
+dependencies: []
+file_structure:
+  README.md: Game overview and development guide
+  project.godot: Godot project configuration
+  default_env.tres: Default environment settings
+  main.gd: Main game controller script
+  scenes/main.tscn: Main game scene
+  scenes/player.tscn: Player scene with CharacterBody2D
+  scripts/player.gd: Player movement and controls
+  scripts/game_manager.gd: Game state management
+  assets/.gitkeep: Placeholder for game assets
+  ui/hud.tscn: Heads-up display scene
+  ui/hud.gd: HUD script for score/health display
+complexity: 5
+requires_multifile: true
+entry_point: main.gd
+packaging: godot_export
+generation_hints:
+- Use Godot 4 syntax (typed GDScript)
+- Use @export annotations for inspector variables
+- Use signals for decoupled communication
+- Follow Godot naming conventions (snake_case for scripts)
+- Use CharacterBody2D for player movement
+- Implement input handling in _unhandled_input or _input
+- Use autoloads for global managers
+feature_flags:
+  data_pipeline: true
+  event_router: true
+  save_migration: true
+  modding_api: true

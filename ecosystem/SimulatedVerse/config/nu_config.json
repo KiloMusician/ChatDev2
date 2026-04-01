@@ -1,0 +1,13 @@
+{
+  "env": {
+    "OLLAMA_HOST": "http://127.0.0.1:11434",
+    "LLM_GATEWAY_URL": "http://127.0.0.1:4455",
+    "OPENAI_MODEL": "gpt-4o-mini"
+  },
+  "noise_excludes": [".git","node_modules",".venv",".pythonlibs","__pycache__", ".cache","dist","build","coverage","attic","quarantine","reports/*.gz"],
+  "cooldown": { "base_s": 75, "min_factor": 0.67, "max_factor": 1.25 },
+  "cycle": { "max_tasks_per_cycle": 3, "stop_file": "daemon/STOP" },
+  "ui": { "status_file": "public/system-status.json", "freshness_s": 60 },
+  "theater": { "threshold": 0.20, "K_norm": 15 },
+  "game": { "smoke": ["apps/game","game","godot","ui/ascii","ui/td"], "stale_cycles_warn": 3 }
+}

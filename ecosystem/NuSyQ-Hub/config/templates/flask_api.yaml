@@ -1,0 +1,82 @@
+# Flask REST API Template
+# OmniTag: [webapp, flask, rest, api, backend]
+# MegaTag: TEMPLATE⨳WEBAPP⦾FLASK_API→∞
+
+name: Flask API
+type: webapp
+language: python
+runtime_profile: native_terminal
+description: Flask REST API with SQLAlchemy ORM and JWT authentication
+version: "1.0.0"
+
+metadata:
+  framework: flask
+  auth_method: jwt
+  database: sqlalchemy
+  async: false
+
+dependencies:
+  - flask>=3.0.0
+  - flask-sqlalchemy>=3.1.0
+  - flask-jwt-extended>=4.6.0
+  - flask-cors>=4.0.0
+  - flask-migrate>=4.0.0
+  - gunicorn>=21.2.0
+  - python-dotenv>=1.0.0
+  - marshmallow>=3.20.0
+
+dev_dependencies:
+  - pytest>=8.0.0
+  - pytest-cov>=4.1.0
+  - httpx>=0.26.0
+  - black>=24.0.0
+  - ruff>=0.2.0
+
+file_structure:
+  README.md: "Project documentation with setup and API docs"
+  requirements.txt: "Production dependencies"
+  requirements-dev.txt: "Development dependencies"
+  .env.example: "Environment variable template"
+  Dockerfile: "Container definition"
+  docker-compose.yml: "Local development services"
+
+  src/__init__.py: "Package init with create_app factory"
+  src/app.py: "Flask application factory pattern"
+  src/config.py: "Configuration classes (dev/prod/test)"
+  src/extensions.py: "Flask extension initialization"
+
+  src/models/__init__.py: "Model exports"
+  src/models/user.py: "User model with password hashing"
+  src/models/base.py: "Base model with timestamps"
+
+  src/routes/__init__.py: "Blueprint registration"
+  src/routes/auth.py: "Authentication routes (login, register, refresh)"
+  src/routes/users.py: "User CRUD routes"
+  src/routes/health.py: "Health check endpoint"
+
+  src/schemas/__init__.py: "Marshmallow schema exports"
+  src/schemas/user.py: "User serialization schemas"
+
+  src/utils/__init__.py: "Utility exports"
+  src/utils/decorators.py: "Custom decorators"
+  src/utils/errors.py: "Custom error handlers"
+
+  tests/__init__.py: "Test package"
+  tests/conftest.py: "Pytest fixtures"
+  tests/test_auth.py: "Authentication tests"
+  tests/test_users.py: "User endpoint tests"
+
+complexity: 5
+requires_multifile: true
+entry_point: "src/app.py"
+
+hooks:
+  post_generate:
+    - "pip install -r requirements.txt"
+    - "flask db init"
+    - "flask db migrate -m 'Initial migration'"
+
+integrations:
+  - nusyq_quest: true
+  - background_orchestrator: true
+  - smart_search: true

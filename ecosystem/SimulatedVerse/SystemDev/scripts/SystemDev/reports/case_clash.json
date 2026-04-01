@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-09-03T11:52:51.484Z",
+  "total_clashes": 0,
+  "severity_breakdown": {
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "clashes": [],
+  "mobile_impact": {
+    "android_webview": "Case-sensitive filesystem will cause 404s",
+    "samsung_s23": "Native browser may fail to load resources",
+    "replit_preview": "Mobile preview tunnel sensitive to case mismatches"
+  },
+  "next_actions": [
+    "No case clashes detected",
+    "Mobile preview should work correctly",
+    "Maintain consistent naming conventions"
+  ]
+}

@@ -1,0 +1,62 @@
+name: "Unity 2D Platformer"
+type: "game"
+language: "csharp"
+runtime_profile: "native_terminal"
+engine: "unity"
+engine_version: "2022.3"
+genre: "platformer"
+description: "A 2D platformer game built with Unity, featuring player movement, jumping, collectibles, and level design"
+complexity: 7
+requires_multifile: true
+target_platforms:
+  - windows
+  - macos
+  - linux
+
+dependencies:
+  - "Unity 2022.3 LTS or newer"
+  - "TextMeshPro"
+
+file_structure:
+  # Unity project structure
+  "Assets/Scripts/PlayerController.cs": "Player movement, jumping, and physics controller"
+  "Assets/Scripts/CameraFollow.cs": "Smooth camera that follows player"
+  "Assets/Scripts/Collectible.cs": "Coins, gems, or power-ups that can be collected"
+  "Assets/Scripts/Enemy.cs": "Basic enemy AI with patrol behavior"
+  "Assets/Scripts/GameManager.cs": "Singleton managing game state, score, lives"
+  "Assets/Scripts/LevelLoader.cs": "Scene loading and level transitions"
+  "Assets/Scripts/UIManager.cs": "Updates UI elements (score, health, etc.)"
+  
+  # Unity package/project files
+  "Packages/manifest.json": "Unity package manager manifest"
+  "ProjectSettings/ProjectVersion.txt": "Unity version metadata"
+  "ProjectSettings/TagManager.asset": "Custom tags and layers for Unity"
+  
+  # Documentation
+  "README.md": "How to open and run the Unity project"
+  "CONTROLS.md": "Player controls documentation"
+
+generation_hints:
+  - "Use Unity's new Input System for player controls"
+  - "Implement physics-based movement with Rigidbody2D"
+  - "Add ground detection using raycasts or overlap checks"
+  - "Include comments explaining Unity lifecycle methods (Start, Update, FixedUpdate)"
+  - "Use serialized fields [SerializeField] for inspector-editable values"
+  - "Add basic SFX hooks (AudioSource.PlayOneShot calls)"
+  - "Include death/respawn mechanics"
+  - "Make collectibles trigger score increase and particle effects"
+  - "Camera smoothing with Lerp or SmoothDamp"
+  - "Level completion detection and scene transitions"
+  - "Save player preferences using PlayerPrefs for high scores"
+
+metadata:
+  unity_render_pipeline: "URP"  # Universal Render Pipeline
+  physics_mode: "2D"
+  aspect_ratio: "16:9"
+  target_fps: 60
+
+feature_flags:
+  data_pipeline: true
+  event_router: true
+  save_migration: true
+  modding_api: true

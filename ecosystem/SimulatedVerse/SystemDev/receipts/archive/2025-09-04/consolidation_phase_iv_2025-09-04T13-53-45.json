@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-09-04T13:53:45.000Z",
+  "phase": "IV_consolidation",
+  "build_fix_progress": {
+    "files_fixed": [
+      "client/src/components/ui/badge.tsx → reconstructed_proper_newlines",
+      "client/src/components/ui/select.tsx → created_missing_component",
+      "GameDev/engine/core/events/EventHub.ts → browser_compatible_EventEmitter",
+      "GameDev/engine/core/save/SaveCodec.ts → localStorage_based_storage"
+    ],
+    "remaining_node_imports": [
+      "GameDev/engine/research/TechTree.ts",
+      "GameDev/engine/core/data/DataLoader.ts", 
+      "GameDev/tools/synthesize/mechanic.ts",
+      "GameDev/tools/synthesize/mechanic_simple.ts",
+      "GameDev/testing/golden_seeds.ts"
+    ],
+    "lsp_diagnostics": "25_errors_across_6_files"
+  },
+  "duplicate_handling": {
+    "dev_menu_duality": "PreviewUI/web/core/MenuRouter.tsx ↔ client/src/components/DevMenuExtended.tsx",
+    "game_shell_duality": "PreviewUI/web/core/GameShell.tsx ↔ client/src/components/GameShell.tsx",
+    "approach": "preserve_both_validate_canonical_routing",
+    "status": "mapping_complete_resolution_pending"
+  },
+  "consolidation_status": "partial_progress_build_blockers_remain",
+  "next_actions": [
+    "fix_remaining_5_fs_imports",
+    "test_build_success",
+    "validate_react_routing"
+  ]
+}

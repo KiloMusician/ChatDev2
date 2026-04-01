@@ -1,0 +1,18 @@
+{
+  "timestamp": 1756824950000,
+  "council_members": {
+    "raven": {"role": "skeptic", "status": "active", "last_check": 1756824888446},
+    "mladenc": {"role": "planner", "status": "active", "last_check": 1756824888446}, 
+    "librarian": {"role": "context", "status": "ready"},
+    "artificer": {"role": "builder", "status": "ready"},
+    "alchemist": {"role": "stabilizer", "status": "checking", "last_check": 1756824726577},
+    "protagonist": {"role": "player", "status": "ready_for_playtest"}
+  },
+  "group_chat_rules": {
+    "turn_policy": "round_robin",
+    "action_requirement": "measurable_action_plus_receipt",
+    "raven_veto": "proof_not_vibes",
+    "receipt_validation": true
+  },
+  "active_threads": ["system_health", "llm_healing", "quadpartite_audit"]
+}

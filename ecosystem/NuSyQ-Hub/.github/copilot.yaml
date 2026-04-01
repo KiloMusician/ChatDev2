@@ -1,0 +1,31 @@
+completions:
+  enabled: true
+  inline: true
+  multi_line: true
+experimental_features:
+  consciousness_patterns: true
+  multi_ai_orchestration: true
+  quantum_context: true
+file_associations:
+  '*.bridge': yaml
+  '*.consciousness': python
+  '*.copilot': yaml
+  '*.foolish': python
+  '*.kilo': python
+  '*.nusyq': json
+  '*.quantum': python
+instructions:
+  - ../AGENTS.md
+prompts:
+  ai: Integrate with existing AI orchestration and multi-LLM systems
+  context: This is a python_ai_research project focusing on quantum_computing, ai_ml,
+    blockchain, consciousness_simulation, repository_management, automation, diagnostics
+  conventions: |
+    Follow repository structure patterns and maintain integration with existing AI systems.
+    Refer to ../AGENTS.md for repository layout and file placement guidance.
+  quantum: Implement quantum computing concepts with consciousness simulation patterns
+  style: Use quantum-inspired patterns and consciousness-aware development approaches
+suggestions:
+  auto_trigger: true
+  context_aware: true
+  enabled: true

@@ -1,0 +1,114 @@
+{
+  "timestamp": "2025-09-04T14:29:15.970Z",
+  "files_total": 130,
+  "size_total": 484069,
+  "size_human": "472.72 KB",
+  "extensions": {
+    "json": 37,
+    "mjs": 32,
+    "ts": 47,
+    "ndjson": 2,
+    "js": 5,
+    "sh": 7
+  },
+  "directories": {
+    "SystemDev/receipts": 14,
+    "SystemDev/reports": 10,
+    ".": 86,
+    "breaths/SystemDev/receipts": 5,
+    "breaths/SystemDev/receipts/telemetry": 4,
+    "breaths/SystemDev/reports": 4,
+    "breaths": 5,
+    "patches": 1,
+    "reports": 1
+  },
+  "size_buckets": {
+    "tiny": 121,
+    "small": 9
+  },
+  "top_dirs_by_count": [
+    {
+      "dir": ".",
+      "count": 86
+    },
+    {
+      "dir": "SystemDev/receipts",
+      "count": 14
+    },
+    {
+      "dir": "SystemDev/reports",
+      "count": 10
+    },
+    {
+      "dir": "breaths/SystemDev/receipts",
+      "count": 5
+    },
+    {
+      "dir": "breaths",
+      "count": 5
+    },
+    {
+      "dir": "breaths/SystemDev/receipts/telemetry",
+      "count": 4
+    },
+    {
+      "dir": "breaths/SystemDev/reports",
+      "count": 4
+    },
+    {
+      "dir": "patches",
+      "count": 1
+    },
+    {
+      "dir": "reports",
+      "count": 1
+    }
+  ],
+  "top_dirs_by_size": [
+    {
+      "dir": ".",
+      "size": 399093
+    },
+    {
+      "dir": "breaths",
+      "size": 44868
+    },
+    {
+      "dir": "patches",
+      "size": 10102
+    },
+    {
+      "dir": "SystemDev/reports",
+      "size": 7446
+    },
+    {
+      "dir": "SystemDev/receipts",
+      "size": 7404
+    },
+    {
+      "dir": "breaths/SystemDev/receipts/telemetry",
+      "size": 7186
+    },
+    {
+      "dir": "breaths/SystemDev/receipts",
+      "size": 4568
+    },
+    {
+      "dir": "breaths/SystemDev/reports",
+      "size": 2773
+    },
+    {
+      "dir": "reports",
+      "size": 629
+    }
+  ],
+  "bloat_indicators": {
+    "node_modules": 0,
+    "build_dirs": 0,
+    "cache_dirs": 0,
+    "log_files": 0,
+    "map_files": 0,
+    "media_files": 0
+  },
+  "anomalies": []
+}

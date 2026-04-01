@@ -1,0 +1,36 @@
+{
+  "id": "proof_8951778a-df14-4440-9ebf-a002077d47cb",
+  "job_id": "8951778a-df14-4440-9ebf-a002077d47cb",
+  "actor": "alchemist",
+  "kind": "file",
+  "path": "ops/proofs/proof_8951778a-df14-4440-9ebf-a002077d47cb.json",
+  "sha256": "c72fe11021522652e08f9382146cd67027db3d9b0842db3a022249c7a8bca8bf",
+  "size": 1466,
+  "created_at": "2025-09-01T22:07:20.788Z",
+  "checks": [
+    {
+      "name": "exists",
+      "ok": true
+    },
+    {
+      "name": "schema",
+      "ok": true
+    },
+    {
+      "name": "nonempty",
+      "ok": false
+    }
+  ],
+  "verdict": "fail",
+  "proof": {
+    "job_id": "8951778a-df14-4440-9ebf-a002077d47cb",
+    "agent": "alchemist",
+    "files": [],
+    "created_at": "2025-09-01T22:07:20.788Z",
+    "runner_exit_code": 1,
+    "runner_stdout": "",
+    "runner_stderr": "node:internal/modules/esm/get_format:189\n  throw new ERR_UNKNOWN_FILE_EXTENSION(ext, filepath);\n        ^\n\nTypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension \".ts\" for /home/runner/workspace/agents/alchemist/index.ts\n    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:189:9)\n    at defaultGetFormat (node:internal/modules/esm/get_format:232:36)\n    at defaultLoad (node:internal/modules/esm/load:145:22)\n    at async ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:477:45)\n    at async ModuleJob._link (node:internal/modules/esm/module_job:110:19) {\n  code: 'ERR_UNKNOWN_FILE_EXTENSION'\n}\n\nNode.js v20.19.3\n"
+  },
+  "file_count": 0,
+  "total_bytes": 0
+}

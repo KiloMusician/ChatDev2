@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-09-03T05:21:46+00:00",
+  "watch_patterns": {
+    "cycles": "reports/cycle-*.json",
+    "receipts": "reports/*receipt*.json", 
+    "audits": "reports/*audit*.json",
+    "jobs": "reports/jobs_topology.json",
+    "llm": "reports/llm_failures.json",
+    "status": "public/system-status.json",
+    "sim": "reports/sim_*proof*.json"
+  },
+  "baseline_files": 112,
+  "differential_ready": true
+}

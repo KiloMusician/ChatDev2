@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-03-20",
+  "workspace_name": "Tripartite Workspace",
+  "repos": [
+    {
+      "name": "Dev-Mentor",
+      "path": "C:\\Users\\keath\\Dev-Mentor",
+      "role": "VS Code-native game and mentor surface"
+    },
+    {
+      "name": "SimulatedVerse",
+      "path": "C:\\Users\\keath\\Desktop\\SimulatedVerse\\SimulatedVerse",
+      "role": "Simulation and UI layer"
+    },
+    {
+      "name": "NuSyQ",
+      "path": "C:\\Users\\keath\\NuSyQ",
+      "role": "Multi-agent orchestration core"
+    },
+    {
+      "name": "NuSyQ-Hub",
+      "path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "role": "Workspace orchestrator and prime anchor host"
+    }
+  ],
+  "required_extensions": [
+    "github.copilot",
+    "github.copilot-chat",
+    "anthropic.claude-code",
+    "continue.continue",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.debugpy",
+    "charliermarsh.ruff",
+    "ms-vscode.powershell"
+  ],
+  "optional_extensions": [
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree",
+    "nguyenngoclong.terminal-keeper",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode"
+  ],
+  "unwanted_extensions": [
+    "codeium.codeium",
+    "openai.chatgpt",
+    "sourcegraph.cody-ai",
+    "bito.bito",
+    "feiskyer.chatgpt-copilot",
+    "genieai.chatgpt-vscode",
+    "ikasann-self.vscode-chat-gpt",
+    "silasnevstad.gpthelper",
+    "sixth.sixth-ai",
+    "danielsanmedium.dscodegpt",
+    "10nates.ollama-autocoder",
+    "chrisbunting.ollama-code-generator",
+    "codeboss.ollama-ai-assistant",
+    "desislavarashev.ollama-commit",
+    "diegoomal.ollama-connection"
+  ],
+  "runtime_defaults": {
+    "powershell": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+    "python": "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "node": "C:\\Program Files\\nodejs\\node.exe"
+  },
+  "port_contract": {
+    "simulatedverse_http": 5001,
+    "dev_mentor_http": 7337,
+    "ollama_http": 11434,
+    "lmstudio_http": 1234
+  },
+  "known_live_processes": [
+    {
+      "pid": 34416,
+      "name": "pwsh.exe",
+      "role": "VS Code PowerShell editor services host"
+    },
+    {
+      "pid": 20684,
+      "name": "pwsh.exe",
+      "role": "VS Code integrated terminal"
+    },
+    {
+      "pid": 23436,
+      "name": "node.exe",
+      "role": "SimulatedVerse native Windows server on port 5001"
+    }
+  ],
+  "known_blockers": [
+    "SimulatedVerse server on port 5001 accepts TCP but times out on HTTP responses",
+    "WSL tsx startup path is unstable for SimulatedVerse",
+    "NuSyQ-Hub start-system and error-report commands do not yet emit a fresh report in the current runtime",
+    "Installed VS Code extensions contain overlapping AI and Ollama surfaces"
+  ]
+}

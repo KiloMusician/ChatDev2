@@ -1,0 +1,12 @@
+{
+  "name": "doc_generator",
+  "version": "1.0.0",
+  "description": "Generate Markdown documentation from Python source files using the LLM.",
+  "entry_point": "plugin.py",
+  "category": "development",
+  "enabled": true,
+  "config_schema": {
+    "file": "path to Python file",
+    "style": "brief|full"
+  }
+}

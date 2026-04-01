@@ -1,0 +1,131 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "ΞNuSyQ Multi-Repo Guided Tour",
+  "steps": [
+    {
+      "title": "Welcome & Purpose",
+      "description": "This tour orients new contributors and agents to the NuSyQ ecosystem. It covers three repositories: `NuSyQ` (root orchestration & MCP), `NuSyQ-Hub` (legacy orchestration and discovery tooling), and `SimulatedVerse` (consciousness simulation engine). Use the next steps to jump into files and learn actionable workflows.\n",
+      "intent": "orient"
+    },
+    {
+      "title": "Workspace layout — high level",
+      "description": "Top-level folders you will work with: `NuSyQ` (this repo), `Desktop/Legacy/NuSyQ-Hub` (legacy Hub), and `Desktop/SimulatedVerse/SimulatedVerse`. Read `docs/ORDER_OF_OPERATIONS.md` for the canonical startup sequence.",
+      "file": "docs/ORDER_OF_OPERATIONS.md",
+      "line": 1
+    },
+    {
+      "title": "NuSyQ (Root) — MCP Server entrypoint",
+      "description": "The MCP server bridges agents and local resources. Primary entrypoint: `mcp_server/main.py` — the FastAPI app, health endpoint, and tool registration. We'll inspect startup and health-check behavior next.",
+      "file": "mcp_server/main.py",
+      "line": 1
+    },
+    {
+      "title": "MCP Server — core class & app factory",
+      "description": "Open `mcp_server/main.py` and find `class NuSyQMCPServer` and the app factory. Key responsibilities:\n- Initialize FastAPI app and middleware\n- Register MCP endpoints (`/mcp`, `/tools/execute`, `/health`)\n- Start background health checks and optional aiohttp probes\n\nLook for `_check_component_health` which the `/health` endpoint uses to collect component statuses.",
+      "file": "mcp_server/main.py",
+      "line": 120
+    },
+    {
+      "title": "MCP Server — background tasks & graceful shutdown",
+      "description": "Search for `startup` and `shutdown` handlers in `mcp_server/main.py`. If the server starts then exits, a background startup task may have raised an exception. Typical culprits:\n- missing optional dependency (aiohttp)\n- ConfigManager failing to load\n- uncaught exception in an asyncio background task\n\nActionable: run the server in foreground and capture logs: `./.venv/Scripts/python.exe mcp_server/main.py`.",
+      "file": "mcp_server/main.py",
+      "line": 300
+    },
+    {
+      "title": "MCP Server — health & lifecycle",
+      "description": "Key functions:\n- `create_app()` builds the FastAPI app\n- `/health` endpoint collects component checks\n\nIf the server starts & then exits, check the `if __name__ == '__main__'` block and background tasks for exceptions. See `mcp_server/main.py` lines near the bottom for the `uvicorn.run(...)` call.",
+      "file": "mcp_server/main.py",
+      "line": 1620
+    },
+    {
+      "title": "AgentContextManager & CLI",
+      "description": "Context plumbing allows agents to persist local context. Manager lives under `src/tools/agent_context_manager.py`. A lightweight CLI is in `scripts/agent_context_cli.py` for registering files into namespaces and optionally pushing to MCP.",
+      "file": "scripts/agent_context_cli.py",
+      "line": 1
+    },
+    {
+      "title": "AgentContextManager — API contract",
+      "description": "`src/tools/agent_context_manager.py` was removed (logic folded into the CLI). The CLI in `scripts/agent_context_cli.py` is now the canonical entry point.\n\nKey methods:\n- `register_from_file(path, namespace)` — register content and metadata\n- `load(namespace)` — return stored content\n- `save(namespace, payload)` — persist payload\n\nTests: `tests/test_agent_context_cli.py`",
+      "file": "scripts/agent_context_cli.py",
+      "line": 1
+    },
+    {
+      "title": "Agent CLI — import robustness",
+      "description": "The CLI `scripts/agent_context_cli.py` contains logic to locate the repo root and insert it into `sys.path` before importing `src.tools.agent_context_manager`. When running tests from a tmpcwd, the CLI uses fallbacks and a minimal in-test manager.\n\nIf you add features, keep the import-resolution logic deterministic (explicit repo_root arg) to avoid ModuleNotFoundError in tests.",
+      "file": "scripts/agent_context_cli.py",
+      "line": 1
+    },
+    {
+      "title": "NuSyQ Orchestrator (PowerShell)",
+      "description": "The orchestrator script `NuSyQ.Orchestrator.ps1` configures the environment, attempts to ensure required PowerShell modules exist, and orchestrates model setup. In DryRun mode it avoids destructive steps—use `-DryRun` for testing. Inspect quoting and YAML module handling when debugging.",
+      "file": "NuSyQ.Orchestrator.ps1",
+      "line": 1
+    },
+    {
+      "title": "Orchestrator debugging — YAML & ConvertFrom-Yaml",
+      "description": "If DryRun shows `ConvertFrom-Yaml` not recognized, it means `PowerShell.Yaml` (or PSScriptTools) is not installed in the host PowerShell. Options:\n- Install module: `Install-Module -Name PowerShell.Yaml -Scope CurrentUser` (requires network)\n- Modify orchestrator to parse YAML via Python instead of PowerShell for DryRun paths\n\nActionable: run DryRun first, fix quoting/herestrings, then run full orchestrator when satisfied.",
+      "file": "NuSyQ.Orchestrator.ps1",
+      "line": 200
+    },
+    {
+      "title": "NuSyQ-Hub — discovery & cataloging",
+      "description": "Legacy hub contains discovery tooling, registries, and experimental orchestration. Important files:\n- `src/tools/kilo_discovery_system.py` (component discovery)\n- `COMPLETE_FUNCTION_REGISTRY.md` and `complete_function_registry.py`\nRun `tests/test_kilo_discovery.py` to validate discovery behavior.",
+      "file": "../Desktop/Legacy/NuSyQ-Hub/src/tools/kilo_discovery_system.py",
+      "line": 1
+    },
+    {
+      "title": "kilo_discovery_system — tag parsing & indexing",
+      "description": "Open `kilo_discovery_system.py` and inspect:\n- `_parse_tag_block(content: str) -> dict` — parses OmniTag/MegaTag blocks (tries JSON then AST literal eval)\n- `_extract_tags_from_content` and `_extract_tags_from_docstring` — higher-level helpers\n- `generate_component_index` — top-level index generator that aggregates file metadata\n\nActionable: add unit tests for malformed tag blocks and large repos to ensure parsing fallback is robust.",
+      "file": "../Desktop/Legacy/NuSyQ-Hub/src/tools/kilo_discovery_system.py",
+      "line": 1
+    },
+    {
+      "title": "SimulatedVerse — front-end & engine",
+      "description": "The consciousness simulation engine. Entry points:\n- `start-dev.js` / `npm run dev` for the Express backend (port 5000)\n- React UI (port 3000)\nCheck `package.json` and `pyproject.toml` for environment and build steps.",
+      "file": "../Desktop/SimulatedVerse/SimulatedVerse/README.md",
+      "line": 1
+    },
+    {
+      "title": "Developer scaffolding & checks",
+      "description": "Use the repo tasks and scripts to run quick scans and tests. Notable tasks available in the workspace tasks are:\n- `Quick Repo Scan (optimized)` — runs `src.tools.maze_solver`\n- `Start MCP Server` — uses the repo venv python to start `mcp_server/main.py`\nRun linters in small batches: `ruff` and format with `black`.",
+      "file": "Makefile",
+      "line": 1
+    },
+    {
+      "title": "Tests & CI quirks",
+      "description": "CI `pytest.ini` injects addopts that can interfere with local runs. When running tests locally, use `-o addopts=` to override the CI flags. Example: `python -m pytest -q tests/test_agent_context_cli.py -o addopts=`.",
+      "file": "pytest.ini",
+      "line": 1
+    },
+    {
+      "title": "Common debugging checklist",
+      "description": "If something fails:\n1. Re-run the failing script with increased verbosity.\n2. Check for missing imports or environment modules (PowerShell.Yaml for orchestrator; aiohttp for MCP optional features).\n3. Confirm venv is activated and correct Python is used (see tasks for exact path). \n4. Inspect logs under `Logs/` or `mcp_server` console output.",
+      "intent": "debug"
+    },
+    {
+      "title": "How to start the MCP server (recommended)",
+      "description": "Start the MCP server using the repository venv python. Example (PowerShell):\n\n```powershell\n./.venv/Scripts/python.exe mcp_server/main.py\n```\n\nIf the server starts and shuts down, capture console output. Common causes: missing optional module or an exception in a startup background task.",
+      "file": "mcp_server/main.py",
+      "line": 1600
+    },
+    {
+      "title": "Registering contexts with the CLI",
+      "description": "Examples:\n\n```powershell\npython scripts/agent_context_cli.py --namespace myns --path path/to/file.txt\npython scripts/agent_context_cli.py --namespace myns --path file.ipynb --push-mcp http://localhost:3000/mcp\n```\n\nThe CLI will store a JSON payload per namespace; push to MCP if server is running.",
+      "file": "scripts/agent_context_cli.py",
+      "line": 1
+    },
+    {
+      "title": "Where to find session logs & healing tools",
+      "description": "Session logs and healing tooling are under:\n- `docs/Agent-Sessions/`\n- `src/healing/repository_health_restorer.py`\n- `src/healing/quantum_problem_resolver.py`\n\nUse the `Agent Navigation & Self-Healing Protocol` in `AGENTS.md` when stuck.",
+      "file": "AGENTS.md",
+      "line": 1
+    },
+    {
+      "title": "Next steps & contribution guidance",
+      "description": "Suggested immediate tasks:\n1. Start MCP server and confirm `/health`.\n2. Register a few contexts via the CLI and confirm they load in `AgentContextManager`.\n3. Run discovery tests and begin refactor of `kilo_discovery_system.py` into smaller helpers.\n\nWhen adding code, put new modules under `src/` and add unit tests under `tests/`.",
+      "intent": "plan"
+    }
+  ],
+  "ref": "codex/add-development-setup-instructions",
+  "description": "A thorough guided walkthrough of the three NuSyQ repositories (NuSyQ, NuSyQ-Hub, SimulatedVerse). Each step explains purpose, entry points, and common maintenance tasks."
+}

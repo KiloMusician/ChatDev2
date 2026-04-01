@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-09-03T11:51:00Z",
+  "operation": "preview_hud_implementation",
+  "status": "operational",
+  "hud_features": {
+    "toggle_access": "?hud=1 query parameter",
+    "logger_bus_connection": "Council Bus SSE stream",
+    "console_interception": "captures console.log/warn/error",
+    "real_time_logs": "live event streaming",
+    "mobile_optimized": "responsive design for S23"
+  },
+  "council_bus_integration": {
+    "endpoint": "/api/council-bus/stream",
+    "event_capture": "all Council Bus events",
+    "reconnection": "automatic retry on disconnect",
+    "status_indicators": "connection health display"
+  },
+  "mobile_debugging": {
+    "no_devtools_required": true,
+    "on_screen_logs": "last 20 entries visible",
+    "touch_optimized": "large close button, scrollable",
+    "backdrop_filter": "blur for readability",
+    "z_index": 9999
+  },
+  "log_management": {
+    "buffer_size": 100,
+    "display_limit": 20,
+    "auto_scroll": "to latest entry",
+    "timestamp_format": "HH:MM:SS",
+    "log_levels": ["info", "warn", "error", "success", "debug"]
+  },
+  "access_methods": {
+    "query_param": "?hud=1 on any Preview URL",
+    "direct_url": "/preview/preview_hud.html",
+    "overlay_mode": "fixed position overlay"
+  }
+}

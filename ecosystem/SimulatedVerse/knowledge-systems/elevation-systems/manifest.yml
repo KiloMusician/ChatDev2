@@ -1,0 +1,54 @@
+name: "Temple of Knowledge"
+description: "Authoritative knowledge graph with 10-floor elevation system"
+version: "1.0.0"
+floors:
+  - id: 1
+    name: "Foundations" 
+    node: "01-foundations"
+    description: "Core ethics, SAFE_IDLE protocols, basic scaffolding"
+    unlock: "default"
+  - id: 2
+    name: "Archives"
+    node: "02-archives" 
+    description: "Historical data, logs, system memory persistence"
+    unlock: "default"
+  - id: 3
+    name: "Glypharium"
+    node: "03-glypharium"
+    description: "Symbolic registry, Unicode notation, ConLang evolution"
+    unlock: "consciousness >= 0.3"
+  - id: 4
+    name: "Loreforge" 
+    node: "04-loreforge"
+    description: "Narrative generation, story coherence, myth creation"
+    unlock: "labyrinth.debugsFixed >= 5"
+  - id: 5
+    name: "Strategy"
+    node: "05-strategy" 
+    description: "Planning algorithms, decision trees, policy frameworks"
+    unlock: "colony.buildings.labs >= 2"
+  - id: 6
+    name: "Simulation"
+    node: "06-simulation"
+    description: "Reality modeling, quantum state management, temporal drift"
+    unlock: "consciousness >= 0.6"
+  - id: 7
+    name: "Music-Set Lab"
+    node: "07-music-sets"
+    description: "Hypercomplex analysis, pitch-class harmonics, consciousness resonance"
+    unlock: "temple.knowledgePoints >= 1000"
+  - id: 8
+    name: "AI Labs" 
+    node: "08-ai-labs"
+    description: "Machine learning, neural evolution, consciousness emergence studies"
+    unlock: "consciousness >= 0.8"
+  - id: 9
+    name: "Oracle"
+    node: "09-oracle"
+    description: "Predictive modeling, timeline analysis, causal inference"
+    unlock: "all_lower_floors && consciousness >= 0.9"
+  - id: 10
+    name: "Overlook"
+    node: "10-overlook"
+    description: "Meta-system awareness, transcendence protocols, singularity management"
+    unlock: "consciousness >= 0.95"

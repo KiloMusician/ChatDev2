@@ -1,0 +1,186 @@
+{
+  "generated_at": "2025-12-26T03:00:28.248264",
+  "repos": {
+    "NuSyQ-Hub": {
+      "Autonomous Monitor": {
+        "name": "Autonomous Monitor",
+        "type": "python",
+        "entry_point": "scripts/autonomous_monitor.py",
+        "port": null,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ-Hub",
+        "description": "Meta-agent for continuous system monitoring",
+        "running": false,
+        "port_active": null
+      },
+      "Auto Cycle": {
+        "name": "Auto Cycle",
+        "type": "python",
+        "entry_point": "scripts/start_nusyq.py auto_cycle --iterations=0",
+        "port": null,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ-Hub",
+        "description": "Continuous PU processing and cultivation",
+        "running": false,
+        "port_active": null
+      },
+      "Quest Replay Engine": {
+        "name": "Quest Replay Engine",
+        "type": "python",
+        "entry_point": "src/tools/quest_replay_engine.py",
+        "port": null,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ-Hub",
+        "description": "Learning from quest patterns",
+        "running": false,
+        "port_active": null
+      },
+      "Metrics Dashboard Builder": {
+        "name": "Metrics Dashboard Builder",
+        "type": "python",
+        "entry_point": "src/tools/cultivation_metrics.py",
+        "port": null,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ-Hub",
+        "description": "Real-time metrics aggregation",
+        "running": false,
+        "port_active": null
+      },
+      "Modular Window Server": {
+        "name": "Modular Window Server",
+        "type": "node",
+        "entry_point": "web/modular-window-server/server.js",
+        "port": 3001,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ-Hub",
+        "description": "Windowing system API",
+        "running": false,
+        "port_active": false
+      },
+      "Observability Stack": {
+        "name": "Observability Stack",
+        "type": "docker",
+        "entry_point": "dev/observability/docker-compose.observability.yml",
+        "port": 16686,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ-Hub",
+        "description": "OpenTelemetry Collector + Jaeger",
+        "running": false,
+        "port_active": false,
+        "docker_info": {
+          "running": false,
+          "services": []
+        }
+      },
+      "Agent Services": {
+        "name": "Agent Services",
+        "type": "docker",
+        "entry_point": "deploy/docker-compose.agents.yml",
+        "port": null,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ-Hub",
+        "description": "Containerized AI agents",
+        "running": false,
+        "port_active": null,
+        "docker_info": {
+          "running": false,
+          "services": []
+        }
+      }
+    },
+    "SimulatedVerse": {
+      "SimulatedVerse API": {
+        "name": "SimulatedVerse API",
+        "type": "node",
+        "entry_point": "server.js",
+        "port": 5000,
+        "auto_start": false,
+        "critical": false,
+        "repo": "SimulatedVerse",
+        "description": "Express API server",
+        "running": false,
+        "port_active": false
+      },
+      "SimulatedVerse React": {
+        "name": "SimulatedVerse React",
+        "type": "node",
+        "entry_point": "npm start",
+        "port": 3000,
+        "auto_start": false,
+        "critical": false,
+        "repo": "SimulatedVerse",
+        "description": "React dev server",
+        "running": false,
+        "port_active": false
+      }
+    },
+    "NuSyQ": {
+      "NuSyQ Orchestrator": {
+        "name": "NuSyQ Orchestrator",
+        "type": "powershell",
+        "entry_point": "NuSyQ.Orchestrator.ps1",
+        "port": null,
+        "auto_start": false,
+        "critical": true,
+        "repo": "NuSyQ",
+        "description": "Root orchestration script",
+        "running": false,
+        "port_active": null
+      },
+      "Ecosystem Sentinel": {
+        "name": "Ecosystem Sentinel",
+        "type": "powershell",
+        "entry_point": "scripts/ecosystem_startup_sentinel.ps1",
+        "port": null,
+        "auto_start": true,
+        "critical": true,
+        "repo": "NuSyQ",
+        "description": "Auto-start Ollama and core services",
+        "running": false,
+        "port_active": null
+      },
+      "Ollama": {
+        "name": "Ollama",
+        "type": "service",
+        "entry_point": "ollama serve",
+        "port": 11434,
+        "auto_start": true,
+        "critical": true,
+        "repo": "NuSyQ",
+        "description": "Local LLM inference (37.5GB models)",
+        "running": true,
+        "port_active": true
+      },
+      "ChatDev Agents": {
+        "name": "ChatDev Agents",
+        "type": "python",
+        "entry_point": "ChatDev/run.py",
+        "port": null,
+        "auto_start": false,
+        "critical": false,
+        "repo": "NuSyQ",
+        "description": "14 AI agent system",
+        "running": false,
+        "port_active": null
+      }
+    }
+  },
+  "total_services": 13,
+  "running_services": 1,
+  "auto_start_services": [
+    "Ecosystem Sentinel",
+    "Ollama"
+  ],
+  "critical_services": [
+    "NuSyQ Orchestrator",
+    "Ecosystem Sentinel",
+    "Ollama"
+  ]
+}

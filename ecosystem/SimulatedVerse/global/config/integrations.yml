@@ -1,0 +1,21 @@
+# config/integrations.yml
+ollama:
+  enabled: false         # default zero-token path
+  base_url: "http://127.0.0.1:11434"
+  model: "llama3:8b-instruct"
+chatdev:
+  enabled: false
+  endpoint: "http://localhost:8800"
+council:
+  enabled: true
+  agents:
+    - id: planner
+      role: "Sequencer"
+    - id: builder
+      role: "Implementer"
+    - id: tester
+      role: "Verifier"
+github:
+  enabled: true
+  remote: "origin"
+  default_branch: "main"

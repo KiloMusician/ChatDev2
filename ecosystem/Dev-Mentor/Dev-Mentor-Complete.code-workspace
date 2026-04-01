@@ -1,0 +1,424 @@
+{
+  // ── Dev-Mentor Ecosystem — Canonical Multi-Repo Workspace ─────────────────
+  // Opens: Dev-Mentor · SimulatedVerse · NuSyQ · NuSyQ-Hub
+  //
+  // Usage:
+  //   File → Open Workspace from File → Dev-Mentor-Complete.code-workspace
+  //   (or double-click from Explorer)
+  //
+  // Ports:
+  //   7337  — Terminal Depths (local / Docker / VS Code)
+  //   8000  — NuSyQ-Hub Agent API
+  //   11434 — Ollama
+  //   1234  — LM Studio
+  //   5000  — Replit compat only — DO NOT use locally
+  // ──────────────────────────────────────────────────────────────────────────
+
+  "folders": [
+    { "path": ".",                               "name": "Dev-Mentor" },
+    { "path": "../Desktop/Legacy/NuSyQ-Hub",     "name": "NuSyQ-Hub" },
+    { "path": "../Desktop/SimulatedVerse/SimulatedVerse", "name": "SimulatedVerse" },
+    { "path": "../NuSyQ",                        "name": "NuSyQ" }
+  ],
+
+  "settings": {
+    // ── Python ──────────────────────────────────────────────────────────────
+    // Pin to real Python312 — avoids Windows Store stub crash-loop
+    "python.defaultInterpreterPath": "C:/Users/keath/AppData/Local/Programs/Python/Python312/python.exe",
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.autoTestDiscoverOnSaveEnabled": false,
+    "python.testing.pytestEnabled": false,
+    // NOTE: python.linting.pylintEnabled and python.formatting.provider are DEPRECATED.
+    //       Ruff (charliermarsh.ruff) handles all lint + format for this project.
+
+    // ── Formatter: Ruff for Python, Prettier for JS/TS ──────────────────────
+    "[python]": {
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.ruff": "explicit",
+        "source.organizeImports.ruff": "explicit"
+      }
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "ruff.lint.enable": true,
+    "ruff.format.enable": true,
+
+    // ── Editor ───────────────────────────────────────────────────────────────
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on",
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.showWords": false,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    // ── Git ──────────────────────────────────────────────────────────────────
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "never",
+
+    // ── File watchers — exclude large auto-generated trees ───────────────────
+    "files.watcherExclude": {
+      "**/.git/**":                true,
+      "**/node_modules/**":        true,
+      "**/__pycache__/**":         true,
+      "**/var/**":                 true,
+      "**/state/**":               true,
+      "**/sessions/**":            true,
+      "**/knowledge/**":           true,
+      "**/docs/lore/**":           true,
+      "**/app/frontend/static/**": true
+    },
+    "files.exclude": {
+      "**/__pycache__":   true,
+      "**/node_modules":  true,
+      "**/.pytest_cache": true,
+      "**/dist":          true
+    },
+    "search.exclude": {
+      "**/node_modules":  true,
+      "**/.venv":         true,
+      "**/venv":          true,
+      "**/state/**":      true,
+      "**/var/**":        true,
+      "**/knowledge/**":  true
+    },
+
+    // ── Pylance exclusions — skip heavy non-code trees ───────────────────────
+    "python.analysis.exclude": [
+      "**/node_modules",
+      "**/app/frontend",
+      "**/.devmentor",
+      "**/knowledge",
+      "**/__pycache__",
+      "**/state",
+      "**/docs/lore"
+    ],
+
+    // ── Terminal — Windows (Git Bash) ─────────────────────────────────────────
+    // These profiles are defined here (workspace level) so they apply regardless
+    // of which folder is active. Settings in a subfolder's .vscode/settings.json
+    // only apply when that folder is opened directly — not via workspace file.
+    "terminal.integrated.defaultProfile.windows": "DM: Dev",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.profiles.windows": {
+      "DM: Dev": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "terminal",
+        "color": "terminal.ansiCyan",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:Dev-Mentor}",
+          "DM_ROLE": "dev"
+        }
+      },
+      "DM: Game Server": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": [
+          "--login", "-i", "-c",
+          "cd ${workspaceFolder:Dev-Mentor} && python -m cli.devmentor serve --port 7337; exec bash"
+        ],
+        "icon": "game",
+        "color": "terminal.ansiMagenta",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:Dev-Mentor}",
+          "PORT": "7337",
+          "DM_ROLE": "gameserver"
+        }
+      },
+      "DM: NuSyQ-Hub": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": [
+          "--login", "-i", "-c",
+          "cd ${workspaceFolder:NuSyQ-Hub} && python -m uvicorn src.api.main:app --port 8000 --host 0.0.0.0; exec bash"
+        ],
+        "icon": "server-process",
+        "color": "terminal.ansiBlue",
+        "env": { "DM_ROLE": "nusyq_hub" }
+      },
+      "DM: Ops": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": [
+          "--login", "-i", "-c",
+          "cd ${workspaceFolder:Dev-Mentor} && python scripts/devmentor_ops.py doctor; exec bash"
+        ],
+        "icon": "pulse",
+        "color": "terminal.ansiYellow",
+        "env": { "PYTHONPATH": "${workspaceFolder:Dev-Mentor}", "DM_ROLE": "ops" }
+      },
+      "DM: Ollama": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": [
+          "--login", "-i", "-c",
+          "echo 'Ollama: http://localhost:11434' && ollama list; exec bash"
+        ],
+        "icon": "robot",
+        "color": "terminal.ansiWhite",
+        "env": { "OLLAMA_HOST": "http://localhost:11434" }
+      },
+      "DM: Agent Dispatch": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i"],
+        "icon": "broadcast",
+        "color": "terminal.ansiCyan",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:Dev-Mentor}",
+          "OLLAMA_HOST": "http://localhost:11434",
+          "LMSTUDIO_HOST": "http://localhost:1234",
+          "DM_ROLE": "agent"
+        }
+      },
+      "DM: Git/Sync": {
+        "path": "C:/Program Files/Git/bin/bash.exe",
+        "args": ["--login", "-i", "-c", "git -C ${workspaceFolder:Dev-Mentor} status; exec bash"],
+        "icon": "git-branch",
+        "color": "terminal.ansiRed",
+        "env": { "PYTHONPATH": "${workspaceFolder:Dev-Mentor}", "DM_ROLE": "git" }
+      },
+      "PowerShell": {
+        "source": "PowerShell",
+        "icon": "terminal-powershell"
+      }
+    },
+
+    // ── Dev Containers ───────────────────────────────────────────────────────
+    // The .devcontainer/ is for Docker Desktop / CI — NOT for daily local dev.
+    // VS Code re-prompts "Reopen in Container?" when devcontainer.json changes.
+    // To silence permanently: add to USER settings (Ctrl+, → search "container"):
+    //   "dev.containers.openSpecificFolder": "never"
+    "remote.autoForwardPorts": false,
+
+    // ── Startup ──────────────────────────────────────────────────────────────
+    "workbench.startupEditor": "none",
+    "workbench.tips.enabled": false
+  },
+
+  "extensions": {
+    "recommendations": [
+      // ── Core AI ──────────────────────────────────────────────────────────
+      "github.copilot",
+      "github.copilot-chat",
+      "continue.continue",
+      // ── Python ───────────────────────────────────────────────────────────
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.debugpy",
+      "charliermarsh.ruff",
+      // ── Git ──────────────────────────────────────────────────────────────
+      "eamodio.gitlens",
+      // ── Web / JS/TS ──────────────────────────────────────────────────────
+      "biomejs.biome",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      // ── Docker / Containers ──────────────────────────────────────────────
+      "ms-vscode-remote.remote-containers",
+      "ms-azuretools.vscode-docker",
+      // ── Config formats ───────────────────────────────────────────────────
+      "redhat.vscode-yaml",
+      "tamasfe.even-better-toml",
+      // ── Utilities ────────────────────────────────────────────────────────
+      "vscode-icons-team.vscode-icons",
+      "streetsidesoftware.code-spell-checker"
+    ],
+    "unwantedRecommendations": [
+      // Deprecated / replaced — suppress VS Code prompts for these:
+      "visualstudioexptteam.vscodeintellicode",
+      "ms-vscode.remote-containers",
+      "ms-python.pylint",
+      "ms-python.black-formatter"
+    ]
+  },
+
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Terminal Depths: Game Server (debug)",
+        "type": "python",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+          "app.backend.main:app",
+          "--host", "0.0.0.0",
+          "--port", "7337",
+          "--reload"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder:Dev-Mentor}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:Dev-Mentor}",
+          "PYTHONUNBUFFERED": "1",
+          "PORT": "7337"
+        },
+        "justMyCode": false
+      },
+      {
+        "name": "NuSyQ-Hub: Agent API (debug)",
+        "type": "python",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+          "src.api.main:app",
+          "--host", "0.0.0.0",
+          "--port", "8000",
+          "--reload"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder:NuSyQ-Hub}",
+        "env": { "PYTHONUNBUFFERED": "1" },
+        "justMyCode": false
+      },
+      {
+        "name": "SimulatedVerse: Dev Server",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder:SimulatedVerse}/node_modules/.bin/tsx",
+        "args": ["server/index.ts"],
+        "cwd": "${workspaceFolder:SimulatedVerse}",
+        "console": "integratedTerminal",
+        "env": { "NODE_ENV": "development" }
+      },
+      {
+        "name": "Terminal Depths CLI (debug)",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder:Dev-Mentor}/cli/devmentor.py",
+        "args": ["play"],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder:Dev-Mentor}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:Dev-Mentor}",
+          "TERMINAL_DEPTHS_URL": "http://127.0.0.1:7337",
+          "PYTHONUNBUFFERED": "1"
+        }
+      }
+    ]
+  },
+
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      // ── Servers ────────────────────────────────────────────────────────────
+      {
+        "label": "▶ Game Server :7337",
+        "type": "shell",
+        "command": "python -m cli.devmentor serve --port 7337",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}", "env": { "PYTHONPATH": "${workspaceFolder:Dev-Mentor}" } },
+        "presentation": { "reveal": "always", "panel": "dedicated", "group": "servers" },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "▶ NuSyQ-Hub :8000",
+        "type": "shell",
+        "command": "python -m uvicorn src.api.main:app --port 8000 --host 0.0.0.0 --reload",
+        "options": { "cwd": "${workspaceFolder:NuSyQ-Hub}" },
+        "presentation": { "reveal": "always", "panel": "dedicated", "group": "servers" },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      // ── Health / Status ────────────────────────────────────────────────────
+      {
+        "label": "⚕ Ops Doctor",
+        "type": "shell",
+        "command": "python scripts/devmentor_ops.py doctor",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}", "env": { "PYTHONPATH": "${workspaceFolder:Dev-Mentor}" } },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      {
+        "label": "⚕ Boot Sequence (8-phase)",
+        "type": "shell",
+        "command": "curl -s -X POST http://localhost:7337/api/game/command -H 'Content-Type: application/json' -d '{\"session_id\":\"claude-prime\",\"command\":\"boot\"}' | python -m json.tool",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}" },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      {
+        "label": "⚕ Validate All",
+        "type": "shell",
+        "command": "python scripts/validate_all.py",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}", "env": { "PYTHONPATH": "${workspaceFolder:Dev-Mentor}" } },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      // ── Tests ──────────────────────────────────────────────────────────────
+      {
+        "label": "🧪 Test: Dev-Mentor",
+        "type": "shell",
+        "command": "python -m pytest tests/ -v",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}", "env": { "PYTHONPATH": "${workspaceFolder:Dev-Mentor}" } },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      {
+        "label": "🧪 Test: NuSyQ-Hub",
+        "type": "shell",
+        "command": "python -m pytest tests/ -v",
+        "options": { "cwd": "${workspaceFolder:NuSyQ-Hub}" },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      // ── Docker ─────────────────────────────────────────────────────────────
+      {
+        "label": "🐳 Docker: Core Up (Redis + DB)",
+        "type": "shell",
+        "command": "make docker-core",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}" },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      {
+        "label": "🐳 Docker: Full Stack Up",
+        "type": "shell",
+        "command": "make docker-up",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}" },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      {
+        "label": "🐳 Docker: Logs",
+        "type": "shell",
+        "command": "docker compose -f docker-compose.yml logs -f",
+        "options": { "cwd": "${workspaceFolder:Dev-Mentor}" },
+        "presentation": { "reveal": "always", "panel": "shared" },
+        "problemMatcher": []
+      },
+      // ── Open in Browser ────────────────────────────────────────────────────
+      {
+        "label": "🌐 Open: Terminal Depths",
+        "type": "shell",
+        "command": "start http://localhost:7337/game/",
+        "windows": { "command": "cmd", "args": ["/c", "start http://localhost:7337/game/"] },
+        "problemMatcher": []
+      },
+      {
+        "label": "🌐 Open: API Docs",
+        "type": "shell",
+        "command": "start http://localhost:7337/docs",
+        "windows": { "command": "cmd", "args": ["/c", "start http://localhost:7337/docs"] },
+        "problemMatcher": []
+      },
+      {
+        "label": "🌐 Open: NuSyQ-Hub API",
+        "type": "shell",
+        "command": "start http://localhost:8000/docs",
+        "windows": { "command": "cmd", "args": ["/c", "start http://localhost:8000/docs"] },
+        "problemMatcher": []
+      }
+    ]
+  }
+}

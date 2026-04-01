@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-12-26T03:26:59.039734",
+  "repos": {
+    "NuSyQ-Hub": {
+      "tasks": 37,
+      "background": 2,
+      "likely_long_running_without_background": [
+        "Observability: Up (Collector+UI)",
+        "Docker: Start Agent Services"
+      ]
+    },
+    "SimulatedVerse": {
+      "tasks": 6,
+      "background": 3,
+      "likely_long_running_without_background": []
+    },
+    "NuSyQ": {
+      "tasks": 6,
+      "background": 2,
+      "likely_long_running_without_background": [
+        "Complete Startup"
+      ]
+    }
+  }
+}

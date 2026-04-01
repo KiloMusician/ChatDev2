@@ -1,0 +1,19 @@
+{
+  "name": "nusyq-simulatedverse",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5000 --host 0.0.0.0",
+    "build": "tsc && vite build",
+    "preview": "vite preview --port 5000"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0",
+    "@types/node": "^20.0.0"
+  },
+  "dependencies": {
+    "rot-js": "^2.3.3",
+    "zod": "^3.23.8"
+  }
+}

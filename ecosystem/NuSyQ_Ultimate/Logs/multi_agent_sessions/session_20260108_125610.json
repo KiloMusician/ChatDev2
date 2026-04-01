@@ -1,0 +1,19 @@
+{
+  "task_prompt": "What is 2+2?",
+  "mode": "turn_taking",
+  "agents": [
+    "ollama_qwen_7b"
+  ],
+  "total_cost": 0.0,
+  "total_tokens": 0,
+  "turns": [
+    {
+      "turn_number": 0,
+      "agent_name": "ollama_qwen_7b",
+      "message": "ERROR calling Ollama: [Errno 2] No such file or directory: 'ollama'",
+      "timestamp": "2026-01-08T12:56:10.585859",
+      "tokens_used": 0,
+      "cost": 0.0
+    }
+  ]
+}

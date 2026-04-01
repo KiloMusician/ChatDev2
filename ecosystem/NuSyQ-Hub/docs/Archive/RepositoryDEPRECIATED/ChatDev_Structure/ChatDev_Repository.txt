@@ -1,0 +1,1255 @@
+ChatDev-main
+├── .gitignore
+├── .gitmodules
+├── camel
+│   ├── agents
+│   │   ├── base.py
+│   │   ├── chat_agent.py
+│   │   ├── critic_agent.py
+│   │   ├── role_playing.py
+│   │   ├── task_agent.py
+│   │   ├── tool_agents
+│   │   │   ├── base.py
+│   │   │   ├── hugging_face_tool_agent.py
+│   │   │   └── __init__.py
+│   │   └── __init__.py
+│   ├── configs.py
+│   ├── generators.py
+│   ├── human.py
+│   ├── messages
+│   │   ├── base.py
+│   │   ├── chat_messages.py
+│   │   ├── system_messages.py
+│   │   └── __init__.py
+│   ├── model_backend.py
+│   ├── prompts
+│   │   ├── base.py
+│   │   ├── prompt_templates.py
+│   │   ├── task_prompt_template.py
+│   │   └── __init__.py
+│   ├── typing.py
+│   ├── utils.py
+│   ├── web_spider.py
+│   └── __init__.py
+├── chatdev
+│   ├── chat_chain.py
+│   ├── chat_env.py
+│   ├── codes.py
+│   ├── composed_phase.py
+│   ├── documents.py
+│   ├── eval_quality.py
+│   ├── phase.py
+│   ├── roster.py
+│   ├── statistics.py
+│   └── utils.py
+├── CompanyConfig
+│   ├── Art
+│   │   └── ChatChainConfig.json
+│   ├── Default
+│   │   ├── ChatChainConfig.json
+│   │   ├── PhaseConfig.json
+│   │   └── RoleConfig.json
+│   ├── Human
+│   │   ├── ChatChainConfig.json
+│   │   └── PhaseConfig.json
+│   └── Incremental
+│       └── ChatChainConfig.json
+├── Contribution.md
+├── Dockerfile
+├── ecl
+│   ├── codes.py
+│   ├── config.yaml
+│   ├── ece.py
+│   ├── ecl.py
+│   ├── embedding.py
+│   ├── experience.py
+│   ├── graph.py
+│   ├── memory
+│   │   └── MemoryCards.json
+│   ├── memory.py
+│   ├── post_process
+│   │   └── memory_filter.py
+│   └── utils.py
+├── LICENSE
+├── misc
+│   ├──  BackgroundRemoval.png
+│   ├──  GreedySnakeGame.png
+│   ├──  WordCloud.png
+│   ├── 2048.png
+│   ├── 2048_old.png
+│   ├── agentverse.png
+│   ├── aquarium.png
+│   ├── arch.png
+│   ├── article_pic.png
+│   ├── art_gallery.png
+│   ├── avoid_game.png
+│   ├── BMI.PNG
+│   ├── budget.png
+│   ├── calc.jpg
+│   ├── car_game.png
+│   ├── CatchGoldHTMLGame.png
+│   ├── chatchain_vis.png
+│   ├── ChatChain_Visualization_Art.png
+│   ├── ChatChain_Visualization_Default.png
+│   ├── ChatChain_Visualization_Human.png
+│   ├── clock.png
+│   ├── CommandDash.png
+│   ├── company.png
+│   ├── currency_converter.png
+│   ├── demo.png
+│   ├── dice.png
+│   ├── docker.png
+│   ├── ebook.png
+│   ├── ebook_reader.png
+│   ├── ecl.png
+│   ├── expense_visualizer.png
+│   ├── fictactoe.png
+│   ├── flappy_bird.png
+│   ├── github.png
+│   ├── git_summary_onlinelog.png
+│   ├── git_summary_terminal.png
+│   ├── gomoku.png
+│   ├── gomoku_art.png
+│   ├── goodcode.png
+│   ├── home_design.png
+│   ├── Human_command.png
+│   ├── Human_intro.png
+│   ├── Human_v1.png
+│   ├── Human_v2.png
+│   ├── Human_v3.png
+│   ├── ier.png
+│   ├── image_editor.png
+│   ├── increment.png
+│   ├── intro.png
+│   ├── jump_game.png
+│   ├── logo1.png
+│   ├── logo2.png
+│   ├── macnet.png
+│   ├── markdown2html.png
+│   ├── MazeGame.png
+│   ├── maze_generator.png
+│   ├── memory_card_game.png
+│   ├── modelbest.png
+│   ├── mspaint.png
+│   ├── music_player.png
+│   ├── Notebook.PNG
+│   ├── paint.png
+│   ├── password_generator.png
+│   ├── pingpong.jpg
+│   ├── pingpong.png
+│   ├── pixel_art.png
+│   ├── poker.png
+│   ├── ppt.jpg
+│   ├── pvz.png
+│   ├── QRCodeGenerator.png
+│   ├── replay.gif
+│   ├── repoagent.png
+│   ├── rgb.png
+│   ├── saas.png
+│   ├── saas1.png
+│   ├── snake.jpg
+│   ├── snake_game.png
+│   ├── space_invasion.png
+│   ├── tetris.png
+│   ├── the_log_left.png
+│   ├── thunlp.png
+│   ├── tictactoe.png
+│   ├── timer.png
+│   ├── tiny_rogue.png
+│   ├── todo.png
+│   ├── tsinghua_bamboo_website.png
+│   ├── typing_test.png
+│   ├── video_player.png
+│   ├── virtual_furniture.png
+│   ├── vocab.png
+│   ├── weather.jpg
+│   └── xquartz.jpg
+├── MultiAgentEbook
+│   ├── book_communication
+│   │   ├── data.csv
+│   │   └── script.js
+│   ├── book_communication_index.html
+│   ├── book_evolution
+│   │   ├── data.csv
+│   │   └── script.js
+│   ├── book_evolution_index.html
+│   ├── book_organization
+│   │   ├── data.csv
+│   │   └── script.js
+│   ├── book_organization_index.html
+│   ├── book_simulation
+│   │   ├── data.csv
+│   │   └── script.js
+│   ├── book_simulation_index.html
+│   ├── book_style.css
+│   ├── communication.html
+│   ├── evolution.html
+│   ├── images
+│   │   ├── (perhaps)_beyond_human_translation_20240520.png
+│   │   ├── 1.png
+│   │   ├── 1a.png
+│   │   ├── 1b.png
+│   │   ├── 1d.png
+│   │   ├── 1e.png
+│   │   ├── 2.png
+│   │   ├── 2a.png
+│   │   ├── 2b.png
+│   │   ├── 2d.png
+│   │   ├── 2e.png
+│   │   ├── 3.png
+│   │   ├── 360°rea_towards_a_reusable_20240408.png
+│   │   ├── 3a.png
+│   │   ├── 3b.png
+│   │   ├── 3d.png
+│   │   ├── 3e.png
+│   │   ├── 4.png
+│   │   ├── 4a.png
+│   │   ├── 4b.png
+│   │   ├── 4d.png
+│   │   ├── 4e.png
+│   │   ├── affordable_generative_agents_20240203.png
+│   │   ├── agentcf_collaborative_learning_with_20231013.png
+│   │   ├── agentverse_cover.png
+│   │   ├── agentverse_facilitating_multi-agent_collaboration_20230821.png
+│   │   ├── agent_hospital_a_simulacrum_20240505.png
+│   │   ├── ai_hospital_interactive_evaluation_20240215.png
+│   │   ├── apollo's_oracle_retrieval-augmented_reasoning_20231208.png
+│   │   ├── application_cover.png
+│   │   ├── are_you_in_a_20230719.png
+│   │   ├── atm_adversarial_tuning_multi-agent_20240528.png
+│   │   ├── autoform_cover.png
+│   │   ├── autogen_enabling_next-gen_llm_20230816.png
+│   │   ├── autonomous_agents_for_collaborative_20240621.png
+│   │   ├── auto_arena_of_llms_20240530.png
+│   │   ├── avalon's_game_of_thoughts_20231002.png
+│   │   ├── back_page_edge_shading.png
+│   │   ├── battleagent_multi-modal_dynamic_emulation_20240423.png
+│   │   ├── beyond_natural_language_llms_20240228.png
+│   │   ├── bg-pattern.svg
+│   │   ├── building_cooperative_embodied_agents_20230705.png
+│   │   ├── camel_communicative_agents_for_20230331.png
+│   │   ├── can_large_language_model_20240207.png
+│   │   ├── chain_of_agents_large_20240604.png
+│   │   ├── chatcoder_chat-based_refine_requirement_20231101.png
+│   │   ├── chatdev.png
+│   │   ├── chatdev_communicative_agents_for_20230716.png
+│   │   ├── chatdev_cover.png
+│   │   ├── chateval_cover.png
+│   │   ├── chateval_towards_better_llm-based_20230814.png
+│   │   ├── colearning_cover.png
+│   │   ├── communication_cover.png
+│   │   ├── comm_collaborative_multi-agent,_multi-reasoning-path_20240426.png
+│   │   ├── competeai_understanding_the_competition_20231026.png
+│   │   ├── cover.png
+│   │   ├── ctc_cover.png
+│   │   ├── dataset_cover.png
+│   │   ├── describe,_explain,_plan_and_20230203.png
+│   │   ├── dynamic_llm-agent_network_an_20231003.png
+│   │   ├── econagent_large_language_model-empowered_20231016.png
+│   │   ├── ei_cover.png
+│   │   ├── encouraging_divergent_thinking_in_20230530.png
+│   │   ├── epidemic_modeling_with_generative_20230711.png
+│   │   ├── evolution_cover.png
+│   │   ├── examining_inter-consistency_of_large_20230519.png
+│   │   ├── experiential_co-learning_of_software-developing_20231228.png
+│   │   ├── exploring_collaboration_mechanisms_for_20231003.png
+│   │   ├── exploring_large_language_models_20230909.png
+│   │   ├── facilitating_multi-role_and_multi-behavior_20240528.png
+│   │   ├── favicon.png
+│   │   ├── flip_book_edge_shading.png
+│   │   ├── framework_cover.png
+│   │   ├── gamegpt_multi-agent_collaborative_framework_20231012.png
+│   │   ├── generative_agents_interactive_simulacra_20230407.png
+│   │   ├── github.png
+│   │   ├── github_normal.png
+│   │   ├── humanoid_agents_platform_for_20231009.png
+│   │   ├── iagents_cover.png
+│   │   ├── icon-close.svg
+│   │   ├── icon-hamburger.svg
+│   │   ├── improving_factuality_and_reasoning_20230523.png
+│   │   ├── improving_language_model_negotiation_20230517.png
+│   │   ├── improving_multi-agent_debate_with_20240617.png
+│   │   ├── interaction_welcome.png
+│   │   ├── ioa_cover.png
+│   │   ├── iterative_experience_refinement_of_20240507.png
+│   │   ├── language_agents_as_digital_20231108.png
+│   │   ├── language_agents_as_optimizable_20240226.png
+│   │   ├── large_language_models_are_20230327.png
+│   │   ├── learn_to_disguise_avoid_20240403.png
+│   │   ├── leveraging_large_language_models_20231103.png
+│   │   ├── llm-based_agent_society_investigation_20231023.png
+│   │   ├── llm-driven_agents_for_influencer_20240322.png
+│   │   ├── lm_vs_lm_detecting_20230522.png
+│   │   ├── logo.png
+│   │   ├── logo3.png
+│   │   ├── logo4.png
+│   │   ├── logo5.png
+│   │   ├── longagent_scaling_language_models_20240218.png
+│   │   ├── lyfe_agents_generative_agents_20231003.png
+│   │   ├── metaagents_simulating_interactions_of_20231010.png
+│   │   ├── metagpt_meta_programming_for_20230801.png
+│   │   ├── mora_enabling_generalist_video_20240320.png
+│   │   ├── multi-agent_software_development_through_20240613.png
+│   │   ├── multiagent_collaboration_attack_investigating_20240620.png
+│   │   ├── multi_agent_framework.png
+│   │   ├── multi_agent_framework_ss.png
+│   │   ├── multi_agent_framework_ts.png
+│   │   ├── on_generative_agents_in_20231016.png
+│   │   ├── optima_cover.png
+│   │   ├── organization.png
+│   │   ├── organization_cover.png
+│   │   ├── out_of_one_many_20220914.png
+│   │   ├── pdf.png
+│   │   ├── pdf_normal.png
+│   │   ├── player_enhancing_llm-based_multi-agent_20240426.png
+│   │   ├── quantifying_the_impact_of_20230807.png
+│   │   ├── reconcile_round-table_conference_improves_20230922.png
+│   │   ├── rethinking_the_bounds_of_20240228.png
+│   │   ├── roco_dialectic_multi-robot_collaboration_20230710.png
+│   │   ├── s3_social-network_simulation_system_20230727.png
+│   │   ├── scalable_multi-robot_collaboration_with_20230927.png
+│   │   ├── scaling_large-language-model-based_multi-agent_collaboration_20240611.png
+│   │   ├── self-organized_agents_a_llm_20240402.png
+│   │   ├── simulating_opinion_dynamics_with_20231116.png
+│   │   ├── simulating_social_media_using_20231005.png
+│   │   ├── simulation.png
+│   │   ├── simulation_cover.pdf
+│   │   ├── simulation_cover.png
+│   │   ├── social_simulacra_creating_populated_20220808.png
+│   │   ├── strategyllm_large_language_models_20231115.png
+│   │   ├── theory_of_mind_for_20231016.png
+│   │   ├── the_impact_of_language_20240616.png
+│   │   ├── the_wisdom_of_partisan_20231116.png
+│   │   ├── tmp.pdf
+│   │   ├── towards_detecting_llms_hallucination_20240605.png
+│   │   ├── toward_optimal_llm_alignments_20240616.png
+│   │   ├── to_infinity_and_beyond_20230724.png
+│   │   ├── traveler_a_multi-lmm_agent_20240401.png
+│   │   ├── unleashing_the_emergent_cognitive_20230711.png
+│   │   ├── unveiling_the_truth_and_20240226.png
+│   │   ├── user_behavior_simulation_with_20230605.png
+│   │   ├── using_large_language_models_20220818.png
+│   │   └── war_and_peace_(waragent)_20231128.png
+│   ├── index.html
+│   ├── main.js
+│   ├── organization.html
+│   ├── papers.csv
+│   ├── README.md
+│   ├── simulation.html
+│   ├── style.css
+│   └── transform_csv.py
+├── readme
+│   ├── README-Arabic.md
+│   ├── README-Bahasa-Indonesia.md
+│   ├── README-Chinese.md
+│   ├── README-Danish.md
+│   ├── README-Dutch.md
+│   ├── README-Filipino.md
+│   ├── README-French.md
+│   ├── README-Hindi.md
+│   ├── README-Japanese.md
+│   ├── README-Korean.md
+│   ├── README-Portuguese.md
+│   ├── README-Russian.md
+│   ├── README-Slovak.md
+│   ├── README-Spanish.md
+│   ├── README-Turkish.md
+│   └── README-Urdu.md
+├── README.md
+├── requirements.txt
+├── run.py
+├── SRDD
+│   ├── cover.png
+│   ├── data
+│   │   ├── check.csv
+│   │   ├── data_attribute_format.csv
+│   │   └── data_ChatDev_format.sh
+│   ├── README.md
+│   └── SRDD_Category.png
+├── visualizer
+│   ├── app.py
+│   └── static
+│       ├── avatars
+│       │   ├── Chief Creative Officer.png
+│       │   ├── Chief Executive Officer.png
+│       │   ├── Chief Human Resource Officer.png
+│       │   ├── Chief Product Officer.png
+│       │   ├── Chief Technology Officer.png
+│       │   ├── Code Reviewer.png
+│       │   ├── Counselor.png
+│       │   ├── Programmer.png
+│       │   ├── Prompt Engineer.png
+│       │   ├── Software Test Engineer.png
+│       │   ├── System.png
+│       │   └── User.png
+│       ├── chain_visualizer.html
+│       ├── css
+│       │   └── style.css
+│       ├── figures
+│       │   ├── background.png
+│       │   ├── ceo.png
+│       │   ├── chatdev.png
+│       │   ├── chatdev2.png
+│       │   ├── company.png
+│       │   ├── counselor.png
+│       │   ├── cpo.png
+│       │   ├── cto.png
+│       │   ├── designer.png
+│       │   ├── hr.png
+│       │   ├── left.png
+│       │   ├── pe.png
+│       │   ├── programmer.png
+│       │   ├── reviewer.png
+│       │   ├── right.png
+│       │   ├── tester.png
+│       │   ├── title.png
+│       │   └── user.png
+│       ├── index.html
+│       ├── js
+│       │   └── main.js
+│       ├── replay
+│       │   ├── css
+│       │   │   ├── github-markdown-dark.css
+│       │   │   └── use.css
+│       │   └── js
+│       │       ├── app.js
+│       │       └── highlight.js
+│       └── replay.html
+├── WareHouse
+│   ├── 2048_THUNLP_20230822144615
+│   │   ├── 20230822144615.log
+│   │   ├── 2048.prompt
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── ArtCanvas_THUNLP_20230825093558
+│   │   ├── ArtCanvas.prompt
+│   │   ├── ArtCanvas_THUNLP_20230825093558.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── Article_pic_DefaultOrganization_20231023003059
+│   │   ├── Article_pic.prompt
+│   │   ├── Article_pic_DefaultOrganization_20231023003059.log
+│   │   ├── article_processor.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── image_finder.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── markdown_maker.py
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   └── templates
+│   │       ├── index.html
+│   │       └── result.html
+│   ├── BackgroundRemoval_THUNLP_20231015220703
+│   │   ├── BackgroundRemoval.prompt
+│   │   ├── BackgroundRemoval_THUNLP_20231015220703.log
+│   │   ├── background_removal.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── BMI Calculator_DefaultOrganization_20230918110521
+│   │   ├── BMI Calculator.prompt
+│   │   ├── BMI Calculator_DefaultOrganization_20230918110521.log
+│   │   ├── bmi_calculator.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   └── RoleConfig.json
+│   ├── BookBreeze_THUNLP_20230825072339
+│   │   ├── .py
+│   │   ├── BookBreeze.prompt
+│   │   ├── BookBreeze_THUNLP_20230825072339.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── ebook_reader.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── readme.md
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── Calculator_THUNLP_20230628184918
+│   │   ├── 20230628184918.log
+│   │   ├── button_0.png
+│   │   ├── button_1.png
+│   │   ├── button_2.png
+│   │   ├── button_3.png
+│   │   ├── button_4.png
+│   │   ├── button_5.png
+│   │   ├── button_6.png
+│   │   ├── button_7.png
+│   │   ├── button_8.png
+│   │   ├── button_9.png
+│   │   ├── button_decimal.png
+│   │   ├── button_divide.png
+│   │   ├── button_equal.png
+│   │   ├── button_minus.png
+│   │   ├── button_multiply.png
+│   │   ├── button_plus.png
+│   │   ├── calculator.py
+│   │   ├── main.py
+│   │   └── meta.txt
+│   ├── car_THUNLPDemo_2024
+│   │   ├── car.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── Demo.prompt
+│   │   ├── Demo_DefaultOrganization_20241221131803.log
+│   │   ├── gameobjects.py
+│   │   ├── main.py
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── RoleConfig.json
+│   │   └── track.py
+│   ├── CatchGoldHTMLGame_THUNLP_202310181636
+│   │   ├── ChatChainConfig.json
+│   │   ├── game-test2.prompt
+│   │   ├── index.html
+│   │   ├── PhaseConfig.json
+│   │   ├── RoleConfig.json
+│   │   ├── script.js
+│   │   └── style.css
+│   ├── CurrencyWiz_THUNLP_20230825101851
+│   │   ├── ChatChainConfig.json
+│   │   ├── CurrencyWiz.prompt
+│   │   ├── CurrencyWiz_THUNLP_20230825101851.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   └── RoleConfig.json
+│   ├── DesignDream_THUNLP_20230825072340
+│   │   ├── ChatChainConfig.json
+│   │   ├── DesignDream.prompt
+│   │   ├── DesignDream_THUNLP_20230825072340.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   └── room.py
+│   ├── DiceRollingSimulator_THUNLP_20230825072338
+│   │   ├── ChatChainConfig.json
+│   │   ├── dice.py
+│   │   ├── DiceRollingSimulator.prompt
+│   │   ├── DiceRollingSimulator_THUNLP_20230825072338.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── DigitalClock_THUNLP_20230825093556
+│   │   ├── .py
+│   │   ├── ChatChainConfig.json
+│   │   ├── DigitalClock.prompt
+│   │   ├── DigitalClock_THUNLP_20230825093556.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── ExpenseEase_THUNLP_20230825093604
+│   │   ├── ChatChainConfig.json
+│   │   ├── ExpenseEase.prompt
+│   │   ├── ExpenseEase_THUNLP_20230825093604 2.log
+│   │   ├── ExpenseEase_THUNLP_20230825093604.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── matplotlib.pyplot
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── FaceWall_byq_ModelBest1024_20231025192523
+│   │   ├── brief_note.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── FaceWall.prompt
+│   │   ├── FaceWall_DefaultOrganization_20231025192523.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── readme.md
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   └── task_list.py
+│   ├── FAIR_ENOUGH_ModelBest1024_20231026000126
+│   │   ├── ChatChainConfig.json
+│   │   ├── FAIR_ENOUGH.prompt
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── project_evaluator.py
+│   │   ├── readme.md
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── Fish_Tycoon_THUNLP_20230825093543
+│   │   ├── aquarium.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── Fish Tycoon.prompt
+│   │   ├── Fish Tycoon_THUNLP_20230825093543.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── FlappyBird_THUNLP_20230726121145
+│   │   ├── 20230726121145.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── flappy_birds.prompt
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── gomokugameArtExample_THUNLP_20230831122822
+│   │   ├── board.py
+│   │   ├── board_background.png
+│   │   ├── button_quit.png
+│   │   ├── button_redo.png
+│   │   ├── button_start.png
+│   │   ├── button_undo.png
+│   │   ├── ChatChainConfig.json
+│   │   ├── cursor.png
+│   │   ├── draw_banner.png
+│   │   ├── gomokugame.prompt
+│   │   ├── gomokugame_DefaultOrganization_20230831122822.log
+│   │   ├── lose_banner.png
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── player_1_icon.png
+│   │   ├── player_2_icon.png
+│   │   ├── RoleConfig.json
+│   │   ├── sidebar_background.png
+│   │   ├── stone_black.png
+│   │   ├── stone_white.png
+│   │   └── win_banner.png
+│   ├── Gomoku_HumanAgentInteraction_20230920135038
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── Gomoku.prompt
+│   │   ├── Gomoku_HumanAgentInteraction_20230920135038.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── Gomoku_THUNLP_20230625201030
+│   │   ├── 20230625201030.log
+│   │   ├── background.png
+│   │   ├── black_chess_piece.png
+│   │   ├── game.py
+│   │   ├── gui.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── requirements.txt
+│   │   └── white_chess_piece.png
+│   ├── Good_code_ModelBest1024_20231023013519
+│   │   ├── ChatChainConfig.json
+│   │   ├── file_processor.py
+│   │   ├── Good_code.prompt
+│   │   ├── Good_code_DefaultOrganization_20231023013519.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── praised_what_ever.py
+│   │   ├── praise_generator.py
+│   │   ├── RoleConfig.json
+│   │   └── what_ever.py
+│   ├── GreedySnakeGame_THUNLP_20231008212648
+│   │   ├── ChatChainConfig.json
+│   │   ├── GreedySnakeGame.prompt
+│   │   ├── GreedySnakeGame_THUNLP_20231008212648.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── menu.py
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   └── settings.py
+│   ├── ImgEditor_THUNLP_20230824142740
+│   │   ├── .py
+│   │   ├── 20230824142740.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── ImgEditor.prompt
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── LifeSimulator_v2_ModelBest1024_20231026164236
+│   │   ├── ChatChainConfig.json
+│   │   ├── LifeSimulator_v2.prompt
+│   │   ├── LifeSimulator_v2_ModelBest1024_20231026164236.log
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── readme.md
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   └── simulator.py
+│   ├── MarbelGameV1_ModelBest1024_20231026183909
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── MarbelGameV1.prompt
+│   │   ├── MarbelGameV1_FrankyAI_20231026183909.log
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── player.py
+│   │   ├── RoleConfig.json
+│   │   └── self.velocity_y
+│   ├── Matchy_Match_THUNLP_20230825101854
+│   │   ├── card.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── Matchy Match.prompt
+│   │   ├── Matchy Match_THUNLP_20230825101854.log
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── MazeGenerator_THUNLP_20230825093601
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── maze.py
+│   │   ├── MazeGenerator.prompt
+│   │   ├── MazeGenerator_THUNLP_20230825093601.log
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── Maze_THUNLP_20231006154305
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── maze.prompt
+│   │   ├── maze.py
+│   │   ├── maze_DefaultOrganization_20231006154305.log
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   └── RoleConfig.json
+│   ├── MBBusinessCardGen_jc_  ModelBest1024_20231024154846
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── MBBusinessCardGen_jc.prompt
+│   │   ├── MBBusinessCardGen_jc_ModelBest_20231024154846.log
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   └── RoleConfig.json
+│   ├── md2html_THUNLP_20230823102935
+│   │   ├── 20230823102935.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── html_generator.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── markdown_parser.py
+│   │   ├── md2html.prompt
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── MoneyCtrl_THUNLP_20230825093546
+│   │   ├── budget.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── MoneyCtrl.prompt
+│   │   ├── MoneyCtrl_THUNLP_20230825093546.log
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── mspaint_THUNLP_20230821204606
+│   │   ├── 20230821204606.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── MyFirstSoftware.prompt
+│   │   ├── paint_app.py
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── musicplayer_THUNLP_20230824113404
+│   │   ├── 20230824113404.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── musicplayer.prompt
+│   │   ├── PhaseConfig.json
+│   │   └── RoleConfig.json
+│   ├── Notebook Application_DefaultOrganization_20230918090434
+│   │   ├── .py
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── Notebook Application.prompt
+│   │   ├── Notebook Application_DefaultOrganization_20230918090434.log
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── no_hair_programmer_v2_DefaultOrganization_20231026192805
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── no_hair_programmer_v2.prompt
+│   │   ├── no_hair_programmer_v2_DefaultOrganization_20231026192805.log
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── PasswordGenerator_THUNLP_20230825072337
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PasswordGenerator.prompt
+│   │   ├── PasswordGenerator_THUNLP_20230825072337.log
+│   │   ├── password_generator.py
+│   │   ├── password_strength_checker.py
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── pingpong_THUNLP_20230817193956
+│   │   ├── 20230817193956.log
+│   │   ├── ball.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── paddle.py
+│   │   ├── PhaseConfig.json
+│   │   ├── pingpong.prompt
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── PixelCraft_THUNLP_20230825072340
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── PixelCraft.prompt
+│   │   ├── PixelCraft_THUNLP_20230825072340.log
+│   │   ├── pixel_io.py
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── PixelRunner_THUNLP_20230825072339
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── obstacle.py
+│   │   ├── PhaseConfig.json
+│   │   ├── PixelRunner.prompt
+│   │   ├── PixelRunner_THUNLP_20230825072339.log
+│   │   ├── player.py
+│   │   ├── powerup.py
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── Poker1_DefaultOrganization_20231006035628
+│   │   ├── ChatChainConfig.json
+│   │   ├── deck.py
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── player.py
+│   │   ├── Poker1.prompt
+│   │   ├── Poker1_DefaultOrganization_20231006035628.log
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── pvz_THUNLPDemo_2024
+│   │   ├── assets
+│   │   │   └── music
+│   │   │       └── bgm.mp3
+│   │   ├── constants.py
+│   │   ├── entities.py
+│   │   ├── main.py
+│   │   ├── requirements.txt
+│   │   └── sprites.py
+│   ├── QRCodeGenerator_THUNLP_20231015214731
+│   │   ├── ChatChainConfig.json
+│   │   ├── code.png
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── QRCodeGenerator.prompt
+│   │   ├── QRCodeGenerator_THUNLP_20231015214731.log
+│   │   ├── QRCodeGenerator_THUNLP_20231015214731.png
+│   │   ├── qrcode_generator.py
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── RandomPick_ModelBest1024_20231022154124
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── RandomPick.prompt
+│   │   ├── RandomPick_ModelBest1024_20231022154124.log
+│   │   ├── requirements.txt
+│   │   └── RoleConfig.json
+│   ├── Red Packet Rain - thu - α
+│   │   ├── ChatChainConfig.json
+│   │   ├── gamewindow.py
+│   │   ├── image.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── Red Packet Rain.prompt
+│   │   ├── Red Packet Rain_thu_20231114192351.log
+│   │   ├── Red_Packet.png
+│   │   ├── RoleConfig.json
+│   │   └── scoreboard.py
+│   ├── RGB_Color_Picker_DefaultOrganization_20231015003723
+│   │   ├── ChatChainConfig.json
+│   │   ├── gui.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RGB_Color_Picker.prompt
+│   │   ├── RGB_Color_Picker_DefaultOrganization_20231015003723.log
+│   │   └── RoleConfig.json
+│   ├── rock_paper_scissors_tangxixi_ModelBest1024_20231026190617
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── gui.py
+│   │   ├── main.py
+│   │   ├── PhaseConfig.json
+│   │   ├── rock_paper_scissors.prompt
+│   │   └── RoleConfig.json
+│   ├── RPG_V1_ModelBest1024_20231026174838
+│   │   ├── ChatChainConfig.json
+│   │   ├── enemy.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── player.py
+│   │   ├── projectile.py
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── RPG_V1.prompt
+│   │   └── RPG_V1_ModelBest1024_20231026174838.log
+│   ├── RunningGame_THUNLP_20231023211843
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── RunningGame.prompt
+│   │   ├── RunningGame_THUNLP_20231023211843.log
+│   │   └── sprites.py
+│   ├── snake_THUNLPDemo_2024
+│   │   └── main.py
+│   ├── Space_Invasion_Classified39_20231006210047
+│   │   ├── bullet.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── enemy.py
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── player.py
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── Space Invasion 2.prompt
+│   │   └── Space Invasion 2_Classified39_20231006210047.log
+│   ├── SpriteMaker_THUNLP_20230825072337
+│   │   ├── canvas.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── editor.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── self.draw_pixel
+│   │   ├── SpriteMaker.prompt
+│   │   ├── SpriteMaker_THUNLP_20230825072337.log
+│   │   ├── tk.all
+│   │   └── toolbar.py
+│   ├── tetris_THUNLPDemo_2024
+│   │   ├── highscore.txt
+│   │   ├── main.py
+│   │   ├── README.md
+│   │   └── requirements.txt
+│   ├── Tetris_zhuoyundu_20240115181403
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── RoleConfig.json
+│   │   ├── team_name.txt
+│   │   ├── Tetris.prompt
+│   │   ├── tetris.py
+│   │   ├── Tetris_DefaultOrganization_20240115181403.log
+│   │   ├── tetris_game.py
+│   │   ├── tetris_shapes.py
+│   │   └── __pycache__
+│   │       └── tetris_shapes.cpython-310.pyc
+│   ├── TicTacToe_THUNLP_20230825093547
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── TicTacToe.prompt
+│   │   └── TicTacToe_THUNLP_20230825093547.log
+│   ├── timer_THUNLP_20230823091709
+│   │   ├── .py
+│   │   ├── 20230823091709.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── timer.prompt
+│   │   └── timer.py
+│   ├── tiny_rogue_like_DefaultOrganization_20230905232453
+│   │   ├── ChatChainConfig.json
+│   │   ├── game.py
+│   │   ├── level.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── player.py
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── tiny_rogue_like.prompt
+│   │   └── tiny_rogue_like_DefaultOrganization_20230905232453.log
+│   ├── ToDo_THUNLP_20230825072331
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── ToDo.prompt
+│   │   ├── todo_app.py
+│   │   └── ToDo_THUNLP_20230825072331.log
+│   ├── trippy_avoid_game_DefaultOrganization_20231006224623
+│   │   ├── character.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── circle.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── trippy_avoid_game.prompt
+│   │   └── trippy_avoid_game_DefaultOrganization_20231006224623.log
+│   ├── TsinghuaBambooWebsite_THUNLPDemo_2024
+│   │   ├── cultural-examination.html
+│   │   ├── images
+│   │   │   ├── examination
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 10.png
+│   │   │   │   ├── 11.png
+│   │   │   │   ├── 12.png
+│   │   │   │   ├── 13.png
+│   │   │   │   ├── 14.png
+│   │   │   │   ├── 15.png
+│   │   │   │   ├── 2.png
+│   │   │   │   ├── 3.png
+│   │   │   │   ├── 4.png
+│   │   │   │   ├── 5.png
+│   │   │   │   ├── 6.png
+│   │   │   │   ├── 7.png
+│   │   │   │   ├── 8.png
+│   │   │   │   ├── 9.png
+│   │   │   │   └── cut.png
+│   │   │   ├── exhibitions
+│   │   │   │   ├── exhibition1.png
+│   │   │   │   ├── exhibition2.png
+│   │   │   │   └── exhibition3.png
+│   │   │   ├── logo
+│   │   │   │   └── chatdev-logo.png
+│   │   │   ├── research-achievements
+│   │   │   │   ├── 1.png
+│   │   │   │   ├── 10.png
+│   │   │   │   ├── 11.png
+│   │   │   │   ├── 12.png
+│   │   │   │   ├── 13.png
+│   │   │   │   ├── 14.png
+│   │   │   │   ├── 15.png
+│   │   │   │   ├── 2.png
+│   │   │   │   ├── 3.png
+│   │   │   │   ├── 4.png
+│   │   │   │   ├── 5.png
+│   │   │   │   ├── 6.png
+│   │   │   │   ├── 7.png
+│   │   │   │   ├── 8.png
+│   │   │   │   └── 9.png
+│   │   │   ├── slider
+│   │   │   │   ├── slide1.png
+│   │   │   │   ├── slide2.png
+│   │   │   │   └── slide3.jpg
+│   │   │   ├── warring-states-bamboo-1.png
+│   │   │   ├── warring-states-bamboo-sub1.png
+│   │   │   ├── warring-states-bamboo-sub2.png
+│   │   │   └── warring-states-bamboo-sub3.png
+│   │   ├── index.html
+│   │   ├── research-achievements.html
+│   │   ├── script.js
+│   │   ├── styles.css
+│   │   └── warring-states-bamboo.html
+│   ├── Typing_THUNLP_20230824105537
+│   │   ├── 20230824105537.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── progress_tracker.py
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── Typing.prompt
+│   │   ├── typing_exercise.py
+│   │   ├── typing_practice.py
+│   │   └── typing_tutor.py
+│   ├── umbrella_stops_raindrops_DefaultOrganization_20240104193702
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── raindrop.py
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── umbrella_stops_raindrops.prompt
+│   │   └── umbrella_stops_raindrops_DefaultOrganization_20240104193702.log
+│   ├── videoplayer_THUNLP_20230824233151
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── MyFirstSoftware.prompt
+│   │   ├── MyFirstSoftware_DefaultOrganization_20230824233151.log
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── test
+│   │   ├── videoplayer.py
+│   │   └── video_player.py
+│   ├── WarmHeart_ModelBest1024_20231026180801
+│   │   ├── avoid_sitting_reminder.py
+│   │   ├── ChatChainConfig.json
+│   │   ├── conversation_topics.py
+│   │   ├── drink_water_reminder.py
+│   │   ├── leave_work_reminder.py
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── WarmHeart.prompt
+│   │   └── WarmHeart_DefaultOrganization_20231026180801.log
+│   ├── WaterBreakv2_ModelBest1024_20231026175200
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── schedule.py
+│   │   ├── timer.py
+│   │   ├── WaterBreakv2.prompt
+│   │   └── WaterBreakv2_ModelBest1024_20231026175200.log
+│   ├── Website_THUNLP_20230725154612
+│   │   ├── 20230725154612.log
+│   │   ├── ChatChainConfig.json
+│   │   ├── index.html
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── RoleConfig.json
+│   │   ├── script.js
+│   │   ├── style.css
+│   │   └── website.prompt
+│   ├── WordCloud_THUNLP_20231015215721
+│   │   ├── ChatChainConfig.json
+│   │   ├── main.py
+│   │   ├── manual.md
+│   │   ├── meta.txt
+│   │   ├── PhaseConfig.json
+│   │   ├── readme.md
+│   │   ├── requirements.txt
+│   │   ├── RoleConfig.json
+│   │   ├── setup.py
+│   │   ├── WordCloud.prompt
+│   │   ├── WordCloud_Beijing.png
+│   │   └── WordCloud_THUNLP_20231015215721.log
+│   └── WordExpand_THUNLP_20230825093623
+│       ├── ChatChainConfig.json
+│       ├── main.py
+│       ├── manual.md
+│       ├── meta.txt
+│       ├── PhaseConfig.json
+│       ├── requirements.txt
+│       ├── RoleConfig.json
+│       ├── vocabulary.py
+│       ├── WordExpand.prompt
+│       └── WordExpand_THUNLP_20230825093623.log
+└── wiki.md

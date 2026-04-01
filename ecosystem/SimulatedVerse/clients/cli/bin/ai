@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# KPulse CLI - AI Assistant
+# Usage: ./ai "How does the tier system work?"
+
+set -e
+
+REPOPILOT_URL="${REPOPILOT_URL:-http://localhost:7411}"
+QUESTION="$*"
+
+if [ -z "$QUESTION" ]; then
+    echo "Usage: ai \"your question here\""
+    echo ""
+    echo "Examples:"
+    echo "  ai \"How does the event bus work?\""
+    echo "  ai \"List all colonist traits\""
+    echo "  ai \"What files handle resource production?\""
+    exit 1
+fi
+
+echo "🤖 Asking RepoPilot: $QUESTION"
+echo ""
+
+# Check if RepoPilot is running
+if ! curl -s "$REPOPILOT_URL/health" > /dev/null 2>&1; then
+    echo "❌ RepoPilot server not running on $REPOPILOT_URL"
+    echo "Start it with: make dev"
+    exit 1
+fi
+
+# Make the request
+RESPONSE=$(curl -s "$REPOPILOT_URL/ask" \
+    -H "Content-Type: application/json" \
+    -d "{\"q\":\"$QUESTION\"}" \
+    2>/dev/null)
+
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to connect to RepoPilot"
+    exit 1
+fi
+
+# Extract answer using basic string manipulation (no jq dependency)
+ANSWER=$(echo "$RESPONSE" | sed -n 's/.*"answer":"\([^"]*\)".*/\1/p' | sed 's/\\n/\n/g' | sed 's/\\"/"/g')
+
+if [ -z "$ANSWER" ]; then
+    echo "❌ Failed to get response from RepoPilot"
+    echo "Raw response: $RESPONSE"
+    exit 1
+fi
+
+echo "$ANSWER"
+echo ""
+echo "💡 Files referenced in this answer may contain additional details"

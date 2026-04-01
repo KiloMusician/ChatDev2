@@ -1,0 +1,33 @@
+{
+  "name": "nusyq-hub",
+  "version": "1.0.0",
+  "description": "[![Build](https://github.com/KiloMusician/FOOLISH_Kilo/actions/workflows/ci.yml/badge.svg)](https://github.com/KiloMusician/FOOLISH_Kilo/actions/workflows/ci.yml)\r [![Coverage](https://img.shields.io/codecov/c/github/KiloMusician/FOOLISH_Kilo)](https://codecov.io/gh/KiloMusician/FOOLISH_Kilo)\r [![ChatDev Status](https://img.shields.io/badge/ChatDev-integrated-brightgreen)](https://github.com/openai/chatdev)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KiloMusician/NuSyQ-Hub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KiloMusician/NuSyQ-Hub/issues"
+  },
+  "homepage": "https://github.com/KiloMusician/NuSyQ-Hub#readme",
+  "dependencies": {
+    "gitnexus": "^1.4.1",
+    "glob": "^13.0.6",
+    "minimist": "^1.2.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
+  }
+}

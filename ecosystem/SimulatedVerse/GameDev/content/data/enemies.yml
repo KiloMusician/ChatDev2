@@ -1,0 +1,171 @@
+# Tower Defense Enemies - Literal enemy types with escalation curves
+
+enemy_types:
+  # Basic enemies
+  scout_drone:
+    name: "Scout Drone"
+    sprite: "👾"
+    health: 50
+    speed: 60
+    armor: 0
+    reward: 5
+    description: "Fast, weak reconnaissance unit"
+    special_abilities: []
+    
+  assault_unit:
+    name: "Assault Unit"
+    sprite: "👹"
+    health: 100
+    speed: 40
+    armor: 0
+    reward: 10
+    description: "Standard enemy with balanced stats"
+    special_abilities: []
+
+  heavy_mech:
+    name: "Heavy Mech"
+    sprite: "🤖"
+    health: 250
+    speed: 25
+    armor: 2
+    reward: 25
+    description: "Armored unit that reduces incoming damage"
+    special_abilities:
+      - damage_reduction
+
+  # Special enemies
+  stealth_infiltrator:
+    name: "Stealth Infiltrator"
+    sprite: "👻"
+    health: 75
+    speed: 55
+    armor: 0
+    reward: 20
+    description: "Becomes invisible periodically"
+    special_abilities:
+      - stealth_mode
+      - detection_immunity
+
+  swarm_spawner:
+    name: "Swarm Spawner"
+    sprite: "🕷️"
+    health: 150
+    speed: 30
+    armor: 1
+    reward: 30
+    description: "Spawns small units when destroyed"
+    special_abilities:
+      - spawn_on_death
+      - swarm_coordination
+
+  boss_destroyer:
+    name: "Destroyer Class"
+    sprite: "💀"
+    health: 1000
+    speed: 20
+    armor: 5
+    reward: 100
+    description: "Massive boss unit with multiple phases"
+    special_abilities:
+      - phase_transition
+      - area_damage
+      - shield_regen
+
+# Wave compositions
+wave_templates:
+  early_game:
+    wave_1: [scout_drone, scout_drone, assault_unit]
+    wave_2: [assault_unit, assault_unit, scout_drone, scout_drone]
+    wave_3: [assault_unit, assault_unit, heavy_mech]
+    
+  mid_game:
+    wave_4: [heavy_mech, assault_unit, assault_unit, stealth_infiltrator]
+    wave_5: [stealth_infiltrator, stealth_infiltrator, heavy_mech, heavy_mech]
+    wave_6: [swarm_spawner, heavy_mech, heavy_mech]
+    
+  late_game:
+    wave_7: [swarm_spawner, swarm_spawner, stealth_infiltrator, heavy_mech]
+    wave_8: [boss_destroyer, heavy_mech, heavy_mech]
+    wave_9: [boss_destroyer, swarm_spawner, swarm_spawner]
+    wave_10: [boss_destroyer, boss_destroyer] # Final boss wave
+
+# Special abilities definitions
+special_abilities:
+  damage_reduction:
+    type: "passive"
+    effect: "reduce_incoming_damage"
+    value: 0.5 # 50% damage reduction
+    
+  stealth_mode:
+    type: "periodic"
+    effect: "invisibility"
+    duration: 3.0
+    cooldown: 8.0
+    
+  detection_immunity:
+    type: "passive"
+    effect: "immune_to_targeting"
+    conditions: ["stealth_active"]
+    
+  spawn_on_death:
+    type: "triggered"
+    trigger: "death"
+    effect: "spawn_enemies"
+    spawn_count: 3
+    spawn_type: "scout_drone"
+    
+  swarm_coordination:
+    type: "aura"
+    effect: "speed_boost"
+    radius: 50
+    value: 1.2 # 20% speed boost to nearby units
+    
+  phase_transition:
+    type: "threshold"
+    trigger: "health_below"
+    threshold: 0.5
+    effect: "change_stats"
+    new_stats:
+      speed: 40
+      armor: 10
+      
+  area_damage:
+    type: "attack"
+    effect: "damage_radius"
+    radius: 75
+    damage: 50
+    
+  shield_regen:
+    type: "periodic"
+    effect: "heal"
+    amount: 25
+    interval: 5.0
+
+# Scaling formulas for wave progression
+scaling:
+  health_per_wave: 1.15 # 15% more health each wave
+  speed_per_wave: 1.05  # 5% faster each wave
+  reward_per_wave: 1.10 # 10% more reward each wave
+  armor_per_wave: 1.08  # 8% more armor each wave (rounded)
+  
+  # Special scaling for boss waves
+  boss_waves: [5, 10, 15, 20]
+  boss_health_multiplier: 3.0
+  boss_reward_multiplier: 5.0
+
+# Difficulty modifiers (applied per wave)
+difficulty_modifiers:
+  easy:
+    health_multiplier: 0.8
+    speed_multiplier: 0.9
+    reward_multiplier: 1.2
+    
+  normal:
+    health_multiplier: 1.0
+    speed_multiplier: 1.0  
+    reward_multiplier: 1.0
+    
+  hard:
+    health_multiplier: 1.3
+    speed_multiplier: 1.1
+    reward_multiplier: 0.9

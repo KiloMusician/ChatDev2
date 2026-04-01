@@ -1,0 +1,47 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir fastapi uvicorn[standard] pydantic
+
+EXPOSE 8765
+
+ENV PYTHONUNBUFFERED=1
+
+RUN mkdir -p /app && cat > /app/main.py << 'PYEOF'
+from fastapi import FastAPI
+from datetime import datetime
+
+app = FastAPI(title="MCP Server", version="1.0.0")
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "healthy",
+        "service": "mcp-server",
+        "capabilities": [
+            "code_generation",
+            "tool_orchestration",
+            "resource_management",
+            "multi_agent_coordination"
+        ],
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
+@app.get("/tools")
+async def list_tools():
+    return {
+        "tools": [
+            {"name": "code_generation", "model": "qwen2.5-coder:14b"},
+            {"name": "system_analysis", "enabled": True},
+            {"name": "agent_coordination", "agents": 14},
+            {"name": "knowledge_base", "size_mb": 500}
+        ]
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8765, log_level="info")
+PYEOF
+
+CMD ["python", "/app/main.py"]

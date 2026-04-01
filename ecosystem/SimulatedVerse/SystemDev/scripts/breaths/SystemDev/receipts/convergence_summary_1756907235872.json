@@ -1,0 +1,85 @@
+{
+  "timestamp": 1756907235871,
+  "operation": "ui_game_convergence_summary",
+  "breath": "convergence_analysis",
+  "agent": "sage_macro",
+  "summary": {
+    "timestamp": 1756907235868,
+    "overall_status": "convergence_partial",
+    "world_online": false,
+    "breath_results": {
+      "ui_route_analysis": {
+        "routes": [],
+        "conflicts": [],
+        "missing_adapters": [
+          "PreviewUI/web/adapters/game_shell_adapter.ts",
+          "PreviewUI/web/adapters/GameShell.tsx",
+          "client/src/adapters/GameShell.tsx",
+          "GameDev/ui/adapters/GameShell.tsx"
+        ],
+        "legacy_mounts": [],
+        "game_shell_status": "missing",
+        "dev_menu_status": "missing",
+        "entry_precedence": {
+          "winner": "unknown",
+          "all_entries": [],
+          "server_config": null
+        }
+      },
+      "build_shadow_scan": {
+        "shadows": [],
+        "total_size_mb": 0,
+        "preview_server_paths": [],
+        "conflicts": [],
+        "quarantine_plan": []
+      },
+      "feature_flags": null,
+      "adapter_binding": null,
+      "ascii_painter": null,
+      "golden_traces": {
+        "latest_session": "session_1756907234502_wg5cp6kj1",
+        "convergence_complete": true,
+        "golden_traces_count": 5,
+        "total_events": 5,
+        "session_duration_ms": 101,
+        "missing_traces": [],
+        "timestamp": 1756907234611
+      }
+    },
+    "golden_trace_status": {
+      "complete": true,
+      "missing": [],
+      "present": [],
+      "traces_count": 5
+    },
+    "critical_issues": [
+      "GameShell adapter missing or not mounted"
+    ],
+    "recommendations": [
+      "Synthesize GameShell adapter via Librarian breath"
+    ],
+    "next_actions": [
+      "1. Synthesize GameShell adapter",
+      "4. Re-run convergence assessment"
+    ],
+    "preview_ui_status": {
+      "route_conflicts": 0,
+      "legacy_components": 0,
+      "adapter_present": false,
+      "toggle_functional": true
+    },
+    "game_shell_status": {
+      "ascii_functional": true,
+      "tick_loop_active": false,
+      "save_system_working": false,
+      "prestige_available": false
+    },
+    "organism_health": {
+      "nervous_system": "council_bus_active",
+      "immune_system": "zeta_checks_passing",
+      "overall_health": 100
+    }
+  },
+  "runset_complete": true,
+  "world_online": false
+}

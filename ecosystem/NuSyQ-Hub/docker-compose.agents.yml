@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  gordon:
+    image: nusyq:gordon-agent
+    container_name: gordon_agent
+    environment:
+      - AGENT_NAME=gordon
+      - ROLE=player_orchestrator
+      - GAME_PORT=7337
+    ports:
+      - "7337:7337"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - nusyq
+      
+  serena:
+    image: nusyq:serena-agent
+    container_name: serena_agent
+    environment:
+      - AGENT_NAME=serena
+      - ROLE=archive_walker
+    networks:
+      - nusyq
+      
+  culture-ship:
+    image: nusyq:culture-ship
+    container_name: culture_ship
+    environment:
+      - AGENT_NAME=culture_ship
+      - ROLE=strategic_governance
+    networks:
+      - nusyq
+
+networks:
+  nusyq:
+    driver: bridge

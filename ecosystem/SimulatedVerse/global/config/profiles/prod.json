@@ -1,0 +1,51 @@
+{
+  "name": "production",
+  "version": "1.0.0", 
+  "description": "Production profile with optimizations and safety checks",
+  
+  "enabledModules": [
+    "root",
+    "energy",
+    "progression", 
+    "ui",
+    "automation"
+  ],
+  
+  "requiredSecrets": [
+    "DATABASE_URL",
+    "JWT_SECRET"
+  ],
+  
+  "optionalSecrets": [
+    "OPENAI_API_KEY",
+    "SENTRY_DSN"
+  ],
+  
+  "features": {
+    "hotReload": false,
+    "debugMode": false,
+    "safeMode": true,
+    "mockProviders": false,
+    "traceMode": false,
+    "councilValidation": true
+  },
+  
+  "limits": {
+    "tokenBudgetDaily": 10000,
+    "aiCallsPerHour": 50,
+    "maxModulesActive": 6
+  },
+  
+  "ui": {
+    "showHUD": false,
+    "enableASCII": false,
+    "logLevel": "warn",
+    "lagRadar": false
+  },
+  
+  "automation": {
+    "enableScheduler": true,
+    "maxConcurrentTasks": 3,
+    "taskTimeout": 15000
+  }
+}

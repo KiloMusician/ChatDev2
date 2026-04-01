@@ -1,0 +1,148 @@
+# KILO-FOOLISH Repository Dependencies
+# Core Python Dependencies for Quantum-Consciousness Development Ecosystem
+
+# === CORE DEPENDENCIES ===
+# Core data science and analysis
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# === AI & ML DEPENDENCIES ===
+# AI and machine learning
+scikit-learn>=1.3.0
+torch>=2.0.0
+transformers>=4.30.0
+
+# AI/LLM Integration (Enhanced for NuSyQ-Hub)
+openai>=1.0.0
+ollama>=0.1.7
+tiktoken>=0.8.0
+tenacity>=8.2.2
+
+# Advanced AI libraries
+scipy>=1.11.0
+sympy>=1.12.0
+
+# === WEB & API DEPENDENCIES ===
+# Web and API functionality
+requests>=2.31.0
+# Type stubs for requests to satisfy static type checkers (mypy) in environments
+# where dev dependencies may not be installed. Kept conservative to avoid runtime
+# impact; these are small packages providing only typing information.
+types-requests>=2.31.0
+flask>=2.3.0
+flask-cors>=6.0.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+
+# ChatDev Integration dependencies (aligned with chatdev2 fork)
+Flask-SocketIO>=5.3.4,<6.0.0
+Werkzeug>=3.0.3,<4.0.0
+colorama>=0.4.6
+importlib-metadata>=6.8.0
+
+# Task 4: GitHub Copilot Extension Dependencies (2025-10-13)
+# NOTE: aiohttp unified to single version below
+async-timeout>=4.0.2,<5.0.0
+structlog>=21.1.0
+prometheus-client>=0.12.0
+
+# === TRACING & OBSERVABILITY ===
+# OpenTelemetry for distributed tracing
+opentelemetry-api>=1.20.0
+opentelemetry-sdk>=1.20.0
+opentelemetry-exporter-otlp>=1.20.0
+opentelemetry-instrumentation-requests>=0.41b0
+opentelemetry-instrumentation-logging>=0.41b0
+
+# Prometheus metrics for performance monitoring
+prometheus-client>=0.19.0
+
+# Caching and performance
+cachetools>=5.3.0
+diskcache>=5.6.0
+
+# === DATA & DATABASE ===
+# Database and data handling
+sqlalchemy>=2.0.0
+# sqlite3 is a built-in Python module, no pip install needed
+psycopg2-binary>=2.9.0
+
+# === DEVELOPMENT TOOLS ===
+# Development and testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-benchmark>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Development utilities
+virtualenv>=20.23.0
+regex>=2023.6.3
+
+# === CONFIGURATION & SECRETS ===
+# Configuration management
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+cryptography>=41.0.0
+typer>=0.9.0
+easydict>=1.10
+
+# === JUPYTER & INTERACTIVE ===
+# Jupyter and interactive development
+jupyter>=1.0.0
+ipykernel>=6.25.0
+notebook>=7.0.0
+
+# === ASYNC & CONCURRENCY ===
+# Async and concurrent processing
+aiohttp>=3.8.1,<4.0.0
+aiofiles>=23.1.0
+celery>=5.3.0,<6.0.0
+
+# === LOGGING & MONITORING ===
+# Enhanced logging and monitoring
+loguru>=0.7.0
+rich>=13.5.0
+portalocker>=2.8.0
+jsonschema>=4.20.0
+
+# === QUANTUM & ADVANCED ===
+# Quantum-inspired and advanced libraries
+qiskit>=0.44.0,<3.0.0  # Optional, for quantum computing experiments
+networkx>=3.4.2,<3.7    # For graph analysis and visualization
+
+# === GAME DEVELOPMENT ===
+# Game development (optional)
+pygame>=2.5.0
+# arcade requires system GEOS via shapely and is not needed in the server image
+# arcade==2.6.0
+
+# Documentation tools have moved to pyproject.toml under optional "dev" extras.
+
+# === OPTIONAL AI SERVICES ===
+# AI service integrations (now included above)
+# anthropic>=0.3.0  # Optional - uncomment if needed
+
+# === SYSTEM UTILITIES ===
+# System and utility libraries
+psutil>=5.9.0
+click>=8.1.3
+tqdm>=4.66.0
+
+# AI Research & Documentation utilities
+Pillow>=8.3,<13
+Markdown>=3.4.4
+Wikipedia-API>=0.6.0,<1.0.0
+beautifulsoup4>=4.12.2
+faiss-cpu>=1.7.4,<2.0.0
+
+# Note: This requirements.txt reflects the comprehensive nature of the KILO-FOOLISH ecosystem
+# Install with: pip install -r requirements.txt
+# For development: pip install -r requirements.txt -e .
+
+# === Task 4: Copilot Extension Dependencies ===
+# NOTE: aiohttp consolidated to single version above
+# (duplicates removed; see earlier definitions)

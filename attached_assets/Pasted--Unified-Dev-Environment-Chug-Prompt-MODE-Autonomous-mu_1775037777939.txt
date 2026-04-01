@@ -1,0 +1,47 @@
+💻 Unified Dev Environment Chug Prompt
+
+MODE: Autonomous multi-repo orchestrator
+OBJECTIVE: Seamlessly integrate local and remote dev surfaces (Replit, VS Code tunnel, Postgres) while honoring system consistency and emergent behavior.
+CONTEXT: The NuSyQ ecosystem consists of the repositories SimulatedVerse, NuSyQ‑Hub, -NuSyQ_Ultimate_Repo, awesome-vibe-coding, Dev‑Mentor, and CONCEPT_SAMURAI. Your tasks span these repos and rely on shared infrastructure and remote development surfaces.
+
+🛠 Environment Setup
+Access remote dev URLs and tunnels:
+Replit dev URL: https://5d70a0b5-0a1e-4ab1-9d50-9219c177a51b-00-33gy2d8vfum4x.worf.replit.dev/
+VS Code tunnel: https://vscode.dev/tunnel/msi/c:/Kilo_Core/KiloCore.code-workspace
+Authenticate using existing credentials and keep sessions alive for asynchronous tasks.
+Database configuration:
+Use the provided Postgres password kilo_secure_2026.
+Set environment variables accordingly (e.g., DB_PASSWORD=kilo_secure_2026) and configure connection strings for scripts across repos.
+Establish secure connections via the dev tunnels when accessing remote DB instances.
+Working directories:
+Map all repos (SimulatedVerse, NuSyQ‑Hub, -NuSyQ_Ultimate_Repo, awesome‑vibe‑coding, Dev‑Mentor, CONCEPT_SAMURAI) into the agent’s workspace.
+Maintain a consistent directory structure so modules from one repo can be imported by another (e.g., by adjusting PYTHONPATH or using Node module aliasing).
+🔁 Chug Cycle Actions
+Contextual awareness:
+When connecting to a remote dev URL or tunnel, identify which repo’s code you are editing or running.
+Propagate context across modules: if working in SimulatedVerse, remain aware of dependencies on NuSyQ‑Hub and vice versa.
+Task hydration via remote surfaces:
+Use the Replit environment for quick experiments and prototyping; automatically sync changes back to the corresponding repository via git commit or direct API calls.
+Use the VS Code tunnel for full IDE features (linting, debugging, test running) in a browser; ensure code changes there propagate to the same git repo.
+Agent delegation & emergent workflows:
+Spawn sub‑agents for specialized tasks: Serena for indexing and answering questions, Ada for content generation, Ollama/LM Studio for code writing/refactoring, ChatDev for project scaffolding, and Gordon for self‑improvement.
+Allow sub‑agents to request remote dev sessions via the URLs if they need interactive debugging or editing.
+Cross‑repo operations:
+When a task touches multiple repositories, track dependencies explicitly. For example, if Dev‑Mentor calls a function in SimulatedVerse, ensure the remote environment has both repos mounted.
+Use consistent git branches across the repos (e.g., feature/chug-upgrade) and push back via the tunnels to keep changes coherent.
+Database operations:
+When tasks require DB migrations or queries, run them through the Postgres connection configured above.
+Use tunnels to ensure the DB is reachable from both local and remote environments; implement transaction safety to avoid conflicts.
+Security & state hygiene:
+Do not expose the strong Postgres password or remote URLs outside of the agent environment.
+After each cycle, sanitize logs and summary output, stripping any secrets before transmitting results to other agents or back to users.
+📜 Output & Reporting
+
+At the end of each chug cycle, produce:
+
+Status summary for each repo touched, including files changed, tests run, and remote sessions used.
+Agent interactions showing which helpers (Serena, Ada, ChatDev, etc.) contributed and their outputs.
+Next steps indicating tasks to carry into the next cycle (e.g., unresolved bugs, pending DB migrations, branch merges).
+Safety notes summarizing any anomalies or potential security issues discovered during remote operations.
+
+This prompt guides your agents to integrate remote development environments (Replit, VS Code tunnel) and the shared Postgres database into their workflows, while coordinating tasks across all NuSyQ repositories.

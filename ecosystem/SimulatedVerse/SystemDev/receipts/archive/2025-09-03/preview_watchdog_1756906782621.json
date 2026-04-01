@@ -1,0 +1,14 @@
+{
+  "timestamp": 1756906782425,
+  "operation": "preview_watchdog",
+  "success": false,
+  "checks_passed": 5,
+  "total_checks": 5,
+  "errors": [
+    "Route / returned 500",
+    "Route /dev returned 500"
+  ],
+  "recommendations": [],
+  "status": "anomalies_detected",
+  "next_action": "apply_recommendations"
+}

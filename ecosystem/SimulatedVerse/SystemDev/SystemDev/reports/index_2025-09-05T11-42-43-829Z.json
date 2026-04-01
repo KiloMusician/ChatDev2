@@ -1,0 +1,231 @@
+{
+  "timestamp": "2025-09-05T11:42:43.812Z",
+  "files_total": 2125,
+  "size_total": 50003511,
+  "size_human": "47.69 MB",
+  "extensions": {
+    "json": 1988,
+    "db": 1,
+    "db-shm": 1,
+    "db-wal": 1,
+    "md": 15,
+    "jsonl": 2,
+    "ts": 66,
+    "yml": 4,
+    "txt": 1,
+    "mjs": 32,
+    "ndjson": 2,
+    "js": 5,
+    "sh": 7
+  },
+  "directories": {
+    ".": 1,
+    ".edge": 3,
+    ".edge/overlay": 1,
+    "backlog/next_up": 10,
+    "backlog": 1,
+    "config": 1,
+    "core": 4,
+    "directives": 2,
+    "guards": 5,
+    "interfaces": 1,
+    "lore": 1,
+    "offline_brain": 1,
+    "patterns": 1,
+    "pipelines": 3,
+    "receipts": 564,
+    "receipts/archive/2025-09-03": 221,
+    "receipts/archive/2025-09-04": 256,
+    "receipts/offline": 877,
+    "reports": 28,
+    "schema": 3,
+    "scripts/SystemDev/receipts": 17,
+    "scripts/SystemDev/reports": 12,
+    "scripts": 92,
+    "scripts/breaths/SystemDev/receipts": 5,
+    "scripts/breaths/SystemDev/receipts/telemetry": 4,
+    "scripts/breaths/SystemDev/reports": 4,
+    "scripts/breaths": 5,
+    "scripts/patches": 1,
+    "scripts/reports": 1
+  },
+  "size_buckets": {
+    "tiny": 1831,
+    "huge": 2,
+    "small": 289,
+    "medium": 3
+  },
+  "top_dirs_by_count": [
+    {
+      "dir": "receipts/offline",
+      "count": 877
+    },
+    {
+      "dir": "receipts",
+      "count": 564
+    },
+    {
+      "dir": "receipts/archive/2025-09-04",
+      "count": 256
+    },
+    {
+      "dir": "receipts/archive/2025-09-03",
+      "count": 221
+    },
+    {
+      "dir": "scripts",
+      "count": 92
+    },
+    {
+      "dir": "reports",
+      "count": 28
+    },
+    {
+      "dir": "scripts/SystemDev/receipts",
+      "count": 17
+    },
+    {
+      "dir": "scripts/SystemDev/reports",
+      "count": 12
+    },
+    {
+      "dir": "backlog/next_up",
+      "count": 10
+    },
+    {
+      "dir": "guards",
+      "count": 5
+    },
+    {
+      "dir": "scripts/breaths/SystemDev/receipts",
+      "count": 5
+    },
+    {
+      "dir": "scripts/breaths",
+      "count": 5
+    },
+    {
+      "dir": "core",
+      "count": 4
+    },
+    {
+      "dir": "scripts/breaths/SystemDev/receipts/telemetry",
+      "count": 4
+    },
+    {
+      "dir": "scripts/breaths/SystemDev/reports",
+      "count": 4
+    },
+    {
+      "dir": ".edge",
+      "count": 3
+    },
+    {
+      "dir": "pipelines",
+      "count": 3
+    },
+    {
+      "dir": "schema",
+      "count": 3
+    },
+    {
+      "dir": "directives",
+      "count": 2
+    },
+    {
+      "dir": ".",
+      "count": 1
+    }
+  ],
+  "top_dirs_by_size": [
+    {
+      "dir": "reports",
+      "size": 26540105
+    },
+    {
+      "dir": ".edge",
+      "size": 11739136
+    },
+    {
+      "dir": "receipts/offline",
+      "size": 9981426
+    },
+    {
+      "dir": "scripts",
+      "size": 458121
+    },
+    {
+      "dir": "receipts",
+      "size": 390052
+    },
+    {
+      "dir": "receipts/archive/2025-09-03",
+      "size": 346892
+    },
+    {
+      "dir": "receipts/archive/2025-09-04",
+      "size": 154644
+    },
+    {
+      "dir": "core",
+      "size": 118443
+    },
+    {
+      "dir": "scripts/breaths",
+      "size": 44868
+    },
+    {
+      "dir": "backlog/next_up",
+      "size": 37788
+    },
+    {
+      "dir": ".edge/overlay",
+      "size": 34826
+    },
+    {
+      "dir": "guards",
+      "size": 23407
+    },
+    {
+      "dir": "pipelines",
+      "size": 21776
+    },
+    {
+      "dir": "scripts/SystemDev/receipts",
+      "size": 18178
+    },
+    {
+      "dir": "directives",
+      "size": 11978
+    },
+    {
+      "dir": "schema",
+      "size": 10721
+    },
+    {
+      "dir": "scripts/patches",
+      "size": 10102
+    },
+    {
+      "dir": "scripts/SystemDev/reports",
+      "size": 10070
+    },
+    {
+      "dir": "backlog",
+      "size": 9108
+    },
+    {
+      "dir": "patterns",
+      "size": 8371
+    }
+  ],
+  "bloat_indicators": {
+    "node_modules": 0,
+    "build_dirs": 0,
+    "cache_dirs": 0,
+    "log_files": 0,
+    "map_files": 0,
+    "media_files": 0
+  },
+  "anomalies": []
+}

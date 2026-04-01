@@ -1,0 +1,29 @@
+{
+  "diagnostics": [
+    "State the minimal facts required to proceed.",
+    "Which subtask yields the highest info gain at lowest cost?",
+    "What non-LLM algorithm or cached artifact can replace a call?"
+  ],
+  "planning": [
+    "Decompose into ≤4 atomic actions with clear IO.",
+    "Pick tools with O(1) or O(log n) cost over tokenized calls."
+  ],
+  "compression": [
+    "Rewrite the prompt in ≤60 words; keep nouns/IDs only.",
+    "Replace prose with fields; force JSON output."
+  ],
+  "escalation_checks": [
+    "Is local answer confidence < threshold?",
+    "Is expected delta in utility > token cost?"
+  ],
+  "quality_gates": [
+    "Does output match expected schema?",
+    "Are all required fields present and valid?",
+    "Is confidence score within acceptable range?"
+  ],
+  "fallback_strategies": [
+    "Use symbolic/algorithmic approach if available",
+    "Degrade to smaller model with tighter prompt",
+    "Return cached partial result with confidence warning"
+  ]
+}

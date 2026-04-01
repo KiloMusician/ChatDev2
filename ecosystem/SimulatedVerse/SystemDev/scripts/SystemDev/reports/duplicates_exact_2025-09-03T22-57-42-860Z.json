@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-03T22:57:42.859Z",
+  "mode": "exact",
+  "files_scanned": 61,
+  "duplicates_found": 1,
+  "bytes_redundant": 453,
+  "groups": [
+    {
+      "hash": "49b893ecbbb6c429bbcbba76ae469fa4b5eff38e6b5c7a0d3883eb8a9dd2d840",
+      "paths": [
+        "SystemDev/receipts/convergence_validation_1756907485107.json",
+        "SystemDev/reports/final_convergence_status.json"
+      ],
+      "size": 453,
+      "type": "exact"
+    }
+  ],
+  "recommendations": [
+    "Found 1 exact duplicate groups - safe to consolidate",
+    "Exact: Keep SystemDev/receipts/convergence_validation_1756907485107.json, move others to attic/dup/",
+    "Potential space savings: 0 KB"
+  ]
+}

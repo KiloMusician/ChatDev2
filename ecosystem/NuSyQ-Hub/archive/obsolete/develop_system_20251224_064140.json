@@ -1,0 +1,25 @@
+{
+  "total_iterations": 1,
+  "max_iterations": 2,
+  "halt_on_error": false,
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp": "2025-12-24T06:41:39.536237",
+      "steps": {
+        "analyze": {
+          "status": "success",
+          "summary": {
+            "working_files": 346,
+            "broken_files": 0,
+            "launch_pad_files": 43,
+            "enhancement_candidates": 53
+          }
+        },
+        "heal": {
+          "status": "skipped"
+        }
+      }
+    }
+  ]
+}

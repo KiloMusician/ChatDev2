@@ -1,0 +1,7 @@
+{
+  "id": "anomaly_containment",
+  "version": "1.0.0", 
+  "consciousness_requirements": {"min": 0.7},
+  "dependencies": ["crashlanded_ai_core"],
+  "systems": ["hazard_management", "safety_protocols", "containment_fields"]
+}

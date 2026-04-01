@@ -1,0 +1,33 @@
+{
+  "aliases": {
+    "@game": "GameDev",
+    "@engine": "GameDev/engine",
+    "@play": "GameDev/gameplay", 
+    "@systems": "GameDev/systems",
+    "@content": "GameDev/content",
+    "@chat": "ChatDev",
+    "@agents": "ChatDev/agents",
+    "@msgx": "ChatDev/directives/MsgX",
+    "@rsev": "ChatDev/directives/RSEV",
+    "@sys": "SystemDev",
+    "@scripts": "SystemDev/scripts",
+    "@knowledge": "knowledge",
+    "@ui": "PreviewUI",
+    "@mobile": "PreviewUI/mobile",
+    "@sectors": "Sectors"
+  },
+  "godot_mappings": {
+    "res://engine/": "GameDev/engine/godot/",
+    "res://gameplay/": "GameDev/gameplay/",
+    "res://systems/": "GameDev/systems/",
+    "res://content/": "GameDev/content/"
+  },
+  "migration_notes": {
+    "phase": "foundation_deployed",
+    "next_steps": [
+      "Run index_repo.ts to catalog current reality",
+      "Deploy import_rewriter.ts for alias adoption", 
+      "Gradual migration of existing paths to aliases"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "stage": "pre_push", 
+  "timestamp": "2025-09-03T08:29:30Z",
+  "dry_run_ok": false,
+  "diagnosis": "no_remote",
+  "evidence": [
+    "No remote 'origin' configured",
+    "Cannot push without remote repository URL"
+  ],
+  "action_hint": "setup_remote_and_auth"
+}

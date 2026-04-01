@@ -1,0 +1,24 @@
+{
+  "currencies": ["scrap","ore","credits","insight","energy"],
+  "bars": [
+    {"key":"boot_progress","from":0,"to":100,"rate":"1+log(1+t)","tier":-1},
+    {"key":"mining","from":0,"to":"1000+50*tier","rate":"mining_power*(1+synergy.mech)","tier":1},
+    {"key":"research","from":0,"to":"200+10*tier","rate":"labs*(1+insight/1000)","tier":2}
+  ],
+  "stats": {
+    "mining_power": 1,
+    "labs": 0,
+    "synergy.mech": 0
+  },
+  "unlocks": [
+    {"flag":"research.base_tools","needs":["mining>=100"]},
+    {"flag":"event.swarm_seen","needs":["time>=600"]},
+    {"flag":"unlock.rogue_core","needs":["mining>=500","research>=50"]},
+    {"flag":"research.civics","needs":["insight>=250"]}
+  ],
+  "ui": {
+    "ascii_view": {"mobileOK": true},
+    "builder": {"mobileOK": false},
+    "defense": {"mobileOK": true}
+  }
+}

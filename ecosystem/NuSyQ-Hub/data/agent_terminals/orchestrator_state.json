@@ -1,0 +1,781 @@
+{
+  "timestamp": "2026-02-13T06:14:06.402712",
+  "active_agent": null,
+  "terminal_streams": 144,
+  "agents": {
+    "claude": {
+      "agent": "claude",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "copilot": {
+      "agent": "copilot",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "codex": {
+      "agent": "codex",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "chatdev": {
+      "agent": "chatdev",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "ollama": {
+      "agent": "ollama",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "quantum_resolver": {
+      "agent": "quantum_resolver",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "consciousness_bridge": {
+      "agent": "consciousness_bridge",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "ai_council": {
+      "agent": "ai_council",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    },
+    "intermediary": {
+      "agent": "intermediary",
+      "active": false,
+      "terminals": {
+        "errors": {
+          "terminal": "errors",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "suggestions": {
+          "terminal": "suggestions",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "tasks": {
+          "terminal": "tasks",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "zeta": {
+          "terminal": "zeta",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "agents": {
+          "terminal": "agents",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "metrics": {
+          "terminal": "metrics",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "anomalies": {
+          "terminal": "anomalies",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "future": {
+          "terminal": "future",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "main": {
+          "terminal": "main",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "claude": {
+          "terminal": "claude",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "copilot": {
+          "terminal": "copilot",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "codex": {
+          "terminal": "codex",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "chatdev": {
+          "terminal": "chatdev",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "ai_council": {
+          "terminal": "ai_council",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "intermediary": {
+          "terminal": "intermediary",
+          "message_count": 0,
+          "recent_messages": []
+        },
+        "scaffolding": {
+          "terminal": "scaffolding",
+          "message_count": 0,
+          "recent_messages": []
+        }
+      }
+    }
+  }
+}

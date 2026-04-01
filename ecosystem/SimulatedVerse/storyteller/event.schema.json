@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Storyteller Event Schema",
+  "description": "Schema for KPulse storyteller events and narrative beats",
+  "type": "object",
+  "required": ["tick", "beats", "tone", "seed"],
+  "properties": {
+    "tick": {
+      "type": "integer",
+      "description": "Game tick when event occurred",
+      "minimum": 0
+    },
+    "tone": {
+      "type": "string",
+      "enum": ["banks_culture", "asimov_foundation", "dry_humor", "grim_resolve"],
+      "description": "Narrative tone/style profile"
+    },
+    "seed": {
+      "type": "integer",
+      "description": "Deterministic seed for reproducible events",
+      "minimum": 0
+    },
+    "beats": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "required": ["step", "cause", "effect", "ui"],
+        "properties": {
+          "step": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 16,
+            "description": "Gradient step (1-16)"
+          },
+          "cause": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "What triggered this beat"
+          },
+          "effect": {
+            "type": "string",
+            "maxLength": 180,
+            "description": "What happens as a result"
+          },
+          "ui": {
+            "type": "object",
+            "description": "UI presentation directives",
+            "properties": {
+              "badge": {
+                "type": "string",
+                "maxLength": 50,
+                "description": "Badge text for UI"
+              },
+              "sfx": {
+                "type": "string",
+                "enum": ["tension", "resolve", "surprise", "humor", "dramatic"],
+                "description": "Sound effect category"
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9A-Fa-f]{6}$",
+                "description": "Hex color for UI theming"
+              },
+              "icon": {
+                "type": "string",
+                "maxLength": 20,
+                "description": "Icon identifier"
+              }
+            },
+            "additionalProperties": false
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Optional metadata for analysis",
+            "properties": {
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "AI confidence in this beat"
+              },
+              "tokens_used": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Tokens consumed generating this beat"
+              },
+              "generated_by": {
+                "type": "string",
+                "enum": ["template", "local_llm", "paid_api", "symbolic"],
+                "description": "Generation method"
+              },
+              "temperature": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 2,
+                "description": "Model temperature used"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "arc": {
+      "type": "object",
+      "description": "Optional narrative arc information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Arc identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["crisis", "development", "exploration", "social", "anomaly"],
+          "description": "Arc type"
+        },
+        "phase": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "description": "Current arc phase"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Colonist IDs involved in this arc"
+        }
+      },
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "description": "Game state context for this event",
+      "properties": {
+        "tier": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 19,
+          "description": "Civilization tier"
+        },
+        "resources": {
+          "type": "object",
+          "description": "Current resource levels"
+        },
+        "colonist_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of active colonists"
+        },
+        "average_mood": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Average colonist mood"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

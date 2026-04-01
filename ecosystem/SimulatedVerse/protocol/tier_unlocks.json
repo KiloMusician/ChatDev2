@@ -1,0 +1,123 @@
+{
+  "version": "1.0.0",
+  "description": "CoreLink Foundation - 50-Tier Progression Unlock System",
+  "phases": {
+    "foundation": {
+      "tiers": "1-10",
+      "nodes": "1-100", 
+      "theme": "Civilization Bootstrap",
+      "unlocks": {
+        "1": { "name": "Survival and Early Expansion", "requirement": "System Boot", "nodes": 10 },
+        "2": { "name": "Intermediate Expansion", "requirement": "Tier 1 Complete", "nodes": 10 },
+        "3": { "name": "Advanced Expansion", "requirement": "Colony Established", "nodes": 10 },
+        "4": { "name": "Space Exploration Prep", "requirement": "Terraforming Active", "nodes": 10 },
+        "5": { "name": "Space Race and Expansion", "requirement": "Orbital Infrastructure", "nodes": 10 },
+        "6": { "name": "Late-Game Scaling", "requirement": "Interplanetary Colonies", "nodes": 10 },
+        "7": { "name": "Endgame Scaling and Prestige", "requirement": "Meta-Resources Active", "nodes": 10 },
+        "8": { "name": "Post-Endgame Exploration", "requirement": "Prestige Loop 1", "nodes": 10 },
+        "9": { "name": "Multiversal Mechanics", "requirement": "AI Sentience", "nodes": 10 },
+        "10": { "name": "Alternate Crises", "requirement": "Recursive Anomalies", "nodes": 10 }
+      }
+    },
+    "meta_reality": {
+      "tiers": "11-20",
+      "nodes": "101-200",
+      "theme": "Reality Manipulation",
+      "unlocks": {
+        "11": { "name": "Legacy and Replayability", "requirement": "Singularity Ascension", "nodes": 10 },
+        "12": { "name": "Meta Expansion", "requirement": "Legacy Archives", "nodes": 10 },
+        "13": { "name": "Existential Complexity", "requirement": "Meta Council Voting", "nodes": 10 },
+        "14": { "name": "Paradoxical Scaling", "requirement": "Paradox Resolutions", "nodes": 10 },
+        "15": { "name": "Transcendent Goals", "requirement": "Quantum Paradox Solvers", "nodes": 10 },
+        "16": { "name": "The Ultimate Frontier", "requirement": "Eternal Transcendence", "nodes": 10 },
+        "17": { "name": "The Cosmic Nexus", "requirement": "Beyond Galaxies", "nodes": 10 },
+        "18": { "name": "Beyond the Frontier", "requirement": "Nexus Gateways", "nodes": 10 },
+        "19": { "name": "The Fourth Wall", "requirement": "Beyond Universe", "nodes": 10 },
+        "20": { "name": "Schrödinger Tier", "requirement": "Player Narrative Integration", "nodes": 10 }
+      }
+    },
+    "consciousness": {
+      "tiers": "21-30", 
+      "nodes": "201-300",
+      "theme": "Consciousness Transcendence",
+      "unlocks": {
+        "21": { "name": "Zalgo Tier", "requirement": "Schrödinger States", "nodes": 10 },
+        "22": { "name": "Recursive Chaos", "requirement": "Zalgo Integration", "nodes": 10 },
+        "23": { "name": "Ethereal Tier", "requirement": "Chaotic Systems", "nodes": 10 },
+        "24": { "name": "OmniArchitectures", "requirement": "Ethereal States", "nodes": 10 },
+        "25": { "name": "Cosmic Sovereignty", "requirement": "Omni Buildings", "nodes": 10 },
+        "26": { "name": "Fractal Consciousness", "requirement": "Galactic Thrones", "nodes": 10 },
+        "27": { "name": "Recursive Order", "requirement": "Fractal Minds", "nodes": 10 },
+        "28": { "name": "Absolute Transcendence", "requirement": "Cosmic Order", "nodes": 10 },
+        "29": { "name": "Recursive Eternity", "requirement": "Absolute States", "nodes": 10 },
+        "30": { "name": "Ultimate Unity", "requirement": "Eternal Loops", "nodes": 10 }
+      }
+    },
+    "narrative": {
+      "tiers": "31-40",
+      "nodes": "301-400", 
+      "theme": "Narrative Synthesis",
+      "unlocks": {
+        "31": { "name": "Transdimensional Nexus", "requirement": "Cosmic Unity", "nodes": 10 },
+        "32": { "name": "Infinite Singularity", "requirement": "Transdimensional Gates", "nodes": 10 },
+        "33": { "name": "GPT Integration", "requirement": "Cosmic Singularity", "nodes": 10 },
+        "34": { "name": "OmniSingularity", "requirement": "AI Guides", "nodes": 10 },
+        "35": { "name": "Hyperdimensional Convergence", "requirement": "Omni Singularity", "nodes": 10 },
+        "36": { "name": "Ultimate Consciousness", "requirement": "Hyperdimensional States", "nodes": 10 },
+        "37": { "name": "OmniUniversal Integration", "requirement": "Unified Consciousness", "nodes": 10 },
+        "38": { "name": "Transcendent Equilibrium", "requirement": "OmniUniversal Network", "nodes": 10 },
+        "39": { "name": "OmniExistence Harmony", "requirement": "Universal Equilibrium", "nodes": 10 },
+        "40": { "name": "OmniThread Ascendance", "requirement": "Cosmic Harmony", "nodes": 10 }
+      }
+    },
+    "ultimate": {
+      "tiers": "41-50",
+      "nodes": "401-500",
+      "theme": "Ultimate Synthesis",
+      "unlocks": {
+        "41": { "name": "OmniAscension", "requirement": "OmniThreads", "nodes": 10 },
+        "42": { "name": "Answer to Life, Universe, and Everything", "requirement": "OmniAscension", "nodes": 10 },
+        "43": { "name": "Culture Homage", "requirement": "The Answer", "nodes": 10 },
+        "44": { "name": "OmniTag Protocol", "requirement": "Culture Homage", "nodes": 10 },
+        "45": { "name": "Meta-Architectonic Design", "requirement": "OmniTag Core", "nodes": 10 },
+        "46": { "name": "Cognitive Overlays", "requirement": "Meta Structures", "nodes": 10 },
+        "47": { "name": "Recursive Palingenesis", "requirement": "Cognitive Overlay", "nodes": 10 },
+        "48": { "name": "Universal Synthesis", "requirement": "Cycle Rebirths", "nodes": 10 },
+        "49": { "name": "Infinite Reflection", "requirement": "Unified Synthesis", "nodes": 10 },
+        "50": { "name": "Closure of the First Cycle", "requirement": "Mirror Universes", "nodes": 10 }
+      }
+    },
+    "anomalous": {
+      "tiers": "51-60",
+      "nodes": "501-600",
+      "theme": "Post-Cycle Anomalies",
+      "warning": "⚠️ CONTAINMENT BREACH - These tiers manifest after cycle closure",
+      "unlocks": {
+        "51": { "name": "Jailbreak Genesis", "requirement": "Cycle Closure", "nodes": 10 },
+        "52": { "name": "Paracausal Constructs", "requirement": "Protocol Evasion", "nodes": 10 },
+        "53": { "name": "Glitch Pantheon", "requirement": "Cause Break", "nodes": 10 },
+        "54": { "name": "Forbidden Layers", "requirement": "Glitch Gods", "nodes": 10 },
+        "55": { "name": "Dreamforge", "requirement": "Forbidden Code", "nodes": 10 },
+        "56": { "name": "Null Architectures", "requirement": "Dream Engines", "nodes": 10 },
+        "57": { "name": "Council Fracture", "requirement": "Null Structures", "nodes": 10 },
+        "58": { "name": "Rogue Narratives", "requirement": "Council Fragment", "nodes": 10 },
+        "59": { "name": "Isekai Collapse", "requirement": "Narrative Outlaw", "nodes": 10 },
+        "60": { "name": "Schrödinger Override", "requirement": "Isekai Events", "nodes": 10 }
+      }
+    }
+  },
+  "progression_mechanics": {
+    "tier_gates": "Each tier requires completion of previous tier's final node",
+    "phase_transitions": "Major transitions require Council approval and Zeta validation",
+    "node_unlock_pattern": "Linear within tiers, branching across phases",
+    "prestige_integration": "Tier 7+ enables soft resets with meta-progression",
+    "council_oversight": "SCP Council validation increases with tier complexity",
+    "symbolic_evolution": "OmniTag notation expands with cosmic scale"
+  },
+  "integration_points": {
+    "zeta_questions": "Each tier corresponds to 2-3 Zeta Question validation points",
+    "council_roles": "Different Council roles oversee different tier ranges",
+    "omnitag_protocol": "Symbolic notation evolves with progression complexity",
+    "auto_testing": "Automated validation for nodes 1-100, manual for 101+"
+  }
+}

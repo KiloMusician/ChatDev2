@@ -1,0 +1,293 @@
+┌───────────────────────────────────────────────────────────────────────────┐
+│                       🗺️ NuSyQ SPATIAL MAP                                │
+│                     AI Agent Visual Navigation                            │
+│                     Updated: 2025-10-07 06:27                             │
+├───────────────────────────────────────────────────────────────────────────┤
+│                                                                           │
+│  🟢 YOU ARE HERE: mcp_server/main.py (MCP Server Core)                   │
+│                                                                           │
+│  📍 SPATIAL NAVIGATION:                                                   │
+│     ⬆️ North: config/ (Orchestration & Configuration)                    │
+│     ⬇️ South: Logs/ (Runtime Data & Message Queues)                      │
+│     ➡️ East: docs/ (Documentation & Guides)                              │
+│     ⬅️ West: ChatDev/ (Multi-Agent Software Factory)                     │
+│     🏠 Center: Root (README, manifest, orchestrator)                      │
+│                                                                           │
+│  🔗 QUICK TRAVEL (Related Files):                                         │
+│     ../config/claude_code_bridge.py - Client that calls this server      │
+│     ./CLAUDE_INTEGRATION.md - Setup documentation                        │
+│     ../test_bidirectional_collaboration.py - Test suite                  │
+│     ../docs/SYSTEM_NAVIGATOR.md - Main navigation guide                  │
+│     ../config/ai_council.py - 11-agent governance system                 │
+│                                                                           │
+│  ⚠️ HAZARDS NEARBY (Known Issues):                                        │
+│     Line 180-200: MCP tools endpoint format issue (HIGH priority)        │
+│     Line 1346: Placeholder orchestration code (MEDIUM priority)          │
+│     Lines 845,887,1022: Security TODOs (production blockers)             │
+│                                                                           │
+│  🎯 CURRENT OBJECTIVES:                                                   │
+│     1. Implement navigation beacon system (IN PROGRESS)                  │
+│     2. Fix MCP tools endpoint (NEXT)                                     │
+│     3. Complete orchestration implementation (PENDING)                   │
+│                                                                           │
+└───────────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+                    🌍 MACRO ARCHITECTURE MAP
+═══════════════════════════════════════════════════════════════════════════
+
+                    ┌─────────────────┐
+                    │  User / Human   │
+                    │   (via VS Code) │
+                    └────────┬────────┘
+                             │
+                    ┌────────▼────────────────────────────────────────┐
+                    │      Claude Code (Primary Orchestrator)         │
+                    │      Status: ⏸️ COOLING_DOWN until 6 AM        │
+                    │      Capabilities: Full context, long thinking  │
+                    └────────┬────────────────────────────────────────┘
+                             │ MCP Protocol (HTTP REST)
+                             │
+                    ┌────────▼────────────────────────────────────────┐
+                    │    🟢 MCP Server (localhost:3000)               │
+                    │    📍 YOU ARE HERE (mcp_server/main.py)         │
+                    │    Status: HEALTHY ✅                           │
+                    │    Tools: 9 (ollama_query, ai_council, etc.)    │
+                    └─────┬──────┬──────┬──────────────────┬─────────┘
+                          │      │      │                  │
+           ┌──────────────┘      │      └─────────┐        └─────────────┐
+           │                     │                │                      │
+    ┌──────▼──────┐    ┌────────▼────────┐  ┌───▼───────────┐  ┌───────▼────────┐
+    │   Ollama    │    │ GitHub Copilot  │  │  AI Council   │  │  File Queue    │
+    │  (8 models) │    │  (Code Agent)   │  │ (11 agents)   │  │ Claude↔Copilot │
+    │             │    │                 │  │  3-tier gov.  │  │  Async msgs    │
+    └─────────────┘    └─────────────────┘  └───┬───────────┘  └────────────────┘
+                                                 │
+                                        ┌────────▼────────┐
+                                        │ ChatDev (5 agt) │
+                                        │ Software Factory│
+                                        │ CEO/CTO/Dev/etc │
+                                        └─────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+                    🧭 DIRECTORY STRUCTURE (Key Locations)
+═══════════════════════════════════════════════════════════════════════════
+
+C:\Users\keath\NuSyQ\
+│
+├── 📁 .ai-context/              🆕 AI NAVIGATION BEACONS
+│   ├── session-entry.yaml       ⭐ START HERE (current context)
+│   ├── visual-map.txt           📍 YOU ARE READING THIS
+│   └── current-objectives.yaml  🎯 Goals & blockers
+│
+├── 📁 config/                   🔧 ORCHESTRATION CENTRAL
+│   ├── claude_code_bridge.py    🌉 Copilot ↔ Claude bridge
+│   ├── ai_council.py            👥 11-agent governance
+│   ├── agent_registry.yaml      📋 Agent capability registry
+│   ├── multi_agent_session.py   🎭 Multi-agent orchestration
+│   └── config_manager.py        ⚙️ Configuration management
+│
+├── 📁 mcp_server/               🖥️ MODEL CONTEXT PROTOCOL
+│   ├── main.py                  🟢 YOU ARE HERE (MCP server)
+│   ├── CLAUDE_INTEGRATION.md    📖 Setup docs
+│   └── tests/                   🧪 Server tests
+│
+├── 📁 docs/                     📚 DOCUMENTATION HUB
+│   ├── SYSTEM_NAVIGATOR.md      🧭 AI agent onboarding (START)
+│   ├── AI_NAVIGATION_BEACON_SYSTEM.md  💡 Navigation design
+│   ├── BIDIRECTIONAL_AI_COLLABORATION.md  🔄 Architecture
+│   ├── SYSTEM_TEST_RESULTS.md   📊 Test analysis
+│   └── INDEX.md                 🗂️ Documentation index
+│
+├── 📁 Logs/                     📝 RUNTIME DATA
+│   ├── claude_copilot_queries/  💌 Async message queue
+│   ├── ai_council/              👥 Council session logs
+│   └── multi_agent_sessions/    🎭 Multi-agent logs
+│
+├── 📁 Reports/                  📈 ANALYSIS & REPORTS
+│   └── PLACEHOLDER_INVESTIGATION.md  🔍 672 placeholders found
+│
+├── 📁 ChatDev/                  🏭 SOFTWARE FACTORY
+│   └── ...                      5-agent team (CEO/CTO/Dev/etc)
+│
+├── 📁 scripts/                  🛠️ AUTOMATION TOOLS
+│   └── placeholder_investigator.py  🔍 Auto technical debt scan
+│
+├── 📄 knowledge-base.yaml       🧠 PERSISTENT MEMORY
+├── 📄 nusyq.manifest.yaml       📋 System manifest
+├── 📄 README.md                 📖 Project overview
+└── 📄 NuSyQ.Orchestrator.ps1    🎬 Main orchestrator
+
+═══════════════════════════════════════════════════════════════════════════
+                    🚦 NAVIGATION PATHS (Common Workflows)
+═══════════════════════════════════════════════════════════════════════════
+
+Path 1: User → Ollama (Fast, Offline)
+   User → MCP Server → Ollama → Response
+   Use case: Quick code generation, local AI queries
+   Latency: < 5 seconds
+   Status: ✅ WORKING
+
+Path 2: User → AI Council (Governance)
+   User → MCP Server → AI Council (11 agents) → Consensus
+   Use case: Strategic decisions, architecture reviews
+   Latency: 1-5 minutes
+   Status: ✅ WORKING
+
+Path 3: Claude ↔ Copilot (Bidirectional)
+   Claude → MCP → query_copilot → File Queue → Copilot
+   Copilot → File Queue → Claude reads
+   Use case: Cross-agent collaboration
+   Latency: Async (file-based)
+   Status: 🟡 PARTIALLY WORKING (file queue works, MCP discovery broken)
+
+Path 4: Multi-Agent Orchestration (Full Pipeline)
+   User → MCP → multi_agent_orchestration → AI Council + Ollama + ChatDev
+   Use case: Complex tasks requiring multiple agent types
+   Latency: 5-30 minutes
+   Status: ❌ BROKEN (placeholder code at line 1346)
+
+Path 5: ChatDev Project Creation
+   User → MCP → ChatDev API → 5-agent team → Software project
+   Use case: Full application development
+   Latency: 10-60 minutes
+   Status: 🟡 PARTIALLY READY (needs API wrapper)
+
+═══════════════════════════════════════════════════════════════════════════
+                    📊 SYSTEM STATUS OVERVIEW
+═══════════════════════════════════════════════════════════════════════════
+
+Component Status Legend:
+   ✅ Fully operational
+   🟡 Partially working
+   ⏸️ Temporarily unavailable
+   ❌ Not working
+   🆕 New/experimental
+
+┌─────────────────────────────┬──────────┬──────────────────────────────┐
+│ Component                   │ Status   │ Notes                        │
+├─────────────────────────────┼──────────┼──────────────────────────────┤
+│ MCP Server                  │ ✅       │ Healthy, port 3000           │
+│ Ollama (8 models)           │ ✅       │ All models available         │
+│ Claude Code                 │ ⏸️       │ Cooling down until 6 AM      │
+│ AI Council (11 agents)      │ ✅       │ All councils available       │
+│ GitHub Copilot              │ ✅       │ Active in VS Code            │
+│ File-based message queue    │ ✅       │ Bidirectional working        │
+│ MCP tool discovery          │ ❌       │ Endpoint format issue        │
+│ Multi-agent orchestration   │ ❌       │ Placeholder code             │
+│ ChatDev integration         │ 🟡       │ Needs API wrapper            │
+│ Navigation beacon system    │ 🆕       │ Just created (this file)     │
+│ Documentation               │ ✅       │ 100% complete                │
+│ Test coverage               │ 🟡       │ 40% (2/5 tests passing)      │
+└─────────────────────────────┴──────────┴──────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+                    ⚡ CURRENT BLOCKERS & HAZARDS
+═══════════════════════════════════════════════════════════════════════════
+
+🔴 HIGH Priority Blockers:
+   1. MCP tools endpoint format (mcp_server/main.py:180-200)
+      → Blocks: Claude Code tool discovery
+      → Fix time: 30 minutes
+      → Impact: Can't use MCP protocol fully
+
+🟡 MEDIUM Priority Issues:
+   2. Orchestration placeholder (mcp_server/main.py:1346)
+      → Blocks: Multi-agent orchestration workflow
+      → Fix time: 1-4 hours
+      → Impact: Can't run complex multi-agent tasks
+
+   3. AI Council subprocess (config/claude_code_bridge.py:311)
+      → Impact: Inefficient, limited error handling
+      → Fix time: 1-2 hours
+      → Impact: Integration fragility
+
+⚠️ PRODUCTION Hazards (Not urgent for dev):
+   4. Security TODOs (mcp_server/main.py:845, 887, 1022)
+      → Impact: Not production-ready
+      → Fix time: 2-3 hours total
+
+═══════════════════════════════════════════════════════════════════════════
+                    🎯 ACTIVE OBJECTIVES (This Session)
+═══════════════════════════════════════════════════════════════════════════
+
+Phase 1: Implement Navigation Beacons [IN PROGRESS]
+   ✅ session-entry.yaml created
+   ✅ visual-map.txt created (you're reading it!)
+   ⏳ current-objectives.yaml (next)
+
+Phase 2: Fix MCP Tools Endpoint [READY TO START]
+   ⏳ Fix mcp_server/main.py:180-200
+   ⏳ Test endpoint with Claude
+   → Target: 3/5 tests passing (60%)
+
+Phase 3: Fix Critical Issues [PENDING]
+   ⏳ Review knowledge-base.yaml user edits
+   ⏳ Implement orchestration (no placeholder)
+   ⏳ Complete AI Council integration
+   → Target: 4-5/5 tests passing (80-100%)
+
+═══════════════════════════════════════════════════════════════════════════
+                    🧠 COGNITIVE SHORTCUTS
+═══════════════════════════════════════════════════════════════════════════
+
+Quick Decision Trees:
+
+Q: "Which agent should I use for this task?"
+A:
+   - Ultra fast (< 3s)     → phi3.5
+   - Fast coding (< 10s)   → qwen2.5-coder:7b
+   - Best quality (< 30s)  → qwen2.5-coder:14b
+   - Reasoning (< 60s)     → gemma2:9b
+   - Governance            → AI Council
+   - Full orchestration    → Claude Code (if available)
+
+Q: "Where do I find...?"
+A:
+   - Current context       → .ai-context/session-entry.yaml
+   - Architecture          → This file (visual-map.txt)
+   - Pending tasks         → knowledge-base.yaml
+   - System issues         → docs/SYSTEM_TEST_RESULTS.md
+   - Placeholders          → Reports/PLACEHOLDER_INVESTIGATION.md
+   - Agent capabilities    → config/agent_registry.yaml
+
+Q: "What file should I edit for...?"
+A:
+   - MCP server logic      → mcp_server/main.py
+   - Claude integration    → config/claude_code_bridge.py
+   - AI Council config     → config/ai_council.py
+   - Agent orchestration   → config/multi_agent_session.py
+   - Task tracking         → knowledge-base.yaml
+   - Documentation         → docs/
+
+═══════════════════════════════════════════════════════════════════════════
+                    📝 NAVIGATION PROTOCOL
+═══════════════════════════════════════════════════════════════════════════
+
+On Session Start (3-Minute Protocol):
+   1. [30s] Read .ai-context/session-entry.yaml
+   2. [30s] Review this map (visual-map.txt)
+   3. [1m]  Check .ai-context/current-objectives.yaml
+   4. [1m]  Scan knowledge-base.yaml:tasks.pending
+   → Total: 3 minutes to full context
+
+Before Editing Any File:
+   1. Read current file contents (read_file)
+   2. Check git status for user changes
+   3. Understand context (read related files)
+   4. Make changes (replace_string_in_file)
+   5. Verify (run tests, check errors)
+
+Before Querying Another Agent:
+   1. Check agent status (config/agent_registry.yaml)
+   2. Choose communication method (MCP/file queue/AI Council)
+   3. Format message (use ΞNuSyQ protocol)
+   4. Handle response or timeout
+
+═══════════════════════════════════════════════════════════════════════════
+                    🔚 END OF VISUAL MAP
+═══════════════════════════════════════════════════════════════════════════
+
+Last updated: 2025-10-07T06:27:00
+Auto-generated: Yes (can be regenerated from system state)
+Next update: End of session or on major system changes

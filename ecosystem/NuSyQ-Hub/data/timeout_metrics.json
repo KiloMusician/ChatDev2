@@ -1,0 +1,51 @@
+{
+  "model_performance": {
+    "qwen2.5-coder:14b:game_code": {
+      "attempts": 3,
+      "successes": 0
+    },
+    "qwen2.5-coder:7b:requirements": {
+      "attempts": 3,
+      "successes": 0
+    },
+    "llama3.1:8b:documentation": {
+      "attempts": 3,
+      "successes": 0
+    },
+    "phi3.5:latest:game_code": {
+      "attempts": 2,
+      "successes": 1
+    },
+    "phi3.5:latest:requirements": {
+      "attempts": 1,
+      "successes": 1
+    },
+    "phi3.5:latest:documentation": {
+      "attempts": 2,
+      "successes": 1
+    },
+    "qwen2.5-coder:14b:code_generation": {
+      "attempts": 263,
+      "successes": 263
+    }
+  },
+  "task_performance": {},
+  "success_rate": {
+    "qwen2.5-coder:14b:game_code": 0.0,
+    "qwen2.5-coder:7b:requirements": 0.0,
+    "llama3.1:8b:documentation": 0.0,
+    "phi3.5:latest:game_code": 0.5,
+    "phi3.5:latest:requirements": 1.0,
+    "phi3.5:latest:documentation": 0.5,
+    "qwen2.5-coder:14b:code_generation": 1.0
+  },
+  "average_times": {
+    "qwen2.5-coder:14b:game_code": 13.582684366703031,
+    "qwen2.5-coder:7b:requirements": 4.78037026643753,
+    "llama3.1:8b:documentation": 7.690334546566009,
+    "phi3.5:latest:game_code": 79.36531550884246,
+    "phi3.5:latest:requirements": 26.297205448150635,
+    "phi3.5:latest:documentation": 60.98582010269165,
+    "qwen2.5-coder:14b:code_generation": 75.0
+  }
+}

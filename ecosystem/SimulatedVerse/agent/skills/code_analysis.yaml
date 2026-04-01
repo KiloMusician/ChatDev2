@@ -1,0 +1,65 @@
+name: code_analysis
+version: 1.0
+description: "Analyze code quality, detect patterns, and suggest improvements"
+
+contract:
+  inputs:
+    - name: file_path
+      type: string
+      required: true
+      description: "Path to the file to analyze"
+    - name: analysis_type
+      type: string
+      enum: ["quality", "security", "performance", "refactor"]
+      default: "quality"
+    - name: language
+      type: string
+      enum: ["typescript", "javascript", "python", "go", "rust"]
+      required: true
+
+  outputs:
+    - name: score
+      type: number
+      range: [0, 10]
+      description: "Overall quality score"
+    - name: issues
+      type: array
+      items:
+        type: object
+        properties:
+          line: { type: integer }
+          severity: { enum: ["error", "warning", "info"] }
+          message: { type: string }
+          category: { type: string }
+    - name: suggestions
+      type: array
+      items:
+        type: object
+        properties:
+          type: { enum: ["refactor", "optimize", "security", "style"] }
+          description: { type: string }
+          effort: { enum: ["low", "medium", "high"] }
+
+cost_model:
+  base_tokens: 150
+  per_line_tokens: 2
+  max_tokens: 1000
+  preferred_model: "local_primary"
+  escalate_threshold: 0.7
+
+execution:
+  method: "hybrid"
+  symbolic_first: true
+  symbolic_patterns:
+    - "syntax_validation"
+    - "basic_metrics"
+    - "import_analysis"
+  llm_patterns:
+    - "code_smell_detection"
+    - "architecture_suggestions"
+    - "security_review"
+
+cache_policy:
+  ttl_minutes: 60
+  cache_key: ["file_path", "file_hash", "analysis_type"]
+  invalidate_on: ["file_change"]

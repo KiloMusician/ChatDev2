@@ -1,0 +1,60 @@
+# SonarLint Exclusions - Standard Library, Configuration, & System Paths
+
+# This prevents SonarLint from analyzing files you can't modify or shouldn't analyze
+
+# Python Standard Library (most common issue)
+
+**/.venv/lib/python\*/**
+**/Lib/python\*/**
+**/lib/python\*/**
+**/site-packages/**
+**/dist-packages/**
+**/.pyenv/**
+
+# Windows Python Distribution Paths
+
+**/AppData/Local/Programs/Python/**
+**/AppData/Roaming/Python/**
+C:/Users/**/AppData/Local/Programs/Python/**
+C:/Users/**/AppData/Roaming/Python/**
+
+# Configuration & Data Files (not source code)
+
+**/knowledge-base.yaml
+**/_.manifest.yaml
+\*\*/_.jsonl
+**/quest_log.jsonl
+**/_.db
+\*\*/_.sqlite
+**/.env
+**/.env.\*
+
+# Node.js & npm packages
+
+**/node_modules/**
+**/npm-cache/**
+
+# Build artifacts
+
+**/build/**
+**/dist/**
+**/\*.egg-info/**
+**/**pycache**/**
+
+# Third-party dependencies
+
+**/ChatDev/**
+**/venv/**
+**/.venv/**
+
+# System & IDE files
+
+**/.git/**
+**/.github/**
+**/.idea/**
+**/.vscode/** \*_/._
+
+**/.git/**
+**/.github/**
+**/.idea/**
+**/.vscode/** \*_/._

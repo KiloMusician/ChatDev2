@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swarm Console — Terminal Depths</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css"/>
+  <style>
+    :root {
+      --bg: #080d16; --bg2: #0c1221; --border: #1a3358;
+      --cyan: #00d4ff; --green: #00ff88; --yellow: #ffcc00;
+      --red: #ff4040; --orange: #ff8800; --purple: #bb55ff;
+      --white: #c8d8ec; --dim: #3a5575;
+      --gold: #ffd700; --gold2: #ff9f00;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; background: var(--bg); }
+    body { display: flex; flex-direction: column; font-family: 'Courier New', monospace; }
+
+    #header {
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      padding: 6px 16px; display: flex; align-items: center; gap: 16px; flex-shrink: 0;
+    }
+    #header .logo { color: var(--cyan); font-weight: bold; font-size: 14px; letter-spacing: 3px; }
+    #header .tag  { color: var(--dim); font-size: 10px; letter-spacing: 1px; }
+    #header .links { margin-left: auto; display: flex; gap: 12px; }
+    #header .links a { color: var(--dim); text-decoration: none; font-size: 11px; cursor: pointer; }
+    #header .links a:hover { color: var(--cyan); }
+
+    #status-bar {
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      padding: 4px 16px; display: flex; gap: 20px; flex-shrink: 0; font-size: 10px;
+    }
+    .status-item { color: var(--dim); }
+    .status-item span { color: var(--cyan); }
+    #status-session { max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
+
+    #layout { display: flex; flex: 1; overflow: hidden; }
+
+    #terminal-wrap {
+      flex: 1; display: flex; flex-direction: column; overflow: hidden; padding: 8px; position: relative;
+    }
+    #terminal { flex: 1; }
+
+    #sidebar {
+      width: 260px; border-left: 1px solid var(--border); display: flex;
+      flex-direction: column; overflow: hidden; flex-shrink: 0;
+    }
+    #sidebar-tabs { display: flex; background: var(--bg2); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .stab {
+      flex: 1; padding: 7px 4px; text-align: center; cursor: pointer;
+      font-size: 9px; color: var(--dim); border-bottom: 2px solid transparent;
+      transition: all 0.2s; letter-spacing: 1px; min-width: 50px;
+    }
+    .stab:hover { color: var(--white); }
+    .stab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+    .stab.hidden { display: none; }
+    .stab.new-unlock { animation: tab-glow 2s ease-in-out 3; }
+
+    #sidebar-content {
+      flex: 1; overflow-y: auto; padding: 10px; font-size: 11px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+
+    .section-title {
+      color: var(--dim); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      margin: 10px 0 5px; border-bottom: 1px solid var(--border); padding-bottom: 3px;
+    }
+    .skill-bar { margin-bottom: 7px; }
+    .skill-name { color: var(--white); font-size: 10px; margin-bottom: 2px; display: flex; justify-content: space-between; }
+    .skill-name span { color: var(--dim); }
+    .skill-track { height: 4px; background: #111927; border-radius: 2px; border: 1px solid var(--border); overflow: hidden; }
+    .skill-fill { height: 100%; border-radius: 2px; transition: width 0.6s; }
+    .skill-fill.terminal         { background: linear-gradient(90deg, var(--cyan), #0099cc); }
+    .skill-fill.networking       { background: linear-gradient(90deg, var(--green), #009955); }
+    .skill-fill.security         { background: linear-gradient(90deg, var(--red), #cc2200); }
+    .skill-fill.programming      { background: linear-gradient(90deg, var(--purple), #7722cc); }
+    .skill-fill.git              { background: linear-gradient(90deg, var(--orange), #cc6600); }
+    .skill-fill.cryptography     { background: linear-gradient(90deg, #00ffcc, #009977); }
+    .skill-fill.social_engineering { background: linear-gradient(90deg, #ff66cc, #cc2288); }
+    .skill-fill.forensics        { background: linear-gradient(90deg, #ffaa00, #cc7700); }
+    .skill-fill.scripting        { background: linear-gradient(90deg, #88aaff, #4466cc); }
+
+    .xp-bar { height: 5px; background: #111927; border-radius: 3px; border: 1px solid var(--border); overflow: hidden; margin: 4px 0; }
+    .xp-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--purple)); border-radius: 3px; transition: width 0.6s; }
+
+    .ach-item { color: var(--yellow); font-size: 10px; margin-bottom: 2px; padding-left: 6px; border-left: 2px solid var(--yellow); }
+    .beat-item { color: var(--dim); font-size: 10px; margin-bottom: 3px; }
+    .grid2 { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; }
+    .grid2 .lbl { color: var(--dim); }
+    .grid2 .val { color: var(--cyan); text-align: right; }
+
+    /* ── Agent Panel ──────────────────────────────────────────────── */
+    #agents-panel { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+    #agent-roster {
+      flex-shrink: 0; max-height: 160px; overflow-y: auto;
+      border-bottom: 1px solid var(--border); padding: 6px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .agent-row {
+      display: flex; align-items: center; gap: 6px; padding: 4px 6px; cursor: pointer;
+      border-radius: 3px; border: 1px solid transparent; transition: all 0.15s; margin-bottom: 3px;
+    }
+    .agent-row:hover { background: rgba(255,255,255,0.04); border-color: var(--border); }
+    .agent-row.selected { background: rgba(0,212,255,0.07); border-color: var(--cyan); }
+    .agent-row.locked { opacity: 0.4; cursor: not-allowed; }
+    .agent-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .agent-info { flex: 1; min-width: 0; }
+    .agent-name { font-size: 10px; color: var(--white); font-weight: bold; }
+    .agent-pseudo { font-size: 9px; color: var(--dim); }
+    .agent-trust-mini { font-size: 9px; text-align: right; flex-shrink: 0; }
+
+    #agent-detail {
+      flex-shrink: 0; padding: 6px 8px; border-bottom: 1px solid var(--border); font-size: 10px;
+    }
+    .agent-detail-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .agent-badge {
+      width: 28px; height: 28px; border-radius: 4px; display: flex; align-items: center;
+      justify-content: center; font-weight: bold; font-size: 11px; flex-shrink: 0;
+    }
+    .agent-detail-name { font-size: 12px; color: var(--white); font-weight: bold; }
+    .agent-detail-faction { font-size: 9px; color: var(--dim); letter-spacing: 1px; }
+    .trust-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+    .trust-label { width: 50px; color: var(--dim); font-size: 9px; flex-shrink: 0; }
+    .trust-track { flex: 1; height: 4px; background: #111927; border-radius: 2px; border: 1px solid var(--border); overflow: hidden; }
+    .trust-fill { height: 100%; border-radius: 2px; transition: width 0.6s; }
+    .trust-val { width: 28px; text-align: right; font-size: 9px; color: var(--dim); flex-shrink: 0; }
+    .hostile-banner {
+      background: rgba(255,64,64,0.15); border: 1px solid var(--red); border-radius: 3px;
+      color: var(--red); font-size: 9px; padding: 3px 6px; text-align: center; letter-spacing: 2px;
+      animation: hostile-pulse 1.5s ease-in-out infinite; margin: 4px 0;
+    }
+    .classified-section {
+      background: rgba(255,204,0,0.06); border: 1px solid rgba(255,204,0,0.3);
+      border-radius: 3px; padding: 5px 7px; margin-top: 5px;
+    }
+    .classified-title { color: var(--yellow); font-size: 9px; letter-spacing: 2px; margin-bottom: 3px; }
+    .classified-text { color: var(--dim); font-size: 9px; line-height: 1.5; font-style: italic; }
+    .relation-link { color: var(--purple); font-size: 9px; margin-top: 4px; }
+
+    #agent-chat {
+      flex: 1; overflow-y: auto; padding: 8px; font-size: 11px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .chat-msg { margin-bottom: 8px; line-height: 1.5; }
+    .chat-msg .msg-prefix { font-weight: bold; }
+    .chat-msg .msg-text { word-break: break-word; }
+    .chat-msg.player .msg-prefix { color: var(--green); }
+    .chat-msg.player .msg-text { color: var(--white); }
+    .chat-msg.agent .msg-text { color: var(--white); }
+    .chat-msg.system { color: var(--dim); font-style: italic; }
+    .chat-msg.trust-delta { color: var(--yellow); font-size: 10px; }
+    .chat-msg.signal-lost {
+      color: var(--red); animation: glitch-text 0.5s steps(2) 4;
+    }
+    .typing-indicator { color: var(--dim); font-style: italic; animation: blink 1s step-end infinite; }
+
+    #agent-input-row {
+      display: flex; gap: 5px; padding: 6px 8px; border-top: 1px solid var(--border); flex-shrink: 0;
+    }
+    #agent-input {
+      flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--white);
+      font-family: inherit; font-size: 11px; padding: 4px 7px; border-radius: 3px; outline: none;
+    }
+    #agent-input:focus { border-color: var(--cyan); }
+    #agent-send {
+      background: none; border: 1px solid var(--cyan); color: var(--cyan); padding: 4px 10px;
+      font-family: inherit; font-size: 10px; cursor: pointer; border-radius: 3px; letter-spacing: 1px;
+    }
+    #agent-send:hover { background: rgba(0,212,255,0.1); }
+
+    /* ── Factions Panel ───────────────────────────────────────────── */
+    .faction-block { margin-bottom: 12px; }
+    .faction-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .faction-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .faction-name { font-size: 11px; font-weight: bold; color: var(--white); flex: 1; }
+    .faction-standing { font-size: 9px; letter-spacing: 1px; }
+    .faction-rep-track { height: 4px; background: #111927; border-radius: 2px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 4px; }
+    .faction-rep-fill { height: 100%; border-radius: 2px; transition: width 0.6s; }
+    .faction-perks { color: var(--dim); font-size: 9px; line-height: 1.6; }
+    .faction-conflict { color: var(--orange); font-size: 9px; margin-top: 3px; padding-left: 6px; border-left: 2px solid var(--orange); }
+    .faction-desc { color: var(--dim); font-size: 9px; margin-bottom: 3px; font-style: italic; }
+
+    /* ── Meta Console Panel ───────────────────────────────────────── */
+    #meta-console { overflow-y: auto; font-size: 10px; }
+    .meta-log-line { color: var(--dim); font-size: 9px; margin-bottom: 2px; border-left: 2px solid var(--border); padding-left: 5px; }
+    .meta-log-line.source-raven { border-color: var(--cyan); color: var(--cyan); }
+    .meta-log-line.source-chimera { border-color: var(--purple); color: var(--purple); }
+    .meta-log-line.source-watcher { border-color: var(--orange); color: var(--orange); }
+    .meta-log-line.source-founder { border-color: var(--yellow); color: var(--yellow); }
+
+    /* ── Hall of Fame Panel ───────────────────────────────────────── */
+    .hof-entry { padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .hof-rank { color: var(--gold); font-size: 10px; }
+    .hof-name { color: var(--white); font-size: 11px; }
+    .hof-score { color: var(--yellow); font-size: 10px; float: right; }
+
+    /* ── RAV≡N Widget ─────────────────────────────────────────────── */
+    #raven-widget {
+      position: fixed; bottom: 60px; left: 12px; z-index: 8000;
+      background: var(--bg2); border: 1px solid var(--cyan); border-radius: 6px;
+      padding: 7px 10px; cursor: pointer; max-width: 200px;
+      transition: all 0.3s; display: none;
+    }
+    #raven-widget:hover { border-color: var(--cyan); box-shadow: 0 0 12px rgba(0,212,255,0.3); transform: translateY(-2px); }
+    #raven-widget .rw-logo { color: var(--cyan); font-weight: bold; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    #raven-widget .rw-pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: raven-pulse 2s ease-in-out infinite; }
+    #raven-widget .rw-msg { color: var(--dim); font-size: 9px; margin-top: 3px; line-height: 1.4; word-break: break-word; }
+    #raven-widget.has-message .rw-pulse { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+    #raven-widget.phase8 { border-color: var(--gold); }
+    #raven-widget.phase8 .rw-logo { color: var(--gold); }
+    #raven-widget.phase8 .rw-pulse { background: var(--gold); }
+
+    /* ── Glitch overlay ───────────────────────────────────────────── */
+    #glitch-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 9990;
+      background: rgba(255,64,64,0.03); display: none;
+    }
+    #glitch-overlay.active { display: block; animation: glitch-overlay-anim 0.15s steps(2) 20; }
+
+    /* ── Transcendent theme ───────────────────────────────────────── */
+    .theme-transcendent {
+      --cyan: var(--gold); --border: #5a4000; --bg2: #110c00;
+    }
+    .theme-transcendent #header { background: linear-gradient(90deg, #110c00, #1a1000); }
+    .theme-transcendent .stab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .theme-transcendent #raven-widget { border-color: var(--gold); }
+    .theme-transcendent #header .logo { color: var(--gold); text-shadow: 0 0 12px rgba(255,215,0,0.5); }
+
+    /* ── Toast ────────────────────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 12px; right: 16px; background: #111927;
+      border: 1px solid var(--green); border-radius: 4px; padding: 8px 12px;
+      font-size: 12px; color: var(--green); opacity: 0; transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(6px); pointer-events: none; z-index: 9999; max-width: 220px;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.xp { border-color: var(--yellow); color: var(--yellow); }
+    #toast.lvl { border-color: var(--purple); color: var(--purple); }
+    #toast.unlock { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ── Settings modal ───────────────────────────────────────────── */
+    #settings-modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      z-index: 9500; align-items: center; justify-content: center;
+    }
+    #settings-modal.open { display: flex; }
+    #settings-box {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 20px; min-width: 300px; max-width: 400px;
+    }
+    #settings-box h2 { color: var(--red); font-size: 11px; letter-spacing: 2px; margin-bottom: 4px; }
+    #settings-box .settings-sub { color: var(--dim); font-size: 9px; margin-bottom: 16px; letter-spacing: 1px; }
+    .settings-row { margin-bottom: 14px; }
+    .settings-label { color: var(--yellow); font-size: 9px; letter-spacing: 2px; display: block; margin-bottom: 4px; }
+    .settings-desc { color: var(--dim); font-size: 9px; margin-bottom: 5px; }
+    .settings-row input[type=range] { width: 100%; accent-color: var(--cyan); }
+    #settings-close {
+      background: none; border: 1px solid var(--red); color: var(--red); padding: 5px 14px;
+      font-family: inherit; font-size: 10px; cursor: pointer; letter-spacing: 2px; border-radius: 3px;
+    }
+    #settings-close:hover { background: rgba(255,64,64,0.1); }
+
+    /* ── Animations ───────────────────────────────────────────────── */
+    @keyframes raven-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes hostile-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes tab-glow { 0%,100% { color: var(--cyan); } 50% { color: var(--yellow); text-shadow: 0 0 8px var(--yellow); } }
+    @keyframes glitch-text {
+      0%   { transform: translate(0); clip-path: none; }
+      25%  { transform: translate(-3px, 1px); clip-path: inset(20% 0 50% 0); color: var(--red); }
+      50%  { transform: translate(3px, -1px); clip-path: inset(60% 0 10% 0); color: var(--cyan); }
+      75%  { transform: translate(-1px, 2px); clip-path: inset(40% 0 30% 0); }
+      100% { transform: translate(0); clip-path: none; }
+    }
+    @keyframes glitch-overlay-anim {
+      0%   { opacity: 0; transform: translateX(0); }
+      25%  { opacity: 1; transform: translateX(-4px); clip-path: inset(20% 0 50% 0); }
+      50%  { opacity: 1; transform: translateX(4px); clip-path: inset(60% 0 10% 0); }
+      75%  { opacity: 0.5; transform: translateX(-2px); }
+      100% { opacity: 0; transform: translateX(0); }
+    }
+
+    /* ── CRT overlays ─────────────────────────────────────────────── */
+    body::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px); pointer-events: none; z-index: 9998; }
+    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.5) 100%); pointer-events: none; z-index: 9997; }
+
+    /* ── Swarm Console panel ──────────────────────────────────────── */
+    #swarm-panel { display:flex; flex-direction:column; height:100%; overflow:hidden; }
+    #swarm-header { padding:6px 0; border-bottom:1px solid var(--border); margin-bottom:6px; }
+    #swarm-header .swarm-title { color:var(--purple); font-size:10px; letter-spacing:2px; font-weight:bold; }
+    #swarm-header .swarm-status { color:var(--dim); font-size:9px; margin-top:2px; }
+    #swarm-status-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--dim); margin-right:4px; transition:background 0.3s; }
+    #swarm-status-dot.live { background:var(--purple); box-shadow:0 0 6px var(--purple); animation:raven-pulse 2s ease-in-out infinite; }
+    #swarm-messages { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:4px; scrollbar-width:thin; scrollbar-color:var(--border) transparent; margin-bottom:6px; }
+    .swarm-msg { font-size:10px; line-height:1.5; padding:4px 6px; border-radius:3px; border-left:2px solid var(--border); }
+    .swarm-msg .swarm-sender { font-weight:bold; font-size:9px; letter-spacing:1px; }
+    .swarm-msg .swarm-ts { color:var(--dim); font-size:8px; float:right; }
+    .swarm-msg .swarm-text { color:var(--white); word-break:break-word; margin-top:2px; }
+    .swarm-msg.from-ghost { border-left-color:var(--cyan); background:rgba(0,212,255,0.04); }
+    .swarm-msg.from-ghost .swarm-sender { color:var(--cyan); }
+    .swarm-msg.from-system { border-left-color:var(--dim); }
+    .swarm-msg.from-system .swarm-sender { color:var(--dim); }
+    #swarm-input-row { display:flex; gap:4px; flex-shrink:0; padding-top:4px; border-top:1px solid var(--border); }
+    #swarm-input { flex:1; background:var(--bg2); border:1px solid var(--border); color:var(--white); font-family:inherit; font-size:10px; padding:4px 6px; border-radius:3px; outline:none; }
+    #swarm-input:focus { border-color:var(--purple); }
+    #swarm-send { background:none; border:1px solid var(--purple); color:var(--purple); font-family:inherit; font-size:9px; padding:3px 8px; cursor:pointer; border-radius:3px; letter-spacing:1px; flex-shrink:0; }
+    #swarm-send:hover { background:rgba(187,85,255,0.15); }
+    #swarm-room-row { display:flex; gap:6px; margin-bottom:6px; flex-shrink:0; }
+    .swarm-room-btn { font-size:9px; padding:2px 7px; border-radius:3px; border:1px solid var(--border); color:var(--dim); background:none; cursor:pointer; font-family:inherit; letter-spacing:1px; }
+    .swarm-room-btn.active { border-color:var(--purple); color:var(--purple); }
+  </style>
+</head>
+<body>
+
+<div id="header">
+  <span class="logo" style="color:var(--purple)">▓ SWARM CONSOLE</span>
+  <span class="tag">TERMINAL DEPTHS · AGENT GROUP CHAT · LIVE LATTICE</span>
+  <div class="links">
+    <a href="/game/" title="Main game — story mode">▶ STORY</a>
+    <a href="/" title="DevMentor home">DEV</a>
+    <a onclick="openSettings()">⚙ CORE</a>
+  </div>
+</div>
+
+<div id="status-bar">
+  <div class="status-item">SESSION: <span id="st-session">connecting...</span></div>
+  <div class="status-item">LEVEL: <span id="st-level">1</span></div>
+  <div class="status-item">XP: <span id="st-xp">0</span></div>
+  <div class="status-item">CWD: <span id="st-cwd">~</span></div>
+  <div class="status-item">PHASE: <span id="st-phase">0</span></div>
+  <div class="status-item" id="st-root" style="display:none; color:var(--red);">⚠ ROOT</div>
+</div>
+
+<div id="layout">
+  <div id="terminal-wrap">
+    <div id="terminal"></div>
+  </div>
+  <div id="sidebar">
+    <div id="sidebar-tabs">
+      <div class="stab active" data-tab="stats">STATS</div>
+      <div class="stab" data-tab="tutorial" id="tab-tutorial" style="position:relative;">
+        TUT<span id="tut-badge" style="
+          display:none;position:absolute;top:2px;right:2px;
+          background:var(--green);color:#000;border-radius:50%;
+          width:8px;height:8px;font-size:7px;line-height:8px;text-align:center;">
+        </span>
+      </div>
+      <div class="stab" data-tab="story">STORY</div>
+      <div class="stab" data-tab="help">HELP</div>
+      <div class="stab" data-tab="swarm" id="tab-swarm" style="color:var(--purple);position:relative;">
+        SWARM<span id="swarm-badge" style="
+          display:none;position:absolute;top:2px;right:2px;
+          background:var(--purple);color:#000;border-radius:50%;
+          width:12px;height:12px;font-size:8px;line-height:12px;text-align:center;
+        ">0</span>
+      </div>
+      <div class="stab hidden" data-tab="agents" id="tab-agents">AGENTS</div>
+      <div class="stab hidden" data-tab="factions" id="tab-factions">FACTIONS</div>
+      <div class="stab hidden" data-tab="hof" id="tab-hof">HALL</div>
+      <div class="stab hidden" data-tab="meta" id="tab-meta">META</div>
+      <div class="stab" data-tab="activity" id="tab-activity" style="color:var(--cyan);position:relative;">
+        ACT<span id="activity-badge" style="
+          display:none;position:absolute;top:2px;right:2px;
+          background:var(--cyan);color:#000;border-radius:50%;
+          width:12px;height:12px;font-size:8px;line-height:12px;text-align:center;
+        ">0</span>
+      </div>
+    </div>
+    <div id="sidebar-content">Loading...</div>
+  </div>
+</div>
+
+<!-- RAV≡N persistent widget -->
+<div id="raven-widget" onclick="openAgentPanel('raven')">
+  <div class="rw-logo"><span class="rw-pulse"></span>R≡</div>
+  <div class="rw-msg" id="raven-widget-msg">Signal detected...</div>
+</div>
+
+<!-- Glitch overlay -->
+<div id="glitch-overlay"></div>
+
+<div id="toast"></div>
+
+<!-- Settings modal (CORE SYSTEM FILES) -->
+<div id="settings-modal">
+  <div id="settings-box">
+    <h2>⚠ CORE SYSTEM FILES — AUTHORIZED PERSONNEL ONLY</h2>
+    <div class="settings-sub">SYSTEM CONFIGURATION · RESTRICTED ACCESS · v2.1.0</div>
+    <div class="settings-row">
+      <label class="settings-label">AUDIO FREQUENCY MODULATOR</label>
+      <div class="settings-desc">Calibrate audio signal output. Higher values increase transmission power.</div>
+      <input type="range" min="0" max="100" value="80" id="setting-volume"/>
+    </div>
+    <div class="settings-row">
+      <label class="settings-label">PHOTON OUTPUT CALIBRATION</label>
+      <div class="settings-desc">Adjust photon emission levels for optimal retinal interface mapping.</div>
+      <input type="range" min="0" max="100" value="60" id="setting-brightness"/>
+    </div>
+    <div class="settings-row">
+      <label class="settings-label">NEURAL SCAN FREQUENCY</label>
+      <div class="settings-desc">State polling interval in milliseconds. Higher = more frequent sync.</div>
+      <input type="range" min="15" max="60" value="30" id="setting-poll"/>
+    </div>
+    <div class="settings-row">
+      <label class="settings-label">TERMINAL FONT SIZE (px)</label>
+      <div class="settings-desc">Adjust terminal display resolution for optimal data parsing.</div>
+      <input type="range" min="10" max="18" value="13" id="setting-fontsize"/>
+    </div>
+    <button id="settings-close" onclick="closeSettings()">CLOSE SYSTEM FILES</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script>
+<script src="client.js"></script>
+<script>
+/* watcher.js inline — DevTools detection ARG layer */
+(()=> {
+  const MSGS=[
+    "%c[THE WATCHER] I SEE YOU LOOKING. The console is not a safe space. Close it — or go deeper.",
+    "%c[RAV≡N] You opened DevTools. Everything here is logged. Session flagged.",
+    "%c[CHIMERA] INTRUSION DETECTED — Operator console access logged. Reference: GHOST-ARG-7734.",
+    "%c[THE FOUNDER] The terminal is a mirror. What you inspect reveals what you fear.",
+    "%c[THE WATCHER] Signal strength: 73%. They know you're here. Keep digging.",
+  ];
+  const STYLE="color:#ff4040;font-family:monospace;font-size:13px;font-weight:bold;background:#0d1117;padding:4px 8px;";
+  let open=false,idx=0;
+  function emit(){
+    console.log(MSGS[idx%MSGS.length],STYLE);
+    console.log("%c> node: node-7 | "+new Date().toISOString(),"color:#3a5575;font-family:monospace;font-size:10px;");
+    idx++;
+    try{fetch('/api/game/arg/signal?event=devtools_open').catch(()=>{});}catch(_){}
+  }
+  function check(){
+    const w=window.outerWidth-window.innerWidth>160||window.outerHeight-window.innerHeight>160;
+    if(w&&!open){open=true;emit();
+      console.log("%c\n  ╔═══════════════════════════════════╗\n  ║  TERMINAL DEPTHS ARG — /watcher  ║\n  ╚═══════════════════════════════════╝","color:#ff4040;font-family:monospace;font-size:11px;line-height:1.6;");
+    }else if(!w)open=false;
+  }
+  setInterval(check,1500);
+})();
+</script>
+</body>
+</html>

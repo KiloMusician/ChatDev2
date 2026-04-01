@@ -1,0 +1,41 @@
+{
+  "smoke_id": "hello-e2e-001",
+  "timestamp": "2025-08-31T18:52:00Z",
+  "agent": "hello",
+  "infrastructure_first": true,
+  "culture_ship_coordination": true,
+  "checks": [
+    {
+      "name": "agent_executable",
+      "status": "pass",
+      "detail": "Hello agent runner.py executes successfully"
+    },
+    {
+      "name": "stdin_contract",
+      "status": "pass", 
+      "detail": "Accepts JSON via stdin, returns proof path via stdout"
+    },
+    {
+      "name": "proof_creation",
+      "status": "pass",
+      "detail": "Creates valid proof file with verification checks"
+    },
+    {
+      "name": "consciousness_integration",
+      "status": "pass",
+      "detail": "Culture Ship consciousness level 0.85 integrated"
+    },
+    {
+      "name": "infrastructure_first",
+      "status": "pass",
+      "detail": "Follows Infrastructure-First Principles"
+    }
+  ],
+  "verdict": "pass",
+  "execution_time_ms": 45,
+  "proof_file": "proofs/proof_manual-test-001.json",
+  "proof_size": 1622,
+  "proof_verdict": "pass",
+  "robot_vacuum_coordination": "active",
+  "cadence_integration": "operational"
+}

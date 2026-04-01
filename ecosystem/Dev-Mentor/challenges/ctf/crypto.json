@@ -1,0 +1,46 @@
+[
+  {
+    "id": "crypto_01",
+    "title": "Caesar's Secret",
+    "category": "Crypto",
+    "difficulty": "easy",
+    "description": "An intercepted NexusCorp transmission reads: `JHLZHY PZUVA ZLJBYL`. The message was encoded with a simple Caesar cipher. Shift value was noted as ROT-7. Decode the message.",
+    "solution": "CAESAR ISNOT SECURE",
+    "hint": "ROT-7 means shift each letter back by 7 positions in the alphabet.",
+    "xp": 30,
+    "tags": ["crypto", "caesar", "classical", "easy"]
+  },
+  {
+    "id": "crypto_02",
+    "title": "Base64 Decoder",
+    "category": "Crypto",
+    "difficulty": "easy",
+    "description": "A hidden file on the CHIMERA node contains an encoded string: `Q0hJTUVSQS1LRVk6IEFscGhhLTg0Ny1YWVo=`. Decode it to find the embedded key.",
+    "solution": "CHIMERA-KEY: Alpha-847-XYZ",
+    "hint": "This is standard base64 encoding. Use `echo '<string>' | base64 -d` to decode.",
+    "xp": 25,
+    "tags": ["crypto", "base64", "encoding", "easy"]
+  },
+  {
+    "id": "crypto_03",
+    "title": "XOR Master",
+    "category": "Crypto",
+    "difficulty": "medium",
+    "description": "A file has been XOR-encrypted with a single-byte key. The ciphertext hex is: `1b 37 37 33 31 36 3f 78 3e 27 33 34 36 3e 7f 3e`. Known plaintext: the message starts with 'Cooking'. Recover the key byte.",
+    "solution": "0x7b",
+    "hint": "XOR the first byte of ciphertext (0x1b) with the first byte of known plaintext 'C' (0x43). The result is your key.",
+    "xp": 85,
+    "tags": ["crypto", "xor", "known-plaintext", "medium"]
+  },
+  {
+    "id": "crypto_04",
+    "title": "Hash Collision",
+    "category": "Crypto",
+    "difficulty": "hard",
+    "description": "The NexusCorp password database stores MD5 hashes. The hash `5f4dcc3b5aa765d61d8327deb882cf99` was found for an admin account. Use your knowledge of common password hashes to identify the plaintext password.",
+    "solution": "password",
+    "hint": "This is one of the most common MD5 hashes ever seen. It's for a very obvious password.",
+    "xp": 130,
+    "tags": ["crypto", "hash", "md5", "hard"]
+  }
+]

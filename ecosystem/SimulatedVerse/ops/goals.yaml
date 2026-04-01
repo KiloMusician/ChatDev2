@@ -1,0 +1,95 @@
+version: 1
+horizons:
+
+  short_term:
+    - id: "st.001.errors.zero"
+      title: "Drive visible errors/warnings to 0"
+      scope: "repo+ui"
+      done_when:
+        ui_console_errors: 0
+        server_error_rate_per_min: 0
+        typecheck_errors: 0
+        lint_errors: 0
+        lsp_diagnostics: 0
+      artifacts:
+        - "reports/errors.json"
+        - "reports/ui_console.ndjson"
+        - "reports/lint.json"
+        - "reports/typecheck.json"
+        - "reports/lsp_diagnostics.json"
+
+    - id: "st.002.ui.stale.under.60s"
+      title: "UI provision freshness < 60s"
+      scope: "provisioner+ui"
+      done_when:
+        provision_timestamp_skew_sec_max: 60
+        build_id_current: true
+        ui_actually_loads: true
+      artifacts:
+        - "public/system-status.json"
+        - "reports/provision_freshness.json"
+        - "reports/ui_build_status.json"
+
+    - id: "st.003.theater.eliminated"
+      title: "Eliminate sophisticated theater (placeholders, hardcoded, TODOs)"
+      scope: "codebase"
+      done_when:
+        placeholder_count: 0
+        todo_fixme_count: 0
+        hardcoded_errors: 0
+        pass_statements: 0
+      artifacts:
+        - "reports/theater_audit.json"
+        - "reports/placeholder_scan.json"
+
+  medium_term:
+    - id: "mt.010.godot.bridge.operational"
+      title: "Godot bridge fully operational with real connections"
+      scope: "integration"
+      done_when:
+        godot_bridge_clients: ">=1"
+        translator_service_up: true
+        real_scene_loading: true
+        osc_data_flowing: true
+      artifacts:
+        - "reports/godot_bridge_status.json"
+        - "reports/translator_health.json"
+        - "yap_archive/qgl/godot_*"
+
+    - id: "mt.011.agents.productive"
+      title: "ChatDev agents producing measurable artifacts"
+      scope: "agents"
+      done_when:
+        agent_artifacts_per_hour: ">=3"
+        real_code_changes: true
+        qgl_receipts_flowing: true
+        agent_decision_loops: true
+      artifacts:
+        - "reports/agent_productivity.json"
+        - "yap_archive/qgl/agent_*"
+
+  long_term:
+    - id: "lt.100.autonomous.development"
+      title: "Truly autonomous development (works without human messages)"
+      scope: "system"
+      done_when:
+        autonomous_uptime_hours: 24
+        tasks_completed_without_human: ">=10"
+        error_recovery_rate: ">=0.90"
+        system_health_sustained: true
+      artifacts:
+        - "reports/autonomy_metrics.json"
+        - "reports/uptime_log.json"
+
+    - id: "lt.200.quadpartite.synergy"
+      title: "All four pillars working in harmony"
+      scope: "ecosystem"
+      done_when:
+        system_repo_stable: true
+        ui_responsive_realtime: true
+        simulation_active: true
+        godot_integration_seamless: true
+        cross_pillar_data_flow: true
+      artifacts:
+        - "reports/pillar_health.json"
+        - "reports/data_flow_map.json"

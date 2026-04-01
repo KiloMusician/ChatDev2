@@ -1,0 +1,427 @@
+{
+  "generated_at": "2026-03-31T09:37:47Z",
+  "updated_at": "2026-03-31T09:37:47Z",
+  "generator_version": "rosetta-bootstrap-v1",
+  "stale_after_seconds": 21600,
+  "source_paths": [
+    "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md",
+    "/mnt/c/Users/keath/NuSyQ/config/control_plane_manifest.json",
+    "/mnt/c/Users/keath/NuSyQ/state/reports/control_plane_snapshot.json",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension/package.json",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/extensions/agent-dashboard/package.json",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/integration/vscode_extension/package.json",
+    "/mnt/c/Users/keath/Dev-Mentor/.vscode/tasks.json"
+  ],
+  "source_hashes": {
+    "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md": "06e7e311c2627057804a6863eb7c5d23045c9ad1a715721ace28df1b69b6c3cc",
+    "/mnt/c/Users/keath/NuSyQ/config/control_plane_manifest.json": "3bd562ed9e5ed822837a02c3cf458679e12c5d5275b18b3b86ce0c33fa6e61b5",
+    "/mnt/c/Users/keath/NuSyQ/state/reports/control_plane_snapshot.json": "8e03a230d5a661fbe97f5f0ffc0a2496244665afc5cf2c50d4c3db567d340fc7",
+    "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json": "cf9e2ba5f5ca9aae15e0a9569d0691873a89e3a2fc506022100ea9ae8f26b68c",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension/package.json": "81772e18e26e80436b5f46f0bfed0d00e69b80c36c82b82f83d2118271c97bdf",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/extensions/agent-dashboard/package.json": "96ca82ef58c2f15f5b18173fa1c0e26689ca4f1da5df24af3031ed977cdf0a38",
+    "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/integration/vscode_extension/package.json": "08722b0c13877fee8d45394914c4de223a166611804bd76d666e795c28e9a537",
+    "/mnt/c/Users/keath/Dev-Mentor/.vscode/tasks.json": "3290c6999a451ef5f631f91d329d2211e21d48353a67db99795dcb4f854a68f5"
+  },
+  "repos": {
+    "concept": {
+      "path": "/mnt/c/CONCEPT",
+      "role": "kernel",
+      "priority": 1,
+      "authority": "machine-governance"
+    },
+    "dev_mentor": {
+      "path": "/mnt/c/Users/keath/Dev-Mentor",
+      "role": "developer_intelligence",
+      "priority": 2,
+      "authority": "workflow_and_guidance"
+    },
+    "simulatedverse": {
+      "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse",
+      "role": "simulation_runtime",
+      "priority": 3,
+      "authority": "culture_ship_runtime_owner"
+    },
+    "nusyq_hub": {
+      "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub",
+      "role": "control_plane",
+      "priority": 4,
+      "authority": "culture_ship_control_owner"
+    },
+    "nusyq": {
+      "path": "/mnt/c/Users/keath/NuSyQ",
+      "role": "rosetta_bundle",
+      "priority": 5,
+      "authority": "distributed_memory_and_bootstrap"
+    }
+  },
+  "roles": {
+    "concept": "kernel",
+    "dev_mentor": "developer_intelligence",
+    "simulatedverse": "simulation_runtime",
+    "nusyq_hub": "control_plane",
+    "nusyq": "rosetta_bundle"
+  },
+  "agents": {
+    "serena": {
+      "role": "refactor_and_structure"
+    },
+    "gordon": {
+      "role": "execution_and_orchestration"
+    },
+    "chatdev": {
+      "role": "multi_agent_generation"
+    },
+    "copilot": {
+      "role": "inline_coding"
+    },
+    "ollama": {
+      "role": "local_reasoning"
+    },
+    "lm_studio": {
+      "role": "local_openai_compatible_models"
+    }
+  },
+  "services": {
+    "dev_mentor": {
+      "health_url": "http://127.0.0.1:7337/api/health",
+      "port": 7337
+    },
+    "simulatedverse": {
+      "health_url": "http://127.0.0.1:5002/api/health",
+      "port": 5002
+    },
+    "chatdev_adapter": {
+      "health_url": "http://127.0.0.1:4466/chatdev/agents",
+      "port": 4466
+    },
+    "ollama": {
+      "health_url": "http://127.0.0.1:11434/api/tags",
+      "port": 11434
+    },
+    "lm_studio": {
+      "health_url": "http://127.0.0.1:1234/v1/models",
+      "port": 1234
+    },
+    "gitnexus": {
+      "health_url": "http://127.0.0.1:8000/api/gitnexus/health",
+      "port": 8000
+    }
+  },
+  "bridges": {
+    "keeper_mcp": "C:/CONCEPT/tools/keeper-mcp.ps1",
+    "gitnexus": "/api/gitnexus/matrix",
+    "nogic": "NuSyQ-Hub visualization surface",
+    "chatdev_adapter": "http://127.0.0.1:4466/chatdev/agents"
+  },
+  "extensions": {
+    "canonical": {
+      "path": "NuSyQ-Hub/src/vscode_mediator_extension",
+      "commands": [
+        "powershellMediator.start",
+        "powershellMediator.stop",
+        "powershellMediator.openReports",
+        "powershellMediator.listOllamaModels",
+        "powershellMediator.runChatDevTask",
+        "powershellMediator.refreshDiagnosticsSnapshot",
+        "powershellMediator.openDiagnosticsDashboard",
+        "powershellMediator.openCapabilityCockpit"
+      ],
+      "settings": [
+        "powershellMediator.additionalCapabilities",
+        "powershellMediator.autoRefreshDiagnosticsSnapshotOnSave",
+        "powershellMediator.autoRefreshLanguageIds",
+        "powershellMediator.diagnosticsSnapshotDebounceMs",
+        "powershellMediator.lmStudioBaseUrl",
+        "powershellMediator.ollamaBaseUrl",
+        "powershellMediator.openClawHealthUrl"
+      ]
+    },
+    "supporting": {
+      "agent_dashboard": [
+        "agentDashboard.open",
+        "agentDashboard.refresh",
+        "agentDashboard.runErrorReport"
+      ],
+      "chatdev_vscode_extension": [
+        "startChatDevParty",
+        "launchChatDevTask"
+      ]
+    },
+    "legacy_dashboard_folded_in": true
+  },
+  "commands": {
+    "keeper_preflight": [
+      "keeper_snapshot",
+      "keeper_score",
+      "keeper_advisor",
+      "keeper_think"
+    ],
+    "bootstrap": [
+      "python scripts/build_rosetta_bootstrap.py"
+    ],
+    "snapshot": [
+      "python scripts/build_control_plane_snapshot.py"
+    ],
+    "culture_ship_runtime": [
+      "python scripts/export_culture_ship_runtime_descriptor.py"
+    ],
+    "quest_log_rotation": [
+      "python ops/rotate_shared_quest_log.py"
+    ],
+    "archive_index": [
+      "python scripts/index_obsolete_current_state_archives.py"
+    ]
+  },
+  "tasks": {
+    "boot": "load bootstrap, registry, snapshot, then focused feeds",
+    "doctor": "refresh snapshot before broad diagnostics",
+    "culture_ship": "use dual-authority model",
+    "dev_mentor_vscode": {
+      "path": "/mnt/c/Users/keath/Dev-Mentor/.vscode/tasks.json",
+      "count": 57,
+      "sample": [
+        "\ud83d\ude80 Bootstrap: Full (Services + CLI)",
+        "\ud83c\udfae Bootstrap: Services Only",
+        "\ud83d\udcbb Bootstrap: CLI Client",
+        "\ud83d\uded1 Shutdown",
+        "\ud83d\udcca Docker: Status",
+        "DevMentor: Start/Resume",
+        "DevMentor: Next Step",
+        "DevMentor: Diagnose Environment",
+        "DevMentor: Validate Current Challenge",
+        "DevMentor: Export Portable ZIP",
+        "DevMentor: Import Portable ZIP",
+        "TD: Enter Terminal Depths"
+      ]
+    }
+  },
+  "dashboards": {
+    "canonical_cockpit": "NuSyQ mediator capability cockpit",
+    "supporting": [
+      "NuSyQ diagnostics dashboard"
+    ]
+  },
+  "storage": {
+    "surfaces": {
+      "rosetta_quest_log": {
+        "owner": "nusyq",
+        "label": "Rosetta Quest Ledger",
+        "path": "/mnt/c/Users/keath/NuSyQ/src/Rosetta_Quest_System/quest_log.jsonl",
+        "kind": "jsonl_ledger",
+        "authority": "append-only canonical memory",
+        "note": "Primary continuity ledger for cross-session discoveries and task breadcrumbs.",
+        "exists": true,
+        "size_bytes": 774,
+        "updated_at": "2026-03-31T09:23:13Z"
+      },
+      "event_ledgers": {
+        "owner": "nusyq",
+        "label": "NuSyQ Event Ledgers",
+        "path": "/mnt/c/Users/keath/NuSyQ/Reports/events",
+        "kind": "jsonl_event_directory",
+        "authority": "supporting event archive",
+        "note": "Historical event streams and operational traces.",
+        "exists": true,
+        "size_bytes": null,
+        "updated_at": "2026-03-29T14:04:17Z"
+      },
+      "hub_ecosystem_status": {
+        "owner": "nusyq_hub",
+        "label": "Hub Ecosystem Status",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/ecosystem_status.json",
+        "kind": "json_status",
+        "authority": "supporting status artifact",
+        "note": "Legacy-supporting ecosystem status surface still referenced by operator flows.",
+        "exists": true,
+        "size_bytes": 4835,
+        "updated_at": "2026-03-29T14:48:55Z"
+      },
+      "hub_startup_log": {
+        "owner": "nusyq_hub",
+        "label": "Hub Startup Log",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/config/startup_log.jsonl",
+        "kind": "jsonl_log",
+        "authority": "supporting startup trace",
+        "note": "Startup/session trace for Hub-side activation and orchestration.",
+        "exists": true,
+        "size_bytes": 3064,
+        "updated_at": "2026-03-29T14:48:51Z"
+      },
+      "hub_archive_index": {
+        "owner": "nusyq_hub",
+        "label": "Obsolete Current State Archive Index",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_index.json",
+        "kind": "json_index",
+        "authority": "generated canonical archive summary",
+        "note": "Canonical compact index for obsolete current_state archives.",
+        "exists": true,
+        "size_bytes": 4486,
+        "updated_at": "2026-03-31T09:36:43Z"
+      },
+      "hub_archive_summary": {
+        "owner": "nusyq_hub",
+        "label": "Obsolete Current State Archive Summary",
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_summary.md",
+        "kind": "markdown_summary",
+        "authority": "generated canonical archive summary",
+        "note": "Human-readable summary for obsolete current_state archives.",
+        "exists": true,
+        "size_bytes": 1297,
+        "updated_at": "2026-03-31T09:36:43Z"
+      },
+      "dev_mentor_memory_db": {
+        "owner": "dev_mentor",
+        "label": "Dev-Mentor Memory DB",
+        "path": "/mnt/c/Users/keath/Dev-Mentor/var/memory.db",
+        "kind": "sqlite_db",
+        "authority": "repo-local runtime memory",
+        "note": "Dev-Mentor local memory/state database.",
+        "exists": true,
+        "size_bytes": 20480,
+        "updated_at": "2026-03-25T06:12:24Z"
+      },
+      "simulatedverse_cache_db": {
+        "owner": "simulatedverse",
+        "label": "SimulatedVerse ZTP Cache",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/ztp_cache.sqlite3",
+        "kind": "sqlite_db",
+        "authority": "runtime cache",
+        "note": "Simulation/runtime-side cache database.",
+        "exists": true,
+        "size_bytes": 12288,
+        "updated_at": "2026-03-31T00:31:27Z"
+      },
+      "simulatedverse_quest_rotation_status": {
+        "owner": "simulatedverse",
+        "label": "Shared Quest Rotation Status",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log_rotation_status.json",
+        "kind": "json_status",
+        "authority": "generated maintenance status",
+        "note": "Latest shared quest rotation recommendation or receipt.",
+        "exists": true,
+        "size_bytes": 740,
+        "updated_at": "2026-03-31T09:34:48Z"
+      },
+      "simulatedverse_quest_rotation_policy": {
+        "owner": "simulatedverse",
+        "label": "Shared Quest Rotation Policy",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/QUEST_LOG_ROTATION_POLICY.md",
+        "kind": "markdown_policy",
+        "authority": "hand-authored operational policy",
+        "note": "Canonical policy for rotating the shared cultivation quest log.",
+        "exists": true,
+        "size_bytes": 949,
+        "updated_at": "2026-03-31T09:31:53Z"
+      },
+      "simulatedverse_shared_quest_log": {
+        "owner": "simulatedverse",
+        "label": "SimulatedVerse Shared Quest Log",
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log.jsonl",
+        "kind": "jsonl_ledger",
+        "authority": "supporting runtime ledger",
+        "note": "Runtime-adjacent shared cultivation quest trail.",
+        "exists": true,
+        "size_bytes": 19973683,
+        "updated_at": "2026-03-31T00:30:37Z"
+      }
+    },
+    "legacy_current_state_archives": {
+      "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/archive/obsolete",
+      "count": 85,
+      "sample": [
+        "current_state_2025-12-24_013146.md",
+        "current_state_2025-12-24_013306.md",
+        "current_state_2025-12-24_022614.md",
+        "current_state_2025-12-24_023141.md",
+        "current_state_2025-12-24_023517.md"
+      ]
+    }
+  },
+  "ports": {
+    "dev_mentor": 7337,
+    "simulatedverse": 5002,
+    "chatdev_adapter": 4466,
+    "ollama": 11434,
+    "lm_studio": 1234,
+    "gitnexus": 8000
+  },
+  "artifacts": {
+    "rosetta_contract": "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md",
+    "control_plane_manifest": "/mnt/c/Users/keath/NuSyQ/config/control_plane_manifest.json",
+    "control_plane_snapshot": "/mnt/c/Users/keath/NuSyQ/state/reports/control_plane_snapshot.json",
+    "culture_ship_runtime_descriptor": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json",
+    "quest_log_rotation_status": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/quest_log_rotation_status.json",
+    "quest_log_rotation_policy": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/shared_cultivation/QUEST_LOG_ROTATION_POLICY.md",
+    "archive_index": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_index.json",
+    "archive_summary": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/state/reports/obsolete_current_state_archive_summary.md",
+    "quest_log": "/mnt/c/Users/keath/NuSyQ/src/Rosetta_Quest_System/quest_log.jsonl",
+    "deprecations": "/mnt/c/Users/keath/NuSyQ/state/deprecation_registry.json"
+  },
+  "workflows": {
+    "read_precedence": [
+      "state/boot/rosetta_bootstrap.json",
+      "state/registry.json",
+      "state/reports/control_plane_snapshot.json",
+      "focused feeds",
+      "docs fallback"
+    ],
+    "culture_ship": {
+      "runtime_owner": "simulatedverse",
+      "control_owner": "nusyq_hub"
+    }
+  },
+  "deprecated": {
+    "docs": [
+      {
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/CULTURE_SHIP_OPERATIONAL.md",
+        "reason": "Legacy single-owner Culture Ship framing; prefer structured dual-authority artifacts.",
+        "replacement": "/mnt/c/Users/keath/NuSyQ/docs/ROSETTA_STONE.md"
+      }
+    ],
+    "extensions": [
+      {
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/extensions/agent-dashboard",
+        "reason": "Legacy dashboard surface; behavior is folded into the mediator cockpit.",
+        "replacement": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension"
+      },
+      {
+        "path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/integration/vscode_extension",
+        "reason": "Supporting ChatDev extension, not the canonical control-plane cockpit.",
+        "replacement": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/src/vscode_mediator_extension"
+      }
+    ],
+    "bridges": [
+      {
+        "path": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/server/router/culture-ship.ts",
+        "reason": "Legacy bridge-style Culture Ship router; keep for compatibility, but prefer the runtime descriptor and active routes.",
+        "replacement": "/mnt/c/Users/keath/Desktop/SimulatedVerse/SimulatedVerse/state/culture_ship_runtime_descriptor.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "broad_repo_scan_before_bootstrap",
+        "reason": "Superseded by structured control-plane read precedence.",
+        "replacement": "state/boot/rosetta_bootstrap.json"
+      }
+    ]
+  },
+  "control_plane": {
+    "runtime_owner": "simulatedverse",
+    "control_owner": "nusyq_hub",
+    "snapshot_status": "ready",
+    "runtime_descriptor_status": "ready",
+    "ide_surface_summary": {
+      "mediator_commands": 8,
+      "mediator_settings": 7,
+      "supporting_extension_commands": 5,
+      "dev_mentor_tasks": 57
+    },
+    "storage_summary": {
+      "tracked_surfaces": 11,
+      "existing_surfaces": 11,
+      "sqlite_dbs": 2,
+      "legacy_current_state_archives": 85
+    }
+  }
+}

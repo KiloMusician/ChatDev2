@@ -1,0 +1,89 @@
+# SAGE-PILOT Breath Cycle Orchestration
+# Micro-cycle automation with cascade hooks
+
+metadata:
+  version: "v2.0"
+  discipline: "≤8 edits / ≤400 lines per breath"
+  quadpartite_alignment: true
+
+agents:
+  sage_pilot:
+    role: "protagonist_caretaker"
+    limits: { edits: 8, lines: 400 }
+    tracks: ["A", "B", "C", "D", "E", "F"]
+  
+  librarian:
+    role: "indexer_linker_rosetta"
+    specialties: ["knowledge_management", "rosetta_harness"]
+  
+  artificer:
+    role: "code_transformation_path_rewrite"
+    specialties: ["import_rewriting", "file_moves", "godot_coherence"]
+  
+  alchemist:
+    role: "deep_merge_schema_reconcile"
+    specialties: ["duplicate_resolution", "consolidation"]
+  
+  janitor:
+    role: "hygiene_sweeps"
+    specialties: ["console_to_logger", "json_sanitize", "todo_surgery"]
+
+breaths:
+  bootstrap:
+    agent: sage_pilot
+    script: "@scripts/index_repo.ts"
+    outputs: ["SystemDev/reports/index_*.json"]
+    cascade_trigger: "always"
+  
+  consolidation:
+    agent: janitor
+    script: "@scripts/duplicate_scan.ts --mode=exact"
+    outputs: ["SystemDev/reports/dedupe_*.json"]
+    cascade_trigger: "if_files_moved>=3"
+  
+  temple_alignment:
+    agent: librarian
+    script: "@scripts/rosetta_compile.ts"
+    outputs: ["GameDev/content/data/tiers.json"]
+    cascade_trigger: "if_rosetta_changed"
+  
+  redstone_tick:
+    agent: sage_pilot
+    script: "@scripts/index_repo.ts --quick"
+    outputs: ["SystemDev/receipts/tick_*.json"]
+    cascade_trigger: "if_edits>=6"
+  
+  import_rewrite:
+    agent: artificer
+    script: "@scripts/import_rewriter.ts --apply --limit=8"
+    outputs: ["SystemDev/receipts/rewrite_*.json"]
+    cascade_trigger: "if_aliases_ready"
+  
+  deepmerge:
+    agent: alchemist
+    script: "@scripts/duplicate_scan.ts --mode=similar --threshold=0.92"
+    outputs: ["SystemDev/backlog/plans/deepmerge_*.md"]
+    cascade_trigger: "manual_approval"
+
+cascade_hooks:
+  culture_ship:
+    trigger_threshold: 6
+    conditions: ["clean_receipts", "no_errors", "progress_detected"]
+    actions: ["unlock_extra_breath", "momentum_boost"]
+  
+  zeta_protocol:
+    validation: ["idempotence_check", "reversibility_test"]
+    guards: ["no_hard_deletes", "receipt_integrity"]
+
+scheduling:
+  default_sequence: ["bootstrap", "consolidation", "redstone_tick"]
+  extended_sequence: ["bootstrap", "temple_alignment", "import_rewrite", "deepmerge", "redstone_tick"]
+  emergency_sequence: ["bootstrap", "redstone_tick"]
+
+tracks:
+  A: "foundation_infrastructure"
+  B: "consolidation_hygiene" 
+  C: "deduplication_moves"
+  D: "rosetta_integration"
+  E: "cascade_optimization"
+  F: "quadpartite_alignment"

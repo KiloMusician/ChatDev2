@@ -1,0 +1,59 @@
+#!/bin/sh
+# Pre-commit hook wrapper for cross-platform compatibility
+# Executes Python implementation using available Python interpreter
+
+HOOK_DIR="$(dirname "$0")"
+PYTHON_SCRIPT="$HOOK_DIR/pre-commit-impl.py"
+
+# Windows (MINGW64/Git Bash): find Python dynamically to avoid Windows Store stub.
+# Priority: venv > Programs/Python > py launcher > python.
+# The Windows Store Python (py launcher default on some systems) lacks project deps.
+if [ "$(uname -o 2>/dev/null)" = "Msys" ] || [ "$(uname -o 2>/dev/null)" = "Cygwin" ]; then
+    # Detect repo root relative to hook dir (handles worktrees too)
+    REPO_ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel 2>/dev/null || echo "")"
+    for win_cmd in \
+        "$REPO_ROOT/.venv/Scripts/python" \
+        "$REPO_ROOT/.venv/Scripts/python.exe" \
+        "/c/Users/$USERNAME/AppData/Local/Programs/Python/Python312/python" \
+        "/c/Users/$USERNAME/AppData/Local/Programs/Python/Python311/python" \
+        "/c/Users/$USERNAME/AppData/Local/Programs/Python/Python310/python" \
+        py python; do
+        [ -n "$win_cmd" ] || continue
+        PY_WIN="$(command -v "$win_cmd" 2>/dev/null || true)"
+        [ -z "$PY_WIN" ] && [ -x "$win_cmd" ] && PY_WIN="$win_cmd"
+        if [ -n "$PY_WIN" ]; then
+            "$PY_WIN" -c 'import sys; sys.exit(0) if sys.version_info >= (3,10) else sys.exit(2)' 2>/dev/null \
+                && exec "$PY_WIN" "$PYTHON_SCRIPT" "$@"
+        fi
+    done
+fi
+
+# Prefer specific modern Python interpreters (3.12 → 3.10), then fall back to python3/python
+# Also check common pyenv locations so hooks find pyenv-installed interpreters.
+# Require Python >= 3.10 because repo uses union types and modern syntax.
+PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
+PY_CANDIDATES=""
+if [ -d "$PYENV_ROOT" ]; then
+    PY_CANDIDATES="$PYENV_ROOT/shims/python3 $PYENV_ROOT/shims/python $PYENV_ROOT/bin/python3"
+fi
+PY_CANDIDATES="$PY_CANDIDATES python3.12 python3.11 python3.10 python3 python"
+
+for cmd in $PY_CANDIDATES; do
+    # resolve explicit paths or commands
+    if [ -x "$cmd" ]; then
+        candidate="$cmd"
+    else
+        candidate="$(command -v "$cmd" 2>/dev/null || true)"
+    fi
+
+    if [ -z "$candidate" ]; then
+        continue
+    fi
+
+    # Check that the candidate is at least 3.10
+    "$candidate" -c 'import sys; sys.exit(0) if sys.version_info >= (3,10) else sys.exit(2)' >/dev/null 2>&1 || continue
+    exec "$candidate" "$PYTHON_SCRIPT" "$@"
+done
+
+echo "❌ Python >= 3.10 not found. Install Python 3.10+ to run git hooks (apt/pyenv/homebrew)."
+exit 1

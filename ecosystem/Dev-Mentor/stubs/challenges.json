@@ -1,0 +1,7 @@
+[
+  {"title":"Recon Node-7","category":"networking","difficulty":"easy","description":"Scan Node-7 for open ports using the built-in tools.","solution":"nmap node-7","hint":"Try the nmap command","xp":25},
+  {"title":"Read the Shadow File","category":"linux","difficulty":"medium","description":"Extract credentials from the system shadow file.","solution":"cat /etc/shadow","hint":"Check /etc/ for credential stores","xp":50},
+  {"title":"Decode the Message","category":"cryptography","difficulty":"medium","description":"The Watcher left an encrypted message. Decode it with base64.","solution":"echo Y0hJTUVSQQ== | base64 -d","hint":"Try base64 decode","xp":75},
+  {"title":"Find the Hidden Flag","category":"linux","difficulty":"hard","description":"A flag is hidden in the filesystem. Locate it.","solution":"find / -name flag.txt 2>/dev/null","hint":"Use find with the right flags","xp":100},
+  {"title":"Escalate to Root","category":"privilege_escalation","difficulty":"expert","description":"You have a low-privilege shell. Gain root access.","solution":"sudo su","hint":"Check what sudo permissions you have","xp":200}
+]

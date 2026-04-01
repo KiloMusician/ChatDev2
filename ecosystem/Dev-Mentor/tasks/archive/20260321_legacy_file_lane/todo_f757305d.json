@@ -1,0 +1,12 @@
+{
+  "id": "todo_f757305d",
+  "title": "TODO: \\n\\n\"",
+  "type": "implement",
+  "details": "Source: agents/llm_agent.py:166\nCode: current = todo.read_text() if todo.exists() else \"# TODO\\n\\n\"",
+  "target": "agents/llm_agent.py",
+  "priority": 5,
+  "status": "pending",
+  "created_at": "2026-03-17T11:50:05Z",
+  "updated_at": "2026-03-17T11:50:05Z",
+  "result": ""
+}

@@ -1,0 +1,36 @@
+{
+  "id": "proof_b4916b75-870b-48b6-b5d1-859c4cd45a09",
+  "job_id": "b4916b75-870b-48b6-b5d1-859c4cd45a09",
+  "actor": "redstone",
+  "kind": "file",
+  "path": "ops/proofs/proof_b4916b75-870b-48b6-b5d1-859c4cd45a09.json",
+  "sha256": "98d8f091a5a9fabdd10c0f80b16a34ac2c644e55a72bca4a6911b75869cff938",
+  "size": 1463,
+  "created_at": "2025-09-01T21:54:03.812Z",
+  "checks": [
+    {
+      "name": "exists",
+      "ok": true
+    },
+    {
+      "name": "schema",
+      "ok": true
+    },
+    {
+      "name": "nonempty",
+      "ok": false
+    }
+  ],
+  "verdict": "fail",
+  "proof": {
+    "job_id": "b4916b75-870b-48b6-b5d1-859c4cd45a09",
+    "agent": "redstone",
+    "files": [],
+    "created_at": "2025-09-01T21:54:03.811Z",
+    "runner_exit_code": 1,
+    "runner_stdout": "",
+    "runner_stderr": "node:internal/modules/esm/get_format:189\n  throw new ERR_UNKNOWN_FILE_EXTENSION(ext, filepath);\n        ^\n\nTypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension \".ts\" for /home/runner/workspace/agents/redstone/index.ts\n    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:189:9)\n    at defaultGetFormat (node:internal/modules/esm/get_format:232:36)\n    at defaultLoad (node:internal/modules/esm/load:145:22)\n    at async ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:477:45)\n    at async ModuleJob._link (node:internal/modules/esm/module_job:110:19) {\n  code: 'ERR_UNKNOWN_FILE_EXTENSION'\n}\n\nNode.js v20.19.3\n"
+  },
+  "file_count": 0,
+  "total_bytes": 0
+}

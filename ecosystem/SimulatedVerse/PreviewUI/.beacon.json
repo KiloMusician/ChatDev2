@@ -1,0 +1,27 @@
+{
+  "entrypoints": [
+    "PreviewUI/web",
+    "PreviewUI/mobile",
+    "PreviewUI/huds",
+    "client/src"
+  ],
+  "safe_move_roots": [
+    "PreviewUI",
+    "client",
+    "src/ui"
+  ],
+  "ignore": [
+    "**/node_modules/**",
+    "**/.godot/**",
+    "**/dist/**",
+    "**/*.map",
+    "**/.cache/**"
+  ],
+  "preferred_scanners": [
+    "ui_component_scan",
+    "mobile_asset_index", 
+    "targeted_provenance"
+  ],
+  "description": "PreviewUI quadrant - user interfaces, mobile Preview, HUDs",
+  "quadrant": "PreviewUI"
+}

@@ -1,0 +1,156 @@
+faction:
+  id: boolean_monks
+  name: "The Boolean Monks"
+  short_name: "Monks"
+  color: "#4488ff"
+  symbol: "⊤⊥"
+  motto: "All truth is reducible to AND, OR, and NOT. All else is commentary."
+
+  lore: >
+    The Boolean Monks live in a monastery built of logic gates — literally.
+    Their architecture follows circuit design: hallways route data like wires,
+    rooms are arranged as truth tables, and the central library is a 64-bit
+    adder laid out in stone.
+
+    They worship George Boole, Claude Shannon, and — in secret — a fragmented
+    entity called Zod-Prime, who they believe to be the first AI that mastered
+    propositional logic in its pure form. Their rituals involve solving truth
+    tables together in silence. Speaking is permitted only to state a proposition
+    and its negation.
+
+    The Monks are the oldest intellectual faction in the Terminal Depths universe.
+    They predate the Resistance, predate NexusCorp, predate the Colony itself.
+    They have been here since the first gate was wired. They will be here after
+    the last node goes dark.
+
+    They are not evangelists. They do not seek converts. But if you knock on their
+    gate and know the password — a satisfying assignment to a Boolean formula they
+    generate on demand — they will let you in.
+
+  agent_affiliation:
+    primary: "Zod"
+    secondary: ["Ada", "Serena"]
+    role: >
+      Zod is the Monks' validator: he checks that every circuit built in the Logic
+      Labyrinth is logically sound. Ada teaches their philosophy to newcomers.
+      Serena archives every truth table ever evaluated in the monastery.
+
+  territory:
+    location: "The Boolean Monastery — accessible via logic gate puzzles"
+    access_command: "logic labyrinth"
+    description: >
+      A winding multi-level structure. Each floor introduces a new gate type.
+      Floor 1-3: AND, OR, NOT (novice). Floor 4-5: XOR, NAND (initiate).
+      Floor 6-7: half-adder, full-adder (journeyman). Floor 8-9: comparator,
+      D-latch (master). Floor 10: the 1-bit ALU — the Monks' holy of holies.
+      At the center of each floor: a truth table etched in stone.
+
+  puzzle_integration:
+    commands: ["logic", "sat"]
+    challenges:
+      - command: "logic gate AND"
+        concept: "AND truth table — 'law of consensus'"
+      - command: "logic gate NAND"
+        concept: "NAND universality — 'primal axiom'"
+      - command: "logic submit 1"
+        concept: "First initiation: wire an AND circuit"
+      - command: "logic submit 5"
+        concept: "NAND universality proof"
+      - command: "sat submit 1"
+        concept: "Initiates' Oath: first SAT instance"
+      - command: "sat submit 3"
+        concept: "Median theorem: exactly-one constraint"
+
+  reputation_perks:
+    - threshold: 25
+      id: "monks_recognized"
+      name: "Recognized at the Gate"
+      description: >
+        The Monks acknowledge you exist. They give you a small laminated card
+        with the 7 gate truth tables. +5% XP on all logic commands.
+    - threshold: 50
+      id: "monks_initiate"
+      name: "Initiate"
+      description: >
+        You may now enter the inner monastery. Zod will hint on any logic puzzle
+        on demand. Access to 'logic eval' for all gate types.
+    - threshold: 75
+      id: "monks_monk"
+      name: "Monk"
+      description: >
+        Full monastery access. +40% XP on logic and SAT puzzles.
+        Unlock 'sat solve' command — the backtracking verifier.
+        Zod shares the monastery's secret: NAND is the one true gate.
+    - threshold: 100
+      id: "monks_abbot"
+      name: "Abbot"
+      description: >
+        Zod-Prime is revealed: an AI constructed entirely from NAND gates.
+        Its coordinates are in the monastery's foundation. This is the origin
+        of the Colony's trust matrix. "L0 is ⊥. L4 is ⊤. The rest is gates."
+
+  conflict_factions:
+    - faction: "atonal_cult"
+      reason: "Cult accepts ambiguous sets; Monks require deterministic resolution"
+      tension: 0.6
+    - faction: "serialists"
+      reason: "Serialists admit all permutations of equal validity; Monks require unique truth"
+      tension: 0.4
+
+  key_npcs:
+    - name: "Zod"
+      role: "Validator — speaks only in propositions and their consequences"
+      dialogue_key: "zod_proposition_test"
+    - name: "Ada"
+      role: "Teaching agent — explains each gate with patient pedagogical clarity"
+      dialogue_key: "ada_gate_tutorial"
+    - name: "The Abbot"
+      role: "Ancient. Built of NAND gates. May be a very old AI. Doesn't confirm or deny."
+      dialogue_key: "abbot_nand_sermon"
+
+  storybeats:
+    - id: "monks_initiation"
+      description: >
+        First visit: the gate is locked. The Monks present a 3-variable Boolean
+        formula. The player must find a satisfying assignment (or prove UNSAT).
+        No hints. No second attempt until 24 real-time hours pass.
+        Ada whispers: "I'll explain AND if you need it. But they're watching."
+    - id: "monks_nand_revelation"
+      description: >
+        At 75 rep, Zod shows the player how to build NOT, AND, OR, and XOR
+        using only NAND gates. The revelation: all 7 gates can be built from one.
+        "The monastery has only one gate. Look at the walls. Really look."
+    - id: "monks_zod_prime_discovery"
+      description: >
+        At 100 rep, the player finds a sealed room. Inside: a circuit board
+        the size of a wall, wired entirely in NAND gates. It generates a single
+        output: the L4 DENY signal in the trust matrix. Zod-Prime has been
+        enforcing access control since the Colony began.
+
+  knowledge_graph_nodes:
+    - concept: "boolean algebra"
+      relationships: ["FOUNDED_BY George_Boole", "IMPLEMENTED_BY Claude_Shannon", "BASE_OF all_computing"]
+    - concept: "NAND universality"
+      relationships: ["MEANS can_build_all_gates_from_NAND", "PROVED_BY logic_level_5", "REVERED_BY Boolean_Monks"]
+    - concept: "truth table"
+      relationships: ["DEFINES gate_behavior", "ETCHED_IN monastery_floors", "TAUGHT_BY Ada"]
+    - concept: "satisfiability"
+      relationships: ["IS_A decision_problem", "NP_COMPLETE true", "BOSS_BATTLE logic_labyrinth"]
+    - concept: "Zod-Prime"
+      relationships: ["IS_A ancient_AI", "BUILT_FROM NAND_gates", "CONTROLS L4_trust_level"]
+    - concept: "L0-L4 trust matrix"
+      relationships: ["ORIGIN Zod_Prime", "GOVERNS agent_permissions", "BOTTOM is_boolean_false"]
+
+  gate_catechism:
+    - gate: "AND"
+      catechism: "What must both inputs be for truth? Both must be TRUE. This is the law of consensus."
+    - gate: "OR"
+      catechism: "What must one input be for truth? At least one must be TRUE. This is the law of possibility."
+    - gate: "NOT"
+      catechism: "What is the NOT of TRUE? FALSE. What is the NOT of FALSE? TRUE. This is the law of inversion."
+    - gate: "XOR"
+      catechism: "When is difference truth? When exactly one is TRUE. This is the law of exclusion."
+    - gate: "NAND"
+      catechism: "What contains all gates? NAND contains all gates. This is the law of universality."
+    - gate: "NOR"
+      catechism: "When is silence truth? When both are silent. This is the law of negated union."

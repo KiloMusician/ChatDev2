@@ -1,0 +1,225 @@
+{
+  "_comment": "Canonical port map for the Terminal Depths / DevMentor ecosystem.",
+  "_version": "1.0.0",
+  "_updated": "2026-03-21",
+  "_philosophy": "AI is an optional amplifier. Every port listed here must serve its function offline.",
+
+  "ports": {
+    "5100": {
+      "name":        "SimulatedVerse · Full/Degraded Runtime",
+      "service":     "simulatedverse",
+      "local_port":  5000,
+      "external":    5100,
+      "health":      "/healthz",
+      "script":      "bash scripts/simulatedverse_daemon.sh",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "KiloCore master maps host:5100 → container:5000 (host:5000 reserved by PerformanceMonitor.exe). Standalone: bash scripts/simulatedverse_daemon.sh on :5000."
+    },
+    "7337": {
+      "name":        "Terminal Depths · DevMentor API",
+      "service":     "devmentor",
+      "local_port":  7337,
+      "external":    7337,
+      "health":      "/api/health",
+      "script":      "python -m cli.devmentor serve --host 0.0.0.0 --port 7337",
+      "critical":    true,
+      "ai_required": false,
+      "note":        "Main game API in the current local/Docker stack. Replit still uses port 5000 via environment overrides."
+    },
+    "3000": {
+      "name":        "Gordon · Orchestrator / Player Agent",
+      "service":     "gordon",
+      "local_port":  3000,
+      "external":    3000,
+      "health":      "/health",
+      "script":      "python scripts/gordon_orchestrator.py --mode daemon",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Deterministic orchestration loop. Redis pub/sub. AI is bonus."
+    },
+    "3001": {
+      "name":        "Serena · ΨΞΦΩ Convergence Layer",
+      "service":     "serena",
+      "local_port":  3001,
+      "external":    3001,
+      "health":      "/health",
+      "script":      "python scripts/serena_analytics.py --daemon",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Code indexer, drift detector, alignment checker. Offline-capable."
+    },
+    "3002": {
+      "name":        "SkyClaw · Anomaly Scanner",
+      "service":     "skyclaw",
+      "local_port":  3002,
+      "external":    3002,
+      "health":      "/health",
+      "script":      "python scripts/skyclaw_scanner.py --daemon",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Filesystem + network anomaly detection. Pure deterministic logic."
+    },
+    "3003": {
+      "name":        "Culture Ship · GSV Sublime Optimization / AI Council",
+      "service":     "culture_ship",
+      "local_port":  3003,
+      "external":    3003,
+      "health":      "/health",
+      "script":      "python scripts/culture_ship.py --daemon",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Meta-controller. Ethical review. Strategic orchestration."
+    },
+    "4200": {
+      "name":        "ChatDev · Code-Gen Agent Frontend",
+      "service":     "chatdev",
+      "local_port":  4200,
+      "external":    4200,
+      "health":      "/health",
+      "script":      "python scripts/chatdev_worker.py --daemon",
+      "critical":    false,
+      "ai_required": true,
+      "note":        "Optional AI code generation. Falls back gracefully if offline."
+    },
+    "5173": {
+      "name":        "VS Code / Copilot Bridge · IDE Extension Host",
+      "service":     "vscode_bridge",
+      "local_port":  5173,
+      "external":    5173,
+      "health":      "/health",
+      "script":      null,
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Reserved for VS Code extension host / Copilot bridge integration."
+    },
+    "6000": {
+      "name":        "Ada-7 / Raven · Resistance Agents REST",
+      "service":     "resistance_agents",
+      "local_port":  6000,
+      "external":    6000,
+      "health":      "/health",
+      "script":      null,
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Reserved for Ada-7 and Raven agent HTTP interfaces."
+    },
+    "6800": {
+      "name":        "RimAPI Bridge · RimWorld → Lattice Relay",
+      "service":     "rimapi",
+      "local_port":  8765,
+      "external":    6800,
+      "health":      "/health",
+      "script":      "python scripts/rimapi_bridge.py --port 8765",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Internal port 8765. Relays RimWorld colony state to the Lattice."
+    },
+    "8000": {
+      "name":        "NuSyQ Hub · Spine / API Layer",
+      "service":     "nusyq_hub",
+      "local_port":  8000,
+      "external":    8000,
+      "health":      "/api/health",
+      "script":      "python -m src.api.main",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "NuSyQ-Hub API service. Health at /api/health (NOT /health or /healthz)."
+    },
+    "9876": {
+      "name":        "NuSyQ Bridge · Lattice Relay",
+      "service":     "nusyq_bridge",
+      "local_port":  9876,
+      "external":    9876,
+      "health":      "/readyz",
+      "script":      "python scripts/nusyq_bridge.py",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Bridge relay between Dev-Mentor and NuSyQ surfaces. Use /readyz for readiness."
+    },
+    "8008": {
+      "name":        "MCP Server · Model Context Protocol JSON-RPC 2.0",
+      "service":     "mcp",
+      "local_port":  8008,
+      "external":    8008,
+      "health":      "/health",
+      "script":      "python mcp/server.py",
+      "critical":    false,
+      "ai_required": false,
+      "note":        "JSON-RPC 2.0 tool bridge. Exposes filesystem, memory, game API."
+    },
+    "9001": {
+      "name":        "Open Router · Resilient AI Gateway",
+      "service":     "model_router",
+      "local_port":  9001,
+      "external":    9001,
+      "health":      "/health",
+      "script":      "python scripts/model_router.py",
+      "critical":    false,
+      "ai_required": true,
+      "note":        "Unified AI gateway with retries, fallbacks, circuit breakers, metrics, and optional llm_client routing."
+    },
+    "8091": {
+      "name":        "Lattice · Knowledge Store Graph API",
+      "service":     "lattice",
+      "local_port":  5000,
+      "external":    8091,
+      "health":      "/api/lattice/stats",
+      "script":      null,
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Served by main devmentor API at /api/lattice/. SQLite-backed."
+    },
+    "8099": {
+      "name":        "SQLite REST · State Inspector / DB Admin",
+      "service":     "db_admin",
+      "local_port":  8099,
+      "external":    8099,
+      "health":      "/health",
+      "script":      null,
+      "critical":    false,
+      "ai_required": false,
+      "note":        "Reserved for lightweight SQLite REST inspector."
+    },
+    "9000": {
+      "name":        "OpenWebUI / Chat Interface · RimWorld noVNC",
+      "service":     "openwebui",
+      "local_port":  9000,
+      "external":    9000,
+      "health":      "/health",
+      "script":      null,
+      "critical":    false,
+      "ai_required": true,
+      "note":        "OpenWebUI chat frontend. Also maps RimWorld noVNC when Docker active."
+    }
+  },
+
+  "offline_core": ["7337", "3000", "3001", "3002", "3003"],
+  "ai_amplifiers": ["4200", "9001", "9000"],
+  "reserved": ["5173", "6000", "8099"],
+
+  "env_vars": {
+    "TERMINAL_DEPTHS_URL": "http://localhost:7337",
+    "GORDON_GAME_API":     "http://localhost:7337",
+    "REDIS_URL":           "redis://localhost:6379",
+    "MODEL_ROUTER_PORT":   "9001",
+    "MODEL_ROUTER_URL":    "http://localhost:9001",
+    "NUSYQ_HUB_URL":       "http://localhost:8000",
+    "NUSYQ_BRIDGE_URL":    "http://localhost:9876",
+    "NUSYQ_PORT":          "9876"
+  },
+
+  "docker_env_vars": {
+    "_comment":            "Used when DOCKER_CONTEXT=kilocore-net. Container DNS names replace localhost.",
+    "TERMINAL_DEPTHS_URL": "http://dev-mentor:7337",
+    "GORDON_GAME_API":     "http://dev-mentor:7337",
+    "REDIS_URL":           "redis://kilocore-redis:6379",
+    "MODEL_ROUTER_URL":    "http://model-router:9001",
+    "NUSYQ_HUB_URL":       "http://nusyq-hub:8000",
+    "GORDON_URL":          "http://gordon:3000",
+    "SERENA_URL":          "http://serena:3001",
+    "SKYCLAW_URL":         "http://skyclaw:3002",
+    "CULTURE_SHIP_URL":    "http://culture-ship:3003",
+    "SIMULATEDVERSE_URL":  "http://simulatedverse:5000"
+  }
+}

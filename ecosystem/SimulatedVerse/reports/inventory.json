@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-01-13T22:44:00Z",
+  "scan_type": "fast_inventory",
+  "directories": {
+    "root_level": ["_reports", "adapters", "agent", "analysis", "app", "apps", "assets", "attached_assets", "bin", "bootstrap", "build", "cascade", "chatdev", "client", "clients", "colony", "config", "content", "core", "dev", "docs", "engine", "features", "game", "HouseOfLeaves", "kb", "logs", "OldestHouse", "TempleOfKnowledge"],
+    "primary_code": ["client/", "server/", "shared/", "apps/", "engine/"],
+    "documentation": ["docs/", "kb/", "TempleOfKnowledge/", "HouseOfLeaves/", "OldestHouse/"],
+    "tooling": ["agent/", "chatdev/", "cascade/", "analysis/"]
+  },
+  "key_files": {
+    "config": ["package.json", "tsconfig.json", "drizzle.config.ts", "components.json"],
+    "entry_points": ["index.html", "index.js", "boot.py", "cascade_boot.py"],
+    "mechanics": ["mechanics.yml", "qbook.yml"],
+    "documentation": ["README.md", "DEPLOYMENT.md", "replit.md"]
+  },
+  "health_status": "needs_analysis"
+}

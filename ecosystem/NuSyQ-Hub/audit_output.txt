@@ -1,0 +1,15 @@
+2025-12-25 23:21:25,015 [INFO] src.orchestration.ecosystem_activator: Γ£à Loaded 12 systems from persisted state
+2025-12-25 23:21:25,015 [INFO] src.orchestration.ecosystem_activator: ≡ƒöî Ecosystem Activator initialized
+
+================================================================================
+≡ƒöì ACTUAL VS CLAIMED CAPABILITY AUDIT
+================================================================================
+
+≡ƒôè Auditing 13 systems...
+
+2025-12-25 23:21:25,015 [INFO] src.orchestration.ecosystem_activator: ≡ƒöì Discovered 13 activatable systems
+Traceback (most recent call last):
+  File "C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\audit_capabilities.py", line 16, in <module>
+    activated = ea.activate_all_systems()
+                ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EcosystemActivator' object has no attribute 'activate_all_systems'. Did you mean: 'activate_system'?

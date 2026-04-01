@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+  "tool_count": 5,
+  "tools": [
+    {
+      "name": "run_black_formatter",
+      "description": "Run Black code formatter on generated files",
+      "category": "code_quality",
+      "allowed_roles": [
+        "Programmer",
+        "Reviewer"
+      ],
+      "allowed_environments": [
+        "development",
+        "staging"
+      ],
+      "requires_acl": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to format"
+          },
+          "line_length": {
+            "type": "integer",
+            "default": 88
+          }
+        },
+        "required": [
+          "path"
+        ]
+      }
+    },
+    {
+      "name": "run_ruff_linter",
+      "description": "Run Ruff linter and fix issues",
+      "category": "code_quality",
+      "allowed_roles": [
+        "Programmer",
+        "Reviewer"
+      ],
+      "allowed_environments": [
+        "development",
+        "staging"
+      ],
+      "requires_acl": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to lint"
+          },
+          "fix": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "required": [
+          "path"
+        ]
+      }
+    },
+    {
+      "name": "run_pytest",
+      "description": "Run pytest tests on generated code",
+      "category": "testing",
+      "allowed_roles": [
+        "Programmer",
+        "Tester"
+      ],
+      "allowed_environments": [
+        "development",
+        "staging"
+      ],
+      "requires_acl": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Test path"
+          },
+          "coverage": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "required": [
+          "path"
+        ]
+      }
+    },
+    {
+      "name": "log_to_quest_system",
+      "description": "Log ChatDev progress to quest system",
+      "category": "logging",
+      "allowed_roles": [
+        "Programmer",
+        "CEO",
+        "CTO",
+        "Reviewer"
+      ],
+      "allowed_environments": [
+        "development",
+        "staging",
+        "production"
+      ],
+      "requires_acl": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "Task identifier"
+          },
+          "progress": {
+            "type": "string",
+            "description": "Progress update"
+          },
+          "artifacts": {
+            "type": "array",
+            "description": "Generated artifacts"
+          }
+        },
+        "required": [
+          "task_id",
+          "progress"
+        ]
+      }
+    },
+    {
+      "name": "check_system_health",
+      "description": "Check Hub system health status",
+      "category": "health",
+      "allowed_roles": [
+        "CEO",
+        "CTO",
+        "Reviewer"
+      ],
+      "allowed_environments": [
+        "development",
+        "staging",
+        "production"
+      ],
+      "requires_acl": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "check_type": {
+            "type": "string",
+            "enum": [
+              "all",
+              "ollama",
+              "storage",
+              "imports"
+            ],
+            "default": "all"
+          }
+        }
+      }
+    }
+  ]
+}

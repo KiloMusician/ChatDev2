@@ -1,0 +1,64 @@
+{
+  "stage": "targeted_provenance_audit",
+  "timestamp": "2025-09-03T22:57:41.878Z",
+  "method": "strategic_directory_sampling",
+  "categories": {
+    "pkg.node": {
+      "files": 1,
+      "bytes": 10102
+    },
+    "pkg.py": {
+      "files": 0,
+      "bytes": 0
+    },
+    "pkg.godot": {
+      "files": 0,
+      "bytes": 0
+    },
+    "build": {
+      "files": 0,
+      "bytes": 0
+    },
+    "tools": {
+      "files": 0,
+      "bytes": 0
+    },
+    "ours.systemdev": {
+      "files": 15,
+      "bytes": 9668
+    },
+    "ours.chatdev": {
+      "files": 0,
+      "bytes": 0
+    },
+    "ours.gamedev": {
+      "files": 0,
+      "bytes": 0
+    },
+    "ours.previewui": {
+      "files": 0,
+      "bytes": 0
+    },
+    "ours.src": {
+      "files": 0,
+      "bytes": 0
+    }
+  },
+  "totals": {
+    "package_total": 1,
+    "build_total": 0,
+    "our_code_total": 15,
+    "tools_total": 0
+  },
+  "analysis": {
+    "package_percentage": 6,
+    "our_code_percentage": 94,
+    "bloat_percentage": 0
+  },
+  "next_hints": [
+    "Packages dominate: 1 files (6% vs our code)",
+    "Build artifacts: 0 files can be quarantined",
+    "Focus consolidation on our 15 source files",
+    "External scope is clean (0 external dependencies detected)"
+  ]
+}

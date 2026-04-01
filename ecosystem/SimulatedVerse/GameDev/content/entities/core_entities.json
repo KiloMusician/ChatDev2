@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "generator": "CoreEntityDefs",
+    "created": "2025-09-04T12:52:00Z"
+  },
+  "entities": {
+    "player": {
+      "name": "Player Character",
+      "description": "The player's avatar in the game world",
+      "sprite_key": "player",
+      "components": {
+        "Position": { "x": 0, "y": 0 },
+        "Health": { "current": 100, "max": 100 },
+        "Inventory": { "items": [], "capacity": 20 }
+      },
+      "tags": ["player", "controllable", "vital"]
+    },
+    "basic_enemy": {
+      "name": "Basic Enemy",
+      "description": "Standard hostile entity",
+      "sprite_key": "enemy_basic",
+      "components": {
+        "Health": { "current": 50, "max": 50 },
+        "AIState": { "state": "patrol" }
+      },
+      "tags": ["enemy", "hostile", "mobile"]
+    },
+    "basic_tower": {
+      "name": "Basic Tower",
+      "description": "Standard defensive structure",
+      "sprite_key": "tower_basic",
+      "components": {
+        "Health": { "current": 200, "max": 200 },
+        "Tower": {
+          "range": 100,
+          "damage": 25,
+          "fire_rate": 1.0,
+          "last_shot": 0
+        }
+      },
+      "tags": ["tower", "defensive", "static"]
+    },
+    "citizen": {
+      "name": "Colony Citizen",
+      "description": "Worker unit for colony simulation",
+      "sprite_key": "citizen",
+      "components": {
+        "Health": { "current": 100, "max": 100 },
+        "Citizen": {
+          "job": "unemployed",
+          "skill_level": 1,
+          "happiness": 50
+        },
+        "AIState": { "state": "idle" }
+      },
+      "tags": ["citizen", "worker", "mobile"]
+    },
+    "resource_node": {
+      "name": "Resource Node",
+      "description": "Harvestable resource point",
+      "sprite_key": "resource_node",
+      "components": {
+        "Inventory": {
+          "items": [{ "id": "raw_materials", "quantity": 100 }],
+          "capacity": 100
+        }
+      },
+      "tags": ["resource", "harvestable", "static"]
+    },
+    "building": {
+      "name": "Generic Building",
+      "description": "Construction project or completed building",
+      "sprite_key": "building",
+      "components": {
+        "Health": { "current": 100, "max": 100 },
+        "Buildable": {
+          "cost": { "wood": 10, "stone": 5 },
+          "build_time": 15000,
+          "progress": 0
+        }
+      },
+      "tags": ["building", "constructible", "static"]
+    }
+  }
+}

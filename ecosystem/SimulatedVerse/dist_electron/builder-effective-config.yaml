@@ -1,0 +1,17 @@
+directories:
+  output: dist_electron
+  buildResources: build
+appId: com.kilomusician.simulatedverse
+productName: SimulatedVerse
+files:
+  - filter:
+      - dist/**/*
+      - main.js
+win:
+  target:
+    - nsis
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+electronVersion: 40.1.0

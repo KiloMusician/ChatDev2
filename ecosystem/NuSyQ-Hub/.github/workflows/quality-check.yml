@@ -1,0 +1,64 @@
+# NuSyQ-Hub Quality Check Workflow - Ruff/Black/Pytest on PRs and master
+
+name: Quality Check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  quality:
+    name: Full Repository Quality Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff black pytest pytest-cov
+
+      - name: Run Ruff (lint and auto-fix)
+        run: |
+          ruff check src/ --fix --exit-zero
+          ruff check src/ --output-format=github
+
+      - name: Run Black (format check)
+        run: |
+          black src/ --check --diff --line-length=100
+
+      - name: Run pytest (quick)
+        run: |
+          pytest tests/test_unified_chatdev_bridge_contract.py tests/integration/test_terminal_api_smoke.py tests/integration/test_agent_orchestration_hub.py::test_route_task_basic tests/integration/test_agent_orchestration_hub.py::test_route_task_service_not_found tests/integration/test_agent_orchestration_hub.py::test_route_to_claude_simulated -q --tb=short --maxfail=1
+          pytest tests -q --tb=short --maxfail=5
+        env:
+          PYTHONUTF8: '1'
+          OLLAMA_BASE_URL: 'http://localhost:11434'
+
+      - name: Generate coverage report
+        if: success()
+        run: |
+          pytest tests --cov=src --cov-report=term-missing --cov-report=xml
+        continue-on-error: true
+
+      - name: Upload coverage to Codecov
+        if: success()
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-nusyq-hub
+        continue-on-error: true

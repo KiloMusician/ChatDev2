@@ -1,0 +1,17 @@
+name: Default CLI
+type: cli
+language: python
+runtime_profile: native_terminal
+description: Default CLI template for utilities.
+metadata: {}
+dependencies:
+  - click
+file_structure:
+  README.md: Project overview
+  src/main.py: CLI entry point
+  tests/test_smoke.py: Smoke test
+complexity: 3
+requires_multifile: false
+entry_point: main.py
+cli_framework: click
+packaging: pyinstaller

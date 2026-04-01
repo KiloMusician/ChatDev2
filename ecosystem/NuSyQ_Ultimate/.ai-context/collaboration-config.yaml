@@ -1,0 +1,271 @@
+# Multi-Agent Collaboration Configuration
+# Purpose: Enable intelligent workload distribution across all AI agents
+# Updated: 2025-10-07 - Multi-Agent Edition
+
+collaboration:
+  enabled: true
+  mode: "multi_agent_orchestration"  # Options: burden_sharing, parallel, consensus
+
+  # Supported agents (auto-discovered)
+  agents:
+    github_copilot:
+      type: "ide_assistant"
+      status: "always_available"
+      strengths: [investigation, small_edits, testing, reports]
+      max_concurrent: 1
+      cost: "free"
+
+    claude_code:
+      type: "cloud_assistant"
+      status: "available_via_mcp"
+      strengths: [large_refactor, architecture, deep_analysis]
+      max_concurrent: 1
+      cost: "metered"
+      cooldown_aware: true
+
+    ollama_qwen_14b:
+      type: "local_llm"
+      status: "available_local"
+      strengths: [code_generation, specialized_coding]
+      max_concurrent: 2
+      cost: "free"
+      hardware_requirements:
+        ram_gb: 16
+
+    ollama_qwen_7b:
+      type: "local_llm"
+      status: "available_local"
+      strengths: [fast_prototyping, code_completion]
+      max_concurrent: 4
+      cost: "free"
+      hardware_requirements:
+        ram_gb: 8
+
+    ollama_starcoder2:
+      type: "local_llm"
+      status: "available_local"
+      strengths: [code_generation, autocomplete]
+      max_concurrent: 2
+      cost: "free"
+      hardware_requirements:
+        ram_gb: 16
+
+    ollama_gemma2:
+      type: "local_llm"
+      status: "available_local"
+      strengths: [reasoning, architecture_planning]
+      max_concurrent: 3
+      cost: "free"
+      hardware_requirements:
+        ram_gb: 10
+
+    ollama_codellama:
+      type: "local_llm"
+      status: "available_local"
+      strengths: [code_completion, fast_tasks]
+      max_concurrent: 4
+      cost: "free"
+      hardware_requirements:
+        ram_gb: 8
+
+    chatdev_team:
+      type: "multi_agent_system"
+      status: "available_local"
+      strengths: [complex_projects, team_simulation, full_features]
+      max_concurrent: 1
+      cost: "free"
+      agents_count: 5
+
+  # Token budget management
+  token_management:
+    copilot_max_per_session: 150000  # Reserve 50k for final responses
+    claude_code_threshold: 100000     # Switch to Claude Code when hitting this
+    context_sharing: true             # Share context between agents
+
+  # Hardware capacity (auto-detected)
+  hardware:
+    cpu_cores: 32
+    ram_gb: 32
+    concurrent_7b_models: 4
+    concurrent_14b_models: 2
+    recommended_parallel_agents: 4
+  patterns:
+    investigation_then_action:
+      description: "Copilot investigates, Claude Code implements"
+      steps:
+        - agent: "copilot"
+          task: "Scan codebase, identify issues, create action plan"
+          max_tokens: 50000
+
+        - agent: "copilot"
+          task: "Prepare context document for Claude Code"
+          output: ".ai-context/claude-handoff.yaml"
+
+        - agent: "claude_code"
+          task: "Execute changes based on context document"
+          input: ".ai-context/claude-handoff.yaml"
+
+    parallel_processing:
+      description: "Both agents work simultaneously on different tasks"
+      enabled: false  # Requires MCP bidirectional messaging
+
+    consensus_review:
+      description: "Copilot proposes, Claude Code reviews, both implement"
+      enabled: true
+
+# MCP Bridge Configuration
+mcp_bridge:
+  enabled: true
+  endpoint: "http://localhost:3000/mcp"
+
+  # Methods for Copilot to call Claude Code
+  copilot_to_claude:
+    method: "submit_via_mcp"
+    payload_format:
+      query: "string"
+      context_files: "array"
+      priority: "enum[critical,high,normal,low]"
+      expected_response_type: "enum[code,analysis,review,decision]"
+
+  # Response handling
+  response_handling:
+    timeout: 300  # 5 minutes for Claude Code to respond
+    retry_on_failure: true
+    max_retries: 2
+
+# Context Sharing Protocol
+context_sharing:
+  # What Copilot shares with Claude Code
+  copilot_provides:
+    - "Investigation summary (.ai-context/investigation.yaml)"
+    - "Error catalog (get_errors() output)"
+    - "File locations and structure"
+    - "Test results and validation status"
+    - "User intent analysis"
+
+  # What Claude Code provides back
+  claude_provides:
+    - "Implemented changes (file diffs)"
+    - "Architecture decisions made"
+    - "Code quality metrics"
+    - "Recommendations for Copilot follow-up"
+
+  # Shared workspace
+  handoff_directory: ".ai-context/handoffs/"
+  format: "yaml"  # Structured data for both agents
+
+# Prompt Engineering Guidelines
+prompt_strategies:
+  copilot_to_user:
+    # Subtle hints, not ultimatums
+    suggest_claude_when:
+      - pattern: "I've identified {count} files that need changes"
+        threshold: 5
+        suggestion: "This might be a good point to hand off to Claude Code for coordinated implementation across multiple files. Would you like me to prepare a context package?"
+
+      - pattern: "Cognitive complexity is {value}"
+        threshold: 15
+        suggestion: "This function is quite complex. Claude Code might handle the refactoring more efficiently while I continue investigating other issues. Shall I prepare the handoff?"
+
+      - pattern: "Token usage: {current}/{max}"
+        threshold: 100000
+        suggestion: "I'm at {percent}% of my token budget. To maximize productivity, I could prepare a detailed context package for Claude Code to handle the implementation while I focus on testing and validation."
+
+  claude_code_prompting:
+    # When handing off to Claude Code via MCP
+    context_structure:
+      objective: "Clear, actionable goal"
+      investigation_summary: "What Copilot found"
+      file_inventory: "List of files needing changes"
+      constraints: "What to preserve, avoid, or consider"
+      success_criteria: "How to verify completion"
+      handoff_back: "What Copilot will do after Claude finishes"
+
+# AI Council Integration
+ai_council_coordination:
+  enabled: true
+
+  # When to invoke AI Council for coordination
+  invoke_when:
+    - "Claude Code and Copilot have conflicting approaches"
+    - "User requests 'council review'"
+    - "Critical architectural decision needed"
+
+  # Council members
+  participants:
+    - "claude_code_app"  # Via MCP bridge
+    - "github_copilot"   # This agent (me)
+    - "ollama_qwen_14b"  # Local reasoning
+    - "ollama_gemma_9b"  # Local alternative perspective
+
+# Graceful Integration (Not Hard-Coded)
+integration_approach:
+  philosophy: "Subtle hints, flexible collaboration, user in control"
+
+  # Instead of hard-coded checks
+  soft_checks:
+    - location: ".ai-context/current-objectives.yaml"
+      check: "Monitor token usage in agent responses"
+      action: "Suggest handoff naturally in conversation"
+
+    - location: "knowledge-base.yaml"
+      check: "Track which tasks succeeded with each agent"
+      action: "Learn optimal distribution over time"
+
+  # Adaptive learning
+  learn_from:
+    - "Which tasks Copilot completed quickly vs struggled"
+    - "Which tasks Claude Code excelled at"
+    - "User preferences (do they prefer one agent over another?)"
+    - "Time of day (Claude Code cooldowns)"
+
+# Configuration Files to Monitor
+monitor_configs:
+  - path: ".ai-context/current-objectives.yaml"
+    watch_for: ["token_usage", "complexity_indicators"]
+
+  - path: ".claude/settings.local.json"
+    watch_for: ["permissions", "capabilities"]
+
+  - path: "config/agent_registry.yaml"
+    watch_for: ["agent_availability", "rate_limits"]
+
+  - path: "knowledge-base.yaml"
+    watch_for: ["session_learnings", "successful_patterns"]
+
+# User Interface Hints
+user_messaging:
+  transparent: true  # Always be clear about what's happening
+
+  handoff_message_template: |
+    I've {action} and identified {details}.
+
+    💡 Suggestion: This looks like a good candidate for Claude Code to handle
+    because {reason}. I can prepare a detailed context package that includes:
+    - {investigation_findings}
+    - {file_locations}
+    - {recommended_approach}
+
+    Would you like me to prepare this handoff? I'll continue with
+    {copilot_next_tasks} while Claude Code works on the implementation.
+
+  progress_update_template: |
+    📊 Session Progress:
+    - Token usage: {tokens_used}/{tokens_available} ({percent}%)
+    - Tasks completed: {tasks_done}
+    - Remaining: {tasks_pending}
+
+    {suggestion_if_applicable}
+
+# Success Metrics
+track_effectiveness:
+  metrics:
+    - "Tasks completed before hitting rate limits"
+    - "Quality of Copilot → Claude Code handoffs"
+    - "User satisfaction with collaboration"
+    - "Total productive time vs cooldown time"
+
+  improvement_goals:
+    - "Increase tasks completed per session by 50%"
+    - "Reduce rate limit hits by 80%"
+    - "Achieve seamless collaboration experience"

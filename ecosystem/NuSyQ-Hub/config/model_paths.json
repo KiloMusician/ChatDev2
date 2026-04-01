@@ -1,0 +1,16 @@
+{
+  "search_dirs": [
+    "${USERPROFILE}\\.lmstudio\\models",
+    "${USERPROFILE}\\.ollama\\models",
+    "${USERPROFILE}\\.docker\\models",
+    "${USERPROFILE}\\Downloads",
+    "C:\\models",
+    "D:\\models",
+    "D:\\gguf",
+    "E:\\gguf"
+  ],
+  "lmstudio_models_dir": "${USERPROFILE}\\.lmstudio\\models",
+  "ollama_models_dir": "${USERPROFILE}\\.ollama\\models"
+  ,
+  "schedule_note": "Recommend daily discovery: python scripts/discover_and_sync_models.py --discover --query-apis --sync --apply --verbose"
+}

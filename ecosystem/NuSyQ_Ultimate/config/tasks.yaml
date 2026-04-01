@@ -1,0 +1,164 @@
+meta:
+  name: "NuSyQ VS Code Tasks Configuration"
+  version: "2.0.0"
+  description: "Flexible task definitions for development workflow"
+
+task_groups:
+  orchestration:
+    - id: "run_orchestrator"
+      label: "Run Orchestrator"
+      description: "Execute the main NuSyQ orchestration script"
+      type: "shell"
+      command: "powershell"
+      args: ["-ExecutionPolicy", "Bypass", "-File", "./NuSyQ.Orchestrator.ps1"]
+      group: "build"
+      presentation:
+        echo: true
+        reveal: "always"
+        focus: false
+        panel: "shared"
+      problem_matcher: []
+      timeout_minutes: 10
+
+  ai_ecosystem:
+    - id: "check_ollama_models"
+      label: "Check Ollama Models"
+      description: "List available Ollama models and their status"
+      type: "shell"
+      command: "ollama"
+      args: ["list"]
+      group: "test"
+      timeout_minutes: 2
+
+    - id: "ollama_health_check"
+      label: "Ollama Health Check"
+      description: "Verify Ollama service is running"
+      type: "shell"
+      command: "curl"
+      args: ["-s", "http://localhost:11434/api/tags"]
+      group: "test"
+      timeout_minutes: 1
+
+    - id: "test_ai_integration"
+      label: "Test AI Integration"
+      description: "Run AI ecosystem integration tests"
+      type: "shell"
+      command: "python"
+      args: ["-m", "pytest", "./tests/ai_integration/", "-v"]
+      group: "test"
+      depends_on: ["check_ollama_models"]
+      timeout_minutes: 5
+
+  development:
+    - id: "start_jupyter_lab"
+      label: "Start Jupyter Lab"
+      description: "Launch Jupyter Lab for interactive development"
+      type: "shell"
+      command: "jupyter"
+      args: ["lab", "./Jupyter/", "--port=8888"]
+      group: "build"
+      is_background: true
+      timeout_minutes: 1
+
+    - id: "start_mcp_server"
+      label: "Start MCP Server"
+      description: "Launch Model Context Protocol server"
+      type: "shell"
+      command: "python"
+      args: ["./mcp_server/main.py", "--port=3000"]
+      group: "build"
+      is_background: true
+      depends_on: ["check_ollama_models"]
+      timeout_minutes: 2
+
+    - id: "run_chatdev"
+      label: "Run ChatDev"
+      description: "Execute ChatDev multi-agent development"
+      type: "shell"
+      command: "python"
+      args: ["./ChatDev/run.py"]
+      group: "build"
+      working_directory: "./ChatDev"
+      timeout_minutes: 30
+
+  maintenance:
+    - id: "update_dependencies"
+      label: "Update Dependencies"
+      description: "Update Python packages and VS Code extensions"
+      type: "shell"
+      command: "powershell"
+      args: ["-Command", "pip install --upgrade -r requirements.txt; code --update-extensions"]
+      group: "build"
+      timeout_minutes: 10
+
+    - id: "clean_logs"
+      label: "Clean Logs"
+      description: "Remove old log files"
+      type: "shell"
+      command: "powershell"
+      args: ["-Command", "Get-ChildItem ./Logs/*.log | Where-Object {$_.LastWriteTime -lt (Get-Date).AddDays(-7)} | Remove-Item"]
+      group: "build"
+      timeout_minutes: 1
+
+    - id: "generate_reports"
+      label: "Generate Reports"
+      description: "Create system health and usage reports"
+      type: "shell"
+      command: "python"
+      args: ["./scripts/generate_reports.py"]
+      group: "build"
+      timeout_minutes: 5
+
+  validation:
+    - id: "validate_manifests"
+      label: "Validate Manifests"
+      description: "Check YAML configuration files for errors"
+      type: "shell"
+      command: "python"
+      args: ["-c", "import yaml; [yaml.safe_load(open(f)) for f in ['nusyq.manifest.yaml', 'knowledge-base.yaml', 'AI_Hub/ai-ecosystem.yaml']]"]
+      group: "test"
+      timeout_minutes: 1
+
+    - id: "security_scan"
+      label: "Security Scan"
+      description: "Run security checks on configuration files"
+      type: "shell"
+      command: "python"
+      args: ["./scripts/security_scan.py"]
+      group: "test"
+      timeout_minutes: 3
+
+workflows:
+  startup:
+    name: "Complete System Startup"
+    description: "Initialize entire NuSyQ ecosystem"
+    sequence:
+      - "validate_manifests"
+      - "check_ollama_models"
+      - "run_orchestrator"
+      - "start_jupyter_lab"
+      - "start_mcp_server"
+
+  development:
+    name: "Development Session"
+    description: "Start development environment"
+    sequence:
+      - "check_ollama_models"
+      - "start_jupyter_lab"
+      - "test_ai_integration"
+
+  maintenance:
+    name: "System Maintenance"
+    description: "Perform routine system maintenance"
+    sequence:
+      - "clean_logs"
+      - "update_dependencies"
+      - "generate_reports"
+      - "security_scan"
+
+configuration:
+  default_shell: "powershell"
+  parallel_execution: true
+  max_concurrent_tasks: 3
+  auto_save_on_execute: true
+  notification_on_completion: true

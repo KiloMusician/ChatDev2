@@ -1,0 +1,29 @@
+{
+  "timestamp": 1756994486976,
+  "operation": "label_backfill",
+  "files_processed": 64363,
+  "labels_assigned": 39,
+  "coverage_percentage": 0,
+  "namespace_distribution": {
+    "unknown": 64324,
+    "tools.development": 17,
+    "pkg.node": 2,
+    "ours.chatdev": 1,
+    "ours.gamedev": 1,
+    "ours.previewui": 2,
+    "ours.systemdev": 1,
+    "ours.client": 1,
+    "ours.server": 10,
+    "ours.shared": 4
+  },
+  "errors": [
+    "Failed to process .local/state/replit/agent/.repl_state.bin.kQuPq-ox3DmeijRXtdzv-~: Error: ENOENT: no such file or directory, stat '.local/state/replit/agent/.repl_state.bin.kQuPq-ox3DmeijRXtdzv-~'"
+  ],
+  "recommendations": [
+    "64324 files need manual namespace classification",
+    "253 experimental files - consider stability review",
+    "64353 files require caution for moves - use Artificer"
+  ],
+  "labels_index_location": "SystemDev/reports/labels.index.json",
+  "status": "completed_with_errors"
+}

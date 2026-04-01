@@ -1,0 +1,263 @@
+{
+  "version": "2.1.0",
+  "timestamp": "2025-12-26T07:31:17.702556",
+  "terminals": {
+    "claude": {
+      "name": "\ud83e\udd16 Claude",
+      "purpose": "Claude agent execution, analysis, code generation",
+      "routes": [
+        "claude",
+        "anthropic",
+        "sonnet",
+        "claude_code"
+      ]
+    },
+    "copilot": {
+      "name": "\ud83e\udde9 Copilot",
+      "purpose": "GitHub Copilot agent execution, suggestions, completions",
+      "routes": [
+        "copilot",
+        "github_copilot",
+        "gh_copilot",
+        "github copilot"
+      ]
+    },
+    "codex": {
+      "name": "\ud83e\udde0 Codex",
+      "purpose": "OpenAI Codex agent execution, transformations",
+      "routes": [
+        "codex",
+        "openai_codex",
+        "gpt_code",
+        "openai",
+        "gpt"
+      ]
+    },
+    "chatdev": {
+      "name": "\ud83c\udfd7\ufe0f ChatDev",
+      "purpose": "ChatDev multi-agent team coordination",
+      "routes": [
+        "chatdev",
+        "chat dev",
+        "multi_agent",
+        "software_company"
+      ]
+    },
+    "ai_council": {
+      "name": "\ud83c\udfdb\ufe0f AI Council",
+      "purpose": "AI Council deliberations and consensus runs",
+      "routes": [
+        "council",
+        "ai_council",
+        "consensus",
+        "deliberation",
+        "vote"
+      ]
+    },
+    "intermediary": {
+      "name": "\ud83d\udd17 Intermediary",
+      "purpose": "Cross-agent communication, routing, coordination",
+      "routes": [
+        "intermediary",
+        "router",
+        "bridge",
+        "coordinator",
+        "handoff"
+      ]
+    },
+    "errors": {
+      "name": "\ud83d\udd25 Errors",
+      "purpose": "Error output, exceptions, failures across all agents",
+      "routes": [
+        "error",
+        "exception",
+        "failed",
+        "stderr",
+        "traceback"
+      ]
+    },
+    "suggestions": {
+      "name": "\ud83d\udca1 Suggestions",
+      "purpose": "Next steps, recommendations from all agents",
+      "routes": [
+        "suggest",
+        "recommend",
+        "next_steps",
+        "hint",
+        "todo"
+      ]
+    },
+    "tasks": {
+      "name": "\u2705 Tasks",
+      "purpose": "Task execution, work queue, PU processing",
+      "routes": [
+        "task",
+        "pu_queue",
+        "work_queue",
+        "processing",
+        "job"
+      ]
+    },
+    "tests": {
+      "name": "\ud83e\uddea Tests",
+      "purpose": "Test execution, pytest output, coverage and test diagnostics",
+      "routes": [
+        "pytest",
+        "tests/",
+        "test suite",
+        "coverage",
+        "xfailed",
+        "xpassed",
+        "test run"
+      ]
+    },
+    "zeta": {
+      "name": "\ud83c\udfaf Zeta",
+      "purpose": "Zeta orchestration, autonomous cycles, meta-operations",
+      "routes": [
+        "zeta",
+        "autonomous",
+        "orchestrat",
+        "cycle",
+        "meta"
+      ]
+    },
+    "agents": {
+      "name": "\ud83e\udd16 Agents",
+      "purpose": "Multi-agent coordination, AI systems",
+      "routes": [
+        "agent",
+        "ai_",
+        "ollama",
+        "multi-agent"
+      ]
+    },
+    "metrics": {
+      "name": "\ud83d\udcca Metrics",
+      "purpose": "Cultivation metrics, health monitoring, dashboards",
+      "routes": [
+        "metric",
+        "health",
+        "dashboard",
+        "monitor",
+        "stats"
+      ]
+    },
+    "anomalies": {
+      "name": "\u26a1 Anomalies",
+      "purpose": "Unusual events, orphaned processes, unexpected behaviors",
+      "routes": [
+        "anomaly",
+        "orphan",
+        "unexpected",
+        "zombie",
+        "leak"
+      ]
+    },
+    "future": {
+      "name": "\ud83d\udd2e Future",
+      "purpose": "Planned features, upcoming tasks, development roadmap",
+      "routes": [
+        "future",
+        "planned",
+        "roadmap",
+        "upcoming",
+        "vision"
+      ]
+    },
+    "main": {
+      "name": "\ud83c\udfe0 Main",
+      "purpose": "Default terminal for general operations",
+      "routes": [
+        "main",
+        "default",
+        "general",
+        "snapshot",
+        "status",
+        "info"
+      ]
+    }
+  },
+  "routing_keywords": {
+    "claude": "claude",
+    "anthropic": "claude",
+    "sonnet": "claude",
+    "claude_code": "claude",
+    "copilot": "copilot",
+    "github_copilot": "copilot",
+    "gh_copilot": "copilot",
+    "github copilot": "copilot",
+    "codex": "codex",
+    "openai_codex": "codex",
+    "gpt_code": "codex",
+    "openai": "codex",
+    "gpt": "codex",
+    "chatdev": "chatdev",
+    "chat dev": "chatdev",
+    "multi_agent": "chatdev",
+    "software_company": "chatdev",
+    "council": "ai_council",
+    "ai_council": "ai_council",
+    "consensus": "ai_council",
+    "deliberation": "ai_council",
+    "vote": "ai_council",
+    "intermediary": "intermediary",
+    "router": "intermediary",
+    "bridge": "intermediary",
+    "coordinator": "intermediary",
+    "handoff": "intermediary",
+    "error": "errors",
+    "exception": "errors",
+    "failed": "errors",
+    "stderr": "errors",
+    "traceback": "errors",
+    "suggest": "suggestions",
+    "recommend": "suggestions",
+    "next_steps": "suggestions",
+    "hint": "suggestions",
+    "todo": "suggestions",
+    "task": "tasks",
+    "pu_queue": "tasks",
+    "work_queue": "tasks",
+    "processing": "tasks",
+    "job": "tasks",
+    "pytest": "tests",
+    "tests/": "tests",
+    "test suite": "tests",
+    "coverage": "tests",
+    "xfailed": "tests",
+    "xpassed": "tests",
+    "test run": "tests",
+    "zeta": "zeta",
+    "autonomous": "zeta",
+    "orchestrat": "zeta",
+    "cycle": "zeta",
+    "meta": "zeta",
+    "agent": "agents",
+    "ai_": "agents",
+    "ollama": "agents",
+    "multi-agent": "agents",
+    "metric": "metrics",
+    "health": "metrics",
+    "dashboard": "metrics",
+    "monitor": "metrics",
+    "stats": "metrics",
+    "anomaly": "anomalies",
+    "orphan": "anomalies",
+    "unexpected": "anomalies",
+    "zombie": "anomalies",
+    "leak": "anomalies",
+    "future": "future",
+    "planned": "future",
+    "roadmap": "future",
+    "upcoming": "future",
+    "vision": "future",
+    "main": "main",
+    "default": "main",
+    "general": "main",
+    "snapshot": "main",
+    "status": "main",
+    "info": "main"
+  },
+  "total_terminals": 16
+}

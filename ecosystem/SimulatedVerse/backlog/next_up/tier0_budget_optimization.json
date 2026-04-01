@@ -1,0 +1,12 @@
+{
+  "id": "tier0_budget_optimization", 
+  "type": "llm_health",
+  "priority": 2,
+  "blast_radius": "high",
+  "tier": 0,
+  "title": "Budget Manager Rate Limiting Optimization",
+  "action": "tune_rate_limits_and_fallback_chain",
+  "expected_receipt": "budget_tune.json",
+  "agent": "Alchemist",
+  "estimated_time": "3m"
+}

@@ -1,0 +1,308 @@
+{
+  "scan_root": "src",
+  "total_issues": 48,
+  "summary": {
+    "placeholder": 8,
+    "hardcoded": 22,
+    "deprecated": 4,
+    "incomplete": 14
+  },
+  "issues": {
+    "placeholder": [
+      {
+        "file": "analysis\\comprehensive_repository_analyzer.py",
+        "line": 283,
+        "content": "\"pass  # TODO\",",
+        "pattern": "pass\\s*#\\s*TODO"
+      },
+      {
+        "file": "diagnostics\\quick_system_analyzer.py",
+        "line": 121,
+        "content": "\"pass  # TODO\",",
+        "pattern": "pass\\s*#\\s*TODO"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 43,
+        "content": "r\"raise NotImplementedError\",",
+        "pattern": "raise NotImplementedError"
+      },
+      {
+        "file": "integration\\boss_rush_bridge.py",
+        "line": 276,
+        "content": "# TODO: Implement actual parsing",
+        "pattern": "TODO[\\s:]*implement"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\kilo_ai_orchestration_master.py",
+        "line": 360,
+        "content": "\"def process_data(data):\\n    # TODO: implement data processing\",",
+        "pattern": "TODO[\\s:]*implement"
+      },
+      {
+        "file": "system\\dictionary\\consciousness_bridge.py",
+        "line": 8,
+        "content": "TODO: Implement or import the full ConsciousnessCore as needed.",
+        "pattern": "TODO[\\s:]*implement"
+      },
+      {
+        "file": "system\\dictionary\\consciousness_bridge.py",
+        "line": 19,
+        "content": "TODO: Implement or import the full CopilotEnhancementBridge as needed.",
+        "pattern": "TODO[\\s:]*implement"
+      },
+      {
+        "file": "system\\dictionary\\consciousness_bridge.py",
+        "line": 30,
+        "content": "TODO: Implement or import the full AICoordinator as needed.",
+        "pattern": "TODO[\\s:]*implement"
+      }
+    ],
+    "hardcoded": [
+      {
+        "file": "config\\service_config.py",
+        "line": 17,
+        "content": "N8N_URL: N8N service URL (default: http://localhost:5678)",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "config\\service_config.py",
+        "line": 78,
+        "content": "Complete Ollama service URL (e.g., 'http://localhost:11435')",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "config\\service_config.py",
+        "line": 89,
+        "content": "Complete SimulatedVerse URL (e.g., 'http://localhost:5000')",
+        "pattern": "localhost:5000"
+      },
+      {
+        "file": "config\\service_config.py",
+        "line": 98,
+        "content": "Complete React UI URL (e.g., 'http://localhost:3000')",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "config\\service_config.py",
+        "line": 116,
+        "content": "Complete N8N service URL (e.g., 'http://localhost:5678')",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "diagnostics\\ecosystem_startup_sentinel.py",
+        "line": 314,
+        "content": "base_url = \"http://localhost:11434\"",
+        "pattern": "localhost:11434"
+      },
+      {
+        "file": "diagnostics\\system_awakener.py",
+        "line": 415,
+        "content": "\"# $env:CHATDEV_PATH = 'C:\\\\Users\\\\keath\\\\NuSyQ\\\\ChatDev'\",",
+        "pattern": "'C:\\\\\\\\Users"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 63,
+        "content": "r\"'/home/\",",
+        "pattern": "'/home/"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 64,
+        "content": "r\"localhost:11434\",",
+        "pattern": "localhost:11434"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 65,
+        "content": "r\"localhost:5000\",",
+        "pattern": "localhost:5000"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 66,
+        "content": "r\"localhost:8081\",",
+        "pattern": "localhost:8081"
+      },
+      {
+        "file": "interface\\ContextBrowser_DesktopApp.py",
+        "line": 451,
+        "content": "webbrowser.open(\"http://localhost:8501\")",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "interface\\ContextBrowser_DesktopApp.py",
+        "line": 469,
+        "content": "self.root.after(3000, lambda: webbrowser.open(\"http://localhost:8501\"))",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "orchestration\\chatdev_testing_chamber.py",
+        "line": 70,
+        "content": "- Connects to local Ollama server (http://localhost:11435)",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "scripts\\next_steps_priority_assessment.py",
+        "line": 32,
+        "content": "'import requests; r=requests.get(\"http://localhost:8501\"); print(\"\u2705 Running on 8",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "tools\\embeddings_exporter.py",
+        "line": 18,
+        "content": "Expects Ollama HTTP API at localhost:11434. Model name is the Ollama model",
+        "pattern": "localhost:11434"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\comprehensive_workflow_orchestrator.py",
+        "line": 249,
+        "content": "command=\"python -c \\\"import requests; r=requests.get('http://localhost:11435/api",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\multi_ai_orchestrator.py",
+        "line": 205,
+        "content": "endpoint=\"http://localhost:11434\",",
+        "pattern": "localhost:11434"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\simulatedverse_bridge.py",
+        "line": 41,
+        "content": "def __init__(self, base_url: str = \"http://localhost:5000\") -> None:",
+        "pattern": "localhost:5000"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\simulatedverse_bridge.py",
+        "line": 455,
+        "content": "\"--url\", default=\"http://localhost:5000\", help=\"SimulatedVerse URL\"",
+        "pattern": "localhost:5000"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\system_testing_orchestrator.py",
+        "line": 190,
+        "content": "test_command=\"python -c \\\"import requests; r=requests.get('http://localhost:1143",
+        "pattern": "localhost:[\\d]{4,5}"
+      },
+      {
+        "file": "legacy\\cleanup_backup\\20251009_124818\\evolution\\ai_council.py",
+        "line": 61,
+        "content": "self.ollama_url = \"http://localhost:11434/api/generate\"",
+        "pattern": "localhost:11434"
+      }
+    ],
+    "deprecated": [
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 47,
+        "content": "r\"@deprecated\",",
+        "pattern": "@deprecated"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 48,
+        "content": "r\"# deprecated\",",
+        "pattern": "# deprecated"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 49,
+        "content": "r\"# DEPRECATED\",",
+        "pattern": "# deprecated"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 50,
+        "content": "r\"__deprecated__\",",
+        "pattern": "__deprecated__"
+      }
+    ],
+    "incomplete": [
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 54,
+        "content": "r\"# TODO:\",",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 55,
+        "content": "r\"# FIXME:\",",
+        "pattern": "# FIXME:"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 56,
+        "content": "r\"# WIP:\",",
+        "pattern": "# WIP:"
+      },
+      {
+        "file": "diagnostics\\unified_scanner.py",
+        "line": 57,
+        "content": "r\"# HACK:\",",
+        "pattern": "# HACK:"
+      },
+      {
+        "file": "healing\\quantum_problem_resolver.py",
+        "line": 1113,
+        "content": "return f\"# TODO: Consider absolute import: from {module_part} import {import_par",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "integration\\boss_rush_bridge.py",
+        "line": 170,
+        "content": "# TODO: Add actual validation logic based on task requirements",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "integration\\breathing_integration.py",
+        "line": 199,
+        "content": "stall_detected=False,  # TODO: Add stall detection logic",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "system\\terminal_manager_integration.py",
+        "line": 76,
+        "content": "# TODO: Integrate with AI Coordinator when available",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\multi_ai_orchestrator.py",
+        "line": 435,
+        "content": "# TODO: Integrate with Copilot API here",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\multi_ai_orchestrator.py",
+        "line": 467,
+        "content": "# TODO: Integrate with Ollama API here",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\multi_ai_orchestrator.py",
+        "line": 495,
+        "content": "# TODO: Integrate with ChatDev API here",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\multi_ai_orchestrator.py",
+        "line": 527,
+        "content": "# TODO: Integrate with consciousness bridge here",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\multi_ai_orchestrator.py",
+        "line": 565,
+        "content": "# TODO: Integrate with quantum backend here",
+        "pattern": "# TODO:"
+      },
+      {
+        "file": "legacy\\consolidation_20251211\\multi_ai_orchestrator.py",
+        "line": 597,
+        "content": "# TODO: Integrate with custom system here",
+        "pattern": "# TODO:"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-09-03T05:21:33+00:00",
+  "theater_score": 0.53,
+  "threshold": "0.2",
+  "triggered": true,
+  "cascade_actions": [
+    "audit:narrow",
+    "watchdog:restart", 
+    "gateway:ping",
+    "ui:etag",
+    "knip:dead-exports",
+    "madge:cycles"
+  ],
+  "receipts_enforced": "proof_only_discipline_active"
+}

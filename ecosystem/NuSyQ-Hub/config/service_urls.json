@@ -1,0 +1,35 @@
+{
+  "services": {
+    "ollama": {
+      "host": "localhost",
+      "port": 11434,
+      "url": "http://localhost:11434",
+      "api_base": "http://localhost:11434/api"
+    },
+    "mcp_server": {
+      "host": "localhost",
+      "port": 8081,
+      "url": "http://localhost:8081"
+    },
+    "simulatedverse": {
+      "host": "localhost",
+      "port": 5001,
+      "url": "http://localhost:5001"
+    },
+    "context_server": {
+      "host": "127.0.0.1",
+      "port": 11434,
+      "url": "http://127.0.0.1:11434"
+    }
+  },
+  "timeouts": {
+    "default": 30,
+    "long": 300,
+    "ollama_generation": 60,
+    "api_call": 10
+  },
+  "retry": {
+    "max_attempts": 3,
+    "backoff_factor": 2
+  }
+}

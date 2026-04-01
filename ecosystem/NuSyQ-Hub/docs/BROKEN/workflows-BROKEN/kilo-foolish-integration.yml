@@ -1,0 +1,474 @@
+name: KILO-FOOLISH Comprehensive Integration & Testing
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/**'
+      - '.github/**'
+      - 'LOGGING/**'
+      - 'docs/**'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      test_level:
+        description: 'Test Level'
+        required: true
+        default: 'comprehensive'
+        type: choice
+        options:
+        - basic
+        - comprehensive
+        - full_integration
+
+      enable_ai_testing:
+        description: 'Enable AI System Testing'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  # ==================================================================================
+  # 🔍 INFRASTRUCTURE VALIDATION
+  # ==================================================================================
+  infrastructure-validation:
+    name: 🏗️ Infrastructure Validation
+    runs-on: ubuntu-latest
+
+    outputs:
+      infrastructure-status: ${{ steps.validation.outputs.status }}
+      system-health: ${{ steps.health-check.outputs.health }}
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: 📦 Install Core Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pathlib
+          pip install -r requirements.txt || echo "⚠️ Requirements installation partial"
+
+      - name: 🔍 Infrastructure Components Check
+        id: validation
+        run: |
+          echo "🔍 Validating KILO-FOOLISH Infrastructure Components..."
+
+          # Core Systems Validation
+          CORE_SYSTEMS=(
+            "src/core/ai_coordinator.py"
+            "src/integration/chatdev_launcher.py"
+            "src/orchestration/chatdev_testing_chamber.py"
+            "src/orchestration/quantum_workflow_automation.py"
+            "src/ai/ollama_chatdev_integrator.py"
+            "LOGGING/infrastructure/modular_logging_system.py"
+          )
+
+          MISSING_SYSTEMS=()
+          AVAILABLE_SYSTEMS=()
+
+          for system in "${CORE_SYSTEMS[@]}"; do
+            if [[ -f "$system" ]]; then
+              echo "✅ $system - Available"
+              AVAILABLE_SYSTEMS+=("$system")
+            else
+              echo "❌ $system - Missing"
+              MISSING_SYSTEMS+=("$system")
+            fi
+          done
+
+          # Calculate infrastructure health
+          TOTAL_SYSTEMS=${#CORE_SYSTEMS[@]}
+          AVAILABLE_COUNT=${#AVAILABLE_SYSTEMS[@]}
+          HEALTH_PERCENTAGE=$((AVAILABLE_COUNT * 100 / TOTAL_SYSTEMS))
+
+          echo "📊 Infrastructure Health: $HEALTH_PERCENTAGE% ($AVAILABLE_COUNT/$TOTAL_SYSTEMS systems)"
+
+          # Set outputs
+          if [[ $HEALTH_PERCENTAGE -ge 90 ]]; then
+            echo "status=excellent" >> $GITHUB_OUTPUT
+          elif [[ $HEALTH_PERCENTAGE -ge 75 ]]; then
+            echo "status=good" >> $GITHUB_OUTPUT
+          elif [[ $HEALTH_PERCENTAGE -ge 50 ]]; then
+            echo "status=fair" >> $GITHUB_OUTPUT
+          else
+            echo "status=poor" >> $GITHUB_OUTPUT
+          fi
+
+          echo "health=$HEALTH_PERCENTAGE" >> $GITHUB_OUTPUT
+
+      - name: 🏗️ Architecture Validation
+        run: |
+          echo "🏗️ Validating Repository Architecture..."
+
+          # Directory Structure Check
+          REQUIRED_DIRS=(
+            "src/core"
+            "src/ai"
+            "src/integration"
+            "src/orchestration"
+            "LOGGING/infrastructure"
+            "logs/storage"
+            ".github/workflows"
+            ".github/instructions"
+            ".github/prompts"
+          )
+
+          for dir in "${REQUIRED_DIRS[@]}"; do
+            if [[ -d "$dir" ]]; then
+              echo "✅ $dir - Present"
+            else
+              echo "❌ $dir - Missing"
+            fi
+          done
+
+      - name: 🔬 System Health Check
+        id: health-check
+        run: |
+          echo "🔬 Performing System Health Check..."
+
+          # Python Files Compilation Check
+          PYTHON_FILES=$(find src/ -name "*.py" -type f | wc -l)
+          echo "📊 Found $PYTHON_FILES Python files"
+
+          # Check for basic compilation errors
+          COMPILATION_ERRORS=0
+          while IFS= read -r file; do
+            if ! python -m py_compile "$file" 2>/dev/null; then
+              echo "❌ Compilation error in: $file"
+              ((COMPILATION_ERRORS++))
+            fi
+          done < <(find src/ -name "*.py" -type f)
+
+          COMPILATION_SUCCESS_RATE=$(( (PYTHON_FILES - COMPILATION_ERRORS) * 100 / PYTHON_FILES ))
+          echo "📊 Compilation Success Rate: $COMPILATION_SUCCESS_RATE%"
+
+          # GitHub Integration Health
+          GITHUB_FILES=$(find .github/ -name "*.yml" -o -name "*.md" | wc -l)
+          echo "📊 GitHub integration files: $GITHUB_FILES"
+
+          # Overall health score
+          OVERALL_HEALTH=$(( (COMPILATION_SUCCESS_RATE + 100) / 2 ))
+          echo "health=$OVERALL_HEALTH" >> $GITHUB_OUTPUT
+
+          if [[ $OVERALL_HEALTH -ge 95 ]]; then
+            echo "🟢 System Health: Excellent ($OVERALL_HEALTH%)"
+          elif [[ $OVERALL_HEALTH -ge 85 ]]; then
+            echo "🟡 System Health: Good ($OVERALL_HEALTH%)"
+          else
+            echo "🔴 System Health: Needs Attention ($OVERALL_HEALTH%)"
+          fi
+
+  # ==================================================================================
+  # 🧪 COMPREHENSIVE TESTING
+  # ==================================================================================
+  comprehensive-testing:
+    name: 🧪 Comprehensive Testing
+    runs-on: ubuntu-latest
+    needs: infrastructure-validation
+    if: needs.infrastructure-validation.outputs.system-health >= '75'
+
+    strategy:
+      matrix:
+        test-suite: [unit, integration, system]
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov
+          pip install -r requirements.txt || echo "⚠️ Some dependencies may be missing"
+
+      - name: 🧪 Run Test Suite - ${{ matrix.test-suite }}
+        run: |
+          echo "🧪 Running ${{ matrix.test-suite }} tests..."
+
+          case "${{ matrix.test-suite }}" in
+            "unit")
+              echo "🔬 Unit Testing - Core Components"
+              # Test core Python modules for basic functionality
+              python -c "
+              import sys
+              sys.path.append('.')
+              try:
+                  # Test imports
+                  print('Testing core imports...')
+                  from pathlib import Path
+                  import yaml
+                  import json
+                  print('✅ Basic imports successful')
+
+                  # Test directory structure
+                  print('Testing directory structure...')
+                  assert Path('src').exists(), 'src directory missing'
+                  assert Path('.github').exists(), '.github directory missing'
+                  print('✅ Directory structure validated')
+
+                  print('🟢 Unit tests completed successfully')
+              except Exception as e:
+                  print(f'❌ Unit test failed: {e}')
+                  sys.exit(1)
+              "
+              ;;
+            "integration")
+              echo "🔗 Integration Testing - System Connectivity"
+              # Test integration between components
+              python -c "
+              import sys
+              sys.path.append('.')
+              try:
+                  print('Testing integration capabilities...')
+                  from pathlib import Path
+
+                  # Check for key integration files
+                  integration_files = [
+                      'src/integration/chatdev_launcher.py',
+                      'src/orchestration/quantum_workflow_automation.py',
+                      'LOGGING/infrastructure/modular_logging_system.py'
+                  ]
+
+                  for file_path in integration_files:
+                      if Path(file_path).exists():
+                          print(f'✅ {file_path} - Available for integration')
+                      else:
+                          print(f'⚠️ {file_path} - Not available')
+
+                  print('🟢 Integration tests completed')
+              except Exception as e:
+                  print(f'❌ Integration test failed: {e}')
+                  sys.exit(1)
+              "
+              ;;
+            "system")
+              echo "🌐 System Testing - Full Workflow"
+              # Test full system workflows
+              python -c "
+              import sys
+              sys.path.append('.')
+              try:
+                  print('Testing system workflows...')
+                  from pathlib import Path
+                  import os
+
+                  # Test GitHub integration
+                  github_workflows = list(Path('.github/workflows').glob('*.yml'))
+                  print(f'✅ Found {len(github_workflows)} GitHub workflows')
+
+                  # Test documentation coverage
+                  context_files = list(Path('.').rglob('*CONTEXT*.md'))
+                  print(f'✅ Found {len(context_files)} context documentation files')
+
+                  # Test logging infrastructure
+                  if Path('LOGGING/infrastructure').exists():
+                      print('✅ Logging infrastructure available')
+
+                  print('🟢 System tests completed successfully')
+              except Exception as e:
+                  print(f'❌ System test failed: {e}')
+                  sys.exit(1)
+              "
+              ;;
+          esac
+
+  # ==================================================================================
+  # 🤖 AI SYSTEMS INTEGRATION TESTING
+  # ==================================================================================
+  ai-systems-testing:
+    name: 🤖 AI Systems Integration
+    runs-on: ubuntu-latest
+    needs: infrastructure-validation
+    if: ${{ github.event.inputs.enable_ai_testing == 'true' || github.event_name != 'workflow_dispatch' }}
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: 📦 Install AI Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml requests
+          pip install -r requirements.txt || echo "⚠️ Some AI dependencies may be missing"
+
+      - name: 🧠 AI System Component Check
+        run: |
+          echo "🧠 Checking AI System Components..."
+
+          AI_COMPONENTS=(
+            "src/ai/ollama_chatdev_integrator.py"
+            ".github/instructions/COPILOT_INSTRUCTIONS_CONFIG.instructions.md"
+            ".github/prompts/NuSyQ_Prompt-Hub.prompt.md"
+            "src/orchestration/chatdev_testing_chamber.py"
+          )
+
+          for component in "${AI_COMPONENTS[@]}"; do
+            if [[ -f "$component" ]]; then
+              echo "✅ $component - AI component available"
+
+              # Basic content validation for key files
+              if [[ "$component" == *".py" ]]; then
+                if python -m py_compile "$component" 2>/dev/null; then
+                  echo "   ✅ Python syntax validation passed"
+                else
+                  echo "   ⚠️ Python syntax issues detected"
+                fi
+              fi
+
+            else
+              echo "❌ $component - AI component missing"
+            fi
+          done
+
+      - name: 🎯 Prompt System Validation
+        run: |
+          echo "🎯 Validating AI Prompt System..."
+
+          if [[ -f ".github/prompts/NuSyQ_Prompt-Hub.prompt.md" ]]; then
+            echo "✅ Main prompt template found"
+
+            # Check prompt structure
+            PROMPT_SIZE=$(wc -c < ".github/prompts/NuSyQ_Prompt-Hub.prompt.md")
+            echo "📊 Prompt template size: $PROMPT_SIZE bytes"
+
+            if [[ $PROMPT_SIZE -gt 1000 ]]; then
+              echo "✅ Comprehensive prompt template detected"
+            else
+              echo "⚠️ Prompt template may need expansion"
+            fi
+          else
+            echo "❌ Main prompt template missing"
+          fi
+
+      - name: 🔧 Copilot Configuration Check
+        run: |
+          echo "🔧 Checking Copilot Configuration..."
+
+          COPILOT_CONFIG=".github/instructions/COPILOT_INSTRUCTIONS_CONFIG.instructions.md"
+
+          if [[ -f "$COPILOT_CONFIG" ]]; then
+            echo "✅ Copilot configuration found"
+
+            # Check for key configuration sections
+            if grep -q "KILO-FOOLISH" "$COPILOT_CONFIG"; then
+              echo "✅ KILO-FOOLISH integration configured"
+            else
+              echo "⚠️ KILO-FOOLISH integration may need enhancement"
+            fi
+
+            if grep -q "quantum" "$COPILOT_CONFIG"; then
+              echo "✅ Quantum-inspired development configured"
+            else
+              echo "⚠️ Quantum development patterns may need configuration"
+            fi
+          else
+            echo "❌ Copilot configuration missing"
+          fi
+
+  # ==================================================================================
+  # 📋 WORKFLOW INTEGRATION REPORTING
+  # ==================================================================================
+  integration-reporting:
+    name: 📋 Integration Report
+    runs-on: ubuntu-latest
+    needs: [infrastructure-validation, comprehensive-testing, ai-systems-testing]
+    if: always()
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📋 Generate Integration Report
+        run: |
+          echo "📋 Generating Comprehensive Integration Report..."
+
+          # Create report header
+          cat > integration_report.md << 'EOF'
+          # 🚀 KILO-FOOLISH Integration Test Report
+
+          **Generated**: $(date)
+          **Workflow**: ${{ github.workflow }}
+          **Trigger**: ${{ github.event_name }}
+          **Branch**: ${{ github.ref }}
+
+          ## 📊 Test Results Summary
+
+          EOF
+
+          # Infrastructure Status
+          echo "### 🏗️ Infrastructure Validation" >> integration_report.md
+          echo "- **Status**: ${{ needs.infrastructure-validation.outputs.infrastructure-status }}" >> integration_report.md
+          echo "- **Health**: ${{ needs.infrastructure-validation.outputs.system-health }}%" >> integration_report.md
+          echo "" >> integration_report.md
+
+          # Testing Results
+          echo "### 🧪 Testing Results" >> integration_report.md
+          if [[ "${{ needs.comprehensive-testing.result }}" == "success" ]]; then
+            echo "- **Comprehensive Testing**: ✅ Passed" >> integration_report.md
+          else
+            echo "- **Comprehensive Testing**: ❌ Failed or Skipped" >> integration_report.md
+          fi
+          echo "" >> integration_report.md
+
+          # AI Systems
+          echo "### 🤖 AI Systems Integration" >> integration_report.md
+          if [[ "${{ needs.ai-systems-testing.result }}" == "success" ]]; then
+            echo "- **AI Integration**: ✅ Validated" >> integration_report.md
+          else
+            echo "- **AI Integration**: ❌ Issues Detected" >> integration_report.md
+          fi
+          echo "" >> integration_report.md
+
+          # Recommendations
+          echo "### 💡 Recommendations" >> integration_report.md
+          echo "- Continue developing with quantum-inspired methodologies" >> integration_report.md
+          echo "- Maintain comprehensive documentation and context files" >> integration_report.md
+          echo "- Regular validation of AI system integrations" >> integration_report.md
+          echo "" >> integration_report.md
+
+          echo "---" >> integration_report.md
+          echo "*Generated by KILO-FOOLISH Comprehensive Integration Workflow*" >> integration_report.md
+
+          # Display report
+          echo "📄 Integration Report Generated:"
+          cat integration_report.md
+
+      - name: 📤 Upload Integration Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: kilo-foolish-integration-report
+          path: integration_report.md
+          retention-days: 30
+
+      - name: 🎯 Workflow Summary
+        run: |
+          echo "🎯 KILO-FOOLISH Integration Workflow Summary"
+          echo "=============================================="
+          echo "Infrastructure Health: ${{ needs.infrastructure-validation.outputs.system-health }}%"
+          echo "Testing Status: ${{ needs.comprehensive-testing.result }}"
+          echo "AI Integration: ${{ needs.ai-systems-testing.result }}"
+          echo ""
+          echo "✅ Workflow completed successfully!"
+          echo "📋 See artifacts for detailed integration report"

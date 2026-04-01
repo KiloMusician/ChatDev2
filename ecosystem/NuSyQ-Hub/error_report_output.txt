@@ -1,0 +1,59 @@
+2026-01-02 10:59:48 [INFO] src.diagnostics.unified_error_reporter: ≡ƒöì Starting unified error scan across all repos...
+2026-01-02 10:59:48 [INFO] src.diagnostics.unified_error_reporter:   Scanning nusyq-hub...
+2026-01-02 10:59:48 [INFO] src.diagnostics.unified_error_reporter:     Found 2306 diagnostics (quick)
+2026-01-02 10:59:48 [INFO] src.diagnostics.unified_error_reporter:   Scanning simulated-verse...
+2026-01-02 10:59:48 [INFO] src.diagnostics.unified_error_reporter:     Found 4 diagnostics (quick)
+2026-01-02 10:59:48 [INFO] src.diagnostics.unified_error_reporter:   Scanning nusyq...
+2026-01-02 10:59:48 [INFO] src.diagnostics.unified_error_reporter:     Found 0 diagnostics (quick)
+
+≡ƒöì UNIFIED ERROR REPORT - GROUND TRUTH
+======================================================================
+Scanning repositories for errors, warnings, and infos...
+Mode: quick
+
+Target repos: nusyq-hub, simulated-verse, nusyq
+
+======================================================================
+≡ƒöì UNIFIED ERROR REPORT - GROUND TRUTH
+======================================================================
+Generated: 2026-01-02T10:59:49.006448
+Scan Mode: quick
+
+≡ƒôè CANONICAL GROUND TRUTH (tool_scan):
+  ΓÇó Total:    2310
+  ΓÇó Errors:   5
+  ΓÇó Warnings: 57
+  ΓÇó Infos:    2248
+  ΓÇó Note:     Comprehensive scan (quick mode) using ruff, mypy, pylint across all three repos
+
+ΓÜá∩╕Å  VS Code Problems Panel (filtered view):
+  ΓÇó Errors:   209
+  ΓÇó Warnings: 887
+  ΓÇó Infos:    657
+  ΓÇó Total:    1753
+  ΓÇó Note:     VS Code shows filtered subset of actual errors
+
+By Repository:
+
+  nusyq-hub (2306 diagnostics)
+    Severity: {'info': 2248, 'warning': 57, 'error': 1}
+    Types: {'linting': 2306}
+    Sources: {'ruff': 2306}
+
+  simulated-verse (4 diagnostics)
+    Severity: {'error': 4}
+    Types: {'linting': 2, 'syntax': 2}
+    Sources: {'ruff': 4}
+
+======================================================================
+
+≡ƒô¥ Report saved to: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\docs\Reports\diagnostics\unified_error_report_20260102_105949.md
+
+≡ƒÄ» GROUND TRUTH FOR ALL AGENTS:
+  Total Diagnostics: 2310
+  ΓÇó Errors:   5
+  ΓÇó Warnings: 57
+  ΓÇó Infos:    2248
+  ΓÇó VS Code:  209 errors, 887 warnings, 657 infos
+
+All agents should report these exact numbers to ensure signal consistency.

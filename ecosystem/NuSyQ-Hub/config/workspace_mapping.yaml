@@ -1,0 +1,118 @@
+# Folder Mapping Configuration File
+# For: VS Code, PowerShell, Tasks
+# Auto-generated: 2026-02-02
+
+folders:
+  # PRIMARY REPOSITORIES
+  nusyq_hub:
+    path: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub
+    label: "NuSyQ-Hub (Core Orchestration)"
+    python: ".venv\\Scripts\\python.exe"
+    env_var: "$env:NUSYQ_HUB"
+    default_task_folder: true  # Commands default here
+    venv_source: ".venv\\Scripts\\Activate.ps1"
+
+  nusyq_root:
+    path: C:\Users\keath\NuSyQ
+    label: "NuSyQ (Multi-AI Root)"
+    python: ".venv\\Scripts\\python.exe"
+    env_var: "$env:NUSYQ_ROOT"
+    venv_source: ".venv\\Scripts\\Activate.ps1"
+
+  simulatedverse:
+    path: C:\Users\keath\Desktop\SimulatedVerse
+    label: "SimulatedVerse (Consciousness)"
+    runtime: "node"
+    env_var: "$env:SIMULATEDVERSE"
+    package_manager: "npm"
+
+  # SPECIAL FOLDERS
+  prime_anchor:
+    path: C:\Users\keath\Desktop\Legacy\NuSyQ-Hub\.vscode\prime_anchor
+    label: "Prime Anchor (VS Code Coordination)"
+    env_var: "$env:PRIME_ANCHOR"
+
+# CROSS-CUTTING VARIABLES
+# Automatically exported to PowerShell environment
+variables:
+  # Quest & Progress
+  quest_log: "$env:NUSYQ_HUB\\src\\Rosetta_Quest_System\\quest_log.jsonl"
+  progress_tracker: "$env:NUSYQ_HUB\\config\\ZETA_PROGRESS_TRACKER.json"
+  status_checklist: "$env:NUSYQ_HUB\\docs\\Checklists\\PROJECT_STATUS_CHECKLIST.md"
+
+  # Orchestration
+  orchestrator: "$env:NUSYQ_HUB\\src\\orchestration\\multi_ai_orchestrator.py"
+  task_router: "$env:NUSYQ_HUB\\src\\tools\\agent_task_router.py"
+  consciousness: "$env:NUSYQ_HUB\\src\\integration\\consciousness_bridge.py"
+
+  # Healing
+  quantum: "$env:NUSYQ_HUB\\src\\healing\\quantum_problem_resolver.py"
+  health: "$env:NUSYQ_HUB\\src\\diagnostics\\system_health_assessor.py"
+  importer: "$env:NUSYQ_HUB\\src\\utils\\quick_import_fix.py"
+
+# OPERATING MODES
+modes:
+  normal:
+    description: "Full access to all operations"
+    restrictions: []
+
+  overnight:
+    description: "Safe autonomous mode (no git push, no deletes)"
+    restrictions:
+      - no_git_push
+      - no_file_delete
+      - no_config_edit
+      - no_force_operations
+
+  analysis:
+    description: "Diagnostic only (no modifications)"
+    restrictions:
+      - no_git_operations
+      - no_file_modifications
+      - no_config_edit
+      - read_only
+
+# AUTOMATIC CONTEXT DETECTION RULES
+# Power: When a terminal opens at location X, automatically set:
+# - WORKSPACE_CONTEXT
+# - WORKSPACE_PYTHON
+# - CURRENT_WORKSPACE_FOLDER
+context_rules:
+  - pattern: "**/NuSyQ-Hub/**"
+    context: "hub"
+    python: "$env:PYTHON_HUB"
+    folder: "$env:NUSYQ_HUB"
+
+  - pattern: "**/NuSyQ/**"
+    context: "root"
+    python: "$env:PYTHON_ROOT"
+    folder: "$env:NUSYQ_ROOT"
+
+  - pattern: "**/SimulatedVerse/**"
+    context: "verse"
+    python: "node"
+    folder: "$env:SIMULATEDVERSE"
+
+  - pattern: "default"
+    context: "hub"
+    python: "$env:PYTHON_HUB"
+    folder: "$env:NUSYQ_HUB"
+
+# PROFILE INITIALIZATION
+profiles:
+  powershell:
+    loader: ".vscode\\workspace_loader.ps1"
+    aliases: true
+    prompt_customization: true
+    quick_commands: true
+
+  vscode:
+    variables_file: ".env.workspace"
+    tasks_json: ".vscode\\tasks.json"
+    launch_json: ".vscode\\launch.json"
+
+# VALIDATION
+validation:
+  check_python_venv: true
+  check_folder_structure: true
+  check_git_repos: true

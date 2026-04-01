@@ -1,0 +1,3 @@
+{"id":"P1","type":"DocPU","title":"ARCH autosave/tick notes","files":[{"path":"docs/ARCH-TICK.md","content":"# Tick & Autosave\nDeterministic 250ms, accumulators, save every N ticks.\n"}],"labels":["docs","automerge"]}
+{"id":"P2","type":"TestPU","title":"Self-play 100-tick smoke","files":[{"path":"tests/selfplay.spec.ts","content":"/* vitest: simulate 100 ticks, expect monotonic time and no entropy growth */"}],"labels":["tests","automerge"]}
+{"id":"P3","type":"InfraPU","title":"Budget gates hardening","files":[{"path":"server/middleware/budget.ts","content":"// Budget enforcement with exponential backoff"}],"labels":["infra","automerge"]}

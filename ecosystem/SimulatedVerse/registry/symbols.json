@@ -1,0 +1,108 @@
+{
+  "version": "1.0.0",
+  "symbols": {
+    "🜁": {
+      "name": "bootstrap_gate",
+      "module": "root",
+      "symbol": "boot",
+      "description": "System initialization entry point"
+    },
+    "⊙": {
+      "name": "core_sync",
+      "module": "root", 
+      "symbol": "sync",
+      "description": "Cross-module synchronization primitive"
+    },
+    "⟦": {
+      "name": "tier_bracket_open",
+      "module": "progression",
+      "symbol": "TierScope",
+      "description": "Tier-gated feature boundary start"
+    },
+    "⟧": {
+      "name": "tier_bracket_close", 
+      "module": "progression",
+      "symbol": "TierScope",
+      "description": "Tier-gated feature boundary end"
+    },
+    "Ξ": {
+      "name": "resource_xi",
+      "module": "energy",
+      "symbol": "ResourceType",
+      "description": "Abstract resource identifier"
+    },
+    "Σ": {
+      "name": "sum_aggregator",
+      "module": "energy", 
+      "symbol": "Aggregator",
+      "description": "Resource summation operator"
+    },
+    "Λ": {
+      "name": "lambda_transform",
+      "module": "energy",
+      "symbol": "Transform", 
+      "description": "Resource transformation function"
+    },
+    "Θ": {
+      "name": "theta_threshold",
+      "module": "progression",
+      "symbol": "Threshold",
+      "description": "Unlock condition threshold"
+    },
+    "Φ": {
+      "name": "phi_flow",
+      "module": "automation",
+      "symbol": "Flow",
+      "description": "Automated process flow"
+    },
+    "Ψ": {
+      "name": "psi_state",
+      "module": "ui",
+      "symbol": "ViewState", 
+      "description": "UI state management primitive"
+    },
+    "⚛": {
+      "name": "atom_core",
+      "module": "root",
+      "symbol": "CorePrimitive",
+      "description": "Indivisible system component"
+    },
+    "🛠": {
+      "name": "tool_modifier",
+      "module": "automation",
+      "symbol": "Modifier",
+      "description": "System modification interface"
+    },
+    "⧉": {
+      "name": "tier_symbol",
+      "module": "progression", 
+      "symbol": "TierMarker",
+      "description": "Tier identification symbol"
+    },
+    "⛛": {
+      "name": "council_authority",
+      "module": "root",
+      "symbol": "CouncilMarker", 
+      "description": "SCP Council authority indicator"
+    },
+    "↗️": {
+      "name": "action_pointer",
+      "module": "root",
+      "symbol": "ActionPointer",
+      "description": "Points to required action"
+    },
+    "∞": {
+      "name": "system_scope",
+      "module": "root",
+      "symbol": "SystemScope",
+      "description": "System-wide impact marker"
+    }
+  },
+  "syntax_patterns": {
+    "tier_gate": "🜁⊙⟦{symbols}⟧ ÷ 🛠 {context}",
+    "resource_transform": "⨆⊕{Ξ} → Σ(Λ(Θ))",
+    "council_msg": "[Msg⛛{ROLE}↗️Σ∞] finding → location → action",
+    "omnitag": "[Ω:<module>:<verb>:<hint>]",
+    "unlock_condition": "if (Θ.met && Φ.ready) unlock(⟦feature⟧)"
+  }
+}

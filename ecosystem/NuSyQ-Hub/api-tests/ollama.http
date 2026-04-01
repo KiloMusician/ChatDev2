@@ -1,0 +1,77 @@
+### Test Ollama Service Health
+GET http://localhost:11434/api/tags
+
+###
+
+### Test Ollama Model Inference - Qwen2.5-Coder
+POST http://localhost:11434/api/generate
+Content-Type: application/json
+
+{
+  "model": "qwen2.5-coder:14b",
+  "prompt": "Write a Python function to calculate fibonacci numbers",
+  "stream": false
+}
+
+###
+
+### Test Ollama Chat Completion
+POST http://localhost:11434/api/chat
+Content-Type: application/json
+
+{
+  "model": "qwen2.5-coder:14b",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explain the self-healing architecture pattern"
+    }
+  ],
+  "stream": false
+}
+
+###
+
+### Test Ollama Embeddings
+POST http://localhost:11434/api/embeddings
+Content-Type: application/json
+
+{
+  "model": "nomic-embed-text:latest",
+  "prompt": "NuSyQ multi-agent orchestration system"
+}
+
+###
+
+### List All Installed Models
+GET http://localhost:11434/api/tags
+
+###
+
+### Show Model Information - Qwen2.5-Coder
+POST http://localhost:11434/api/show
+Content-Type: application/json
+
+{
+  "name": "qwen2.5-coder:14b"
+}
+
+###
+
+### Pull New Model (Example)
+# POST http://localhost:11434/api/pull
+# Content-Type: application/json
+#
+# {
+#   "name": "codellama:7b"
+# }
+
+###
+
+### Delete Model (Use with caution)
+# DELETE http://localhost:11434/api/delete
+# Content-Type: application/json
+#
+# {
+#   "name": "model-to-delete"
+# }

@@ -1,0 +1,94 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": null,
+    "title": "Postgres Basic",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "Postgres Exporter: Connections",
+        "targets": [
+          {
+            "expr": "sum(pg_stat_activity_count) or sum(pg_stat_database_numbackends)",
+            "legendFormat": "connections",
+            "refId": "A"
+          }
+        ],
+        "gridPos": { "h": 6, "w": 12, "x": 0, "y": 0 }
+      },
+      {
+        "type": "graph",
+        "title": "Commits / sec (proxy)",
+        "targets": [
+          {
+            "expr": "rate(pg_stat_database_xact_commit[1m])",
+            "legendFormat": "commits/sec",
+            "refId": "C"
+          }
+        ],
+        "gridPos": { "h": 6, "w": 12, "x": 0, "y": 6 }
+      },
+      {
+        "type": "stat",
+        "title": "Postgres Up",
+        "targets": [
+          {
+            "expr": "up{job=\"postgres\"}",
+            "refId": "B"
+          }
+        ],
+        "gridPos": { "h": 3, "w": 4, "x": 12, "y": 0 }
+      },
+      {
+        "type": "stat",
+        "title": "DB Size (MB)",
+        "targets": [
+          {
+            "expr": "pg_database_size_bytes{datname=\"consciousness\"} / 1024 / 1024",
+            "refId": "D"
+          }
+        ],
+        "gridPos": { "h": 3, "w": 4, "x": 12, "y": 3 }
+      }
+      ,
+      {
+        "type": "graph",
+        "title": "Narratives: Table Size (MB)",
+        "targets": [
+          {
+            "expr": "pg_relation_size_bytes{relname=\"narratives\"} / 1024 / 1024",
+            "legendFormat": "narratives size (MB)",
+            "refId": "E"
+          }
+        ],
+        "gridPos": { "h": 6, "w": 12, "x": 0, "y": 12 }
+      },
+      {
+        "type": "graph",
+        "title": "Narratives: Index Size (MB)",
+        "targets": [
+          {
+            "expr": "pg_indexes_size_bytes{relname=\"narratives\"} / 1024 / 1024",
+            "legendFormat": "narratives index (MB)",
+            "refId": "F"
+          }
+        ],
+        "gridPos": { "h": 6, "w": 12, "x": 0, "y": 18 }
+      },
+      {
+        "type": "graph",
+        "title": "Narratives: Total Table+Index Size (MB)",
+        "targets": [
+          {
+            "expr": "(pg_relation_size_bytes{relname=~\"narratives.*\"} + pg_indexes_size_bytes{relname=~\"narratives.*\"}) / 1024 / 1024",
+            "legendFormat": "total size (MB)",
+            "refId": "G"
+          }
+        ],
+        "gridPos": { "h": 6, "w": 12, "x": 12, "y": 6 }
+      }
+    ],
+    "schemaVersion": 16
+  },
+  "overwrite": true
+}

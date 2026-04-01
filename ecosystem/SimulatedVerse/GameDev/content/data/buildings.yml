@@ -1,0 +1,266 @@
+# Buildings - Literal construction system with power grid and job assignments
+
+buildings:
+  # Energy Production
+  solar_panel:
+    name: "Solar Panel"
+    description: "Converts sunlight to energy"
+    cost:
+      energy: 50
+      materials: 10
+    build_time: 30
+    footprint: 
+      width: 2
+      height: 2
+    effects:
+      - type: resource_generation
+        resource: energy
+        amount: 1.5
+    power:
+      consumption: 0
+      production: 0 # Produces energy directly, not power grid
+    jobs: 0
+    prerequisites: []
+    category: power
+
+  wind_turbine:
+    name: "Wind Turbine"
+    description: "Harnesses wind for clean energy"
+    cost:
+      energy: 150
+      materials: 25
+    build_time: 60
+    footprint:
+      width: 3
+      height: 3
+    effects:
+      - type: resource_generation
+        resource: energy
+        amount: 4.0
+    power:
+      consumption: 0
+      production: 0
+    jobs: 1 # Requires maintenance worker
+    prerequisites:
+      - basic_automation
+    category: power
+
+  # Resource Production
+  mining_station:
+    name: "Mining Station"
+    description: "Extracts materials from the ground"
+    cost:
+      energy: 100
+      materials: 20
+    build_time: 45
+    footprint:
+      width: 4
+      height: 3
+    effects:
+      - type: resource_generation
+        resource: materials
+        amount: 2.0
+    power:
+      consumption: 2
+      production: 0
+    jobs: 2
+    prerequisites:
+      - materials_processing
+    category: production
+
+  hydroponic_farm:
+    name: "Hydroponic Farm"
+    description: "Produces food for growing population"
+    cost:
+      energy: 80
+      materials: 15
+      water: 30
+    build_time: 50
+    footprint:
+      width: 5
+      height: 3
+    effects:
+      - type: resource_generation
+        resource: food
+        amount: 3.0
+      - type: happiness_modifier
+        amount: 5
+    power:
+      consumption: 1
+      production: 0
+    jobs: 1
+    prerequisites:
+      - materials_processing
+    category: production
+
+  # Research and Technology
+  research_lab:
+    name: "Research Laboratory"
+    description: "Conducts scientific research"
+    cost:
+      energy: 200
+      materials: 50
+    build_time: 90
+    footprint:
+      width: 6
+      height: 4
+    effects:
+      - type: resource_generation
+        resource: research
+        amount: 1.0
+    power:
+      consumption: 3
+      production: 0
+    jobs: 2 # Scientists
+    prerequisites: []
+    category: research
+
+  quantum_lab:
+    name: "Quantum Research Lab"
+    description: "Advanced quantum computing research"
+    cost:
+      research: 100
+      nanobots: 50
+      quantum_cores: 5
+    build_time: 180
+    footprint:
+      width: 8
+      height: 6
+    effects:
+      - type: resource_generation
+        resource: research
+        amount: 5.0
+      - type: tech_speed_bonus
+        amount: 2.0
+    power:
+      consumption: 10
+      production: 0
+    jobs: 3
+    prerequisites:
+      - quantum_computing
+    category: research
+
+  # Defense Buildings
+  defensive_turret:
+    name: "Defensive Turret"
+    description: "Automated defense system"
+    cost:
+      energy: 75
+      materials: 30
+    build_time: 40
+    footprint:
+      width: 2
+      height: 2
+    effects:
+      - type: defense_rating
+        amount: 25
+    power:
+      consumption: 2
+      production: 0
+    jobs: 0 # Automated
+    prerequisites:
+      - tower_defense_mastery
+    category: defense
+
+  shield_generator:
+    name: "Shield Generator"
+    description: "Energy barrier protecting the colony"
+    cost:
+      energy: 300
+      nanobots: 75
+    build_time: 120
+    footprint:
+      width: 4
+      height: 4
+    effects:
+      - type: colony_shield
+        amount: 500 # Shield HP
+    power:
+      consumption: 5
+      production: 0
+    jobs: 1 # Technician
+    prerequisites:
+      - civics_kernel
+    category: defense
+
+  # Infrastructure
+  power_relay:
+    name: "Power Relay"
+    description: "Distributes power across the colony"
+    cost:
+      energy: 120
+      materials: 40
+    build_time: 60
+    footprint:
+      width: 3
+      height: 3
+    effects: []
+    power:
+      consumption: 0
+      production: 0
+      transmission_range: 10 # Grid tiles
+    jobs: 0
+    prerequisites:
+      - materials_processing
+    category: infrastructure
+
+  habitat_module:
+    name: "Habitat Module"
+    description: "Housing for colonists"
+    cost:
+      materials: 60
+      energy: 30
+    build_time: 75
+    footprint:
+      width: 4
+      height: 5
+    effects:
+      - type: population_capacity
+        amount: 4
+      - type: happiness_modifier
+        amount: 10
+    power:
+      consumption: 1
+      production: 0
+    jobs: 0
+    prerequisites: []
+    category: infrastructure
+
+# Building categories for UI organization
+categories:
+  power:
+    name: "Power Generation"
+    icon: "⚡"
+    description: "Buildings that generate energy"
+    
+  production:
+    name: "Resource Production"
+    icon: "🏭"
+    description: "Buildings that produce materials and resources"
+    
+  research:
+    name: "Research & Technology"
+    icon: "🔬"
+    description: "Buildings that advance your technological capabilities"
+    
+  defense:
+    name: "Defense Systems"
+    icon: "🛡️"
+    description: "Buildings that protect your colony"
+    
+  infrastructure:
+    name: "Infrastructure"
+    icon: "🏗️"
+    description: "Buildings that support colony operations"
+
+# Power grid configuration
+power_grid:
+  max_transmission_distance: 15
+  power_loss_per_tile: 0.01
+  blackout_threshold: 0.9 # 90% power usage triggers warnings
+  
+# Construction rules
+construction:
+  max_concurrent_projects: 3
+  cancellation_refund: 0.75 # 75% refund when cancelling
+  rush_cost_multiplier: 2.0 # 2x cost to instant-build

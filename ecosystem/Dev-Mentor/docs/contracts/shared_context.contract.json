@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "description": "Shared navigation/action context object carried between all surfaces.",
+  "required": ["version", "current", "policy", "updated_at"],
+  "current_required": [
+    "entity_id",
+    "subsystem_id",
+    "task_id",
+    "event_id",
+    "world_slice",
+    "source_surface",
+    "breadcrumbs"
+  ],
+  "policy_required": ["preserve_on_route", "clear_on_session_reset"]
+}

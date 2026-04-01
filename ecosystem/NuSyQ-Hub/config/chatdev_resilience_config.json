@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "ChatDev Resilience Configuration - Ollama Fallback",
+  "version": "1.0.0",
+  
+  "primary_model": {
+    "type": "chatdev",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "timeout_seconds": 300,
+    "max_retries": 2
+  },
+  
+  "fallback_chain": [
+    {
+      "trigger_on": ["429", "502", "503", "timeout", "quota_exceeded", "rate_limit"],
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "description": "Primary fallback - fast local code model"
+    },
+    {
+      "trigger_on": ["model_unavailable", "connection_error"],
+      "provider": "ollama",
+      "model": "codellama:7b",
+      "description": "Secondary fallback - CodeLlama for code tasks"
+    },
+    {
+      "trigger_on": ["all_models_failed"],
+      "provider": "stub",
+      "model": "degraded_scaffold",
+      "description": "Emergency fallback - return scaffold only"
+    }
+  ],
+  
+  "ollama_config": {
+    "base_url": "http://127.0.0.1:11434",
+    "timeout_seconds": 600,
+    "preferred_models_for_code": [
+      "qwen2.5-coder:14b",
+      "qwen2.5-coder:7b",
+      "deepseek-coder-v2:16b",
+      "codellama:7b"
+    ],
+    "run_ollama_path": "C:/Users/keath/NuSyQ/ChatDev/run_ollama.py"
+  },
+  
+  "retry_policy": {
+    "max_attempts": 3,
+    "initial_delay_seconds": 1.0,
+    "max_delay_seconds": 30.0,
+    "exponential_backoff": true,
+    "jitter": true
+  },
+  
+  "degraded_mode": {
+    "enabled": true,
+    "scope_reduction": 0.5,
+    "skip_phases": ["ArtDesign", "TestErrorSummary"],
+    "minimal_files": ["main.py", "README.md"]
+  },
+  
+  "audit": {
+    "log_all_retries": true,
+    "log_model_switches": true,
+    "quest_integration": true
+  }
+}

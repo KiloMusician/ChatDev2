@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Entity Content Schema",
+  "description": "Data-driven entity definitions for multi-genre game engine",
+  "type": "object",
+  "properties": {
+    "entities": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z_][a-zA-Z0-9_]*$": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "sprite_key": { "type": "string" },
+            "components": {
+              "type": "object",
+              "properties": {
+                "Position": {
+                  "type": "object",
+                  "properties": {
+                    "x": { "type": "number" },
+                    "y": { "type": "number" },
+                    "z": { "type": "number", "default": 0 }
+                  },
+                  "required": ["x", "y"]
+                },
+                "Health": {
+                  "type": "object",
+                  "properties": {
+                    "current": { "type": "number", "minimum": 0 },
+                    "max": { "type": "number", "minimum": 1 }
+                  },
+                  "required": ["current", "max"]
+                },
+                "Tower": {
+                  "type": "object",
+                  "properties": {
+                    "range": { "type": "number", "minimum": 0 },
+                    "damage": { "type": "number", "minimum": 0 },
+                    "fire_rate": { "type": "number", "minimum": 0.1 },
+                    "last_shot": { "type": "number", "default": 0 }
+                  },
+                  "required": ["range", "damage", "fire_rate"]
+                },
+                "Enemy": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "x": { "type": "number" },
+                          "y": { "type": "number" }
+                        },
+                        "required": ["x", "y"]
+                      }
+                    },
+                    "path_index": { "type": "number", "minimum": 0 },
+                    "reward": { "type": "number", "minimum": 0 }
+                  },
+                  "required": ["path", "path_index", "reward"]
+                },
+                "Citizen": {
+                  "type": "object",
+                  "properties": {
+                    "job": { "type": "string" },
+                    "skill_level": { "type": "number", "minimum": 1, "maximum": 10 },
+                    "happiness": { "type": "number", "minimum": 0, "maximum": 100 }
+                  },
+                  "required": ["job", "skill_level", "happiness"]
+                }
+              }
+            },
+            "tags": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["name", "sprite_key"]
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "generator": { "type": "string" },
+        "created": { "type": "string", "format": "date-time" }
+      },
+      "required": ["version"]
+    }
+  },
+  "required": ["entities"]
+}

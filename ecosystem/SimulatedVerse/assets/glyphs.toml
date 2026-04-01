@@ -1,0 +1,52 @@
+[terrain]
+empty = "."
+wall = "#"
+door = "+"
+stairs_up = "<"
+stairs_down = ">"
+water = "~"
+crystal = "*"
+artifact = "?"
+anomaly = "!"
+
+[units]
+player = "@"
+colonist = "♦"
+drone_scout = "⟟"
+drone_worker = "⚙"
+drone_medic = "✚"
+
+[buildings]
+shelter = "H"
+workshop = "W"
+greenhouse = "G"
+storage = "S"
+laboratory = "L"
+kitchen = "K"
+infirmary = "I"
+power_plant = "P"
+communications = "C"
+
+[enemies]
+scout = "s"
+fighter = "f"
+heavy = "H"
+swarm = "*"
+boss = "B"
+
+[towers]
+basic_turret = "T"
+laser_cannon = "L"
+missile_launcher = "M"
+shield_generator = "S"
+repair_station = "R"
+
+[effects]
+explosion = "💥"
+energy = "⚡"
+growth = "🌱"
+repair = "🔧"
+research = "🔬"
+warning = "⚠"
+success = "✅"
+failed = "❌"

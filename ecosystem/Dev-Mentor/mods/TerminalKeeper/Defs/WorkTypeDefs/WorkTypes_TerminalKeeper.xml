@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <WorkTypeDef>
+    <defName>TK_LatticeTask</defName>
+    <label>lattice work</label>
+    <pawnLabel>Lattice Worker</pawnLabel>
+    <description>Interface with Lattice Terminals and Consoles to upload logs, execute AI Council task assignments, download blueprints, and contribute experience to the Terminal Depths ecosystem.</description>
+    <workTags>Intellectual Skilled</workTags>
+    <workGiversByPriority>
+      <li>
+        <giverClass>TerminalKeeper.WorkGiver_UseLatticeTerminal</giverClass>
+        <priorityInType>80</priorityInType>
+      </li>
+    </workGiversByPriority>
+    <relevantSkills>
+      <li>Intellectual</li>
+    </relevantSkills>
+    <naturalPriority>500</naturalPriority>
+    <visible>true</visible>
+    <alwaysStartActive>false</alwaysStartActive>
+    <defName>TK_LatticeTask</defName>
+  </WorkTypeDef>
+
+</Defs>

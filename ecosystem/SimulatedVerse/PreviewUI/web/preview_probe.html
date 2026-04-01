@@ -1,0 +1,21 @@
+<!doctype html>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<title>Preview OK</title>
+<style>
+body { font-family: system-ui; padding: 20px; background: #1a1a1a; color: #00ff88; margin: 0; }
+h1 { font-size: 2rem; margin: 0; }
+.status { margin-top: 1rem; font-family: monospace; }
+.timestamp { opacity: 0.7; font-size: 0.8rem; }
+</style>
+<h1>🎯 Preview OK</h1>
+<div class="status">
+  <div>✅ Static serving functional</div>
+  <div>🌐 Mobile viewport configured</div>
+  <div>📱 S23 compatibility ready</div>
+  <div class="timestamp">Probe deployed: <span id="time"></span></div>
+</div>
+<script>
+document.getElementById('time').textContent = new Date().toLocaleString();
+console.log('🎯 Preview probe loaded successfully');
+</script>

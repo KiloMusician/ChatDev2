@@ -1,0 +1,84 @@
+name: "Tower Defense: First Turret"
+id: "tower_defense_first_turret"
+pattern: "tower_defense"
+description: "Basic tower defense with 2 lanes, 1 turret slot, and simple enemy waves"
+
+genreTags:
+  - td
+  - strategy
+  - real-time
+
+inputs:
+  - tower_placement
+  - enemy_spawn
+  - wave_start
+
+outputs:
+  - enemies_killed
+  - damage_dealt
+  - wave_completed
+  - turrets_placed
+
+tickable: true
+
+ui_hooks:
+  route: "/game/tower-defense"
+  menu_label: "Tower Defense"
+  tooltip: "Defend against enemy waves with turrets"
+
+proof_checklist:
+  - "Enemies spawn and move along lanes"
+  - "Player can place turrets in designated slots"
+  - "Turrets automatically fire at enemies in range"
+  - "Enemies take damage and die when health reaches zero"
+  - "Wave progression advances after all enemies defeated"
+  - "Kill counter increments correctly"
+
+balance:
+  lane_count: 2
+  turret_slots_per_lane: 3
+  enemy_health: 100
+  enemy_speed: 50
+  turret_damage: 25
+  turret_range: 100
+  turret_fire_rate: 1.0
+  wave_size: 5
+  wave_spawn_interval: 2.0
+  enemy_reward: 10
+
+mechanics:
+  lanes:
+    - id: "lane_1"
+      start_pos: [0, 100]
+      end_pos: [800, 100]
+      waypoints: [[200, 100], [400, 100], [600, 100]]
+    - id: "lane_2" 
+      start_pos: [0, 200]
+      end_pos: [800, 200]
+      waypoints: [[200, 200], [400, 200], [600, 200]]
+  
+  turret_slots:
+    - pos: [150, 80]
+      lane_coverage: ["lane_1"]
+    - pos: [350, 80]
+      lane_coverage: ["lane_1", "lane_2"]
+    - pos: [550, 80]
+      lane_coverage: ["lane_2"]
+
+  enemy_types:
+    - id: "basic_enemy"
+      health: 100
+      speed: 50
+      reward: 10
+      sprite: "👹"
+
+  turret_types:
+    - id: "basic_turret"
+      damage: 25
+      range: 100
+      fire_rate: 1.0
+      cost: 50
+      sprite: "🗼"
+
+winning_condition: "Survive 5 waves"
+failure_condition: "10 enemies reach the end"

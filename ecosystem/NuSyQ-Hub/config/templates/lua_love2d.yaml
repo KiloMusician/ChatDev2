@@ -1,0 +1,35 @@
+name: LOVE2D Game
+type: game
+language: lua
+runtime_profile: native_terminal
+description: 2D game using the LOVE framework and Lua.
+metadata:
+  love_version: '11.4'
+  render_mode: 2d
+dependencies: []
+file_structure:
+  README.md: Game overview and running instructions
+  conf.lua: LOVE configuration (window, modules)
+  main.lua: Game entry point with love callbacks
+  src/player.lua: Player entity with movement
+  src/game_state.lua: Game state management
+  src/input.lua: Input handling module
+  src/utils.lua: Utility functions
+  assets/.gitkeep: Placeholder for game assets
+complexity: 4
+requires_multifile: true
+entry_point: main.lua
+packaging: love-release
+generation_hints:
+- Implement love.load(), love.update(dt), love.draw()
+- Use dt (delta time) for framerate-independent movement
+- Use local variables for module encapsulation
+- Use metatables for OOP-style classes
+- Handle input in love.keypressed/love.keyreleased
+- Use love.graphics for rendering
+- Structure code as self-contained modules
+feature_flags:
+  data_pipeline: true
+  event_router: true
+  save_migration: true
+  modding_api: true

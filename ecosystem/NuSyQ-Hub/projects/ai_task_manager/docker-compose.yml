@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=sqlite:///./app.db
+    volumes:
+      - ./data:/app/data

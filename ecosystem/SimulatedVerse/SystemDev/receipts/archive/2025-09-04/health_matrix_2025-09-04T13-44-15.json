@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-09-04T13:44:15.000Z",
+  "action": "zeta_check_bootstrap",
+  "operation": "ΞΘΛΔ_init",
+  "health_snapshot": {
+    "engines": {
+      "ollama": "down_rate_limited",
+      "openai": "down_rate_limited_429",
+      "offline_operations": "ok_initialized",
+      "organism_health": "ok_100_percent"
+    },
+    "council_bus": "ok_publishing_events",
+    "offline_ops": "running_autonomous_manager_active",
+    "agents": {
+      "active": ["raven", "alchemist", "sage-pilot"],
+      "dormant": ["librarian", "artificer", "janitor", "navigator", "culture-ship"],
+      "locked": []
+    },
+    "ui_preview_entrypoints": {
+      "dev_menu": "/dev → DevMenuExtended.tsx",
+      "game_main": "/game → UIMetamorphosisShell (PreviewUI/web)"
+    },
+    "files_index_ref": "SystemDev/reports/index_2025-09-04T13-14-32-751Z.json",
+    "repo_search_strategy": ["rg", "fd", "index_json", "receipts_backref", "path_alias_map"],
+    "zeta_idempotency": true
+  },
+  "endpoint_verification": {
+    "organism_status": "functional_100_health",
+    "llm_status": "endpoint_missing_404",
+    "council_events": "active_publishing",
+    "game_state_api": "functional_real_resources",
+    "outside_scope_probe": "completed_zero_external_deps"
+  },
+  "infrastructure_reality": {
+    "total_source_files": 2034,
+    "typescript_files": 1943,
+    "real_monitoring": "active_chokidar_winston_p-queue",
+    "memory_usage": "stable_around_200MB",
+    "autonomous_systems": "enabled_and_processing"
+  },
+  "remediation_needed": {
+    "llm_endpoint": "implement_api_llm_status",
+    "rate_limit_recovery": "ollama_openai_both_throttled",
+    "agent_activation": "5_dormant_agents_need_initialization"
+  },
+  "search_strategies_validated": {
+    "receipts_available": true,
+    "index_json_current": true,
+    "path_alias_map_loaded": true,
+    "fd_rg_available": true,
+    "sector_navigation": "quadpartite_functional"
+  },
+  "anti_theater_enforcement": true,
+  "next_phase": "culture_ship_scan"
+}

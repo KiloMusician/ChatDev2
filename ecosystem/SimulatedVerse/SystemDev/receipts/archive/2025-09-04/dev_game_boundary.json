@@ -1,0 +1,31 @@
+{
+  "dev_game_boundary_enforcement": {
+    "timestamp": "2025-09-04T12:12:05Z",
+    "boundary_verified": true,
+    "dev_mount": {
+      "path": "PreviewUI/web/dev/DevMenu.tsx",
+      "tag": "dev_menu",
+      "router_reference": "PreviewUI/web/core/MenuRouter.tsx:27",
+      "mode_switch": "game.setMode('DEV')"
+    },
+    "game_mount": {
+      "path": "PreviewUI/web/core/GameShell.tsx", 
+      "tag": "game_shell",
+      "router_reference": "PreviewUI/web/core/MenuRouter.tsx:32",
+      "mode_switch": "game.setMode('PLAY')"
+    },
+    "separation_enforced": {
+      "dev_systems_isolated": true,
+      "game_flavor_separated": true,
+      "lore_bridge_location": "PreviewUI/bridges/",
+      "no_system_leakage": true
+    },
+    "receipt_meta": {
+      "who": "BossRush_BoundaryEnforcement",
+      "what": "dev_game_separation_verification",
+      "where": "SystemDev/receipts/dev_game_boundary.json",
+      "artifact_path": "SystemDev/receipts/dev_game_boundary.json",
+      "cross_refs": ["PreviewUI/web/dev/DevMenu.tsx", "PreviewUI/web/core/GameShell.tsx", "PreviewUI/web/core/MenuRouter.tsx"]
+    }
+  }
+}

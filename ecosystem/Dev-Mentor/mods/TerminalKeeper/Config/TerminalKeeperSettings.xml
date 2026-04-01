@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Terminal Keeper settings. Edit to point to your Terminal Depths instance. -->
+<TerminalKeeperSettings>
+  <!-- Terminal Depths REST API endpoint (default: DevMentor Console on port 5000) -->
+  <ApiEndpoint>http://localhost:5000</ApiEndpoint>
+
+  <!-- Ollama endpoint for direct model queries (bypass Terminal Depths API) -->
+  <OllamaEndpoint>http://localhost:11434</OllamaEndpoint>
+
+  <!-- LM Studio endpoint (alternative local LLM) -->
+  <LMStudioEndpoint>http://localhost:1234</LMStudioEndpoint>
+
+  <!-- Which backend to use: "terminal_depths" | "ollama" | "lm_studio" -->
+  <LLMBackend>terminal_depths</LLMBackend>
+
+  <!-- Default model for colonist reasoning -->
+  <DefaultModel>llama3.2-3b</DefaultModel>
+
+  <!-- How often (in ticks) to push colonist state to the API. 60 = ~1s real time. -->
+  <ColonistUpdateIntervalTicks>300</ColonistUpdateIntervalTicks>
+
+  <!-- Proximity distance (tiles) for colonist conversations -->
+  <ConversationProximityTiles>3</ConversationProximityTiles>
+
+  <!-- Cooldown (ticks) between AI conversations for same pair -->
+  <ConversationCooldownTicks>3600</ConversationCooldownTicks>
+
+  <!-- Enable AI Council voting on colony-wide decisions -->
+  <EnableAICouncil>true</EnableAICouncil>
+
+  <!-- Enable blueprint generation from AI Council -->
+  <EnableBlueprintGeneration>true</EnableBlueprintGeneration>
+
+  <!-- Log level: "Debug" | "Info" | "Warning" | "Error" -->
+  <LogLevel>Info</LogLevel>
+
+  <!-- API auth token (set if your Terminal Depths server uses NuSyQ passkey) -->
+  <ApiToken></ApiToken>
+</TerminalKeeperSettings>

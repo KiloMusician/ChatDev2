@@ -1,0 +1,29 @@
+# Add missing Python analysis methods
+python -c "
+content = '''
+def _check_python_imports(self, content, filepath):
+    \"\"\"Enhanced Python import analysis\"\"\"
+    issues = []
+    lines = content.split('\n')
+
+    for i, line in enumerate(lines, 1):
+        # Check for unused imports
+        if line.strip().startswith('import ') or line.strip().startswith('from '):
+            import_name = line.split()[-1]
+            if import_name not in ' '.join(lines[i:]):
+                issues.append({
+                    'line': i,
+                    'type': 'INFO',
+                    'message': f'Potentially unused import: {import_name}',
+                    'fix_suggestion': f'Remove unused import or add usage'
+                })
+
+    return issues
+'''
+
+# Append to analyzer file
+with open('repository_syntax_analyzer.py', 'a') as f:
+    f.write('\n    ' + content.strip())
+
+print('✅ Added missing _check_python_imports method')
+"

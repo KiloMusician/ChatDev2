@@ -1,0 +1,310 @@
+{
+  "timestamp": "2026-03-09T07:13:47.687912",
+  "scan_mode": "quick",
+  "total_diagnostics": 18,
+  "by_severity": {
+    "errors": 0,
+    "warnings": 0,
+    "infos_hints": 18
+  },
+  "by_repo": {
+    "nusyq-hub": {
+      "repo": "nusyq-hub",
+      "total": 18,
+      "by_severity": {
+        "info": 18
+      },
+      "by_type": {
+        "linting": 18
+      },
+      "by_source": {
+        "ruff": 18
+      },
+      "path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub",
+      "python_targets": 6,
+      "python_target_names": [
+        "src",
+        "tests",
+        "scripts",
+        "core",
+        "ml",
+        "tools"
+      ]
+    }
+  },
+  "targets": [
+    "nusyq-hub"
+  ],
+  "filters": {
+    "include": [
+      "nusyq-hub"
+    ],
+    "exclude": [
+      "simulated-verse",
+      "nusyq"
+    ]
+  },
+  "partial_scan": false,
+  "scan_warnings": [],
+  "vscode_counts": null,
+  "ground_truth": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 18,
+    "total": 18,
+    "source": "tool_scan",
+    "note": "Tool scan (quick mode) using ruff, mypy, pylint across targeted repos: nusyq-hub; excludes quick E501 debt scan (set NUSYQ_ERROR_SCAN_INCLUDE_QUICK_E501_DEBT=1 to include)",
+    "scope": {
+      "targets": [
+        "nusyq-hub"
+      ],
+      "scan_mode": "quick",
+      "partial_scan": false
+    },
+    "confidence": "medium"
+  },
+  "diagnostics_export_counts": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0,
+    "total": 0,
+    "source": "vscode_diagnostics_bridge",
+    "path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\docs\\Reports\\diagnostics\\vscode_problem_counts_tooling.json"
+  },
+  "diagnostic_details": [
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+      "line_num": 230,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D205",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+      "line_num": 100,
+      "column_num": 5,
+      "message": "1 blank line required between summary line and description",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+      "line_num": 725,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-N999",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ChatDev-Party-System.py",
+      "line_num": 1,
+      "column_num": 1,
+      "message": "Invalid module name: 'ChatDev-Party-System'",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D205",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 1089,
+      "column_num": 9,
+      "message": "1 blank line required between summary line and description",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 2061,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D205",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 1048,
+      "column_num": 9,
+      "message": "1 blank line required between summary line and description",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 1038,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D205",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+      "line_num": 793,
+      "column_num": 9,
+      "message": "1 blank line required between summary line and description",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+      "line_num": 769,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D205",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+      "line_num": 1,
+      "column_num": 1,
+      "message": "1 blank line required between summary line and description",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 91,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D205",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 1023,
+      "column_num": 5,
+      "message": "1 blank line required between summary line and description",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_coordinator.py",
+      "line_num": 336,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 1133,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 1227,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D205",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ai_intermediary.py",
+      "line_num": 1,
+      "column_num": 1,
+      "message": "1 blank line required between summary line and description",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    },
+    {
+      "error_id": "ruff-D107",
+      "severity": "info",
+      "error_type": "linting",
+      "repo": "nusyq-hub",
+      "file_path": "C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\ai\\ChatDev-Party-System.py",
+      "line_num": 99,
+      "column_num": 9,
+      "message": "Missing docstring in `__init__`",
+      "source": "ruff",
+      "suggestion": "",
+      "timestamp": "2026-03-09T07:13:47.683355"
+    }
+  ]
+}

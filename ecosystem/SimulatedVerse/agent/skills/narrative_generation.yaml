@@ -1,0 +1,74 @@
+name: narrative_generation
+version: 1.0
+description: "Generate narrative content with token-efficient templates and selective LLM enhancement"
+
+contract:
+  inputs:
+    - name: context
+      type: object
+      required: true
+      properties:
+        tier: { type: integer, range: [1, 19] }
+        resources: { type: object }
+        colonists: { type: array }
+        mood: { type: number, range: [0, 100] }
+    - name: arc_type
+      type: string
+      enum: ["crisis", "development", "exploration", "social", "anomaly"]
+      required: true
+    - name: phase
+      type: integer
+      range: [0, 15]
+      required: true
+    - name: style
+      type: string
+      enum: ["banks_culture", "asimov_foundation", "dry_humor", "grim_resolve"]
+      default: "dry_humor"
+
+  outputs:
+    - name: beats
+      type: array
+      minItems: 1
+      maxItems: 16
+      items:
+        type: object
+        required: ["step", "cause", "effect", "ui"]
+    - name: metadata
+      type: object
+      properties:
+        method: { enum: ["template", "local_llm", "paid_api", "hybrid"] }
+        confidence: { type: number, range: [0, 1] }
+        tokens_used: { type: integer }
+
+cost_model:
+  base_tokens: 100
+  per_beat_tokens: 50
+  max_tokens: 800
+  preferred_model: "local_primary"
+  template_first: true
+  llm_polish_threshold: 0.6
+
+execution:
+  method: "template_first"
+  steps:
+    1: "generate_skeleton_from_templates"
+    2: "apply_context_variables"
+    3: "check_quality_threshold"
+    4: "selective_llm_polish"
+    5: "validate_schema"
+
+templates:
+  crisis:
+    spark: "Critical system failure in {system_name}. {severity_description}."
+    tension: "Resources depleting at {rate}. Time remaining: {estimate}."
+    resolution: "Emergency protocols {outcome}. System {status}."
+  
+  development:
+    spark: "Breakthrough in {research_area}. New possibilities emerge."
+    tension: "Implementation challenges: {obstacles}."
+    resolution: "Innovation {success_level}. Unlocks: {new_capabilities}."
+
+cache_policy:
+  ttl_minutes: 30
+  cache_key: ["arc_type", "phase", "context_hash", "style"]
+  partial_cache: true

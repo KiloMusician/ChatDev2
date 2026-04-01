@@ -1,0 +1,12 @@
+{
+  "id": "scripts_council_turn_sh_34",
+  "tier": 1,
+  "priority": 5,
+  "title": "Fix: printf \"\n/* AUTO  handled TODO at line %s */\n\" \"$line\" >> \"$file\"",
+  "source": {
+    "file": "scripts/council_turn.sh",
+    "line": 34
+  },
+  "action": "apply_patch_or_impl",
+  "expected_receipt": "reports/receipt_1756883401.517477_scripts_council_turn_sh_34.json"
+}

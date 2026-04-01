@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Keeper Dashboard</title>
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; margin: 16px; }
+      header { display:flex; align-items:center; justify-content:space-between }
+      .status { margin-top:12px; }
+      button { margin-right:8px; }
+      #games { margin-top:12px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2>Keeper Dashboard</h2>
+      <div>
+        <button id="btnToggle">Toggle Listener</button>
+        <button id="btnStatus">Refresh Status</button>
+      </div>
+    </header>
+
+    <section class="status">
+      <strong>Listener status:</strong>
+      <pre id="status">(loading...)</pre>
+    </section>
+
+    <section id="games">
+      <h3>Remote Steam data (example)</h3>
+      <div id="gamesList">Run `tools/steam-enrich-example.ps1` to attach remote data to settings (example).</div>
+    </section>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

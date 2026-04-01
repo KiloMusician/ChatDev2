@@ -1,0 +1,456 @@
+{
+  "dryRun": true,
+  "appliedAt": "2025-08-29T10:00:01.390Z",
+  "fileWriteCount": 95,
+  "fixes": {
+    "ImportFixes": [
+      {
+        "file": "tests/smoke.mjs",
+        "old": "../bootstrap/init.js",
+        "new": "../bootstrap/init"
+      },
+      {
+        "file": "src/main.ts",
+        "old": "./guardian/core/bus.js",
+        "new": "./kpulse/bus"
+      },
+      {
+        "file": "scripts/serialism_to_boolean.cjs",
+        "old": "./src/ai-hub/chatdev_tasks/repair_placeholders",
+        "new": "../ai-systems/chatdev-tasks/repair_placeholders"
+      },
+      {
+        "file": "registry/loader.ts",
+        "old": "../core/types",
+        "new": "../global/shared/sim/types"
+      },
+      {
+        "file": "bootstrap/init.ts",
+        "old": "../config/profiles",
+        "new": "../global/config/profiles"
+      },
+      {
+        "file": "bootstrap/init.ts",
+        "old": "../config/guards",
+        "new": "../global/config/guards"
+      },
+      {
+        "file": "bootstrap/init.ts",
+        "old": "../ui/ascii/splash",
+        "new": "../interface-systems/component-libraries/ascii/splash"
+      },
+      {
+        "file": "agent/main.ts",
+        "old": "./idle_tick.js",
+        "new": "./idle_tick"
+      },
+      {
+        "file": "agent/main.ts",
+        "old": "./quest_runner.js",
+        "new": "./quest_runner"
+      },
+      {
+        "file": "agent/main.ts",
+        "old": "./codemods.js",
+        "new": "./codemods"
+      },
+      {
+        "file": "agent/main.ts",
+        "old": "./testharness.js",
+        "new": "./testharness"
+      },
+      {
+        "file": "agent/main.ts",
+        "old": "./green_commit.js",
+        "new": "./green_commit"
+      },
+      {
+        "file": "agent/codemods.ts",
+        "old": "../engine/state.mjs",
+        "new": "../src/kpulse/state"
+      },
+      {
+        "file": "src/vscode-bridge/extension-coordinator.ts",
+        "old": "../copilot-enhancement/workspace-enhancer.js",
+        "new": "../copilot-enhancement/workspace-enhancer"
+      },
+      {
+        "file": "src/vscode-bridge/extension-coordinator.ts",
+        "old": "../ollama-orchestration/model-manager.js",
+        "new": "../../system/llm/ollama-orchestration/model-manager"
+      },
+      {
+        "file": "src/vscode-bridge/extension-coordinator.ts",
+        "old": "../ai-hub/coordination-core.js",
+        "new": "../../ai-systems/orchestration/coordination-core"
+      },
+      {
+        "file": "src/vscode-bridge/extension-coordinator.ts",
+        "old": "../knowledge-integration/obsidian-bridge.js",
+        "new": "../knowledge-integration/obsidian-bridge"
+      },
+      {
+        "file": "src/llm-system-bridge/unified-llm-integration.ts",
+        "old": "../ollama-orchestration/model-manager.js",
+        "new": "../../system/llm/ollama-orchestration/model-manager"
+      },
+      {
+        "file": "src/llm-system-bridge/unified-llm-integration.ts",
+        "old": "../integration-bridges/chatdev-bridge.js",
+        "new": "../integration-bridges/chatdev-bridge"
+      },
+      {
+        "file": "src/llm-system-bridge/unified-llm-integration.ts",
+        "old": "../ai-hub/coordination-core.js",
+        "new": "../../ai-systems/orchestration/coordination-core"
+      },
+      {
+        "file": "src/llm-system-bridge/unified-llm-integration.ts",
+        "old": "../ai-hub/llm-provider-selector.js",
+        "new": "../../ai-systems/orchestration/llm-provider-selector"
+      },
+      {
+        "file": "src/llm-system-bridge/unified-llm-integration.ts",
+        "old": "../ai-hub/vscode-copilot-interface.js",
+        "new": "../../ai-systems/orchestration/vscode-copilot-interface"
+      },
+      {
+        "file": "src/integration-bridges/chatdev-bridge.ts",
+        "old": "../ollama-orchestration/model-manager.js",
+        "new": "../../system/llm/ollama-orchestration/model-manager"
+      },
+      {
+        "file": "src/integration-bridges/chatdev-bridge.ts",
+        "old": "../ai-hub/coordination-core.js",
+        "new": "../../ai-systems/orchestration/coordination-core"
+      },
+      {
+        "file": "src/kpulse/viewport.ts",
+        "old": "./state.js",
+        "new": "./state"
+      },
+      {
+        "file": "src/kpulse/timeflow.ts",
+        "old": "./state.js",
+        "new": "./state"
+      },
+      {
+        "file": "src/kpulse/tier_router.ts",
+        "old": "./bus.js",
+        "new": "./bus"
+      },
+      {
+        "file": "src/kpulse/self_build.ts",
+        "old": "./bus.js",
+        "new": "./bus"
+      },
+      {
+        "file": "src/kpulse/self_build.ts",
+        "old": "./registry.js",
+        "new": "./registry"
+      },
+      {
+        "file": "src/kpulse/perimeter.ts",
+        "old": "./config.js",
+        "new": "./config"
+      },
+      {
+        "file": "src/kpulse/perimeter.ts",
+        "old": "./hash.js",
+        "new": "./hash"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./config.js",
+        "new": "./config"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./bus.js",
+        "new": "./bus"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./state.js",
+        "new": "./state"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./viewport.js",
+        "new": "./viewport"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./registry.js",
+        "new": "./registry"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./directives.js",
+        "new": "./directives"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./self_build.js",
+        "new": "./self_build"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./entropy.js",
+        "new": "./entropy"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./validator.js",
+        "new": "./validator"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./bridge_adapter.js",
+        "new": "./bridge_adapter"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./tier_router.js",
+        "new": "./tier_router"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./logs.js",
+        "new": "./logs"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./diff.js",
+        "new": "./diff"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./introspect.js",
+        "new": "./introspect"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./config.js",
+        "new": "./config"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./navai/index.js",
+        "new": "../../index"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./navai/memory.js",
+        "new": "./navai/memory"
+      },
+      {
+        "file": "src/kpulse/index.ts",
+        "old": "./perimeter.js",
+        "new": "./perimeter"
+      },
+      {
+        "file": "src/kpulse/generated_loader.ts",
+        "old": "./types.js",
+        "new": "../../global/shared/sim/types"
+      },
+      {
+        "file": "src/kpulse/entropy.ts",
+        "old": "./state.js",
+        "new": "./state"
+      },
+      {
+        "file": "src/kpulse/directives.ts",
+        "old": "./state.js",
+        "new": "./state"
+      },
+      {
+        "file": "src/kpulse/directives.ts",
+        "old": "./bus.js",
+        "new": "./bus"
+      },
+      {
+        "file": "src/kpulse/directives.ts",
+        "old": "./registry.js",
+        "new": "./registry"
+      },
+      {
+        "file": "src/kpulse/directives.ts",
+        "old": "./timeflow.js",
+        "new": "./timeflow"
+      },
+      {
+        "file": "src/kpulse/directives.ts",
+        "old": "./config.js",
+        "new": "./config"
+      },
+      {
+        "file": "src/kpulse/directives.ts",
+        "old": "./navai/memory.js",
+        "new": "./navai/memory"
+      },
+      {
+        "file": "src/kpulse/bridge_adapter.ts",
+        "old": "./bus.js",
+        "new": "./bus"
+      },
+      {
+        "file": "modules/culture_ship/ship.ts",
+        "old": "./planners/cascade_event.js",
+        "new": "./planners/cascade_event"
+      },
+      {
+        "file": "modules/culture_ship/ship.ts",
+        "old": "./analyzers/duplicates.js",
+        "new": "./analyzers/duplicates"
+      },
+      {
+        "file": "modules/culture_ship/ship.ts",
+        "old": "./analyzers/imports.js",
+        "new": "./analyzers/imports"
+      },
+      {
+        "file": "modules/culture_ship/ship.ts",
+        "old": "./analyzers/softlocks.js",
+        "new": "./analyzers/softlocks"
+      },
+      {
+        "file": "modules/culture_ship/ship.ts",
+        "old": "./surgeons/rename_and_rewire.js",
+        "new": "./surgeons/rename_and_rewire"
+      },
+      {
+        "file": "modules/culture_ship/ship.ts",
+        "old": "./planners/token_governor.js",
+        "new": "./planners/token_governor"
+      },
+      {
+        "file": "modules/culture_ship/ship.ts",
+        "old": "./ui/telemetry.js",
+        "new": "./ui/telemetry"
+      },
+      {
+        "file": "features/progression/service.ts",
+        "old": "../../core/types",
+        "new": "../../global/shared/sim/types"
+      },
+      {
+        "file": "features/energy/service.ts",
+        "old": "../../core/types",
+        "new": "../../global/shared/sim/types"
+      },
+      {
+        "file": "knowledge-systems/elevation-systems/elevator.mjs",
+        "old": "../engine/state.mjs",
+        "new": "../../src/kpulse/state"
+      },
+      {
+        "file": "ai-systems/orchestration/llm-provider-selector.ts",
+        "old": "../../src/ollama-orchestration/model-manager",
+        "new": "../../system/llm/ollama-orchestration/model-manager"
+      },
+      {
+        "file": "src/kpulse/navai/provider.ts",
+        "old": "./indexer.js",
+        "new": "./indexer"
+      },
+      {
+        "file": "src/kpulse/navai/provider.ts",
+        "old": "./memory.js",
+        "new": "./memory"
+      },
+      {
+        "file": "src/kpulse/navai/provider.ts",
+        "old": "../config.js",
+        "new": "../config"
+      },
+      {
+        "file": "src/kpulse/navai/memory.ts",
+        "old": "../config.js",
+        "new": "../config"
+      },
+      {
+        "file": "src/kpulse/navai/indexer.ts",
+        "old": "../config.js",
+        "new": "../config"
+      },
+      {
+        "file": "src/kpulse/navai/index.ts",
+        "old": "./provider.js",
+        "new": "../../../ai-systems/providers/provider"
+      },
+      {
+        "file": "src/kpulse/navai/index.ts",
+        "old": "./memory.js",
+        "new": "./memory"
+      },
+      {
+        "file": "application-services/engine/scripts/bus.js",
+        "old": "../src/bus.js",
+        "new": "../../../src/kpulse/bus"
+      }
+    ],
+    "DuplicateMerges": [],
+    "PlaceholderStubs": [],
+    "SoftlockGuards": [
+      {
+        "softened": "system/llm/ollama-orchestration/model-manager.js",
+        "pattern": "/\\bwhile\\s*\\(\\s*true\\s*\\)\\s*\\{/",
+        "severity": "high"
+      }
+    ],
+    "BarrelFiles": [
+      {
+        "barrel": "tests/index.ts"
+      },
+      {
+        "barrel": "src/index.ts"
+      },
+      {
+        "barrel": "scripts/index.ts"
+      },
+      {
+        "barrel": "registry/index.ts"
+      },
+      {
+        "barrel": "bootstrap/index.ts"
+      },
+      {
+        "barrel": "agent/index.ts"
+      },
+      {
+        "barrel": "src/vscode-bridge/index.ts"
+      },
+      {
+        "barrel": "src/scripts/index.ts"
+      },
+      {
+        "barrel": "src/server/index.ts"
+      },
+      {
+        "barrel": "src/llm-system-bridge/index.ts"
+      },
+      {
+        "barrel": "src/integration-bridges/index.ts"
+      },
+      {
+        "barrel": "modules/culture_ship/index.ts"
+      },
+      {
+        "barrel": "features/progression/index.ts"
+      },
+      {
+        "barrel": "features/energy/index.ts"
+      },
+      {
+        "barrel": "knowledge-systems/elevation-systems/index.ts"
+      },
+      {
+        "barrel": "ai-systems/orchestration/index.ts"
+      },
+      {
+        "barrel": "application-services/engine/scripts/index.ts"
+      }
+    ]
+  }
+}

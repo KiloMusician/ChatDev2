@@ -1,0 +1,41 @@
+﻿=== Maintenance for C:\Users\keath\Desktop\Legacy\NuSyQ-Hub ===
+?? .maintenance-log-20260329-052817.txt
+git : warning: no corresponding .idx: 
+.git/objects/pack/pack-0bab944b2de6ed11c448ac8c7b69cac6d1201624.pack
+At C:\Users\keath\Dev-Mentor\.vscode\do_all_maintenance.ps1:36 char:9
++         git count-objects -vH 2>&1 | Out-File -FilePath $log -Append  ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: no cor...c6d1201624.pack 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+warning: no corresponding .idx: 
+.git/objects/pack/pack-17a34f1f01e374a5d481b5c4f278ecc24c6ab110.pack
+warning: no corresponding .idx: 
+.git/objects/pack/pack-1c777985fe86259aa0652a2fc2b94147800cb1d9.pack
+warning: no corresponding .idx: 
+.git/objects/pack/pack-80b940fe88b191d762b4b9396c3e59a16e2e3771.pack
+warning: no corresponding .idx: 
+.git/objects/pack/pack-ace0600dbd012df08d2048585e85397a1bcf7a1b.pack
+warning: no corresponding .idx: 
+.git/objects/pack/pack-cad8440d8bd93b4ee5b7f1558abb5327719b9665.pack
+warning: no corresponding .idx: 
+.git/objects/pack/pack-f7a0fe8e59cef08b08b0572ca7cbeb5c7398298f.pack
+count: 0
+size: 0 bytes
+in-pack: 36894
+packs: 1
+size-pack: 131.74 MiB
+prune-packable: 0
+garbage: 7
+size-garbage: 106.30 MiB
+git : Cloning into bare repository 
+'C:\Users\keath\repo-backups\NuSyQ-Hub-20260329-052817.git'...
+At C:\Users\keath\Dev-Mentor\.vscode\do_all_maintenance.ps1:42 char:9
++         git clone --mirror $repo $mirrorDir 2>&1 | Out-File -FilePath ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Cloning into ba...-052817.git'... 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+done.

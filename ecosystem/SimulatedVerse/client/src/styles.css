@@ -1,0 +1,151 @@
+:root{
+  /* Typography */
+  --font-ui: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* Layout */
+  --sidebar-w: 260px;
+  --topbar-h: 52px;
+  --tabbar-h: 56px;
+  /* Colors (auto dark/light) */
+  color-scheme: dark light;
+  --bg: Canvas;
+  --fg: CanvasText;
+  --muted: color-mix(in oklab, var(--fg) 60%, var(--bg));
+  --accent: #68f; /* tweak freely */
+  --panel: color-mix(in oklab, var(--bg) 92%, var(--fg));
+  --ok: #48d597;
+  --warn: #ffcc66;
+  --bad: #ff6b6b;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --panel: color-mix(in oklab, var(--bg) 80%, var(--fg));
+  }
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-ui); line-height: 1.25;
+}
+* { box-sizing: border-box; }
+:root { color-scheme: dark; }
+canvas { image-rendering: pixelated; }
+
+/* App frame with safe areas */
+.app{
+  min-height: 100svh; /* small-viewport; great for mobile in Replit preview */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: var(--topbar-h) 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar main";
+}
+
+/* Desktop sidebar */
+.sidebar{
+  grid-area: sidebar; border-right: 1px solid var(--panel);
+  padding: 12px; display: flex; flex-direction: column; gap: 12px;
+}
+.brand{ font-weight: 800; letter-spacing:.5px; }
+.nav{ display: grid; gap: 6px; }
+.nav-btn{
+  width: 100%; text-align: left; padding: 10px 12px;
+  border: 1px solid var(--panel); background: transparent; color: var(--fg);
+  border-radius: 8px; cursor: pointer;
+}
+.nav-btn:hover{ border-color: var(--accent); }
+.panel{ border-top: 1px solid var(--panel); padding-top: 8px; }
+.row{ display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.row.sm{ font-size: 12px; color: var(--muted); }
+.spacer{ flex: 1; }
+
+/* Topbar for mobile (also visible on desktop) */
+.topbar{
+  grid-area: topbar; display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--panel); padding: 0 8px;
+}
+.icon-btn{
+  border: 1px solid var(--panel); background: transparent; color: var(--fg);
+  border-radius: 8px; padding: 6px 10px; cursor: pointer;
+}
+.icon-btn:active{ transform: translateY(1px); }
+.title{ font-weight: 700; flex: 1; }
+
+/* Tabbar for mobile */
+.tabbar{
+  position: fixed; inset: auto 0 0 0; height: var(--tabbar-h);
+  display: none; grid-template-columns: repeat(5, 1fr);
+  background: var(--bg); border-top: 1px solid var(--panel);
+}
+.tab{ background: transparent; border: 0; font-size: 20px; }
+.tab:active{ transform: translateY(1px); }
+
+/* Main area */
+.main{ grid-area: main; position: relative; overflow: hidden; }
+
+/* ASCII stage (auto scales) */
+.stage-wrap{
+  position: absolute; inset: 0; overflow: auto;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(50% 50% at 50% 50%, color-mix(in oklab, var(--bg) 92%, var(--fg)) 0%, transparent 60%) no-repeat;
+}
+.ascii{
+  margin: 0; padding: 8px 12px; line-height: 1.0;
+  font-family: var(--font-mono); font-variant-ligatures: none;
+  white-space: pre; background: rgba(0,0,0,.04);
+  border: 1px solid var(--panel); border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.07);
+  /* Scales down gracefully on small screens */
+  transform-origin: top left;
+}
+
+/* HUD pills */
+.hud{
+  position: absolute; top: 8px; right: 8px; display: flex; gap: 6px; flex-wrap: wrap;
+}
+.pill{
+  background: color-mix(in oklab, var(--bg) 70%, var(--fg));
+  border: 1px solid var(--panel); border-radius: 999px;
+  padding: 4px 10px; font-size: 12px;
+}
+
+/* Mobile layout: hide sidebar, show tabbar */
+@media (max-width: 960px){
+  .app{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "topbar"
+      "main";
+  }
+  .sidebar{ display: none; }
+  .tabbar{ display: grid; }
+  .main{ padding-bottom: var(--tabbar-h); }
+}
+
+/* Mobile Drawer (when hamburger tapped) */
+.app.drawer-open .sidebar{
+  display: block; position: fixed; z-index: 10; inset: 0 auto 0 0; width: min(84vw, 360px);
+  background: var(--bg);
+}
+.app.drawer-open #scrim{ display: block; }
+
+.scrim{
+  position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 9;
+}
+
+/* Accessiblity helpers */
+:focus-visible{ outline: 2px dashed var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
+.high-contrast{
+  --panel: color-mix(in oklab, var(--bg) 60%, var(--fg));
+  --accent: #3af;
+  filter: contrast(1.1) saturate(1.1);
+}
+.mono-ui{ font-family: var(--font-mono); }

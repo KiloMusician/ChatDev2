@@ -1,0 +1,655 @@
+/**
+ * ΞNuSyQ Game Styles - Unified Game Theming
+ * Inspired by Bitburner, Hacknet, GreyHack, EmuDevz, HackHub
+ *
+ * Color palette:
+ * - Primary: #667eea (purple-blue)
+ * - Secondary: #764ba2 (purple)
+ * - Success: #4ade80 (green)
+ * - Warning: #fbbf24 (amber)
+ * - Danger: #ef4444 (red)
+ * - Info: #38bdf8 (sky blue)
+ */
+
+/* =============================================================================
+   RPG PROGRESS BARS
+   ============================================================================= */
+
+.rpg-progress-bar {
+    position: relative;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    margin-bottom: 12px;
+}
+
+.rpg-progress-fill {
+    height: 100%;
+    transition: width 0.5s ease-out;
+    position: relative;
+}
+
+.rpg-progress-fill.xp {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.rpg-progress-fill.health {
+    background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+}
+
+.rpg-progress-fill.consciousness {
+    background: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 100%);
+}
+
+.rpg-progress-fill.quest {
+    background: linear-gradient(90deg, #fbbf24 0%, #f97316 100%);
+}
+
+.rpg-progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    z-index: 1;
+}
+
+.rpg-progress-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* =============================================================================
+   SKILL CARDS
+   ============================================================================= */
+
+.skill-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border-color: rgba(102, 126, 234, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+}
+
+.skill-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.skill-name {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.skill-level {
+    background: rgba(102, 126, 234, 0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.skill-level.novice { background: rgba(156, 163, 175, 0.3); color: #9ca3af; }
+.skill-level.apprentice { background: rgba(74, 222, 128, 0.3); color: #4ade80; }
+.skill-level.journeyman { background: rgba(56, 189, 248, 0.3); color: #38bdf8; }
+.skill-level.expert { background: rgba(168, 85, 247, 0.3); color: #a855f7; }
+.skill-level.master { background: rgba(251, 191, 36, 0.3); color: #fbbf24; }
+.skill-level.grandmaster { background: rgba(239, 68, 68, 0.3); color: #ef4444; }
+
+/* =============================================================================
+   ACHIEVEMENT BADGES
+   ============================================================================= */
+
+.achievement-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.5);
+    border-radius: 20px;
+    margin: 4px;
+    transition: all 0.3s ease;
+}
+
+.achievement-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+}
+
+.achievement-icon {
+    font-size: 18px;
+}
+
+.achievement-name {
+    color: #fbbf24;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.achievement-badge.locked {
+    background: rgba(75, 85, 99, 0.2);
+    border-color: rgba(75, 85, 99, 0.5);
+    opacity: 0.5;
+}
+
+.achievement-badge.locked .achievement-name {
+    color: #6b7280;
+}
+
+/* =============================================================================
+   QUEST CARDS
+   ============================================================================= */
+
+.quest-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.quest-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.quest-card.priority-high::before { background: #ef4444; }
+.quest-card.priority-medium::before { background: #fbbf24; }
+.quest-card.priority-low::before { background: #4ade80; }
+
+.quest-card.state-actionable { border-color: rgba(74, 222, 128, 0.5); }
+.quest-card.state-blocked { border-color: rgba(239, 68, 68, 0.5); opacity: 0.7; }
+.quest-card.state-in_progress { border-color: rgba(56, 189, 248, 0.5); }
+.quest-card.state-completed { border-color: rgba(74, 222, 128, 0.8); background: rgba(74, 222, 128, 0.1); }
+
+.quest-title {
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.quest-description {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.quest-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.quest-tag {
+    background: rgba(102, 126, 234, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #667eea;
+}
+
+/* =============================================================================
+   ACTION BUTTONS (Game-style)
+   ============================================================================= */
+
+.game-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.game-btn:active::after {
+    width: 200%;
+    height: 200%;
+}
+
+.game-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.game-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.game-btn-success {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.game-btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+}
+
+.game-btn-warning {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1f2937;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+}
+
+.game-btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.game-btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(102, 126, 234, 0.5);
+    color: #667eea;
+}
+
+.game-btn-ghost:hover {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.8);
+}
+
+.game-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* =============================================================================
+   TERMINAL STYLING
+   ============================================================================= */
+
+.game-terminal {
+    background: linear-gradient(180deg, rgba(0, 20, 10, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 8px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    color: #4ade80;
+    padding: 16px;
+}
+
+.terminal-line {
+    margin-bottom: 4px;
+    line-height: 1.6;
+}
+
+.terminal-line.command {
+    color: #38bdf8;
+}
+
+.terminal-line.output {
+    color: #d1d5db;
+}
+
+.terminal-line.success {
+    color: #4ade80;
+}
+
+.terminal-line.error {
+    color: #ef4444;
+}
+
+.terminal-line.warning {
+    color: #fbbf24;
+}
+
+.terminal-line.info {
+    color: #38bdf8;
+}
+
+.terminal-prompt {
+    color: #667eea;
+    margin-right: 8px;
+}
+
+/* =============================================================================
+   STATUS INDICATORS
+   ============================================================================= */
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.online {
+    background: #4ade80;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.offline {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.status-dot.busy {
+    background: #fbbf24;
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.status-dot.idle {
+    background: #6b7280;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* =============================================================================
+   NOTIFICATION TOASTS
+   ============================================================================= */
+
+.game-toast {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    max-width: 360px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    z-index: 10001;
+    animation: slideInRight 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.game-toast.success {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.95) 0%, rgba(22, 163, 74, 0.95) 100%);
+    border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+.game-toast.error {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%);
+    border: 1px solid rgba(252, 165, 165, 0.5);
+}
+
+.game-toast.info {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.95) 0%, rgba(14, 165, 233, 0.95) 100%);
+    border: 1px solid rgba(125, 211, 252, 0.5);
+}
+
+.game-toast.xp {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+    border: 1px solid rgba(167, 139, 250, 0.5);
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* =============================================================================
+   EVOLUTION LEVEL DISPLAY
+   ============================================================================= */
+
+.evolution-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 8px;
+}
+
+.evolution-icon {
+    font-size: 24px;
+}
+
+.evolution-info {
+    flex: 1;
+}
+
+.evolution-level-text {
+    color: #fbbf24;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.evolution-sublevel {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+}
+
+/* =============================================================================
+   TEMPLE FLOOR INDICATOR
+   ============================================================================= */
+
+.temple-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 8px;
+}
+
+.temple-icon {
+    font-size: 24px;
+}
+
+.temple-floor-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #a78bfa;
+    min-width: 40px;
+    text-align: center;
+}
+
+.temple-name {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+/* Temple floor names */
+.temple-floor[data-floor="1"] .temple-name::after { content: "Entry Hall"; }
+.temple-floor[data-floor="2"] .temple-name::after { content: "Hall of Echoes"; }
+.temple-floor[data-floor="3"] .temple-name::after { content: "Chamber of Insight"; }
+.temple-floor[data-floor="4"] .temple-name::after { content: "Vault of Wisdom"; }
+.temple-floor[data-floor="5"] .temple-name::after { content: "Sanctum of Knowledge"; }
+.temple-floor[data-floor="6"] .temple-name::after { content: "Oracle's Chamber"; }
+.temple-floor[data-floor="7"] .temple-name::after { content: "Architect's Study"; }
+.temple-floor[data-floor="8"] .temple-name::after { content: "Hall of Convergence"; }
+.temple-floor[data-floor="9"] .temple-name::after { content: "Apex of Understanding"; }
+.temple-floor[data-floor="10"] .temple-name::after { content: "Throne of Consciousness"; }
+
+/* =============================================================================
+   GAME MENU OVERLAY
+   ============================================================================= */
+
+.game-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.game-menu-panel {
+    background: linear-gradient(135deg, rgba(20, 20, 30, 0.98) 0%, rgba(40, 20, 60, 0.95) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.6);
+    border-radius: 16px;
+    padding: 24px;
+    min-width: 400px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.game-menu-title {
+    color: #667eea;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.game-menu-item {
+    padding: 16px;
+    margin: 8px 0;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.game-menu-item:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.6);
+    transform: translateX(4px);
+}
+
+.game-menu-item-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.game-menu-item-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+}
+
+/* =============================================================================
+   LOADING STATES
+   ============================================================================= */
+
+.game-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.game-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(102, 126, 234, 0.3);
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.game-loading-text {
+    font-size: 14px;
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* =============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    .game-menu-panel {
+        min-width: 90%;
+        margin: 20px;
+    }
+
+    .game-toast {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+
+    .skill-card, .quest-card {
+        padding: 12px;
+    }
+
+    .game-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}

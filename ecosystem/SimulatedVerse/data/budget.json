@@ -1,0 +1,21 @@
+{
+  "daily_allowance": 100,
+  "daily_used": 0,
+  "warn_threshold": 70,
+  "hard_threshold": 90,
+  "entropy_score": 0,
+  "last_reset": "2025-08-30T04:36:00Z",
+  "per_job_weights": {
+    "RefactorPU": 5,
+    "TestPU": 3,
+    "DocPU": 2,
+    "PerfPU": 7,
+    "UXPU": 4,
+    "GamePU": 6,
+    "SecurityPU": 8
+  },
+  "backoff_multiplier": 2.0,
+  "recovery_rate": 5,
+  "infrastructure_first": true,
+  "audit_timestamp": "2025-08-30T04:36:00Z"
+}

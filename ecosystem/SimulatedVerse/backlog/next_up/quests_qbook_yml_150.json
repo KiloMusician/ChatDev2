@@ -1,0 +1,12 @@
+{
+  "id": "quests_qbook_yml_150",
+  "tier": 1,
+  "priority": 5,
+  "title": "Fix: assert  'expect(lint(\"TODO\")).toMatch(/soft-warning/)'",
+  "source": {
+    "file": "quests/qbook.yml",
+    "line": 150
+  },
+  "action": "apply_patch_or_impl",
+  "expected_receipt": "reports/receipt_1756883400.634468_quests_qbook_yml_150.json"
+}

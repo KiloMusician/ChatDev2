@@ -1,0 +1,140 @@
+{
+  "run_id": "20251226_071456",
+  "timestamp": "2025-12-26T07:18:20.787874",
+  "status": "fail",
+  "total_checks": 6,
+  "passed": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "check": "?? Quick Tests",
+      "exit_code": 1,
+      "duration_seconds": 130.03,
+      "details": "Command '['C:\\\\Users\\\\keath\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe', 'scripts/start_nusyq.py', 'test']' timed out after 130 seconds",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "test"
+      ]
+    },
+    {
+      "check": "?? Code Format",
+      "exit_code": 1,
+      "duration_seconds": 9.67,
+      "details": "would reformat C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\agents\\adaptive_timeout_manager.py | would reformat C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\an...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "black",
+        "src/",
+        "--check",
+        "--extend-exclude",
+        "\\.ipynb$"
+      ]
+    },
+    {
+      "check": "?? Lint Check",
+      "exit_code": 1,
+      "duration_seconds": 0.16,
+      "details": "E501 Line too long (135 > 100) | --> src\\ai\\ChatDev-Party-System.py:3:101 | | | 1 | \"\"\"\ud83c\udfad KILO-FOOLISH ChatDev Party System - Working Version.\"\"\" | 2 | | 3 | ...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src/",
+        "--select=E,F"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "check": "?? System Health",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 21.91,
+      "details": "\ud83c\udfe5 NuSyQ Selfcheck Diagnostic | ================================================== | 1. Validating Python syntax... | 2. Checking required directories... | 3....",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "selfcheck"
+      ]
+    },
+    {
+      "check": "?? Capabilities",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 20.73,
+      "details": "\ud83e\udde0 NuSyQ Comprehensive Capability Discovery | ====================================================================== | \ud83d\udcca System Snapshot | Total Capabilities:...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "capabilities"
+      ]
+    },
+    {
+      "check": "?? Guild Status",
+      "status": "pass",
+      "exit_code": 0,
+      "duration_seconds": 22.19,
+      "details": "{ | \"timestamp\": \"2025-12-26T07:04:17.452636\", | \"agents_online\": 2, | \"quests_open\": 1, | \"quests_active\": 0, | \"quests_blocked\": 0, | \"critical_signals\": [...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "guild_status"
+      ]
+    },
+    {
+      "check": "?? Quick Tests",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 130.03,
+      "details": "Command '['C:\\\\Users\\\\keath\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe', 'scripts/start_nusyq.py', 'test']' timed out after 130 seconds",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "scripts/start_nusyq.py",
+        "test"
+      ]
+    },
+    {
+      "check": "?? Code Format",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 9.67,
+      "details": "would reformat C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\agents\\adaptive_timeout_manager.py | would reformat C:\\Users\\keath\\Desktop\\Legacy\\NuSyQ-Hub\\src\\an...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "black",
+        "src/",
+        "--check",
+        "--extend-exclude",
+        "\\.ipynb$"
+      ]
+    },
+    {
+      "check": "?? Lint Check",
+      "status": "fail",
+      "exit_code": 1,
+      "duration_seconds": 0.16,
+      "details": "E501 Line too long (135 > 100) | --> src\\ai\\ChatDev-Party-System.py:3:101 | | | 1 | \"\"\"\ud83c\udfad KILO-FOOLISH ChatDev Party System - Working Version.\"\"\" | 2 | | 3 | ...",
+      "command": [
+        "C:\\Users\\keath\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src/",
+        "--select=E,F"
+      ]
+    }
+  ],
+  "suggestions": [
+    "Run: python scripts/start_nusyq.py test",
+    "Or isolate failures: pytest tests/ -q -x --maxfail=1",
+    "Format code: python scripts/improve_code_quality.py",
+    "Or run: black src/ --line-length=100",
+    "Auto-fix lint: ruff check src/ --fix",
+    "Re-run lint: ruff check src/ --select=E,F"
+  ],
+  "output_contract_version": "v1.1"
+}

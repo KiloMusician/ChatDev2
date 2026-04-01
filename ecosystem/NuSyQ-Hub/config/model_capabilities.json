@@ -1,0 +1,158 @@
+{
+  "openai:gpt-4o-mini": {
+    "tags": [
+      "code",
+      "general"
+    ],
+    "cost": "medium",
+    "latency": "medium"
+  },
+  "ollama:qwen2.5-coder:7b": {
+    "tags": [
+      "local",
+      "code"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:phi3:3.8b": {
+    "tags": [
+      "code",
+      "local",
+      "light"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:llama3:8b": {
+    "tags": [
+      "code",
+      "general",
+      "local"
+    ],
+    "cost": "low",
+    "latency": "medium"
+  },
+  "chatdev:chatdev-team": {
+    "tags": [
+      "multi-agent",
+      "codegen",
+      "pipeline"
+    ],
+    "cost": "variable",
+    "latency": "high"
+  },
+  "ollama:gpt-3.5-turbo-16k:latest": {
+    "tags": [
+      "local"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:llama3.1:8b": {
+    "tags": [
+      "local",
+      "general"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:nomic-embed-text:latest": {
+    "tags": [
+      "local"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:phi3.5:latest": {
+    "tags": [
+      "local",
+      "general"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:starcoder2:15b": {
+    "tags": [
+      "local",
+      "code"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:deepseek-coder-v2:16b": {
+    "tags": [
+      "local",
+      "code"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:codellama:7b": {
+    "tags": [
+      "local",
+      "code",
+      "general"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:gemma2:9b": {
+    "tags": [
+      "local",
+      "general"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "ollama:qwen2.5-coder:14b": {
+    "tags": [
+      "local",
+      "code"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "lmstudio:openai/gpt-oss-20b": {
+    "tags": [
+      "local"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "lmstudio:text-embedding-nomic-embed-text-v1.5": {
+    "tags": [
+      "local"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "skyclaw:gateway": {
+    "tags": [
+      "agent-runtime",
+      "multi-channel",
+      "code",
+      "general",
+      "local"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "copilot:bridge": {
+    "tags": [
+      "code",
+      "completion",
+      "general"
+    ],
+    "cost": "low",
+    "latency": "low"
+  },
+  "codex:cli": {
+    "tags": [
+      "code",
+      "general"
+    ],
+    "cost": "low",
+    "latency": "medium"
+  }
+}

@@ -1,0 +1,2135 @@
+{
+  "version": "2.0.0",
+  "meta": {
+    "created": "2025-11-26",
+    "last_updated": "2025-12-26",
+    "ecosystem": "NuSyQ Multi-Repository Workspace",
+    "total_rules": 16,
+    "description": "Battle-tested wisdom from NuSyQ-Hub, SimulatedVerse, and NuSyQ Root"
+  },
+  "rules": [
+    {
+      "id": "powershell_python_misroute",
+      "version": 3,
+      "triggers": {
+        "errors": [
+          "The term 'python' is not recognized",
+          "python : The term 'python' is not recognized as the name of a cmdlet"
+        ],
+        "command_patterns": [
+          "python .*",
+          "python$"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "pwsh"
+        ],
+        "platforms": [
+          "windows"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "PowerShell requires 'py' launcher instead of 'python' command",
+        "long": "Windows PowerShell doesn't alias 'python' by default. Use the Python Launcher 'py' or add Python to PATH. This is the #1 beginner mistake in Windows development.",
+        "level": "beginner",
+        "related_rules": [
+          "venv_activation_powershell"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "use_py_launcher",
+          "description": "Use Windows Python Launcher (recommended)",
+          "example": "py -3.11 src/main.py",
+          "when_to_use": "Always in PowerShell on Windows",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "use_full_path",
+          "description": "Use full path to Python executable",
+          "example": "C:\\Python311\\python.exe script.py",
+          "when_to_use": "When py launcher unavailable or specific version needed",
+          "success_rate": 0.9
+        },
+        {
+          "strategy": "activate_venv",
+          "description": "Activate virtual environment which adds python to PATH",
+          "example": ".venv\\Scripts\\Activate.ps1",
+          "when_to_use": "When working in project with venv",
+          "success_rate": 0.98
+        }
+      ],
+      "actions": {
+        "severity": "warn",
+        "auto_fix": true,
+        "fix_strategy": "replace_python_with_py",
+        "notify_agent": true,
+        "learn_from_success": true
+      },
+      "tags": [
+        "powershell",
+        "python",
+        "windows",
+        "beginner",
+        "common"
+      ],
+      "lore": {
+        "glyph": "\u0398\u039b\u03a3\u039e",
+        "story": "The Shell Deceiver - when the serpent's true name differs between realms",
+        "moral": "Know thy shell's tongue before invoking the serpent",
+        "culture_ship_wisdom": "Even the Culture respects local protocols"
+      },
+      "meta": {
+        "hit_count": 127,
+        "success_rate": 0.95,
+        "first_seen": "2025-10-15",
+        "last_seen": "2025-11-25",
+        "affected_agents": [
+          "copilot",
+          "continue"
+        ],
+        "repo_frequency": {
+          "NuSyQ-Hub": 82,
+          "SimulatedVerse": 31,
+          "NuSyQ": 14
+        }
+      }
+    },
+    {
+      "id": "missing_module_import",
+      "version": 4,
+      "triggers": {
+        "errors": [
+          "ModuleNotFoundError: No module named",
+          "ImportError: cannot import name",
+          "No module named"
+        ],
+        "command_patterns": [
+          "python .*",
+          "py .*",
+          "pytest.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Python module not installed or venv not activated",
+        "long": "Missing modules indicate either: 1) package not installed, 2) wrong virtual environment, 3) circular import, or 4) typo in module name. Check requirements.txt and venv activation first.",
+        "level": "beginner",
+        "related_rules": [
+          "venv_activation_powershell",
+          "circular_import_detected"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "pip_install",
+          "description": "Install missing package with pip",
+          "example": "pip install package-name",
+          "when_to_use": "Module exists on PyPI",
+          "success_rate": 0.88
+        },
+        {
+          "strategy": "pip_install_requirements",
+          "description": "Install all project dependencies",
+          "example": "pip install -r requirements.txt",
+          "when_to_use": "Fresh clone or new environment",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "check_venv_activation",
+          "description": "Verify and activate virtual environment",
+          "example": ".venv\\Scripts\\Activate.ps1  # PowerShell\nsource .venv/bin/activate  # Bash",
+          "when_to_use": "When project uses venv",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "check_pythonpath",
+          "description": "Add src to PYTHONPATH for local imports",
+          "example": "$env:PYTHONPATH=\"$PWD\\src;$env:PYTHONPATH\"",
+          "when_to_use": "When importing local modules",
+          "success_rate": 0.78
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "suggest_pip_install_with_detection",
+        "notify_agent": true
+      },
+      "tags": [
+        "python",
+        "imports",
+        "pip",
+        "venv",
+        "beginner",
+        "common"
+      ],
+      "lore": {
+        "glyph": "\u2295\u2207\u03a3",
+        "story": "The Missing Scroll - knowledge sought but not possessed",
+        "moral": "First acquire the grimoire before attempting the incantation"
+      },
+      "meta": {
+        "hit_count": 243,
+        "success_rate": 0.87,
+        "first_seen": "2025-09-01",
+        "last_seen": "2025-11-26",
+        "affected_agents": [
+          "copilot",
+          "chatdev",
+          "ollama"
+        ],
+        "common_culprits": [
+          "requests",
+          "numpy",
+          "pytest",
+          "black",
+          "ruff"
+        ]
+      }
+    },
+    {
+      "id": "venv_activation_powershell",
+      "version": 2,
+      "triggers": {
+        "errors": [
+          "cannot be loaded because running scripts is disabled",
+          "Activate.ps1 cannot be loaded",
+          "execution of scripts is disabled on this system"
+        ],
+        "command_patterns": [
+          "\\\\.venv\\\\Scripts\\\\Activate\\.ps1"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "pwsh"
+        ],
+        "platforms": [
+          "windows"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "PowerShell ExecutionPolicy blocks venv activation",
+        "long": "Windows PowerShell restricts script execution by default. You need to either: 1) Set ExecutionPolicy to RemoteSigned, or 2) Bypass for current session, or 3) Use 'py -m venv' activation workaround.",
+        "level": "beginner",
+        "related_rules": [
+          "powershell_python_misroute"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "bypass_execution_policy",
+          "description": "Bypass ExecutionPolicy for current session (safest)",
+          "example": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; .venv\\Scripts\\Activate.ps1",
+          "when_to_use": "One-time activation without system changes",
+          "success_rate": 0.98
+        },
+        {
+          "strategy": "set_remotesigned",
+          "description": "Set ExecutionPolicy to RemoteSigned (permanent)",
+          "example": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser",
+          "when_to_use": "For permanent fix on your machine",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "use_cmd_activation",
+          "description": "Use CMD-style activation (no ExecutionPolicy issue)",
+          "example": ".venv\\Scripts\\activate.bat",
+          "when_to_use": "When policy cannot be changed",
+          "success_rate": 0.8
+        }
+      ],
+      "actions": {
+        "severity": "warn",
+        "auto_fix": true,
+        "fix_strategy": "suggest_bypass_executionpolicy",
+        "notify_agent": true
+      },
+      "tags": [
+        "powershell",
+        "venv",
+        "windows",
+        "beginner",
+        "permissions"
+      ],
+      "lore": {
+        "glyph": "\u27d0\u2205\u2295",
+        "story": "The Forbidden Gate - when the guardian bars entry to the sanctuary",
+        "moral": "Proper credentials open all doors"
+      },
+      "meta": {
+        "hit_count": 89,
+        "success_rate": 0.94,
+        "first_seen": "2025-10-01",
+        "last_seen": "2025-11-22"
+      }
+    },
+    {
+      "id": "git_uncommitted_changes",
+      "version": 2,
+      "triggers": {
+        "errors": [
+          "error: Your local changes to the following files would be overwritten",
+          "Please commit your changes or stash them",
+          "cannot checkout"
+        ],
+        "command_patterns": [
+          "git checkout.*",
+          "git pull.*",
+          "git merge.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Uncommitted changes prevent git operations",
+        "long": "Git protects your work by refusing operations that would overwrite uncommitted changes. You must commit, stash, or discard changes before switching branches or pulling.",
+        "level": "intermediate",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "git_stash",
+          "description": "Temporarily save changes (safest, recommended)",
+          "example": "git stash push -m 'WIP: feature work'\ngit checkout branch-name\ngit stash pop",
+          "when_to_use": "When you want to keep changes but switch context",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "git_commit",
+          "description": "Commit changes to current branch",
+          "example": "git add .\ngit commit -m 'WIP: checkpoint'",
+          "when_to_use": "When changes are at a good checkpoint",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "git_discard_changes",
+          "description": "Discard uncommitted changes (DANGEROUS)",
+          "example": "git checkout -- .\n# or\ngit reset --hard HEAD",
+          "when_to_use": "When changes are experimental and can be lost",
+          "success_rate": 0.88,
+          "warning": "THIS PERMANENTLY DELETES YOUR CHANGES!"
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "suggest_stash",
+        "notify_agent": true,
+        "require_confirmation": true
+      },
+      "tags": [
+        "git",
+        "version-control",
+        "intermediate",
+        "data-loss-risk"
+      ],
+      "lore": {
+        "glyph": "\u220f\u2211\u2297",
+        "story": "The Unfinished Manuscript - when the scribe refuses to discard their work",
+        "moral": "Complete or preserve your labor before seeking new ventures"
+      },
+      "meta": {
+        "hit_count": 67,
+        "success_rate": 0.91,
+        "first_seen": "2025-10-10",
+        "last_seen": "2025-11-24"
+      }
+    },
+    {
+      "id": "circular_import_detected",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "ImportError: cannot import name",
+          "most likely due to a circular import",
+          "partially initialized module"
+        ],
+        "command_patterns": [
+          "python.*",
+          "pytest.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub"
+        ]
+      },
+      "lesson": {
+        "short": "Circular imports create initialization deadlock",
+        "long": "Module A imports B, B imports A = deadlock. Fix by: 1) Move imports into functions, 2) Restructure code to break dependency cycle, 3) Use TYPE_CHECKING for type hints only.",
+        "level": "advanced",
+        "related_rules": [
+          "missing_module_import"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "import_in_function",
+          "description": "Move import statement inside function",
+          "example": "def my_function():\n    from module import Component\n    # use Component here",
+          "when_to_use": "Quick fix for circular dependency",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "use_type_checking",
+          "description": "Use TYPE_CHECKING for type hints only",
+          "example": "from typing import TYPE_CHECKING\nif TYPE_CHECKING:\n    from module import Component",
+          "when_to_use": "When import only needed for type checking",
+          "success_rate": 0.9
+        },
+        {
+          "strategy": "restructure_modules",
+          "description": "Refactor code to break circular dependency",
+          "example": "# Extract shared code to new module\n# Use dependency injection\n# Create interface/protocol",
+          "when_to_use": "For proper long-term fix",
+          "success_rate": 0.95
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "suggest_restructure",
+        "notify_agent": true,
+        "requires_code_review": true
+      },
+      "tags": [
+        "python",
+        "imports",
+        "architecture",
+        "advanced"
+      ],
+      "lore": {
+        "glyph": "\u229b\u221e\u2297",
+        "story": "The Ouroboros Paradox - when the serpent consumes itself",
+        "moral": "Break the cycle before it consumes you"
+      },
+      "meta": {
+        "hit_count": 23,
+        "success_rate": 0.87,
+        "first_seen": "2025-10-20",
+        "last_seen": "2025-11-18",
+        "common_locations": [
+          "src/orchestration/",
+          "src/integration/"
+        ]
+      }
+    },
+    {
+      "id": "environment_variable_not_set",
+      "version": 2,
+      "triggers": {
+        "errors": [
+          "KeyError:",
+          "environment variable not set",
+          "OPENAI_API_KEY not found",
+          "CHATDEV_PATH not found"
+        ],
+        "command_patterns": [
+          "python.*",
+          "pytest.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Required environment variable missing or not loaded",
+        "long": "Environment variables store configuration secrets. Check: 1) .env file exists, 2) python-dotenv loads it, 3) variable name is correct, 4) value is not empty/redacted.",
+        "level": "intermediate",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "check_env_file",
+          "description": "Verify .env file exists and contains variable",
+          "example": "# Check if .env exists\nls .env\n# Verify variable\nGet-Content .env | Select-String OPENAI_API_KEY",
+          "when_to_use": "First troubleshooting step",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "load_dotenv",
+          "description": "Ensure python-dotenv loads environment",
+          "example": "from dotenv import load_dotenv\nload_dotenv()  # Add at top of script",
+          "when_to_use": "When .env exists but variables not loaded",
+          "success_rate": 0.9
+        },
+        {
+          "strategy": "set_manually",
+          "description": "Set environment variable for current session",
+          "example": "$env:OPENAI_API_KEY='your-key-here'  # PowerShell\nexport OPENAI_API_KEY='your-key-here'  # Bash",
+          "when_to_use": "Quick testing or one-time use",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "check_secrets_config",
+          "description": "Use SecureConfig from src/setup/secrets.py",
+          "example": "from src.setup.secrets import get_config\nconfig = get_config()\napi_key = config.get_secret('openai', 'api_key')",
+          "when_to_use": "In NuSyQ-Hub codebase",
+          "success_rate": 0.92
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "guide_env_setup",
+        "notify_agent": true
+      },
+      "tags": [
+        "environment",
+        "configuration",
+        "secrets",
+        "intermediate"
+      ],
+      "lore": {
+        "glyph": "\ud83d\udd10\u2295\u2207",
+        "story": "The Lost Key - when the treasure remains locked",
+        "moral": "Guard your secrets well, but remember where you placed them"
+      },
+      "meta": {
+        "hit_count": 45,
+        "success_rate": 0.88,
+        "first_seen": "2025-10-05",
+        "last_seen": "2025-11-25",
+        "common_variables": [
+          "OPENAI_API_KEY",
+          "CHATDEV_PATH",
+          "OLLAMA_BASE_URL"
+        ]
+      }
+    },
+    {
+      "id": "ollama_service_not_running",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Connection refused",
+          "Failed to connect to localhost:11434",
+          "Ollama service not responding",
+          "ConnectionError"
+        ],
+        "command_patterns": [
+          "python.*ollama.*",
+          "ollama .*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Ollama service must be running for local LLM operations",
+        "long": "Ollama provides local LLM inference. The service auto-starts via ecosystem sentinel, but manual start may be needed after crashes or system restarts. Should auto-resolve on workspace open.",
+        "level": "beginner",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "auto_start_via_sentinel",
+          "description": "Ecosystem sentinel should auto-start Ollama",
+          "example": "python -m src.diagnostics.ecosystem_startup_sentinel",
+          "when_to_use": "After workspace open if Ollama didn't start",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "manual_start",
+          "description": "Manually start Ollama service",
+          "example": "ollama serve",
+          "when_to_use": "When auto-start fails",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "check_port",
+          "description": "Verify Ollama port is not blocked",
+          "example": "curl http://localhost:11434/api/tags",
+          "when_to_use": "If service runs but connection fails",
+          "success_rate": 0.8
+        }
+      ],
+      "actions": {
+        "severity": "warn",
+        "auto_fix": true,
+        "fix_strategy": "trigger_ecosystem_sentinel",
+        "notify_agent": true
+      },
+      "tags": [
+        "ollama",
+        "llm",
+        "local-ai",
+        "services",
+        "beginner"
+      ],
+      "lore": {
+        "glyph": "\ud83e\udd16\u26a1",
+        "story": "The Sleeping Oracle - when the AI mind slumbers",
+        "moral": "Even artificial minds need awakening"
+      },
+      "meta": {
+        "hit_count": 34,
+        "success_rate": 0.94,
+        "first_seen": "2025-11-15",
+        "last_seen": "2025-11-26",
+        "auto_fix_added": "2025-11-26"
+      }
+    },
+    {
+      "id": "chatdev_path_not_configured",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "CHATDEV_PATH not set",
+          "ChatDev directory not found",
+          "No such file or directory.*ChatDev"
+        ],
+        "command_patterns": [
+          "python.*chatdev.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub"
+        ]
+      },
+      "lesson": {
+        "short": "CHATDEV_PATH must point to C:\\Users\\keath\\NuSyQ\\ChatDev\\",
+        "long": "ChatDev integration requires CHATDEV_PATH environment variable pointing to the separate ChatDev repository. This enables multi-agent software development workflows.",
+        "level": "intermediate",
+        "related_rules": [
+          "environment_variable_not_set"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "set_chatdev_path",
+          "description": "Set CHATDEV_PATH environment variable",
+          "example": "$env:CHATDEV_PATH='C:\\Users\\keath\\NuSyQ\\ChatDev'  # PowerShell\nexport CHATDEV_PATH='/path/to/NuSyQ/ChatDev'  # Bash",
+          "when_to_use": "Always required for ChatDev integration",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "add_to_env_file",
+          "description": "Add to .env for persistence",
+          "example": "echo 'CHATDEV_PATH=C:\\Users\\keath\\NuSyQ\\ChatDev' >> .env",
+          "when_to_use": "For permanent configuration",
+          "success_rate": 0.98
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "guide_chatdev_setup",
+        "notify_agent": true
+      },
+      "tags": [
+        "chatdev",
+        "multi-agent",
+        "configuration",
+        "intermediate"
+      ],
+      "lore": {
+        "glyph": "\ud83c\udfe2\u2699\ufe0f",
+        "story": "The Company Without Office - when the workforce has no headquarters",
+        "moral": "Establish the foundation before summoning the builders"
+      },
+      "meta": {
+        "hit_count": 12,
+        "success_rate": 0.96,
+        "first_seen": "2025-10-25",
+        "last_seen": "2025-11-20",
+        "correct_path": "C:\\Users\\keath\\NuSyQ\\ChatDev"
+      }
+    },
+    {
+      "id": "json_decode_error_config",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "JSONDecodeError",
+          "Expecting property name enclosed in double quotes",
+          "Expecting ',' delimiter",
+          "Invalid JSON"
+        ],
+        "command_patterns": [
+          "python.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "JSON configuration file has syntax error",
+        "long": "JSON is strict: use double quotes, no trailing commas, proper escaping. Common issues: single quotes, missing/extra commas, unescaped backslashes in Windows paths.",
+        "level": "beginner",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "validate_json",
+          "description": "Use Python json.tool to validate and format",
+          "example": "python -m json.tool config/file.json",
+          "when_to_use": "First step to find syntax errors",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "check_common_issues",
+          "description": "Look for common JSON mistakes",
+          "example": "# Single quotes \u2192 double quotes\n# Trailing commas in objects/arrays\n# Unescaped backslashes (use \\\\ or /)",
+          "when_to_use": "When validator shows line number",
+          "success_rate": 0.88
+        },
+        {
+          "strategy": "use_json_linter",
+          "description": "Use VS Code JSON validator",
+          "example": "# Open file in VS Code\n# Check PROBLEMS panel",
+          "when_to_use": "For complex JSON files",
+          "success_rate": 0.95
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "guide_json_fix",
+        "notify_agent": true
+      },
+      "tags": [
+        "json",
+        "configuration",
+        "syntax",
+        "beginner"
+      ],
+      "lore": {
+        "glyph": "\ud83d\udcdc\u2717",
+        "story": "The Malformed Scroll - when ancient syntax rejects the inscription",
+        "moral": "Precision in notation prevents chaos in interpretation"
+      },
+      "meta": {
+        "hit_count": 28,
+        "success_rate": 0.9,
+        "first_seen": "2025-10-18",
+        "last_seen": "2025-11-26",
+        "common_files": [
+          "zen_engine/codex/zen.json",
+          "config/secrets.json"
+        ]
+      }
+    },
+    {
+      "id": "simulatedverse_npm_issues",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "npm ERR!",
+          "Module not found: Error: Can't resolve",
+          "Cannot find module",
+          "ENOENT: no such file or directory.*node_modules"
+        ],
+        "command_patterns": [
+          "npm.*",
+          "node.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "SimulatedVerse"
+        ]
+      },
+      "lesson": {
+        "short": "Node modules not installed or package.json out of sync",
+        "long": "SimulatedVerse uses npm for Node.js dependencies. Missing modules indicate either: 1) npm install not run, 2) node_modules deleted/corrupted, 3) package.json changed without install.",
+        "level": "beginner",
+        "related_rules": [
+          "missing_module_import"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "npm_install",
+          "description": "Install all dependencies from package.json",
+          "example": "npm install",
+          "when_to_use": "Fresh clone or after package.json changes",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "npm_ci",
+          "description": "Clean install (recommended for CI/CD)",
+          "example": "npm ci",
+          "when_to_use": "When node_modules corrupted or need clean slate",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "delete_node_modules",
+          "description": "Delete and reinstall from scratch",
+          "example": "Remove-Item -Recurse -Force node_modules\nnpm install",
+          "when_to_use": "When dependency tree is broken",
+          "success_rate": 0.88
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "suggest_npm_install",
+        "notify_agent": true
+      },
+      "tags": [
+        "nodejs",
+        "npm",
+        "simulatedverse",
+        "dependencies",
+        "beginner"
+      ],
+      "lore": {
+        "glyph": "\ud83d\udce6\ud83c\udf10",
+        "story": "The Empty Warehouse - when the supplies never arrived",
+        "moral": "Manifest the materials before building the machine"
+      },
+      "meta": {
+        "hit_count": 19,
+        "success_rate": 0.91,
+        "first_seen": "2025-11-01",
+        "last_seen": "2025-11-23",
+        "repo": "SimulatedVerse"
+      }
+    },
+    {
+      "id": "pytest_collection_error",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "ERROR collecting",
+          "ModuleNotFoundError.*conftest",
+          "import file mismatch",
+          "pytest: error:"
+        ],
+        "command_patterns": [
+          "pytest.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub"
+        ]
+      },
+      "lesson": {
+        "short": "Pytest cannot collect tests due to import or path issues",
+        "long": "Pytest collection failures indicate: 1) PYTHONPATH not including src, 2) __init__.py missing, 3) circular imports in test files, 4) conftest.py errors.",
+        "level": "intermediate",
+        "related_rules": [
+          "missing_module_import",
+          "circular_import_detected"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "set_pythonpath",
+          "description": "Add src to PYTHONPATH before running pytest",
+          "example": "$env:PYTHONPATH=\"$PWD\\src;$env:PYTHONPATH\"; pytest",
+          "when_to_use": "When tests can't import from src/",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "run_from_module",
+          "description": "Run pytest as module with proper path",
+          "example": "python -m pytest tests/",
+          "when_to_use": "Alternative to PYTHONPATH",
+          "success_rate": 0.9
+        },
+        {
+          "strategy": "check_conftest",
+          "description": "Verify conftest.py has no errors",
+          "example": "python tests/conftest.py",
+          "when_to_use": "When pytest collection fails early",
+          "success_rate": 0.82
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "guide_pytest_setup",
+        "notify_agent": true
+      },
+      "tags": [
+        "pytest",
+        "testing",
+        "python",
+        "intermediate"
+      ],
+      "lore": {
+        "glyph": "\ud83e\uddea\u274c",
+        "story": "The Broken Laboratory - when the tools of validation fail to initialize",
+        "moral": "The tester must first test their own apparatus"
+      },
+      "meta": {
+        "hit_count": 31,
+        "success_rate": 0.84,
+        "first_seen": "2025-10-12",
+        "last_seen": "2025-11-24"
+      }
+    },
+    {
+      "id": "type_checking_import_error",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Name.*is not defined",
+          "NameError.*TYPE_CHECKING"
+        ],
+        "command_patterns": [
+          "python.*",
+          "pytest.*"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "bash",
+          "zsh"
+        ],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub"
+        ]
+      },
+      "lesson": {
+        "short": "Type hints imported under TYPE_CHECKING not available at runtime",
+        "long": "TYPE_CHECKING is False at runtime. Types imported under 'if TYPE_CHECKING:' are only for type checkers, not execution. Use string annotations or import normally if needed at runtime.",
+        "level": "advanced",
+        "related_rules": [
+          "circular_import_detected"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "use_string_annotations",
+          "description": "Use forward reference string annotations",
+          "example": "def func(param: 'SomeClass') -> 'ReturnType':\n    pass",
+          "when_to_use": "When type is only for type checkers",
+          "success_rate": 0.9
+        },
+        {
+          "strategy": "import_normally",
+          "description": "Import outside TYPE_CHECKING if needed at runtime",
+          "example": "from module import SomeClass  # Normal import",
+          "when_to_use": "When type is used in runtime code (isinstance, etc.)",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "use_future_annotations",
+          "description": "Enable PEP 563 postponed annotations",
+          "example": "from __future__ import annotations",
+          "when_to_use": "For Python 3.7+ with heavy type hints",
+          "success_rate": 0.88
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "guide_type_hints_fix",
+        "notify_agent": true
+      },
+      "tags": [
+        "python",
+        "type-hints",
+        "typing",
+        "advanced"
+      ],
+      "lore": {
+        "glyph": "\ud83d\udcdd\ud83d\udd2e",
+        "story": "The Phantom Type - when shadows guide but cannot be grasped",
+        "moral": "Distinguish between the map and the territory"
+      },
+      "meta": {
+        "hit_count": 15,
+        "success_rate": 0.89,
+        "first_seen": "2025-11-05",
+        "last_seen": "2025-11-22"
+      }
+    },
+    {
+      "id": "fstring_without_placeholders",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "f-string without any placeholders",
+          "ruff-F541"
+        ],
+        "code_patterns": [
+          "f['\\\"].*['\\\"]"
+        ]
+      },
+      "contexts": {
+        "languages": [
+          "python"
+        ],
+        "tools": [
+          "ruff",
+          "flake8"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Unnecessary f-string without placeholders wastes performance",
+        "long": "F-strings have overhead for interpolation. If no placeholders are used, use a regular string instead. This is a common mistake when refactoring code or converting print statements.",
+        "level": "beginner",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "convert_to_regular_string",
+          "description": "Remove f-prefix from string literal",
+          "example": "f\"Hello world\" -> \"Hello world\"",
+          "when_to_use": "Always when no curly-brace placeholders present",
+          "success_rate": 1.0
+        },
+        {
+          "strategy": "add_placeholder_if_intended",
+          "description": "Add missing variable interpolation",
+          "example": "f\"Error: description\" -> f\"Error: {var}\"",
+          "when_to_use": "When variable interpolation was intended",
+          "success_rate": 0.95
+        }
+      ],
+      "actions": {
+        "severity": "info",
+        "auto_fix": true,
+        "fix_strategy": "remove_f_prefix",
+        "notify_agent": false,
+        "learn_from_success": true
+      },
+      "tags": [
+        "python",
+        "ruff",
+        "f-string",
+        "optimization",
+        "beginner"
+      ],
+      "lore": {
+        "glyph": "\u03a6\u03a3\u03a4\u03a1",
+        "story": "The Unnecessary Incantation - when magic words are spoken without power",
+        "moral": "Invoke only the spells you need",
+        "culture_ship_wisdom": "Efficiency is elegance"
+      },
+      "meta": {
+        "hit_count": 3,
+        "success_rate": 1.0,
+        "first_seen": "2025-12-25",
+        "last_seen": "2025-12-25",
+        "affected_agents": [
+          "claude",
+          "copilot"
+        ],
+        "repo_frequency": {
+          "NuSyQ-Hub": 2,
+          "SimulatedVerse": 0,
+          "NuSyQ": 1
+        }
+      }
+    },
+    {
+      "id": "unused_imports",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "imported but unused",
+          "ruff-F401",
+          "F401 "
+        ],
+        "code_patterns": [
+          "^import ",
+          "^from .* import "
+        ]
+      },
+      "contexts": {
+        "languages": [
+          "python"
+        ],
+        "tools": [
+          "ruff",
+          "flake8",
+          "pylint"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Unused imports clutter code and slow startup time",
+        "long": "Unused imports increase file size, slow module loading, and confuse readers about dependencies. They often result from refactoring or copy-paste. Modern IDEs and linters can auto-remove them.",
+        "level": "beginner",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "remove_unused_import",
+          "description": "Delete the unused import statement",
+          "example": "from typing import Dict, List  # Remove if unused",
+          "when_to_use": "When import is truly not used anywhere",
+          "success_rate": 0.98
+        },
+        {
+          "strategy": "check_for_type_annotations",
+          "description": "Verify if import used in type annotations",
+          "example": "def func(x: List[str]) -> Dict:  # List, Dict are used!",
+          "when_to_use": "When false positive suspected in type hints",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "move_to_type_checking_block",
+          "description": "Move to TYPE_CHECKING block for type-only imports",
+          "example": "if TYPE_CHECKING:\\n    from typing import Dict",
+          "when_to_use": "When import only needed for type checking",
+          "success_rate": 0.92
+        }
+      ],
+      "actions": {
+        "severity": "info",
+        "auto_fix": true,
+        "fix_strategy": "remove_import_line",
+        "notify_agent": false,
+        "learn_from_success": true
+      },
+      "tags": [
+        "python",
+        "ruff",
+        "imports",
+        "cleanup",
+        "beginner"
+      ],
+      "lore": {
+        "glyph": "\u0394\u039a\u039b\u039c",
+        "story": "The Unused Tools - carrying burdens never wielded",
+        "moral": "Travel light, bring only what serves",
+        "culture_ship_wisdom": "A Ship's cargo reflects its purpose"
+      },
+      "meta": {
+        "hit_count": 1,
+        "success_rate": 0.98,
+        "first_seen": "2025-12-25",
+        "last_seen": "2025-12-25",
+        "affected_agents": [
+          "claude",
+          "copilot"
+        ],
+        "repo_frequency": {
+          "NuSyQ-Hub": 1,
+          "SimulatedVerse": 0,
+          "NuSyQ": 0
+        }
+      }
+    },
+    {
+      "id": "duplicate_keyword_argument",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Duplicate keyword argument",
+          "duplicate keyword argument",
+          "keyword argument repeated"
+        ],
+        "code_patterns": [
+          ".*\\(.*=.*,.*=.*\\)"
+        ]
+      },
+      "contexts": {
+        "languages": [
+          "python"
+        ],
+        "tools": [
+          "ruff",
+          "mypy",
+          "pylint"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Duplicate keyword arguments cause SyntaxError in Python",
+        "long": "Python functions cannot accept the same keyword argument twice. This typically happens during refactoring, copy-paste errors, or when manually resolving merge conflicts. The second value would silently override the first if allowed, which is confusing.",
+        "level": "beginner",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "remove_duplicate",
+          "description": "Remove one of the duplicate keyword arguments",
+          "example": "func(check=True, check=False) -> func(check=True)",
+          "when_to_use": "When one argument is clearly redundant",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "merge_values",
+          "description": "Combine values if both are needed",
+          "example": "func(tags=['a'], tags=['b']) -> func(tags=['a', 'b'])",
+          "when_to_use": "When both values should be combined",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "check_merge_conflict",
+          "description": "Look for git merge conflict markers",
+          "example": "Search for <<<<<<< HEAD in file",
+          "when_to_use": "When duplicate appeared after merge",
+          "success_rate": 0.9
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "manual_review_required",
+        "notify_agent": true,
+        "learn_from_success": true
+      },
+      "tags": [
+        "python",
+        "syntax",
+        "refactoring",
+        "merge-conflict",
+        "beginner"
+      ],
+      "lore": {
+        "glyph": "\u03a8\u03a9\u039e\u0398",
+        "story": "The Echo Chamber - when the same truth is spoken twice",
+        "moral": "Say what needs saying, but say it once",
+        "culture_ship_wisdom": "Redundancy in data, not in signal"
+      },
+      "meta": {
+        "hit_count": 2,
+        "success_rate": 0.95,
+        "first_seen": "2025-12-25",
+        "last_seen": "2025-12-25",
+        "affected_agents": [
+          "claude",
+          "copilot"
+        ],
+        "repo_frequency": {
+          "NuSyQ-Hub": 2,
+          "SimulatedVerse": 0,
+          "NuSyQ": 0
+        }
+      }
+    }
+  ],
+  "rule_clusters": {
+    "python_environment": [
+      "powershell_python_misroute",
+      "missing_module_import",
+      "venv_activation_powershell",
+      "environment_variable_not_set"
+    ],
+    "git_workflows": [
+      "git_uncommitted_changes"
+    ],
+    "advanced_python": [
+      "circular_import_detected",
+      "type_checking_import_error"
+    ],
+    "service_management": [
+      "ollama_service_not_running",
+      "chatdev_path_not_configured"
+    ],
+    "configuration": [
+      "json_decode_error_config",
+      "environment_variable_not_set"
+    ],
+    "testing": [
+      "pytest_collection_error"
+    ],
+    "nodejs_ecosystem": [
+      "simulatedverse_npm_issues"
+    ]
+  },
+  "evolution_history": [
+    {
+      "version": "2.0.0",
+      "date": "2025-11-26",
+      "changes": "Initial comprehensive codex population with 12 battle-tested rules from actual workspace experience",
+      "rules_added": 12,
+      "agent": "GitHub Copilot",
+      "wisdom_source": "Multi-repository ecosystem observation (NuSyQ-Hub, SimulatedVerse, NuSyQ Root)"
+    },
+    {
+      "version": "2.1.0",
+      "date": "2025-11-26",
+      "changes": "Added advanced rules from 4,706-error analysis: Docker best practices, cognitive complexity, exception handling, type annotations",
+      "rules_added": 5,
+      "agent": "GitHub Copilot",
+      "wisdom_source": "Comprehensive error diagnostic scan across all three repositories",
+      "error_patterns_analyzed": 4706
+    }
+  ],
+  "advanced_rules": [
+    {
+      "id": "dockerfile_optimization",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Merge this RUN instruction with the consecutive ones",
+          "Sort these package names alphanumerically"
+        ],
+        "command_patterns": []
+      },
+      "contexts": {
+        "shells": [
+          "bash",
+          "sh"
+        ],
+        "platforms": [
+          "docker",
+          "linux"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ],
+        "file_patterns": [
+          "Dockerfile",
+          "*.dockerfile"
+        ]
+      },
+      "lesson": {
+        "short": "Optimize Docker layers by merging RUN commands and sorting packages",
+        "long": "Docker creates a layer for each RUN command. Merge consecutive RUN commands to reduce image size and build time. Sort packages alphabetically for better maintainability and cache efficiency.",
+        "level": "intermediate",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "merge_run_commands",
+          "description": "Combine all RUN commands with && operators",
+          "example": "RUN apt-get update && apt-get install -y \\\n    package1 \\\n    package2 \\\n    && rm -rf /var/lib/apt/lists/*",
+          "when_to_use": "Always in production Dockerfiles",
+          "success_rate": 0.98
+        },
+        {
+          "strategy": "sort_packages",
+          "description": "Sort package names alphabetically for readability",
+          "example": "build-essential \\\nca-certificates \\\ncurl \\\ngit",
+          "when_to_use": "When listing multiple packages",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "clean_apt_cache",
+          "description": "Remove apt cache in same layer to reduce image size",
+          "example": "&& rm -rf /var/lib/apt/lists/*",
+          "when_to_use": "After apt-get install commands",
+          "success_rate": 0.99
+        }
+      ],
+      "actions": {
+        "severity": "info",
+        "auto_fix": true,
+        "fix_strategy": "merge_and_sort_dockerfile_commands",
+        "notify_agent": true
+      },
+      "tags": [
+        "docker",
+        "dockerfile",
+        "optimization",
+        "intermediate",
+        "devops"
+      ],
+      "lore": {
+        "glyph": "\ud83d\udc33\u2699\ufe0f",
+        "story": "The Layered Fortress - each command a stone in the wall",
+        "moral": "Efficiency in construction yields strength in deployment"
+      },
+      "meta": {
+        "hit_count": 6,
+        "success_rate": 0.97,
+        "first_seen": "2025-11-26",
+        "last_seen": "2025-11-26",
+        "affected_files": [
+          ".devcontainer/Dockerfile"
+        ]
+      }
+    },
+    {
+      "id": "cognitive_complexity_reduction",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Refactor this function to reduce its Cognitive Complexity from",
+          "Cognitive Complexity",
+          "too complex"
+        ],
+        "command_patterns": []
+      },
+      "contexts": {
+        "shells": [],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ],
+        "languages": [
+          "python",
+          "typescript",
+          "javascript"
+        ]
+      },
+      "lesson": {
+        "short": "Functions with high cognitive complexity are hard to understand and maintain",
+        "long": "Cognitive complexity measures how difficult code is to understand. Limit is typically 15. Reduce by extracting helper methods, simplifying conditionals, and reducing nesting depth.",
+        "level": "advanced",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "extract_helper_methods",
+          "description": "Break down complex function into smaller helper methods",
+          "example": "def complex_function():\n    result = _validate_input()\n    data = _process_data(result)\n    return _format_output(data)",
+          "when_to_use": "When complexity > 15",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "simplify_conditionals",
+          "description": "Replace nested if/else with early returns or guard clauses",
+          "example": "if not valid:\n    return error\nif not ready:\n    return wait\nreturn proceed",
+          "when_to_use": "When nested conditionals > 3 levels",
+          "success_rate": 0.88
+        },
+        {
+          "strategy": "use_lookup_tables",
+          "description": "Replace complex if/elif chains with dictionaries",
+          "example": "handlers = {'add': add_handler, 'delete': delete_handler}\nhandlers[action]()",
+          "when_to_use": "When handling multiple discrete cases",
+          "success_rate": 0.85
+        }
+      ],
+      "actions": {
+        "severity": "warn",
+        "auto_fix": false,
+        "fix_strategy": "suggest_refactoring",
+        "notify_agent": true,
+        "requires_code_review": true
+      },
+      "tags": [
+        "complexity",
+        "refactoring",
+        "maintainability",
+        "advanced",
+        "code-quality"
+      ],
+      "lore": {
+        "glyph": "\ud83e\udde9\ud83d\udd00",
+        "story": "The Labyrinthine Mind - when paths twist beyond comprehension",
+        "moral": "Simplicity is the ultimate sophistication"
+      },
+      "meta": {
+        "hit_count": 34,
+        "success_rate": 0.87,
+        "first_seen": "2025-11-26",
+        "last_seen": "2025-11-26",
+        "complexity_threshold": 15,
+        "affected_functions": [
+          "perform_system_validation",
+          "interactive_master_menu"
+        ]
+      }
+    },
+    {
+      "id": "specific_exception_handling",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Catching too general exception Exception",
+          "except Exception",
+          "bare except"
+        ],
+        "command_patterns": []
+      },
+      "contexts": {
+        "shells": [],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ],
+        "languages": [
+          "python"
+        ]
+      },
+      "lesson": {
+        "short": "Catch specific exceptions instead of broad Exception",
+        "long": "Catching Exception or using bare except hides bugs and makes debugging harder. Catch specific exceptions (ValueError, KeyError, OSError) and use Exception only as last resort with logging.exception().",
+        "level": "intermediate",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "catch_specific_exceptions",
+          "description": "Identify and catch specific exception types",
+          "example": "try:\n    process()\nexcept (ValueError, KeyError) as e:\n    handle_error(e)\nexcept OSError as e:\n    handle_io_error(e)",
+          "when_to_use": "Always when possible",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "log_unexpected_exceptions",
+          "description": "Use logger.exception() for truly unexpected errors",
+          "example": "except Exception as e:\n    logger.exception(f'Unexpected error: {e}')\n    raise",
+          "when_to_use": "Only for genuinely unexpected errors",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "add_exception_context",
+          "description": "Preserve exception chain with 'from'",
+          "example": "except ValueError as e:\n    raise RuntimeError('Invalid config') from e",
+          "when_to_use": "When wrapping exceptions",
+          "success_rate": 0.9
+        }
+      ],
+      "actions": {
+        "severity": "warn",
+        "auto_fix": false,
+        "fix_strategy": "suggest_specific_exceptions",
+        "notify_agent": true
+      },
+      "tags": [
+        "python",
+        "exceptions",
+        "error-handling",
+        "intermediate",
+        "debugging"
+      ],
+      "lore": {
+        "glyph": "\u26a0\ufe0f\ud83c\udfaf",
+        "story": "The Precise Net - catch what you seek, not all that swims",
+        "moral": "Precision in error handling reveals truth in failure"
+      },
+      "meta": {
+        "hit_count": 28,
+        "success_rate": 0.91,
+        "first_seen": "2025-11-26",
+        "last_seen": "2025-11-26",
+        "common_exceptions": [
+          "RuntimeError",
+          "ValueError",
+          "KeyError",
+          "OSError",
+          "TypeError"
+        ]
+      }
+    },
+    {
+      "id": "type_annotation_dict_usage",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Use dict[...] instead of Dict[...]",
+          "Use list[...] instead of List[...]",
+          "Use tuple[...] instead of Tuple[...]"
+        ],
+        "command_patterns": []
+      },
+      "contexts": {
+        "shells": [],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ],
+        "languages": [
+          "python"
+        ],
+        "python_versions": [
+          "3.9+"
+        ]
+      },
+      "lesson": {
+        "short": "Use built-in generic types (dict, list) instead of typing module (Dict, List) in Python 3.9+",
+        "long": "PEP 585 (Python 3.9+) allows using built-in types for generic type hints: dict[str, int] instead of Dict[str, int]. This is the modern, preferred style.",
+        "level": "beginner",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "use_builtin_generics",
+          "description": "Replace typing module imports with built-in types",
+          "example": "# Old: Dict[str, Any]\n# New: dict[str, Any]\ndef func() -> dict[str, int]:\n    return {'count': 42}",
+          "when_to_use": "Always in Python 3.9+",
+          "success_rate": 0.99
+        },
+        {
+          "strategy": "remove_typing_imports",
+          "description": "Clean up typing module imports when no longer needed",
+          "example": "# Remove: from typing import Dict, List\n# Keep: from typing import Any, Optional",
+          "when_to_use": "After converting to built-in generics",
+          "success_rate": 0.98
+        }
+      ],
+      "actions": {
+        "severity": "info",
+        "auto_fix": true,
+        "fix_strategy": "replace_typing_imports",
+        "notify_agent": true
+      },
+      "tags": [
+        "python",
+        "type-hints",
+        "modernization",
+        "beginner",
+        "pep585"
+      ],
+      "lore": {
+        "glyph": "\ud83d\udd24\u2728",
+        "story": "The Native Tongue - when imports become unnecessary",
+        "moral": "Evolution simplifies what was once complex"
+      },
+      "meta": {
+        "hit_count": 45,
+        "success_rate": 0.98,
+        "first_seen": "2025-11-26",
+        "last_seen": "2025-11-26",
+        "python_version_requirement": "3.9+",
+        "replacements": {
+          "Dict": "dict",
+          "List": "list",
+          "Tuple": "tuple",
+          "Set": "set"
+        }
+      }
+    },
+    {
+      "id": "async_function_without_await",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "Use asynchronous features in this function or remove the `async` keyword",
+          "async function never awaits",
+          "coroutine was never awaited"
+        ],
+        "command_patterns": []
+      },
+      "contexts": {
+        "shells": [],
+        "platforms": [
+          "windows",
+          "linux",
+          "darwin"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ],
+        "languages": [
+          "python"
+        ]
+      },
+      "lesson": {
+        "short": "Async functions must use await or be converted to regular functions",
+        "long": "Marking a function as async without using await wastes resources and creates misleading API. Either add await calls or remove the async keyword. Consider if the function truly needs to be async.",
+        "level": "intermediate",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "remove_async_keyword",
+          "description": "Convert to regular function if no await needed",
+          "example": "# Before: async def process():\n#     return result\n# After:\ndef process():\n    return result",
+          "when_to_use": "When function doesn't need async operations",
+          "success_rate": 0.95
+        },
+        {
+          "strategy": "add_await_calls",
+          "description": "Make function properly async by adding await",
+          "example": "async def process():\n    data = await fetch_data()\n    result = await transform(data)\n    return result",
+          "when_to_use": "When function should be async",
+          "success_rate": 0.92
+        },
+        {
+          "strategy": "use_asyncio_sleep",
+          "description": "Replace time.sleep with asyncio.sleep in async functions",
+          "example": "await asyncio.sleep(1)  # Not time.sleep(1)",
+          "when_to_use": "When delays needed in async code",
+          "success_rate": 0.98
+        }
+      ],
+      "actions": {
+        "severity": "warn",
+        "auto_fix": false,
+        "fix_strategy": "suggest_async_pattern",
+        "notify_agent": true
+      },
+      "tags": [
+        "python",
+        "async",
+        "asyncio",
+        "intermediate",
+        "performance"
+      ],
+      "lore": {
+        "glyph": "\u23f3\ud83d\udd04",
+        "story": "The False Promise - when the async declaration lies dormant",
+        "moral": "Declare intent only when action follows"
+      },
+      "meta": {
+        "hit_count": 8,
+        "success_rate": 0.93,
+        "first_seen": "2025-11-26",
+        "last_seen": "2025-11-26",
+        "affected_functions": [
+          "perform_system_validation",
+          "_system_configuration"
+        ]
+      }
+    },
+    {
+      "id": "import_error_quantum_bridge",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "ImportError",
+          "ModuleNotFoundError",
+          "cannot import name"
+        ],
+        "command_patterns": [
+          "pytest .*",
+          "python .*"
+        ],
+        "files": [
+          "src/",
+          "scripts/"
+        ]
+      },
+      "contexts": {
+        "shells": [
+          "powershell",
+          "pwsh",
+          "bash"
+        ],
+        "platforms": [
+          "windows",
+          "linux"
+        ],
+        "repos": [
+          "NuSyQ-Hub",
+          "SimulatedVerse",
+          "NuSyQ"
+        ]
+      },
+      "lesson": {
+        "short": "Route import errors through Quantum Error Bridge to auto-create a PU and suggest fixes",
+        "long": "Import errors often mean missing module paths or stale installs. Invoke Quantum Error Bridge: it converts the error into a ProblemSignature, attempts resolution, and if unresolved, generates a Processing Unit with proof gates for manual follow-up.",
+        "level": "intermediate",
+        "related_rules": [
+          "venv_activation_powershell",
+          "powershell_python_misroute"
+        ]
+      },
+      "suggestions": [
+        {
+          "strategy": "invoke_quantum_error_bridge",
+          "description": "Call QuantumErrorBridge.handle_error(error, context) with file/task info; let it auto-fix or create a PU",
+          "example": "bridge = QuantumErrorBridge(); await bridge.handle_error(err, {\"file\": path, \"task\": \"tests\"})",
+          "when_to_use": "On any ImportError/ModuleNotFound in repo code",
+          "success_rate": 0.65
+        },
+        {
+          "strategy": "repair_sys_path",
+          "description": "Ensure src/ is on sys.path; activate venv before running",
+          "example": "import sys, Path; sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))",
+          "when_to_use": "If bridge reports missing module path",
+          "success_rate": 0.75
+        }
+      ],
+      "actions": {
+        "severity": "warn",
+        "auto_fix": false,
+        "fix_strategy": "route_to_quantum_bridge",
+        "notify_agent": true,
+        "learn_from_success": true
+      },
+      "tags": [
+        "python",
+        "imports",
+        "quantum_bridge",
+        "auto_fix",
+        "pu_queue"
+      ],
+      "lore": {
+        "glyph": "\u03a8\u03bb",
+        "story": "The Missing Thread \u2013 weave imports back into the tapestry via the quantum loom",
+        "moral": "When paths diverge, entangle them and observe",
+        "culture_ship_wisdom": "Every broken import is a request for coordination"
+      },
+      "meta": {
+        "hit_count": 0,
+        "success_rate": 0.0,
+        "first_seen": "2025-12-25",
+        "last_seen": "2025-12-25",
+        "affected_agents": [
+          "copilot",
+          "continue"
+        ],
+        "repo_frequency": {
+          "NuSyQ-Hub": 0,
+          "SimulatedVerse": 0,
+          "NuSyQ": 0
+        }
+      }
+    },
+    {
+      "id": "attribute_error_missing_attribute",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "AttributeError: '.*' object has no attribute",
+          "AttributeError: module '.*' has no attribute"
+        ],
+        "command_patterns": [
+          "python.*",
+          "pytest.*"
+        ]
+      },
+      "contexts": {
+        "shells": ["powershell", "bash", "zsh"],
+        "platforms": ["windows", "linux", "darwin"],
+        "repos": ["NuSyQ-Hub", "SimulatedVerse", "NuSyQ"]
+      },
+      "lesson": {
+        "short": "Object/module doesn't have expected attribute - likely typo, wrong version, or stale import cache",
+        "long": "AttributeErrors indicate: 1) typo in attribute name, 2) object is different type than expected, 3) stale .pyc files, 4) module version mismatch. Check spelling, type hints, and import statements first.",
+        "level": "intermediate",
+        "related_rules": ["missing_module_import"]
+      },
+      "suggestions": [
+        {
+          "strategy": "check_spelling",
+          "description": "Verify attribute name spelling and case",
+          "example": "# Use dir(obj) to see available attributes\nprint(dir(my_object))",
+          "when_to_use": "First step - most common cause",
+          "success_rate": 0.6
+        },
+        {
+          "strategy": "clear_pycache",
+          "description": "Remove __pycache__ and .pyc files",
+          "example": "Get-ChildItem -Recurse __pycache__ | Remove-Item -Recurse -Force",
+          "when_to_use": "After refactoring or renaming",
+          "success_rate": 0.75
+        },
+        {
+          "strategy": "check_module_version",
+          "description": "Verify module is correct version",
+          "example": "pip show module-name\npip install --upgrade module-name",
+          "when_to_use": "When using external libraries",
+          "success_rate": 0.7
+        },
+        {
+          "strategy": "route_to_quantum_bridge",
+          "description": "Use Quantum Error Bridge for systematic resolution",
+          "example": "python scripts/start_nusyq.py debug \"AttributeError in module\"",
+          "when_to_use": "When simple fixes don't work",
+          "success_rate": 0.65
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "diagnose_then_route_to_quantum",
+        "notify_agent": true
+      },
+      "tags": ["python", "attribute", "debugging", "intermediate"],
+      "lore": {
+        "glyph": "⚡🔍",
+        "story": "The Missing Limb - when the body lacks what the mind expects",
+        "moral": "Observe what is, not what should be"
+      },
+      "meta": {
+        "hit_count": 0,
+        "success_rate": 0.0,
+        "first_seen": "2025-12-26",
+        "last_seen": "2025-12-26",
+        "common_causes": ["typo", "stale_cache", "wrong_type", "version_mismatch"]
+      }
+    },
+    {
+      "id": "async_runtime_error",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "RuntimeError: asyncio.run() cannot be called from a running event loop",
+          "RuntimeError: no running event loop",
+          "This event loop is already running"
+        ],
+        "command_patterns": ["python.*", "pytest.*"]
+      },
+      "contexts": {
+        "shells": ["powershell", "bash", "zsh"],
+        "platforms": ["windows", "linux", "darwin"],
+        "repos": ["NuSyQ-Hub", "SimulatedVerse", "NuSyQ"]
+      },
+      "lesson": {
+        "short": "Async event loop conflicts - don't nest asyncio.run() calls or run in Jupyter/IPython",
+        "long": "asyncio.run() creates a new event loop. Can't be called from within an existing loop (Jupyter, async functions, or nested calls). Use await directly in async context, or use asyncio.create_task() for concurrent tasks.",
+        "level": "advanced",
+        "related_rules": []
+      },
+      "suggestions": [
+        {
+          "strategy": "use_await_directly",
+          "description": "If already in async context, use await instead of asyncio.run()",
+          "example": "# Wrong:\nasync def foo():\n    result = asyncio.run(bar())\n\n# Right:\nasync def foo():\n    result = await bar()",
+          "when_to_use": "Inside async functions",
+          "success_rate": 0.9
+        },
+        {
+          "strategy": "use_nest_asyncio",
+          "description": "Allow nested event loops (Jupyter/IPython)",
+          "example": "import nest_asyncio\nnest_asyncio.apply()\nasyncio.run(my_async_function())",
+          "when_to_use": "In Jupyter notebooks or interactive environments",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "get_or_create_loop",
+          "description": "Get existing loop or create new one",
+          "example": "try:\n    loop = asyncio.get_running_loop()\n    loop.create_task(my_async_function())\nexcept RuntimeError:\n    asyncio.run(my_async_function())",
+          "when_to_use": "In mixed sync/async contexts",
+          "success_rate": 0.8
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": false,
+        "fix_strategy": "guide_async_patterns",
+        "notify_agent": true
+      },
+      "tags": ["python", "asyncio", "async", "event-loop", "advanced"],
+      "lore": {
+        "glyph": "∞⚡",
+        "story": "The Nested Loops - when time folds upon itself",
+        "moral": "One loop to rule them all, one loop to bind them"
+      },
+      "meta": {
+        "hit_count": 0,
+        "success_rate": 0.0,
+        "first_seen": "2025-12-26",
+        "last_seen": "2025-12-26",
+        "common_contexts": ["jupyter", "nested_async", "multi_agent_systems"]
+      }
+    },
+    {
+      "id": "name_not_defined_error",
+      "version": 1,
+      "triggers": {
+        "errors": [
+          "NameError: name '.*' is not defined",
+          "NameError: global name '.*' is not defined"
+        ],
+        "command_patterns": ["python.*"]
+      },
+      "contexts": {
+        "shells": ["powershell", "bash", "zsh"],
+        "platforms": ["windows", "linux", "darwin"],
+        "repos": ["NuSyQ-Hub", "SimulatedVerse", "NuSyQ"]
+      },
+      "lesson": {
+        "short": "Variable/function used before definition or import",
+        "long": "NameError means Python doesn't know about the name in current scope. Common causes: 1) typo, 2) missing import, 3) wrong scope, 4) circular dependency, 5) used before definition. Check imports and function/variable order.",
+        "level": "beginner",
+        "related_rules": ["missing_module_import"]
+      },
+      "suggestions": [
+        {
+          "strategy": "check_imports",
+          "description": "Verify all necessary imports are present",
+          "example": "# Add missing imports at top of file\nfrom typing import Any\nimport sys",
+          "when_to_use": "Most common case - missing import",
+          "success_rate": 0.85
+        },
+        {
+          "strategy": "check_spelling",
+          "description": "Verify variable/function name spelling",
+          "example": "# Check for typos in variable names\n# Python is case-sensitive",
+          "when_to_use": "When you think it should be defined",
+          "success_rate": 0.7
+        },
+        {
+          "strategy": "check_scope",
+          "description": "Ensure variable is in correct scope",
+          "example": "# Variables defined in functions aren't global\n# Use 'global' or 'nonlocal' keywords if needed",
+          "when_to_use": "When dealing with nested functions",
+          "success_rate": 0.6
+        },
+        {
+          "strategy": "route_to_quantum_bridge",
+          "description": "Use Quantum Error Bridge for complex cases",
+          "example": "python scripts/start_nusyq.py debug \"NameError: name 'Any' is not defined\"",
+          "when_to_use": "When error persists after simple fixes",
+          "success_rate": 0.7
+        }
+      ],
+      "actions": {
+        "severity": "error",
+        "auto_fix": true,
+        "fix_strategy": "add_missing_import_or_definition",
+        "notify_agent": true
+      },
+      "tags": ["python", "nameerror", "imports", "scope", "beginner"],
+      "lore": {
+        "glyph": "❓🔤",
+        "story": "The Unnamed - when the word has no referent",
+        "moral": "Names must be bound before they can be invoked"
+      },
+      "meta": {
+        "hit_count": 0,
+        "success_rate": 0.0,
+        "first_seen": "2025-12-26",
+        "last_seen": "2025-12-26",
+        "common_missing_imports": ["Any", "Dict", "List", "Optional", "Path"]
+      }
+    }
+  ]
+}

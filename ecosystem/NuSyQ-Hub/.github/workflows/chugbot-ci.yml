@@ -1,0 +1,57 @@
+name: ChugBot CI
+
+on:
+  push:
+    branches: [ master, main, 'fix/**' ]
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 */6 * * *' # run every 6 hours
+
+jobs:
+  chugbot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+
+      - name: Ensure safe .gitmodules (script)
+        run: |
+          python scripts/ensure_stub_gitmodules.py
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Install minimal deps (CI-friendly)
+        run: |
+          python -m pip install --upgrade pip
+          python scripts/generate_ci_requirements.py
+          python -m pip install pytest pytest-asyncio pytest-benchmark -q || true
+          pip install -r requirements.ci.txt || true
+          pip install pytest-asyncio pytest-benchmark
+
+      - name: Run unit tests
+        run: pytest tests/unit -q
+
+      - name: Run programmatic import checks
+        run: python scripts/run_repo_import_checks.py .
+
+      - name: Run apply_missing_inits dry-run
+        run: python scripts/apply_missing_inits.py --roots src projects --exclude .venv .git node_modules reports --dry-run
+
+      - name: Generate PHASE1 plan
+        run: python scripts/generate_phase1_plan.py
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: chugbot-reports
+          path: |
+            reports/import_failures_programmatic.json
+            config/PHASE1_FOCUS_PLAN.json
+
+      - name: "Optional: Run triage (no-op without PR)"
+        run: python scripts/triage_import_failures.py || true

@@ -1,0 +1,42 @@
+[
+  {
+    "task_id": "autogen_code_module",
+    "description": "Generate autonomous code generation module for Dev-Mentor",
+    "type": "CODE_GENERATION",
+    "priority": 1,
+    "agents": ["ceo", "cto", "programmer", "tester", "reviewer"],
+    "model": "qwen2.5-coder:14b"
+  },
+  {
+    "task_id": "extend_terminal_depths",
+    "description": "Extend Terminal Depths game world with new procedural generation systems",
+    "type": "CODE_GENERATION",
+    "priority": 2,
+    "agents": ["ceo", "programmer"],
+    "model": "qwen2.5-coder:7b"
+  },
+  {
+    "task_id": "nusyq_integration",
+    "description": "Create bi-directional bridge between Dev-Mentor and NuSyQ Hub",
+    "type": "CODE_GENERATION",
+    "priority": 1,
+    "agents": ["cto", "programmer", "reviewer"],
+    "model": "qwen2.5-coder:14b"
+  },
+  {
+    "task_id": "orchestration_layer",
+    "description": "Implement complete orchestration layer for multi-service coordination",
+    "type": "CODE_GENERATION",
+    "priority": 1,
+    "agents": ["ceo", "cto", "programmer"],
+    "model": "qwen2.5-coder:14b"
+  },
+  {
+    "task_id": "mcp_tools",
+    "description": "Develop advanced MCP tools for system introspection and optimization",
+    "type": "CODE_GENERATION",
+    "priority": 2,
+    "agents": ["programmer", "tester"],
+    "model": "qwen2.5-coder:7b"
+  }
+]

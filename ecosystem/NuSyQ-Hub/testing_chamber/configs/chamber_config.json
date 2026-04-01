@@ -1,0 +1,123 @@
+{
+  "version": "1.0.0",
+  "staging_root": "testing_chamber",
+  "promotion_workflow": {
+    "enabled": true,
+    "require_proof_artifacts": true,
+    "require_owner_review": true,
+    "auto_promote_on_pass": false
+  },
+  "rosetta_headers": {
+    "required": true,
+    "fields": {
+      "STABILITY": {
+        "values": ["alpha", "beta", "stable"],
+        "default": "alpha"
+      },
+      "HEALTH": {
+        "values": ["unknown", "degraded", "healthy", "excellent"],
+        "default": "unknown"
+      },
+      "OWNER": {
+        "required": true,
+        "format": "agent_name"
+      },
+      "PURPOSE": {
+        "required": true,
+        "format": "string"
+      },
+      "TESTS": {
+        "required": false,
+        "format": "test_suite_name"
+      }
+    }
+  },
+  "allowed_edit_types": [
+    "bugfix",
+    "perf_tweak",
+    "ui_polish",
+    "incremental_feature_toggled_off",
+    "refactor_internal",
+    "documentation"
+  ],
+  "forbidden_edit_types": [
+    "breaking_change",
+    "major_refactor",
+    "architecture_change",
+    "api_change"
+  ],
+  "smoke_tests": {
+    "enabled": true,
+    "timeout_seconds": 30,
+    "output_dir": "testing_chamber/ops/smokes",
+    "required_tests": {
+      "boot": "System boots without errors",
+      "import": "All imports resolve correctly",
+      "render": "UI/CLI renders without crashing"
+    }
+  },
+  "diff_generation": {
+    "enabled": true,
+    "output_dir": "testing_chamber/ops/diffs",
+    "format": "unified",
+    "context_lines": 3,
+    "include_stats": true
+  },
+  "duplicate_scanning": {
+    "enabled": true,
+    "threshold": 0.85,
+    "ignore_patterns": [
+      "**/__pycache__/**",
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/*.pyc"
+    ]
+  },
+  "bloat_detection": {
+    "enabled": true,
+    "max_file_size_kb": 500,
+    "max_function_lines": 100,
+    "max_class_lines": 300,
+    "report_threshold": "warning"
+  },
+  "promotion_gates": {
+    "smoke_tests": {
+      "enabled": true,
+      "severity": "critical"
+    },
+    "diff_review": {
+      "enabled": true,
+      "severity": "high"
+    },
+    "duplicate_check": {
+      "enabled": true,
+      "severity": "medium"
+    },
+    "bloat_check": {
+      "enabled": true,
+      "severity": "low"
+    },
+    "owner_approval": {
+      "enabled": true,
+      "severity": "critical"
+    }
+  },
+  "notification_settings": {
+    "on_promotion_ready": true,
+    "on_gate_failure": true,
+    "on_successful_promotion": true,
+    "slack_webhook": null,
+    "email_recipients": []
+  },
+  "metadata": {
+    "created": "2025-10-10T05:20:00Z",
+    "description": "Testing chamber configuration for safe staged development",
+    "version_history": [
+      {
+        "version": "1.0.0",
+        "date": "2025-10-10",
+        "changes": "Initial configuration based on SimulatedVerse reference implementation"
+      }
+    ]
+  }
+}

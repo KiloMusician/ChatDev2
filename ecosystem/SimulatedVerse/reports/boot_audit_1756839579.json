@@ -1,0 +1,33 @@
+{
+  "timestamp": 1756839579,
+  "phase": "A_system_boot_sentinels",
+  "llm_spine": {
+    "gateway_health": "unreachable_4455",
+    "ollama_health": "unreachable_11434", 
+    "status": "failed",
+    "proof_gate": "GET_endpoint_responds_200"
+  },
+  "sage": {
+    "file_exists": true,
+    "processes_running": 0,
+    "status": "dormant",
+    "proof_gate": "process_active_in_ps"
+  },
+  "ui_freshness": {
+    "system_status_age_seconds": 15601,
+    "threshold_seconds": 60,
+    "status": "stale",
+    "proof_gate": "timestamp_drift_under_60s"
+  },
+  "gitignore_audit": {
+    "scope_shields": "comprehensive",
+    "noise_protection": "active",
+    "status": "healthy"
+  },
+  "next_actions": [
+    "enqueue_fixpu_llm_spine_restore",
+    "enqueue_fixpu_provisioner_system_status",
+    "start_sage_if_available",
+    "proceed_phase_b_with_cooldown"
+  ]
+}

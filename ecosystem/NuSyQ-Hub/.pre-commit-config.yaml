@@ -1,0 +1,184 @@
+exclude: |
+  (?x)^(
+    -p/|
+    projects/generated/|
+    projects/ai_task_manager/|
+    archive/|
+    docs/Agent-Sessions/|
+    docs/tracing/RECEIPTS/|
+    docs/Metrics/|
+    docs/Archive/|
+    data/|
+    demo_output/|
+    agent_output/|
+    logs/|
+    NuSyQ-Hub-Obsidian/|
+    web/modular-window-server/node_modules/|
+    node_modules/|
+    vscode-extension/node_modules/|
+    \.snapshots/|
+    \.vscode/mediator/|
+    conversations_test\.json|
+    conversations\.json
+  )
+
+repos:
+  # Formatter: Black (opinionated Python code formatter)
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        language_version: python3.12
+        args: ["--line-length=100"]
+
+  # Linter: Ruff (fast Python linter)
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.4
+    hooks:
+      - id: ruff
+        args: ["--fix", "--line-length=100", "--ignore=B904"]
+        files: ^(src|tests|scripts)/
+
+  # Type checker: mypy (static type checking)
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.7.1
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - types-requests
+          - types-PyYAML
+          - types-cryptography
+        args:
+          - --python-version=3.12
+          - --no-error-summary
+          - --ignore-missing-imports
+          - --exclude=src/copilot/extension\.py|src/tools/nusyq_workspace/\.snapshots/
+        files: ^(src/(?!copilot/extension\.py|copilot/extension/|tools/nusyq_workspace/\.snapshots/)|tests/|scripts/)
+        stages: [manual]
+        exclude: |
+          (?x)^(
+            tests/|
+            ChatDev/|
+            WareHouse/|
+            archive/|
+            \.archive/|
+            \.snapshots/|
+            nusyq_clean_clone/|
+            _vibe/|
+            \.venv\.old/|
+            \.docker_build_context/|
+            \.sanitized_build_context/
+          )
+
+  # Security: Detect secrets and private keys
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ["--baseline", ".secrets.baseline"]
+        exclude: |
+          (?x)^(
+            \.git|
+            \.venv|
+            ChatDev/
+          )
+
+  # Pre-commit core checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+        args: ["--unsafe"]
+        exclude: |
+          (?x)^(
+            \.sonarlintignore|
+            sonar-project\.properties|
+            knowledge-base\.yaml
+          )
+      - id: check-json
+        exclude: |
+          (?x)^(
+            \.vscode/|
+            .*\/\.devcontainer/|
+            \.devcontainer/|
+            docs/Reports/|
+            docs/reports/|
+            docs/Metrics/|
+            docs/Agent-Sessions/|
+            docs/tracing/RECEIPTS/|
+            docs/Archive/|
+            docs/docs-logs/|
+            docs/Notes/|
+            docs/Vault/|
+            NuSyQ-Hub-Obsidian/|
+            data/|
+            archive/|
+            demo_output/|
+            agent_output/|
+            node_modules/|
+            web/modular-window-server/node_modules/|
+            vscode-extension/node_modules/|
+            projects/generated/|
+            projects/ai_task_manager/|
+            zen_engine/|
+            config/civilization_parameters\.json|
+            config/PHASE1_FOCUS_PLAN\.json|
+            config/startup_log\.json|
+            \.ruff_e501\.json
+          )
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: end-of-file-fixer
+        exclude: |
+          (?x)^(
+            projects/generated/|
+            archive/|
+            docs/Agent-Sessions/|
+            docs/tracing/RECEIPTS/|
+            docs/Metrics/|
+            docs/Archive/|
+            data/|
+            demo_output/|
+            agent_output/|
+            logs/|
+            NuSyQ-Hub-Obsidian/|
+            web/modular-window-server/node_modules/|
+            node_modules/|
+            vscode-extension/node_modules/|
+            zen_engine/|
+            \.vscode/|
+            \.devcontainer/
+          )
+      - id: trailing-whitespace
+        args: ["--markdown-linebreak-ext=md"]
+        exclude: |
+          (?x)^(
+            projects/generated/|
+            archive/|
+            docs/Agent-Sessions/|
+            docs/tracing/RECEIPTS/|
+            docs/Metrics/|
+            docs/Archive/|
+            data/|
+            demo_output/|
+            agent_output/|
+            logs/|
+            NuSyQ-Hub-Obsidian/|
+            web/modular-window-server/node_modules/|
+            node_modules/|
+            vscode-extension/node_modules/|
+            zen_engine/|
+            \.vscode/|
+            \.devcontainer/
+          )
+      - id: check-ast
+        files: ^(src|tests|scripts)/
+      - id: debug-statements
+        files: ^(src|tests|scripts)/
+
+# Don't require git clone for hooks
+default_language_version:
+  python: python3.12
+default_stages: [pre-commit]
+fail_fast: false

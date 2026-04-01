@@ -1,0 +1,54 @@
+{
+  "timestamp": 1756839853,
+  "phase": "K_tier_gates_compute",
+  "tiers": {
+    "-1": {
+      "name": "Kernel",
+      "status": "blocked", 
+      "requirements": ["llm_health", "gateway_responds", "provisioner_alive"],
+      "proof_gates": {
+        "llm_health": false,
+        "gateway_responds": true,
+        "provisioner_alive": false
+      },
+      "blockers": ["llm_spine_down", "gateway_failed"]
+    },
+    "0": {
+      "name": "Viability",
+      "status": "blocked",
+      "requirements": ["ui_freshness_60s", "pu_queue_drains", "tests_baseline"],
+      "proof_gates": {
+        "ui_freshness": false,
+        "pu_queue_healthy": true,
+        "tests_baseline": true
+      },
+      "blockers": ["ui_stale"]
+    },
+    "1": {
+      "name": "Gameplay", 
+      "status": "ready",
+      "requirements": ["sim_boots", "invariants_pass", "protagonist_ok"],
+      "proof_gates": {
+        "sim_boots": true,
+        "invariants_pass": true,
+        "protagonist_ok": true
+      },
+      "blockers": []
+    },
+    "2": {
+      "name": "Cadence",
+      "status": "blocked",
+      "requirements": ["feature_deploy_works", "council_pipelines_daily"],
+      "proof_gates": {
+        "feature_deploy": "partial",
+        "council_pipelines": "active"
+      },
+      "blockers": ["theater_score_1.000", "placeholder_explosion"]
+    }
+  },
+  "summary": {
+    "highest_ready_tier": 1,
+    "critical_blockers": ["theater_score_1.000", "llm_spine_issues", "placeholder_explosion"],
+    "immediate_actions": ["reduce_theater_score", "restore_llm_spine", "fix_hardcoded_errors"]
+  }
+}

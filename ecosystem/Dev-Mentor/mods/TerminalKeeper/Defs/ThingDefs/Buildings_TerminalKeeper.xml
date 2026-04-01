@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ─── Tier 0: Rimnet Terminal (entry-point, no research required) ───── -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>TK_RimnetTerminal</defName>
+    <label>Rimnet Terminal</label>
+    <description>A salvaged terminal jury-rigged to access the Rimnet — a scrappy local mesh that somehow connects to something deeper. Colonists are drawn to it instinctively. The interface is glitchy but functional. Some say the responses feel... too personal.
+
+When a colonist sits down, they jack into Terminal Depths and start playing. You can peer over their shoulder at any time.</description>
+    <thingClass>TerminalKeeper.Building_LatticeTerminal</thingClass>
+    <graphicData>
+      <texPath>Things/Building/TK_RimnetTerminal</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <designationCategory>Furniture</designationCategory>
+    <costList>
+      <Steel>20</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <WorkToBuild>600</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>75</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="TerminalKeeper.CompProperties_LatticeTerminal">
+        <tier>0</tier>
+        <requiredSkill>Intellectual</requiredSkill>
+        <requiredSkillLevel>0</requiredSkillLevel>
+        <xpGranted>10</xpGranted>
+        <apiRoute>/api/game/command</apiRoute>
+      </li>
+    </comps>
+    <building>
+      <ai_chillDestination>true</ai_chillDestination>
+    </building>
+  </ThingDef>
+
+  <!-- ─── Tier 1: Basic Lattice Terminal ─────────────────────────────────── -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>TK_LatticeTerminal</defName>
+    <label>Lattice Terminal</label>
+    <description>A quantum-entangled terminal connected to the Terminal Depths AI ecosystem. Colonists with sufficient Intellectual skill can upload daily logs, receive AI Council task assignments, and download blueprints. Each use feeds progress back to the DevMentor CHUG engine.</description>
+    <thingClass>TerminalKeeper.Building_LatticeTerminal</thingClass>
+    <graphicData>
+      <texPath>Things/Building/TK_LatticeTerminal</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <designationCategory>Production</designationCategory>
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <WorkToBuild>1200</WorkToBuild>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>TK_LatticeResearch</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="TerminalKeeper.CompProperties_LatticeTerminal">
+        <tier>1</tier>
+        <requiredSkill>Intellectual</requiredSkill>
+        <requiredSkillLevel>4</requiredSkillLevel>
+        <xpGranted>25</xpGranted>
+        <apiRoute>/api/game/command</apiRoute>
+      </li>
+    </comps>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+    </building>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <!-- ─── Tier 2: Advanced Lattice Console ───────────────────────────────── -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>TK_LatticeConsole</defName>
+    <label>Lattice Console</label>
+    <description>An advanced terminal with a dedicated GPU inference node. Colonists can query the AI Council directly, receive real-time colonist-state analysis from Serena, and participate in blueprint voting. Requires AdvancedComponents and higher Intellectual skill.</description>
+    <thingClass>TerminalKeeper.Building_LatticeTerminal</thingClass>
+    <graphicData>
+      <texPath>Things/Building/TK_LatticeConsole</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,1)</drawSize>
+    </graphicData>
+    <size>(2,1)</size>
+    <designationCategory>Production</designationCategory>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <statBases>
+      <WorkToBuild>3000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.4</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>TK_AdvancedLatticeResearch</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="TerminalKeeper.CompProperties_LatticeTerminal">
+        <tier>2</tier>
+        <requiredSkill>Intellectual</requiredSkill>
+        <requiredSkillLevel>8</requiredSkillLevel>
+        <xpGranted>60</xpGranted>
+        <apiRoute>/api/game/command</apiRoute>
+        <enableCouncilVoting>true</enableCouncilVoting>
+        <enableBlueprintDownload>true</enableBlueprintDownload>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ─── Tier 3: Lattice Nexus ──────────────────────────────────────────── -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>TK_LatticeNexus</defName>
+    <label>Lattice Nexus</label>
+    <description>The colony's primary node in the Lattice. Broadcasts colonist-state telemetry to NuSyQ-Hub, receives live CHUG engine directives, and hosts Gordon's orchestration daemon. All colonists within 15 tiles gain the "Lattice-Linked" hediff, improving decision quality.</description>
+    <thingClass>TerminalKeeper.Building_LatticeNexus</thingClass>
+    <graphicData>
+      <texPath>Things/Building/TK_LatticeNexus</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <designationCategory>Production</designationCategory>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Gold>10</Gold>
+    </costList>
+    <statBases>
+      <WorkToBuild>8000</WorkToBuild>
+      <MaxHitPoints>400</MaxHitPoints>
+      <Flammability>0.3</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>TK_NexusResearch</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>800</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_AffectsSky"/>
+      <li Class="TerminalKeeper.CompProperties_LatticeNexus">
+        <influenceRadius>15</influenceRadius>
+        <broadcastIntervalTicks>600</broadcastIntervalTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

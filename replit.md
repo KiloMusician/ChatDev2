@@ -22,6 +22,8 @@ The single workflow `Start application` runs `bash start.sh` which:
 
 - Port 5000: Frontend (Vite) — webview-accessible
 - Port 6400: Backend (FastAPI) — internal only, proxied through Vite
+- Port 8008: Dev-Mentor (Terminal Depths) — ecosystem service
+- Port 3001: CONCEPT_SAMURAI static docs — ecosystem service
 
 ## Key Files
 
@@ -36,6 +38,23 @@ The single workflow `Start application` runs `bash start.sh` which:
 - **Python**: 3.12 (installed via Replit module system)
 - **Python packages**: fastapi, uvicorn, fastmcp, pandas, pyyaml, openai, anthropic, etc. (installed via pip)
 - **Node packages**: Vue 3, vue-router, @vue-flow/core, vite (installed via npm in `frontend/`)
+
+## NuSyQ Ecosystem Integration
+
+Six repos cloned to `ecosystem/` and launched via `ecosystem/start_services.sh`:
+
+| Repo | Type | Port | Status |
+|------|------|------|--------|
+| Dev-Mentor | FastAPI (game engine, CHUG, ML) | 8008 | Auto-started |
+| CONCEPT_SAMURAI | Static docs server | 3001 | Auto-started |
+| SimulatedVerse | Node/RimWorld sim | 3000 | Heavy — not auto-started |
+| NuSyQ-Hub | CLI / health analysis | — | Snapshot on startup |
+| NuSyQ_Ultimate | Python library | — | CLI/library mode |
+| awesome-vibe-coding | Docs/resources | — | Static reference |
+
+The **Ecosystem** page (`/ecosystem`) in the frontend shows live health of all 6 repos with git metadata, status indicators, architecture diagram, and a CHUG cycle trigger button.
+
+Backend API: `GET /api/ecosystem/status`, `GET /api/ecosystem/repos`, `POST /api/ecosystem/chug`
 
 ## LLM Setup
 

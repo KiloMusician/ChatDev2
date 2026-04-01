@@ -1,0 +1,27 @@
+{
+  "session": "2026-03-02-raven-activation",
+  "timestamp": "2026-03-02T22:09:36.902Z",
+  "summary": "RAVEN autonomous system fully activated and verified",
+  "results": {
+    "jobs_seeded": 21,
+    "jobs_processed": 21,
+    "queue_depth_final": 0,
+    "ollama_model": "llama3.1:8b",
+    "run_log": "ops/logs/raven/run.log"
+  },
+  "fixes": [
+    "server/services/raven/core.ts: added getRavenStatus() export",
+    "server/router/raven.ts: boot disk-loader, /status endpoint, ESM imports, comment-stripped admin guard",
+    "ops/seed-raven.ts: fallback to disk on 4xx responses",
+    "ops/raven-runner.ts: uses BASE_URL env var correctly",
+    ".env: removed inline comments, added BASE_URL=http://10.0.0.172:5000",
+    "package.json: npm run seed|raven|activate scripts with --env-file=.env"
+  ],
+  "known_issues": [
+    "PerformanceMonitor.exe on 127.0.0.1:5000 — use BASE_URL=http://10.0.0.172:5000",
+    "ackRavenJob remaining=NaN bug — leases accumulate in inFlight map (cosmetic, queue still drains)",
+    "ChatDev needs Python (python not found on Windows)",
+    "Lease expiry has no re-queue mechanism — re-run npm run seed if runner crashes mid-batch"
+  ],
+  "pu": "pu.raven.017"
+}

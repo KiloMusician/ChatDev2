@@ -1,0 +1,12 @@
+{
+  "maxFileSize": "1MB hard limit",
+  "maxLogEntries": 100,
+  "rollingBuffer": 50,
+  "monitoring": "Active",
+  "enforcementRules": [
+    "PUQueue: Rolling 50-entry buffer",
+    "Agent states: Archive >1MB files",
+    "Status displays: Update in-place only",
+    "Reports: Circular buffers, no accumulation"
+  ]
+}

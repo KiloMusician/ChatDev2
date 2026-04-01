@@ -1,0 +1,422 @@
+{
+  "version": "1.5",
+  "generated": "2025-12-25T00:30:00",
+  "entry_points": {
+    "src/main.py": {
+      "modes": [
+        "orchestration",
+        "quantum",
+        "analysis",
+        "interactive"
+      ],
+      "safety": "moderate"
+    },
+    "src/cli/nusyq_cli.py": {
+      "modes": [
+        "full_cli"
+      ],
+      "safety": "moderate"
+    },
+    "src/tools/agent_task_router.py": {
+      "modes": [
+        "analyze",
+        "generate",
+        "review",
+        "debug",
+        "plan",
+        "test",
+        "document"
+      ],
+      "safety": "safe"
+    },
+    "src/copilot/bridge_cli.py": {
+      "modes": [
+        "copilot_bridge"
+      ],
+      "safety": "safe"
+    },
+    "src/diagnostics/health_cli.py": {
+      "modes": [
+        "health_check"
+      ],
+      "safety": "safe"
+    },
+    "scripts/start_nusyq.py": {
+      "modes": [
+        "snapshot",
+        "brief",
+        "capabilities",
+        "heal",
+        "suggest",
+        "hygiene",
+        "analyze",
+        "review",
+        "debug",
+        "test",
+        "doctor",
+        "generate",
+        "map",
+        "work",
+        "doctrine_check",
+        "emergence_capture",
+        "selfcheck",
+        "develop_system",
+        "simverse_bridge",
+        "queue",
+        "metrics",
+        "replay",
+        "sync",
+        "auto_cycle",
+        "trace_doctor",
+        "problem_signal_snapshot",
+        "error_report",
+        "vscode_diagnostics_bridge",
+        "agent_status",
+        "orchestrate",
+        "invoke_agent",
+        "activate_ecosystem",
+        "ecosystem_status",
+        "run_notebook",
+        "terminals"
+      ],
+      "safety": "safe"
+    }
+  },
+  "wired_actions": {
+    "snapshot": {
+      "type": "builtin",
+      "safety": "safe",
+      "outputs": [
+        "state/reports/current_state*.md"
+      ],
+      "desc": "Generate system state snapshot across 3 repos"
+    },
+    "heal": {
+      "type": "delegate",
+      "target": "health.py --stats",
+      "safety": "safe",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Run health check (ruff statistics)"
+    },
+    "suggest": {
+      "type": "delegate",
+      "target": "src.orchestration.suggestion_engine",
+      "safety": "safe",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Get contextual suggestions"
+    },
+    "hygiene": {
+      "type": "builtin",
+      "safety": "safe",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Check spine git status"
+    },
+    "analyze": {
+      "type": "delegate",
+      "target": "src.tools.agent_task_router",
+      "safety": "safe",
+      "outputs": [
+        "state/reports/analyze_*.md"
+      ],
+      "desc": "AI-powered file analysis with Ollama fallback"
+    },
+    "review": {
+      "type": "delegate",
+      "target": "src.tools.agent_task_router",
+      "safety": "safe",
+      "outputs": [
+        "state/reports/review_*.md"
+      ],
+      "desc": "Code review via AI"
+    },
+    "debug": {
+      "type": "delegate",
+      "target": "src.tools.agent_task_router (quantum_resolver)",
+      "safety": "moderate",
+      "outputs": [
+        "state/reports/debug_*.md"
+      ],
+      "desc": "Debug with quantum resolver"
+    },
+    "test": {
+      "type": "script",
+      "target": "pytest -q",
+      "safety": "safe",
+      "outputs": [
+        "console + htmlcov/"
+      ],
+      "desc": "Run tests with pytest (817 tests, 91% coverage)"
+    },
+    "doctor": {
+      "type": "composite",
+      "target": "quick_system_analyzer + health --stats + ai_backend_status",
+      "safety": "safe",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Comprehensive diagnostics (3-step)"
+    },
+    "generate": {
+      "type": "delegate",
+      "target": "src.tools.agent_task_router",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py generate <description>",
+      "desc": "Generate code/project with ChatDev"
+    },
+    "map": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py map",
+      "desc": "Regenerate capability map from action catalog"
+    },
+    "brief": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py brief",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Quick workspace intelligence summary (repo status, quests, errors, recommendations)"
+    },
+    "capabilities": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py capabilities",
+      "outputs": [
+        "state/reports/capability_map.md"
+      ],
+      "desc": "Auto-generate capability inventory from entrypoints, modules, AI backends"
+    },
+    "work": {
+      "type": "quest_driven",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py work",
+      "desc": "Execute next safe quest from quest_log.jsonl"
+    },
+    "doctrine_check": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py doctrine_check",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Validate system architecture against doctrine (circular imports, blocking ops, mandatory files)"
+    },
+    "emergence_capture": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py emergence_capture",
+      "outputs": [
+        "state/emergence/emergence_*.jsonl"
+      ],
+      "desc": "Capture emergent behavior signals (quest activity, health, AI interactions)"
+    },
+    "selfcheck": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py selfcheck",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Quick 5-point system diagnostic (paths, entrypoints, quest log, git, health)"
+    },
+    "develop_system": {
+      "type": "autonomous",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py develop_system [--iterations=N] [--halt-on-error]",
+      "outputs": [
+        "state/reports/develop_*.md"
+      ],
+      "desc": "Autonomous development loop (analyze → heal → repeat)"
+    },
+    "simverse_bridge": {
+      "type": "integration",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py simverse_bridge",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Test NuSyQ-Hub ↔ SimulatedVerse bridge connection"
+    },
+    "queue": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py queue",
+      "outputs": [
+        "console",
+        "WORK_QUEUE.json"
+      ],
+      "desc": "Execute next queued work item with status updates"
+    },
+    "metrics": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py metrics",
+      "outputs": [
+        "console",
+        "docs/Metrics/dashboard.html",
+        "docs/Metrics/metrics_*.json"
+      ],
+      "desc": "Build and open cultivation metrics dashboard"
+    },
+    "replay": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py replay",
+      "outputs": [
+        "console",
+        "docs/Learning/learning_report_*.json"
+      ],
+      "desc": "Replay quests, extract patterns, predict next items"
+    },
+    "sync": {
+      "type": "integration",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py sync",
+      "outputs": [
+        "console",
+        "../SimulatedVerse/SimulatedVerse/shared_cultivation/*"
+      ],
+      "desc": "Cross-sync cultivation data with SimulatedVerse"
+    },
+    "auto_cycle": {
+      "type": "autonomous",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py auto_cycle [--iterations=N] [--sleep=SECONDS]",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Run queue → replay → metrics → sync cycle N times"
+    },
+    "trace_doctor": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py trace_doctor",
+      "outputs": [
+        "docs/tracing/TRACE_DOCTOR_REPORT.md",
+        "docs/tracing/RECEIPTS/trace_doctor_*.txt"
+      ],
+      "desc": "Validate tracing env + collector reachability + emit test span"
+    },
+    "problem_signal_snapshot": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py problem_signal_snapshot",
+      "outputs": [
+        "docs/Reports/diagnostics/problem_signal_snapshot_*.json",
+        "docs/Reports/diagnostics/problem_signal_snapshot_*.md",
+        "docs/Reports/diagnostics/vscode_problem_counts.json"
+      ],
+      "desc": "Align VS Code problem counts with tool diagnostics across repos"
+    },
+    "error_report": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py error_report",
+      "outputs": [
+        "docs/Reports/diagnostics/unified_error_report_*.json",
+        "docs/Reports/diagnostics/unified_error_report_*.md",
+        "docs/Reports/diagnostics/unified_error_report_latest.json",
+        "docs/Reports/diagnostics/unified_error_report_latest.md"
+      ],
+      "desc": "Unified error report with per-repo breakdown and VS Code counts"
+    },
+    "vscode_diagnostics_bridge": {
+      "type": "script",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py vscode_diagnostics_bridge",
+      "outputs": [
+        "docs/Reports/diagnostics/vscode_problem_counts_tooling.json",
+        "docs/Reports/diagnostics/vscode_diagnostics_bridge.json"
+      ],
+      "desc": "Refresh tooling-based diagnostics counts (use --override-truth to overwrite VS Code counts)"
+    },
+    "agent_status": {
+      "type": "orchestration",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py agent_status",
+      "outputs": [
+        "console",
+        "data/agent_registry.json"
+      ],
+      "desc": "Show status of all registered agents (Ollama, ChatDev, Continue, Jupyter, Docker)"
+    },
+    "orchestrate": {
+      "type": "orchestration",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py orchestrate <task_description> [--pattern=sequential|parallel] [--prefer-cloud]",
+      "outputs": [
+        "console",
+        "data/orchestration/execution_log.jsonl"
+      ],
+      "desc": "Orchestrate a task across multiple AI agents with intelligent routing"
+    },
+    "invoke_agent": {
+      "type": "orchestration",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py invoke_agent <agent_id> <task_description>",
+      "outputs": [
+        "console",
+        "data/orchestration/execution_log.jsonl"
+      ],
+      "desc": "Directly invoke a specific agent (ollama-local, chatdev-orchestrator, continue-vscode, jupyter-notebooks, docker-orchestrator)"
+    },
+    "activate_ecosystem": {
+      "type": "ecosystem",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py activate_ecosystem",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Activate all dormant infrastructure (Consciousness Bridge, Quantum Systems, SimulatedVerse, AI Context Manager, etc.)"
+    },
+    "ecosystem_status": {
+      "type": "ecosystem",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py ecosystem_status",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Show status of all activated ecosystem systems with capabilities and health"
+    },
+    "run_notebook": {
+      "type": "jupyter",
+      "safety": "moderate",
+      "cmd": "python scripts/start_nusyq.py run_notebook <notebook_path> [--params=key1=val1,key2=val2] [--output=output_path] [--timeout=300]",
+      "outputs": [
+        "console",
+        "data/jupyter/executions/*.ipynb"
+      ],
+      "desc": "Execute a Jupyter notebook programmatically with optional parameters and capture outputs"
+    },
+    "terminals": {
+      "type": "builtin",
+      "safety": "safe",
+      "cmd": "python scripts/start_nusyq.py terminals [activate|status|test]",
+      "outputs": [
+        "console"
+      ],
+      "desc": "Manage 23-terminal intelligence ecosystem with 100+ output source routing"
+    }
+  },
+  "unwired_actions": {
+  },
+  "script_count": 120,
+  "script_themes": {
+    "analysis": 16,
+    "fixing": 30,
+    "typing": 3,
+    "modernization": 4,
+    "testing": 16,
+    "git": 1,
+    "health": 1,
+    "orchestration": 3,
+    "misc": 46
+  }
+}

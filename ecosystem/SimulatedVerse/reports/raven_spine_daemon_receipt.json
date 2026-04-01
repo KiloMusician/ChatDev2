@@ -1,0 +1,15 @@
+{
+  "agent": "Raven",
+  "action": "diagnose",
+  "args": "llm_spine_status", 
+  "daemon_pass": 1,
+  "findings": {
+    "ollama_daemon": "unreachable_consistent",
+    "gateway_fallback": "available",
+    "openai_cascade": "rate_limited_but_operational", 
+    "budget_protection": "active_0_of_100",
+    "spine_resilience": "tier0_cascade_functional"
+  },
+  "receipt": "spine_diagnosis_complete",
+  "next_action": "continue_monitoring"
+}

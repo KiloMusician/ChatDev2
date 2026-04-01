@@ -1,0 +1,15 @@
+id: "005_entropy_anchor"
+name: "Entropy Anchor v1"
+tier: 8
+effects:
+  - kind: "unlock"
+    key: "anchor.available"
+spawns:
+  - when: { energy_gte: 100 }
+    create:
+      id: "010_auto_anchor"
+      name: "Auto-Anchor: Prime"
+      tier: 8
+      effects:
+        - kind: "energy"
+          dE: 1.0

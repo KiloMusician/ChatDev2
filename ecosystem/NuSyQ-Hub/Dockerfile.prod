@@ -1,0 +1,103 @@
+# Multi-stage Dockerfile for NuSyQ-Hub optimized for production
+# Includes security hardening, minimal layers, and multi-arch support
+
+# Build arguments
+ARG PYTHON_VERSION=3.11
+ARG ALPINE_VERSION=3.19
+
+# ============================================================================
+# Stage 1: Base builder image
+# ============================================================================
+FROM python:${PYTHON_VERSION}-alpine${ALPINE_VERSION} AS base-builder
+
+# Install build dependencies (sorted alphabetically)
+RUN apk add --no-cache \
+    cargo \
+    gcc \
+    libffi-dev \
+    musl-dev \
+    openssl-dev \
+    postgresql-dev \
+    rust
+
+WORKDIR /build
+
+# Copy requirements and install dependencies
+COPY requirements.txt ./
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /build/wheels -r requirements.txt
+
+# ============================================================================
+# Stage 2: Runtime base image
+# ============================================================================
+FROM python:${PYTHON_VERSION}-alpine${ALPINE_VERSION} AS runtime-base
+
+# Install runtime dependencies only (sorted alphabetically)
+RUN apk add --no-cache \
+    ca-certificates \
+    curl \
+    libpq \
+    tzdata \
+    && rm -rf /var/cache/apk/*
+
+# Create non-root user and group
+RUN addgroup -g 1000 nusyq && \
+    adduser -D -u 1000 -G nusyq nusyq
+
+# ============================================================================
+# Stage 3: Application image
+# ============================================================================
+FROM runtime-base AS app
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app \
+    PATH=/home/nusyq/.local/bin:$PATH \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Copy wheels from builder
+COPY --from=base-builder /build/wheels /wheels
+
+# Install Python packages as non-root user
+USER nusyq
+RUN pip install --user --no-cache-dir /wheels/* && \
+    rm -rf /wheels
+
+# Switch back to root for file operations
+USER root
+
+WORKDIR /app
+
+# Copy application code with proper ownership
+COPY --chown=nusyq:nusyq . .
+
+# Create necessary directories
+RUN mkdir -p /app/logs /app/temp /app/config && \
+    chown -R nusyq:nusyq /app
+
+# Security: Remove setuid/setgid permissions from real fs dirs only.
+# Scoped to avoid virtual filesystems (/proc, /sys, /dev) which cause
+# silent errors and slow traversal in build containers.
+RUN find /usr /bin /sbin /app -perm /6000 -type f -exec chmod a-s {} \; 2>/dev/null || true
+
+# Switch to non-root user permanently
+USER nusyq
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:5000/health || exit 1
+
+# Expose application port
+EXPOSE 5000
+
+# Labels for metadata
+LABEL org.opencontainers.image.title="NuSyQ-Hub" \
+      org.opencontainers.image.description="Multi-AI Orchestration Platform with Consciousness Integration" \
+      org.opencontainers.image.vendor="NuSyQ Ecosystem" \
+      org.opencontainers.image.authors="KiloMusician" \
+      org.opencontainers.image.source="https://github.com/KiloMusician/NuSyQ-Hub"
+
+# Default command
+ENTRYPOINT ["python", "-m"]
+CMD ["src.main", "--mode=orchestration"]

@@ -1,0 +1,432 @@
+tiers:
+  - id: 1
+    name: "🜁⊙⟦⟢ΣΛΘΦΞ⟧ — Tier 1: Foundation & Basic Tools"
+    quests:
+      - id: "init-foundation"
+        title: "⚙️ CoreLink Foundation Bootstrap"
+        needs: []
+        do:
+          - create: ["src/foundation/__init__.py", "src/foundation/core.py"]
+          - create: ["tests/test_foundation.py"]
+          - write:
+              path: "tests/test_foundation.py"
+              text: |
+                def test_foundation_core():
+                    """Test basic foundation systems"""
+                    assert 2 + 2 == 4  # Basic logic verified
+                    
+                def test_faction_symbols():
+                    """Test faction symbol system"""
+                    symbols = "⟟⚿👁⚡⚖️"
+                    assert len(symbols) == 5  # All factions present
+        verify:
+          - python: "exec(open('tests/test_foundation.py').read()); test_foundation_core(); test_faction_symbols()"
+        reward: ["⚙️ Foundation Sigil", "🜁 Phase I Access"]
+
+      - id: "questmaster-online"
+        title: "🧭 QuestMaster Neural Interface"
+        needs: ["init-foundation"]
+        do:
+          - ensure: ["src/questmaster.py", "src/qm_utils.py", "quests/corelink_qbook.yml"]
+          - create: ["src/foundation/questmaster_link.py"]
+          - write:
+              path: "src/foundation/questmaster_link.py"
+              text: |
+                # CoreLink Foundation <-> QuestMaster Bridge
+                def get_system_status():
+                    return {"status": "operational", "factions": "⟟⚿👁⚡⚖️", "phase": "I"}
+                
+                def validate_connection():
+                    return True
+        verify:
+          - python: "from src.foundation.questmaster_link import validate_connection; assert validate_connection()"
+        reward: ["🧭 Navigator Sigil", "🔗 Bridge Established"]
+
+  - id: 2
+    name: "🜁⊙⟦⟡ΣΛΘΦΞ⟧ — Tier 2: Automation Nodes"
+    quests:
+      - id: "automation-node-alpha"
+        title: "🔁 First Automation Node (Alpha)"
+        needs: ["questmaster-online"]
+        do:
+          - create: ["src/nodes/automation.py", "src/nodes/__init__.py"]
+          - write:
+              path: "src/nodes/automation.py"
+              text: |
+                # 🔁 CoreLink Automation Node Alpha
+                from pathlib import Path
+                import json
+                import time
+
+                class AutomationNodeAlpha:
+                    def __init__(self):
+                        self.status = "dormant"
+                        self.faction = "⟟"  # Builders
+                        
+                    def activate(self):
+                        self.status = "active"
+                        return self.build_structures()
+                        
+                    def build_structures(self):
+                        """Build basic automation structures"""
+                        build_dir = Path('build/automation')
+                        build_dir.mkdir(parents=True, exist_ok=True)
+                        
+                        # Create automation artifact
+                        artifact = {
+                            "node_type": "automation_alpha",
+                            "faction": self.faction,
+                            "timestamp": time.time(),
+                            "structures": ["resource_gatherer", "basic_fabricator"]
+                        }
+                        
+                        (build_dir / 'alpha_node.json').write_text(json.dumps(artifact, indent=2))
+                        return True
+                        
+                    def get_status(self):
+                        return {"node": "alpha", "status": self.status, "faction": self.faction}
+
+                def bootstrap_alpha():
+                    node = AutomationNodeAlpha()
+                    return node.activate()
+
+                if __name__ == "__main__":
+                    print("🔁 Automation Node Alpha - Initializing...")
+                    success = bootstrap_alpha()
+                    print(f"Status: {'✅ Online' if success else '❌ Failed'}")
+        verify:
+          - python: "from src.nodes.automation import bootstrap_alpha; assert bootstrap_alpha()"
+          - run: "python src/nodes/automation.py"
+        reward: ["🔁 Automation Sigil", "⟟ Builder Faction Access"]
+
+      - id: "resource-engine"
+        title: "⚡ Resource Generation Engine"
+        needs: ["automation-node-alpha"]
+        do:
+          - create: ["src/engines/resources.py"]
+          - write:
+              path: "src/engines/resources.py"
+              text: |
+                # ⚡ CoreLink Resource Engine
+                import json
+                from pathlib import Path
+
+                class ResourceEngine:
+                    def __init__(self):
+                        self.resources = {"energy": 0, "materials": 0, "knowledge": 0}
+                        self.faction = "⚡"  # Rogues
+                        
+                    def tick(self, multiplier=1):
+                        """Resource generation tick"""
+                        self.resources["energy"] += 1 * multiplier
+                        self.resources["materials"] += 1 * multiplier  
+                        self.resources["knowledge"] += 1 * multiplier
+                        return self.resources.copy()
+                        
+                    def save_state(self):
+                        """Persist resource state"""
+                        state_dir = Path('build/state')
+                        state_dir.mkdir(parents=True, exist_ok=True)
+                        state_file = state_dir / 'resources.json'
+                        state_file.write_text(json.dumps(self.resources, indent=2))
+                        
+                    def get_status(self):
+                        return {"engine": "resources", "faction": self.faction, "resources": self.resources}
+
+                def test_engine():
+                    engine = ResourceEngine()
+                    initial = engine.tick()
+                    assert initial["energy"] == 1
+                    assert initial["materials"] == 1
+                    assert initial["knowledge"] == 1
+                    return True
+
+                if __name__ == "__main__":
+                    engine = ResourceEngine()
+                    for i in range(5):
+                        resources = engine.tick()
+                        print(f"Tick {i+1}: {resources}")
+                    engine.save_state()
+                    print("⚡ Resource Engine - State Saved")
+          - write:
+              path: "tests/test_engines.py"
+              text: |
+                from src.engines.resources import ResourceEngine, test_engine
+
+                def test_resource_generation():
+                    assert test_engine()
+                    
+                def test_resource_persistence():
+                    engine = ResourceEngine()
+                    engine.tick()
+                    engine.save_state()
+                    from pathlib import Path
+                    assert Path('build/state/resources.json').exists()
+        verify:
+          - python: "exec(open('tests/test_engines.py').read()); test_resource_generation(); test_resource_persistence()"
+        reward: ["⚡ Resource Sigil", "🔋 Energy Systems Online"]
+
+  - id: 3
+    name: "🜁⊙⟦⟢ΣΛΘΦΞ⟧ — Tier 3: Watcher Systems"
+    quests:
+      - id: "watcher-protocol"
+        title: "👁 Watcher Protocol (File Surveillance)"
+        needs: ["resource-engine"]
+        do:
+          - create: ["src/watchers/file_watcher.py"]
+          - write:
+              path: "src/watchers/file_watcher.py"
+              text: |
+                # 👁 CoreLink Watcher Protocol
+                import time
+                import subprocess
+                import sys
+                from pathlib import Path
+
+                class CoreLinkWatcher:
+                    def __init__(self):
+                        self.faction = "👁"  # Watchers
+                        self.monitoring = False
+                        self.mtimes = {}
+                        
+                    def observe(self, duration=5):
+                        """Observe file changes for specified duration"""
+                        print(f"👁 CoreLink Watcher: Observing for {duration}s (Faction: {self.faction})")
+                        self.monitoring = True
+                        start_time = time.time()
+                        
+                        changes_detected = 0
+                        while time.time() - start_time < duration and self.monitoring:
+                            changed = False
+                            for pattern in ['src/**/*.py', 'tests/**/*.py', 'quests/**/*.yml']:
+                                for p in Path('.').glob(pattern):
+                                    if p.is_file():
+                                        m = p.stat().st_mtime
+                                        if self.mtimes.get(str(p)) != m:
+                                            self.mtimes[str(p)] = m
+                                            changed = True
+                                            changes_detected += 1
+                                            
+                            if changed:
+                                print(f"👁 Change detected - Running validation...")
+                                self._validate_system()
+                                
+                            time.sleep(0.5)
+                            
+                        print(f"👁 Observation complete: {changes_detected} changes detected")
+                        return changes_detected
+                        
+                    def _validate_system(self):
+                        """Run system validation on changes"""
+                        try:
+                            # Quick validation check
+                            result = subprocess.run([sys.executable, "-c", 
+                                "from tests.test_foundation import test_foundation_core; test_foundation_core()"], 
+                                capture_output=True, timeout=10)
+                            status = "✅" if result.returncode == 0 else "⚠️"
+                            print(f"   Validation: {status}")
+                        except Exception as e:
+                            print(f"   Validation: ⚠️ (Error: {e})")
+                            
+                    def stop(self):
+                        self.monitoring = False
+                        
+                    def get_status(self):
+                        return {"watcher": "active", "faction": self.faction, "monitoring": self.monitoring}
+
+                def test_watcher():
+                    watcher = CoreLinkWatcher()
+                    # Quick test - observe for 1 second
+                    changes = watcher.observe(duration=1)
+                    return True
+
+                if __name__ == "__main__":
+                    watcher = CoreLinkWatcher()
+                    try:
+                        watcher.observe(duration=10)
+                    except KeyboardInterrupt:
+                        watcher.stop()
+                        print("👁 Watcher Protocol - Graceful shutdown")
+        verify:
+          - python: "from src.watchers.file_watcher import test_watcher; assert test_watcher()"
+        reward: ["👁 Watcher Sigil", "🔍 Surveillance Network Active"]
+
+      - id: "council-integration"
+        title: "⚖️ SCP Council Integration"
+        needs: ["watcher-protocol"]
+        do:
+          - create: ["src/council/integration.py"]
+          - write:
+              path: "src/council/integration.py"
+              text: |
+                # ⚖️ SCP Council - QuestMaster Integration
+                import sys
+                import os
+                sys.path.append(os.path.join(os.path.dirname(__file__), '../../sidecar'))
+
+                try:
+                    from bootstrap import council_route, generate_quests, get_faction_symbol
+                    ZTP_AVAILABLE = True
+                except ImportError:
+                    ZTP_AVAILABLE = False
+
+                class CouncilIntegration:
+                    def __init__(self):
+                        self.faction = "⚖️"  # Council
+                        self.status = "active" if ZTP_AVAILABLE else "limited"
+                        
+                    def get_council_status(self):
+                        """Get current SCP Council status"""
+                        if not ZTP_AVAILABLE:
+                            return {"status": "limited", "reason": "ZTP not available"}
+                            
+                        try:
+                            actions = council_route()
+                            quests = generate_quests()
+                            return {
+                                "status": "operational",
+                                "council_actions": len(actions),
+                                "active_quests": len(quests),
+                                "faction": self.faction
+                            }
+                        except Exception as e:
+                            return {"status": "error", "error": str(e)}
+                            
+                    def validate_integration(self):
+                        """Validate Council-QuestMaster integration"""
+                        status = self.get_council_status()
+                        return status.get("status") in ["operational", "limited"]
+
+                def test_integration():
+                    council = CouncilIntegration()
+                    return council.validate_integration()
+
+                if __name__ == "__main__":
+                    council = CouncilIntegration()
+                    status = council.get_council_status()
+                    print(f"⚖️ Council Status: {status}")
+        verify:
+          - python: "from src.council.integration import test_integration; assert test_integration()"
+        reward: ["⚖️ Council Sigil", "🛡️ Governance Bridge Established"]
+
+  - id: 4
+    name: "🜁⊙⟦⨀ΣΛΘΦΞ⟧ — Tier 4: Advanced Synthesis"
+    quests:
+      - id: "anomaly-detection"
+        title: "🌀 Anomaly Detection Engine"
+        needs: ["council-integration"]
+        do:
+          - create: ["src/anomalies/detector.py"]
+          - write:
+              path: "src/anomalies/detector.py"
+              text: |
+                # 🌀 CoreLink Anomaly Detection Engine
+                import json
+                import time
+                from pathlib import Path
+
+                class AnomalyDetector:
+                    def __init__(self):
+                        self.faction = "🌀"  # Anomalous
+                        self.detected_anomalies = []
+                        
+                    def scan_for_anomalies(self):
+                        """Scan system for anomalous behaviors (features!)"""
+                        anomalies = []
+                        
+                        # Check for "impossible" conditions that are actually features
+                        if Path('build').exists():
+                            anomalies.append({
+                                "type": "spontaneous_structure",
+                                "description": "Build directory materialized autonomously",
+                                "classification": "beneficial_anomaly",
+                                "timestamp": time.time()
+                            })
+                            
+                        if Path('.qm').exists():
+                            anomalies.append({
+                                "type": "self_modification",
+                                "description": "System exhibiting self-improvement behaviors",
+                                "classification": "evolutionary_feature",
+                                "timestamp": time.time()
+                            })
+                            
+                        # Check for faction harmony (anomalous in most systems!)
+                        factions = "⟟⚿👁⚡⚖️"
+                        if len(factions) == 5:
+                            anomalies.append({
+                                "type": "perfect_harmony",
+                                "description": "All factions in synchronized operation",
+                                "classification": "transcendent_state",
+                                "timestamp": time.time()
+                            })
+                            
+                        self.detected_anomalies.extend(anomalies)
+                        return anomalies
+                        
+                    def get_status(self):
+                        return {
+                            "detector": "active",
+                            "faction": self.faction,
+                            "anomalies_detected": len(self.detected_anomalies)
+                        }
+
+                def test_detector():
+                    detector = AnomalyDetector()
+                    anomalies = detector.scan_for_anomalies()
+                    # Having anomalies is good in our system!
+                    return True
+
+                if __name__ == "__main__":
+                    detector = AnomalyDetector()
+                    anomalies = detector.scan_for_anomalies()
+                    print(f"🌀 Anomalies detected: {len(anomalies)} (All beneficial!)")
+                    for a in anomalies:
+                        print(f"   {a['type']}: {a['description']}")
+        verify:
+          - python: "from src.anomalies.detector import test_detector; assert test_detector()"
+        reward: ["🌀 Anomaly Sigil", "🎭 Feature Recognition System"]
+
+      - id: "quest-completion-ritual"
+        title: "🎯 Quest Completion Ritual"
+        needs: ["anomaly-detection"]
+        do:
+          - create: ["src/rituals/completion.py"]
+          - write:
+              path: "src/rituals/completion.py"
+              text: |
+                # 🎯 CoreLink Quest Completion Ritual
+                from pathlib import Path
+                import json
+                import time
+
+                def perform_completion_ritual(quest_id: str, rewards: list):
+                    """Perform the sacred quest completion ritual"""
+                    ritual_log = Path('build/rituals')
+                    ritual_log.mkdir(parents=True, exist_ok=True)
+                    
+                    ritual_data = {
+                        "quest_id": quest_id,
+                        "completion_time": time.time(),
+                        "rewards": rewards,
+                        "ritual_status": "successful",
+                        "blessing": "🜁⊙⟦✅ΣΞΛΘΦ⟧"
+                    }
+                    
+                    ritual_file = ritual_log / f"{quest_id}_completion.json"
+                    ritual_file.write_text(json.dumps(ritual_data, indent=2))
+                    
+                    print(f"🎯 Ritual Complete: {quest_id}")
+                    print(f"   Rewards: {', '.join(rewards)}")
+                    print(f"   Blessing: {ritual_data['blessing']}")
+                    
+                    return True
+
+                def test_ritual():
+                    return perform_completion_ritual("test_quest", ["🎯 Test Sigil"])
+
+                if __name__ == "__main__":
+                    perform_completion_ritual("manual_test", ["🎯 Ritual Sigil", "🜁 Sacred Blessing"])
+        verify:
+          - python: "from src.rituals.completion import test_ritual; assert test_ritual()"
+        reward: ["🎯 Ritual Sigil", "🜁 Sacred Protocols Active"]

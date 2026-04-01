@@ -1,0 +1,22 @@
+{
+  "context": {
+    "name": "ChatDev Multi-Agent Development",
+    "command": "C:\\Users\\keath\\NuSyQ\\.venv\\Scripts\\python.exe ChatDev\\run.py --task Create a simple Hello World Python script --config NuSyQ_Ollama --org NuSyQ --model qwen2.5-coder:14b",
+    "purpose": "Generate complete software project with multi-agent collaboration",
+    "expected_duration_sec": 300,
+    "expected_behavior": "High CPU during code generation, file I/O for writing code",
+    "investigation_triggers": {
+      "duration_multiplier": 6,
+      "cpu_idle_seconds": 300,
+      "memory_mb_threshold": 2000
+    }
+  },
+  "final_status": {
+    "pid": 57724,
+    "name": "ChatDev Multi-Agent Development",
+    "purpose": "Generate complete software project with multi-agent collaboration",
+    "returncode": 1,
+    "duration_sec": 4.103353023529053,
+    "snapshots_count": 2
+  }
+}

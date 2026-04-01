@@ -1,0 +1,109 @@
+{
+  "name": "powershell-mediator-extension",
+  "displayName": "PowerShell Mediator",
+  "description": "VS Code control-plane extension for mediator control, diagnostics, agent-mesh visibility, and NuSyQ capability cockpit workflows.",
+  "version": "0.0.0",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "main": "./extension.js",
+  "files": [
+    "extension.js",
+    "package.json",
+    "README.md"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:powershellMediator.start",
+    "onCommand:powershellMediator.stop",
+    "onCommand:powershellMediator.openReports",
+    "onCommand:powershellMediator.listOllamaModels",
+    "onCommand:powershellMediator.runChatDevTask",
+    "onCommand:powershellMediator.refreshDiagnosticsSnapshot",
+    "onCommand:powershellMediator.openDiagnosticsDashboard",
+    "onCommand:powershellMediator.openCapabilityCockpit"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "powershellMediator.start",
+        "title": "PowerShell Mediator: Start"
+      },
+      {
+        "command": "powershellMediator.stop",
+        "title": "PowerShell Mediator: Stop"
+      },
+      {
+        "command": "powershellMediator.openReports",
+        "title": "PowerShell Mediator: Open Reports Folder"
+      },
+      {
+        "command": "powershellMediator.listOllamaModels",
+        "title": "PowerShell Mediator: List Ollama Models"
+      },
+      {
+        "command": "powershellMediator.runChatDevTask",
+        "title": "PowerShell Mediator: Run ChatDev Task"
+      },
+      {
+        "command": "powershellMediator.refreshDiagnosticsSnapshot",
+        "title": "PowerShell Mediator: Refresh Diagnostics Snapshot"
+      },
+      {
+        "command": "powershellMediator.openDiagnosticsDashboard",
+        "title": "PowerShell Mediator: Open Diagnostics Dashboard"
+      },
+      {
+        "command": "powershellMediator.openCapabilityCockpit",
+        "title": "PowerShell Mediator: Open Capability Cockpit"
+      }
+    ],
+    "configuration": {
+      "title": "PowerShell Mediator",
+      "properties": {
+        "powershellMediator.autoRefreshDiagnosticsSnapshotOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Refresh the NuSyQ diagnostics bridge snapshot after saving supported files."
+        },
+        "powershellMediator.diagnosticsSnapshotDebounceMs": {
+          "type": "number",
+          "default": 1500,
+          "minimum": 250,
+          "description": "Debounce window in milliseconds before auto-refreshing the diagnostics bridge snapshot."
+        },
+        "powershellMediator.autoRefreshLanguageIds": {
+          "type": "array",
+          "default": ["python", "javascript", "typescript", "json"],
+          "items": {
+            "type": "string"
+          },
+          "description": "Document language IDs that trigger diagnostics bridge snapshot refresh on save."
+        },
+        "powershellMediator.ollamaBaseUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:11434",
+          "description": "Base URL for Ollama health and model inventory probes."
+        },
+        "powershellMediator.lmStudioBaseUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:1234",
+          "description": "Base URL for LM Studio model inventory probes."
+        },
+        "powershellMediator.openClawHealthUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:18790/api/health",
+          "description": "Health endpoint for the OpenClaw gateway."
+        },
+        "powershellMediator.additionalCapabilities": {
+          "type": "array",
+          "default": ["SkyClaw", "MetaClaw", "Hermes-Agent", "Shepherd", "GitNexus", "Nogic", "Culture Ship", "Keeper"],
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional capability names to surface in the VS Code cockpit even when they are not yet explicitly wired."
+        }
+      }
+    }
+  }
+}

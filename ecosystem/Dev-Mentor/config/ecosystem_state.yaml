@@ -1,0 +1,137 @@
+# config/ecosystem_state.yaml
+# Single source of truth for the desired ecosystem state.
+# Read by: environment.py, port_watcher.py, Serena, activation planner
+# Philosophy: offline-first — AI is an amplifier, never a dependency.
+
+version: "1.1"
+updated: "2026-03-19"
+
+# ─── Required services (read from port_map.json for full detail) ──────────────
+required_services:
+  - name: "Terminal Depths API"
+    port: 5000
+    health: "/api/health"
+    critical: true
+    tier: offline_core
+    start: "python -m cli.devmentor serve --host 0.0.0.0 --port 5000"
+
+  - name: "Gordon Orchestrator"
+    port: 3000
+    health: "/health"
+    critical: false
+    tier: offline_core
+    start: "python scripts/gordon_orchestrator.py --mode daemon"
+
+  - name: "Serena Convergence Layer"
+    port: 3001
+    health: "/health"
+    critical: false
+    tier: offline_core
+    start: "python scripts/serena_analytics.py --daemon"
+
+  - name: "SkyClaw Scanner"
+    port: 3002
+    health: "/health"
+    critical: false
+    tier: offline_core
+    start: "python scripts/skyclaw_scanner.py --daemon"
+
+  - name: "Culture Ship"
+    port: 3003
+    health: "/health"
+    critical: false
+    tier: offline_core
+    start: "python scripts/culture_ship.py --daemon"
+
+  # ── AI amplifiers (optional) ──────────────────────────────────────────────
+  - name: "Model Router"
+    port: 9001
+    health: "/health"
+    critical: false
+    tier: ai_amplifier
+    start: "python scripts/model_router.py"
+
+  - name: "MCP Server"
+    port: 8008
+    health: "/health"
+    critical: false
+    tier: optional
+    start: "python mcp/server.py"
+
+# ─── Sibling repositories ─────────────────────────────────────────────────────
+sibling_repos:
+  - name: "NuSyQ-Hub"
+    path: "../NuSyQ-Hub"
+    required: false
+    note: "Agent manifest spine — connects all repos in the ecosystem"
+
+  - name: "SimulatedVerse"
+    path: "../SimulatedVerse"
+    required: false
+    note: "Simulation substrate / CyberTerminal game engine"
+
+  - name: "CyberTerminal"
+    path: "../CyberTerminal"
+    required: false
+    note: "CLI terminal game (SimulatedVerse variant)"
+
+# ─── Required environment variables ──────────────────────────────────────────
+env_vars:
+  required:
+    - GAME_API_URL           # defaults to http://localhost:5000
+    - SESSION_SECRET         # FastAPI session signing key
+  optional:
+    - GITHUB_TOKEN           # git auto-push / issue creation
+    - REDIS_URL              # Redis pub/sub (defaults redis://localhost:6379)
+    - REPLIT_DEV_DOMAIN      # set automatically by Replit
+    - OPENAI_API_KEY         # optional AI amplifier
+    - OLLAMA_HOST            # optional local LLM
+    - MASTER_KEY             # inter-agent auth (optional)
+    - AUTO_SLEEP_MINUTES     # Replit idle shutdown (default 120)
+
+# ─── Surface-specific notes ───────────────────────────────────────────────────
+surfaces:
+  replit:
+    port: 5000
+    notes:
+      - "Game API + Serena agno bridge + NuSyQ-Hub bridge all run here"
+      - "State lives in state/ (gitignored) — ephemeral per deployment"
+      - "Auto-push to GitHub runs every 60 min via git_auto_push.py"
+      - "Gordon player agent targets REPLIT_DEV_DOMAIN"
+    quickstart:
+      - "The game server starts automatically via the DevMentor Console workflow"
+      - "Open the game: visit the Webview tab"
+      - "Type `help` in the terminal to begin"
+
+  docker:
+    port: 7337
+    notes:
+      - "Full stack — Ollama, MCP server, Redis, all agents"
+      - "Start with: ./scripts/cascade.sh core"
+      - "Full stack: ./scripts/cascade.sh full"
+      - "State persists in ./state/ volume mount"
+    quickstart:
+      - "docker compose up -d"
+      - "python scripts/port_watcher.py --fix  # see what's dark"
+      - "python scripts/td.py  # connect CLI client"
+
+  vscode:
+    port: null
+    notes:
+      - "Ctrl+Shift+B — DevMentor task panel (tasks.json as control panel)"
+      - "Gordon player connects to REPLIT_DEV_DOMAIN"
+      - "CHUG engine and tutorial system are primary surface"
+    quickstart:
+      - "Open DevMentorWorkspace.workspace.json"
+      - "Install recommended extensions (.vscode/extensions.json)"
+      - "Run Task: Start DevMentor Server"
+
+  windows:
+    port: null
+    notes:
+      - "Use WSL2 for full Linux command compatibility"
+      - "PowerShell: scripts/bootstrap_windows.ps1"
+      - "Git Bash: scripts/bootstrap_local.sh"
+    quickstart:
+      - "wsl --install  # if WSL2 not installed"
+      - "./scripts/bootstrap_local.sh  # in WSL or Git Bash"

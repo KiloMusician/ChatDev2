@@ -1,0 +1,5 @@
+{"id":"pu-qsa-hardcoded-errors","kind":"refactor","title":"Eliminate 1 hard-coded error sites","files":["other-file.ts"],"proof":{"kind":"grep-absent","target":"reports/qsa/issues.json","expect":"hardcoded"}}
+{"id":"pu-qsa-placeholders","kind":"cleanup","title":"Address 1 TODO/FIXME/TBD placeholders","files":["some-file.ts"],"proof":{"kind":"threshold","target":"reports/qsa/issues.json","expect":{"placeholders_lt":0}}}
+{"id":"pu-qsa-exact-dupes","kind":"consolidate","title":"Consolidate 1 exact duplicate clusters","files":["file1.ts","file1-copy.ts"],"proof":{"kind":"dedupe","target":"reports/qsa/dupes.json","expect":{"exact_clusters":0}}}
+{"id":"pu-qsa-near-dupes","kind":"anneal","title":"Anneal 1 near-duplicate pairs","files":["similar1.ts","similar2.ts"],"proof":{"kind":"threshold","target":"reports/qsa/dupes.json","expect":{"near_pairs_lt":0}}}
+{"id":"pu-qsa-spam-storms","kind":"archive","title":"Archive/compress 1 spam buckets","files":["report1.json","report2.json"],"proof":{"kind":"archive","target":"reports/qsa/spam.json","expect":{"storms":0}}}

@@ -1,0 +1,99 @@
+{
+  "id": "history_smoke",
+  "name": "history_smoke",
+  "description": "Created via nq workflow create",
+  "nodes": [
+    {
+      "id": "trigger_1",
+      "name": "Manual Trigger",
+      "type": "trigger",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "trigger_data",
+          "type": "object",
+          "required": true,
+          "has_default": false,
+          "description": ""
+        }
+      ],
+      "config": {
+        "trigger": "manual"
+      },
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "action_1",
+      "name": "Log Action",
+      "type": "action",
+      "inputs": [
+        {
+          "name": "data",
+          "type": "any",
+          "required": false,
+          "has_default": false,
+          "description": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type": "any",
+          "required": true,
+          "has_default": false,
+          "description": ""
+        }
+      ],
+      "config": {
+        "action": "log"
+      },
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "output_1",
+      "name": "Summary Output",
+      "type": "output",
+      "inputs": [
+        {
+          "name": "data",
+          "type": "any",
+          "required": false,
+          "has_default": false,
+          "description": ""
+        }
+      ],
+      "outputs": [],
+      "config": {
+        "format": "summary"
+      },
+      "position": [
+        0,
+        0
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from_node": "trigger_1",
+      "from_port": "output",
+      "to_node": "action_1",
+      "to_port": "input"
+    },
+    {
+      "from_node": "action_1",
+      "from_port": "output",
+      "to_node": "output_1",
+      "to_port": "input"
+    }
+  ],
+  "metadata": {},
+  "enabled": true,
+  "created_at": "2026-02-07T00:30:05.144583",
+  "updated_at": "2026-02-07T00:30:05.144583"
+}

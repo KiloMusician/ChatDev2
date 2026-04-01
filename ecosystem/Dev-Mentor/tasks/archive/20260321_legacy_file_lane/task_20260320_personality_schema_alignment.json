@@ -1,0 +1,9 @@
+{
+  "id": "task_20260320_personality_schema_alignment",
+  "title": "Normalize agent personality YAMLs to Serena drift schema",
+  "agent": "implementer.py",
+  "details": "Serena drift is now correctly reporting widespread ROLE_DRIFT warnings in agents/personalities/*.yaml. Bring the personality files into alignment with the current required schema (id, name, role, faction, codename, traits, system_prompt) without regressing existing agent behavior.",
+  "priority": 9,
+  "status": "pending",
+  "created_at": "2026-03-20T10:24:30Z"
+}

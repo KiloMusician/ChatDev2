@@ -1,0 +1,9 @@
+{
+  "id": "task_20260320_external_ecosystem_activation",
+  "title": "Bring external ecosystem surfaces from reachable to operational",
+  "agent": "validator.py",
+  "details": "NuSyQ-Hub is reachable on :8000 but reports system.status=off / overall_status=unknown. SimulatedVerse is not present as a runnable local image. RimWorld container is up but the actual game assets are missing from /rimworld/game. Produce a concrete activation checklist and validate each dependency needed for a true full-stack bring-up.",
+  "priority": 8,
+  "status": "pending",
+  "created_at": "2026-03-20T10:24:30Z"
+}

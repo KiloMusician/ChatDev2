@@ -1,0 +1,4 @@
+[[rule]]
+match = 'console.log(:[x])'
+rewrite = 'logger.debug(:[x])'
+languages = ["javascript", "typescript"]

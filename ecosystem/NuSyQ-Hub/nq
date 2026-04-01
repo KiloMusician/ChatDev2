@@ -1,0 +1,2578 @@
+#!/usr/bin/env python3
+"""NuSyQ Quick CLI - The 10X Developer Experience.
+
+Usage:
+    nq search <query>           Search codebase
+    nq quest add <title>        Add a quest
+    nq quest list               List quests
+    nq council propose <topic>  Propose to council
+    nq bg dispatch <prompt>     Dispatch to local LLM
+    nq bg process [n]           Process n queued tasks (default: 1)
+    nq bg run [options]         Run queue processing loop with time/completion budget
+    nq status                   System status
+    nq boot                     Boot all systems
+    nq watch                    Watch for file changes, auto-rebuild index
+    nq cycle                    Run one autonomous development cycle
+    nq analyze <path>           Quick analyze a file or directory
+    nq fix <path>               Run auto-fixes on file/directory
+    nq health                   Quick health check
+    nq connector list           List registered connectors
+    nq connector connect <id>   Connect a connector
+    nq connector health         Health check all connectors
+    nq workflow list            List available workflows
+    nq workflow run <id>        Execute a workflow
+    nq workflow create <name>   Create new workflow
+    nq test-loop <target>       Run test loop with AI fixes
+    nq outputs scan             Scan VS Code + terminal output sources
+    nq outputs tail <channel>   Tail recent lines for an output channel
+    nq outputs diff             Compare scan snapshots
+    nq outputs stale            Flag stale/noisy channels and idle shells
+    nq outputs hints            Convert noisy logs into actionable guidance
+    nq zero status              Zero-token/SNS bridge status across repos
+    nq zero analyze <text>      Estimate token savings with SNS-Core
+    nq zero convert <text>      Convert text to SNS notation
+    nq zero report              Full zero-token bridge report
+    nq protocol status [--quick] Protocol health over core facades
+    nq factory health           Run factory smoke probes (fallback/bootstrap/packaging)
+    nq factory doctor           Fail-fast diagnostics for degraded generation quality
+    nq factory doctor --fix     Apply safe remediation actions from doctor findings
+    nq factory autopilot        Run doctor + examples + patch plan (optional --fix)
+    nq factory ci-gate          Alias for strict CI gate autopilot mode (hooks + workspace integrity)
+    nq factory autopilot --ci-gate  CI gate mode (strict hooks, no examples, workspace integrity)
+    nq factory inspect-examples Inspect reference game installs for runtime patterns
+    nq lang list                List supported programming languages
+    nq lang info <name>         Show details for a language
+    nq lang templates           List templates by language
+    nq lang providers           List AI provider capabilities
+    nq gen list                 List registered code generators
+    nq gen info <name>          Show generator details
+    nq gen test <name>          Test a generator
+    nq gen for <language>       Find best generator for a language
+    nq factory generate <name>  Generate a project (async, multi-language)
+
+Examples:
+    nq search "authentication"
+    nq quest add "Fix the login bug"
+    nq bg dispatch "Analyze src/auth for security issues"
+    nq bg process 5             Process 5 queued background tasks
+    nq bg run --hours 4 --batch 3 --target-completions 50
+    nq watch
+    nq cycle
+    nq analyze src/auth
+    nq fix src/main.py
+    nq connector list
+    nq workflow run data_pipeline
+    nq test-loop tests/ -n 5
+    nq outputs scan
+    nq outputs tail "GitHub Copilot chat" --lines 30
+    nq outputs tail "Errors" --since 30
+    nq outputs diff
+    nq outputs stale --minutes 180 --idle-minutes 20
+    nq outputs hints Codex --since 60 --sns
+    nq zero status
+    nq zero analyze "analyze terminal errors and suggest fixes"
+    nq zero convert "system integration flow then validate output"
+    nq protocol status --quick
+    nq factory health
+    nq factory doctor --fix
+    nq factory autopilot --fix --strict-hooks
+    nq factory ci-gate --json
+    nq factory autopilot --ci-gate
+    nq factory doctor --strict-hooks
+    nq factory autopilot --ci-gate --json
+    nq factory inspect-examples
+"""
+
+import json
+import os
+import sys
+from pathlib import Path
+
+# Add src to path
+sys.path.insert(0, str(Path(__file__).parent))
+
+from src.core import nusyq
+
+
+def print_result(result, verbose=False):
+    """Pretty print a Result object."""
+    if result.success:
+        print(f"✅ {result.message or 'Success'}")
+        if result.data:
+            if isinstance(result.data, dict):
+                for k, v in result.data.items():
+                    print(f"   {k}: {v}")
+            elif isinstance(result.data, list):
+                for item in result.data[:10]:  # Limit output
+                    if isinstance(item, dict):
+                        print(f"   - {item.get('file', item.get('title', item))}")
+                    else:
+                        print(f"   - {item}")
+                if len(result.data) > 10:
+                    print(f"   ... and {len(result.data) - 10} more")
+            else:
+                print(f"   {result.data}")
+    else:
+        print(f"❌ {result.error}")
+        if result.code:
+            print(f"   Code: {result.code}")
+
+
+def cmd_search(args):
+    """Search the codebase."""
+    if not args:
+        print("Usage: nq search <query>")
+        return 1
+
+    query = " ".join(args)
+    result = nusyq.search.find(query, limit=10)
+    print_result(result)
+    return 0 if result.success else 1
+
+
+def cmd_quest(args):
+    """Quest operations."""
+    if not args:
+        print("Usage: nq quest <add|list|complete|status> [args]")
+        return 1
+
+    subcmd = args[0]
+
+    if subcmd == "add":
+        if len(args) < 2:
+            print("Usage: nq quest add <title>")
+            return 1
+        title = " ".join(args[1:])
+        result = nusyq.quest.add(title)
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "list":
+        result = nusyq.quest.list()
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "complete":
+        if len(args) < 2:
+            print("Usage: nq quest complete <quest_id>")
+            return 1
+        result = nusyq.quest.complete(args[1])
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "status":
+        result = nusyq.quest.status()
+        print_result(result)
+        return 0 if result.success else 1
+
+    else:
+        print(f"Unknown quest subcommand: {subcmd}")
+        return 1
+
+
+def cmd_council(args):
+    """Council operations."""
+    if not args:
+        print("Usage: nq council <propose|vote|status> [args]")
+        return 1
+
+    subcmd = args[0]
+
+    if subcmd == "propose":
+        if len(args) < 2:
+            print("Usage: nq council propose <topic>")
+            return 1
+        topic = " ".join(args[1:])
+        result = nusyq.council.propose(topic)
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "vote":
+        if len(args) < 3:
+            print("Usage: nq council vote <decision_id> <approve|reject>")
+            return 1
+        result = nusyq.council.vote(args[1], args[2])
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "status":
+        result = nusyq.council.status()
+        print_result(result)
+        return 0 if result.success else 1
+
+    else:
+        print(f"Unknown council subcommand: {subcmd}")
+        return 1
+
+
+def cmd_bg(args):
+    """Background task operations."""
+    if not args:
+        print("Usage: nq bg <dispatch|status|list|process|run> [args]")
+        return 1
+
+    subcmd = args[0]
+
+    if subcmd == "dispatch":
+        if len(args) < 2:
+            print("Usage: nq bg dispatch <prompt>")
+            return 1
+        prompt = " ".join(args[1:])
+        result = nusyq.background.dispatch(prompt)
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "status":
+        task_id = args[1] if len(args) > 1 else None
+        result = nusyq.background.status(task_id)
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "list":
+        status_filter = args[1] if len(args) > 1 else None
+        result = nusyq.background.list_tasks(status_filter)
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "process":
+        limit = 1
+        if len(args) > 1:
+            try:
+                limit = int(args[1])
+            except ValueError:
+                print(f"Invalid count: {args[1]}, using 1")
+
+        print(f"🔄 Processing up to {limit} queued tasks...")
+        if limit == 1:
+            result = nusyq.background.process_one()
+        else:
+            result = nusyq.background.process_batch(limit)
+        print_result(result)
+        return 0 if result.success else 1
+
+    elif subcmd == "run":
+        # Soft-runtime controlled queue processing loop.
+        # Defaults: 4h max, batch size 3, stop when queue empties.
+        import time
+
+        duration_seconds = 4 * 60 * 60
+        batch_size = 3
+        target_completions = None
+        sleep_seconds = 2.0
+        max_failures = 5
+        json_mode = False
+
+        i = 1
+        while i < len(args):
+            arg = args[i]
+            if arg == "--hours" and i + 1 < len(args):
+                i += 1
+                try:
+                    duration_seconds = max(60, int(float(args[i]) * 3600))
+                except ValueError:
+                    print(f"Invalid --hours value: {args[i]}")
+                    return 1
+            elif arg == "--minutes" and i + 1 < len(args):
+                i += 1
+                try:
+                    duration_seconds = max(60, int(float(args[i]) * 60))
+                except ValueError:
+                    print(f"Invalid --minutes value: {args[i]}")
+                    return 1
+            elif arg == "--batch" and i + 1 < len(args):
+                i += 1
+                try:
+                    batch_size = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --batch value: {args[i]}")
+                    return 1
+            elif arg == "--target-completions" and i + 1 < len(args):
+                i += 1
+                try:
+                    target_completions = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --target-completions value: {args[i]}")
+                    return 1
+            elif arg == "--sleep" and i + 1 < len(args):
+                i += 1
+                try:
+                    sleep_seconds = max(0.0, float(args[i]))
+                except ValueError:
+                    print(f"Invalid --sleep value: {args[i]}")
+                    return 1
+            elif arg == "--max-failures" and i + 1 < len(args):
+                i += 1
+                try:
+                    max_failures = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --max-failures value: {args[i]}")
+                    return 1
+            elif arg == "--json":
+                json_mode = True
+            else:
+                print(f"Unknown option: {arg}")
+                print(
+                    "Usage: nq bg run [--hours N|--minutes N] [--batch N] "
+                    "[--target-completions N] [--sleep SECONDS] [--max-failures N] [--json]"
+                )
+                return 1
+            i += 1
+
+        status_start = nusyq.background.status()
+        if not status_start.success:
+            print_result(status_start)
+            return 1
+
+        start_counts = status_start.data.get("status_counts", {})
+        start_completed = int(start_counts.get("completed", 0))
+        start_queued = int(start_counts.get("queued", 0))
+
+        started_at = time.time()
+        deadline = started_at + duration_seconds
+
+        total_processed = 0
+        total_succeeded = 0
+        total_failed = 0
+        loops = 0
+        consecutive_failures = 0
+        stop_reason = "time_budget_reached"
+
+        if not json_mode:
+            print("🚀 Background run mode")
+            print(f"   Budget: {duration_seconds}s")
+            print(f"   Batch size: {batch_size}")
+            print(f"   Queue at start: {start_queued}")
+            if target_completions:
+                print(f"   Target completions: {target_completions}")
+
+        while time.time() < deadline:
+            status_now = nusyq.background.status()
+            if not status_now.success:
+                stop_reason = "status_error"
+                break
+
+            counts = status_now.data.get("status_counts", {})
+            queued_now = int(counts.get("queued", 0))
+            if queued_now <= 0:
+                stop_reason = "queue_empty"
+                break
+
+            process_count = min(batch_size, queued_now)
+            result = nusyq.background.process_batch(process_count)
+            loops += 1
+            if not result.success:
+                consecutive_failures += 1
+                total_failed += process_count
+                if not json_mode:
+                    print(f"   loop#{loops}: process error ({result.error})")
+            else:
+                data = result.data or {}
+                processed = int(data.get("processed", 0))
+                succeeded = int(data.get("succeeded", 0))
+                failed = int(data.get("failed", 0))
+                total_processed += processed
+                total_succeeded += succeeded
+                total_failed += failed
+                consecutive_failures = 0 if succeeded > 0 else (consecutive_failures + 1)
+                if not json_mode:
+                    print(
+                        f"   loop#{loops}: processed={processed} "
+                        f"succeeded={succeeded} failed={failed} queued={queued_now}"
+                    )
+
+            if target_completions and total_succeeded >= target_completions:
+                stop_reason = "target_completions_reached"
+                break
+
+            if consecutive_failures >= max_failures:
+                stop_reason = "max_failures_reached"
+                break
+
+            if sleep_seconds:
+                time.sleep(sleep_seconds)
+
+        elapsed_seconds = int(max(0.0, time.time() - started_at))
+        status_end = nusyq.background.status()
+        end_counts = status_end.data.get("status_counts", {}) if status_end.success else {}
+        end_completed = int(end_counts.get("completed", 0))
+        end_queued = int(end_counts.get("queued", 0))
+
+        report = {
+            "stop_reason": stop_reason,
+            "elapsed_seconds": elapsed_seconds,
+            "loops": loops,
+            "budget_seconds": duration_seconds,
+            "batch_size": batch_size,
+            "target_completions": target_completions,
+            "start": {
+                "queued": start_queued,
+                "completed": start_completed,
+            },
+            "run": {
+                "processed": total_processed,
+                "succeeded": total_succeeded,
+                "failed": total_failed,
+            },
+            "end": {
+                "queued": end_queued,
+                "completed": end_completed,
+            },
+            "delta": {
+                "completed": end_completed - start_completed,
+                "queued": end_queued - start_queued,
+            },
+        }
+
+        if json_mode:
+            print(json.dumps(report, indent=2))
+        else:
+            print("\n📊 Run summary")
+            print(json.dumps(report, indent=2))
+
+        # Return success unless infrastructure status itself failed.
+        if stop_reason in {"status_error"}:
+            return 1
+        return 0
+
+    else:
+        print(f"Unknown bg subcommand: {subcmd}")
+        return 1
+
+
+def cmd_status(args):
+    """Get overall system status."""
+    print("🚀 NuSyQ-Hub System Status")
+    print("=" * 40)
+
+    # Search
+    print("\n📚 SmartSearch:")
+    result = nusyq.search.health()
+    if result.success:
+        data = result.data
+        print(f"   Status: {data.get('status', 'unknown')}")
+        print(f"   Files: {data.get('total_files', 0)}")
+        print(f"   Keywords: {data.get('total_keywords', 0)}")
+    else:
+        print(f"   ❌ {result.error}")
+
+    # Quest
+    print("\n🎯 Quest Engine:")
+    result = nusyq.quest.status()
+    if result.success:
+        data = result.data
+        print(f"   Total: {data.get('total', 0)}")
+        print(f"   Completed: {data.get('completed', 0)}")
+        print(f"   Pending: {data.get('pending', 0)}")
+    else:
+        print(f"   ❌ {result.error}")
+
+    # Council
+    print("\n🏛️  AI Council:")
+    result = nusyq.council.status()
+    if result.success:
+        data = result.data
+        print(f"   Decisions: {data.get('total_decisions', 0)}")
+        print(f"   Approved: {data.get('approved', 0)}")
+        print(f"   Pending: {data.get('pending', 0)}")
+    else:
+        print(f"   ❌ {result.error}")
+
+    # Background
+    print("\n🤖 Background Orchestrator:")
+    result = nusyq.background.status()
+    if result.success:
+        data = result.data
+        counts = data.get('status_counts', {})
+        print(f"   Total: {data.get('total_tasks', 0)}")
+        print(f"   Queued: {counts.get('queued', 0)}")
+        print(f"   Running: {counts.get('running', 0)}")
+        print(f"   Completed: {counts.get('completed', 0)}")
+    else:
+        print(f"   ❌ {result.error}")
+
+    print("\n" + "=" * 40)
+    return 0
+
+
+def cmd_boot(args):
+    """Boot all systems."""
+    from src.core import quick_boot
+
+    print("🚀 Booting NuSyQ-Hub...")
+    result = quick_boot()
+
+    if result.success:
+        print(f"✅ Boot complete: {result.systems_ready} systems ready")
+    else:
+        print(f"❌ Boot failed: {result.systems_failed} systems failed")
+        for error in result.errors:
+            print(f"   - {error}")
+
+    return 0 if result.success else 1
+
+
+def cmd_watch(args):
+    """Watch for file changes and auto-rebuild search index."""
+    import time
+    from datetime import datetime
+
+    print("👁️  NuSyQ File Watcher - Auto Index Rebuild")
+    print("=" * 50)
+
+    root = Path(__file__).parent
+    index_dir = root / "state" / "search_index"
+
+    # Extensions to watch
+    watch_extensions = {".py", ".md", ".json", ".yaml", ".yml", ".toml", ".txt"}
+
+    # Directories to ignore
+    ignore_dirs = {
+        "__pycache__", ".git", ".venv", "venv", "node_modules",
+        ".mypy_cache", ".pytest_cache", ".ruff_cache", "htmlcov"
+    }
+
+    def get_file_hash(file_path):
+        """Get hash of file modification time and size."""
+        try:
+            stat = file_path.stat()
+            return f"{stat.st_mtime}:{stat.st_size}"
+        except (OSError, IOError):
+            return None
+
+    def scan_files():
+        """Scan all files and return hash of their states."""
+        file_states = {}
+        for ext in watch_extensions:
+            for file_path in root.rglob(f"*{ext}"):
+                # Skip ignored directories
+                if any(ignored in file_path.parts for ignored in ignore_dirs):
+                    continue
+                file_hash = get_file_hash(file_path)
+                if file_hash:
+                    file_states[str(file_path)] = file_hash
+        return file_states
+
+    def rebuild_index():
+        """Rebuild the search index."""
+        print(f"\n🔄 Rebuilding search index at {datetime.now().strftime('%H:%M:%S')}...")
+        try:
+            from src.search.index_builder import IndexBuilder
+            builder = IndexBuilder(root)
+            builder.build_all()
+            print("✅ Index rebuilt successfully")
+            return True
+        except ImportError:
+            print("❌ Could not import IndexBuilder")
+            return False
+        except Exception as e:
+            print(f"❌ Index rebuild failed: {e}")
+            return False
+
+    # Parse arguments
+    interval = 5  # Default 5 seconds
+    for i, arg in enumerate(args):
+        if arg in ("-i", "--interval") and i + 1 < len(args):
+            try:
+                interval = int(args[i + 1])
+            except ValueError:
+                print(f"Invalid interval: {args[i + 1]}, using default {interval}s")
+
+    print(f"📂 Watching: {root}")
+    print(f"⏱️  Check interval: {interval}s")
+    print(f"📁 Extensions: {', '.join(sorted(watch_extensions))}")
+    print("\nPress Ctrl+C to stop watching.\n")
+
+    # Initial scan
+    previous_states = scan_files()
+    print(f"📊 Initial scan: {len(previous_states)} files indexed")
+
+    # Build initial index if it doesn't exist
+    if not (index_dir / "file_metadata.json").exists():
+        print("📝 No index found, building initial index...")
+        rebuild_index()
+
+    try:
+        while True:
+            time.sleep(interval)
+            current_states = scan_files()
+
+            # Check for changes
+            changed = []
+            added = []
+            removed = []
+
+            for path, hash_val in current_states.items():
+                if path not in previous_states:
+                    added.append(path)
+                elif previous_states[path] != hash_val:
+                    changed.append(path)
+
+            for path in previous_states:
+                if path not in current_states:
+                    removed.append(path)
+
+            # Report and rebuild if changes detected
+            if changed or added or removed:
+                print(f"\n🔔 Changes detected at {datetime.now().strftime('%H:%M:%S')}:")
+                for path in added[:5]:
+                    print(f"   + {Path(path).relative_to(root)}")
+                for path in changed[:5]:
+                    print(f"   ~ {Path(path).relative_to(root)}")
+                for path in removed[:5]:
+                    print(f"   - {Path(path).relative_to(root)}")
+
+                total_changes = len(added) + len(changed) + len(removed)
+                if total_changes > 5:
+                    print(f"   ... and {total_changes - 5} more changes")
+
+                rebuild_index()
+                previous_states = current_states
+
+    except KeyboardInterrupt:
+        print("\n\n👋 Watch stopped.")
+        return 0
+
+
+def cmd_cycle(args):
+    """Run one autonomous development cycle."""
+    print("🔄 Running Autonomous Development Cycle")
+    print("=" * 50)
+
+    try:
+        from src.automation.autonomous_loop import AutonomousLoop
+
+        # Parse arguments
+        max_tasks = 3
+        mode = "normal"
+
+        for i, arg in enumerate(args):
+            if arg in ("-t", "--tasks") and i + 1 < len(args):
+                try:
+                    max_tasks = int(args[i + 1])
+                except ValueError:
+                    print(f"Invalid task count: {args[i + 1]}, using default {max_tasks}")
+            if arg in ("-m", "--mode") and i + 1 < len(args):
+                mode = args[i + 1]
+
+        print(f"⚙️  Mode: {mode}")
+        print(f"📋 Max tasks: {max_tasks}")
+        print()
+
+        # Create loop configured for single cycle
+        loop = AutonomousLoop(
+            interval_minutes=1,  # Doesn't matter for single cycle
+            mode=mode,
+            max_tasks_per_cycle=max_tasks,
+            max_cycles=1  # Single cycle only
+        )
+
+        # Run just one cycle
+        loop.run_cycle()
+
+        print("\n✅ Cycle complete!")
+        return 0
+
+    except ImportError as e:
+        print(f"❌ Could not import AutonomousLoop: {e}")
+        return 1
+    except Exception as e:
+        print(f"❌ Cycle failed: {e}")
+        return 1
+
+
+def cmd_analyze(args):
+    """Quick analyze a file or directory."""
+    if not args:
+        print("Usage: nq analyze <path> [--type <analysis_type>]")
+        print("\nAnalysis types:")
+        print("  code_analysis  - General code review (default)")
+        print("  security       - Security audit")
+        print("  performance    - Performance analysis")
+        print("  complexity     - Complexity assessment")
+        return 1
+
+    target_path = args[0]
+    analysis_type = "code_analysis"
+
+    # Parse arguments
+    for i, arg in enumerate(args):
+        if arg in ("-t", "--type") and i + 1 < len(args):
+            analysis_type = args[i + 1]
+
+    print(f"🔍 Analyzing: {target_path}")
+    print(f"📊 Type: {analysis_type}")
+    print("=" * 50)
+
+    # Resolve the path
+    root = Path(__file__).parent
+    full_path = Path(target_path)
+    if not full_path.is_absolute():
+        full_path = root / target_path
+
+    if not full_path.exists():
+        print(f"❌ Path not found: {full_path}")
+        return 1
+
+    # Use the nusyq orchestrator for analysis
+    result = nusyq.analyze(str(full_path), analysis_type=analysis_type)
+    print_result(result)
+
+    # If it's a file, also show quick stats
+    if full_path.is_file() and full_path.suffix == ".py":
+        print("\n📈 Quick Stats:")
+        try:
+            content = full_path.read_text(encoding="utf-8")
+            lines = content.split("\n")
+            code_lines = [line for line in lines if line.strip() and not line.strip().startswith("#")]
+
+            import ast
+            try:
+                tree = ast.parse(content)
+                classes = [n.name for n in ast.walk(tree) if isinstance(n, ast.ClassDef)]
+                functions = [n.name for n in ast.walk(tree) if isinstance(n, ast.FunctionDef)]
+                imports = sum(1 for n in ast.walk(tree) if isinstance(n, (ast.Import, ast.ImportFrom)))
+
+                print(f"   Lines: {len(lines)} total, {len(code_lines)} code")
+                print(f"   Classes: {len(classes)}")
+                print(f"   Functions: {len(functions)}")
+                print(f"   Imports: {imports}")
+
+                if classes:
+                    print(f"   Class names: {', '.join(classes[:5])}")
+                if functions:
+                    print(f"   Top functions: {', '.join(functions[:5])}")
+                    if len(functions) > 5:
+                        print(f"   ... and {len(functions) - 5} more")
+            except SyntaxError:
+                print("   (Could not parse Python AST)")
+        except Exception as e:
+            print(f"   (Could not read file: {e})")
+
+    elif full_path.is_dir():
+        print("\n📁 Directory Contents:")
+        try:
+            py_files = list(full_path.rglob("*.py"))
+            other_files = [f for f in full_path.rglob("*") if f.is_file() and f.suffix != ".py"]
+            subdirs = [d for d in full_path.iterdir() if d.is_dir() and not d.name.startswith(".")]
+
+            print(f"   Python files: {len(py_files)}")
+            print(f"   Other files: {len(other_files)}")
+            print(f"   Subdirectories: {len(subdirs)}")
+
+            if subdirs:
+                print(f"   Subdirs: {', '.join(d.name for d in subdirs[:5])}")
+        except Exception as e:
+            print(f"   (Could not scan directory: {e})")
+
+    return 0 if result.success else 1
+
+
+def cmd_fix(args):
+    """Run auto-fixes on a file or directory."""
+    if not args:
+        print("Usage: nq fix <path> [--dry-run]")
+        return 1
+
+    target_path = args[0]
+    dry_run = "--dry-run" in args or "-n" in args
+
+    print(f"🔧 Auto-fixing: {target_path}")
+    if dry_run:
+        print("   (dry run - no changes will be made)")
+    print("=" * 50)
+
+    root = Path(__file__).parent
+    full_path = Path(target_path)
+    if not full_path.is_absolute():
+        full_path = root / target_path
+
+    if not full_path.exists():
+        print(f"❌ Path not found: {full_path}")
+        return 1
+
+    fixes_applied = 0
+
+    try:
+        import subprocess
+        import sys
+
+        # Run ruff check with --fix
+        print("\n📋 Running ruff auto-fix...")
+        ruff_args = [sys.executable, "-m", "ruff", "check", str(full_path), "--fix"]
+        if dry_run:
+            ruff_args = [sys.executable, "-m", "ruff", "check", str(full_path)]
+
+        result = subprocess.run(ruff_args, capture_output=True, text=True)
+        if result.returncode == 0:
+            print("   ✅ ruff: No issues or all fixed")
+        else:
+            issues = result.stdout.count('\n')
+            print(f"   ⚠️  ruff: {issues} issues found")
+            if not dry_run:
+                fixes_applied += 1
+
+        # Run black formatter
+        print("\n🎨 Running black formatter...")
+        black_args = [sys.executable, "-m", "black", str(full_path)]
+        if dry_run:
+            black_args.append("--check")
+
+        result = subprocess.run(black_args, capture_output=True, text=True)
+        if "reformatted" in result.stderr or result.returncode == 0:
+            if "reformatted" in result.stderr:
+                print("   ✅ black: Files reformatted")
+                fixes_applied += 1
+            else:
+                print("   ✅ black: Already formatted")
+        else:
+            print(f"   ⚠️  black: {result.stderr[:100]}")
+
+        # Run isort
+        print("\n📦 Running isort...")
+        isort_args = [sys.executable, "-m", "isort", str(full_path)]
+        if dry_run:
+            isort_args.append("--check-only")
+
+        result = subprocess.run(isort_args, capture_output=True, text=True)
+        if result.returncode == 0:
+            print("   ✅ isort: Imports sorted")
+            if not dry_run:
+                fixes_applied += 1
+        else:
+            print("   ⚠️  isort: Changes needed")
+
+        print(f"\n{'=' * 50}")
+        if dry_run:
+            print("🔍 Dry run complete - no changes made")
+        else:
+            print(f"✅ Fix complete - {fixes_applied} tools applied changes")
+
+        return 0
+
+    except Exception as e:
+        print(f"❌ Fix failed: {e}")
+        return 1
+
+
+def cmd_health(args):
+    """Quick health check of all systems."""
+    print("🏥 NuSyQ-Hub Health Check")
+    print("=" * 50)
+
+    all_healthy = True
+    checks = []
+
+    # Check 1: Search index
+    print("\n📚 Search Index...", end=" ")
+    result = nusyq.search.health()
+    if result.success and result.data.get('status') == 'healthy':
+        print(f"✅ {result.data.get('total_files', 0)} files indexed")
+        checks.append(("Search", True, result.data.get('total_files', 0)))
+    else:
+        print("❌ Unhealthy")
+        all_healthy = False
+        checks.append(("Search", False, result.error if not result.success else "stale"))
+
+    # Check 2: Quest engine
+    print("🎯 Quest Engine...", end=" ")
+    result = nusyq.quest.status()
+    if result.success:
+        print(f"✅ {result.data.get('total', 0)} quests")
+        checks.append(("Quest", True, result.data.get('total', 0)))
+    else:
+        print("❌ Error")
+        all_healthy = False
+        checks.append(("Quest", False, result.error))
+
+    # Check 3: Council
+    print("🏛️  AI Council...", end=" ")
+    result = nusyq.council.status()
+    if result.success:
+        print(f"✅ {result.data.get('total_decisions', 0)} decisions")
+        checks.append(("Council", True, result.data.get('total_decisions', 0)))
+    else:
+        print("❌ Error")
+        all_healthy = False
+        checks.append(("Council", False, result.error))
+
+    # Check 4: Background orchestrator
+    print("🤖 Background...", end=" ")
+    result = nusyq.background.status()
+    if result.success:
+        queued = result.data.get('status_counts', {}).get('queued', 0)
+        print(f"✅ {queued} tasks queued")
+        checks.append(("Background", True, queued))
+    else:
+        print("❌ Error")
+        all_healthy = False
+        checks.append(("Background", False, result.error))
+
+    # Check 5: Ollama
+    print("🦙 Ollama...", end=" ")
+    try:
+        import requests
+        resp = requests.get("http://localhost:11434/api/tags", timeout=2)
+        if resp.status_code == 200:
+            models = len(resp.json().get('models', []))
+            print(f"✅ {models} models available")
+            checks.append(("Ollama", True, models))
+        else:
+            print("❌ Not responding")
+            all_healthy = False
+            checks.append(("Ollama", False, "not responding"))
+    except Exception:
+        print("❌ Not available")
+        checks.append(("Ollama", False, "connection failed"))
+
+    # Summary
+    print("\n" + "=" * 50)
+    healthy_count = sum(1 for _, ok, _ in checks if ok)
+    print(f"📊 Health: {healthy_count}/{len(checks)} systems healthy")
+
+    if all_healthy:
+        print("🎉 All systems operational!")
+        return 0
+    else:
+        print("⚠️  Some systems need attention")
+        return 1
+
+
+def cmd_connector(args):
+    """Connector operations."""
+    if not args:
+        print("Usage: nq connector <list|connect|disconnect|health> [connector_id]")
+        return 1
+
+    try:
+        from src.connectors.registry import get_connector_registry
+    except ImportError as e:
+        print(f"❌ Connector registry unavailable: {e}")
+        return 1
+
+    registry = get_connector_registry()
+    subcmd = args[0]
+
+    if subcmd == "list":
+        connectors = registry.list_connectors()
+        status = registry.get_status()
+        print("🔌 Registered Connectors")
+        print("=" * 40)
+        print(f"Total: {status.get('total_connectors', 0)}")
+        print(f"Enabled: {status.get('enabled', 0)}")
+        print(f"Connected: {status.get('connected', 0)}")
+        if not connectors:
+            print("\n(no connectors registered)")
+            return 0
+        for connector in connectors:
+            print(
+                f" - {connector.get('name')} "
+                f"[{connector.get('status')}] "
+                f"enabled={connector.get('enabled')}"
+            )
+        return 0
+
+    if subcmd == "connect":
+        if len(args) > 1:
+            connector = registry.get(args[1])
+            if not connector:
+                print(f"❌ Connector not found: {args[1]}")
+                return 1
+            result = connector.connect()
+            print_result(result)
+            return 0 if result.success else 1
+
+        result = registry.connect_all()
+        print_result(result)
+        return 0 if result.success else 1
+
+    if subcmd == "disconnect":
+        if len(args) > 1:
+            connector = registry.get(args[1])
+            if not connector:
+                print(f"❌ Connector not found: {args[1]}")
+                return 1
+            result = connector.disconnect()
+            print_result(result)
+            return 0 if result.success else 1
+
+        result = registry.disconnect_all()
+        print_result(result)
+        return 0 if result.success else 1
+
+    if subcmd == "health":
+        result = registry.health_check_all()
+        print_result(result)
+        return 0 if result.success else 1
+
+    print(f"Unknown connector subcommand: {subcmd}")
+    return 1
+
+
+def _slugify(value: str) -> str:
+    """Create a stable identifier from free text."""
+    import re
+
+    slug = re.sub(r"[^a-zA-Z0-9]+", "_", value).strip("_").lower()
+    return slug or "workflow"
+
+
+def cmd_workflow(args):
+    """Workflow operations."""
+    if not args:
+        print("Usage: nq workflow <list|run|create|history> [args]")
+        return 1
+
+    try:
+        from src.workflow.engine import get_workflow_engine
+        from src.workflow.nodes import ActionNode, NodeType, OutputNode, TriggerNode
+    except ImportError as e:
+        print(f"❌ Workflow engine unavailable: {e}")
+        return 1
+
+    engine = get_workflow_engine()
+    subcmd = args[0]
+
+    if subcmd == "list":
+        workflows = engine.list_workflows()
+        print("🧩 Workflows")
+        print("=" * 40)
+        if not workflows:
+            print("(no workflows found)")
+            return 0
+        for wf in workflows:
+            print(
+                f" - {wf.get('id')} :: {wf.get('name')} "
+                f"(nodes={wf.get('node_count', 0)}, enabled={wf.get('enabled', True)})"
+            )
+        return 0
+
+    if subcmd == "run":
+        if len(args) < 2:
+            print("Usage: nq workflow run <workflow_id>")
+            return 1
+        result = engine.execute_workflow(args[1], {})
+        print_result(result)
+        return 0 if result.success else 1
+
+    if subcmd == "create":
+        if len(args) < 2:
+            print("Usage: nq workflow create <name>")
+            return 1
+
+        name = " ".join(args[1:])
+        workflow_id = _slugify(name)
+
+        workflow = engine.create_workflow(
+            id=workflow_id,
+            name=name,
+            description="Created via nq workflow create",
+        )
+
+        trigger = TriggerNode(
+            id="trigger_1",
+            name="Manual Trigger",
+            node_type=NodeType.TRIGGER,
+            config={"trigger": "manual"},
+        )
+        action = ActionNode(
+            id="action_1",
+            name="Log Action",
+            node_type=NodeType.ACTION,
+            config={"action": "log"},
+        )
+        output = OutputNode(
+            id="output_1",
+            name="Summary Output",
+            node_type=NodeType.OUTPUT,
+            config={"format": "summary"},
+        )
+
+        workflow.add_node(trigger)
+        workflow.add_node(action)
+        workflow.add_node(output)
+        workflow.add_edge("trigger_1", "action_1")
+        workflow.add_edge("action_1", "output_1")
+
+        result = engine.save_workflow(workflow)
+        print_result(result)
+        return 0 if result.success else 1
+
+    if subcmd == "history":
+        workflow_id = args[1] if len(args) > 1 else None
+        history = engine.get_execution_history(workflow_id=workflow_id, limit=20)
+        print("🕘 Workflow Execution History")
+        print("=" * 40)
+        if not history:
+            print("(no executions yet)")
+            return 0
+        for item in history:
+            print(
+                f" - {item.get('execution_id')} | {item.get('workflow_id')} | "
+                f"{item.get('status')} | started={item.get('started_at')}"
+            )
+        return 0
+
+    print(f"Unknown workflow subcommand: {subcmd}")
+    return 1
+
+
+def cmd_test_loop(args):
+    """Run test loop with iterative AI-assisted fixes."""
+    if not args:
+        print("Usage: nq test-loop <target> [-n <iterations>] [--no-ai] [--dry-run]")
+        return 1
+
+    target = args[0]
+    max_iterations = 3
+    enable_ai = True
+    dry_run = False
+
+    i = 1
+    while i < len(args):
+        arg = args[i]
+        if arg in ("-n", "--max-iterations") and i + 1 < len(args):
+            try:
+                max_iterations = int(args[i + 1])
+            except ValueError:
+                print(f"⚠️  Invalid iteration count: {args[i + 1]}, using {max_iterations}")
+            i += 2
+            continue
+        if arg == "--no-ai":
+            enable_ai = False
+        if arg == "--dry-run":
+            dry_run = True
+        i += 1
+
+    try:
+        from src.automation.test_loop import TestLoop
+    except ImportError as e:
+        print(f"❌ Test loop unavailable: {e}")
+        return 1
+
+    print(f"🧪 Test loop target: {target}")
+    print(f"🔁 Max iterations: {max_iterations}")
+    print(f"🤖 AI fixes: {'enabled' if enable_ai else 'disabled'}")
+    if dry_run:
+        print("🧪 Dry run: test loop execution skipped")
+        return 0
+
+    loop = TestLoop(enable_ai_fixes=enable_ai)
+    result = loop.iterate_until_pass(target, max_iterations=max_iterations)
+    print_result(result)
+    return 0 if result.success else 1
+
+
+def cmd_protocol(args):
+    """Protocol operations over existing facades."""
+    if not args or args[0] != "status":
+        print("Usage: nq protocol status [--quick]")
+        return 1
+
+    quick = "--quick" in args[1:]
+
+    print("🧭 Protocol Status")
+    print("=" * 40)
+
+    healthy = True
+
+    # Core facade status
+    print("\n🧠 Core Facade:")
+    if quick:
+        print("   ✅ Quick mode enabled (lightweight checks)")
+    else:
+        core_result = nusyq.status()
+        if core_result.success:
+            core_data = core_result.data or {}
+            print("   ✅ Available")
+            print(f"   Search: {'ok' if core_data.get('search', {}).get('success', False) else 'degraded'}")
+            print(f"   Quest: {'ok' if core_data.get('quest', {}).get('success', False) else 'degraded'}")
+            print(f"   Council: {'ok' if core_data.get('council', {}).get('success', False) else 'degraded'}")
+            print(f"   Background: {'ok' if core_data.get('background', {}).get('success', False) else 'degraded'}")
+        else:
+            print(f"   ❌ {core_result.error}")
+            healthy = False
+
+    # Connector surface
+    print("\n🔌 Connectors:")
+    try:
+        from src.connectors.registry import get_connector_registry
+        registry = get_connector_registry()
+        connector_status = registry.get_status()
+        print("   ✅ Available")
+        print(f"   Total: {connector_status.get('total_connectors', 0)}")
+        print(f"   Enabled: {connector_status.get('enabled', 0)}")
+        print(f"   Connected: {connector_status.get('connected', 0)}")
+    except Exception as e:
+        print(f"   ❌ {e}")
+        healthy = False
+
+    # Workflow surface
+    print("\n🧩 Workflows:")
+    try:
+        from src.workflow.engine import get_workflow_engine
+        engine = get_workflow_engine()
+        workflows = engine.list_workflows()
+        print("   ✅ Available")
+        print(f"   Registered: {len(workflows)}")
+    except Exception as e:
+        print(f"   ❌ {e}")
+        healthy = False
+
+    # Test loop surface
+    print("\n🧪 Test Loop:")
+    try:
+        from src.automation.test_loop import TestLoop
+        _ = TestLoop(enable_ai_fixes=False)
+        print("   ✅ Available")
+    except Exception as e:
+        print(f"   ❌ {e}")
+        healthy = False
+
+    # Zero-token bridge surface
+    print("\n💰 Zero-Token:")
+    try:
+        from src.integration.zero_token_bridge import get_zero_token_bridge
+
+        bridge = get_zero_token_bridge(nusyq_hub=Path.cwd(), simverse=_discover_simverse_path())
+        status = bridge.get_zero_token_status()
+        print("   ✅ Available")
+        print(
+            "   SNS-Core: "
+            f"{'ok' if status.get('sns_core', {}).get('available') else 'missing'}"
+        )
+        print(
+            "   Bridge: "
+            f"{'ok' if status.get('bridge_operational') else 'degraded'}"
+        )
+    except Exception as e:
+        print(f"   ❌ {e}")
+        healthy = False
+
+    print("\n" + "=" * 40)
+    print(f"Protocol status: {'healthy' if healthy else 'degraded'}")
+    return 0 if healthy else 1
+
+
+def _discover_simverse_path() -> Path | None:
+    """Best-effort SimulatedVerse path discovery without heavy filesystem scans."""
+    env_path = os.environ.get("NUSYQ_SIMVERSE_PATH", "").strip()
+    if env_path:
+        candidate = Path(env_path).expanduser()
+        if candidate.exists():
+            return candidate
+
+    repo_root = Path.cwd()
+    candidates = [
+        repo_root.parent / "SimulatedVerse",
+        repo_root.parent.parent / "SimulatedVerse",
+        Path.home() / "Desktop" / "SimulatedVerse",
+        Path.home() / "Desktop" / "SimulatedVerse" / "SimulatedVerse",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def cmd_zero(args):
+    """Zero-token and SNS-Core operations over existing bridge/helper infrastructure."""
+    if not args:
+        print("Usage: nq zero <status|report|analyze|convert|estimate> [args]")
+        print("  nq zero status")
+        print("  nq zero report")
+        print("  nq zero analyze <text>")
+        print("  nq zero convert <text> [--aggressive]")
+        print("  nq zero estimate <operation> [--complexity simple|normal|complex]")
+        return 1
+
+    subcmd = args[0]
+    json_mode = "--json" in args[1:]
+
+    try:
+        from src.integration.zero_token_bridge import get_zero_token_bridge
+        from src.utils.sns_core_helper import (
+            analyze_token_savings,
+            convert_to_sns,
+            format_sns_report,
+        )
+    except ImportError as e:
+        print(f"❌ Zero-token tooling unavailable: {e}")
+        return 1
+
+    bridge = get_zero_token_bridge(
+        nusyq_hub=Path.cwd(),
+        simverse=_discover_simverse_path(),
+    )
+
+    if subcmd == "status":
+        status = bridge.get_zero_token_status()
+        if json_mode:
+            print(json.dumps(status, indent=2))
+            return 0
+
+        print("💰 Zero-Token Status")
+        print("=" * 40)
+        sns = status.get("sns_core", {})
+        sv = status.get("simverse", {})
+        print(
+            f"SNS-Core: {'available' if sns.get('available') else 'missing'} "
+            f"(validated={sns.get('validated_reduction', 'n/a')})"
+        )
+        print(
+            f"SimulatedVerse: {'available' if sv.get('available') else 'missing'} "
+            f"(scripts={sv.get('zero_token_scripts', 0)})"
+        )
+        print(
+            "Bridge: "
+            f"{'operational' if status.get('bridge_operational') else 'degraded'}"
+        )
+        savings = status.get("savings_estimate", {})
+        print("Savings estimate:")
+        for key in ("sns_core", "simverse", "combined"):
+            if key in savings:
+                print(f" - {key}: {savings[key]}")
+        return 0
+
+    if subcmd == "report":
+        print(bridge.generate_bridge_report())
+        return 0
+
+    if subcmd == "analyze":
+        text_parts = [arg for arg in args[1:] if not arg.startswith("--")]
+        if not text_parts:
+            print("Usage: nq zero analyze <text>")
+            return 1
+        analysis = analyze_token_savings(" ".join(text_parts))
+        if json_mode:
+            print(json.dumps(analysis, indent=2))
+            return 0
+        print(format_sns_report(analysis))
+        return 0
+
+    if subcmd == "convert":
+        aggressive = "--aggressive" in args[1:]
+        text_parts = [
+            arg for arg in args[1:] if not arg.startswith("--")
+        ]
+        if not text_parts:
+            print("Usage: nq zero convert <text> [--aggressive]")
+            return 1
+        sns_text, metadata = convert_to_sns(" ".join(text_parts), aggressive=aggressive)
+        if json_mode:
+            print(json.dumps({"sns": sns_text, "metadata": metadata}, indent=2))
+            return 0
+        print("🔣 SNS Conversion")
+        print("=" * 40)
+        print(f"Mode: {metadata.get('mode')}")
+        print(f"Savings: {metadata.get('savings_pct')}%")
+        print(f"SNS: {sns_text}")
+        return 0
+
+    if subcmd == "estimate":
+        complexity = "normal"
+        op_parts = []
+        i = 1
+        while i < len(args):
+            token = args[i]
+            if token == "--complexity" and i + 1 < len(args):
+                complexity = args[i + 1].strip().lower()
+                i += 2
+                continue
+            if token.startswith("--"):
+                i += 1
+                continue
+            op_parts.append(token)
+            i += 1
+        operation = " ".join(op_parts).strip() or "general_operation"
+        estimate = bridge.estimate_operation_cost(operation, complexity=complexity)
+        print(json.dumps(estimate, indent=2) if json_mode else f"💵 {estimate}")
+        return 0
+
+    print(f"Unknown zero subcommand: {subcmd}")
+    return 1
+
+
+def cmd_outputs(args):
+    """Output source diagnostics over VS Code + NuSyQ terminal channels."""
+    if not args:
+        print("Usage: nq outputs <scan|tail|diff|stale|hints> [options]")
+        print("  nq outputs scan [output.json] [--json]")
+        print("  nq outputs tail <channel> [--lines N] [--since M] [--json]")
+        print("  nq outputs diff [old.json] [new.json] [--json]")
+        print(
+            "  nq outputs stale [--minutes N] [--idle-minutes N] [--sample-lines N] [--include-static] [--json]"
+        )
+        print("  nq outputs hints [channel] [--since M] [--sample-lines N] [--sns] [--json]")
+        return 1
+
+    subcmd = args[0]
+    json_mode = "--json" in args[1:]
+
+    try:
+        from src.diagnostics.output_source_inventory import OutputSourceInventory
+    except ImportError as e:
+        print(f"❌ Output source diagnostics unavailable: {e}")
+        return 1
+
+    inventory = OutputSourceInventory()
+
+    if subcmd == "scan":
+        report = inventory.scan()
+        output_path = None
+        for token in args[1:]:
+            if token == "--json":
+                continue
+            if token.startswith("--"):
+                continue
+            output_path = token
+            break
+
+        if output_path:
+            try:
+                target = Path(output_path)
+                if not target.is_absolute():
+                    target = Path.cwd() / target
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(json.dumps(report, indent=2), encoding="utf-8")
+                if not json_mode:
+                    print(f"Saved report: {target}")
+            except OSError as e:
+                print(f"❌ Failed to save report to {output_path}: {e}")
+                return 1
+
+        if json_mode:
+            print(json.dumps(report, indent=2))
+            return 0
+
+        summary = report.get("summary", {})
+        print("🛰️ Output Source Scan")
+        print("=" * 50)
+        print(f"VS Code logs root: {report.get('vscode_logs_root') or 'not found'}")
+        print(f"Latest VS Code session: {report.get('latest_vscode_session') or 'n/a'}")
+        print(f"Total records: {summary.get('total_records', 0)}")
+        print(f"Total channels: {summary.get('total_channels', 0)}")
+        print(f"Expected channels found: {summary.get('expected_found', 0)}")
+        print(f"Expected channels missing: {summary.get('expected_missing', 0)}")
+        print("\nSource type counts:")
+        for source_type, count in sorted(summary.get("source_type_counts", {}).items()):
+            print(f" - {source_type}: {count}")
+
+        channels = list(report.get("channels", {}).values())
+        channels.sort(key=lambda item: item.get("latest_modified", ""), reverse=True)
+        print("\nMost recently active channels:")
+        for item in channels[:15]:
+            name = item.get("channel")
+            modified = item.get("latest_modified") or "n/a"
+            types = ", ".join(item.get("source_types", []))
+            print(f" - {name} [{types}] @ {modified}")
+
+        missing = report.get("expected", {}).get("missing", [])
+        if missing:
+            print("\nMissing expected channels (sample):")
+            for name in missing[:20]:
+                print(f" - {name}")
+            if len(missing) > 20:
+                print(f" - ... and {len(missing) - 20} more")
+        return 0
+
+    if subcmd == "tail":
+        if len(args) < 2:
+            print("Usage: nq outputs tail <channel> [--lines N] [--since M] [--json]")
+            return 1
+
+        channel_parts = []
+        lines = 40
+        since_minutes = None
+        i = 1
+        while i < len(args):
+            arg = args[i]
+            if arg == "--json":
+                i += 1
+                continue
+            if arg == "--since" and i + 1 < len(args):
+                i += 1
+                try:
+                    since_minutes = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --since value: {args[i]}")
+                    return 1
+                i += 1
+                continue
+            if arg == "--lines" and i + 1 < len(args):
+                i += 1
+                try:
+                    lines = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --lines value: {args[i]}")
+                    return 1
+                i += 1
+                continue
+            channel_parts.append(arg)
+            i += 1
+
+        channel = " ".join(channel_parts).strip()
+        if not channel:
+            print("Usage: nq outputs tail <channel> [--lines N] [--since M] [--json]")
+            return 1
+
+        result = inventory.tail_since(channel, lines=lines, since_minutes=since_minutes)
+        if json_mode:
+            print(json.dumps(result, indent=2))
+            return 0 if result.get("found") else 1
+
+        if not result.get("found"):
+            print(f"❌ Channel not found: {channel}")
+            suggestions = result.get("suggestions", [])
+            if suggestions:
+                print("Did you mean:")
+                for suggestion in suggestions[:5]:
+                    print(f" - {suggestion}")
+            return 1
+
+        print(f"📜 Output tail: {result.get('channel')}")
+        print("=" * 50)
+        matches = result.get("matches", [])
+        if matches:
+            print("Sources:")
+            for path in matches[:5]:
+                print(f" - {path}")
+            print()
+        for line in result.get("lines", []):
+            print(line)
+        return 0
+
+    if subcmd == "diff":
+        raw_paths = [token for token in args[1:] if not token.startswith("--")]
+        old_report = None
+        new_report = None
+
+        try:
+            if len(raw_paths) >= 1:
+                old_report = inventory.load_report(raw_paths[0])
+            else:
+                default_baselines = [
+                    Path("output_source_inventory.json"),
+                    Path("state/reports/output_source_inventory.json"),
+                ]
+                for candidate in default_baselines:
+                    if candidate.exists():
+                        old_report = inventory.load_report(candidate)
+                        break
+
+            if len(raw_paths) >= 2:
+                new_report = inventory.load_report(raw_paths[1])
+            else:
+                new_report = inventory.scan()
+                new_report["_loaded_from"] = "fresh_scan"
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"❌ Failed to load diff reports: {e}")
+            return 1
+
+        if old_report is None:
+            print("❌ No baseline scan found. Run: nq outputs scan output_source_inventory.json")
+            return 1
+
+        result = inventory.diff_reports(old_report, new_report)
+        if json_mode:
+            print(json.dumps(result, indent=2))
+            return 0
+
+        summary = result.get("summary", {})
+        print("🧮 Output Source Diff")
+        print("=" * 50)
+        print(f"Old: {result.get('old_source')}")
+        print(f"New: {result.get('new_source')}")
+        print(f"Old timestamp: {result.get('old_timestamp')}")
+        print(f"New timestamp: {result.get('new_timestamp')}")
+        print(f"Added channels: {summary.get('added_channels', 0)}")
+        print(f"Removed channels: {summary.get('removed_channels', 0)}")
+        print(f"Changed channels: {summary.get('changed_channels', 0)}")
+        print(f"Expected missing resolved: {summary.get('missing_resolved', 0)}")
+        print(f"Expected missing new: {summary.get('missing_new', 0)}")
+
+        added = result.get("added_channels", [])
+        if added:
+            print("\nAdded (sample):")
+            for name in added[:10]:
+                print(f" - {name}")
+
+        removed = result.get("removed_channels", [])
+        if removed:
+            print("\nRemoved (sample):")
+            for name in removed[:10]:
+                print(f" - {name}")
+
+        changed = result.get("changed_channels", [])
+        if changed:
+            print("\nChanged (sample):")
+            for item in changed[:10]:
+                print(
+                    f" - {item.get('channel')}: Δbytes={item.get('delta_bytes')} | "
+                    f"{item.get('old_latest_modified')} -> {item.get('new_latest_modified')}"
+                )
+        return 0
+
+    if subcmd == "stale":
+        stale_minutes = 240
+        idle_minutes = 30
+        sample_lines = 400
+        include_static = False
+        i = 1
+        while i < len(args):
+            arg = args[i]
+            if arg == "--json":
+                i += 1
+                continue
+            if arg == "--include-static":
+                include_static = True
+                i += 1
+                continue
+            if arg == "--minutes" and i + 1 < len(args):
+                i += 1
+                try:
+                    stale_minutes = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --minutes value: {args[i]}")
+                    return 1
+                i += 1
+                continue
+            if arg == "--idle-minutes" and i + 1 < len(args):
+                i += 1
+                try:
+                    idle_minutes = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --idle-minutes value: {args[i]}")
+                    return 1
+                i += 1
+                continue
+            if arg == "--sample-lines" and i + 1 < len(args):
+                i += 1
+                try:
+                    sample_lines = max(50, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --sample-lines value: {args[i]}")
+                    return 1
+                i += 1
+                continue
+            print(f"Unknown option for stale: {arg}")
+            return 1
+
+        result = inventory.stale_report(
+            stale_minutes=stale_minutes,
+            idle_shell_minutes=idle_minutes,
+            noise_sample_lines=sample_lines,
+            include_static_channels=include_static,
+        )
+        if json_mode:
+            print(json.dumps(result, indent=2))
+            return 0
+
+        summary = result.get("summary", {})
+        print("🧹 Output Source Stale Report")
+        print("=" * 50)
+        print(f"Stale channels: {summary.get('stale_channels', 0)}")
+        print(f"Noisy channels: {summary.get('noisy_channels', 0)}")
+        print(f"Idle shells: {summary.get('idle_shells', 0)}")
+
+        stale_channels = result.get("stale_channels", [])
+        if stale_channels:
+            print("\nStale channels (sample):")
+            for item in stale_channels[:10]:
+                print(
+                    f" - {item.get('channel')}: age={item.get('age_minutes')}m "
+                    f"[{', '.join(item.get('source_types', []))}]"
+                )
+
+        noisy_channels = result.get("noisy_channels", [])
+        if noisy_channels:
+            print("\nNoisy channels (sample):")
+            for item in noisy_channels[:10]:
+                print(
+                    f" - {item.get('channel')}: errors={item.get('error_lines')}, "
+                    f"warnings={item.get('warning_lines')}, repeat={item.get('top_repeat_count')}"
+                )
+
+        idle_shells = result.get("idle_shells", [])
+        if idle_shells:
+            print("\nIdle shells (sample):")
+            for item in idle_shells[:10]:
+                print(
+                    f" - PID {item.get('pid')}: age={item.get('age_minutes')}m, "
+                    f"cpu={item.get('cpu_seconds')}"
+                )
+        return 0
+
+    if subcmd == "hints":
+        channel = None
+        since_minutes = 60
+        sample_lines = 2000
+        sns_mode = False
+        i = 1
+        while i < len(args):
+            arg = args[i]
+            if arg == "--json":
+                i += 1
+                continue
+            if arg == "--sns":
+                sns_mode = True
+                i += 1
+                continue
+            if arg == "--since" and i + 1 < len(args):
+                i += 1
+                try:
+                    since_minutes = max(1, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --since value: {args[i]}")
+                    return 1
+                i += 1
+                continue
+            if arg == "--sample-lines" and i + 1 < len(args):
+                i += 1
+                try:
+                    sample_lines = max(100, int(args[i]))
+                except ValueError:
+                    print(f"Invalid --sample-lines value: {args[i]}")
+                    return 1
+                i += 1
+                continue
+            if channel is None and not arg.startswith("--"):
+                channel = arg
+                i += 1
+                continue
+            print(f"Unknown option for hints: {arg}")
+            return 1
+
+        result = inventory.hints_report(
+            channel=channel,
+            since_minutes=since_minutes,
+            sample_lines=sample_lines,
+        )
+        if json_mode:
+            print(json.dumps(result, indent=2))
+            return 0
+
+        summary = result.get("summary", {})
+        print("🧠 Output Hints")
+        print("=" * 50)
+        print(f"Channel filter: {result.get('channel_filter') or 'all'}")
+        print(f"Since: {result.get('since_minutes')} minutes")
+        print(f"Analyzed lines: {result.get('analyzed_lines')}")
+        print(
+            "Issues: "
+            f"{summary.get('issue_count', 0)} "
+            f"(high={summary.get('high', 0)}, medium={summary.get('medium', 0)}, low={summary.get('low', 0)})"
+        )
+
+        issues = result.get("issues", [])
+        if not issues:
+            print("\nNo high-signal recurring issues detected in the selected window.")
+            return 0
+
+        for issue in issues:
+            print(f"\n[{issue.get('severity', 'unknown').upper()}] {issue.get('title')}")
+            print(f"  Evidence: {issue.get('evidence_count')} hits")
+            channels = ", ".join(issue.get("channels", [])[:6])
+            if channels:
+                print(f"  Channels: {channels}")
+            for tip in issue.get("guidance", [])[:3]:
+                print(f"  Guidance: {tip}")
+            for step in issue.get("next_steps", [])[:3]:
+                print(f"  Next: {step}")
+            examples = issue.get("examples", [])
+            if examples:
+                print(f"  Example: {examples[0]}")
+
+        global_guidance = result.get("global_guidance", [])
+        if global_guidance:
+            print("\nGlobal guidance:")
+            for tip in global_guidance:
+                print(f" - {tip}")
+
+        if sns_mode and issues:
+            try:
+                from src.utils.sns_core_helper import convert_to_sns
+            except ImportError:
+                print("\nSNS compact mode unavailable (converter import failed).")
+                return 0
+
+            print("\nSNS compact hints:")
+            for issue in issues[:8]:
+                base_text = f"{issue.get('title')}. {' '.join(issue.get('next_steps', [])[:2])}"
+                sns_line, meta = convert_to_sns(base_text, aggressive=True)
+                print(
+                    f" - {issue.get('id')}: {sns_line} "
+                    f"(saved {meta.get('savings_pct', 0)}%)"
+                )
+        return 0
+
+    print(f"Unknown outputs subcommand: {subcmd}")
+    print("Usage: nq outputs <scan|tail|diff|stale|hints> [options]")
+    return 1
+
+
+def cmd_lang(args):
+    """Language and template operations."""
+    if not args:
+        print("Usage: nq lang <list|info|templates> [options]")
+        print("  nq lang list              List all supported languages")
+        print("  nq lang info <name>       Show details for a language")
+        print("  nq lang templates         List templates by language")
+        print("  nq lang providers         List provider capabilities")
+        return 1
+
+    subcmd = args[0]
+
+    if subcmd == "list":
+        try:
+            from src.factories.languages import get_language_registry
+            registry = get_language_registry()
+
+            print("=" * 50)
+            print("Supported Languages")
+            print("=" * 50)
+            for lang in registry.list_all():
+                providers = ", ".join(lang.providers)
+                print(f"\n  {lang.display_name} ({lang.name})")
+                print(f"    Entry file: {lang.entry_file}")
+                print(f"    Providers: {providers}")
+            return 0
+        except Exception as e:
+            print(f"Error loading languages: {e}")
+            return 1
+
+    elif subcmd == "info":
+        if len(args) < 2:
+            print("Usage: nq lang info <language>")
+            return 1
+
+        lang_name = args[1]
+        try:
+            from src.factories.languages import get_language_registry
+            registry = get_language_registry()
+            lang = registry.get(lang_name)
+
+            print(f"\n{'=' * 50}")
+            print(f"Language: {lang.display_name}")
+            print(f"{'=' * 50}")
+            print(f"  Name:           {lang.name}")
+            print(f"  Extensions:     {', '.join(lang.extensions)}")
+            print(f"  Entry file:     {lang.entry_file}")
+            print(f"  Dependency:     {lang.dependency_file or 'N/A'}")
+            print(f"  Install cmd:    {lang.install_cmd or 'N/A'}")
+            print(f"  Run cmd:        {lang.run_cmd}")
+            print(f"  Build cmd:      {lang.build_cmd or 'N/A'}")
+            print(f"  Package cmd:    {lang.package_cmd or 'N/A'}")
+            print(f"  Code fence:     {lang.code_fence}")
+            print(f"  Providers:      {', '.join(lang.providers)}")
+            print(f"  Capabilities:   {', '.join(lang.capabilities) or 'N/A'}")
+            if lang.notes:
+                print(f"  Notes:          {lang.notes}")
+            return 0
+        except KeyError as e:
+            print(f"Language not found: {lang_name}")
+            print(f"Available: {', '.join(get_language_registry().list_names())}")
+            return 1
+        except Exception as e:
+            print(f"Error: {e}")
+            return 1
+
+    elif subcmd == "templates":
+        try:
+            import yaml
+            template_dir = Path(__file__).parent / "config" / "templates"
+            templates_by_lang = {}
+
+            for template_file in template_dir.glob("*.yaml"):
+                with open(template_file) as f:
+                    data = yaml.safe_load(f)
+                lang = data.get("language", "unknown")
+                if lang not in templates_by_lang:
+                    templates_by_lang[lang] = []
+                templates_by_lang[lang].append({
+                    "file": template_file.stem,
+                    "name": data.get("name", template_file.stem),
+                    "type": data.get("type", "unknown"),
+                })
+
+            print("=" * 50)
+            print("Templates by Language")
+            print("=" * 50)
+            for lang, templates in sorted(templates_by_lang.items()):
+                print(f"\n  {lang}:")
+                for t in templates:
+                    print(f"    - {t['file']} ({t['type']}): {t['name']}")
+            return 0
+        except Exception as e:
+            print(f"Error listing templates: {e}")
+            return 1
+
+    elif subcmd == "providers":
+        try:
+            from src.factories.languages import get_language_registry
+            registry = get_language_registry()
+
+            providers = {}
+            for lang in registry.list_all():
+                for prov in lang.providers:
+                    if prov not in providers:
+                        providers[prov] = []
+                    providers[prov].append(lang.name)
+
+            print("=" * 50)
+            print("Provider Language Support")
+            print("=" * 50)
+            for prov, langs in sorted(providers.items()):
+                print(f"\n  {prov}:")
+                print(f"    Languages: {', '.join(sorted(langs))}")
+
+            # Also show provider info if available
+            for prov in providers:
+                info = registry.get_provider_info(prov)
+                if info:
+                    print(f"\n  {prov} details:")
+                    if info.get("description"):
+                        print(f"    Description: {info['description']}")
+                    if info.get("best_for"):
+                        print(f"    Best for: {info['best_for']}")
+            return 0
+        except Exception as e:
+            print(f"Error listing providers: {e}")
+            return 1
+
+    else:
+        print(f"Unknown lang subcommand: {subcmd}")
+        print("Usage: nq lang <list|info|templates|providers>")
+        return 1
+
+
+def cmd_gen(args):
+    """Generator management and testing."""
+    if not args:
+        print("Usage: nq gen <list|info|test> [options]")
+        print("  nq gen list              List all registered generators")
+        print("  nq gen info <name>       Show details for a generator")
+        print("  nq gen test <name>       Test a generator with a simple prompt")
+        print("  nq gen for <language>    Find best generator for a language")
+        return 1
+
+    subcmd = args[0]
+
+    if subcmd == "list":
+        try:
+            from src.factories.generators import GeneratorRegistry
+            registry = GeneratorRegistry.get_instance()
+
+            print("=" * 50)
+            print("Registered Generators")
+            print("=" * 50)
+            for name in registry.list_all():
+                try:
+                    gen = registry.get(name)
+                    available = "available" if gen.is_available() else "not available"
+                    caps = gen.get_capabilities()
+                    local = "local" if caps.get("local") else "API"
+                    print(f"\n  {name} ({local}, {available})")
+                    print(f"    Languages: {len(caps.get('supported_languages', []))} supported")
+                    print(f"    Parallel: {caps.get('supports_parallel', False)}")
+                except Exception as e:
+                    print(f"\n  {name} (error: {e})")
+            return 0
+        except Exception as e:
+            print(f"Error listing generators: {e}")
+            return 1
+
+    elif subcmd == "info":
+        if len(args) < 2:
+            print("Usage: nq gen info <generator>")
+            return 1
+
+        gen_name = args[1]
+        try:
+            from src.factories.generators import GeneratorRegistry
+            registry = GeneratorRegistry.get_instance()
+            gen = registry.get(gen_name)
+            caps = gen.get_capabilities()
+
+            print(f"\n{'=' * 50}")
+            print(f"Generator: {gen.provider_name}")
+            print(f"{'=' * 50}")
+            print(f"  Available:       {gen.is_available()}")
+            print(f"  Local:           {caps.get('local', False)}")
+            print(f"  Parallel:        {caps.get('supports_parallel', False)}")
+            print(f"  Max tokens:      {caps.get('max_tokens', 'N/A')}")
+            print(f"  Cost/1K tokens:  ${caps.get('cost_per_1k_tokens', 0):.4f}")
+            print(f"  Requires API:    {caps.get('requires_api_key', False)}")
+            print(f"  Languages:       {', '.join(caps.get('supported_languages', []))}")
+            if caps.get('models'):
+                print(f"  Models:          {', '.join(caps.get('models', []))}")
+            if caps.get('default_model'):
+                print(f"  Default model:   {caps.get('default_model')}")
+            return 0
+        except KeyError:
+            print(f"Generator not found: {gen_name}")
+            from src.factories.generators import GeneratorRegistry
+            registry = GeneratorRegistry.get_instance()
+            print(f"Available: {', '.join(registry.list_all())}")
+            return 1
+        except Exception as e:
+            print(f"Error: {e}")
+            return 1
+
+    elif subcmd == "test":
+        if len(args) < 2:
+            print("Usage: nq gen test <generator>")
+            return 1
+
+        gen_name = args[1]
+        try:
+            import asyncio
+            from src.factories.generators import GeneratorRegistry, GenerationContext
+            from src.factories.templates import BaseProjectTemplate
+            from pathlib import Path
+            import tempfile
+
+            registry = GeneratorRegistry.get_instance()
+            gen = registry.get(gen_name)
+
+            if not gen.is_available():
+                print(f"Generator {gen_name} is not available")
+                return 1
+
+            print(f"Testing {gen_name} generator...")
+
+            # Create a minimal template
+            template = BaseProjectTemplate(
+                name="test",
+                type="cli",
+                language="python",
+                description="Test project",
+                file_structure={"test.py": "Print hello world"}
+            )
+
+            with tempfile.TemporaryDirectory() as tmpdir:
+                context = GenerationContext(
+                    project_name="test",
+                    description="Test project",
+                    template=template,
+                    output_path=Path(tmpdir),
+                )
+
+                async def run_test():
+                    result = await gen.generate(context)
+                    return result
+
+                result = asyncio.run(run_test())
+
+                print(f"\n  Result:")
+                print(f"    Success: {result.success}")
+                print(f"    Files: {result.total_files}")
+                print(f"    Successful: {result.successful_files}")
+                print(f"    Time: {result.total_time_ms}ms")
+                print(f"    Tokens: {result.total_tokens}")
+
+                if result.files:
+                    print(f"\n  Generated file preview:")
+                    for f in result.files[:1]:
+                        preview = f.content[:200].replace('\n', '\n      ')
+                        print(f"    {f.filepath}:")
+                        print(f"      {preview}...")
+
+            return 0 if result.success else 1
+
+        except Exception as e:
+            print(f"Error testing generator: {e}")
+            import traceback
+            traceback.print_exc()
+            return 1
+
+    elif subcmd == "for":
+        if len(args) < 2:
+            print("Usage: nq gen for <language>")
+            return 1
+
+        language = args[1]
+        try:
+            from src.factories.generators import GeneratorRegistry
+            registry = GeneratorRegistry.get_instance()
+
+            # Get generators that support this language
+            supporting = registry.list_for_language(language)
+            best = registry.get_for_language(language)
+
+            print(f"\n{'=' * 50}")
+            print(f"Generators for {language}")
+            print(f"{'=' * 50}")
+
+            if not supporting:
+                print(f"  No generators support {language}")
+                return 1
+
+            print(f"  Supporting generators: {', '.join(supporting)}")
+            if best:
+                print(f"  Best available: {best.provider_name}")
+                caps = best.get_capabilities()
+                print(f"    Local: {caps.get('local', False)}")
+                print(f"    Available: {best.is_available()}")
+            else:
+                print(f"  No available generator found")
+
+            return 0
+        except Exception as e:
+            print(f"Error: {e}")
+            return 1
+
+    else:
+        print(f"Unknown gen subcommand: {subcmd}")
+        print("Usage: nq gen <list|info|test|for>")
+        return 1
+
+
+def _cmd_factory_list(args):
+    """List available templates, languages, and providers."""
+    show_all = not args or "all" in args
+    show_templates = show_all or "templates" in args
+    show_languages = show_all or "languages" in args or "langs" in args
+    show_providers = show_all or "providers" in args or "gens" in args
+
+    try:
+        if show_templates:
+            from src.factories.async_factory import AsyncProjectFactory
+            import yaml
+
+            factory = AsyncProjectFactory()
+            templates = factory.list_templates()
+
+            print("=" * 60)
+            print("Available Templates")
+            print("=" * 60)
+
+            # Group by type
+            by_type = {}
+            for t in templates:
+                ttype = t.get("type", "other")
+                by_type.setdefault(ttype, []).append(t)
+
+            for ttype, tlist in sorted(by_type.items()):
+                print(f"\n  {ttype.upper()}:")
+                for t in sorted(tlist, key=lambda x: x["name"]):
+                    print(f"    {t['name']:20} [{t['language']}] {t.get('description', '')[:40]}")
+
+        if show_languages:
+            from src.factories.languages import get_language_registry
+
+            registry = get_language_registry()
+
+            print()
+            print("=" * 60)
+            print("Supported Languages")
+            print("=" * 60)
+
+            for lang in registry.list_all():
+                providers = ", ".join(lang.providers)
+                print(f"  {lang.display_name:12} ({lang.name:10}) -> {providers}")
+
+        if show_providers:
+            from src.factories.generators import GeneratorRegistry
+
+            registry = GeneratorRegistry.get_instance()
+
+            print()
+            print("=" * 60)
+            print("Available Generators")
+            print("=" * 60)
+
+            for name in registry.list_all():
+                try:
+                    gen = registry.get(name)
+                    status = "ready" if gen.is_available() else "not available"
+                    caps = gen.get_capabilities()
+                    local = "local" if caps.get("local") else "API"
+                    print(f"  {name:10} ({local:5}, {status})")
+                except Exception as e:
+                    print(f"  {name:10} (error: {e})")
+
+        return 0
+
+    except Exception as e:
+        print(f"Error listing factory resources: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
+def _cmd_factory_generate(args):
+    """Generate a project using AsyncProjectFactory."""
+    import asyncio
+
+    # Parse arguments
+    name = None
+    template = None
+    language = None
+    provider = None
+    description = ""
+    parallel = True
+    json_output = False
+
+    positional = []
+    for arg in args:
+        if arg.startswith("--template="):
+            template = arg.split("=", 1)[1]
+        elif arg.startswith("--lang="):
+            language = arg.split("=", 1)[1]
+        elif arg.startswith("--language="):
+            language = arg.split("=", 1)[1]
+        elif arg.startswith("--provider="):
+            provider = arg.split("=", 1)[1]
+        elif arg.startswith("--desc="):
+            description = arg.split("=", 1)[1]
+        elif arg == "--sequential":
+            parallel = False
+        elif arg == "--json":
+            json_output = True
+        elif not arg.startswith("--"):
+            positional.append(arg)
+
+    if not positional:
+        print("Usage: nq factory generate <name> [options]")
+        print("  --template=<name>   Template to use (e.g., rust_cli, godot_2d_game)")
+        print("  --lang=<language>   Language (python, rust, typescript, etc.)")
+        print("  --provider=<name>   Provider (ollama, claude, openai)")
+        print("  --desc=<text>       Project description")
+        print("  --sequential        Disable parallel generation")
+        print("  --json              Output result as JSON")
+        print()
+        print("Examples:")
+        print("  nq factory generate MyGame --template=godot_2d_game")
+        print("  nq factory generate MyCLI --lang=rust --provider=ollama")
+        print("  nq factory generate MyAPI --template=fastapi_service")
+        return 1
+
+    name = positional[0]
+
+    try:
+        from src.factories.async_factory import AsyncProjectFactory
+
+        factory = AsyncProjectFactory()
+
+        print(f"Generating project: {name}")
+        if template:
+            print(f"  Template: {template}")
+        if language:
+            print(f"  Language: {language}")
+        if provider:
+            print(f"  Provider: {provider}")
+        print()
+
+        async def run_generation():
+            return await factory.generate(
+                name=name,
+                template=template,
+                language=language,
+                provider=provider,
+                description=description,
+                parallel=parallel,
+            )
+
+        result = asyncio.run(run_generation())
+
+        if json_output:
+            import json
+            print(json.dumps(result.to_dict(), indent=2))
+        else:
+            print("=" * 50)
+            print(f"Project: {result.name}")
+            print("=" * 50)
+            print(f"  Output:     {result.output_path}")
+            print(f"  Type:       {result.type}")
+            print(f"  Language:   {result.language}")
+            print(f"  Provider:   {result.provider}")
+            print(f"  Model:      {result.model}")
+            print()
+            print(f"  Files:      {result.successful_files}/{result.total_files} successful")
+            if result.placeholder_files:
+                print(f"  Placeholders: {result.placeholder_files}")
+            if result.failed_files:
+                print(f"  Failed:     {result.failed_files}")
+            print(f"  Success:    {result.success_rate:.1f}%")
+            print()
+            print(f"  Tokens:     {result.total_tokens}")
+            print(f"  Time:       {result.total_time_ms}ms")
+            print(f"  Est. cost:  ${result.estimated_cost_usd:.4f}")
+
+            if result.errors:
+                print()
+                print("  Errors:")
+                for err in result.errors[:5]:
+                    print(f"    - {err.get('file')}: {err.get('error')}")
+
+            print()
+            if result.success:
+                print(f"✅ Generated successfully at {result.output_path}")
+            else:
+                print(f"⚠️  Generation completed with issues")
+
+        return 0 if result.success else 1
+
+    except FileNotFoundError as e:
+        print(f"❌ Template not found: {e}")
+        return 1
+    except ValueError as e:
+        print(f"❌ Configuration error: {e}")
+        return 1
+    except Exception as e:
+        print(f"❌ Generation failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
+def cmd_factory(args):
+    """Factory operations."""
+    if not args:
+        print("Usage: nq factory <list|generate|health|doctor|autopilot|ci-gate|inspect-examples> [options]")
+        print("  nq factory list [templates|languages|providers]")
+        print("  nq factory generate <name> [--template=<t>] [--lang=<l>] [--provider=<p>]")
+        print("  nq factory health [--no-packaging] [--json]")
+        print("  nq factory doctor [--strict-hooks] [--no-examples] [--fix] [--json]")
+        print("  nq factory autopilot [--strict-hooks] [--no-examples] [--fix] [--ci-gate] [--json] [path ...]")
+        print("  nq factory ci-gate [--fix] [--json] [path ...]")
+        print("  nq factory inspect-examples [path ...] [--json]")
+        return 1
+    subcmd = args[0]
+    json_output = "--json" in args[1:]
+
+    # Handle 'generate' subcommand with async factory
+    if subcmd == "generate":
+        return _cmd_factory_generate(args[1:])
+
+    # Handle 'list' subcommand
+    if subcmd == "list":
+        return _cmd_factory_list(args[1:])
+
+    try:
+        from src.factories import ProjectFactory
+    except Exception as e:
+        print(f"❌ Factory module unavailable: {e}")
+        return 1
+
+    factory = ProjectFactory()
+
+    if subcmd == "health":
+        include_packaging = "--no-packaging" not in args[1:]
+        report = factory.run_health_check(include_packaging=include_packaging)
+
+        if json_output:
+            print(json.dumps(report, indent=2))
+            return 0 if report.get("healthy") else 1
+
+        print("🏭 Factory Health")
+        print("=" * 40)
+        print("Running smoke probes:")
+        print(" - Provider fallback (ChatDev -> Ollama)")
+        print(" - Runtime bootstrap wiring")
+        if include_packaging:
+            print(" - Runtime profile packaging adapters")
+
+        for check in report.get("checks", []):
+            status = "✅" if check.get("passed") else "❌"
+            print(f"\n{status} {check.get('name')}")
+            details = check.get("details", {})
+            if isinstance(details, dict):
+                for key, value in details.items():
+                    print(f"   {key}: {value}")
+
+        print("\n" + "=" * 40)
+        overall = "healthy" if report.get("healthy") else "degraded"
+        print(f"Factory health: {overall}")
+        return 0 if report.get("healthy") else 1
+
+    if subcmd == "inspect-examples":
+        raw_paths = [arg for arg in args[1:] if not arg.startswith("--")]
+        report = factory.inspect_reference_games(paths=raw_paths or None)
+
+        if json_output:
+            print(json.dumps(report, indent=2))
+            return 0
+
+        print("🧪 Factory Example Inspection")
+        print("=" * 40)
+        print("Profiles:")
+        for profile, count in report.get("profiles", {}).items():
+            print(f" - {profile}: {count}")
+
+        print("\nReference Reports:")
+        for item in report.get("reports", []):
+            status = "✅" if item.get("exists") else "⚠️"
+            print(f"\n{status} {item.get('path')}")
+            print(f"   runtime_profile: {item.get('runtime_profile')}")
+            signals = item.get("signals", [])
+            print(f"   signals: {', '.join(signals) if signals else 'none'}")
+            recs = item.get("recommendations", [])
+            if recs:
+                print(f"   recommendation: {recs[0]}")
+
+        print("\nRecommendations:")
+        for rec in report.get("recommendations", []):
+            print(f" - {rec}")
+        return 0
+
+    if subcmd == "doctor":
+        strict_hooks = "--strict-hooks" in args[1:]
+        include_examples = "--no-examples" not in args[1:]
+        apply_fix = "--fix" in args[1:]
+        if apply_fix:
+            report = factory.run_doctor_fix(
+                strict_hooks=strict_hooks,
+                include_examples=include_examples,
+                include_health=True,
+            )
+            healthy = bool(report.get("post_fix", {}).get("healthy"))
+        else:
+            report = factory.run_doctor(
+                strict_hooks=strict_hooks,
+                include_examples=include_examples,
+                include_health=True,
+            )
+            healthy = bool(report.get("healthy"))
+
+        if json_output:
+            print(json.dumps(report, indent=2))
+            return 0 if healthy else 1
+
+        print("🩺 Factory Doctor")
+        print("=" * 40)
+        if apply_fix:
+            print(f"status: {report.get('status')}")
+            print(f"healthy: {healthy}")
+            actions = report.get("actions", [])
+            print("\nApplied Actions:")
+            for action in actions:
+                print(f" - {action.get('action')}: applied={action.get('applied')}")
+            post = report.get("post_fix", {})
+            issues = post.get("issues", [])
+            print("\nPost-fix Issues:")
+            if issues:
+                for issue in issues:
+                    print(f" - [{issue.get('code')}] {issue.get('message')}")
+            else:
+                print(" - none")
+            print("\nRecommendations:")
+            for rec in post.get("recommendations", []):
+                print(f" - {rec}")
+            return 0 if healthy else 1
+
+        print(f"status: {report.get('status')}")
+        print(f"healthy: {healthy}")
+
+        quality = report.get("generation_quality", {})
+        print("\nGeneration quality:")
+        print(f" - sample_size: {quality.get('sample_size')}")
+        print(f" - fallback_runs: {quality.get('fallback_runs')}")
+        print(f" - placeholder_runs: {quality.get('placeholder_runs')}")
+        print(f" - max_placeholder_ratio: {quality.get('max_placeholder_ratio')}")
+
+        issues = report.get("issues", [])
+        print("\nIssues:")
+        if issues:
+            for issue in issues:
+                print(f" - [{issue.get('code')}] {issue.get('message')}")
+        else:
+            print(" - none")
+
+        print("\nRecommendations:")
+        for rec in report.get("recommendations", []):
+            print(f" - {rec}")
+
+        return 0 if healthy else 1
+
+    if subcmd in ("autopilot", "ci-gate"):
+        ci_gate = subcmd == "ci-gate" or "--ci-gate" in args[1:]
+        strict_hooks = "--strict-hooks" in args[1:] or ci_gate
+        include_examples = ("--no-examples" not in args[1:]) and not ci_gate
+        apply_fix = "--fix" in args[1:]
+        raw_paths = [arg for arg in args[1:] if not arg.startswith("--")]
+        report = factory.run_autopilot(
+            fix=apply_fix,
+            strict_hooks=strict_hooks,
+            include_examples=include_examples,
+            include_workspace=ci_gate,
+            recent_limit=25,
+            example_paths=raw_paths or None,
+        )
+        if json_output:
+            print(json.dumps(report, indent=2))
+            return 0 if report.get("healthy") else 1
+
+        print("🛰️ Factory Autopilot")
+        print("=" * 40)
+        print(f"status: {report.get('status')}")
+        print(f"healthy: {report.get('healthy')}")
+        if ci_gate:
+            print("mode: ci-gate")
+
+        print("\nPatch Plan:")
+        for item in report.get("patch_plan", []):
+            print(
+                f" - [{item.get('priority')}] {item.get('action')} "
+                f"(auto_fix={item.get('auto_fix')})"
+            )
+        if apply_fix:
+            fix_report = report.get("fix_applied", {}) or {}
+            print("\nFix Actions:")
+            for action in fix_report.get("actions", []):
+                print(f" - {action.get('action')}: applied={action.get('applied')}")
+
+        return 0 if report.get("healthy") else 1
+
+    print(f"Unknown factory subcommand: {subcmd}")
+    return 1
+
+
+def main():
+    """Main entry point."""
+    if len(sys.argv) < 2:
+        print(__doc__)
+        return 0
+
+    cmd = sys.argv[1]
+    args = sys.argv[2:]
+
+    commands = {
+        "search": cmd_search,
+        "quest": cmd_quest,
+        "council": cmd_council,
+        "bg": cmd_bg,
+        "background": cmd_bg,
+        "status": cmd_status,
+        "boot": cmd_boot,
+        "watch": cmd_watch,
+        "cycle": cmd_cycle,
+        "analyze": cmd_analyze,
+        "fix": cmd_fix,
+        "health": cmd_health,
+        "connector": cmd_connector,
+        "workflow": cmd_workflow,
+        "test-loop": cmd_test_loop,
+        "outputs": cmd_outputs,
+        "zero": cmd_zero,
+        "protocol": cmd_protocol,
+        "factory": cmd_factory,
+        "lang": cmd_lang,
+        "language": cmd_lang,
+        "gen": cmd_gen,
+        "generator": cmd_gen,
+    }
+
+    if cmd in commands:
+        return commands[cmd](args)
+    elif cmd in ("-h", "--help", "help"):
+        print(__doc__)
+        return 0
+    else:
+        print(f"Unknown command: {cmd}")
+        print(__doc__)
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

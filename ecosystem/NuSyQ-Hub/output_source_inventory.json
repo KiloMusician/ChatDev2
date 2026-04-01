@@ -1,0 +1,816 @@
+{
+  "timestamp": "2026-02-10T11:20:32.886106",
+  "repo_root": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub",
+  "vscode_logs_root": "/mnt/c/Users/keath/AppData/Roaming/Code/logs",
+  "latest_vscode_session": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T102909",
+  "summary": {
+    "total_records": 71,
+    "total_channels": 50,
+    "source_type_counts": {
+      "nusyq_terminal_log": 31,
+      "terminal_watcher_script": 23,
+      "terminal_watcher_task": 16,
+      "vscode_core_log": 1
+    },
+    "expected_count": 97,
+    "expected_found": 3,
+    "expected_missing": 94
+  },
+  "channels": {
+    "activatesystem": {
+      "channel": "activatesystem",
+      "canonical": "activatesystem",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/activatesystem.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/activatesystem.log",
+      "latest_modified": "2026-02-06T11:39:50.528158+00:00",
+      "total_bytes": 24677
+    },
+    "agents": {
+      "channel": "agents",
+      "canonical": "agents",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/agents.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_agents_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/agents.log",
+      "latest_modified": "2026-02-10T12:34:52.457199+00:00",
+      "total_bytes": 3471
+    },
+    "Agents": {
+      "channel": "Agents",
+      "canonical": "agents",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "ai_agent_coordinator": {
+      "channel": "ai_agent_coordinator",
+      "canonical": "aiagentcoordinator",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_agent_coordinator.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_agent_coordinator.log",
+      "latest_modified": "2026-02-06T11:39:50.529149+00:00",
+      "total_bytes": 25109
+    },
+    "ai_council": {
+      "channel": "ai_council",
+      "canonical": "aicouncil",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_council.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_ai_council_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ai_council.log",
+      "latest_modified": "2026-02-10T12:34:52.296532+00:00",
+      "total_bytes": 3497
+    },
+    "Ai_Council": {
+      "channel": "Ai_Council",
+      "canonical": "aicouncil",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "anomalies": {
+      "channel": "anomalies",
+      "canonical": "anomalies",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/anomalies.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_anomalies_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/anomalies.log",
+      "latest_modified": "2026-02-10T12:34:52.722098+00:00",
+      "total_bytes": 3893
+    },
+    "Anomalies": {
+      "channel": "Anomalies",
+      "canonical": "anomalies",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "chatdev": {
+      "channel": "chatdev",
+      "canonical": "chatdev",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatdev.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_chatdev_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatdev.log",
+      "latest_modified": "2026-02-10T12:34:52.284923+00:00",
+      "total_bytes": 3492
+    },
+    "Chatdev": {
+      "channel": "Chatdev",
+      "canonical": "chatdev",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "chatgpt_bridge": {
+      "channel": "chatgpt_bridge",
+      "canonical": "chatgptbridge",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatgpt_bridge.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_chatgpt_bridge_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/chatgpt_bridge.log",
+      "latest_modified": "2026-02-10T12:34:52.531435+00:00",
+      "total_bytes": 3393370
+    },
+    "claude": {
+      "channel": "claude",
+      "canonical": "claude",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/claude.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_claude_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/claude.log",
+      "latest_modified": "2026-02-10T12:34:52.213951+00:00",
+      "total_bytes": 3974
+    },
+    "Claude": {
+      "channel": "Claude",
+      "canonical": "claude",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "cli": {
+      "channel": "cli",
+      "canonical": "cli",
+      "source_types": [
+        "vscode_core_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T102909/cli.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/AppData/Roaming/Code/logs/20260210T102909/cli.log",
+      "latest_modified": "2026-02-10T17:29:09.717268+00:00",
+      "total_bytes": 1963
+    },
+    "codex": {
+      "channel": "codex",
+      "canonical": "codex",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/codex.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_codex_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/codex.log",
+      "latest_modified": "2026-02-10T12:34:52.265186+00:00",
+      "total_bytes": 3446
+    },
+    "Codex": {
+      "channel": "Codex",
+      "canonical": "codex",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "copilot": {
+      "channel": "copilot",
+      "canonical": "copilot",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/copilot.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_copilot_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/copilot.log",
+      "latest_modified": "2026-02-10T17:25:51.765962+00:00",
+      "total_bytes": 33931
+    },
+    "Copilot": {
+      "channel": "Copilot",
+      "canonical": "copilot",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "culture_ship": {
+      "channel": "culture_ship",
+      "canonical": "cultureship",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/culture_ship.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_culture_ship_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/culture_ship.log",
+      "latest_modified": "2026-02-10T12:34:52.600075+00:00",
+      "total_bytes": 2274
+    },
+    "errors": {
+      "channel": "errors",
+      "canonical": "errors",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/errors.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_errors_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/errors.log",
+      "latest_modified": "2026-02-10T12:34:52.709429+00:00",
+      "total_bytes": 491486
+    },
+    "Errors": {
+      "channel": "Errors",
+      "canonical": "errors",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "future": {
+      "channel": "future",
+      "canonical": "future",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/future.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_future_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/future.log",
+      "latest_modified": "2026-02-10T12:34:52.439131+00:00",
+      "total_bytes": 3462
+    },
+    "Future": {
+      "channel": "Future",
+      "canonical": "future",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "importcheck": {
+      "channel": "importcheck",
+      "canonical": "importcheck",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/importcheck.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/importcheck.log",
+      "latest_modified": "2026-02-10T11:11:14.486553+00:00",
+      "total_bytes": 2555264
+    },
+    "intermediary": {
+      "channel": "intermediary",
+      "canonical": "intermediary",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/intermediary.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_intermediary_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/intermediary.log",
+      "latest_modified": "2026-02-10T12:34:52.308128+00:00",
+      "total_bytes": 3503
+    },
+    "Intermediary": {
+      "channel": "Intermediary",
+      "canonical": "intermediary",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "lm_studio": {
+      "channel": "lm_studio",
+      "canonical": "lmstudio",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/lm_studio.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/lm_studio.log",
+      "latest_modified": "2026-02-10T12:34:52.585563+00:00",
+      "total_bytes": 296
+    },
+    "lmstudio": {
+      "channel": "lmstudio",
+      "canonical": "lmstudio",
+      "source_types": [
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_lmstudio_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_lmstudio_terminal.ps1",
+      "latest_modified": "2026-02-05T16:41:53.602254+00:00",
+      "total_bytes": 1930
+    },
+    "main": {
+      "channel": "main",
+      "canonical": "main",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/main.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_main_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/main.log",
+      "latest_modified": "2026-02-10T12:34:52.752040+00:00",
+      "total_bytes": 4325
+    },
+    "Main": {
+      "channel": "Main",
+      "canonical": "main",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "metrics": {
+      "channel": "metrics",
+      "canonical": "metrics",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/metrics.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_metrics_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/metrics.log",
+      "latest_modified": "2026-02-10T12:34:52.670337+00:00",
+      "total_bytes": 468683
+    },
+    "Metrics": {
+      "channel": "Metrics",
+      "canonical": "metrics",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "moderator": {
+      "channel": "moderator",
+      "canonical": "moderator",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/moderator.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_moderator_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/moderator.log",
+      "latest_modified": "2026-02-10T12:34:52.513890+00:00",
+      "total_bytes": 2240
+    },
+    "nusyq_activate_ecosystem": {
+      "channel": "nusyq_activate_ecosystem",
+      "canonical": "nusyqactivateecosystem",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/nusyq_activate_ecosystem.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/nusyq_activate_ecosystem.log",
+      "latest_modified": "2026-02-10T12:34:52.049252+00:00",
+      "total_bytes": 0
+    },
+    "ollama": {
+      "channel": "ollama",
+      "canonical": "ollama",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ollama.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_ollama_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/ollama.log",
+      "latest_modified": "2026-02-10T12:34:52.570546+00:00",
+      "total_bytes": 2212
+    },
+    "powershell_extension": {
+      "channel": "powershell_extension",
+      "canonical": "powershellextension",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/powershell_extension.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/powershell_extension.log",
+      "latest_modified": "2026-02-10T12:34:52.057760+00:00",
+      "total_bytes": 0
+    },
+    "pwsh": {
+      "channel": "pwsh",
+      "canonical": "pwsh",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/pwsh.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/pwsh.log",
+      "latest_modified": "2026-02-10T12:34:52.065850+00:00",
+      "total_bytes": 0
+    },
+    "service_watch": {
+      "channel": "service_watch",
+      "canonical": "servicewatch",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/service_watch.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/service_watch.log",
+      "latest_modified": "2026-02-03T02:53:56.447716+00:00",
+      "total_bytes": 1146
+    },
+    "simulated_verse": {
+      "channel": "simulated_verse",
+      "canonical": "simulatedverse",
+      "source_types": [
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_simulated_verse_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_simulated_verse_terminal.ps1",
+      "latest_modified": "2026-02-05T16:41:53.599188+00:00",
+      "total_bytes": 1966
+    },
+    "simulatedverse": {
+      "channel": "simulatedverse",
+      "canonical": "simulatedverse",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/simulatedverse.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/simulatedverse.log",
+      "latest_modified": "2026-02-10T12:34:52.552018+00:00",
+      "total_bytes": 327
+    },
+    "suggestions": {
+      "channel": "suggestions",
+      "canonical": "suggestions",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/suggestions.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_suggestions_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/suggestions.log",
+      "latest_modified": "2026-02-10T12:34:52.634293+00:00",
+      "total_bytes": 3938
+    },
+    "Suggestions": {
+      "channel": "Suggestions",
+      "canonical": "suggestions",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "system": {
+      "channel": "system",
+      "canonical": "system",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/system.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_system_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/system.log",
+      "latest_modified": "2026-02-10T12:34:52.489760+00:00",
+      "total_bytes": 4382
+    },
+    "tasks": {
+      "channel": "tasks",
+      "canonical": "tasks",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tasks.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_tasks_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tasks.log",
+      "latest_modified": "2026-02-10T12:34:52.654828+00:00",
+      "total_bytes": 3659
+    },
+    "Tasks": {
+      "channel": "Tasks",
+      "canonical": "tasks",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "testing": {
+      "channel": "testing",
+      "canonical": "testing",
+      "source_types": [
+        "nusyq_terminal_log"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/testing.log"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/testing.log",
+      "latest_modified": "2026-02-02T14:17:50.781137+00:00",
+      "total_bytes": 119
+    },
+    "tests": {
+      "channel": "tests",
+      "canonical": "tests",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tests.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_tests_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/tests.log",
+      "latest_modified": "2026-02-10T12:34:52.661828+00:00",
+      "total_bytes": 4158
+    },
+    "Tests": {
+      "channel": "Tests",
+      "canonical": "tests",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    },
+    "zeta": {
+      "channel": "zeta",
+      "canonical": "zeta",
+      "source_types": [
+        "nusyq_terminal_log",
+        "terminal_watcher_script"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/zeta.log",
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_watchers/watch_zeta_terminal.ps1"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/data/terminal_logs/zeta.log",
+      "latest_modified": "2026-02-10T12:34:52.405556+00:00",
+      "total_bytes": 3456
+    },
+    "Zeta": {
+      "channel": "Zeta",
+      "canonical": "zeta",
+      "source_types": [
+        "terminal_watcher_task"
+      ],
+      "paths": [
+        "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json"
+      ],
+      "latest_path": "/mnt/c/Users/keath/Desktop/Legacy/NuSyQ-Hub/.vscode/terminal_watcher_tasks.json",
+      "latest_modified": "2026-02-10T10:38:08.154827+00:00",
+      "total_bytes": 8936
+    }
+  },
+  "expected": {
+    "found": [
+      "Codex",
+      "Main",
+      "Tasks"
+    ],
+    "missing": [
+      ".NET Install Tool",
+      ".NET Test Log",
+      "AI Toolkit",
+      "AI Toolkit Tracing",
+      "Agent Sessions",
+      "Auto Rename Tag",
+      "Biome",
+      "Biome (NuSyQ)",
+      "Biome (NuSyQ-Hub)",
+      "Biome (Prime_anchor)",
+      "Biome (SimulatedVerse)",
+      "Black Formatter",
+      "C#",
+      "C# LSP Trace Logs",
+      "Claude VSCode",
+      "Code",
+      "Code Spell Checker",
+      "Cody by SourceGraph",
+      "Cody: Network",
+      "Docker LSP (Markdown)",
+      "Docker Labs AI",
+      "ESLint",
+      "EditorConfig",
+      "Even Better TOML",
+      "Even Better TOML LSP",
+      "Extension Host",
+      "Extension Host (Worker)",
+      "Flake8",
+      "Git",
+      "Git Graph",
+      "GitHub",
+      "GitHub Actions",
+      "GitHub Authentication",
+      "GitHub Copilot Log (Code References)",
+      "GitHub Copilot chat",
+      "GitLens",
+      "GitLens (Git)",
+      "GritQL Token Provider",
+      "Helm",
+      "ILSpy Backend",
+      "ILSpy Extension",
+      "JSON Language Server",
+      "Jupyter",
+      "Jupyter Server Console",
+      "Kilo-Code",
+      "Kubernetes",
+      "MSBuild Project Tools",
+      "Makefile Tools",
+      "Markdown",
+      "Microsoft Authentication",
+      "Mypy Type Checker",
+      "OpenAPI Swagger Editor",
+      "OpenCtx",
+      "Peacock",
+      "PowerShell",
+      "Prettier",
+      "Pty Host",
+      "PyHover",
+      "Pylint",
+      "Python",
+      "Python Debugger",
+      "Python Language Service",
+      "Python Locator",
+      "Python Test Adapter Log",
+      "REST",
+      "Razor Log",
+      "Remote Tunnel Service",
+      "Roo-Code",
+      "Ruff",
+      "Ruff Language Server",
+      "SQLTools",
+      "Semgrep (Client)",
+      "Semgrep (Server)",
+      "Settings Sync",
+      "Shared",
+      "Sixth",
+      "SonarQube for IDE",
+      "Tailwind CSS IntelliSense",
+      "Terminal",
+      "Test Explorer",
+      "Text Model Changes Reason",
+      "Todohighlight",
+      "TypeScript",
+      "VersionLens",
+      "ViTest",
+      "Window",
+      "Windsurf",
+      "YAML Support",
+      "autoDocstring",
+      "coverage-gutters",
+      "database Client",
+      "isort",
+      "rainbow_csv_debug+channel",
+      "vscode-shiki-bridge"
+    ]
+  }
+}

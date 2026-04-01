@@ -1,0 +1,35 @@
+{
+  "timestamp": 1756824975000,
+  "cascade_system": "operational",
+  "triggers": {
+    "stagnancy_guard": {
+      "threshold": "90s_no_pu_progress", 
+      "action": "spawn_anti_theater_pus",
+      "status": "monitoring"
+    },
+    "theater_guard": {
+      "threshold": "theater_score > 0.3",
+      "action": "raven_proof_review", 
+      "current_score": 0.15,
+      "status": "green"
+    },
+    "llm_degradation": {
+      "threshold": "2_consecutive_health_failures",
+      "action": "restart_watchdog_gateway",
+      "current_failures": "ongoing_429s",
+      "status": "healing"
+    }
+  },
+  "cascade_responses": {
+    "sage_nudge": "enqueue_fixnow_pus",
+    "ship_install_wave": "install_missing_deps",
+    "ship_heal_llm": "implemented_circuit_breaker",
+    "ship_rewire_jobs": "modernize_dormant_jobs"
+  },
+  "big_red_button": {
+    "condition": "multiple_failures_detected",
+    "response": "full_system_cascade",
+    "last_triggered": "never",
+    "readiness": "armed"
+  }
+}

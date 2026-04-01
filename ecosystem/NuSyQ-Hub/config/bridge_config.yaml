@@ -1,0 +1,21 @@
+bridge_config:
+  omni_tag:
+    enabled: true
+    default_pattern: "default_omnitag_pattern"
+    max_tags: 100
+    retention_period: "30d"
+  mega_tag:
+    enabled: true
+    default_schema: "default_megatag_schema"
+    max_tags: 50
+    processing_strategy: "batch"
+  contextual_memory:
+    enabled: true
+    storage_backend: "sqlite"
+    database_path: "path/to/database.db"
+    cache_size: 1000
+  symbolic_cognition:
+    enabled: true
+    reasoning_level: "high"
+    inference_timeout: 5.0
+    max_symbolic_nodes: 500

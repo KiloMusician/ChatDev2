@@ -1,0 +1,619 @@
+# Terminal Depths — Shared Singleton Docker Plane
+#
+# Default `docker compose up` brings up only the shared infra layer:
+#   - redis
+#   - ollama
+#   - model-router
+#   - shared-postgres
+#
+# Additional surfaces are explicit opt-in profiles:
+#   shared-ops       — mcp-server, lm-studio-bridge, n8n
+#   cross-repo       — nusyq-bridge
+#   app-containers   — dev-mentor, nusyq-hub-app, simulatedverse-app
+#   legacy-sidecars  — gordon, serena-analytics, skyclaw, culture-ship, chatdev
+#   rimworld         — rimapi, rimworld
+#   research-dbs     — per-repo Postgres instances for comparison work
+
+services:
+  # ============================================================
+  # Shared Singleton Infra
+  # ============================================================
+
+  redis:
+    image: redis:7-alpine
+    container_name: lattice-redis
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 6s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: terminal-depths-ollama
+    ports:
+      - "11434:11434"
+    environment:
+      OLLAMA_HOST: "0.0.0.0:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  model-router:
+    build:
+      context: .
+      dockerfile: Dockerfile.router
+    container_name: lattice-model-router
+    ports:
+      - "9001:9001"
+    env_file:
+      - .env
+    environment:
+      MODEL_ROUTER_PORT: "9001"
+      ROUTER_CONFIG_PATH: "/app/config/router.yml"
+      REDIS_URL: "redis://redis:6379"
+      OLLAMA_HOST: "http://ollama:11434"
+      OLLAMA_MODEL: "${MODEL_ROUTER_OLLAMA_MODEL:-qwen2.5-coder:14b}"
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./:/app
+    depends_on:
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9001/health"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  shared-postgres:
+    image: postgres:15-alpine
+    container_name: lattice-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "terminal_depths"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-terminal_depths_secure}"
+      POSTGRES_DB: "terminal_depths_db"
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+    volumes:
+      - shared-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U terminal_depths -d terminal_depths_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  # ============================================================
+  # Shared Orchestration Utilities
+  # ============================================================
+
+  mcp-server:
+    image: python:3.11-slim
+    container_name: terminal-depths-mcp
+    working_dir: /app
+    command: >
+      sh -c "pip install -q requests &&
+      python scripts/mcp_server.py --http 8765"
+    environment:
+      TERMINAL_DEPTHS_URL: "${TERMINAL_DEPTHS_URL:-http://host.docker.internal:7337}"
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./:/app
+    profiles:
+      - shared-ops
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8765/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  lm-studio-bridge:
+    image: python:3.11-slim
+    container_name: lm-studio-bridge
+    working_dir: /app
+    command: >
+      sh -c "pip install -q fastapi uvicorn[standard] aiohttp pydantic &&
+      python scripts/lm_studio_bridge.py"
+    environment:
+      LM_STUDIO_HOST: "${LM_STUDIO_HOST:-host.docker.internal}"
+      LM_STUDIO_PORT: "${LM_STUDIO_PORT:-1234}"
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "1234:1234"
+    volumes:
+      - ./:/app
+    profiles:
+      - shared-ops
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1234/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  n8n-terminal:
+    image: n8nio/n8n:latest
+    container_name: terminal-depths-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      N8N_HOST: "0.0.0.0"
+      N8N_PORT: "5678"
+      N8N_PROTOCOL: "http"
+      N8N_WEBHOOK_URL: "http://localhost:5678"
+      N8N_BASIC_AUTH_ACTIVE: "false"
+      DB_TYPE: "postgresdb"
+      DB_POSTGRESDB_HOST: "shared-postgres"
+      DB_POSTGRESDB_PORT: "5432"
+      DB_POSTGRESDB_DATABASE: "terminal_depths_db"
+      DB_POSTGRESDB_USER: "terminal_depths"
+      DB_POSTGRESDB_PASSWORD: "${POSTGRES_PASSWORD:-terminal_depths_secure}"
+    volumes:
+      - n8n-data:/home/node/.n8n
+    depends_on:
+      shared-postgres:
+        condition: service_healthy
+    profiles:
+      - shared-ops
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  nusyq-bridge:
+    image: python:3.11-slim
+    container_name: nusyq-bridge
+    working_dir: /app
+    command: >
+      sh -c "pip install -q fastapi uvicorn[standard] aiohttp redis pydantic &&
+      python scripts/nusyq_bridge.py"
+    environment:
+      NUSYQ_HUB_URL: "${NUSYQ_HUB_URL:-http://nusyq-hub-app:5000}"
+      DEV_MENTOR_URL: "${DEV_MENTOR_DOCKER_URL:-http://dev-mentor:7337}"
+      CHATDEV_URL: "${CHATDEV_DOCKER_URL:-http://chatdev:7338}"
+      REDIS_URL: "redis://redis:6379/0"
+      MCP_SERVER_URL: "${MCP_SERVER_URL:-http://mcp-server:8765}"
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "9876:9876"
+    volumes:
+      - ./:/app
+    depends_on:
+      redis:
+        condition: service_healthy
+      mcp-server:
+        condition: service_started
+    profiles:
+      - cross-repo
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9876/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  # ============================================================
+  # Optional App Containers
+  # ============================================================
+
+  dev-mentor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: terminal-depths-backend
+    ports:
+      - "7337:7337"
+    env_file:
+      - .env
+    environment:
+      TD_ENDPOINT: "http://ollama:11434/api/generate"
+      REDIS_URL: "redis://redis:6379"
+      MODEL_ROUTER_URL: "http://model-router:9001"
+      USE_ROUTER: "${USE_ROUTER:-0}"
+      PYTHONUNBUFFERED: "1"
+      PORT: "7337"
+      REPOS_DIR: "/workspace/repos"
+      SKIP_HARVEST: "${SKIP_HARVEST:-0}"
+      NUSYQ_HUB_PATH: "/workspace/repos/NuSyQ-Hub"
+      SIMULATED_VERSE_PATH: "/workspace/repos/SimulatedVerse"
+      NUSYQ_ULTIMATE_PATH: "/workspace/repos/NuSyQ-Ultimate"
+      POSTGRES_URL: "postgresql://terminal_depths:${POSTGRES_PASSWORD:-terminal_depths_secure}@shared-postgres:5432/terminal_depths_db"
+    volumes:
+      - ./app:/app/app
+      - ./cli:/app/cli
+      - ./agents:/app/agents
+      - ./core:/app/core
+      - ./config:/app/config
+      - ./mcp:/app/mcp
+      - ./services:/app/services
+      - ./state:/app/state
+      - ./var:/app/var
+      - ./scripts:/app/scripts
+      - terminal-depths-sessions:/app/sessions
+      - repos-workspace:/workspace/repos
+    depends_on:
+      redis:
+        condition: service_healthy
+      model-router:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7337/api/health"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    profiles:
+      - app-containers
+      - devmentor-app
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  nusyq-hub-app:
+    build:
+      context: ${NUSYQ_HUB_ROOT:-../Desktop/Legacy/NuSyQ-Hub}
+      dockerfile: Dockerfile.dev
+    container_name: nusyq-hub-dev
+    ports:
+      - "8000:5000"
+      - "5678:5678"
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PYTHONPATH: "/app"
+      ENVIRONMENT: "development"
+      DEBUG: "1"
+      OLLAMA_BASE_URL: "http://ollama:11434"
+      POSTGRES_URL: "postgresql://terminal_depths:${POSTGRES_PASSWORD:-terminal_depths_secure}@shared-postgres:5432/terminal_depths_db"
+    volumes:
+      - ${NUSYQ_HUB_ROOT:-../Desktop/Legacy/NuSyQ-Hub}:/app
+      - /app/.venv
+      - /app/__pycache__
+    depends_on:
+      ollama:
+        condition: service_started
+      shared-postgres:
+        condition: service_healthy
+    profiles:
+      - app-containers
+      - nusyq-hub-app
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  simulatedverse-app:
+    build:
+      context: ${SIMULATEDVERSE_ROOT:-../Desktop/SimulatedVerse/SimulatedVerse}
+      dockerfile: Dockerfile
+    container_name: simulatedverse-app
+    ports:
+      - "5002:5000"
+    environment:
+      NODE_ENV: "production"
+      PORT: "5000"
+      WORLD_API: "${DEV_MENTOR_DOCKER_URL:-http://dev-mentor:7337}"
+      MCP_ENABLED: "true"
+      CHATDEV_INTEGRATION_ENABLED: "true"
+      OLLAMA_HOST: "http://ollama:11434"
+      NUSYQ_HUB_API: "http://nusyq-hub-app:5000"
+      DATABASE_URL: "postgresql://terminal_depths:${POSTGRES_PASSWORD:-terminal_depths_secure}@shared-postgres:5432/terminal_depths_db"
+    depends_on:
+      shared-postgres:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    profiles:
+      - app-containers
+      - simulatedverse-app
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  # ============================================================
+  # Legacy / Experimental Container Sidecars
+  # ============================================================
+
+  gordon:
+    image: python:3.11-slim
+    container_name: lattice-gordon
+    working_dir: /app
+    command: >
+      sh -c "pip install -q redis requests &&
+      python scripts/gordon_orchestrator.py --mode daemon"
+    env_file:
+      - .env
+    environment:
+      TERMINAL_DEPTHS_URL: "http://dev-mentor:7337"
+      GORDON_MODEL_ROUTER: "http://model-router:9001"
+      REDIS_URL: "redis://redis:6379"
+      WORKSPACE_ROOT: "/app"
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      dev-mentor:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - legacy-sidecars
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  serena-analytics:
+    image: python:3.11-slim
+    container_name: lattice-serena
+    working_dir: /app
+    command: >
+      sh -c "pip install -q redis requests &&
+      python scripts/serena_analytics.py --daemon"
+    env_file:
+      - .env
+    environment:
+      TERMINAL_DEPTHS_URL: "http://dev-mentor:7337"
+      REDIS_URL: "redis://redis:6379"
+      SERENA_DB: "/app/state/serena_memory.db"
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+    depends_on:
+      dev-mentor:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - legacy-sidecars
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  skyclaw:
+    image: python:3.11-slim
+    container_name: lattice-skyclaw
+    working_dir: /app
+    command: >
+      sh -c "pip install -q redis requests &&
+      python scripts/skyclaw_scanner.py --daemon"
+    env_file:
+      - .env
+    environment:
+      TERMINAL_DEPTHS_URL: "http://dev-mentor:7337"
+      REDIS_URL: "redis://redis:6379"
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "3002:3002"
+    volumes:
+      - .:/app
+    depends_on:
+      dev-mentor:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - legacy-sidecars
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  culture-ship:
+    image: python:3.11-slim
+    container_name: lattice-culture-ship
+    working_dir: /app
+    command: >
+      sh -c "pip install -q redis requests &&
+      python scripts/culture_ship.py --daemon"
+    env_file:
+      - .env
+    environment:
+      TERMINAL_DEPTHS_URL: "http://dev-mentor:7337"
+      REDIS_URL: "redis://redis:6379"
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "3003:3003"
+    volumes:
+      - .:/app
+    depends_on:
+      dev-mentor:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - legacy-sidecars
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  chatdev:
+    build:
+      context: .
+      dockerfile: Dockerfile.chatdev
+    container_name: lattice-chatdev
+    working_dir: /app
+    command: ["python", "/app/scripts/chatdev_worker.py", "--daemon"]
+    env_file:
+      - .env
+    environment:
+      TERMINAL_DEPTHS_URL: "http://dev-mentor:7337"
+      REDIS_URL: "redis://redis:6379"
+      PYTHONUNBUFFERED: "1"
+      CHATDEV_OUTPUT: "/app/state/chatdev_output"
+      CHATDEV_LLM_BACKEND: "${CHATDEV_LLM_BACKEND:-ollama}"
+      MODEL_ROUTER_URL: "http://model-router:9001"
+      USE_ROUTER: "${USE_ROUTER:-0}"
+      OLLAMA_HOST: "http://ollama:11434"
+      OLLAMA_MODEL: "qwen2.5-coder:7b"
+    volumes:
+      - ./:/app
+    depends_on:
+      dev-mentor:
+        condition: service_healthy
+    profiles:
+      - legacy-sidecars
+      - chatdev
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  # ============================================================
+  # Heavy / Special-Case Runtimes
+  # ============================================================
+
+  rimapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lattice-rimapi
+    ports:
+      - "8766:8765"
+    command: python scripts/rimapi_bridge.py
+    env_file:
+      - .env
+    environment:
+      TERMINAL_DEPTHS_URL: "http://dev-mentor:7337"
+      REDIS_URL: "redis://redis:6379"
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./state:/app/state
+      - ./scripts:/app/scripts
+    depends_on:
+      dev-mentor:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - rimworld
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  rimworld:
+    build:
+      context: .
+      dockerfile: Dockerfile.rimworld
+    container_name: terminal-depths-rimworld
+    ports:
+      - "5900:5900"
+      - "6080:6080"
+      - "9000:9000"
+    env_file:
+      - .env
+    environment:
+      PYTHONUNBUFFERED: "1"
+      GAME_API: "http://dev-mentor:7337"
+      REDIS_URL: "redis://redis:6379"
+    volumes:
+      - ./state:/app/state
+      - ./config:/app/config
+    depends_on:
+      dev-mentor:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - rimworld
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  # ============================================================
+  # Research / Comparison Databases
+  # ============================================================
+
+  devmentor-postgres:
+    image: postgres:15-alpine
+    container_name: devmentor-postgres-research
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: "devmentor"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-terminal_depths_secure}"
+      POSTGRES_DB: "devmentor_research"
+    volumes:
+      - devmentor-postgres-data:/var/lib/postgresql/data
+    profiles:
+      - research-dbs
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  nusyq-hub-postgres:
+    image: postgres:15-alpine
+    container_name: nusyq-hub-postgres-research
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: "nusyq_hub"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-terminal_depths_secure}"
+      POSTGRES_DB: "nusyq_hub_research"
+    volumes:
+      - nusyq-hub-postgres-data:/var/lib/postgresql/data
+    profiles:
+      - research-dbs
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+  simulatedverse-postgres:
+    image: postgres:15-alpine
+    container_name: simulatedverse-postgres-research
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: "simulatedverse"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-terminal_depths_secure}"
+      POSTGRES_DB: "simulatedverse_research"
+    volumes:
+      - simulatedverse-postgres-data:/var/lib/postgresql/data
+    profiles:
+      - research-dbs
+    restart: unless-stopped
+    networks:
+      - terminal-depths-net
+
+volumes:
+  redis-data:
+  ollama-models:
+  terminal-depths-sessions:
+  repos-workspace:
+  shared-postgres-data:
+  n8n-data:
+  devmentor-postgres-data:
+  nusyq-hub-postgres-data:
+  simulatedverse-postgres-data:
+
+networks:
+  terminal-depths-net:
+    driver: bridge

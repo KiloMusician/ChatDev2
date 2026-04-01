@@ -1,0 +1,157 @@
+game: Shenzhen I/O
+game_id: shenzhen_io
+description: >
+  A microcontroller programming puzzle game where you write real assembly-like code
+  to control hardware. Teaches register management, signal synchronization, and
+  minimal-instruction thinking. Directly applicable to low-level agent communication design.
+category: assembly_programming
+difficulty_range: intermediate_to_expert
+terminal_depths_relevance: medium
+
+techniques:
+
+  - name: Minimal Instruction Design
+    id: shenzhen_minimal_instructions
+    description: >
+      Reducing code to the fewest possible instructions by combining operations
+      and eliminating redundant state transitions.
+    concepts:
+      - code golf
+      - register optimization
+      - branch elimination
+      - instruction fusion
+    steps:
+      - "Identify every instruction that could be merged with its neighbor"
+      - "Replace conditional branches with arithmetic where possible (add instead of jmp)"
+      - "Use `slp` only when synchronization is required — it costs power"
+      - "Collapse multi-step initialization into the first loop iteration"
+    tips:
+      - "The `mov` instruction can both read and write in the same cycle"
+      - "Use `teq` (test equal) to set conditional flags instead of branching"
+      - "A single `mov p0, acc` can replace an entire read-process-write block"
+    principles:
+      - "Every instruction is a cost — the optimal program does nothing unnecessary"
+      - "Measure first; optimize what the profiler shows, not what you assume"
+    related_techniques:
+      - shenzhen_parallel_components
+    difficulty: advanced
+    xp_reward: 100
+    terminal_depths_mapping: "tis100 speedrun chapter — same principles apply to agent instruction chains"
+
+  - name: Parallel Component Design
+    id: shenzhen_parallel_components
+    description: >
+      Using multiple microcontrollers to handle independent tasks simultaneously,
+      trading component cost for speed.
+    concepts:
+      - parallelism
+      - task decomposition
+      - signal multiplexing
+      - pipeline architecture
+    steps:
+      - "Decompose the problem into independent sub-problems"
+      - "Assign one microcontroller per sub-problem"
+      - "Use XBus for high-bandwidth inter-component communication"
+      - "Simple Wire for boolean signals between components"
+      - "Design a coordinator chip that fans out input to all workers"
+    tips:
+      - "XBus is blocking — sender and receiver must synchronize"
+      - "Use Simple IO (`p0`, `p1`) for analog signals from sensors"
+      - "A single fast chip is often worse than two slow parallel chips"
+    principles:
+      - "Parallelism is the solution to time constraints, not faster serial code"
+      - "Coordination cost is real — don't over-parallelize trivially simple tasks"
+    related_techniques:
+      - shenzhen_minimal_instructions
+      - shenzhen_signal_sync
+    difficulty: intermediate
+    xp_reward: 60
+    terminal_depths_mapping: "71-agent colony design mirrors this exactly — see DEPENDENCY_GRAPH.md"
+
+  - name: Signal Synchronization
+    id: shenzhen_signal_sync
+    description: >
+      Using `slp` and XBus blocking to synchronize multiple components that must
+      produce output at the same moment.
+    concepts:
+      - synchronization barriers
+      - timing constraints
+      - deadlock avoidance
+    steps:
+      - "Identify which components must produce output simultaneously"
+      - "Use XBus reads as implicit sync points — receiver blocks until sender writes"
+      - "Use `slp 1` to add a deliberate 1-cycle delay for fine-grained timing"
+      - "Avoid circular dependencies — component A waits for B waits for A = deadlock"
+    tips:
+      - "Draw the timing diagram on paper before writing code"
+      - "If stuck in a deadlock, add a 'kickstart' signal on startup"
+      - "`slp` saves power but adds latency — use only where required"
+    principles:
+      - "Synchronization bugs are the hardest to debug — design them out structurally"
+      - "Deadlock prevention: always acquire resources in a consistent order"
+    related_techniques:
+      - shenzhen_parallel_components
+    difficulty: advanced
+    xp_reward: 80
+    terminal_depths_mapping: "Agent orchestration — ContentScheduler uses the same barrier pattern"
+
+  - name: Power Optimization
+    id: shenzhen_power_opt
+    description: >
+      Minimizing power consumption by using sleep instructions and reducing
+      active computation time.
+    concepts:
+      - power efficiency
+      - sleep states
+      - event-driven design
+    steps:
+      - "Use `slp` when no input has arrived — don't busy-wait"
+      - "Design event-driven chips: wake on signal, process, sleep again"
+      - "Combine operations to reduce the number of active cycles"
+    tips:
+      - "The game scores power separately — optimize cycles first, then power"
+      - "A chip in `slp` uses 0 power — event-driven design minimizes active time"
+    principles:
+      - "Idle is the optimal state — compute only when necessary"
+    related_techniques:
+      - shenzhen_minimal_instructions
+    difficulty: beginner
+    xp_reward: 25
+    terminal_depths_mapping: "AUTO_SLEEP_MINUTES in DevMentor Console — same pattern"
+
+lore:
+  - "Shenzhen I/O was designed with a real MCR (microcontroller reference) manual included in the game"
+  - "The puzzles are inspired by actual embedded systems work at Zachtronics' parent company"
+  - "Speed% runs focus on minimizing the number of components (chips cost money)"
+  - "The game's world is set in Shenzhen's electronics manufacturing district — deeply researched"
+  - "Later puzzles require understanding of analog vs. digital signal conversion"
+
+easter_eggs:
+  - id: shenzhen_secret_file
+    filename: "SHENZHEN_MANUAL_PAGE.txt"
+    content: |
+      === SHENZHEN I/O — RECOVERED TECHNICAL MANUAL PAGE ===
+      
+      COMPONENT: MC4000
+      REGISTERS: acc (100), dat (0-999)
+      PINS: p0, p1 (Simple IO), x0, x1 (XBus)
+      
+      INSTRUCTION SET (abbreviated):
+        nop           — no operation (1 cycle, 0 power)
+        mov <val/src> <dst>  — move value to destination
+        add <val>     — acc += val
+        sub <val>     — acc -= val
+        mul <val>     — acc *= val
+        not           — acc = 100 if acc == 0, else 0
+        dgt <val>     — acc = digit val of acc
+        dst <val> <val>  — set digit val of acc
+        slp <val>     — sleep for val cycles
+        slx <pin>     — sleep until XBus ready
+        teq <val> <val>  — test equal (set conditional)
+        tgt <val> <val>  — test greater than
+        tlt <val> <val>  — test less than
+        tcp <val> <val>  — test compare (-1/0/+1)
+        
+      "The simplest solution uses the fewest instructions.
+       The best engineer knows what NOT to write."
+    path: "/home/ghost/lore/shenzhen_io/"

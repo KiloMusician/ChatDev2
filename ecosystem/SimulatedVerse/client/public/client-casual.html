@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreLink Foundation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: 300;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .stage {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .resources {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .resource {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .resource:last-child { border-bottom: none; }
+        
+        .resource-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resource-icon {
+            font-size: 20px;
+        }
+        
+        .resource-value {
+            font-weight: bold;
+            color: #00ffff;
+        }
+        
+        .buildings {
+            margin-bottom: 20px;
+        }
+        
+        .building {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .building:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .building:active {
+            transform: translateY(0);
+        }
+        
+        .building-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .building-cost {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #00ffff, #0099cc);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .developer-mode {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .developer-mode:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">CoreLink Foundation</div>
+            <div class="stage" id="stage">Microbe Stage</div>
+        </div>
+        
+        <div class="resources" id="resources">
+            <!-- Resources will be populated by JavaScript -->
+        </div>
+        
+        <div class="buildings" id="buildings">
+            <!-- Buildings will be populated by JavaScript -->
+        </div>
+        
+        <div class="actions">
+            <button class="btn" id="advance-btn" onclick="advanceStage()">
+                Evolve
+            </button>
+        </div>
+    </div>
+    
+    <div class="developer-mode" onclick="toggleDeveloperMode()" title="Enable Developer Mode">
+        👨‍💻
+    </div>
+    
+    <script>
+        let gameData = {};
+        let developerMode = false;
+        
+        // Casual player resource icons
+        const resourceIcons = {
+            biomass: '🧬',
+            ore: '⛏️',
+            energy: '⚡',
+            consciousness: '🧠',
+            credits: '💰'
+        };
+        
+        // Building definitions for casual players
+        const buildingTypes = {
+            biomass_generator: { name: 'Bio Lab', icon: '🧪', cost: { biomass: 10 } },
+            ore_extractor: { name: 'Mining Drill', icon: '⛏️', cost: { ore: 15, energy: 5 } },
+            energy_plant: { name: 'Power Plant', icon: '🏭', cost: { ore: 25, biomass: 10 } },
+            research_lab: { name: 'Think Tank', icon: '🧠', cost: { energy: 20, consciousness: 5 } }
+        };
+        
+        async function updateGame() {
+            try {
+                const response = await fetch('/api/game/state');
+                gameData = await response.json();
+                
+                // Update resources
+                const resourcesEl = document.getElementById('resources');
+                resourcesEl.innerHTML = Object.entries(gameData.resources)
+                    .map(([name, value]) => `
+                        <div class="resource">
+                            <div class="resource-name">
+                                <span class="resource-icon">${resourceIcons[name] || '📊'}</span>
+                                <span>${name.charAt(0).toUpperCase() + name.slice(1)}</span>
+                            </div>
+                            <span class="resource-value">${Math.floor(value)}</span>
+                        </div>
+                    `).join('');
+                
+                // Update stage
+                document.getElementById('stage').textContent = 
+                    gameData.stage.charAt(0).toUpperCase() + gameData.stage.slice(1) + ' Stage';
+                
+                // Update buildings
+                updateBuildings();
+                
+                // Update advance button
+                const advanceBtn = document.getElementById('advance-btn');
+                advanceBtn.disabled = !gameData.canAdvance;
+                
+            } catch (error) {
+                console.error('Failed to update game:', error);
+            }
+        }
+        
+        function updateBuildings() {
+            const buildingsEl = document.getElementById('buildings');
+            buildingsEl.innerHTML = Object.entries(buildingTypes)
+                .map(([key, building]) => {
+                    const level = gameData.buildings[key] || 0;
+                    const costText = Object.entries(building.cost)
+                        .map(([resource, amount]) => `${amount} ${resource}`)
+                        .join(', ');
+                    
+                    return `
+                        <div class="building" onclick="buildBuilding('${key}')">
+                            <div class="building-name">${building.icon} ${building.name} (Level ${level})</div>
+                            <div class="building-cost">Cost: ${costText}</div>
+                        </div>
+                    `;
+                }).join('');
+        }
+        
+        async function buildBuilding(type) {
+            try {
+                await fetch('/api/game/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'build', target: type })
+                });
+                updateGame();
+            } catch (error) {
+                console.error('Failed to build:', error);
+            }
+        }
+        
+        async function advanceStage() {
+            try {
+                await fetch('/api/game/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'advance_stage' })
+                });
+                updateGame();
+            } catch (error) {
+                console.error('Failed to advance stage:', error);
+            }
+        }
+        
+        function toggleDeveloperMode() {
+            if (!developerMode) {
+                // Switch to developer interface
+                window.location.href = 'client-developer.html';
+            }
+        }
+        
+        // Update game every second
+        setInterval(updateGame, 1000);
+        updateGame();
+    </script>
+</body>
+</html>

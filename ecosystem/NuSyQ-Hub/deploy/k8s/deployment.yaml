@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nusyq-hub
+  namespace: nusyq-hub
+  labels:
+    app: nusyq-hub
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nusyq-hub
+  template:
+    metadata:
+      labels:
+        app: nusyq-hub
+        version: v1
+    spec:
+      serviceAccountName: nusyq-hub
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: nusyq-hub
+        image: nusyq-hub:v1.0.0
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+              - ALL
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+            ephemeral-storage: "5Gi"
+        env:
+        - name: PYTHONUNBUFFERED
+          valueFrom:
+            configMapKeyRef:
+              name: nusyq-hub-config
+              key: PYTHONUNBUFFERED
+        - name: OLLAMA_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: nusyq-hub-config
+              key: OLLAMA_HOST
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: nusyq-hub-config
+              key: LOG_LEVEL
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: nusyq-hub-secrets
+              key: DATABASE_URL
+              optional: true
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: nusyq-hub-secrets
+              key: REDIS_URL
+              optional: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        volumeMounts:
+        - name: config
+          mountPath: /app/config
+          readOnly: true
+        - name: data
+          mountPath: /app/data
+      volumes:
+      - name: config
+        configMap:
+          name: nusyq-hub-config
+      - name: data
+        persistentVolumeClaim:
+          claimName: nusyq-hub-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nusyq-hub-data-pvc
+  namespace: nusyq-hub
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: hostpath  # For docker-desktop, use hostpath

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nusyq-hub-runtime
+  namespace: nusyq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nusyq-hub
+  template:
+    metadata:
+      labels:
+        app: nusyq-hub
+    spec:
+      initContainers:
+      - name: install-deps
+        image: python:3.11-slim
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            apt-get update && apt-get install -y git curl &&
+            pip install --target=/deps flask requests sqlalchemy colorama python-dotenv
+        volumeMounts:
+        - name: deps
+          mountPath: /deps
+      containers:
+      - name: nusyq-hub
+        image: python:3.11-slim
+        env:
+        - name: PYTHONPATH
+          value: "/deps:/app/src"
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: deps
+          mountPath: /deps
+        command: ["/bin/bash", "-c", "while true; do echo 'NuSyQ-Hub runtime ready'; sleep 30; done"]
+      volumes:
+      - name: deps
+        emptyDir: {}

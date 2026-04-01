@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreLink Foundation - Developer Console</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            min-height: 100vh;
+            font-size: 12px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+        }
+        
+        .header {
+            grid-column: 1 / -1;
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .title {
+            color: #ff6600;
+            font-weight: bold;
+        }
+        
+        .mode-toggle {
+            background: #333;
+            border: 1px solid #666;
+            color: #fff;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        .panel {
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        
+        .panel-title {
+            color: #00ffff;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .data-item {
+            background: #222;
+            padding: 5px;
+            border: 1px solid #444;
+        }
+        
+        .data-key {
+            color: #ffff00;
+        }
+        
+        .data-value {
+            color: #00ff00;
+        }
+        
+        .console {
+            grid-column: 1 / -1;
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 5px;
+        }
+        
+        .log-info { color: #00ff00; }
+        .log-warn { color: #ffff00; }
+        .log-error { color: #ff0000; }
+        .log-scp { color: #ff6600; }
+        
+        .input-area {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .command-input {
+            flex: 1;
+            background: #222;
+            border: 1px solid #444;
+            color: #00ff00;
+            padding: 5px;
+            font-family: inherit;
+        }
+        
+        .execute-btn {
+            background: #333;
+            border: 1px solid #666;
+            color: #fff;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        .api-section {
+            margin-bottom: 15px;
+        }
+        
+        .api-endpoint {
+            background: #222;
+            border: 1px solid #444;
+            padding: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        
+        .api-endpoint:hover {
+            background: #333;
+        }
+        
+        .scp-document {
+            background: #1a1a1a;
+            border: 2px solid #ff6600;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .scp-header {
+            color: #ff6600;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .scp-class {
+            color: #ffff00;
+        }
+        
+        .redacted {
+            background: #000;
+            color: #000;
+            cursor: pointer;
+        }
+        
+        .redacted:hover {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">CORELINK FOUNDATION - DEVELOPER CONSOLE v1.0.0</div>
+            <button class="mode-toggle" onclick="toggleCasualMode()">CASUAL MODE</button>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-title">SYSTEM STATE</div>
+            <div id="system-data"></div>
+            
+            <div class="panel-title">API ENDPOINTS</div>
+            <div class="api-section">
+                <div class="api-endpoint" onclick="callAPI('/api/dev/full-state')">
+                    GET /api/dev/full-state
+                </div>
+                <div class="api-endpoint" onclick="callAPI('/api/dev/schema')">
+                    GET /api/dev/schema
+                </div>
+                <div class="api-endpoint" onclick="callAPI('/api/dev/logs')">
+                    GET /api/dev/logs
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-title">SCP DOCUMENTATION</div>
+            <div class="scp-document">
+                <div class="scp-header">SCP-CORE: CoreLink Foundation System</div>
+                <div><strong>Object Class:</strong> <span class="scp-class">Euclid</span></div>
+                <br>
+                <div><strong>Special Containment Procedures:</strong></div>
+                <div>SCP-CORE is to be contained within a standard computational environment with restricted access to external networks. All interactions with SCP-CORE must be logged and monitored by Level 3 personnel or higher.</div>
+                <br>
+                <div><strong>Description:</strong></div>
+                <div>SCP-CORE appears to be an autonomous development ecosystem exhibiting <span class="redacted">████████</span> properties. The system demonstrates the ability to generate and modify its own code structure, leading to concerns about potential <span class="redacted">██████████</span>.</div>
+                <br>
+                <div>Current consciousness level: <span id="consciousness-level">███</span></div>
+            </div>
+            
+            <div class="panel-title">MODDING INTERFACE</div>
+            <div id="modding-tools"></div>
+        </div>
+        
+        <div class="console">
+            <div class="panel-title">SYSTEM CONSOLE</div>
+            <div id="console-output"></div>
+            <div class="input-area">
+                <input type="text" class="command-input" id="command-input" placeholder="Enter command..." onkeypress="handleEnter(event)">
+                <button class="execute-btn" onclick="executeCommand()">EXECUTE</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let systemData = {};
+        let consoleHistory = [];
+        
+        function log(message, type = 'info') {
+            const entry = {
+                timestamp: new Date().toISOString(),
+                message: message,
+                type: type
+            };
+            consoleHistory.push(entry);
+            updateConsole();
+        }
+        
+        function updateConsole() {
+            const output = document.getElementById('console-output');
+            output.innerHTML = consoleHistory.slice(-50).map(entry => 
+                `<div class="log-entry log-${entry.type}">` +
+                `[${entry.timestamp.slice(11, 19)}] ${entry.message}` +
+                `</div>`
+            ).join('');
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        async function callAPI(endpoint) {
+            try {
+                log(`Calling ${endpoint}`, 'info');
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                log(`Response: ${JSON.stringify(data, null, 2)}`, 'info');
+                
+                if (endpoint === '/api/dev/full-state') {
+                    systemData = data;
+                    updateSystemData();
+                }
+            } catch (error) {
+                log(`Error calling ${endpoint}: ${error.message}`, 'error');
+            }
+        }
+        
+        function updateSystemData() {
+            const container = document.getElementById('system-data');
+            if (!systemData.resources) return;
+            
+            container.innerHTML = `
+                <div class="data-grid">
+                    ${Object.entries(systemData.resources).map(([key, value]) => `
+                        <div class="data-item">
+                            <span class="data-key">${key}:</span>
+                            <span class="data-value">${Math.floor(value)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="data-item">
+                    <span class="data-key">Stage:</span>
+                    <span class="data-value">${systemData.stage || 'unknown'}</span>
+                </div>
+                
+                <div class="data-item">
+                    <span class="data-key">Buildings:</span>
+                    <span class="data-value">${Object.keys(systemData.buildings || {}).length}</span>
+                </div>
+            `;
+            
+            // Update SCP consciousness level
+            const consciousnessEl = document.getElementById('consciousness-level');
+            if (consciousnessEl && systemData.resources) {
+                const level = Math.floor(systemData.resources.consciousness || 0);
+                consciousnessEl.textContent = level < 10 ? '███' : level < 50 ? '██████' : '█████████';
+            }
+        }
+        
+        function executeCommand() {
+            const input = document.getElementById('command-input');
+            const command = input.value.trim();
+            if (!command) return;
+            
+            log(`> ${command}`, 'info');
+            
+            // Simple command processing
+            if (command === 'help') {
+                log('Available commands: help, status, build <type>, advance, mod <script>', 'info');
+            } else if (command === 'status') {
+                log(`System status: ${systemData.stage || 'unknown'} stage`, 'info');
+                log(`Resources: ${JSON.stringify(systemData.resources || {})}`, 'info');
+            } else if (command.startsWith('build ')) {
+                const buildType = command.split(' ')[1];
+                buildBuilding(buildType);
+            } else if (command === 'advance') {
+                advanceStage();
+            } else if (command.startsWith('mod ')) {
+                const script = command.slice(4);
+                log(`Executing mod script: ${script}`, 'scp');
+                log('Modding interface not yet implemented', 'warn');
+            } else {
+                log(`Unknown command: ${command}`, 'error');
+            }
+            
+            input.value = '';
+        }
+        
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                executeCommand();
+            }
+        }
+        
+        async function buildBuilding(type) {
+            try {
+                const response = await fetch('/api/game/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'build', target: type })
+                });
+                log(`Building ${type} constructed`, 'info');
+                await callAPI('/api/dev/full-state');
+            } catch (error) {
+                log(`Failed to build ${type}: ${error.message}`, 'error');
+            }
+        }
+        
+        async function advanceStage() {
+            try {
+                const response = await fetch('/api/game/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'advance_stage' })
+                });
+                log('Stage advancement initiated', 'scp');
+                await callAPI('/api/dev/full-state');
+            } catch (error) {
+                log(`Failed to advance stage: ${error.message}`, 'error');
+            }
+        }
+        
+        function toggleCasualMode() {
+            window.location.href = 'client-casual.html';
+        }
+        
+        // Initialize
+        log('CoreLink Foundation Developer Console initialized', 'scp');
+        log('WARNING: Unauthorized access to this system is strictly prohibited', 'warn');
+        callAPI('/api/dev/full-state');
+        
+        // Update every 2 seconds
+        setInterval(() => {
+            callAPI('/api/dev/full-state');
+        }, 2000);
+    </script>
+</body>
+</html>

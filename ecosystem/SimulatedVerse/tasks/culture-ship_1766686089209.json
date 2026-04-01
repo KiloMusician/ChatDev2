@@ -1,0 +1,26 @@
+{
+  "task_id": "culture-ship_1766686089209",
+  "agent_id": "culture-ship",
+  "content": "Analyze NuSyQ-Hub theater audit results and generate prioritized cleanup PUs",
+  "metadata": {
+    "project": "NuSyQ-Hub",
+    "audit_results": {
+      "total_files": 464,
+      "theater_markers": 567,
+      "files_with_markers": 121,
+      "theater_ratio": 0.27
+    },
+    "high_priority_targets": [
+      "cross_ecosystem_sync.py - 30 markers",
+      "treasure_pipeline.py - 21 markers",
+      "chatdev_development_orchestrator.py - 19 markers",
+      "hard_coded_paths - 115 scripts remaining"
+    ],
+    "request_type": "generate_cleanup_pus"
+  },
+  "t": 1766686089209,
+  "utc": 1766686089209,
+  "entropy": 0.5,
+  "budget": 0.95,
+  "submitted_at": "2025-12-25T11:08:09.209852"
+}

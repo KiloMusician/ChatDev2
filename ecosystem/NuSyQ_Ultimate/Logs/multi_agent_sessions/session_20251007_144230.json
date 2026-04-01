@@ -1,0 +1,19 @@
+{
+  "task_prompt": "Say 'hello'",
+  "mode": "turn_taking",
+  "agents": [
+    "ollama_qwen_14b"
+  ],
+  "total_cost": 0.0,
+  "total_tokens": 8,
+  "turns": [
+    {
+      "turn_number": 0,
+      "agent_name": "ollama_qwen_14b",
+      "message": "Hello! How can I assist you today?",
+      "timestamp": "2025-10-07T14:42:30.748957",
+      "tokens_used": 8,
+      "cost": 0.0
+    }
+  ]
+}

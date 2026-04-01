@@ -1,0 +1,1 @@
+"""KILO-FOOLISH Core Module"""

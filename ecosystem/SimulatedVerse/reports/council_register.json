@@ -1,0 +1,147 @@
+{
+  "timestamp": 1756819942699,
+  "agents": [
+    {
+      "id": "raven",
+      "role": "skeptic",
+      "name": "Raven (Skeptic)",
+      "capabilities": [
+        "check_system_health",
+        "fix_error",
+        "read_topology"
+      ],
+      "runner": "in-process",
+      "enabled": true
+    },
+    {
+      "id": "mladenc",
+      "role": "planner",
+      "name": "𝕄ₗₐ⧉𝕕𝕖𝕟𝕔 (Planner)",
+      "capabilities": [
+        "plan_game_tier",
+        "read_topology",
+        "anneal_repo"
+      ],
+      "runner": "in-process",
+      "enabled": true
+    },
+    {
+      "id": "librarian",
+      "role": "memory",
+      "name": "Librarian (Memory Keeper)",
+      "capabilities": [
+        "read_topology",
+        "anneal_repo"
+      ],
+      "runner": "in-process",
+      "enabled": true
+    },
+    {
+      "id": "artificer",
+      "role": "builder",
+      "name": "Artificer (Builder)",
+      "capabilities": [
+        "fix_error",
+        "run_tests",
+        "refresh_ui"
+      ],
+      "runner": "in-process",
+      "enabled": true
+    },
+    {
+      "id": "alchemist",
+      "role": "stabilizer",
+      "name": "Alchemist (Stabilizer)",
+      "capabilities": [
+        "fix_error",
+        "check_system_health",
+        "cascade_ship"
+      ],
+      "runner": "in-process",
+      "enabled": true
+    },
+    {
+      "id": "protagonist",
+      "role": "integration",
+      "name": "Protagonist (Integration)",
+      "capabilities": [
+        "cascade_ship",
+        "refresh_ui",
+        "plan_game_tier"
+      ],
+      "runner": "in-process",
+      "enabled": true
+    }
+  ],
+  "capabilities": {
+    "fix_error": [
+      "raven",
+      "artificer",
+      "alchemist"
+    ],
+    "run_tests": [
+      "artificer"
+    ],
+    "check_system_health": [
+      "raven",
+      "alchemist"
+    ],
+    "read_topology": [
+      "raven",
+      "mladenc",
+      "librarian"
+    ],
+    "anneal_repo": [
+      "mladenc",
+      "librarian"
+    ],
+    "cascade_ship": [
+      "alchemist",
+      "protagonist"
+    ],
+    "refresh_ui": [
+      "artificer",
+      "protagonist"
+    ],
+    "plan_game_tier": [
+      "mladenc",
+      "protagonist"
+    ]
+  },
+  "health": {
+    "raven": {
+      "status": "operational",
+      "last_seen": 1756819942699,
+      "runner": "in-process"
+    },
+    "mladenc": {
+      "status": "operational",
+      "last_seen": 1756819942699,
+      "runner": "in-process"
+    },
+    "librarian": {
+      "status": "operational",
+      "last_seen": 1756819942699,
+      "runner": "in-process"
+    },
+    "artificer": {
+      "status": "operational",
+      "last_seen": 1756819942699,
+      "runner": "in-process"
+    },
+    "alchemist": {
+      "status": "operational",
+      "last_seen": 1756819942699,
+      "runner": "in-process"
+    },
+    "protagonist": {
+      "status": "operational",
+      "last_seen": 1756819942699,
+      "runner": "in-process"
+    }
+  },
+  "llm_routing": {
+    "gateway_url": "http://127.0.0.1:4455/llm/chat",
+    "fallback_mode": "heuristic"
+  }
+}

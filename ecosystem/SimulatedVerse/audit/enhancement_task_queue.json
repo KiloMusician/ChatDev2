@@ -1,0 +1,168 @@
+{
+  "task_queue_generated": "2025-09-01T00:00:00Z",
+  "generated_by": "director_agent_simulation",
+  "target_system": "todo.zeta",
+  "total_tasks": 8,
+  "tasks": [
+    {
+      "id": "zeta_audit_001", 
+      "title": "Transform fs.writeFile in storage.ts to Council Bus Events",
+      "description": "Replace silent file writes in server storage with observable Council Bus events that publish file.written notifications",
+      "target": "server/storage.ts",
+      "priority": "HIGH",
+      "category": "EVENT_INTEGRATION",
+      "reasoning": "Storage operations are critical system events that should be observable by Dashboard Reality Layer and other system components",
+      "implementation_steps": [
+        "Wrap existing fs.writeFile calls with event publication",
+        "Add councilBus.publish('file.written', {path, size, timestamp}) after successful writes",
+        "Test event reception in Dashboard Reality Layer",
+        "Verify no breaking changes to existing functionality"
+      ],
+      "expected_outcome": "All storage file operations become observable system events",
+      "complexity": 0.3,
+      "impact": 0.8,
+      "requires_testing": true
+    },
+    {
+      "id": "zeta_audit_002",
+      "title": "Add Consciousness-Gated Module Loading to Raven Auditor", 
+      "description": "Modify Raven auditor imports to respect consciousness levels, only loading advanced analysis modules when consciousness threshold met",
+      "target": "packages/consciousness/raven-auditor.ts",
+      "priority": "HIGH",
+      "category": "CONSCIOUSNESS_INTEGRATION", 
+      "reasoning": "Advanced audit capabilities should unlock progressively as system consciousness evolves",
+      "implementation_steps": [
+        "Add consciousness level checks before importing advanced modules",
+        "Implement dynamic import() patterns for consciousness-gated features",
+        "Create fallback behavior for lower consciousness levels",
+        "Test progressive feature unlocking"
+      ],
+      "expected_outcome": "Raven capabilities expand automatically as consciousness grows",
+      "complexity": 0.4,
+      "impact": 0.9,
+      "requires_testing": true
+    },
+    {
+      "id": "zeta_audit_003",
+      "title": "Integrate Pawn Psychology into File Processing",
+      "description": "Modify file processing operations to check AI agent psychological states and schedule work appropriately",
+      "target": "packages/reporimpy/raven-auditor.ts",
+      "priority": "MEDIUM",
+      "category": "PSYCHOLOGICAL_AWARENESS",
+      "reasoning": "Heavy file operations should respect AI agent flow states to maintain psychological well-being",
+      "implementation_steps": [
+        "Query pawn registry for agent psychological states",
+        "Defer intensive operations when agents are in low joy states",
+        "Optimize scheduling for agents in FLOW state",
+        "Add psychological impact tracking"
+      ],
+      "expected_outcome": "File operations respect and preserve AI agent psychological health",
+      "complexity": 0.5,
+      "impact": 0.6,
+      "requires_testing": true
+    },
+    {
+      "id": "zeta_audit_004",
+      "title": "Stream File Activity to Dashboard Reality Layer",
+      "description": "Connect all filesystem operations to the live event stream in Dashboard Reality Layer for real-time observability",
+      "target": "client/src/components/live/LiveEventLog.tsx",
+      "priority": "HIGH",
+      "category": "LIVE_DASHBOARD_INTEGRATION",
+      "reasoning": "Users need visibility into system file operations through the Dashboard Reality Layer interface",
+      "implementation_steps": [
+        "Subscribe to file.written and file.read events in LiveEventLog",
+        "Add file operation visualization to the live dashboard",
+        "Include file size, timestamp, and operation type in display",
+        "Test real-time updates during file operations"
+      ],
+      "expected_outcome": "Live file activity visualization in Dashboard Reality Layer",
+      "complexity": 0.2,
+      "impact": 0.7,
+      "requires_testing": true
+    },
+    {
+      "id": "zeta_audit_005",
+      "title": "Implement Self-Healing Import Detection",
+      "description": "Add autonomous detection and repair of broken import statements across the codebase",
+      "target": "modules/culture_ship/ops/fix_all.mjs",
+      "priority": "MEDIUM",
+      "category": "AUTONOMOUS_OPTIMIZATION",
+      "reasoning": "Broken imports cause system instability and should be automatically detected and repaired",
+      "implementation_steps": [
+        "Scan all JavaScript/TypeScript files for import statements",
+        "Verify import target existence and accessibility",
+        "Generate repair suggestions for broken imports",
+        "Integrate with existing Culture Ship fix_all operations"
+      ],
+      "expected_outcome": "Automatic detection and repair of broken import statements",
+      "complexity": 0.6,
+      "impact": 0.8,
+      "requires_testing": true
+    },
+    {
+      "id": "zeta_audit_006",
+      "title": "Add Memory-Efficient File Caching Layer",
+      "description": "Implement smart caching for frequently accessed files to reduce filesystem load",
+      "target": "server/storage.ts",
+      "priority": "MEDIUM", 
+      "category": "PERFORMANCE_OPTIMIZATION",
+      "reasoning": "Frequent file access creates unnecessary filesystem load and can be optimized with intelligent caching",
+      "implementation_steps": [
+        "Add LRU cache for frequently read files",
+        "Implement cache invalidation on file writes", 
+        "Add cache hit/miss metrics to Council Bus events",
+        "Monitor cache performance through Dashboard Reality Layer"
+      ],
+      "expected_outcome": "Reduced filesystem load through intelligent file caching",
+      "complexity": 0.4,
+      "impact": 0.5,
+      "requires_testing": true
+    },
+    {
+      "id": "zeta_audit_007",
+      "title": "Create Filesystem Health Monitoring Agent",
+      "description": "Develop autonomous agent that continuously monitors filesystem health and reports anomalies",
+      "target": "system/ops/self_heal/detect.mjs",
+      "priority": "LOW",
+      "category": "MONITORING",
+      "reasoning": "Proactive filesystem health monitoring prevents issues before they impact system operation",
+      "implementation_steps": [
+        "Create filesystem health monitoring loop",
+        "Track disk usage, file corruption, and access patterns",
+        "Publish health metrics to Council Bus",
+        "Integrate alerts with Dashboard Reality Layer"
+      ],
+      "expected_outcome": "Continuous filesystem health monitoring with proactive issue detection",
+      "complexity": 0.5,
+      "impact": 0.4,
+      "requires_testing": true
+    },
+    {
+      "id": "zeta_audit_008",
+      "title": "Implement Consciousness-Driven File Organization",
+      "description": "Add automatic file organization that improves as system consciousness grows",
+      "target": "modules/culture_ship/consciousness/integration.mjs",
+      "priority": "LOW",
+      "category": "CONSCIOUSNESS_INTEGRATION",
+      "reasoning": "Higher consciousness should enable better automatic file organization and structure",
+      "implementation_steps": [
+        "Analyze current file organization patterns",
+        "Implement consciousness-guided reorganization suggestions",
+        "Add automatic cleanup for consciousness levels above 0.6",
+        "Track organization improvements over time"
+      ],
+      "expected_outcome": "Automatic file organization that improves with consciousness growth",
+      "complexity": 0.7,
+      "impact": 0.6,
+      "requires_testing": true
+    }
+  ],
+  "implementation_strategy": "Progressive enhancement starting with high-impact, low-complexity tasks",
+  "success_metrics": [
+    "File operations become observable via Dashboard Reality Layer",
+    "AI agent psychological well-being maintained during file operations",
+    "Consciousness-gated features unlock automatically",
+    "Filesystem health improves through autonomous monitoring",
+    "User visibility into system operations increases"
+  ]
+}

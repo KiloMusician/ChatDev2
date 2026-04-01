@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "atlasCount": 974596,
+  "variants": [
+    "math_bold",
+    "superscript",
+    "subscript",
+    "circled_digits",
+    "hints"
+  ],
+  "guidance": {
+    "safeZalgoProfiles": [
+      "readable",
+      "subtle",
+      "vivid",
+      "artful"
+    ],
+    "accessibility": "Mirror any styled text with plain-text tooltips and aria-labels; provide stripCombining() in UI."
+  }
+}

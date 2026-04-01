@@ -1,0 +1,132 @@
+game: EmuDevz
+game_id: emudevz
+description: >
+  A unique game about writing a NES emulator in JavaScript. Teaches CPU architecture,
+  opcode parsing, PPU/APU design, and unit testing methodology. The most technically
+  deep game in the compendium — finishing it means you understand how computers work
+  at the silicon level.
+category: emulator_development
+difficulty_range: advanced_to_expert
+terminal_depths_relevance: medium
+
+techniques:
+
+  - name: Component-Driven Development
+    id: emudevz_component_driven
+    description: >
+      Building the emulator one component at a time (CPU → PPU → APU), each
+      independently testable before integration.
+    concepts:
+      - component isolation
+      - test-driven development
+      - incremental integration
+      - unit testing
+    steps:
+      - "Implement the CPU first — it's the foundation everything else builds on"
+      - "Write unit tests for each opcode before moving to the next"
+      - "Implement the PPU (graphics) second — test with nestest ROM"
+      - "Add APU (audio) last — audio bugs don't break core functionality"
+      - "Run the integration test suite at each stage before moving forward"
+    tips:
+      - "Use nestest.nes as your first integration test — it's designed for this"
+      - "The 6502 has 151 opcodes — group by addressing mode to reduce test count"
+      - "PPU timing is the hardest part — start with the simplest scanline renderer"
+    principles:
+      - "Build incrementally — a working partial system beats a broken complete one"
+      - "Tests are documentation — they show exactly what the component must do"
+    related_techniques:
+      - emudevz_opcode_parsing
+    difficulty: advanced
+    xp_reward: 150
+    terminal_depths_mapping: "CHUG engine 7-phase cycle mirrors this: ASSESS → EXECUTE → VERIFY"
+
+  - name: 6502 Opcode Parsing
+    id: emudevz_opcode_parsing
+    description: >
+      Efficiently parsing and dispatching the 6502 instruction set using a
+      lookup table approach for O(1) dispatch.
+    concepts:
+      - lookup tables
+      - instruction decoding
+      - addressing modes
+      - cycle counting
+    steps:
+      - "Build a 256-entry lookup table mapping opcodes to handler functions"
+      - "Each handler takes (cpu_state, address_mode) and returns cycle_count"
+      - "Implement the 13 addressing modes as separate functions"
+      - "Each opcode = handler_fn + addressing_mode + base_cycle_count"
+      - "Add 1 cycle for page-crossing on certain addressing modes"
+    tips:
+      - "Illegal opcodes still need handlers (NOP or undefined behavior) — nestest tests them"
+      - "The ADC/SBC/CMP family shares addressing mode logic — factor it out"
+      - "Stack operations (PHA, PLA, PHP, PLP) are the simplest — implement them first"
+    principles:
+      - "A lookup table is the optimal data structure when keys are dense integers"
+      - "Separate concerns: decoding ≠ execution ≠ cycle counting"
+    related_techniques:
+      - emudevz_component_driven
+    difficulty: expert
+    xp_reward: 200
+    terminal_depths_mapping: "Ghost Script Engine opcode dispatch uses the same table pattern"
+
+  - name: PPU Scanline Rendering
+    id: emudevz_ppu_rendering
+    description: >
+      Implementing the NES Picture Processing Unit's scanline-by-scanline renderer
+      with cycle-accurate timing.
+    concepts:
+      - graphics pipeline
+      - cycle accuracy
+      - sprite rendering
+      - tile-based graphics
+    steps:
+      - "Understand the NES frame structure: 262 scanlines, 341 cycles each"
+      - "Implement background rendering first: nametable + attribute tables"
+      - "Add sprite rendering (OAM — Object Attribute Memory) second"
+      - "Handle sprite 0 hit (used for status bar split effects)"
+      - "Implement VBLANK NMI — this is how the CPU knows the frame is done"
+    tips:
+      - "Mario uses sprite 0 hit for the status bar — test this specifically"
+      - "The first 8 sprites per scanline are rendered; extras flicker (authentic!)"
+      - "Palette is 64 colors but only 25 are truly unique"
+    principles:
+      - "Cycle accuracy matters — off-by-one timing errors cause visual glitches"
+      - "The simplest renderer that passes nestest is better than a perfect idle renderer"
+    related_techniques:
+      - emudevz_component_driven
+    difficulty: expert
+    xp_reward: 175
+    terminal_depths_mapping: "Terminal Depths CRT shader uses scanline simulation — same visual principle"
+
+lore:
+  - "The NES CPU is a Ricoh 2A03 — a modified MOS Technology 6502"
+  - "The 6502 was designed in 1975 and powered the Apple II, Commodore 64, NES, and Atari 2600"
+  - "nestest.nes by Kevin Horton is the gold standard for 6502 emulator validation"
+  - "The PPU has its own separate VRAM and runs independently from the CPU"
+  - "Emulators are a form of perfect documentation — they specify behavior exactly"
+
+easter_eggs:
+  - id: emudevz_secret_file
+    filename: "EMUDEVZ_6502_NOTES.txt"
+    content: |
+      === EMUDEVZ — RECOVERED DEVELOPMENT NOTES ===
+      
+      6502 Architecture Quick Reference:
+        Registers: A (accumulator), X, Y (index), S (stack pointer), P (flags), PC
+        Flags: N V - B D I Z C
+        Stack: descending, $0100-$01FF
+        Vectors: NMI $FFFA, RESET $FFFC, IRQ $FFFE
+      
+      Most useful opcodes:
+        LDA — load accumulator    STA — store accumulator
+        LDX — load X             STX — store X  
+        LDY — load Y             STY — store Y
+        JSR — jump to subroutine RTS — return from subroutine
+        JMP — jump               BEQ/BNE — branch equal/not equal
+        PHA — push acc to stack  PLA — pull acc from stack
+        
+      "An emulator is the purest form of documentation.
+       It doesn't describe behavior — it IS behavior."
+       
+      — from the EmuDevz development journal
+    path: "/home/ghost/lore/emudevz/"

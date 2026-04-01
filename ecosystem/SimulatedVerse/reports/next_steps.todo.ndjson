@@ -1,0 +1,5 @@
+{"priority":1,"task":"database_real_persistence","owner":"artificer","dependencies":[],"proof":"game_state_persists_across_restarts"}
+{"priority":2,"task":"culture_ship_big_red_button","owner":"alchemist","dependencies":["database_real_persistence"],"proof":"cascade_triggers_on_multiple_failures"}
+{"priority":3,"task":"mini_game_progression_hookup","owner":"protagonist","dependencies":["database_real_persistence"],"proof":"tower_defense_affects_energy_resources"}
+{"priority":4,"task":"sage_full_autonomous_restart","owner":"mladenc","dependencies":[],"proof":"sage_runs_continuously_without_manual_restart"}
+{"priority":5,"task":"agent_party_real_development","owner":"council","dependencies":["sage_full_autonomous_restart"],"proof":"agents_generate_actual_code_changes"}

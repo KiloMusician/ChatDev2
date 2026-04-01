@@ -1,0 +1,245 @@
+[
+  {
+    "id": "8f70a5f0-ad00-4407-be4c-0d4051070e7b",
+    "title": "Test Feature",
+    "description": "Write feature tests",
+    "questline": "Build Feature",
+    "status": "complete",
+    "created_at": "2025-12-30T23:11:20.824761+00:00",
+    "updated_at": "2025-12-30T23:11:20.829310+00:00",
+    "dependencies": [],
+    "tags": [
+      "medium"
+    ],
+    "history": [
+      {
+        "status": "complete",
+        "timestamp": "2025-12-30T23:11:20.829310+00:00"
+      }
+    ],
+    "priority": null
+  },
+  {
+    "id": "9af12df9-0564-4c08-9bfe-8d4bbb969857",
+    "title": "Fix ValueError: Test error for workflow...",
+    "description": "Error occurred in workflow_test\n\nError: ValueError: Test error for workflow\nFile: test.py\nFunction: unknown\n\nQuantum Analysis:\n- State: superposition\n- Entanglement: 50%\n- Auto-fix probability: 50%\n\nSource: NuSyQ-Hub | Priority: medium\nProof Criteria: Error no longer occurs when running workflow_test, Code passes linting and type checking, Related tests pass\n\nComplexity: medium | Estimated Time: 135s",
+    "questline": "bug_fixes",
+    "status": "active",
+    "created_at": "2025-12-30T23:11:30.409485+00:00",
+    "updated_at": "2025-12-30T23:11:30.412043+00:00",
+    "dependencies": [],
+    "tags": [
+      "BugFixPU",
+      "medium",
+      "NuSyQ-Hub",
+      "medium"
+    ],
+    "history": [
+      {
+        "status": "active",
+        "timestamp": "2025-12-30T23:11:30.412043+00:00"
+      }
+    ],
+    "priority": null
+  },
+  {
+    "id": "cf4d63fa-d281-43dc-bcb6-1e08808ea433",
+    "title": "Design Feature",
+    "description": "Create feature design",
+    "questline": "Build Feature",
+    "status": "complete",
+    "created_at": "2025-12-30T23:11:37.515179+00:00",
+    "updated_at": "2025-12-30T23:11:37.519175+00:00",
+    "dependencies": [],
+    "tags": [
+      "high"
+    ],
+    "history": [
+      {
+        "status": "complete",
+        "timestamp": "2025-12-30T23:11:37.519175+00:00"
+      }
+    ],
+    "priority": null
+  },
+  {
+    "id": "9dc6dc20-7d43-4991-86ce-6fe6794408c1",
+    "title": "Implement Feature",
+    "description": "Write feature code",
+    "questline": "Build Feature",
+    "status": "complete",
+    "created_at": "2025-12-30T23:11:37.517174+00:00",
+    "updated_at": "2025-12-30T23:11:37.520684+00:00",
+    "dependencies": [],
+    "tags": [
+      "medium"
+    ],
+    "history": [
+      {
+        "status": "complete",
+        "timestamp": "2025-12-30T23:11:37.520684+00:00"
+      }
+    ],
+    "priority": null
+  },
+  {
+    "id": "69d36662-e75c-409d-8c9d-d5257798d6cc",
+    "title": "Test Quest",
+    "description": "A test quest for validation",
+    "questline": "General",
+    "status": "completed",
+    "created_at": "2025-12-30T23:11:47.956750+00:00",
+    "updated_at": "2025-12-30T23:11:47.958257+00:00",
+    "dependencies": [],
+    "tags": [],
+    "history": [
+      {
+        "status": "completed",
+        "timestamp": "2025-12-30T23:11:47.958257+00:00"
+      }
+    ],
+    "priority": "high"
+  },
+  {
+    "id": "d39f90b3-f4f9-4fc4-9459-dda84fbfad9d",
+    "title": "Task 1",
+    "description": "First task",
+    "questline": "Test Questline",
+    "status": "pending",
+    "created_at": "2025-12-30T23:11:47.962265+00:00",
+    "updated_at": "2025-12-30T23:11:47.962265+00:00",
+    "dependencies": [],
+    "tags": [],
+    "history": [],
+    "priority": null
+  },
+  {
+    "id": "316a3334-4690-4531-8fde-4dc94aaa499e",
+    "title": "Task 2",
+    "description": "Second task",
+    "questline": "Test Questline",
+    "status": "pending",
+    "created_at": "2025-12-30T23:11:47.963267+00:00",
+    "updated_at": "2025-12-30T23:11:47.963267+00:00",
+    "dependencies": [],
+    "tags": [],
+    "history": [],
+    "priority": null
+  },
+  {
+    "id": "05e3c90b-7909-4e19-8dcc-b604464325a2",
+    "title": "Harden health verifier typings",
+    "description": "Align the health verification helpers with `bool` returns so mypy stops flagging return-value violations.",
+    "questline": "Type Error Campaign",
+    "status": "completed",
+    "created_at": "2026-01-03T15:00:05.000000+00:00",
+    "updated_at": "2026-01-03T15:00:05.000000+00:00",
+    "dependencies": [],
+    "tags": [
+      "mypy",
+      "type"
+    ],
+    "history": [
+      {
+        "status": "completed",
+        "timestamp": "2026-01-03T15:00:05.000000+00:00"
+      }
+    ],
+    "priority": "high"
+  },
+  {
+    "id": "1c92d676-9fef-4437-bab2-3a62eb568040",
+    "title": "Extend TypeError campaign",
+    "description": "Document the most critical diagnostics and prepare the next type-error batch (~75 issues).",
+    "questline": "Type Error Campaign",
+    "status": "active",
+    "created_at": "2026-01-03T15:00:10.000000+00:00",
+    "updated_at": "2026-01-03T15:00:10.000000+00:00",
+    "dependencies": [
+      "05e3c90b-7909-4e19-8dcc-b604464325a2"
+    ],
+    "tags": [
+      "triage",
+      "heal-cycle"
+    ],
+    "history": [
+      {
+        "status": "active",
+        "timestamp": "2026-01-03T15:00:10.000000+00:00"
+      }
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": "dd90d643-ea7e-464a-95f8-e8bab68c6065",
+    "title": "Wire model selection telemetry",
+    "description": "Feed intent metrics and cache health samples into the intelligent model selection layer tracked by ZETA03 so the system learns which Ollama/Claude stack to pick.",
+    "questline": "ZETA Phase 1 — Model Selection & Conversation Management",
+    "status": "completed",
+    "created_at": "2026-01-03T15:00:25.000000+00:00",
+    "updated_at": "2026-01-03T15:00:25.000000+00:00",
+    "dependencies": [],
+    "tags": [
+      "observation",
+      "zeta03"
+    ],
+    "history": [
+      {
+        "status": "pending",
+        "timestamp": "2026-01-03T15:00:25.000000+00:00"
+      },
+      {
+        "status": "completed",
+        "timestamp": "2026-01-03T15:00:25.000000+00:00"
+      }
+    ],
+    "priority": "high"
+  },
+  {
+    "id": "eeb70c67-82c5-401b-80bd-862d51c07807",
+    "title": "Improve conversation manager resilience",
+    "description": "Validate cross-session summaries and caching so the conversation manager can power next-intent analysis.",
+    "questline": "ZETA Phase 1 — Model Selection & Conversation Management",
+    "status": "active",
+    "created_at": "2026-01-03T15:00:30.000000+00:00",
+    "updated_at": "2026-01-03T15:00:30.000000+00:00",
+    "dependencies": [
+      "dd90d643-ea7e-464a-95f8-e8bab68c6065"
+    ],
+    "tags": [
+      "conversation",
+      "context"
+    ],
+    "history": [
+      {
+        "status": "active",
+        "timestamp": "2026-01-03T15:00:30.000000+00:00"
+      }
+    ],
+    "priority": "high"
+  },
+  {
+    "id": "batch3_test_runner_consolidation",
+    "title": "Batch 3: Test Runner Consolidation - COMPLETE",
+    "description": "Consolidated test runner tools (20 tools) into canonical friendly_test_runner.py with modes:\n        \nCOMPLETED ACTIONS:\n- Created canonical entrypoint: scripts/friendly_test_runner.py with modes full|quick|targeted|smart|smoke|ci\n- Preserved quick behavior: coverage-free local iteration without addopts\n- Added WSL backend support for pytest via wsl_test_runner.ps1\n- Delegated targeted mode to run_targeted_tests.py\n- Delegated smart mode to run_tests_intelligent.py\n- Delegated CI mode to lint_test_check.py\n- Implemented smoke mode for file-level AST/import/syntax checks\n- Created shims for: run_tests_quick.py, run_tests_safely.py, comprehensive_test_runner.py\n- Updated references in README.md, DEV_QUICK_RUN.md, fix_pytest_capture.py, quick_fix_workflow.py\n\nCONSOLIDATION IMPACT:\n- Tool count: 20 → 1 canonical + 3 shims (5 redundant runners now delegate)\n- Lines of code consolidated: ~800 lines\n- UX standardized: All runners now use --mode flag\n- Compliance: Three Before New protocol documented and applied\n\nPROOF:\n- docs/THREE_BEFORE_NEW_BATCH_3_CONSOLIDATION.md - complete plan and status\n- All files edited and tested\n- Shims provide backward compatibility\n- Canonical runner tested with multiple modes\n\nBatch 2 consolidation pattern successfully applied to test runners.\n        ",
+    "questline": "brownfield_compliance",
+    "status": "completed",
+    "created_at": "2026-01-05T16:59:44.251024+00:00",
+    "updated_at": "2026-01-05T16:59:44.251024+00:00",
+    "dependencies": [],
+    "tags": [
+      "three_before_new",
+      "consolidation",
+      "test_runners",
+      "compliance",
+      "completed"
+    ],
+    "history": [
+      {
+        "status": "completed",
+        "timestamp": "2026-01-05T16:59:44.251024+00:00"
+      }
+    ],
+    "priority": "high"
+  }
+]

@@ -1,0 +1,194 @@
+meta:
+  name: NuSyQ Master Manifest
+  version: 2025-10-04
+  root_dir: "%USERPROFILE%/NuSyQ"
+  reports_dir: "%USERPROFILE%/NuSyQ/Reports"
+  logs_dir: "%USERPROFILE%/NuSyQ/Logs"
+  state_dir: "%USERPROFILE%/NuSyQ/State"
+
+env:
+  # optional environment variables you want persisted (User scope)
+  OLLAMA_MODELS: "D:/AI_Models/Ollama/models"   # change or remove if not needed
+
+folders:
+  - "%USERPROFILE%/NuSyQ"
+  - "%USERPROFILE%/NuSyQ/AI_Hub"
+  - "%USERPROFILE%/NuSyQ/ChatDev"
+  - "%USERPROFILE%/NuSyQ/GODOT"
+  - "%USERPROFILE%/NuSyQ/Jupyter"
+  - "%USERPROFILE%/NuSyQ/Logs"
+  - "%USERPROFILE%/NuSyQ/Reports"
+  - "%USERPROFILE%/NuSyQ/State"
+
+winget_packages:
+  # Each entry is Id + (optional) exact and notes. Script will 'winget show' (audit) before install.
+  - id: GodotEngine.Godot
+    exact: true
+    required: true
+  - id: Microsoft.PCManager
+    exact: true
+  - id: BleachBit.BleachBit
+    exact: true
+  # Optional utilities—toggle as needed
+  # - id: Microsoft.WindowsTerminal
+  #   exact: true
+  # - id: O&O.ShutUp10
+  #   exact: true
+
+pip_packages:
+  # Python-side tools
+  - notebook
+  - jupyterlab
+  - jupyterlab_vim
+  - ipykernel
+  - chatdev    # if this fails, we’ll log and you can swap to a repo-based install
+
+vscode_extensions:
+  # === Core Development Tools ===
+  - ms-vscode.powershell
+  - ms-python.python
+  - ms-python.vscode-pylance
+  - ms-python.black-formatter          # Black code formatter
+  - ms-python.isort                    # Import sorting
+  - ms-python.flake8                   # Python linting
+  - ms-toolsai.jupyter
+  - ms-azuretools.vscode-docker
+  - ms-vscode.remote-repositories
+  - ms-vscode-remote.remote-wsl
+
+  # === Git & Version Control ===
+  - eamodio.gitlens                    # Enhanced Git capabilities
+  - mhutchie.git-graph                 # Visual Git graph
+  - donjayamanne.githistory            # Git history explorer
+  - GitHub.vscode-pull-request-github  # GitHub PR integration
+
+  # === AI Coding Assistants (Multi-Model Orchestration) ===
+  # Primary AI: Complex reasoning, architecture, code review
+  - anthropic.claude-code
+
+  # Additional AI Assistants
+  - kilocode.kilo-code
+  - Continue.continue                  # Local Ollama integration
+  # - rjmacarthy.twinny                # Alternative Ollama integration
+  # - github.copilot                   # GitHub Copilot (commercial)
+  # - github.copilot-chat              # Copilot Chat (commercial)
+
+  # === Markdown & Documentation ===
+  - yzhang.markdown-all-in-one         # Markdown productivity
+  - bierner.markdown-mermaid           # Mermaid diagrams
+  - shd101wyy.markdown-preview-enhanced # Enhanced preview
+  - davidanson.vscode-markdownlint     # Markdown linting
+
+  # === Code Quality & Analysis ===
+  - sonarsource.sonarlint-vscode       # Code quality (multi-language)
+  - streetsidesoftware.code-spell-checker # Spell checker
+  - usernamehw.errorlens               # Inline error display
+  - gruntfuggly.todo-tree              # TODO/FIXME finder
+
+  # === Productivity & Navigation ===
+  - alefragnani.project-manager        # Multi-project management
+  - alefragnani.bookmarks              # Code bookmarks
+  - oderwat.indent-rainbow             # Rainbow indentation
+  - aaron-bond.better-comments         # Enhanced comment highlighting
+  - wayou.vscode-todo-highlight        # Highlight TODOs
+  - christian-kohler.path-intellisense # Path autocomplete
+
+  # === Code Visualization ===
+  - hediet.vscode-drawio               # Draw.io integration
+  - vsls-contrib.codetour              # Code walkthroughs
+  - formulahendry.code-runner          # Run code snippets
+  - ritwickdey.liveserver              # Live web preview
+
+  # === YAML & Configuration ===
+  - redhat.vscode-yaml                 # YAML language support
+  - tamasfe.even-better-toml           # TOML support
+  - dotenv.dotenv-vscode               # .env file support
+
+  # === Database & Data ===
+  - mtxr.sqltools                      # SQL management
+  - RandomFractalsInc.vscode-data-preview # CSV/JSON viewer
+
+  # === Testing & Debugging ===
+  - ms-vscode.test-adapter-converter   # Test adapter
+  - littlefoxteam.vscode-python-test-adapter # Python test adapter
+  - hbenl.vscode-test-explorer         # Test explorer UI
+
+  # === Theme & UI Enhancement ===
+  - PKief.material-icon-theme          # Material icons
+  - zhuangtongfa.material-theme        # Material theme
+  - johnpapa.vscode-peacock            # Workspace color coding
+  - oderwat.indent-rainbow             # Rainbow indentation
+
+  # === Language Support (Extended) ===
+  - ms-vscode.cpptools                 # C/C++
+  - golang.go                          # Go language
+  - rust-lang.rust-analyzer            # Rust analyzer
+  - redhat.java                        # Java support
+
+  # === REST API & HTTP ===
+  - humao.rest-client                  # REST client
+  - rangav.vscode-thunder-client       # Thunder Client (Postman alternative)
+
+  # === Performance & Monitoring ===
+  - ms-vscode.vscode-typescript-next   # TypeScript (if needed)
+  - ms-vsliveshare.vsliveshare         # Live collaboration
+
+  # === AI-Specific Enhancements ===
+  - ollama.ollama                      # Official Ollama extension
+  - phind.phind                        # Phind AI search (alternative AI)
+
+  # === Optional: Advanced Tools ===
+  # - ms-vscode.hexeditor              # Hex editor
+  # - jock.svg                          # SVG viewer
+  # - wix.vscode-import-cost           # Import cost analyzer
+
+ollama_models:
+  # === Authoritative Model List ===
+  # Orchestrator pulls models listed here. Priority: coding > reasoning > speed
+
+  # Primary Coding Models (qwen2.5-coder is code-optimized)
+  - qwen2.5-coder:14b      # Best quality, complex projects (9GB)
+  - qwen2.5-coder:7b       # Fast, good quality (4.7GB)
+
+  # Specialist Models
+  - codellama:7b           # Code completion specialist (3.8GB)
+  - deepseek-coder-v2:16b  # Advanced coding, large context (9.1GB)
+  - starcoder2:15b         # Code generation alternative (9.1GB)
+
+  # Reasoning & General Purpose
+  - gemma2:9b              # Reasoning-focused (5.4GB)
+  - phi3.5                 # Lightweight, efficient (2.2GB)
+  - phi4                   # Updated reasoning model
+
+  # Embeddings for Continue.dev semantic search
+  - nomic-embed-text       # Required for Continue.dev codebase search
+  - llama3.1:8b            # Local model found on disk; added to manifest to keep authoritative list
+
+post_install:
+  # Commands to run after packages are installed (idempotent-friendly).
+  # Add anything you want the system to do at the very end.
+  - "python -m ipykernel install --user --name \"Python3.12-NuSyQ\" --display-name \"Python 3.12 (NuSyQ)\""
+
+health_checks:
+  # Each check is a command + substring to expect; failures are logged.
+  - cmd: "git --version"
+    expect: "git version"
+  - cmd: "node --version"
+    expect: "v"
+  - cmd: "python --version"
+    expect: "Python 3"
+  - cmd: "dotnet --info"
+    expect: ".NET SDK"
+  - cmd: "ollama --version"
+    expect: "0."
+  - cmd: "code --list-extensions"
+    expect: "anthropic.claude-code"
+  - cmd: "ollama list"
+    expect: "qwen2.5-coder"
+
+reports:
+  # Extra reports the orchestrator will write
+  - type: "winget_export"     # winget export
+  - type: "vscode_extensions" # code --list-extensions --show-versions
+  - type: "ollama_models"     # ollama list
+  - type: "system_baseline"   # Get-ComputerInfo

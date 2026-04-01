@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "id": "cultivated_0_0",
+      "title": "Run full test suite (smoke test validation",
+      "source": "cultivation_ten_minute_plan",
+      "iteration": 1,
+      "priority": "normal",
+      "effort": "small",
+      "risk": "low",
+      "status": "failed",
+      "created": "2025-12-24T06:59:05.563645",
+      "description": "Suggested by ten-minute plan (iteration 1)",
+      "last_updated": "2025-12-24T07:08:05.275699",
+      "last_note": "Test execution failed: Command '['python', '-m', 'pytest', 'tests', '-q', '--tb=short']' timed out after 60 seconds"
+    },
+    {
+      "id": "cultivated_0_1",
+      "title": "Generate capability inventory update",
+      "source": "cultivation_ten_minute_plan",
+      "iteration": 1,
+      "priority": "normal",
+      "effort": "small",
+      "risk": "low",
+      "status": "queued",
+      "created": "2025-12-24T06:59:05.563645",
+      "description": "Suggested by ten-minute plan (iteration 1)"
+    },
+    {
+      "id": "cultivated_0_2",
+      "title": "Check for quick wins in work queue",
+      "source": "cultivation_ten_minute_plan",
+      "iteration": 1,
+      "priority": "normal",
+      "effort": "small",
+      "risk": "low",
+      "status": "queued",
+      "created": "2025-12-24T06:59:05.563645",
+      "description": "Suggested by ten-minute plan (iteration 1)"
+    }
+  ],
+  "last_synced_from_hub": "2025-12-24T07:25:56.900114"
+}

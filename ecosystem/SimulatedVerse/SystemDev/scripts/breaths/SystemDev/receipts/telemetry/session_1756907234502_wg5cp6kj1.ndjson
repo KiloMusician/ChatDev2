@@ -1,0 +1,5 @@
+{"timestamp":1756907234502,"event_kind":"ui.route.mount","source":"test","data":{"component":"GameShell","mode":"game"},"trace_id":"test_trace_1"}
+{"timestamp":1756907234502,"event_kind":"ui.adapter.bind","source":"test","data":{"adapter":"GameShell","engine":"ascii"},"trace_id":"test_trace_2"}
+{"timestamp":1756907234603,"event_kind":"game.tick.pulse","source":"test","data":{"deltaTime":1,"resources":{"energy":100,"materials":50}},"trace_id":"test_trace_3"}
+{"timestamp":1756907234603,"event_kind":"game.save.snapshot","source":"test","data":{"version":"1.0.0","state":{"tick":1}},"trace_id":"test_trace_4"}
+{"timestamp":1756907234603,"event_kind":"game.prestige.exec","source":"test","data":{"oldResources":{},"newResources":{},"metaCurrency":1},"trace_id":"test_trace_5"}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>TK_LatticeResearch</defName>
+    <label>Lattice Integration</label>
+    <description>Establish a basic connection to the Terminal Depths AI ecosystem. Unlocks the Lattice Terminal, allowing colonists to upload daily logs and receive simple task assignments from Gordon.</description>
+    <baseCost>600</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>Main</tab>
+    <researchViewX>8.00</researchViewX>
+    <researchViewY>4.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>TK_AdvancedLatticeResearch</defName>
+    <label>Advanced Lattice Protocols</label>
+    <description>Upgrade the Lattice connection with dedicated inference hardware. Enables AI Council voting, blueprint generation, and direct Serena analytics queries via the Lattice Console.</description>
+    <baseCost>1200</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>Main</tab>
+    <prerequisites>
+      <li>TK_LatticeResearch</li>
+    </prerequisites>
+    <researchViewX>9.50</researchViewX>
+    <researchViewY>4.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>TK_NexusResearch</defName>
+    <label>Lattice Nexus</label>
+    <description>Build the colony's primary Lattice node. The Nexus broadcasts full telemetry to NuSyQ-Hub, runs Gordon's orchestration daemon locally, and confers the "Lattice-Linked" aura to nearby colonists.</description>
+    <baseCost>2400</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>Main</tab>
+    <prerequisites>
+      <li>TK_AdvancedLatticeResearch</li>
+    </prerequisites>
+    <researchViewX>11.00</researchViewX>
+    <researchViewY>4.00</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

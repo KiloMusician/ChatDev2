@@ -1,0 +1,757 @@
+[
+  {
+    "file": "tools/run-gamification-demo.ts",
+    "from": "../agent/enhanced-gamification-system",
+    "to": "./agent/enhanced-gamification-system.ts"
+  },
+  {
+    "file": "tools/run-gamification-demo.ts",
+    "from": "../agent/cultivation-healing-system",
+    "to": "./agent/cultivation-healing-system.ts"
+  },
+  {
+    "file": "tools/run-gamification-demo.ts",
+    "from": "../agent/error-quest-transformer",
+    "to": "./agent/error-quest-transformer.ts"
+  },
+  {
+    "file": "tools/run-gamification-demo.ts",
+    "from": "../agent/active-quest-progress",
+    "to": "./agent/active-quest-progress.ts"
+  },
+  {
+    "file": "tools/gamification-cli.ts",
+    "from": "../agent/enhanced-gamification-system",
+    "to": "./agent/enhanced-gamification-system.ts"
+  },
+  {
+    "file": "tools/gamification-cli.ts",
+    "from": "../agent/cultivation-healing-system",
+    "to": "./agent/cultivation-healing-system.ts"
+  },
+  {
+    "file": "tools/gamification-cli.ts",
+    "from": "../agent/error-quest-transformer",
+    "to": "./agent/error-quest-transformer.ts"
+  },
+  {
+    "file": "tools/gamification-cli.ts",
+    "from": "../agent/active-quest-progress",
+    "to": "./agent/active-quest-progress.ts"
+  },
+  {
+    "file": "system/llm/sidecar/token_guard.ts",
+    "from": "./ollama",
+    "to": "./system/llm/sidecar/ollama.ts"
+  },
+  {
+    "file": "system/llm/sidecar/token_guard.ts",
+    "from": "./symbolic_planner",
+    "to": "./system/llm/sidecar/symbolic_planner.ts"
+  },
+  {
+    "file": "system/llm/sidecar/smoke_test.ts",
+    "from": "./token_guard",
+    "to": "./system/llm/sidecar/token_guard.ts"
+  },
+  {
+    "file": "system/llm/sidecar/smoke_test.ts",
+    "from": "./ops_queue",
+    "to": "./system/llm/sidecar/ops_queue.ts"
+  },
+  {
+    "file": "system/llm/sidecar/smoke_test.ts",
+    "from": "./symbolic_planner",
+    "to": "./system/llm/sidecar/symbolic_planner.ts"
+  },
+  {
+    "file": "system/llm/sidecar/smoke_test.ts",
+    "from": "./ollama",
+    "to": "./system/llm/sidecar/ollama.ts"
+  },
+  {
+    "file": "system/llm/ollama-orchestration/npc-dialogue-system.ts",
+    "from": "./model-manager",
+    "to": "./system/llm/ollama-orchestration/model-manager.ts"
+  },
+  {
+    "file": "src/views/IdleHUD.tsx",
+    "from": "../core/state/AppState",
+    "to": "./src/core/state/AppState.ts"
+  },
+  {
+    "file": "src/views/IdleHUD.tsx",
+    "from": "../core/ui/AsciiCanvas",
+    "to": "./src/core/ui/AsciiCanvas.tsx"
+  },
+  {
+    "file": "src/tier-progression/core/tier-system.ts",
+    "from": "../../omni-optimizer/core/omni-optimizer",
+    "to": "./src/omni-optimizer/core/omni-optimizer.ts"
+  },
+  {
+    "file": "src/tier-progression/core/tier-system.ts",
+    "from": "../../quantum-glyphic-language/core/qgl-framework",
+    "to": "./src/quantum-glyphic-language/core/qgl-framework.ts"
+  },
+  {
+    "file": "src/server/nusyq-integration.ts",
+    "from": "../nusyq-framework/index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/server/nusyq-integration.ts",
+    "from": "../nusyq-framework/omnitag-system",
+    "to": "./src/nusyq-framework/omnitag-system.ts"
+  },
+  {
+    "file": "src/server/nusyq-integration.ts",
+    "from": "../nusyq-framework/quantum-feedback",
+    "to": "./src/nusyq-framework/quantum-feedback.ts"
+  },
+  {
+    "file": "src/server/nusyq-integration.ts",
+    "from": "../nusyq-framework/self-coding-evolution",
+    "to": "./src/nusyq-framework/self-coding-evolution.ts"
+  },
+  {
+    "file": "src/server/nusyq-integration.ts",
+    "from": "../nusyq-framework/narrative-quantum-engine",
+    "to": "./src/nusyq-framework/narrative-quantum-engine.ts"
+  },
+  {
+    "file": "src/scripts/trigger-evolution.ts",
+    "from": "../nusyq-framework/self-coding-evolution",
+    "to": "./src/nusyq-framework/self-coding-evolution.ts"
+  },
+  {
+    "file": "src/scripts/quantum-coherence.ts",
+    "from": "../nusyq-framework/quantum-feedback",
+    "to": "./src/nusyq-framework/quantum-feedback.ts"
+  },
+  {
+    "file": "src/scripts/nusyq-health-check.ts",
+    "from": "../nusyq-framework/index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/scripts/initialize-nusyq.ts",
+    "from": "../nusyq-framework/index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/scripts/guardian-status.ts",
+    "from": "../nusyq-framework/index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/scripts/deploy-complete-system.ts",
+    "from": "../nusyq-framework/index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/scripts/consciousness-report.ts",
+    "from": "../nusyq-framework/index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/scripts/consciousness-report.ts",
+    "from": "../nusyq-framework/narrative-quantum-engine",
+    "to": "./src/nusyq-framework/narrative-quantum-engine.ts"
+  },
+  {
+    "file": "src/scripts/consciousness-report.ts",
+    "from": "../nusyq-framework/quantum-feedback",
+    "to": "./src/nusyq-framework/quantum-feedback.ts"
+  },
+  {
+    "file": "src/quantum-glyphic-language/core/qgl-framework.ts",
+    "from": "../../omni-optimizer/core/omni-optimizer",
+    "to": "./src/omni-optimizer/core/omni-optimizer.ts"
+  },
+  {
+    "file": "src/protagonist-agent/agent-party-orchestrator.ts",
+    "from": "../../ai-systems/orchestration/coordination-core",
+    "to": "./ai-systems/orchestration/coordination-core.ts"
+  },
+  {
+    "file": "src/omni-optimizer/core/omni-optimizer.ts",
+    "from": "../../nusyq-framework",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/omni-optimizer/autonomous-patching/self-patcher.ts",
+    "from": "../core/omni-optimizer",
+    "to": "./src/omni-optimizer/core/omni-optimizer.ts"
+  },
+  {
+    "file": "src/omni-optimizer/ai-learning/mod-learner.ts",
+    "from": "../core/omni-optimizer",
+    "to": "./src/omni-optimizer/core/omni-optimizer.ts"
+  },
+  {
+    "file": "src/omni-optimizer/ai-learning/error-prediction.ts",
+    "from": "../core/omni-optimizer",
+    "to": "./src/omni-optimizer/core/omni-optimizer.ts"
+  },
+  {
+    "file": "src/nusyq-framework/self-coding-evolution.ts",
+    "from": "./index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/nusyq-framework/quantum-feedback.ts",
+    "from": "./index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/nusyq-framework/narrative-quantum-engine.ts",
+    "from": "./index",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/nusyq-framework/index.ts",
+    "from": "./narrative-quantum-engine",
+    "to": "./src/nusyq-framework/narrative-quantum-engine.ts"
+  },
+  {
+    "file": "src/nusyq-framework/index.ts",
+    "from": "./self-coding-evolution",
+    "to": "./src/nusyq-framework/self-coding-evolution.ts"
+  },
+  {
+    "file": "src/nusyq-framework/index.ts",
+    "from": "./quantum-feedback",
+    "to": "./src/nusyq-framework/quantum-feedback.ts"
+  },
+  {
+    "file": "src/nusyq-framework/index.ts",
+    "from": "./omnitag-system",
+    "to": "./src/nusyq-framework/omnitag-system.ts"
+  },
+  {
+    "file": "src/integration-patterns/CrewAI-Inspired-Coordination.ts",
+    "from": "../nusyq-framework",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/integration-patterns/ConsciousnessAI-Integration.ts",
+    "from": "../nusyq-framework",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/hypertemporal-schrodinger/TemporalConsciousnessAnalyzer.ts",
+    "from": "../nusyq-framework",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "src/framework-integration/unified-orchestrator.ts",
+    "from": "../omni-optimizer/core/omni-optimizer",
+    "to": "./src/omni-optimizer/core/omni-optimizer.ts"
+  },
+  {
+    "file": "src/framework-integration/unified-orchestrator.ts",
+    "from": "../omni-optimizer/ai-learning/mod-learner",
+    "to": "./src/omni-optimizer/ai-learning/mod-learner.ts"
+  },
+  {
+    "file": "src/framework-integration/unified-orchestrator.ts",
+    "from": "../omni-optimizer/ai-learning/error-prediction",
+    "to": "./src/omni-optimizer/ai-learning/error-prediction.ts"
+  },
+  {
+    "file": "src/framework-integration/unified-orchestrator.ts",
+    "from": "../omni-optimizer/autonomous-patching/self-patcher",
+    "to": "./src/omni-optimizer/autonomous-patching/self-patcher.ts"
+  },
+  {
+    "file": "src/framework-integration/unified-orchestrator.ts",
+    "from": "../quantum-glyphic-language/core/qgl-framework",
+    "to": "./src/quantum-glyphic-language/core/qgl-framework.ts"
+  },
+  {
+    "file": "src/framework-integration/unified-orchestrator.ts",
+    "from": "../tier-progression/core/tier-system",
+    "to": "./src/tier-progression/core/tier-system.ts"
+  },
+  {
+    "file": "src/culture-guardian/guardian-system.ts",
+    "from": "../framework-integration/unified-orchestrator",
+    "to": "./src/framework-integration/unified-orchestrator.ts"
+  },
+  {
+    "file": "src/core/views/viewRegistry.ts",
+    "from": "../state/AppState",
+    "to": "./src/core/state/AppState.ts"
+  },
+  {
+    "file": "src/core/views/viewRegistry.ts",
+    "from": "../../views/IdleHUD",
+    "to": "./src/views/IdleHUD.tsx"
+  },
+  {
+    "file": "src/core/views/viewRegistry.ts",
+    "from": "../../views/Builder",
+    "to": "./src/views/Builder.tsx"
+  },
+  {
+    "file": "src/core/views/viewRegistry.ts",
+    "from": "../../views/Defense",
+    "to": "./src/views/Defense.tsx"
+  },
+  {
+    "file": "src/core/views/viewRegistry.ts",
+    "from": "../../views/Explore",
+    "to": "./src/views/Explore.tsx"
+  },
+  {
+    "file": "src/core/ui/MobileDock.tsx",
+    "from": "../state/AppState",
+    "to": "./src/core/state/AppState.ts"
+  },
+  {
+    "file": "src/core/ui/MobileDock.tsx",
+    "from": "../views/viewRegistry",
+    "to": "./src/core/views/viewRegistry.ts"
+  },
+  {
+    "file": "src/core/ui/DesktopShell.tsx",
+    "from": "../state/AppState",
+    "to": "./src/core/state/AppState.ts"
+  },
+  {
+    "file": "src/core/ui/DesktopShell.tsx",
+    "from": "../views/viewRegistry",
+    "to": "./src/core/views/viewRegistry.ts"
+  },
+  {
+    "file": "src/core/ui/AdaptiveNav.tsx",
+    "from": "../device/useDeviceProfile",
+    "to": "./src/core/device/useDeviceProfile.ts"
+  },
+  {
+    "file": "src/core/ui/AdaptiveNav.tsx",
+    "from": "./MobileDock",
+    "to": "./src/core/ui/MobileDock.tsx"
+  },
+  {
+    "file": "src/core/ui/AdaptiveNav.tsx",
+    "from": "./DesktopShell",
+    "to": "./src/core/ui/DesktopShell.tsx"
+  },
+  {
+    "file": "src/core/ui/AdaptiveNav.tsx",
+    "from": "../perf/usePerfWatchdog",
+    "to": "./src/core/perf/usePerfWatchdog.ts"
+  },
+  {
+    "file": "src/core/perf/usePerfWatchdog.ts",
+    "from": "../state/AppState",
+    "to": "./src/core/state/AppState.ts"
+  },
+  {
+    "file": "src/chatdev-orchestration/enhanced-bridge.ts",
+    "from": "../../system/llm/ollama-orchestration/model-manager",
+    "to": "./system/llm/ollama-orchestration/model-manager.ts"
+  },
+  {
+    "file": "src/chatdev-orchestration/enhanced-bridge.ts",
+    "from": "../ai-council/crewai-patterns",
+    "to": "./src/ai-council/crewai-patterns.ts"
+  },
+  {
+    "file": "src/chatdev-integration/autonomous-development.ts",
+    "from": "../framework-integration/unified-orchestrator",
+    "to": "./src/framework-integration/unified-orchestrator.ts"
+  },
+  {
+    "file": "src/chatdev-integration/autonomous-development.ts",
+    "from": "../quantum-glyphic-language/core/qgl-framework",
+    "to": "./src/quantum-glyphic-language/core/qgl-framework.ts"
+  },
+  {
+    "file": "src/chatdev-integration/autonomous-development.ts",
+    "from": "../tier-progression/core/tier-system",
+    "to": "./src/tier-progression/core/tier-system.ts"
+  },
+  {
+    "file": "src/chatdev-integration/autonomous-development.ts",
+    "from": "../culture-guardian/guardian-system",
+    "to": "./src/culture-guardian/guardian-system.ts"
+  },
+  {
+    "file": "src/boolean-hyper-music/PostTonalConsciousnessAnalyzer.ts",
+    "from": "../nusyq-framework",
+    "to": "./src/nusyq-framework/index.ts"
+  },
+  {
+    "file": "server/routes.ts",
+    "from": "./consciousness-endpoints",
+    "to": "./server/consciousness-endpoints.ts"
+  },
+  {
+    "file": "packages/kpulse-atmo/src/index.ts",
+    "from": "./director/VFXDirector",
+    "to": "./packages/kpulse-atmo/src/director/VFXDirector.ts"
+  },
+  {
+    "file": "packages/kpulse-atmo/src/index.ts",
+    "from": "./director/mappings",
+    "to": "./packages/kpulse-atmo/src/director/mappings.ts"
+  },
+  {
+    "file": "packages/kpulse-atmo/src/index.ts",
+    "from": "./layers/FullscreenShaderLayer",
+    "to": "./packages/kpulse-atmo/src/layers/FullscreenShaderLayer.ts"
+  },
+  {
+    "file": "packages/kpulse-atmo/src/index.ts",
+    "from": "./layers/Particles2DLayer",
+    "to": "./packages/kpulse-atmo/src/layers/Particles2DLayer.ts"
+  },
+  {
+    "file": "packages/kpulse-atmo/src/director/mappings.ts",
+    "from": "./VFXDirector",
+    "to": "./packages/kpulse-atmo/src/director/VFXDirector.ts"
+  },
+  {
+    "file": "global/shared/schema.ts",
+    "from": "./narrative-types",
+    "to": "./global/shared/narrative-types.ts"
+  },
+  {
+    "file": "global/shared/utils/hash.ts",
+    "from": "../types/core",
+    "to": "./global/shared/types/core.ts"
+  },
+  {
+    "file": "global/shared/sim/work-order-system.ts",
+    "from": "./types",
+    "to": "./global/shared/sim/types.ts"
+  },
+  {
+    "file": "global/shared/sim/atmosphere-director.ts",
+    "from": "./types",
+    "to": "./global/shared/sim/types.ts"
+  },
+  {
+    "file": "global/shared/sim/atmosphere-director.ts",
+    "from": "./anomalous-storyteller",
+    "to": "./global/shared/sim/anomalous-storyteller.ts"
+  },
+  {
+    "file": "global/shared/sim/anomalous-storyteller.ts",
+    "from": "./types",
+    "to": "./global/shared/sim/types.ts"
+  },
+  {
+    "file": "global/shared/progression/progression-gatekeeper.ts",
+    "from": "../sim/anomalous-storyteller",
+    "to": "./global/shared/sim/anomalous-storyteller.ts"
+  },
+  {
+    "file": "global/shared/progression/progression-gatekeeper.ts",
+    "from": "../sim/atmosphere-director",
+    "to": "./global/shared/sim/atmosphere-director.ts"
+  },
+  {
+    "file": "client/src/main.tsx",
+    "from": "./core/state/AppState",
+    "to": "./client/src/core/state/AppState.tsx"
+  },
+  {
+    "file": "client/src/App.tsx",
+    "from": "./core/ui/AdaptiveNav",
+    "to": "./client/src/core/ui/AdaptiveNav.tsx"
+  },
+  {
+    "file": "client/src/App.tsx",
+    "from": "./core/state/AppState",
+    "to": "./client/src/core/state/AppState.tsx"
+  },
+  {
+    "file": "client/src/App.tsx",
+    "from": "./core/views/viewRegistry",
+    "to": "./client/src/core/views/viewRegistry.ts"
+  },
+  {
+    "file": "client/src/components/ui/sidebar.tsx",
+    "from": "../../core/state/AppState",
+    "to": "./client/src/core/state/AppState.tsx"
+  },
+  {
+    "file": "client/src/components/ui/chart.tsx",
+    "from": "../../lib/utils",
+    "to": "./client/src/lib/utils.ts"
+  },
+  {
+    "file": "client/src/components/ui/carousel.tsx",
+    "from": "../../lib/utils",
+    "to": "./client/src/lib/utils.ts"
+  },
+  {
+    "file": "client/src/components/ui/carousel.tsx",
+    "from": "./button",
+    "to": "./client/src/components/ui/button.tsx"
+  },
+  {
+    "file": "client/src/components/ui/button.tsx",
+    "from": "../../lib/utils",
+    "to": "./client/src/lib/utils.ts"
+  },
+  {
+    "file": "client/src/components/culture-ship/QuantumInterface.tsx",
+    "from": "../../lib/queryClient",
+    "to": "./client/src/lib/queryClient.ts"
+  },
+  {
+    "file": "client/src/components/consciousness/ConsciousnessIndicator.tsx",
+    "from": "../../lib/queryClient",
+    "to": "./client/src/lib/queryClient.ts"
+  },
+  {
+    "file": "bootstrap/init.ts",
+    "from": "../registry/loader",
+    "to": "./registry/loader.ts"
+  },
+  {
+    "file": "application-services/web/src/main.ts",
+    "from": "./render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/main.ts",
+    "from": "./views/viewManager",
+    "to": "./application-services/web/src/views/viewManager.ts"
+  },
+  {
+    "file": "application-services/web/src/main.ts",
+    "from": "./engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/main.ts",
+    "from": "./modules/cascade",
+    "to": "./application-services/web/src/modules/cascade.ts"
+  },
+  {
+    "file": "application-services/web/src/main.ts",
+    "from": "./modules/chatdevViz",
+    "to": "./application-services/web/src/modules/chatdevViz.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "../render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "./view.microbe",
+    "to": "./application-services/web/src/views/view.microbe.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "./view.colony",
+    "to": "./application-services/web/src/views/view.colony.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "./view.city",
+    "to": "./application-services/web/src/views/view.city.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "./view.planet",
+    "to": "./application-services/web/src/views/view.planet.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "./view.system",
+    "to": "./application-services/web/src/views/view.system.ts"
+  },
+  {
+    "file": "application-services/web/src/views/viewManager.ts",
+    "from": "./view.space",
+    "to": "./application-services/web/src/views/view.space.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.system.ts",
+    "from": "./viewManager",
+    "to": "./application-services/web/src/views/viewManager.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.system.ts",
+    "from": "../render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.system.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.space.ts",
+    "from": "./viewManager",
+    "to": "./application-services/web/src/views/viewManager.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.space.ts",
+    "from": "../render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.space.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.planet.ts",
+    "from": "./viewManager",
+    "to": "./application-services/web/src/views/viewManager.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.planet.ts",
+    "from": "../render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.planet.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.microbe.ts",
+    "from": "./viewManager",
+    "to": "./application-services/web/src/views/viewManager.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.microbe.ts",
+    "from": "../render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.microbe.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.colony.ts",
+    "from": "./viewManager",
+    "to": "./application-services/web/src/views/viewManager.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.colony.ts",
+    "from": "../render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.colony.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.city.ts",
+    "from": "./viewManager",
+    "to": "./application-services/web/src/views/viewManager.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.city.ts",
+    "from": "../render/asciiRenderer",
+    "to": "./application-services/web/src/render/asciiRenderer.ts"
+  },
+  {
+    "file": "application-services/web/src/views/view.city.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/web/src/modules/cascade.ts",
+    "from": "../engine/state",
+    "to": "./application-services/web/src/engine/state.ts"
+  },
+  {
+    "file": "application-services/storyteller/src/gradient.ts",
+    "from": "../../engine/src/bus",
+    "to": "./application-services/engine/src/bus.ts"
+  },
+  {
+    "file": "application-services/repopilot/src/server.ts",
+    "from": "./llm",
+    "to": "./application-services/repopilot/src/llm.ts"
+  },
+  {
+    "file": "application-services/repopilot/src/server.ts",
+    "from": "./rag",
+    "to": "./application-services/repopilot/src/rag.ts"
+  },
+  {
+    "file": "application-services/repopilot/src/llm.ts",
+    "from": "./rag",
+    "to": "./application-services/repopilot/src/rag.ts"
+  },
+  {
+    "file": "application-services/engine/src/spawn.ts",
+    "from": "./bus",
+    "to": "./application-services/engine/src/bus.ts"
+  },
+  {
+    "file": "application-services/engine/src/loop.ts",
+    "from": "./spawn",
+    "to": "./application-services/engine/src/spawn.ts"
+  },
+  {
+    "file": "application-services/engine/src/index.ts",
+    "from": "./loop",
+    "to": "./application-services/engine/src/loop.ts"
+  },
+  {
+    "file": "application-services/engine/src/index.ts",
+    "from": "./pantheon",
+    "to": "./application-services/engine/src/pantheon.ts"
+  },
+  {
+    "file": "application-services/engine/src/index.ts",
+    "from": "./bus",
+    "to": "./application-services/engine/src/bus.ts"
+  },
+  {
+    "file": "ai-systems/orchestration/vscode-copilot-interface.ts",
+    "from": "./llm-provider-selector",
+    "to": "./ai-systems/orchestration/llm-provider-selector.ts"
+  },
+  {
+    "file": "ai-systems/orchestration/api-endpoints.ts",
+    "from": "./llm-provider-selector",
+    "to": "./ai-systems/orchestration/llm-provider-selector.ts"
+  },
+  {
+    "file": "ai-systems/orchestration/api-endpoints.ts",
+    "from": "./vscode-copilot-interface",
+    "to": "./ai-systems/orchestration/vscode-copilot-interface.ts"
+  },
+  {
+    "file": "agent/error-quest-transformer.ts",
+    "from": "./enhanced-gamification-system",
+    "to": "./agent/enhanced-gamification-system.ts"
+  },
+  {
+    "file": "agent/error-quest-transformer.ts",
+    "from": "./cultivation-healing-system",
+    "to": "./agent/cultivation-healing-system.ts"
+  },
+  {
+    "file": "agent/enhanced-gamification-system.ts",
+    "from": "./active-quest-progress",
+    "to": "./agent/active-quest-progress.ts"
+  },
+  {
+    "file": "agent/cultivation-healing-system.ts",
+    "from": "./enhanced-gamification-system",
+    "to": "./agent/enhanced-gamification-system.ts"
+  }
+]

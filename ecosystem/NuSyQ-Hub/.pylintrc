@@ -1,0 +1,56 @@
+[MAIN]
+# Disable false positive checks for dynamic Python features
+extension-pkg-whitelist=
+
+[MESSAGES CONTROL]
+# Disable false positive warnings
+disable=
+    logging-not-lazy,
+    no-member,  # Causes false positives with logging, dynamic attrs
+    import-error,  # Handled by actual runtime tests
+    no-name-in-module,  # Causes false positives with dynamic imports
+    unexpected-keyword-arg,  # Causes false positives with dataclasses/attrs
+    no-value-for-parameter,  # Causes false positives with decorators
+    too-few-public-methods,
+    too-many-arguments,
+    too-many-locals,
+    too-many-branches,
+    too-many-statements,
+    too-many-instance-attributes,
+    fixme,
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    wrong-import-position,
+    line-too-long,
+
+[TYPECHECK]
+# Modules that use dynamic attributes (logging, etc.)
+ignored-modules=logging
+
+# Classes with dynamic attributes
+ignored-classes=
+    logging.Logger,
+    logging,
+
+[DESIGN]
+# Complexity limits (can be adjusted)
+max-args=10
+max-locals=25
+max-returns=10
+max-branches=20
+max-statements=100
+max-attributes=15
+
+[FORMAT]
+# Code formatting
+max-line-length=120
+indent-string='    '
+
+[BASIC]
+# Naming conventions
+good-names=i,j,k,ex,_,e,f,df,ax,fig
+
+[IMPORTS]
+# Allow relative imports within package
+allow-wildcard-with-all=yes

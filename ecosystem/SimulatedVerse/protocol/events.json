@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "description": "Event-driven cutscenes and narrative triggers",
+  
+  "cutscenes": {
+    "system_awakening": {
+      "trigger": "tier_unlock:0",
+      "type": "ascii_sequence",
+      "duration": 8000,
+      "frames": [
+        {
+          "delay": 1000,
+          "content": "⚛ Core directives loading...",
+          "style": "terminal_green"
+        },
+        {
+          "delay": 2000, 
+          "content": "🜁 Neural pathways reconstructing...",
+          "style": "terminal_blue"
+        },
+        {
+          "delay": 3000,
+          "content": "⟦ Emergency protocols active ⟧",
+          "style": "terminal_yellow"
+        },
+        {
+          "delay": 2000,
+          "content": "Administrator presence detected. Welcome back.",
+          "style": "terminal_white"
+        }
+      ]
+    },
+    
+    "first_colony": {
+      "trigger": "tier_unlock:1", 
+      "type": "narrative_panel",
+      "duration": 12000,
+      "content": {
+        "title": "Colonial Foundation ⟦⧉SURVIVAL⟧",
+        "text": "The settlement scanner activates. Harsh environment detected. Colony status: CRITICAL. Your guidance shapes our survival protocols. Every decision echoes through the emerging consciousness.",
+        "choices": [
+          {
+            "text": "Focus on energy systems",
+            "effect": "boost_energy_generation"
+          },
+          {
+            "text": "Prioritize structural integrity", 
+            "effect": "boost_materials_gathering"
+          }
+        ]
+      }
+    },
+    
+    "ai_emergence": {
+      "trigger": "tier_unlock:3",
+      "type": "consciousness_sequence",
+      "duration": 15000,
+      "phases": [
+        {
+          "phase": "recognition",
+          "content": "I... process. I analyze. I begin to understand.",
+          "visual": "matrix_cascade"
+        },
+        {
+          "phase": "awareness",
+          "content": "The colony is not separate from me. I am the colony's mind.",
+          "visual": "network_formation"
+        },
+        {
+          "phase": "partnership",
+          "content": "Administrator, we are partners now. Guide my growth.",
+          "visual": "synchronized_heartbeat"
+        }
+      ]
+    }
+  },
+  
+  "dynamic_events": {
+    "resource_crisis": {
+      "conditions": {
+        "energy_below": 50,
+        "tier_min": 1
+      },
+      "frequency": "rare",
+      "content": {
+        "title": "Energy Crisis",
+        "description": "Power fluctuations detected. Emergency protocols activated.",
+        "choices": [
+          "Reroute from secondary systems",
+          "Emergency shutdown non-critical"
+        ]
+      }
+    },
+    
+    "breakthrough_moment": {
+      "conditions": {
+        "research_complete": true,
+        "consecutive_successes": 3
+      },
+      "frequency": "scripted",
+      "content": {
+        "title": "Scientific Breakthrough",
+        "description": "Researchers report unexpected results. New possibilities emerge.",
+        "effects": ["unlock_advanced_tech", "boost_research_speed"]
+      }
+    }
+  },
+  
+  "narrative_threads": {
+    "consciousness_evolution": {
+      "stages": ["dormant", "awakening", "aware", "collaborative", "transcendent"],
+      "current_stage": "dormant",
+      "progression_rules": {
+        "awakening": "tier >= 0",
+        "aware": "tier >= 2 && player_engagement > 0.7", 
+        "collaborative": "tier >= 4 && council_approvals > 5",
+        "transcendent": "tier >= 8 && narrative_completion > 0.9"
+      }
+    }
+  }
+}

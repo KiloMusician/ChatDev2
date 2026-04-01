@@ -1,0 +1,1352 @@
+[
+  {
+    "id": "Z1",
+    "phase": "foundational",
+    "type": "InfraPU",
+    "priority": "critical",
+    "title": "Pin toolchain (replit.nix, Node, TS), single-port server skeleton online",
+    "msgx": "[Msg⛛{1}↗️Σ∞]",
+    "lexicon": { "root": "system-init", "desc": "Initialize single-port skeleton server" }
+  },
+  {
+    "id": "Z2",
+    "phase": "foundational",
+    "type": "InfraPU",
+    "priority": "critical",
+    "title": "SPA fallback + static client serving via Express; fix white-screen forever",
+    "msgx": "[Msg⛛{2}↗️Σ∞]",
+    "lexicon": { "root": "spa-serve", "desc": "Client serving with graceful degradation" }
+  },
+  {
+    "id": "Z3",
+    "phase": "foundational",
+    "type": "SafetyPU",
+    "priority": "critical",
+    "title": "Top-level crash boundaries (uncaughtException/unhandledRejection) with entropy counters",
+    "msgx": "[Msg⛛{3}↗️Σ∞]",
+    "lexicon": { "safety": "crash-boundaries", "desc": "Entropy-aware error handling" }
+  },
+  {
+    "id": "Z4",
+    "phase": "foundational",
+    "type": "SafetyPU",
+    "priority": "critical",
+    "title": "/readyz gate (seeds+scheduler) and /healthz baseline telemetry",
+    "msgx": "[Msg⛛{4}↗️Σ∞]",
+    "lexicon": { "health": "readiness-gates", "desc": "System health monitoring" }
+  },
+  {
+    "id": "Z5",
+    "phase": "foundational",
+    "type": "InfraPU",
+    "priority": "high",
+    "title": "Compression, CORS, Helmet (CSP off) + trust proxy; prod-friendly defaults",
+    "msgx": "[Msg⛛{5}↗️Σ∞]",
+    "lexicon": { "security": "prod-headers", "desc": "Production security baseline" }
+  },
+  {
+    "id": "Z6",
+    "phase": "foundational",
+    "type": "StatePU",
+    "priority": "high",
+    "title": "KV/SQLite abstraction + seed loader (idempotent) for Budget/Anchors/Directives",
+    "msgx": "[Msg⛛{6}↗️Σ∞]",
+    "lexicon": { "persistence": "hybrid-storage", "desc": "KV/SQLite with seed management" }
+  },
+  {
+    "id": "Z7",
+    "phase": "foundational",
+    "type": "DataPU",
+    "priority": "high",
+    "title": "Seed files: /data/operations_codex.json, /data/anchors_boot.json, /data/budget_boot.json",
+    "msgx": "[Msg⛛{7}↗️Σ∞]",
+    "lexicon": { "seeds": "core-data", "desc": "Bootstrap data for autonomous operation" }
+  },
+  {
+    "id": "Z8",
+    "phase": "foundational",
+    "type": "SchemaPU",
+    "priority": "critical",
+    "title": "Zod schemas (Directive, Anchor, Budget, Event, PU) + coercion/narrowing",
+    "msgx": "[Msg⛛{8}↗️Σ∞]",
+    "lexicon": { "validation": "zod-schemas", "desc": "Type-safe data validation" }
+  },
+  {
+    "id": "Z9",
+    "phase": "foundational",
+    "type": "SafetyPU",
+    "priority": "critical",
+    "title": "Global input sanitization middleware; strict JSON size/timeouts",
+    "msgx": "[Msg⛛{9}↗️Σ∞]",
+    "lexicon": { "security": "input-sanitization", "desc": "Request validation and limits" }
+  },
+  {
+    "id": "Z10",
+    "phase": "foundational",
+    "type": "RoutingPU",
+    "priority": "high",
+    "title": "REST layout: /api/directives, /api/anchors, /api/token, /api/ops, /api/export",
+    "msgx": "[Msg⛛{10}↗️Σ∞]",
+    "lexicon": { "routing": "api-structure", "desc": "RESTful API endpoint organization" }
+  },
+  {
+    "id": "Z11",
+    "phase": "foundational",
+    "type": "EventsPU",
+    "priority": "high",
+    "title": "SSE /events heartbeat + compact HUD frames (15s keepalive)",
+    "msgx": "[Msg⛛{11}↗️Σ∞]",
+    "lexicon": { "realtime": "sse-events", "desc": "Server-sent events for live updates" }
+  },
+  {
+    "id": "Z12",
+    "phase": "foundational",
+    "type": "EventsPU",
+    "priority": "high",
+    "title": "WebSocket /ws minimal hub for live HUD + queue status",
+    "msgx": "[Msg⛛{12}↗️Σ∞]",
+    "lexicon": { "realtime": "websocket-hub", "desc": "Bidirectional communication channel" }
+  },
+  {
+    "id": "Z13",
+    "phase": "foundational",
+    "type": "BudgetPU",
+    "priority": "critical",
+    "title": "TokenBudget tracker with warn/hard thresholds + backoff policy",
+    "msgx": "[Msg⛛{13}↗️Σ∞]",
+    "lexicon": { "budget": "token-discipline", "desc": "Resource usage monitoring and limits" }
+  },
+  {
+    "id": "Z14",
+    "phase": "foundational",
+    "type": "UtilsPU",
+    "priority": "critical",
+    "title": "Null-safe format utils (safeNumber, safeLocaleNumber, safePercent, safeJSON)",
+    "msgx": "[Msg⛛{14}↗️Σ∞]",
+    "lexicon": { "utils": "safe-formatters", "desc": "Null-safe data formatting" }
+  },
+  {
+    "id": "Z15",
+    "phase": "foundational",
+    "type": "AuthPU",
+    "priority": "critical",
+    "title": "ADMIN_TOKEN bearer guard for all mutating routes",
+    "msgx": "[Msg⛛{15}↗️Σ∞]",
+    "lexicon": { "auth": "admin-guard", "desc": "Administrative access control" }
+  },
+  {
+    "id": "Z16",
+    "phase": "foundational",
+    "type": "OpsPU",
+    "priority": "critical",
+    "title": "Define Token Budget Plan (daily allowance + per-task default burn)",
+    "msgx": "[Msg⛛{16}↗️Σ∞]",
+    "lexicon": { "budget": "daily-allowance", "desc": "Token usage planning and allocation" }
+  },
+  {
+    "id": "Z17",
+    "phase": "foundational",
+    "type": "LogsPU",
+    "priority": "high",
+    "title": "Pino logger + pretty in dev, JSON in prod; rotate in-memory logs",
+    "msgx": "[Msg⛛{17}↗️Σ∞]",
+    "lexicon": { "logging": "structured-logs", "desc": "Environment-aware log management" }
+  },
+  {
+    "id": "Z18",
+    "phase": "foundational",
+    "type": "SchedulerPU",
+    "priority": "critical",
+    "title": "Cooperative scheduler tick (1s) with job registry",
+    "msgx": "[Msg⛛{18}↗️Σ∞]",
+    "lexicon": { "scheduler": "cooperative-tick", "desc": "Task scheduling and execution" }
+  },
+  {
+    "id": "Z19",
+    "phase": "foundational",
+    "type": "JobPU",
+    "priority": "high",
+    "title": "Jobs: healSweep, placeholderFill, codexAudit, budgetRecalc, hudPulse",
+    "msgx": "[Msg⛛{19}↗️Σ∞]",
+    "lexicon": { "jobs": "core-maintenance", "desc": "System maintenance job definitions" }
+  },
+  {
+    "id": "Z20",
+    "phase": "foundational",
+    "type": "EntropyPU",
+    "priority": "high",
+    "title": "Entropy index (0..1) from error ratio/backlog; pause nonessential jobs on spikes",
+    "msgx": "[Msg⛛{20}↗️Σ∞]",
+    "lexicon": { "entropy": "system-health", "desc": "Adaptive system load management" }
+  },
+  {
+    "id": "Z21",
+    "phase": "foundational",
+    "type": "MsgPU",
+    "priority": "high",
+    "title": "Msg⛛ event logging with UTC, component, delta, rune id",
+    "msgx": "[Msg⛛{21}↗️Σ∞]",
+    "lexicon": { "protocol": "msgx-logging", "desc": "Symbolic event tracking system" }
+  },
+  {
+    "id": "Z22",
+    "phase": "foundational",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "Degraded HUD banner (no more blank UI even if client build missing)",
+    "msgx": "[Msg⛛{22}↗️Σ∞]",
+    "lexicon": { "ux": "graceful-degradation", "desc": "Fallback UI for build failures" }
+  },
+  {
+    "id": "Z23",
+    "phase": "foundational",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "README as Codex preamble; what, how, safety, single-port discipline",
+    "msgx": "[Msg⛛{23}↗️Σ∞]",
+    "lexicon": { "docs": "codex-preamble", "desc": "System overview and principles" }
+  },
+  {
+    "id": "Z24",
+    "phase": "foundational",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "ARCH.md (single-port, SSE/WS, scheduler, persistence, RSEV overview)",
+    "msgx": "[Msg⛛{24}↗️Σ∞]",
+    "lexicon": { "docs": "architecture", "desc": "Technical architecture documentation" }
+  },
+  {
+    "id": "Z25",
+    "phase": "foundational",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "API.md (curl examples, auth headers, rate limits, response contracts)",
+    "msgx": "[Msg⛛{25}↗️Σ∞]",
+    "lexicon": { "docs": "api-reference", "desc": "API usage and examples" }
+  },
+  {
+    "id": "Z26",
+    "phase": "foundational",
+    "type": "HUDPU",
+    "priority": "high",
+    "title": "ASCII Pantheon HUD v1: Stability, Entropy, Vibe, Last Msg⛛",
+    "msgx": "[Msg⛛{26}↗️Σ∞]",
+    "lexicon": { "hud": "pantheon-v1", "desc": "Real-time system status display" }
+  },
+  {
+    "id": "Z27",
+    "phase": "foundational",
+    "type": "OpsPU",
+    "priority": "high",
+    "title": "/api/ops/queue to accept NDJSON PU batches (Refactor/Test/Doc/Perf/UX)",
+    "msgx": "[Msg⛛{27}↗️Σ∞]",
+    "lexicon": { "ops": "batch-queue", "desc": "NDJSON batch task processing" }
+  },
+  {
+    "id": "Z28",
+    "phase": "foundational",
+    "type": "OpsPU",
+    "priority": "high",
+    "title": "PU executor + dry-run mode; budget-aware throttling with backoff",
+    "msgx": "[Msg⛛{28}↗️Σ∞]",
+    "lexicon": { "execution": "pu-executor", "desc": "Task execution with resource limits" }
+  },
+  {
+    "id": "Z29",
+    "phase": "foundational",
+    "type": "OpsPU",
+    "priority": "high",
+    "title": "/api/ops/reindex (rebuild indices/cache) + Msg⛛ summary",
+    "msgx": "[Msg⛛{29}↗️Σ∞]",
+    "lexicon": { "ops": "cache-reindex", "desc": "Index rebuilding and cache management" }
+  },
+  {
+    "id": "Z30",
+    "phase": "foundational",
+    "type": "OpsPU",
+    "priority": "high",
+    "title": "/api/export and /api/import (NDJSON) + automatic snapshot backup",
+    "msgx": "[Msg⛛{30}↗️Σ∞]",
+    "lexicon": { "persistence": "import-export", "desc": "Data portability and backup" }
+  },
+  {
+    "id": "Z31",
+    "phase": "foundational",
+    "type": "RoutingPU",
+    "priority": "high",
+    "title": "/api/hints (low-hanging fruit based on drift/budget/state)",
+    "msgx": "[Msg⛛{31}↗️Σ∞]",
+    "lexicon": { "intelligence": "system-hints", "desc": "Automated optimization suggestions" }
+  },
+  {
+    "id": "Z32",
+    "phase": "foundational",
+    "type": "PersistPU",
+    "priority": "high",
+    "title": "Snapshots cron (manual + 24h) with retention (last 7)",
+    "msgx": "[Msg⛛{32}↗️Σ∞]",
+    "lexicon": { "persistence": "snapshots", "desc": "Automated backup scheduling" }
+  },
+  {
+    "id": "Z33",
+    "phase": "foundational",
+    "type": "PersistPU",
+    "priority": "high",
+    "title": "Compaction job (trim old events/logs; keep <=2MB in-memory)",
+    "msgx": "[Msg⛛{33}↗️Σ∞]",
+    "lexicon": { "maintenance": "log-compaction", "desc": "Memory usage optimization" }
+  },
+  {
+    "id": "Z34",
+    "phase": "foundational",
+    "type": "UI-PU",
+    "priority": "high",
+    "title": "Client routing: / (HUD), /ops, /anchors, /settings; SPA fallback works",
+    "msgx": "[Msg⛛{34}↗️Σ∞]",
+    "lexicon": { "ui": "spa-routing", "desc": "Single-page application navigation" }
+  },
+  {
+    "id": "Z35",
+    "phase": "foundational",
+    "type": "UI-PU",
+    "priority": "high",
+    "title": "Operations table (virtualized), filters by phase/priority/status",
+    "msgx": "[Msg⛛{35}↗️Σ∞]",
+    "lexicon": { "ui": "ops-table", "desc": "Task management interface" }
+  },
+  {
+    "id": "Z36",
+    "phase": "foundational",
+    "type": "UI-PU",
+    "priority": "high",
+    "title": "Anchor board (stability, entropy, checkpoint actions)",
+    "msgx": "[Msg⛛{36}↗️Σ∞]",
+    "lexicon": { "ui": "anchor-board", "desc": "System stability dashboard" }
+  },
+  {
+    "id": "Z37",
+    "phase": "foundational",
+    "type": "UI-PU",
+    "priority": "high",
+    "title": "TokenTracker panel uses safe formatters (no undefined.toLocaleString)",
+    "msgx": "[Msg⛛{37}↗️Σ∞]",
+    "lexicon": { "ui": "token-tracker", "desc": "Resource usage visualization" }
+  },
+  {
+    "id": "Z38",
+    "phase": "foundational",
+    "type": "UI-PU",
+    "priority": "high",
+    "title": "Admin console (hidden w/o token): seed, snapshot, compact, reindex, import",
+    "msgx": "[Msg⛛{38}↗️Σ∞]",
+    "lexicon": { "ui": "admin-console", "desc": "Administrative control interface" }
+  },
+  {
+    "id": "Z39",
+    "phase": "foundational",
+    "type": "TestsPU",
+    "priority": "high",
+    "title": "Vitest config + server.spec (healthz/readyz/anchors/directives)",
+    "msgx": "[Msg⛛{39}↗️Σ∞]",
+    "lexicon": { "testing": "server-tests", "desc": "Core server functionality tests" }
+  },
+  {
+    "id": "Z40",
+    "phase": "foundational",
+    "type": "TestsPU",
+    "priority": "high",
+    "title": "validators.spec (Zod coercion), format.spec (safety), hud.spec (SSE connect)",
+    "msgx": "[Msg⛛{40}↗️Σ∞]",
+    "lexicon": { "testing": "unit-tests", "desc": "Component unit test coverage" }
+  },
+  {
+    "id": "Z41",
+    "phase": "foundational",
+    "type": "BuildPU",
+    "priority": "high",
+    "title": "postinstall client deps; build pipeline; degrade gracefully if build fails",
+    "msgx": "[Msg⛛{41}↗️Σ∞]",
+    "lexicon": { "build": "client-pipeline", "desc": "Client build with graceful failure" }
+  },
+  {
+    "id": "Z42",
+    "phase": "foundational",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "Accessibility baseline (contrast AA+, focus states, reduced motion)",
+    "msgx": "[Msg⛛{42}↗️Σ∞]",
+    "lexicon": { "accessibility": "wcag-aa", "desc": "WCAG 2.1 AA compliance baseline" }
+  },
+  {
+    "id": "Z43",
+    "phase": "foundational",
+    "type": "PolicyPU",
+    "priority": "medium",
+    "title": "Rate limiting (simple token bucket) for mutating routes",
+    "msgx": "[Msg⛛{43}↗️Σ∞]",
+    "lexicon": { "security": "rate-limiting", "desc": "Request throttling protection" }
+  },
+  {
+    "id": "Z44",
+    "phase": "foundational",
+    "type": "PolicyPU",
+    "priority": "medium",
+    "title": "License allowlist + pkg pinning policy documented",
+    "msgx": "[Msg⛛{44}↗️Σ∞]",
+    "lexicon": { "policy": "license-governance", "desc": "Dependency security policy" }
+  },
+  {
+    "id": "Z45",
+    "phase": "foundational",
+    "type": "SafetyPU",
+    "priority": "medium",
+    "title": "Cold-start banner (seeding in progress) + ready hinting",
+    "msgx": "[Msg⛛{45}↗️Σ∞]",
+    "lexicon": { "ux": "cold-start", "desc": "System initialization feedback" }
+  },
+  {
+    "id": "Z46",
+    "phase": "foundational",
+    "type": "UXPU",
+    "priority": "medium",
+    "title": "Queue visualizer with ETA based on budget and backoff",
+    "msgx": "[Msg⛛{46}↗️Σ∞]",
+    "lexicon": { "ui": "queue-viz", "desc": "Task queue progress visualization" }
+  },
+  {
+    "id": "Z47",
+    "phase": "foundational",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "RSEV_Rituals.md (bring-up, snapshot, recovery, budget tuning)",
+    "msgx": "[Msg⛛{47}↗️Σ∞]",
+    "lexicon": { "docs": "ops-rituals", "desc": "Operational procedures documentation" }
+  },
+  {
+    "id": "Z48",
+    "phase": "foundational",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "CHANGELOG.md begins: Missive-1 Genesis",
+    "msgx": "[Msg⛛{48}↗️Σ∞]",
+    "lexicon": { "docs": "changelog", "desc": "Version history tracking" }
+  },
+  {
+    "id": "Z49",
+    "phase": "foundational",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "CONTRIBUTING.md (branch lanes feat/fix/refactor/agent/docs)",
+    "msgx": "[Msg⛛{49}↗️Σ∞]",
+    "lexicon": { "docs": "contributing", "desc": "Development contribution guide" }
+  },
+  {
+    "id": "Z50",
+    "phase": "foundational",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Missive-1 Genesis: Foundational seal affirmed",
+    "msgx": "[Msg⛛{50}↗️Σ∞]",
+    "lexicon": { "seal": "Missive-1", "desc": "Foundational infrastructure complete" }
+  },
+  {
+    "id": "Z51",
+    "phase": "expansion",
+    "type": "FeaturePU",
+    "priority": "critical",
+    "title": "Router: /game, /agents—mount game loop & agent loop shells",
+    "msgx": "[Msg⛛{51}↗️Σ∞]",
+    "lexicon": { "system": "Core Evolution", "desc": "Game and agent endpoint routing" }
+  },
+  {
+    "id": "Z52",
+    "phase": "expansion",
+    "type": "FeaturePU",
+    "priority": "critical",
+    "title": "Game state machine (tickable), persistence, resume from snapshot",
+    "msgx": "[Msg⛛{52}↗️Σ∞]",
+    "lexicon": { "system": "Core Evolution", "desc": "Persistent idler state, snapshot resume" }
+  },
+  {
+    "id": "Z53",
+    "phase": "expansion",
+    "type": "FeaturePU",
+    "priority": "critical",
+    "title": "Agent bus (event-driven), proposal channels, council registry",
+    "msgx": "[Msg⛛{53}↗️Σ∞]",
+    "lexicon": { "agents": "event-bus", "desc": "Agent coordination and communication" }
+  },
+  {
+    "id": "Z54",
+    "phase": "expansion",
+    "type": "IntegrationPU",
+    "priority": "high",
+    "title": "Ship (orchestrator) bindings to agents/game/HUD",
+    "msgx": "[Msg⛛{54}↗️Σ∞]",
+    "lexicon": { "orchestration": "ship-bindings", "desc": "Autonomous coordination layer" }
+  },
+  {
+    "id": "Z55",
+    "phase": "expansion",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "ASCII HUD: panes for Game, Agents, Budget, Council votes",
+    "msgx": "[Msg⛛{55}↗️Σ∞]",
+    "lexicon": { "hud": "multi-pane", "desc": "Integrated system monitoring display" }
+  },
+  {
+    "id": "Z56",
+    "phase": "expansion",
+    "type": "FeaturePU",
+    "priority": "high",
+    "title": "Self-play harness: game can play itself (policy hooks)",
+    "msgx": "[Msg⛛{56}↗️Σ∞]",
+    "lexicon": { "automation": "self-play", "desc": "Autonomous game progression" }
+  },
+  {
+    "id": "Z57",
+    "phase": "expansion",
+    "type": "FeaturePU",
+    "priority": "high",
+    "title": "Agent-play harness: agents can play the game (task macros)",
+    "msgx": "[Msg⛛{57}↗️Σ∞]",
+    "lexicon": { "system": "Agents", "desc": "ChatDev agents perform gameplay loops autonomously" }
+  },
+  {
+    "id": "Z58",
+    "phase": "expansion",
+    "type": "FeaturePU",
+    "priority": "high",
+    "title": "Game-plays-agents harness (stress agents with scripted arcs)",
+    "msgx": "[Msg⛛{58}↗️Σ∞]",
+    "lexicon": { "testing": "agent-stress", "desc": "Automated agent testing scenarios" }
+  },
+  {
+    "id": "Z59",
+    "phase": "expansion",
+    "type": "PolicyPU",
+    "priority": "high",
+    "title": "Sandbox lanes for autonomous PRs (agent/*) with human countersign",
+    "msgx": "[Msg⛛{59}↗️Σ∞]",
+    "lexicon": { "governance": "autonomous-prs", "desc": "Agent-driven development workflow" }
+  },
+  {
+    "id": "Z60",
+    "phase": "expansion",
+    "type": "PerfPU",
+    "priority": "high",
+    "title": "Frame budget: HUD render ≤250ms; virtualize long tables",
+    "msgx": "[Msg⛛{60}↗️Σ∞]",
+    "lexicon": { "performance": "frame-budget", "desc": "UI performance optimization" }
+  },
+  {
+    "id": "Z61",
+    "phase": "expansion",
+    "type": "IntegrationPU",
+    "priority": "high",
+    "title": "ChatDev profiles + launchers (scaffold/test/doc pipelines)",
+    "msgx": "[Msg⛛{61}↗️Σ∞]",
+    "lexicon": { "chatdev": "profiles", "desc": "Agent role definitions and workflows" }
+  },
+  {
+    "id": "Z62",
+    "phase": "expansion",
+    "type": "IntegrationPU",
+    "priority": "high",
+    "title": "Ollama bridge (optional): proxy endpoint, strict caps and timeouts",
+    "msgx": "[Msg⛛{62}↗️Σ∞]",
+    "lexicon": { "llm": "local-proxy", "desc": "Local LLM integration with safeguards" }
+  },
+  {
+    "id": "Z63",
+    "phase": "expansion",
+    "type": "IntegrationPU",
+    "priority": "high",
+    "title": "Obsidian/Jupyter bindings: export metrics, logs, snapshots",
+    "msgx": "[Msg⛛{63}↗️Σ∞]",
+    "lexicon": { "analytics": "knowledge-export", "desc": "Data export for analysis tools" }
+  },
+  {
+    "id": "Z64",
+    "phase": "expansion",
+    "type": "CultivationPU",
+    "priority": "high",
+    "title": "TODO Harvest: scan repo for TODO/FIXME/HARDCODED and emit PU directives with file/line/risk",
+    "msgx": "[Msg⛛{64}↗️Σ∞]",
+    "lexicon": { "cultivation": "todo-harvest", "desc": "Create queued directives from TODO/FIXME placeholders with proof paths" }
+  },
+  {
+    "id": "Z65",
+    "phase": "expansion",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "Tutorial scaffolds: Getting Started, Agents 101, Self-play 101",
+    "msgx": "[Msg⛛{65}↗️Σ∞]",
+    "lexicon": { "docs": "tutorials", "desc": "User onboarding documentation" }
+  },
+  {
+    "id": "Z66",
+    "phase": "expansion",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "In-app Help overlay (hotkeys: H,O,A,S) + degraded modes",
+    "msgx": "[Msg⛛{66}↗️Σ∞]",
+    "lexicon": { "ux": "help-overlay", "desc": "Contextual help system" }
+  },
+  {
+    "id": "Z67",
+    "phase": "expansion",
+    "type": "TestPU",
+    "priority": "high",
+    "title": "Self-play smoke: 100 ticks; no entropy growth; stable save/restore",
+    "msgx": "[Msg⛛{67}↗️Σ∞]",
+    "lexicon": { "testing": "self-play-smoke", "desc": "Autonomous gameplay stability test" }
+  },
+  {
+    "id": "Z68",
+    "phase": "expansion",
+    "type": "TestPU",
+    "priority": "high",
+    "title": "Agent-play smoke: 25 cycles; bounded proposals; no runaway queue",
+    "msgx": "[Msg⛛{68}↗️Σ∞]",
+    "lexicon": { "testing": "agent-play-smoke", "desc": "Agent gameplay constraint verification" }
+  },
+  {
+    "id": "Z69",
+    "phase": "expansion",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "Roadmap.md (phases, seals, bloomwaves, KPIs)",
+    "msgx": "[Msg⛛{69}↗️Σ∞]",
+    "lexicon": { "docs": "roadmap", "desc": "Development roadmap and milestones" }
+  },
+  {
+    "id": "Z70",
+    "phase": "expansion",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Missive-2: Feature completion & placeholder population seal",
+    "msgx": "[Msg⛛{70}↗️Σ∞]",
+    "lexicon": { "seal": "Missive-2", "desc": "Expansion phase complete" }
+  },
+  {
+    "id": "Z71",
+    "phase": "cultivation",
+    "type": "PerfPU",
+    "priority": "critical",
+    "title": "SQLite↔KV hybrid perf tuning + LRU caches for hot keys",
+    "msgx": "[Msg⛛{71}↗️Σ∞]",
+    "lexicon": { "performance": "hybrid-storage", "desc": "Storage layer optimization" }
+  },
+  {
+    "id": "Z72",
+    "phase": "cultivation",
+    "type": "PerfPU",
+    "priority": "critical",
+    "title": "SSE/WS throughput optimization + compacted frames",
+    "msgx": "[Msg⛛{72}↗️Σ∞]",
+    "lexicon": { "performance": "realtime-throughput", "desc": "Communication layer optimization" }
+  },
+  {
+    "id": "Z73",
+    "phase": "cultivation",
+    "type": "BudgetPU",
+    "priority": "critical",
+    "title": "Budget optimizer (impact/effort scoring, throttling tiers)",
+    "msgx": "[Msg⛛{73}↗️Σ∞]",
+    "lexicon": { "budget": "optimizer", "desc": "Intelligent resource allocation" }
+  },
+  {
+    "id": "Z74",
+    "phase": "cultivation",
+    "type": "IntegrationPU",
+    "priority": "high",
+    "title": "Backends: remote-LLM proxy shim (off by default), WASM fallback",
+    "msgx": "[Msg⛛{74}↗️Σ∞]",
+    "lexicon": { "llm": "backend-options", "desc": "Multi-backend LLM integration" }
+  },
+  {
+    "id": "Z75",
+    "phase": "cultivation",
+    "type": "CultivationPU",
+    "priority": "high",
+    "title": "Every 75 steps, lexicon consistency audit (Rosetta/OmniTag)",
+    "msgx": "[Msg⛛{75}↗️Σ∞]",
+    "lexicon": { "cultivation": "lexicon-audit", "desc": "Periodic terminology consistency check" }
+  },
+  {
+    "id": "Z76",
+    "phase": "cultivation",
+    "type": "RefactorPU",
+    "priority": "high",
+    "title": "Codemods for learned rewrites; shrink boilerplate",
+    "msgx": "[Msg⛛{76}↗️Σ∞]",
+    "lexicon": { "refactoring": "codemods", "desc": "Automated code transformation" }
+  },
+  {
+    "id": "Z77",
+    "phase": "cultivation",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "HUD modes (Game Focus / Ops Focus / Council Focus)",
+    "msgx": "[Msg⛛{77}↗️Σ∞]",
+    "lexicon": { "hud": "focus-modes", "desc": "Context-aware display modes" }
+  },
+  {
+    "id": "Z78",
+    "phase": "cultivation",
+    "type": "IntegrationPU",
+    "priority": "high",
+    "title": "ASCII mini-games embedded in tutorial overlay (unlockable)",
+    "msgx": "[Msg⛛{78}↗️Σ∞]",
+    "lexicon": { "gamification": "tutorial-games", "desc": "Interactive learning experiences" }
+  },
+  {
+    "id": "Z79",
+    "phase": "cultivation",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "Lore consolidation pass → Bloomwave Codex v1",
+    "msgx": "[Msg⛛{79}↗️Σ∞]",
+    "lexicon": { "lore": "bloomwave-codex", "desc": "Cultural knowledge compilation" }
+  },
+  {
+    "id": "Z80",
+    "phase": "cultivation",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Missive-3: Deep integration, performance, budget discipline seal",
+    "msgx": "[Msg⛛{80}↗️Σ∞]",
+    "lexicon": { "seal": "Missive-3", "desc": "Cultivation phase complete" }
+  },
+  {
+    "id": "Z81",
+    "phase": "cultivation",
+    "type": "TestsPU",
+    "priority": "critical",
+    "title": "Unit+Integration+E2E matrix; prompt regression harness",
+    "msgx": "[Msg⛛{81}↗️Σ∞]",
+    "lexicon": { "testing": "comprehensive-matrix", "desc": "Full test coverage matrix" }
+  },
+  {
+    "id": "Z82",
+    "phase": "cultivation",
+    "type": "CI-PU",
+    "priority": "critical",
+    "title": "CI: lint/type/test; budget check; size budgets; fail on regressions",
+    "msgx": "[Msg⛛{82}↗️Σ∞]",
+    "lexicon": { "ci": "comprehensive-pipeline", "desc": "Complete CI/CD automation" }
+  },
+  {
+    "id": "Z83",
+    "phase": "cultivation",
+    "type": "A11yPU",
+    "priority": "high",
+    "title": "Accessibility AA+ sweep; keyboard-only nav; aria labeling",
+    "msgx": "[Msg⛛{83}↗️Σ∞]",
+    "lexicon": { "accessibility": "aa-plus", "desc": "Enhanced accessibility compliance" }
+  },
+  {
+    "id": "Z84",
+    "phase": "cultivation",
+    "type": "QualityPU",
+    "priority": "high",
+    "title": "Forbidden import maps; license scan; supply-chain diffs",
+    "msgx": "[Msg⛛{84}↗️Σ∞]",
+    "lexicon": { "security": "supply-chain", "desc": "Dependency security scanning" }
+  },
+  {
+    "id": "Z85",
+    "phase": "cultivation",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "Error boundaries everywhere; friendly copy; remediation links",
+    "msgx": "[Msg⛛{85}↗️Σ∞]",
+    "lexicon": { "ux": "error-boundaries", "desc": "Comprehensive error handling UX" }
+  },
+  {
+    "id": "Z86",
+    "phase": "cultivation",
+    "type": "PerfPU",
+    "priority": "high",
+    "title": "Cold/warm boot timing + flame graphs; eliminate hotspots",
+    "msgx": "[Msg⛛{86}↗️Σ∞]",
+    "lexicon": { "performance": "boot-optimization", "desc": "Startup performance profiling" }
+  },
+  {
+    "id": "Z87",
+    "phase": "cultivation",
+    "type": "TestPU",
+    "priority": "high",
+    "title": "Chaos test: crash & recover with Codex intact",
+    "msgx": "[Msg⛛{87}↗️Σ∞]",
+    "lexicon": { "testing": "chaos-recovery", "desc": "System resilience verification" }
+  },
+  {
+    "id": "Z88",
+    "phase": "cultivation",
+    "type": "TestPU",
+    "priority": "high",
+    "title": "Scenario: 10 concurrent agents propose PUs without overload",
+    "msgx": "[Msg⛛{88}↗️Σ∞]",
+    "lexicon": { "testing": "concurrent-agents", "desc": "Multi-agent load testing" }
+  },
+  {
+    "id": "Z89",
+    "phase": "cultivation",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "Quality Gates explained; how to waive with rationale",
+    "msgx": "[Msg⛛{89}↗️Σ∞]",
+    "lexicon": { "docs": "quality-gates", "desc": "Quality assurance documentation" }
+  },
+  {
+    "id": "Z90",
+    "phase": "cultivation",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Missive-4: Tests, CI, Quality Gates, Accessibility seal",
+    "msgx": "[Msg⛛{90}↗️Σ∞]",
+    "lexicon": { "seal": "Missive-4", "desc": "Quality assurance complete" }
+  },
+  {
+    "id": "Z91",
+    "phase": "endurance",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "Tutorials: Agents, Game loops, Council rituals, Missives",
+    "msgx": "[Msg⛛{91}↗️Σ∞]",
+    "lexicon": { "docs": "comprehensive-tutorials", "desc": "Complete system tutorials" }
+  },
+  {
+    "id": "Z92",
+    "phase": "endurance",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "FAQ + Troubleshooting: degraded modes, snapshots, imports",
+    "msgx": "[Msg⛛{92}↗️Σ∞]",
+    "lexicon": { "docs": "troubleshooting", "desc": "User support documentation" }
+  },
+  {
+    "id": "Z93",
+    "phase": "endurance",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "Admin Guide: snapshots, compaction, reindex, recovery",
+    "msgx": "[Msg⛛{93}↗️Σ∞]",
+    "lexicon": { "docs": "admin-guide", "desc": "System administration manual" }
+  },
+  {
+    "id": "Z94",
+    "phase": "endurance",
+    "type": "DocPU",
+    "priority": "high",
+    "title": "Release Rituals: semver, artifacts, changelog, checksums",
+    "msgx": "[Msg⛛{94}↗️Σ∞]",
+    "lexicon": { "release": "rituals", "desc": "Version release procedures" }
+  },
+  {
+    "id": "Z95",
+    "phase": "endurance",
+    "type": "UXPU",
+    "priority": "medium",
+    "title": "Help overlay with quickstart, links to docs/temples",
+    "msgx": "[Msg⛛{95}↗️Σ∞]",
+    "lexicon": { "ux": "help-system", "desc": "Integrated help and guidance" }
+  },
+  {
+    "id": "Z96",
+    "phase": "endurance",
+    "type": "UXPU",
+    "priority": "medium",
+    "title": "HUD seal badge (Msg⛛{123}) and state banners (quiet/audit/active)",
+    "msgx": "[Msg⛛{96}↗️Σ∞]",
+    "lexicon": { "hud": "status-badges", "desc": "System state visualization" }
+  },
+  {
+    "id": "Z97",
+    "phase": "endurance",
+    "type": "PersistPU",
+    "priority": "medium",
+    "title": "Century capsule snapshot (milestone archival bundle)",
+    "msgx": "[Msg⛛{97}↗️Σ∞]",
+    "lexicon": { "archival": "century-capsule", "desc": "Long-term milestone preservation" }
+  },
+  {
+    "id": "Z98",
+    "phase": "endurance",
+    "type": "CulturePU",
+    "priority": "medium",
+    "title": "Cultural touchstones: naming, tone, rituals, glyph index",
+    "msgx": "[Msg⛛{98}↗️Σ∞]",
+    "lexicon": { "culture": "touchstones", "desc": "Cultural consistency framework" }
+  },
+  {
+    "id": "Z99",
+    "phase": "endurance",
+    "type": "PolicyPU",
+    "priority": "medium",
+    "title": "Governance: ADR cadence + countersign rules for agent PRs",
+    "msgx": "[Msg⛛{99}↗️Σ∞]",
+    "lexicon": { "governance": "decision-records", "desc": "Architectural decision governance" }
+  },
+  {
+    "id": "Z100",
+    "phase": "endurance",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Missive-5: Docs, Tutorials, Help, Admin, Release seal",
+    "msgx": "[Msg⛛{100}↗️Σ∞]",
+    "lexicon": { "docs": "tutorials+faq+roadmap", "desc": "System sealed with full documentation" }
+  },
+  {
+    "id": "Z101",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "critical",
+    "title": "Unify Anchors+Missives+Directives into recursive index",
+    "msgx": "[Msg⛛{101}↗️Σ∞]",
+    "lexicon": { "recursion": "unified-index", "desc": "Recursive knowledge integration" }
+  },
+  {
+    "id": "Z102",
+    "phase": "bloomwave",
+    "type": "RefactorPU",
+    "priority": "high",
+    "title": "Normalize data schemas across ML nursery and Game",
+    "msgx": "[Msg⛛{102}↗️Σ∞]",
+    "lexicon": { "schema": "normalization", "desc": "Cross-system data consistency" }
+  },
+  {
+    "id": "Z103",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "medium",
+    "title": "Introduce Bloomwave rituals (every 25 steps)",
+    "msgx": "[Msg⛛{103}↗️Σ∞]",
+    "lexicon": { "bloomwave": "rituals", "desc": "Periodic cultural ceremonies" }
+  },
+  {
+    "id": "Z104",
+    "phase": "bloomwave",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "Multi-HUD sync across agent/game contexts",
+    "msgx": "[Msg⛛{104}↗️Σ∞]",
+    "lexicon": { "hud": "multi-context", "desc": "Synchronized cross-system displays" }
+  },
+  {
+    "id": "Z105",
+    "phase": "bloomwave",
+    "type": "PerfPU",
+    "priority": "critical",
+    "title": "Optimize SQLite↔KV hybrid persistence & caches",
+    "msgx": "[Msg⛛{105}↗️Σ∞]",
+    "lexicon": { "performance": "storage-optimization", "desc": "Advanced storage layer tuning" }
+  },
+  {
+    "id": "Z106",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "critical",
+    "title": "Zeta Ship AI Council consensus with ChatDev agents",
+    "msgx": "[Msg⛛{106}↗️Σ∞]",
+    "lexicon": { "council": "ai-consensus", "desc": "Multi-agent decision making" }
+  },
+  {
+    "id": "Z107",
+    "phase": "bloomwave",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "Consolidate scattered lore into Bloomwave Codex",
+    "msgx": "[Msg⛛{107}↗️Σ∞]",
+    "lexicon": { "lore": "consolidation", "desc": "Cultural knowledge unification" }
+  },
+  {
+    "id": "Z108",
+    "phase": "bloomwave",
+    "type": "TestPU",
+    "priority": "high",
+    "title": "Recursive loop test: game self-play 100 ticks",
+    "msgx": "[Msg⛛{108}↗️Σ∞]",
+    "lexicon": { "testing": "recursive-loops", "desc": "Extended autonomous operation test" }
+  },
+  {
+    "id": "Z109",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "medium",
+    "title": "Auto-anneal entropy surges with glyphal dampeners",
+    "msgx": "[Msg⛛{109}↗️Σ∞]",
+    "lexicon": { "entropy": "auto-annealing", "desc": "Automated system stability management" }
+  },
+  {
+    "id": "Z110",
+    "phase": "bloomwave",
+    "type": "UXPU",
+    "priority": "medium",
+    "title": "ASCII fractal mini-games embedded in tutorials",
+    "msgx": "[Msg⛛{110}↗️Σ∞]",
+    "lexicon": { "gamification": "fractal-games", "desc": "Recursive learning experiences" }
+  },
+  {
+    "id": "Z111",
+    "phase": "bloomwave",
+    "type": "RefactorPU",
+    "priority": "high",
+    "title": "Audit Jupyter/Obsidian integration pipelines",
+    "msgx": "[Msg⛛{111}↗️Σ∞]",
+    "lexicon": { "integration": "knowledge-audit", "desc": "External tool integration review" }
+  },
+  {
+    "id": "Z112",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "medium",
+    "title": "RimWorld-style agent bridge (traits/schedules/zones)",
+    "msgx": "[Msg⛛{112}↗️Σ∞]",
+    "lexicon": { "agents": "rimworld-bridge", "desc": "Complex agent behavior modeling" }
+  },
+  {
+    "id": "Z113",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "medium",
+    "title": "Rosetta lexicon expansion; conlang overlays in code/docs",
+    "msgx": "[Msg⛛{113}↗️Σ∞]",
+    "lexicon": { "language": "rosetta-expansion", "desc": "Multi-language cultural integration" }
+  },
+  {
+    "id": "Z114",
+    "phase": "bloomwave",
+    "type": "PerfPU",
+    "priority": "critical",
+    "title": "Missive processing cache + entropy-aware backoff",
+    "msgx": "[Msg⛛{114}↗️Σ∞]",
+    "lexicon": { "performance": "missive-cache", "desc": "Intelligent task processing optimization" }
+  },
+  {
+    "id": "Z115",
+    "phase": "bloomwave",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "Endurance phase rituals documented for long runs",
+    "msgx": "[Msg⛛{115}↗️Σ∞]",
+    "lexicon": { "endurance": "long-run-rituals", "desc": "Extended operation procedures" }
+  },
+  {
+    "id": "Z116",
+    "phase": "bloomwave",
+    "type": "TestPU",
+    "priority": "critical",
+    "title": "Chaos test: crash + recover with Codex intact",
+    "msgx": "[Msg⛛{116}↗️Σ∞]",
+    "lexicon": { "testing": "codex-resilience", "desc": "Critical system recovery verification" }
+  },
+  {
+    "id": "Z117",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "medium",
+    "title": "Link Ollama embeddings to NuSyQ lexicon (opt-in)",
+    "msgx": "[Msg⛛{117}↗️Σ∞]",
+    "lexicon": { "llm": "embedding-integration", "desc": "Semantic embedding enhancement" }
+  },
+  {
+    "id": "Z118",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "low",
+    "title": "Recursive annealing of ASCII glyph displays",
+    "msgx": "[Msg⛛{118}↗️Σ∞]",
+    "lexicon": { "visualization": "glyph-annealing", "desc": "Dynamic visual optimization" }
+  },
+  {
+    "id": "Z119",
+    "phase": "bloomwave",
+    "type": "RefactorPU",
+    "priority": "critical",
+    "title": "Standardize Msg⛛ protocol across all modules",
+    "msgx": "[Msg⛛{119}↗️Σ∞]",
+    "lexicon": { "protocol": "msgx-standardization", "desc": "Unified messaging protocol implementation" }
+  },
+  {
+    "id": "Z120",
+    "phase": "bloomwave",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Mid-Seal affirmation: Codex half-complete",
+    "msgx": "[Msg⛛{120}↗️Σ∞]",
+    "lexicon": { "seal": "Mid-Bloomwave", "desc": "Halfway milestone acknowledgment" }
+  },
+  {
+    "id": "Z121",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "critical",
+    "title": "Council agents can refactor themselves (bounded)",
+    "msgx": "[Msg⛛{121}↗️Σ∞]",
+    "lexicon": { "agents": "self-refactoring", "desc": "Autonomous agent self-improvement" }
+  },
+  {
+    "id": "Z122",
+    "phase": "bloomwave",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "Auto-generate annotated Bloomwave visual maps",
+    "msgx": "[Msg⛛{122}↗️Σ∞]",
+    "lexicon": { "visualization": "bloomwave-maps", "desc": "Automated system documentation" }
+  },
+  {
+    "id": "Z123",
+    "phase": "bloomwave",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Declare Recursive Seal: Codex Active ∞",
+    "msgx": "[Msg⛛{123}↗️Σ∞]",
+    "lexicon": { "seal": "Recursive Infinity", "desc": "Infinite recursive capability achieved" }
+  },
+  {
+    "id": "Z124",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "critical",
+    "title": "Meta-Agent orchestration across Ship and Game loops",
+    "msgx": "[Msg⛛{124}↗️Σ∞]",
+    "lexicon": { "orchestration": "meta-agents", "desc": "Higher-order agent coordination" }
+  },
+  {
+    "id": "Z125",
+    "phase": "bloomwave",
+    "type": "RefactorPU",
+    "priority": "high",
+    "title": "Prune redundant scripts; consolidate into /ops",
+    "msgx": "[Msg⛛{125}↗️Σ∞]",
+    "lexicon": { "organization": "script-consolidation", "desc": "Operational script organization" }
+  },
+  {
+    "id": "Z126",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "medium",
+    "title": "Evolving council rituals (Intermediary guidance)",
+    "msgx": "[Msg⛛{126}↗️Σ∞]",
+    "lexicon": { "council": "evolving-rituals", "desc": "Adaptive governance ceremonies" }
+  },
+  {
+    "id": "Z127",
+    "phase": "bloomwave",
+    "type": "TestPU",
+    "priority": "critical",
+    "title": "100-agent stress test with concurrent game loops",
+    "msgx": "[Msg⛛{127}↗️Σ∞]",
+    "lexicon": { "testing": "massive-concurrency", "desc": "High-scale system stress testing" }
+  },
+  {
+    "id": "Z128",
+    "phase": "bloomwave",
+    "type": "PerfPU",
+    "priority": "high",
+    "title": "Generative caching for game↔agent self-play",
+    "msgx": "[Msg⛛{128}↗️Σ∞]",
+    "lexicon": { "performance": "generative-cache", "desc": "Intelligent interaction caching" }
+  },
+  {
+    "id": "Z129",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "critical",
+    "title": "Bridge Three Temples: Docs, Code, Glyphs",
+    "msgx": "[Msg⛛{129}↗️Σ∞]",
+    "lexicon": { "temples": "three-bridge", "desc": "Knowledge domain unification" }
+  },
+  {
+    "id": "Z130",
+    "phase": "bloomwave",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "Cultural Codex expansion: Missive→Temple linkages",
+    "msgx": "[Msg⛛{130}↗️Σ∞]",
+    "lexicon": { "culture": "temple-linkages", "desc": "Cross-domain cultural mapping" }
+  },
+  {
+    "id": "Z131",
+    "phase": "bloomwave",
+    "type": "UXPU",
+    "priority": "high",
+    "title": "Multi-viewport council deliberation displays",
+    "msgx": "[Msg⛛{131}↗️Σ∞]",
+    "lexicon": { "council": "multi-viewport", "desc": "Collaborative decision visualization" }
+  },
+  {
+    "id": "Z132",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "medium",
+    "title": "Recursive Bloom directive for phase shifts",
+    "msgx": "[Msg⛛{132}↗️Σ∞]",
+    "lexicon": { "bloomwave": "phase-shifts", "desc": "Dynamic phase transition management" }
+  },
+  {
+    "id": "Z133",
+    "phase": "bloomwave",
+    "type": "RefactorPU",
+    "priority": "critical",
+    "title": "Migrate legacy ML stubs into /ml/nursery",
+    "msgx": "[Msg⛛{133}↗️Σ∞]",
+    "lexicon": { "ml": "nursery-migration", "desc": "ML component organization" }
+  },
+  {
+    "id": "Z134",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "high",
+    "title": "Idler tiers trigger ML model growth (opt-in)",
+    "msgx": "[Msg⛛{134}↗️Σ∞]",
+    "lexicon": { "ml": "tier-triggered-growth", "desc": "Game-driven ML model evolution" }
+  },
+  {
+    "id": "Z135",
+    "phase": "bloomwave",
+    "type": "PerfPU",
+    "priority": "critical",
+    "title": "Self-optimizing entropy dampener with pruning",
+    "msgx": "[Msg⛛{135}↗️Σ∞]",
+    "lexicon": { "entropy": "self-optimization", "desc": "Adaptive system stability enhancement" }
+  },
+  {
+    "id": "Z136",
+    "phase": "bloomwave",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "Tutorial unifying mini-games, Ship, Agents",
+    "msgx": "[Msg⛛{136}↗️Σ∞]",
+    "lexicon": { "tutorials": "unified-experience", "desc": "Comprehensive system introduction" }
+  },
+  {
+    "id": "Z137",
+    "phase": "bloomwave",
+    "type": "TestPU",
+    "priority": "critical",
+    "title": "Simulated 10,000 ticks with stable entropy",
+    "msgx": "[Msg⛛{137}↗️Σ∞]",
+    "lexicon": { "testing": "long-term-stability", "desc": "Extended stability verification" }
+  },
+  {
+    "id": "Z138",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "medium",
+    "title": "Copilot bridge into recursive Codex flow",
+    "msgx": "[Msg⛛{138}↗️Σ∞]",
+    "lexicon": { "ai": "copilot-integration", "desc": "AI-assisted development integration" }
+  },
+  {
+    "id": "Z139",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "medium",
+    "title": "Narrative seeds for recursive culture arcs",
+    "msgx": "[Msg⛛{139}↗️Σ∞]",
+    "lexicon": { "narrative": "recursive-arcs", "desc": "Self-reinforcing story generation" }
+  },
+  {
+    "id": "Z140",
+    "phase": "bloomwave",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Bloomwave Mid-Seal: affirmed and logged",
+    "msgx": "[Msg⛛{140}↗️Σ∞]",
+    "lexicon": { "seal": "Mid-Seal-Affirmation", "desc": "Mid-phase completion confirmation" }
+  },
+  {
+    "id": "Z141",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "critical",
+    "title": "Game↔Agent↔ML self-improving feedback loop",
+    "msgx": "[Msg⛛{141}↗️Σ∞]",
+    "lexicon": { "feedback": "triple-loop", "desc": "Multi-system recursive improvement" }
+  },
+  {
+    "id": "Z142",
+    "phase": "bloomwave",
+    "type": "RefactorPU",
+    "priority": "high",
+    "title": "Unify scattered docs/tutorials under Bloomwave schema",
+    "msgx": "[Msg⛛{142}↗️Σ∞]",
+    "lexicon": { "docs": "bloomwave-unification", "desc": "Documentation system consolidation" }
+  },
+  {
+    "id": "Z143",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "medium",
+    "title": "Ritual of Glyphal Memory retention across runs",
+    "msgx": "[Msg⛛{143}↗️Σ∞]",
+    "lexicon": { "memory": "glyphal-retention", "desc": "Cross-session memory preservation" }
+  },
+  {
+    "id": "Z144",
+    "phase": "bloomwave",
+    "type": "TestPU",
+    "priority": "critical",
+    "title": "Cascade 3-phase annealing test across agents",
+    "msgx": "[Msg⛛{144}↗️Σ∞]",
+    "lexicon": { "testing": "cascade-annealing", "desc": "Multi-phase system optimization test" }
+  },
+  {
+    "id": "Z145",
+    "phase": "bloomwave",
+    "type": "UXPU",
+    "priority": "medium",
+    "title": "Terminal UI lore layers (folded panes, tooltips)",
+    "msgx": "[Msg⛛{145}↗️Σ∞]",
+    "lexicon": { "ui": "lore-layers", "desc": "Contextual cultural information display" }
+  },
+  {
+    "id": "Z146",
+    "phase": "bloomwave",
+    "type": "PerfPU",
+    "priority": "critical",
+    "title": "Budget optimizer for 1000+ NDJSON tasks in queue",
+    "msgx": "[Msg⛛{146}↗️Σ∞]",
+    "lexicon": { "performance": "massive-queue", "desc": "High-volume task processing optimization" }
+  },
+  {
+    "id": "Z147",
+    "phase": "bloomwave",
+    "type": "IntegrationPU",
+    "priority": "critical",
+    "title": "Recursive merge of ChatDev + Ship + Game control flows",
+    "msgx": "[Msg⛛{147}↗️Σ∞]",
+    "lexicon": { "integration": "recursive-merge", "desc": "Complete system convergence" }
+  },
+  {
+    "id": "Z148",
+    "phase": "bloomwave",
+    "type": "DocPU",
+    "priority": "medium",
+    "title": "Bloomwave Index: annotated missives + zeta arcs",
+    "msgx": "[Msg⛛{148}↗️Σ∞]",
+    "lexicon": { "index": "bloomwave-catalog", "desc": "Comprehensive system reference" }
+  },
+  {
+    "id": "Z149",
+    "phase": "bloomwave",
+    "type": "CultivationPU",
+    "priority": "high",
+    "title": "Final recursive Bloom directive for Codex seal",
+    "msgx": "[Msg⛛{149}↗️Σ∞]",
+    "lexicon": { "directive": "final-bloom", "desc": "Ultimate recursive command preparation" }
+  },
+  {
+    "id": "Z150",
+    "phase": "bloomwave",
+    "type": "SealPU",
+    "priority": "critical",
+    "title": "Final Zeta–Bloomwave Seal: Codex Complete",
+    "msgx": "[Msg⛛{150}↗️Σ∞]",
+    "lexicon": { "seal": "Recursive Infinity", "desc": "Game ↔ Agents ↔ Protocol loop complete" }
+  }
+]

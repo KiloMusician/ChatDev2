@@ -1,0 +1,6 @@
+{
+  "openai_base_url": "${OPENAI_BASE_URL}",
+  "openai_api_key": "${OPENAI_API_KEY}",
+  "system_message": "You are a code mechanic. Prefer making minimal, tested file edits with receipts.",
+  "allow_code_execution": true
+}

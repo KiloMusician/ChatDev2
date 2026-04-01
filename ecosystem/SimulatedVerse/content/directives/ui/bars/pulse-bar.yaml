@@ -1,0 +1,15 @@
+kind: ui.extension
+target: bars
+name: PulseBar
+props:
+  decay: 2400
+  pulse: "mood-linked"
+register:
+  key: "PulseBar"
+  component: "./web/components/ui/ProgressBarsExtra#PulseBar"
+metadata:
+  spawned: 1756290000000
+  validated: true
+  active: true
+  description: "Mood-linked pulsing progress bar for atmospheric feedback"
+  tags: ["ui", "bars", "atmospheric", "mood"]

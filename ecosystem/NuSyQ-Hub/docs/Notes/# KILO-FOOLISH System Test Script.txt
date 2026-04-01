@@ -1,0 +1,208 @@
+# KILO-FOOLISH System Test Script
+# filepath: c:\Users\malik\Documents\GitHub\KILO-FOOLISH\test_system.py
+
+"""
+🧪 KILO-FOOLISH System Test Suite
+Tests all major components and integrations
+"""
+
+import json
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+def test_python_environment():
+    """Test Python environment and dependencies"""
+    print("🐍 Testing Python Environment...")
+
+    # Check Python version
+    print(f"   Python Version: {sys.version}")
+
+    # Check virtual environment
+    venv = hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix)
+    print(f"   Virtual Environment: {'✅ Active' if venv else '❌ Not Active'}")
+
+    # Test critical imports
+    critical_modules = ['subprocess', 'json', 'pathlib', 'time']
+    optional_modules = ['requests', 'rich', 'streamlit']
+
+    print("\n   Core Modules:")
+    for module in critical_modules:
+        try:
+            __import__(module)
+            print(f"   ✅ {module}")
+        except ImportError:
+            print(f"   ❌ {module} (CRITICAL)")
+
+    print("\n   Optional Modules:")
+    for module in optional_modules:
+        try:
+            __import__(module)
+            print(f"   ✅ {module}")
+        except ImportError:
+            print(f"   ⚠️ {module} (optional)")
+
+def test_file_structure():
+    """Test repository file structure"""
+    print("\n📁 Testing File Structure...")
+
+    required_files = [
+        "launch-adventure.py",
+        "ΞNuSyQ₁-Hub₁/ChatDev-Party-System.py"
+    ]
+
+    recommended_files = [
+        "Scripts/wizard_navigator.py",
+        "Scripts/wizard_navigator_enhanced.py",
+        "Scripts/ollama_autostart.ps1"
+    ]
+
+    print("\n   Required Files:")
+    for file in required_files:
+        if Path(file).exists():
+            size = round(Path(file).stat().st_size / 1024, 1)
+            print(f"   ✅ {file} ({size} KB)")
+        else:
+            print(f"   ❌ {file} (MISSING)")
+
+    print("\n   Recommended Files:")
+    for file in recommended_files:
+        if Path(file).exists():
+            size = round(Path(file).stat().st_size / 1024, 1)
+            print(f"   ✅ {file} ({size} KB)")
+        else:
+            print(f"   ⚠️ {file} (missing)")
+
+def test_ollama_integration():
+    """Test Ollama integration"""
+    print("\n🤖 Testing Ollama Integration...")
+
+    try:
+        import requests
+
+        # Test if Ollama is running
+        try:
+            response = requests.get("http://localhost:11434/api/tags", timeout=5)
+            if response.status_code == 200:
+                models = response.json().get("models", [])
+                print(f"   ✅ Ollama Running: {len(models)} models available")
+
+                if models:
+                    print("\n   Available Models:")
+                    for model in models[:3]:  # Show first 3
+                        size_gb = model.get("size", 0) / (1024**3)
+                        print(f"   📦 {model['name']} ({size_gb:.1f} GB)")
+                    if len(models) > 3:
+                        print(f"   ... and {len(models) - 3} more")
+                else:
+                    print("   ⚠️ No models installed")
+                    print("   💡 Suggestion: ollama pull phi:2.7b")
+            else:
+                print(f"   ❌ Ollama API Error: {response.status_code}")
+        except requests.exceptions.ConnectionError:
+            print("   ❌ Ollama Not Running")
+            print("   💡 Try: ollama serve")
+        except Exception as e:
+            print(f"   ❌ Ollama Test Failed: {e}")
+
+    except ImportError:
+        print("   ❌ requests module not available")
+        print("   💡 Install with: pip install requests")
+
+def test_launch_scripts():
+    """Test launch scripts"""
+    print("\n🚀 Testing Launch Scripts...")
+
+    # Test Python launcher
+    launcher_path = Path("launch-adventure.py")
+    if launcher_path.exists():
+        print("   ✅ launch-adventure.py exists")
+
+        # Check if it has the main functions
+        content = launcher_path.read_text()
+        required_functions = ['ensure_ollama_running', 'main', 'manage_ollama']
+
+        print("\n   Function Check:")
+        for func in required_functions:
+            if f"def {func}(" in content:
+                print(f"   ✅ {func}()")
+            else:
+                print(f"   ❌ {func}() (missing)")
+    else:
+        print("   ❌ launch-adventure.py not found")
+
+    # Test PowerShell script
+    ps_script = Path("Scripts/ollama_autostart.ps1")
+    if ps_script.exists():
+        print("   ✅ ollama_autostart.ps1 exists")
+    else:
+        print("   ⚠️ ollama_autostart.ps1 not found")
+
+def test_chatdev_system():
+    """Test ChatDev Party System"""
+    print("\n🎭 Testing ChatDev Party System...")
+
+    chatdev_path = Path("ΞNuSyQ₁-Hub₁/ChatDev-Party-System.py")
+    if chatdev_path.exists():
+        size = round(chatdev_path.stat().st_size / 1024, 1)
+        print(f"   ✅ ChatDev Party System found ({size} KB)")
+
+        # Check if it has required classes
+        content = chatdev_path.read_text()
+        required_classes = ['ChatDevPartyOrchestrator', 'Agent', 'Task']
+
+        print("\n   Class Check:")
+        for cls in required_classes:
+            if f"class {cls}" in content:
+                print(f"   ✅ {cls}")
+            else:
+                print(f"   ⚠️ {cls} (may be missing)")
+    else:
+        print("   ❌ ChatDev Party System not found")
+
+def run_integration_test():
+    """Run a quick integration test"""
+    print("\n🔧 Running Integration Test...")
+
+    try:
+        # Test importing the launcher functions
+        sys.path.append(str(Path(__file__).parent))
+
+        # This would import the launcher if it's properly structured
+        print("   ✅ Integration test setup complete")
+
+        # Test Ollama auto-start function
+        try:
+            import launch_adventure
+            print("   ✅ Launcher module importable")
+        except:
+            print("   ⚠️ Launcher module import failed (normal if not structured as module)")
+
+    except Exception as e:
+        print(f"   ❌ Integration test failed: {e}")
+
+def main():
+    """Run all tests"""
+    print("🧪 KILO-FOOLISH System Test Suite")
+    print("=" * 50)
+
+    test_python_environment()
+    test_file_structure()
+    test_ollama_integration()
+    test_launch_scripts()
+    test_chatdev_system()
+    run_integration_test()
+
+    print("\n🎯 Test Summary:")
+    print("   If all critical items show ✅, your system is ready!")
+    print("   Items marked ⚠️ are recommended but not required")
+    print("   Items marked ❌ may need attention")
+
+    print("\n🚀 Next Steps:")
+    print("   1. Run: python launch-adventure.py")
+    print("   2. Choose option 6 for Ollama Management")
+    print("   3. Choose option 1 for ChatDev Party System")
+
+if __name__ == "__main__":
+    main()

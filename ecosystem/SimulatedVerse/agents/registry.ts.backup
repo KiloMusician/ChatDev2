@@ -1,0 +1,31 @@
+// agents/registry.ts
+import fs from "node:fs";
+import path from "node:path";
+import yaml from "yaml";
+import { z } from "zod";
+import { Agent, AgentManifest } from "../shared/agents/contract.js";
+
+const ROOT = path.resolve("agents");
+
+export type LoadedAgent = { id: string; manifest: z.infer<typeof AgentManifest>; impl: Agent };
+
+export async function loadAgents(): Promise<LoadedAgent[]> {
+  const out: LoadedAgent[] = [];
+  if (!fs.existsSync(ROOT)) return out;
+  for (const dir of fs.readdirSync(ROOT)) {
+    const agentDir = path.join(ROOT, dir);
+    const mf = path.join(agentDir, "manifest.yaml");
+    const ix = path.join(agentDir, "index.ts");
+    if (!fs.existsSync(mf) || !fs.existsSync(ix)) continue;
+    try {
+      const manifest = AgentManifest.parse(yaml.parse(fs.readFileSync(mf, "utf-8")));
+      const module = await import(path.resolve(ix));
+      const impl: Agent = module.default || module[Object.keys(module)[0]];
+      if (!impl?.run || !impl?.manifest) continue;
+      out.push({ id: manifest.id, manifest, impl });
+    } catch (error) {
+      console.warn(`[Registry] Failed to load agent ${dir}:`, error);
+    }
+  }
+  return out;
+}

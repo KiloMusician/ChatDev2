@@ -1,0 +1,16 @@
+[
+  {
+    "path": "some-file.ts",
+    "quad": "system",
+    "placeholders": true,
+    "hardcoded": false,
+    "sample": "// TODO: implement this"
+  },
+  {
+    "path": "other-file.ts",
+    "quad": "ui",
+    "placeholders": false,
+    "hardcoded": true,
+    "sample": "console.error('hardcoded error')"
+  }
+]

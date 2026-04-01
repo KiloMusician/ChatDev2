@@ -1,0 +1,21 @@
+{
+  "agent": "Raven",
+  "action": "diagnose",
+  "target": "llm_spine_status",
+  "timestamp": "2025-09-03T05:21:16+00:00",
+  "mode": "vacuum",
+  "findings": {
+    "ollama_daemon": "",
+    "gateway_available": "no",
+    "openai_fallback": "configured",
+    "adaptive_cascade": "functional",
+    "current_backend": ""
+  },
+  "repro": {
+    "steps": ["curl /api/version", "test gateway", "verify openai key"],
+    "expected": "at_least_one_backend_available",
+    "actual": ""
+  },
+  "receipt": "spine_diagnosis_complete",
+  "next_action": "monitor_spine_health"
+}

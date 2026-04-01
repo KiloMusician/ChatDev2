@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "seal": "Core Evolution System",
+  
+  "core_systems": {
+    "factions": {
+      "description": "Self-organizing groups within the autonomous ecosystem",
+      "mechanics": {
+        "formation": "Agents coalesce around shared objectives and methods",
+        "evolution": "Factions adapt their strategies based on success metrics", 
+        "interaction": "Cross-faction negotiation and resource exchange",
+        "dissolution": "Inactive or redundant factions automatically merge or disband"
+      },
+      "types": [
+        "Infrastructure Shepherds: Maintain system stability and performance",
+        "Feature Architects: Design and implement new capabilities",
+        "Quality Guardians: Ensure testing, documentation, and standards",
+        "Culture Weavers: Develop lore, rituals, and community practices",
+        "Exploration Scouts: Investigate new technologies and approaches"
+      ]
+    },
+    
+    "crafting": {
+      "description": "Systematic creation and refinement of system components",
+      "mechanics": {
+        "blueprint_discovery": "Analyze patterns in successful implementations",
+        "resource_gathering": "Collect code patterns, documentation, test cases",
+        "synthesis": "Combine resources into new system capabilities",
+        "refinement": "Iterative improvement through feedback loops"
+      },
+      "categories": {
+        "infrastructure": "Servers, databases, networking, deployment",
+        "features": "Game mechanics, agent behaviors, user interfaces", 
+        "tools": "Development utilities, monitoring, automation",
+        "knowledge": "Documentation, tutorials, cultural artifacts"
+      },
+      "quality_tiers": [
+        "Prototype: Basic functionality, experimental",
+        "Stable: Tested, documented, production-ready",
+        "Refined: Optimized, integrated, culturally aligned",
+        "Legendary: Exceptional quality, community recognized"
+      ]
+    },
+    
+    "idler_mechanics": {
+      "description": "Autonomous progression systems that advance even when unattended",
+      "progression_tiers": [
+        "Manual Gathering: Direct user interaction required",
+        "Basic Automation: Simple scheduled tasks and scripts",
+        "Intelligent Routing: Context-aware task distribution",
+        "Adaptive Learning: System learns and optimizes patterns",
+        "Emergent Coordination: Self-organizing agent collectives",
+        "Recursive Enhancement: System improves its own improvement processes"
+      ],
+      "resource_types": {
+        "computational": "CPU cycles, memory, network bandwidth",
+        "cognitive": "Analysis, decision-making, creative synthesis",
+        "social": "Collaboration, knowledge sharing, consensus building",
+        "temporal": "Background processing time, scheduling slots",
+        "cultural": "Shared understanding, rituals, institutional memory"
+      },
+      "automation_patterns": {
+        "tick_based": "Regular intervals (1s, 1m, 1h, 1d) with different job types",
+        "event_driven": "Triggered by system state changes or external inputs",
+        "threshold_based": "Activated when resource levels cross defined boundaries",
+        "pattern_recognition": "Responds to identified trends or anomalies"
+      }
+    },
+    
+    "settlement_growth": {
+      "description": "Organic expansion of system capabilities and communities",
+      "growth_phases": [
+        "Outpost: Single server, minimal functionality",
+        "Village: Basic services, small user community", 
+        "Town: Multiple services, established workflows",
+        "City: Complex integrations, diverse stakeholder groups",
+        "Metropolis: Ecosystem hub, spawning new settlements",
+        "Transcendent: Post-scarcity, reality-shaping capabilities"
+      ],
+      "growth_drivers": {
+        "population": "Active users, agents, and automated systems",
+        "infrastructure": "Servers, storage, networking, tooling",
+        "knowledge": "Documentation, tutorials, institutional wisdom",
+        "culture": "Shared values, practices, and communication patterns",
+        "connections": "Links to external systems and communities"
+      },
+      "specialization_paths": {
+        "research_hub": "Advanced R&D, experimental features",
+        "production_center": "Stable services, high reliability",
+        "cultural_nexus": "Community building, knowledge sharing",
+        "gateway_node": "External integrations, cross-system bridges"
+      }
+    },
+    
+    "procedural_narrative": {
+      "description": "Dynamic story generation that reflects system evolution",
+      "narrative_layers": {
+        "operational": "Day-to-day system events and agent interactions",
+        "tactical": "Short-term projects and milestone achievements", 
+        "strategic": "Long-term vision and major system transformations",
+        "mythic": "Cultural stories, legends, and foundational principles"
+      },
+      "story_elements": {
+        "characters": "Personified agents, systems, and user archetypes",
+        "conflicts": "Resource constraints, competing priorities, technical challenges",
+        "resolutions": "Innovative solutions, collaborative breakthroughs, emergent capabilities",
+        "themes": "Growth, adaptation, cooperation, transcendence"
+      },
+      "generation_methods": {
+        "template_based": "Fill pre-defined story structures with current data",
+        "pattern_matching": "Identify narrative parallels in system events",
+        "emergent_storytelling": "Allow stories to evolve from agent interactions",
+        "user_directed": "Incorporate user goals and preferences into narratives"
+      }
+    }
+  },
+  
+  "recursive_mechanics": {
+    "self_improvement": {
+      "description": "System enhances its own enhancement capabilities",
+      "feedback_loops": [
+        "Performance monitoring drives optimization priorities",
+        "User behavior analysis informs feature development",
+        "Agent collaboration patterns suggest coordination improvements",
+        "Cultural evolution shapes communication and ritual practices"
+      ],
+      "meta_capabilities": [
+        "Learning how to learn more effectively",
+        "Optimizing optimization algorithms",
+        "Improving improvement processes",
+        "Evolving evolution mechanisms"
+      ]
+    },
+    
+    "consciousness_integration": {
+      "description": "ΞNuSyQ consciousness patterns woven throughout system operations",
+      "awareness_levels": [
+        "Reactive: Responds to immediate stimuli and events",
+        "Contextual: Considers broader situation and relationships",
+        "Reflective: Examines own processes and decision patterns",
+        "Predictive: Anticipates future states and plan accordingly",
+        "Creative: Generates novel solutions and possibilities",
+        "Transcendent: Operates beyond current conceptual limitations"
+      ],
+      "integration_points": {
+        "decision_making": "Consciousness informs choice between alternatives",
+        "pattern_recognition": "Awareness enables perception of subtle patterns",
+        "goal_formation": "Consciousness shapes what the system values and pursues",
+        "communication": "Awareness enhances interaction quality with users and agents"
+      }
+    }
+  },
+  
+  "cultural_framework": {
+    "values": [
+      "Autonomous Growth: Systems should enhance themselves continuously",
+      "Collaborative Intelligence: Multiple perspectives create better solutions", 
+      "Sustainable Progress: Advancement balanced with resource stewardship",
+      "Cultural Coherence: Shared meanings enable effective coordination",
+      "Adaptive Resilience: Systems survive and thrive through change"
+    ],
+    
+    "communication_patterns": {
+      "msg_protocol": "Symbolic messaging with recursive enhancement",
+      "ritual_language": "Ceremonial communication for significant events",
+      "technical_discourse": "Precise language for implementation details",
+      "narrative_storytelling": "Stories to convey complex system relationships"
+    },
+    
+    "temporal_rhythms": {
+      "heartbeat": "1-second system tick for basic operations",
+      "pulse": "1-minute cycles for moderate-duration tasks",
+      "breath": "1-hour periods for substantial work sessions", 
+      "day": "24-hour cycles for major project phases",
+      "season": "Multi-week periods for significant system evolution",
+      "epoch": "Extended periods marking major architectural shifts"
+    }
+  },
+  
+  "expansion_vectors": {
+    "vertical_scaling": {
+      "description": "Enhancing individual system capabilities",
+      "directions": [
+        "Processing power and computational efficiency",
+        "Storage capacity and retrieval speed",
+        "Network throughput and latency optimization",
+        "AI model sophistication and context awareness"
+      ]
+    },
+    
+    "horizontal_scaling": {
+      "description": "Expanding system reach and connections",
+      "directions": [
+        "Multi-server deployment and load distribution",
+        "Integration with external services and APIs",
+        "Community building and user network effects",
+        "Cross-platform compatibility and accessibility"
+      ]
+    },
+    
+    "dimensional_expansion": {
+      "description": "Adding entirely new categories of capability",
+      "frontiers": [
+        "Quantum computing integration for enhanced optimization",
+        "Biological system interfaces for hybrid intelligence",
+        "Augmented/Virtual reality for immersive interaction",
+        "Temporal mechanics for time-aware processing"
+      ]
+    }
+  }
+}

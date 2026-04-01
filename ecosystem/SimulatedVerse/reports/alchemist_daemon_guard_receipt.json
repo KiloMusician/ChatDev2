@@ -1,0 +1,14 @@
+{
+  "agent": "Alchemist", 
+  "action": "guard",
+  "args": "daemon_health",
+  "daemon_pass": 1,
+  "guards": {
+    "theater_score": "θ=0.15_below_threshold",
+    "receipt_generation": "active_3_per_pass",
+    "file_ingestion": "differential_scanning_ok",
+    "timeout_protection": "adaptive_tau_active"
+  },
+  "receipt": "daemon_guard_complete",
+  "next_action": "continue_health_monitoring"
+}

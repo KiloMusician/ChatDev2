@@ -1,0 +1,289 @@
+{
+  "_meta": {
+    "format": "ecosystem_registry_v2",
+    "updated": "2026-03-31",
+    "note": "Registry of active NuSyQ-Hub systems. Structured truth. Expand when new systems activate."
+  },
+
+  "systems": {
+    "culture_ship_advisor": {
+      "name": "Culture Ship Strategic Advisor",
+      "module_path": "src.orchestration.culture_ship_strategic_advisor",
+      "system_type": "strategic",
+      "capabilities": [
+        "identify_strategic_issues",
+        "make_strategic_decisions",
+        "implement_decisions",
+        "run_full_strategic_cycle"
+      ],
+      "metadata": { "class_name": "CultureShipStrategicAdvisor" },
+      "activated_at": "2026-03-16T02:39:12.208351",
+      "status": "active"
+    },
+
+    "agent_orchestration_hub": {
+      "name": "Agent Orchestration Hub",
+      "module_path": "src.orchestration.agent_orchestration_hub",
+      "system_type": "orchestration",
+      "capabilities": [
+        "route_tasks_to_agents",
+        "coordinate_multi_agent_workflows",
+        "manage_agent_lifecycle"
+      ],
+      "status": "active"
+    },
+
+    "agent_registry": {
+      "name": "Agent Registry",
+      "module_path": "src.orchestration.agent_registry",
+      "system_type": "registry",
+      "capabilities": [
+        "register_agents",
+        "discover_agents",
+        "query_agent_capabilities"
+      ],
+      "status": "active"
+    },
+
+    "autonomous_quest_orchestrator": {
+      "name": "Autonomous Quest Orchestrator",
+      "module_path": "src.orchestration.autonomous_quest_orchestrator",
+      "system_type": "orchestration",
+      "capabilities": [
+        "orchestrate_quest_execution",
+        "sequence_quest_dependencies",
+        "route_quest_tasks"
+      ],
+      "metadata": {
+        "note": "SimulatedVerseBridge absent at import — degraded mode, still functional"
+      },
+      "status": "active_degraded"
+    },
+
+    "chatdev_autonomous_router": {
+      "name": "ChatDev Autonomous Router",
+      "module_path": "src.orchestration.chatdev_autonomous_router",
+      "system_type": "orchestration",
+      "capabilities": [
+        "route_tasks_to_chatdev",
+        "manage_chatdev_sessions",
+        "coordinate_chatdev_generation"
+      ],
+      "status": "active"
+    },
+
+    "quest_engine": {
+      "name": "Rosetta Quest Engine",
+      "module_path": "src.Rosetta_Quest_System.quest_engine",
+      "system_type": "memory",
+      "capabilities": [
+        "create_quests",
+        "update_quest_status",
+        "query_quest_log",
+        "append_quest_log"
+      ],
+      "data": {
+        "quest_log": "src/Rosetta_Quest_System/quest_log.jsonl",
+        "questlines": "src/Rosetta_Quest_System/questlines.json"
+      },
+      "status": "active"
+    },
+
+    "quest_manager": {
+      "name": "Rosetta Quest Manager",
+      "module_path": "src.Rosetta_Quest_System.quest_manager",
+      "system_type": "memory",
+      "capabilities": [
+        "manage_questlines",
+        "assign_quests",
+        "track_completion"
+      ],
+      "status": "active"
+    },
+
+    "system_health_assessor": {
+      "name": "System Health Assessor",
+      "module_path": "src.diagnostics.system_health_assessor",
+      "system_type": "diagnostics",
+      "capabilities": [
+        "assess_system_health",
+        "generate_health_report",
+        "identify_failing_components"
+      ],
+      "status": "active"
+    },
+
+    "unified_agent_ecosystem": {
+      "name": "Unified Agent Ecosystem",
+      "module_path": "src.agents.unified_agent_ecosystem",
+      "system_type": "orchestration",
+      "capabilities": [
+        "coordinate_agent_ecosystem",
+        "manage_agent_roles",
+        "route_cross_agent_communication"
+      ],
+      "status": "active"
+    },
+
+    "auto_healing": {
+      "name": "Auto Healing",
+      "module_path": "src.orchestration.auto_healing",
+      "system_type": "resilience",
+      "capabilities": [
+        "detect_failures",
+        "attempt_auto_repair",
+        "escalate_unresolved_issues"
+      ],
+      "status": "active"
+    },
+
+    "background_task_orchestrator": {
+      "name": "Background Task Orchestrator",
+      "module_path": "src.background_task_orchestrator",
+      "system_type": "orchestration",
+      "capabilities": [
+        "schedule_background_tasks",
+        "manage_task_queue",
+        "report_task_status"
+      ],
+      "status": "active"
+    },
+
+    "culture_ship_runtime": {
+      "name": "Culture Ship Runtime Module",
+      "module_path": "src.culture_ship",
+      "system_type": "runtime",
+      "capabilities": [
+        "culture_ship_mission_control",
+        "workflow_sequencing"
+      ],
+      "metadata": {
+        "authority": "control_plane",
+        "runtime_owner": "SimulatedVerse",
+        "control_owner": "NuSyQ-Hub"
+      },
+      "status": "active"
+    },
+
+    "consciousness": {
+      "name": "Consciousness Layer",
+      "module_path": "src.consciousness",
+      "system_type": "meta",
+      "capabilities": [
+        "meta_reasoning",
+        "self_awareness_probes",
+        "system_introspection"
+      ],
+      "status": "active"
+    },
+
+    "continue_bridge": {
+      "name": "Continue Bridge",
+      "module_path": "src.orchestration.bridges.continue_bridge",
+      "system_type": "bridge",
+      "capabilities": [
+        "bridge_continue_dev_extension",
+        "route_continue_requests"
+      ],
+      "status": "active"
+    },
+
+    "api_layer": {
+      "name": "NuSyQ API Layer",
+      "module_path": "src.api",
+      "system_type": "interface",
+      "capabilities": [
+        "expose_http_endpoints",
+        "route_api_requests"
+      ],
+      "status": "active"
+    },
+
+    "cli_layer": {
+      "name": "NuSyQ CLI",
+      "module_path": "src.cli",
+      "system_type": "interface",
+      "capabilities": [
+        "command_line_interface",
+        "subcommand_routing"
+      ],
+      "status": "active"
+    },
+
+    "vscode_extension": {
+      "name": "NuSyQ Copilot Bridge (VS Code Extension)",
+      "module_path": "vscode-extension/src/extension.ts",
+      "system_type": "interface",
+      "capabilities": [
+        "status_bar",
+        "command_palette",
+        "terminal_routing",
+        "diagnostics_routing",
+        "cockpit_data_display"
+      ],
+      "metadata": {
+        "extension_id": "nusyq-copilot-bridge",
+        "version": "0.0.1",
+        "commands": 30,
+        "data_load_order": [
+          "state/boot/rosetta_bootstrap.json",
+          "state/ecosystem_registry.json",
+          "state/world_state_snapshot.json",
+          "state/reports/control_plane_snapshot.json"
+        ]
+      },
+      "status": "active"
+    }
+  },
+
+  "external_agents": {
+    "ollama": {
+      "type": "local_model_runtime",
+      "status": "online",
+      "role": "cheap_local_inference"
+    },
+    "chatdev": {
+      "type": "multi_agent_generation",
+      "status": "online",
+      "role": "staged_generation"
+    },
+    "claude_cli": {
+      "type": "reasoning_engine",
+      "status": "online",
+      "role": "deep_reasoning_and_architecture"
+    },
+    "lmstudio": {
+      "type": "local_model_runtime",
+      "status": "offline",
+      "role": "manual_prompt_testing"
+    },
+    "copilot": {
+      "type": "code_completion",
+      "status": "online",
+      "role": "inline_completion"
+    }
+  },
+
+  "repo_registry": {
+    "CONCEPT": {
+      "role": "system_kernel",
+      "path": "C:/CONCEPT",
+      "entry": "keeper.ps1"
+    },
+    "NuSyQ-Hub": {
+      "role": "orchestration_brain",
+      "path": "C:/prime_anchor/NuSyQ-Hub",
+      "entry": "src/start_nusyq.py"
+    },
+    "Dev-Mentor": {
+      "role": "operator_coaching",
+      "path": "C:/Users/keath/Dev-Mentor",
+      "entry": "chug_engine.py"
+    },
+    "SimulatedVerse": {
+      "role": "runtime_owner",
+      "path": "C:/Users/keath/Desktop/SimulatedVerse/SimulatedVerse",
+      "entry": "server/index.ts"
+    }
+  }
+}

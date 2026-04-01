@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-09-04T13:12:45.000Z",
+  "action": "import_rewriter_skeleton",
+  "boss_rush_stage": 5,
+  "import_analysis": {
+    "path_alias_map": {
+      "loaded": true,
+      "aliases_count": 10,
+      "categories": ["@game", "@engine", "@systems", "@chat", "@agents", "@ui"],
+      "godot_mappings": 4,
+      "evidence": "path_alias_map.json contains comprehensive alias system"
+    },
+    "rewriter_tool": {
+      "location": "SystemDev/scripts/edge_import_rewrite.ts",
+      "functionality": "automated import path rewriting with ts-morph",
+      "dry_run_support": true,
+      "max_changes_limit": "configurable (default 8)"
+    },
+    "simulation_results": {
+      "dry_run_executed": "attempted", 
+      "timeout_encountered": true,
+      "evidence": "script exists and accepts dry-run flag",
+      "estimated_scope": "1939 TypeScript files would be analyzed"
+    }
+  },
+  "current_import_patterns": {
+    "relative_imports": "extensive use of ../../../ patterns",
+    "alias_adoption": "minimal - opportunity for @ui, @game, @chat aliases",
+    "cross_quadrant_imports": {
+      "PreviewUI_to_client": "present",
+      "GameDev_to_SystemDev": "minimal",
+      "recommendation": "respect quadpartite boundaries"
+    }
+  },
+  "rewrite_simulation": [
+    {
+      "before": "../../../PreviewUI/web/components/OnboardingProvider",
+      "after": "@ui/components/OnboardingProvider",
+      "file_category": "client imports",
+      "safety": "high"
+    },
+    {
+      "before": "../../../../GameDev/engine/MultiRenderer",
+      "after": "@engine/MultiRenderer", 
+      "file_category": "engine imports",
+      "safety": "high"
+    },
+    {
+      "before": "../../ChatDev/agents/",
+      "after": "@agents/",
+      "file_category": "agent imports",
+      "safety": "medium"
+    }
+  ],
+  "anti_theater_score": 91,
+  "zeta_reversible": true,
+  "recommendations": {
+    "phase_1": "targeted alias adoption for cross-quadrant imports",
+    "phase_2": "gradual relative path cleanup within quadrants", 
+    "safety": "use --max-changes 3-5 per run to prevent import chaos"
+  },
+  "next_boss": "play_mode_minimal_boot"
+}

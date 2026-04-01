@@ -40,6 +40,15 @@ localPort = 6400
 externalPort = 3001
 exposeLocalhost = true
 
+[[ports]]
+localPort = 8008
+externalPort = 8008
+exposeLocalhost = true
+
+[[ports]]
+localPort = 9001
+externalPort = 3002
+
 [deployment]
 deploymentTarget = "vm"
 run = ["bash", "start.sh"]

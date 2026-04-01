@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+    <name>DeepTalk - AI Colonist Conversations</name>
+    <author>NuSyQ-Hub</author>
+    <url>https://github.com/nusyq/deeptalk</url>
+    <supportedVersions>
+        <li>1.4</li>
+        <li>1.5</li>
+    </supportedVersions>
+    <packageId>nusyq.deeptalk</packageId>
+    <description>
+DeepTalk gives your colonists deeper, more meaningful conversations powered by local AI.
+
+Features:
+- Colonists have contextual conversations based on their traits, mood, and relationships
+- Uses local LLM (Ollama) - no internet required, your data stays private
+- Conversations affect social interactions and relationships
+- Lightweight and performance-friendly
+
+Requirements:
+- Ollama running locally (http://localhost:11434)
+- Any small LLM model (phi3.5, llama3.1:8b recommended)
+
+Setup:
+1. Install Ollama: https://ollama.ai
+2. Run: ollama pull phi3.5:latest
+3. Start Ollama: ollama serve
+4. Enable this mod and enjoy!
+    </description>
+    <modDependencies>
+        <li>
+            <packageId>brrainz.harmony</packageId>
+            <displayName>Harmony</displayName>
+        </li>
+    </modDependencies>
+    <loadAfter>
+        <li>Ludeon.RimWorld</li>
+        <li>brrainz.harmony</li>
+    </loadAfter>
+</ModMetaData>

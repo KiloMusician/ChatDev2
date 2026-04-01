@@ -1,0 +1,83 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    🧹 EXTENSION CLEANUP - QUICK GUIDE                        ║
+║                       Solo Dev + AI Optimization                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📋 HOW TO DISABLE EXTENSIONS:
+1. Press Ctrl+Shift+X (Extensions view)
+2. Search for extension by name
+3. Click gear icon ⚙️ → "Disable (Workspace)"
+4. Repeat for each extension below
+
+────────────────────────────────────────────────────────────────────────────────
+❌ DISABLE THESE (Team/Enterprise Tools - Not Needed for Solo Dev):
+────────────────────────────────────────────────────────────────────────────────
+
+Extension Name                      ID                               Reason
+─────────────────────────────────────────────────────────────────────────────
+GitLens                            eamodio.gitlens                  Team collab features
+Git Graph                          mhutchie.git-graph               Redundant with VS Code
+SonarLint                          sonarsource.sonarlint-vscode     Enterprise-heavy (Ruff suffices)
+Live Server                        ritwickdey.liveserver            Not doing web dev
+Docker                             ms-azuretools.vscode-docker      Only if not using Docker
+Remote - SSH                       ms-vscode-remote.remote-ssh      Only if not remote dev
+Remote - Containers                ms-vscode-remote.remote-containers Only if not using containers
+
+────────────────────────────────────────────────────────────────────────────────
+✅ KEEP THESE (Essential for AI + Python Development):
+────────────────────────────────────────────────────────────────────────────────
+
+Extension Name                      ID                               Purpose
+─────────────────────────────────────────────────────────────────────────────
+GitHub Copilot                     github.copilot                   Primary AI assistant
+GitHub Copilot Chat                github.copilot-chat              AI chat interface
+Continue                           continue.continue                Local Ollama LLMs
+Python                             ms-python.python                 Python language support
+Pylance                            ms-python.vscode-pylance         Fast IntelliSense
+Python Debugger                    ms-python.debugpy                Debugging
+Jupyter                            ms-toolsai.jupyter               Notebook support
+Markdown All in One                yzhang.markdown-all-in-one       Documentation
+Markdown Mermaid                   bierner.markdown-mermaid         Diagrams
+PowerShell                         ms-vscode.powershell             Windows automation
+YAML                               redhat.vscode-yaml               Config files
+Even Better TOML                   tamasfe.even-better-toml         Config files
+Code Spell Checker                 streetsidesoftware.code-spell-checker Typo catching
+
+────────────────────────────────────────────────────────────────────────────────
+📊 IMPACT:
+────────────────────────────────────────────────────────────────────────────────
+Before:  25 extensions installed
+After:   ~10-12 active extensions
+Result:  40-50% reduction → Faster VS Code, clearer workflow
+
+────────────────────────────────────────────────────────────────────────────────
+💡 OPTIONAL - Keep if Actively Using:
+────────────────────────────────────────────────────────────────────────────────
+- Docker extension (if containerizing apps)
+- Remote SSH/Containers (if doing remote development)
+- ESLint + Prettier (if working on SimulatedVerse TypeScript)
+
+────────────────────────────────────────────────────────────────────────────────
+🎯 PHILOSOPHY:
+────────────────────────────────────────────────────────────────────────────────
+Solo Dev + AI   = Simple, focused tools
+Team Dev        = Collaboration features (GitLens, PR tools, etc.)
+Enterprise      = Heavy analysis (SonarLint, etc.)
+
+For your use case (solo dev with AI agents), you need:
+✅ AI tools (Copilot, Continue)
+✅ Language support (Python, Pylance)
+✅ Core utilities (Markdown, YAML, spell check)
+❌ NOT team collaboration or enterprise-grade analysis
+
+────────────────────────────────────────────────────────────────────────────────
+✅ AFTER DISABLING:
+────────────────────────────────────────────────────────────────────────────────
+1. Reload VS Code (Ctrl+Shift+P → "Reload Window")
+2. Notice faster startup and less clutter
+3. Continue development with essential tools only
+
+────────────────────────────────────────────────────────────────────────────────
+Time to disable: 5 minutes
+Benefit: Permanent workflow clarity
+────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,25 @@
+{
+  "job_id": "28bd455a-1ca6-450f-b0c6-a3a0e57004f2",
+  "agent": "content-seeder",
+  "files": [
+    {
+      "path": "content/generators/base.json",
+      "sha256": "84fe5630ea957e4fd951364ad459a08ec1579b4f53a4de237826d82a445d8e10",
+      "size": 812
+    },
+    {
+      "path": "content/tiers/tiers.json",
+      "sha256": "f7c9558936f7d0f8865f0a5126e861457230b06da5d810a62bb86ed4061b8d43",
+      "size": 699
+    },
+    {
+      "path": "content/upgrades/base.json",
+      "sha256": "11839c7c0413adcaccff6e4d2b72c7f71bd85b46f4ac34d3df9d4bc018cab9d9",
+      "size": 643
+    }
+  ],
+  "created_at": "2025-09-01T09:11:18.578Z",
+  "runner_exit_code": 0,
+  "runner_stdout": "{\"ok\":true,\"job_id\":\"28bd455a-1ca6-450f-b0c6-a3a0e57004f2\",\"agent\":\"content-seeder\",\"staged\":[\"content/tiers/tiers.json\",\"content/generators/base.json\",\"content/upgrades/base.json\"],\"summary\":\"Seeded missing tiers (-1,0,1), basic generators, and starter upgrades\",\"idempotent\":true}\n",
+  "runner_stderr": ""
+}

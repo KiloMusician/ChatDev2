@@ -1,0 +1,17 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; but this minimal config is mobile-safe compatible.
+
+[application]
+
+config/name="CoreLink Foundation"
+config/description="Autonomous Development Ecosystem - Mobile Safe Edition"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.png"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

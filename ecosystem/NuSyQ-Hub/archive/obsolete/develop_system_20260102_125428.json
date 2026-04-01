@@ -1,0 +1,65 @@
+{
+  "total_iterations": 1,
+  "max_iterations": 2,
+  "halt_on_error": false,
+  "cultivation_bundle": {
+    "intent_events": [
+      {
+        "type": "system_health_achieved",
+        "iteration": 1,
+        "timestamp": "2026-01-02T12:54:28.337022",
+        "message": "System detected healthy state (0 broken files)",
+        "state": {
+          "broken_files": 0,
+          "working_files": 393,
+          "timestamp": "2026-01-02T12:54:28.337022"
+        },
+        "actions_that_helped": []
+      }
+    ],
+    "total_events": 1
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp": "2026-01-02T12:54:27.352993",
+      "steps": {
+        "analyze": {
+          "status": "success",
+          "summary": {
+            "working_files": 393,
+            "broken_files": 0,
+            "launch_pad_files": 47,
+            "enhancement_candidates": 115
+          }
+        },
+        "heal": {
+          "status": "skipped"
+        }
+      },
+      "cultivation": {
+        "intent_captured": {
+          "type": "system_health_achieved",
+          "iteration": 1,
+          "timestamp": "2026-01-02T12:54:28.337022",
+          "message": "System detected healthy state (0 broken files)",
+          "state": {
+            "broken_files": 0,
+            "working_files": 393,
+            "timestamp": "2026-01-02T12:54:28.337022"
+          },
+          "actions_that_helped": []
+        },
+        "ten_minute_plan": {
+          "status": "healthy",
+          "max_items": 3,
+          "suggested_items": [
+            "1. Document recovery actions",
+            "2. Validate key workflows",
+            "3. Plan next experiment"
+          ]
+        }
+      }
+    }
+  ]
+}

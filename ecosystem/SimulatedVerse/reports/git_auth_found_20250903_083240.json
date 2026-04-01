@@ -1,0 +1,21 @@
+{
+  "stage": "auth_found",
+  "timestamp": "2025-09-03T08:32:40Z",
+  "authentication_tokens_detected": {
+    "GITHUB_TOKEN": true,
+    "GITHUB_PERSONAL_ACCESS_TOKEN": true,
+    "NuSyQ_Github_Token_Fine_Grained": true,
+    "ADMIN_TOKEN": true
+  },
+  "git_repository_restrictions": {
+    "active": true,
+    "error": "Avoid changing .git repository. When git operations are needed, only allow users who have proper git expertise to perform these actions themselves through shell tools",
+    "lock_file": "/home/runner/workspace/.git/index.lock"
+  },
+  "remote_configuration": {
+    "status": "blocked_by_platform",
+    "attempted": "https://github.com/KiloMusician/CoreLink-Foundation.git"
+  },
+  "diagnosis": "platform_restrictions_active",
+  "next_hint": "manual_shell_operations_required"
+}

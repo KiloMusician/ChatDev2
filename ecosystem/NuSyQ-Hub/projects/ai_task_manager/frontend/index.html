@@ -1,0 +1,204 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .task-input {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .task-input input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .task-input button {
+            width: 25%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .task-input button:hover {
+            background-color: #0056b3;
+        }
+        .tasks {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .task-item.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .task-actions button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .task-actions button:hover {
+            color: red;
+        }
+        .dashboard {
+            margin-top: 20px;
+        }
+        .dashboard h2 {
+            color: #555;
+        }
+        .productivity-insights {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .insight-item {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AI-Assisted Task Manager</h1>
+    
+    <!-- Task Input Section -->
+    <div class="task-input">
+        <input type="text" id="new-task" placeholder="Add a new task...">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <!-- Tasks List -->
+    <ul id="tasks" class="tasks"></ul>
+
+    <!-- Dashboard Section -->
+    <div class="dashboard">
+        <h2>Dashboard</h2>
+        <div class="productivity-insights">
+            <div class="insight-item">
+                <p><strong>Total Tasks:</strong></p>
+                <span id="total-tasks">0</span>
+            </div>
+            <div class="insight-item">
+                <p><strong>Completed Tasks:</strong></p>
+                <span id="completed-tasks">0</span>
+            </div>
+            <div class="insight-item">
+                <p><strong>Pending Tasks:</strong></p>
+                <span id="pending-tasks">0</span>
+            </div>
+        </div>
+
+        <!-- AI Suggestions -->
+        <h3>AI Suggestions</h3>
+        <ul id="ai-suggestions"></ul>
+    </div>
+
+</div>
+
+<script>
+    // Sample JavaScript for adding tasks
+    function addTask() {
+        const taskInput = document.getElementById('new-task');
+        const taskText = taskInput.value.trim();
+        if (taskText === '') return;
+
+        const tasksList = document.getElementById('tasks');
+        const newTaskItem = document.createElement('li');
+        newTaskItem.className = 'task-item';
+        newTaskItem.innerHTML = `
+            <span>${taskText}</span>
+            <div class="task-actions">
+                <button onclick="completeTask(this)">Complete</button>
+                <button onclick="deleteTask(this)">Delete</button>
+            </div>
+        `;
+        tasksList.appendChild(newTaskItem);
+        taskInput.value = '';
+
+        updateDashboard();
+    }
+
+    function completeTask(button) {
+        const taskItem = button.parentElement.parentElement;
+        taskItem.classList.toggle('completed');
+        updateDashboard();
+    }
+
+    function deleteTask(button) {
+        const taskItem = button.parentElement.parentElement;
+        taskItem.remove();
+        updateDashboard();
+    }
+
+    function updateDashboard() {
+        const tasks = document.querySelectorAll('.task-item');
+        const totalTasks = tasks.length;
+        let completedTasks = 0;
+
+        tasks.forEach(task => {
+            if (task.classList.contains('completed')) {
+                completedTasks++;
+            }
+        });
+
+        const pendingTasks = totalTasks - completedTasks;
+
+        document.getElementById('total-tasks').textContent = totalTasks;
+        document.getElementById('completed-tasks').textContent = completedTasks;
+        document.getElementById('pending-tasks').textContent = pendingTasks;
+    }
+
+    // Placeholder for AI suggestions
+    function fetchAISuggestions() {
+        const aiSuggestionsList = document.getElementById('ai-suggestions');
+        aiSuggestionsList.innerHTML = ''; // Clear previous suggestions
+
+        // Simulate fetching AI suggestions
+        const suggestions = ['Finish report', 'Schedule meeting', 'Reply to emails'];
+        suggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement('li');
+            suggestionItem.textContent = suggestion;
+            aiSuggestionsList.appendChild(suggestionItem);
+        });
+    }
+
+    // Fetch AI suggestions when the page loads
+    window.onload = fetchAISuggestions;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+name: C# Console Application
+type: cli
+language: csharp
+runtime_profile: native_terminal
+description: Cross-platform C# console application using .NET 8.
+metadata:
+  framework: net8.0
+  sdk_version: "8.0"
+dependencies:
+  - System.CommandLine
+file_structure:
+  README.md: Project overview and build instructions
+  Project.csproj: .NET project file with dependencies
+  Program.cs: Application entry point with argument parsing
+  Commands/HealthCommand.cs: Health check command implementation
+  Utils/Logger.cs: Logging utility class
+  Tests/SmokeTests.cs: Basic smoke tests (xUnit)
+complexity: 4
+requires_multifile: true
+entry_point: Program.cs
+cli_framework: System.CommandLine
+packaging: dotnet publish
+generation_hints:
+  - Use file-scoped namespaces (C# 10+)
+  - Use top-level statements for simple entry points
+  - Define commands using System.CommandLine
+  - Use async Main for I/O operations
+  - Follow .NET naming conventions (PascalCase)
+  - Use nullable reference types

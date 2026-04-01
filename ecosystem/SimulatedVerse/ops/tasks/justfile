@@ -1,0 +1,43 @@
+set dotenv-load := true
+
+default: scan
+
+scan:
+    @echo "🔎 Scanning repo…"
+    rg -n "TODO|FIXME|XXX|HACK" || true
+    semgrep --config ops/linters/semgrep_rules.yml || true
+
+fix: fix:format fix:lint fix:semgrep fix:comby
+
+fix:format:
+    black . || true
+    ruff check --fix || true
+    isort . || true
+    prettier -w . || true
+    gdformat . || true
+
+fix:lint:
+    eslint . --ext .ts,.tsx,.js,.jsx --fix || true
+    mypy || true
+    bandit -r . || true
+    gdlint . || true
+
+fix:semgrep:
+    semgrep --config ops/linters/semgrep_rules.yml --fix || true
+
+fix:comby:
+    comby -config ops/linters/comby/console_to_logger.toml -d . -in-place || true
+
+codemod:  # example TS codemod
+    npx jscodeshift -t ops/codemods/ts/rename-symbol.template.ts src || true
+
+agent:aider:
+    @source ops/spine/detect_env.sh 2>/dev/null || true; \
+    aider --config ops/agents/aider.conf.yml
+
+agent:oi:
+    @source ops/spine/detect_env.sh 2>/dev/null || true; \
+    interpreter --profile ops/agents/open_interpreter_profile.json
+
+vacuum:
+    python ops/agents/smolagents_recipe.py

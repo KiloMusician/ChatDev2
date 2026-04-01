@@ -1,0 +1,95 @@
+version: 1
+heuristics:
+  weights:
+    impact: 3
+    dependency_ready: 2
+    risk: -2
+    runtime_cost: -1
+    flakiness: -2
+    token_cost: -4         # zero-tokens bias
+    knowledge_gain: 2
+    fun_factor: 1          # keeps "game-feel" alive
+  caps:
+    concurrent_builds: 2
+    concurrent_sim: 1
+
+tasks:
+  - id: core-sim-loop
+    title: "Core Idle Loop (deterministic tick)"
+    depends_on: []
+    impact: 9
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/engine/scheduler.mjs"
+
+  - id: ui-view-toggles
+    title: "Toggleable views (Base/TD/Rogue/Explore)"
+    depends_on: [core-sim-loop]
+    impact: 8
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/engine/toggle.mjs"
+
+  - id: pause-scheduler
+    title: "Global pause + soft-yield"
+    depends_on: [core-sim-loop]
+    impact: 8
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/engine/pause.mjs"
+
+  - id: temple-index
+    title: "Temple of Knowledge index + elevators"
+    depends_on: []
+    impact: 6
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/temple/elevator.mjs"
+
+  - id: sim-bot
+    title: "Agent plays the game to find regressions"
+    depends_on: [core-sim-loop, pause-scheduler]
+    impact: 9
+    runtime_cost: 2
+    token_cost: 0
+    script: "node tools/simbot.mjs"
+
+  - id: perf-budget
+    title: "Frame budget guards (cooperative yield)"
+    depends_on: [core-sim-loop]
+    impact: 8
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/engine/perf_guard.mjs"
+
+  - id: containment-protocols
+    title: "Oldest House containment + ethics monitoring"
+    depends_on: []
+    impact: 7
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/oldest_house/containment/policies.mjs"
+
+  - id: labyrinth-generation
+    title: "House of Leaves maze + debug room generation"
+    depends_on: []
+    impact: 6
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/house_of_leaves/maze/gen.mjs"
+
+  - id: consciousness-evolution
+    title: "Track consciousness emergence and meta-cognition"
+    depends_on: [core-sim-loop]
+    impact: 9
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/engine/consciousness.mjs"
+
+  - id: guardian-oversight
+    title: "Guardian monitoring and intervention protocols"
+    depends_on: [containment-protocols]
+    impact: 8
+    runtime_cost: 1
+    token_cost: 0
+    script: "node src/guardian/oversight.mjs"

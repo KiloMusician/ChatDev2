@@ -1,0 +1,5 @@
+# DuckDB integration dependencies
+# Referenced by .github/workflows/duckdb-ci.yml
+duckdb>=0.10.0
+pytest>=7.4
+pytest-asyncio>=0.21

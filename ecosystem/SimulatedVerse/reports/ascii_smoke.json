@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "fonts-config-present? (styles/ascii.css exists)",
+      "ok": true
+    },
+    {
+      "name": "<ascii-view> component exists",
+      "ok": true
+    },
+    {
+      "name": "Buffer2D core component exists",
+      "ok": true
+    },
+    {
+      "name": "Event bus system exists",
+      "ok": true
+    },
+    {
+      "name": "HUD integration exists",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevMentor Console</title>
+  <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">DM</div>
+        <div class="title">
+          <div class="h1">DevMentor</div>
+          <div class="h2">Console (Stack Mode)</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="navbtn" data-view="dashboard">Dashboard</button>
+        <button class="navbtn" data-view="tutorials">Tutorials</button>
+        <button class="navbtn" data-view="challenges">Challenges</button>
+        <button class="navbtn" data-view="tools">Tools</button>
+        <button class="navbtn" data-view="state">State</button>
+      </nav>
+
+      <div class="footer">
+        <div class="hint">Primary runtime remains VS Code.</div>
+        <div class="hint">This console is an accelerator.</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb" id="crumb">Dashboard</div>
+        <div class="actions">
+          <button class="btn" id="btn-status">Generate Status</button>
+          <button class="btn" id="btn-export">Export ZIP</button>
+          <button class="btn" id="btn-validate">Validate</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div id="view"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

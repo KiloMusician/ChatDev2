@@ -1,0 +1,65 @@
+{
+  "action": "phase_5_play_dev_toggle_verification",
+  "timestamp": 1756940700000,
+  "status": "toggle_system_operational_with_hotkey",
+  
+  "toggle_mechanism": {
+    "storage_key": "PLAY_MODE",
+    "modes": ["dev_menu", "game"],
+    "default_mode": "dev_menu",
+    "fallback_chain": "localStorage → process.env → 'dev_menu'"
+  },
+  
+  "hotkey_implementation": {
+    "trigger": "backtick (`) or tilde (~)",
+    "action": "toggles between dev_menu and game modes",
+    "preventDefault": true,
+    "cross_tab_sync": "dispatches mode-switch custom event",
+    "state_persistence": "localStorage.setItem('PLAY_MODE')"
+  },
+  
+  "event_system": {
+    "mode_switch_event": "Custom event 'mode-switch'",
+    "storage_change_listener": "Cross-tab synchronization",
+    "golden_trace_emission": "UI route mount traces for debugging",
+    "event_cleanup": "Proper removeEventListener on unmount"
+  },
+  
+  "state_continuity": {
+    "no_remount": "Components use lazy loading and state preservation",
+    "mode_persistence": "localStorage maintains state across sessions",
+    "cross_tab_sync": "StorageEvent synchronizes across browser tabs",
+    "loading_state": "isLoading prevents flash during initialization"
+  },
+  
+  "route_integrity": {
+    "dev_menu_route": "PreviewUI/web/dev/DevMenu component",
+    "game_route": "PreviewUI/web/adapters/GameShell component", 
+    "lazy_loading": "React.lazy with error boundaries",
+    "fallback_handling": "Loading states for failed imports"
+  },
+  
+  "ui_feedback": {
+    "mode_indicator": "Visible mode state in UI",
+    "transition_smoothness": "No jarring reloads or flashes",
+    "hotkey_responsiveness": "Immediate toggle on keypress",
+    "debug_traces": "Golden traces for troubleshooting"
+  },
+  
+  "validation_tests": [
+    "localStorage.setItem('PLAY_MODE', 'game') → UI switches to GameShell",
+    "localStorage.setItem('PLAY_MODE', 'dev_menu') → UI switches to DevMenu",
+    "Backtick keypress → toggles mode and updates localStorage",
+    "Cross-tab test → changing PLAY_MODE in one tab updates others",
+    "Page refresh → maintains last selected mode"
+  ],
+  
+  "integration_status": {
+    "feature_flags": "ui_mode: game, game_entry_button: true",
+    "culture_ship_compatibility": "Works with nanobot bootstrap phase",
+    "mobile_optimization": "Touch-friendly with safe areas",
+    "accessibility": "Keyboard navigation support"
+  },
+  
+  "next_phase_ready": "preview_freshness_verification"
+}
