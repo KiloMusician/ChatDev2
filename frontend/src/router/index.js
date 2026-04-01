@@ -24,6 +24,10 @@ const routes = [
     {
         path: '/ecosystem',
         component: () => import('../pages/EcosystemView.vue')
+    },
+    {
+        path: '/orchestrator',
+        component: () => import('../pages/OrchestratorView.vue')
     }
 ]
 

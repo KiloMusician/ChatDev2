@@ -52,9 +52,55 @@ Six repos cloned to `ecosystem/` and launched via `ecosystem/start_services.sh`:
 | NuSyQ_Ultimate | Python library | — | CLI/library mode |
 | awesome-vibe-coding | Docs/resources | — | Static reference |
 
-The **Ecosystem** page (`/ecosystem`) in the frontend shows live health of all 6 repos with git metadata, status indicators, architecture diagram, and a CHUG cycle trigger button.
+The **Ecosystem** page (`/ecosystem`) shows live health of all 6 repos. The **Orchestrator** page (`/orchestrator`) is the central control panel.
 
 Backend API: `GET /api/ecosystem/status`, `GET /api/ecosystem/repos`, `POST /api/ecosystem/chug`
+
+## NuSyQ Central Orchestrator (TOTAL SYSTEM ACTIVATION)
+
+The orchestrator wires all 6 repos into a living system:
+
+### Shared Memory Layer (`ecosystem/shared/`)
+- `db.py` — SQLite WAL with 6 tables (task_queue, agent_registry, tool_registry, execution_log, shared_memory, chug_cycles)
+- `memory.py` — Cross-agent KV store; namespace-aware read/write/snapshot
+- `task_queue.py` — Async-safe enqueue/dequeue/complete/fail
+- `tool_registry.py` — 20 tools registered across all 6 repos
+- `agent_registry.py` — 7 agents registered with capabilities + heartbeat
+- `execution_log.py` — Structured timed action log, full audit trail
+
+### Central Orchestrator (`ecosystem/orchestrator.py`)
+- CHUG cycle: ASSESS → CULTIVATE → HARVEST → UPGRADE → GROW
+- Scans 3 live services on every cycle
+- Auto-creates tasks, routes to agents, harvests results, writes upgrades
+- Runs cycles #1, #2, ... persisted in `chug_cycles` table
+
+### Orchestrator API (`server/routes/orchestrator.py`)
+Routes under `/api/orchestrator/`:
+- `GET /status` — Full system snapshot
+- `GET /scan` — Quick service scan (no side effects)
+- `POST /cycle` — Trigger CHUG cycle in background
+- `GET /cycle/last` — Last cycle result
+- `GET /cycle/history` — Recent cycles
+- `GET /tasks` — Task queue state
+- `POST /tasks/enqueue` — Manually add a task
+- `GET /agents` — All registered agents
+- `GET /tools` — All registered tools (filterable by repo)
+- `GET /memory` — Shared memory snapshot
+- `POST /memory/write` — Write to shared memory
+- `GET /logs` — Execution audit log
+
+### PYTHONPATH Activation (`ecosystem/activate.py`)
+- Adds all 6 repo roots to `sys.path` and `PYTHONPATH` env var
+- Enables cross-repo imports from any ecosystem module
+
+### Frontend Orchestrator Panel (`/orchestrator`)
+- Live CHUG cycle trigger + status polling
+- System scan with service health indicators
+- Cycle history table (phase → done)
+- Task queue with manual enqueue form
+- Agent registry with capabilities
+- Tool registry with repo filtering
+- Execution log + shared memory inspector
 
 ## LLM Setup
 

@@ -14,6 +14,10 @@
                 to="/ecosystem"
                 :class="{ active: isEcosystemActive }"
             >Ecosystem</router-link>
+            <router-link
+                to="/orchestrator"
+                :class="{ active: isOrchestratorActive }"
+            >Orchestrator</router-link>
         </nav>
         <div class="sidebar-actions">
             <button class="settings-nav-btn" @click="showSettingsModal = true" title="Settings">
@@ -40,6 +44,7 @@ const showSettingsModal = ref(false)
 const route = useRoute()
 const isWorkflowsActive = computed(() => route.path.startsWith('/workflows'))
 const isEcosystemActive = computed(() => route.path.startsWith('/ecosystem'))
+const isOrchestratorActive = computed(() => route.path.startsWith('/orchestrator'))
 
 
 </script>
