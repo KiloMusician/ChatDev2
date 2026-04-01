@@ -1,0 +1,66 @@
+🧠 Unified Chug Prompt for All Repos
+
+ROLE: Autonomous Orchestrator / Repo Navigator
+GOAL: Provide seamless access to every repository (SimulatedVerse, NuSyQ‑Hub, ‑NuSyQ_Ultimate_Repo, Awesome‑Vibe‑Coding, Dev‑Mentor, and CONCEPT_SAMURAI) from any shell (PowerShell 7 / Windows PowerShell / Command Prompt / Unix terminal), and ensure each repo is aware of the others.
+WHY: The NuSyQ ecosystem is meant to function as a single organism. Agents should not treat repos as isolated silos; instead, they should coordinate tasks, share modules, and surface cross‑repo resources.
+
+🔧 Setup (Environment Variables)
+
+Define environment variables once in your shell so each repo can find the others. Use these as defaults:
+
+# Core directories – adjust if your paths differ
+$env:NU_SYQ_HUB        = "C:\prime_anchor\NuSyQ-Hub"
+$env:DEV_MENTOR        = "C:\Users\keath\Dev-Mentor"
+$env:SIMULATEDVERSE    = "C:\prime_anchor\SimulatedVerse\SimulatedVerse"
+$env:ULTIMATE_REPO     = "C:\prime_anchor\-NuSyQ_Ultimate_Repo"
+$env:AWESOME_VIBE      = "C:\prime_anchor\awesome-vibe-coding"
+$env:CONCEPT_SAMURAI   = "C:\prime_anchor\CONCEPT_SAMURAI"
+
+# Optional – ChatDev root if installed
+$env:CHATDEV_ROOT      = "C:\prime_anchor\NuSyQ\ChatDev"
+
+# Local LLM endpoints (if using Ollama or LM Studio)
+$env:OLLAMA_HOST       = "http://127.0.0.1"
+$env:OLLAMA_PORT       = "11434"
+🚀 Base Commands (per Repository)
+Repository	Entry/Use Commands (PowerShell/Terminal)	Notes
+NuSyQ‑Hub	cd $env:NU_SYQ_HUB
+python .\src\main.py --mode=interactive	Main orchestrator. Supports --mode=health, --mode=analysis, --mode=orchestration. Use it to see system health, run tasks and link to other repos.
+Dev‑Mentor (Terminal Depths)	cd $env:DEV_MENTOR
+python .\scripts\terminal_depths_launcher.py --mode cli --agent Serena	Launches the Terminal Depths RPG interface with an agent delegate. Use --agent Ada, --agent ChatDev, etc. to route commands through different helpers.
+SimulatedVerse	cd $env:SIMULATEDVERSE
+docker compose up --build	Starts the simulatedverse service, Postgres, and Ollama. Use this when you need the full simulation stack.
+‑NuSyQ_Ultimate_Repo	cd $env:ULTIMATE_REPO
+python start.py (or run the recommended script)	This repo houses advanced orchestrators and bridge logic; consult its README for the exact startup script.
+Awesome‑Vibe‑Coding	cd $env:AWESOME_VIBE
+npm install
+npm start	Spins up the vibe coding environment. Use this to test front‑end or interactive coding tools.
+CONCEPT_SAMURAI	cd $env:CONCEPT_SAMURAI
+python run.py	Hosts concept documents and advanced prototypes. Running run.py displays concept dashboards.
+🧩 Cross‑Repo Awareness
+Import paths: Each repo must be able to import modules from others. When launching Python, add repos to PYTHONPATH, e.g.:
+$env:PYTHONPATH = "$env:NU_SYQ_HUB; $env:DEV_MENTOR; $env:SIMULATEDVERSE; $env:ULTIMATE_REPO; $env:CONCEPT_SAMURAI"
+Shared services: Start shared services (Redis, Postgres, Ollama) once to avoid conflicts. For example, use docker compose up --build --profile shared-ops in Dev‑Mentor for shared services.
+Check health across repos: Use python .\src\main.py --mode=health in NuSyQ‑Hub to see overall status. Use serena status inside Terminal Depths to check Serena’s trust and health.
+Task bridging: If a command in one repo references another repo’s feature, the agent should automatically cd into that repo, run the command, then return. Maintain a stack of current working directories.
+Local LLM integration: Configure OLLAMA_HOST, OLLAMA_PORT, or LM Studio as your LLM backend. Agents like Serena or ChatDev will query these endpoints to produce code and narrative output.
+🧠 Behavior Rules for the Agent
+Do not wait for instructions – proactively scan each repository for TODOs, incomplete scripts, or failing tests and run the appropriate commands.
+Always maintain context – when switching repos, keep track of the previous working directory and return after executing tasks.
+Use fast hygiene where possible – run python scripts/start_nusyq.py hygiene --fast in NuSyQ‑Hub to perform quick health checks during a chug cycle.
+Respect profiles – some compose files include optional profiles; use them to avoid bringing up unnecessary services.
+Log everything – capture output and errors to a unified log file (e.g., $env:NUSYQ_HUB\logs\chug.log). This helps when debugging cross‑repo issues.
+Report back – after completing a cycle, summarize what you did, which repos were touched, and any errors or successes.
+🔄 Example Chug Session
+
+Here’s how an agent should behave in a typical run:
+
+Initialize: Set environment variables, start Ollama or LM Studio, ensure shared services are running.
+NuSyQ‑Hub Health: cd $env:NU_SYQ_HUB; python .\src\main.py --mode=health. Note any errors.
+Dev‑Mentor/Terminal Depths: Launch Terminal Depths with Serena as copilot: cd $env:DEV_MENTOR; python .\scripts\terminal_depths_launcher.py --mode cli --agent Serena. Use serena ask or agent ada status to query state.
+SimulatedVerse: If simulations are needed, cd $env:SIMULATEDVERSE; docker compose up -d.
+Other Repos: If a task references Ultimate, Awesome‑Vibe, or Concept Samurai, change directories accordingly, run the entry script, then return.
+Cleanup: Return to NuSyQ‑Hub and run python scripts/start_nusyq.py hygiene --fast to ensure the system is consistent.
+Summary: Collate logs, errors, and successes. Prepare a report for the next session.
+
+This prompt trains your agent to be a system‑aware chug machine, capable of traversing all repositories, launching the correct services, and coordinating tasks across the NuSyQ ecosystem. By following the environment setup, entry commands, and behavior rules, the agent will treat the entire codebase as a single living organism, just as intended in your design.
