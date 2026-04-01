@@ -82,26 +82,31 @@ let pollTimer = null
 let evtSource = null
 
 // ── Service dots ────────────────────────────────────────────────────────────
+const LIVE_SERVICES = [
+  { id: 'chatdev',         label: 'ChatDev :6400',         port: 6400 },
+  { id: 'dev_mentor',     label: 'Dev-Mentor :8008',      port: 8008 },
+  { id: 'nusyq_hub',      label: 'NuSyQ-Hub :3003',       port: 3003 },
+  { id: 'concept_samurai',label: 'CONCEPT_SAMURAI :3002',  port: 3002 },
+]
+
 const dotServices = computed(() => {
   if (!status.value) return []
   const online = new Set(status.value.repos?.online ?? [])
-  return [
-    { id: 'chatdev',        label: 'ChatDev :6400',        cls: online.has('chatdev') ? 'dot-g' : 'dot-r' },
-    { id: 'dev_mentor',     label: 'Dev-Mentor :8008',     cls: online.has('dev_mentor') ? 'dot-g' : 'dot-r' },
-    { id: 'concept_samurai',label: 'CONCEPT_SAMURAI :3002', cls: online.has('concept_samurai') ? 'dot-g' : 'dot-r' },
-  ]
+  return LIVE_SERVICES.map(s => ({
+    ...s, cls: online.has(s.id) ? 'dot-g' : 'dot-r',
+  }))
 })
 
 const panelServices = computed(() => {
   if (!status.value) return []
   const online = new Set(status.value.repos?.online ?? [])
   const all = status.value.repos?.total ?? 0
-  return [
-    { id: 'chatdev',        label: 'ChatDev :6400',         cls: online.has('chatdev') ? 'dot-g' : 'dot-r',         state: online.has('chatdev') ? 'Online' : 'Offline' },
-    { id: 'dev_mentor',     label: 'Dev-Mentor :8008',      cls: online.has('dev_mentor') ? 'dot-g' : 'dot-r',      state: online.has('dev_mentor') ? 'Online' : 'Offline' },
-    { id: 'concept_samurai',label: 'CONCEPT_SAMURAI :3002', cls: online.has('concept_samurai') ? 'dot-g' : 'dot-r', state: online.has('concept_samurai') ? 'Online' : 'Offline' },
-    { id: 'others',         label: `Other repos (${all - 3})`, cls: 'dot-b',                                          state: 'CLI/lib' },
-  ]
+  const named = LIVE_SERVICES.map(s => ({
+    ...s, cls: online.has(s.id) ? 'dot-g' : 'dot-r', state: online.has(s.id) ? 'Online' : 'Offline',
+  }))
+  const extra = Math.max(0, all - LIVE_SERVICES.length)
+  if (extra > 0) named.push({ id: 'others', label: `Other repos (${extra})`, cls: 'dot-b', state: 'CLI/lib', port: null })
+  return named
 })
 
 // ── Data ────────────────────────────────────────────────────────────────────

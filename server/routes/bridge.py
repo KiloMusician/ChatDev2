@@ -225,19 +225,27 @@ async def bridge_events(request: Request):
                 try:
                     import urllib.request as _urllib
                     probes = {
-                        "chatdev": "http://localhost:6400/health",
-                        "dev_mentor": "http://localhost:8008/api/manifest",
+                        "chatdev":         "http://localhost:6400/health",
+                        "dev_mentor":      "http://localhost:8008/api/manifest",
+                        "nusyq_hub":       "http://localhost:3003/api/status",
                         "concept_samurai": "http://localhost:3002/",
                     }
                     online = []
-                    for name, url in probes.items():
+                    for svc_name, url in probes.items():
                         try:
                             with _urllib.urlopen(url, timeout=1) as r:
                                 if r.status == 200:
-                                    online.append(name)
+                                    online.append(svc_name)
                         except Exception:
                             pass
-                    payload = json.dumps({"online": len(online), "services": online})
+                    payload = json.dumps({
+                        "online": len(online),
+                        "services": online,
+                        "repos": {
+                            "online": online,
+                            "total": len(probes),
+                        },
+                    })
                     yield f"event: health\ndata: {payload}\n\n"
                     last_health_check = now
                 except Exception:

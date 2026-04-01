@@ -23,7 +23,8 @@ The single workflow `Start application` runs `bash start.sh` which:
 - Port 5000: Frontend (Vite) — webview-accessible
 - Port 6400: Backend (FastAPI) — internal only, proxied through Vite
 - Port 8008: Dev-Mentor (Terminal Depths) — ecosystem service
-- Port 3001: CONCEPT_SAMURAI static docs — ecosystem service
+- Port 3003: NuSyQ-Hub Reactive API — ecosystem service (FastAPI, `src/api/main.py`)
+- Port 3002: CONCEPT_SAMURAI static docs — ecosystem service
 
 ## Key Files
 
@@ -126,10 +127,51 @@ Routes under `/api/orchestrator/`:
 - Tool registry with repo filtering
 - Execution log + shared memory inspector
 
+## NuSyQ-Hub as Running Service
+
+NuSyQ-Hub (`ecosystem/NuSyQ-Hub/`) now runs as a persistent HTTP service on **port 3003** via `uvicorn src.api.main:app`. Started by `ecosystem/start_services.sh` alongside Dev-Mentor and CONCEPT_SAMURAI.
+
+API surface exposed at `http://localhost:3003`:
+- `GET /api/status` — system heartbeat (`status`, `run_id`, `details`)
+- `GET /api/agents` — agent registry
+- `GET /api/quests` — quest list (12 templates)
+- `GET /api/metrics` — system metrics
+- `GET /api/systems/*` — per-system status routes
+
+The bridge status endpoint now probes NuSyQ-Hub at `/api/status` and reports it as `online` when healthy. The BridgeHUD shows it as a 4th coloured dot.
+
+## Per-Repo td_bridge.py
+
+Each ecosystem repo has a self-contained `td_bridge.py` at its root. All 6 repos are covered:
+
+| Repo | REPO_ID | File |
+|---|---|---|
+| Dev-Mentor | `dev_mentor` | `ecosystem/Dev-Mentor/td_bridge.py` |
+| CONCEPT_SAMURAI | `concept_samurai` | `ecosystem/CONCEPT_SAMURAI/td_bridge.py` |
+| NuSyQ-Hub | `nusyq_hub` | `ecosystem/NuSyQ-Hub/td_bridge.py` |
+| NuSyQ_Ultimate | `nusyq_ultimate` | `ecosystem/NuSyQ_Ultimate/td_bridge.py` |
+| awesome-vibe-coding | `awesome_vibe_coding` | `ecosystem/awesome-vibe-coding/td_bridge.py` |
+| SimulatedVerse | `simulated_verse` | `ecosystem/SimulatedVerse/td_bridge.py` |
+
+Each file is self-contained: auto-resolves the workspace root, provides `td`, `hub` singleton clients, and these helper functions:
+
+```python
+from td_bridge import td_ping, td_command, td_task, td_heartbeat, td_hub_status
+from td_bridge import td_game_state, td_push_state, td_consciousness
+from td_bridge import td_colonists, td_push_colonists, td_dispatch, td_session
+
+td_ping()                       # ChatDev bridge health
+td_command("projects")          # run bridge command
+td_heartbeat()                  # self-register with bridge + write to shared memory
+td_hub_status()                 # NuSyQ-Hub port 3003 status
+td_game_state()                 # read persisted game/sim state
+td_push_state({"phase": "run"}) # merge-update game state
+```
+
 ## Bridge HUD (Sidebar)
 
 `frontend/src/components/BridgeHUD.vue` — live ecosystem status strip embedded at the left side of the top nav bar:
-- Coloured dots for ChatDev :6400, Dev-Mentor :8008, and CONCEPT_SAMURAI :3002
+- Coloured dots for ChatDev :6400, Dev-Mentor :8008, NuSyQ-Hub :3003, and CONCEPT_SAMURAI :3002
 - Live event count badge fed by the SSE stream
 - SSE connection pulse indicator
 - Hover panel with per-service status, quest count, sessions, uptime, and 5 most-recent events

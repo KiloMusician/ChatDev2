@@ -1,93 +1,139 @@
 {
-  "_comment": "NuSyQ Ecosystem Repo Registry — single source of truth for all repos in this environment",
-  "_version": "1.0.0",
-  "_environment": "replit",
-  "chatdev": {
-    "name": "ChatDev 2.0 (DevAll)",
-    "role": "primary_cockpit",
-    "description": "Zero-code multi-agent orchestration platform — primary bridge surface and control layer",
-    "root": "/home/runner/workspace",
-    "api": "http://localhost:6400",
-    "frontend": "http://localhost:5000",
-    "health": "http://localhost:6400/health",
-    "manifest": "http://localhost:6400/api/bridge/manifest",
-    "bridge": "http://localhost:6400/api/bridge",
-    "orchestrator": "http://localhost:6400/api/orchestrator",
-    "status": "online"
-  },
-  "dev_mentor": {
-    "name": "Dev-Mentor (Terminal Depths)",
-    "role": "game_engine_and_cli",
-    "description": "Cyberpunk terminal RPG + CLI agent executor + swarm controller + 533 commands + ML services",
-    "root": "/home/runner/workspace/ecosystem/Dev-Mentor",
-    "api": "http://localhost:8008",
-    "health": "http://localhost:8008/api/manifest",
-    "manifest": "http://localhost:8008/api/manifest",
-    "bridge_target": "http://localhost:6400/api/bridge",
-    "capabilities": ["chug", "game", "cli", "swarm", "ml", "serena", "gordon", "lattice", "132_infra_nodes", "533_commands"],
-    "agents": ["serena", "gordon", "ada", "model_router"],
-    "status": "online",
-    "port": 8008
-  },
-  "nusyq_hub": {
-    "name": "NuSyQ-Hub",
-    "role": "orchestration_spine",
-    "description": "Central orchestration layer: agent routing, task queues, memory palace, cross-ecosystem sync",
-    "root": "/home/runner/workspace/ecosystem/NuSyQ-Hub",
-    "src": "/home/runner/workspace/ecosystem/NuSyQ-Hub/src",
-    "capabilities": ["orchestration", "agent_routing", "memory_palace", "cross_sync", "task_queue", "auto_healing"],
-    "key_modules": [
-      "src/orchestration/agent_orchestration_hub.py",
-      "src/orchestration/agent_task_queue.py",
-      "src/memory/memory_palace.py",
-      "src/memory/contextual_memory.py",
-      "src/tools/cross_ecosystem_sync.py",
-      "src/agents/unified_agent_ecosystem.py"
-    ],
-    "bridge_target": "http://localhost:6400/api/bridge",
-    "status": "cli_only",
-    "port": null
-  },
-  "concept_samurai": {
-    "name": "CONCEPT_SAMURAI",
-    "role": "logic_and_abstraction",
-    "description": "Meta-logic engine, structured abstractions, Katana Keeper orchestrator",
-    "root": "/home/runner/workspace/ecosystem/CONCEPT_SAMURAI",
-    "api": "http://localhost:3002",
-    "health": "http://localhost:3002/",
-    "bridge_target": "http://localhost:6400/api/bridge",
-    "capabilities": ["meta", "logic", "abstraction", "katana", "godot"],
-    "status": "online",
-    "port": 3002
-  },
-  "simulatedverse": {
-    "name": "SimulatedVerse",
-    "role": "simulation_layer",
-    "description": "RimWorld-style agent simulation world engine",
-    "root": "/home/runner/workspace/ecosystem/SimulatedVerse",
-    "bridge_target": "http://localhost:6400/api/bridge",
-    "capabilities": ["simulation", "world", "agents", "emergent"],
-    "status": "cli_only",
-    "port": null
-  },
-  "nusyq_ultimate": {
-    "name": "NuSyQ_Ultimate",
-    "role": "core_intelligence",
-    "description": "Advanced agent systems, ChatDev integration, core AI architecture",
-    "root": "/home/runner/workspace/ecosystem/NuSyQ_Ultimate",
-    "bridge_target": "http://localhost:6400/api/bridge",
-    "capabilities": ["chatdev", "ai", "architecture", "agent_systems"],
-    "status": "cli_only",
-    "port": null
-  },
-  "awesome_vibe_coding": {
-    "name": "awesome-vibe-coding",
-    "role": "patterns_and_generators",
-    "description": "Patterns, generators, vibe coding resources",
-    "root": "/home/runner/workspace/ecosystem/awesome-vibe-coding",
-    "bridge_target": "http://localhost:6400/api/bridge",
-    "capabilities": ["patterns", "generators", "resources"],
-    "status": "reference",
-    "port": null
-  }
+    "_comment": "NuSyQ Ecosystem Repo Registry \u2014 single source of truth for all repos in this environment",
+    "_version": "1.0.0",
+    "_environment": "replit",
+    "chatdev": {
+        "name": "ChatDev 2.0 (DevAll)",
+        "role": "primary_cockpit",
+        "description": "Zero-code multi-agent orchestration platform \u2014 primary bridge surface and control layer",
+        "root": "/home/runner/workspace",
+        "api": "http://localhost:6400",
+        "frontend": "http://localhost:5000",
+        "health": "http://localhost:6400/health",
+        "manifest": "http://localhost:6400/api/bridge/manifest",
+        "bridge": "http://localhost:6400/api/bridge",
+        "orchestrator": "http://localhost:6400/api/orchestrator",
+        "status": "online"
+    },
+    "dev_mentor": {
+        "name": "Dev-Mentor (Terminal Depths)",
+        "role": "game_engine_and_cli",
+        "description": "Cyberpunk terminal RPG + CLI agent executor + swarm controller + 533 commands + ML services",
+        "root": "/home/runner/workspace/ecosystem/Dev-Mentor",
+        "api": "http://localhost:8008",
+        "health": "http://localhost:8008/api/manifest",
+        "manifest": "http://localhost:8008/api/manifest",
+        "bridge_target": "http://localhost:6400/api/bridge",
+        "capabilities": [
+            "chug",
+            "game",
+            "cli",
+            "swarm",
+            "ml",
+            "serena",
+            "gordon",
+            "lattice",
+            "132_infra_nodes",
+            "533_commands"
+        ],
+        "agents": [
+            "serena",
+            "gordon",
+            "ada",
+            "model_router"
+        ],
+        "status": "online",
+        "port": 8008
+    },
+    "nusyq_hub": {
+        "name": "NuSyQ-Hub",
+        "role": "orchestration_spine",
+        "description": "Central orchestration layer: agent routing, task queues, memory palace, cross-ecosystem sync",
+        "root": "/home/runner/workspace/ecosystem/NuSyQ-Hub",
+        "src": "/home/runner/workspace/ecosystem/NuSyQ-Hub/src",
+        "capabilities": [
+            "orchestration",
+            "agent_routing",
+            "memory_palace",
+            "cross_sync",
+            "task_queue",
+            "auto_healing"
+        ],
+        "key_modules": [
+            "src/orchestration/agent_orchestration_hub.py",
+            "src/orchestration/agent_task_queue.py",
+            "src/memory/memory_palace.py",
+            "src/memory/contextual_memory.py",
+            "src/tools/cross_ecosystem_sync.py",
+            "src/agents/unified_agent_ecosystem.py"
+        ],
+        "bridge_target": "http://localhost:6400/api/bridge",
+        "status": "online",
+        "port": 3003,
+        "api": "http://localhost:3003",
+        "health": "http://localhost:3003/api/status",
+        "manifest": "http://localhost:3003/api/status"
+    },
+    "concept_samurai": {
+        "name": "CONCEPT_SAMURAI",
+        "role": "logic_and_abstraction",
+        "description": "Meta-logic engine, structured abstractions, Katana Keeper orchestrator",
+        "root": "/home/runner/workspace/ecosystem/CONCEPT_SAMURAI",
+        "api": "http://localhost:3002",
+        "health": "http://localhost:3002/",
+        "bridge_target": "http://localhost:6400/api/bridge",
+        "capabilities": [
+            "meta",
+            "logic",
+            "abstraction",
+            "katana",
+            "godot"
+        ],
+        "status": "online",
+        "port": 3002
+    },
+    "simulatedverse": {
+        "name": "SimulatedVerse",
+        "role": "simulation_layer",
+        "description": "RimWorld-style agent simulation world engine",
+        "root": "/home/runner/workspace/ecosystem/SimulatedVerse",
+        "bridge_target": "http://localhost:6400/api/bridge",
+        "capabilities": [
+            "simulation",
+            "world",
+            "agents",
+            "emergent"
+        ],
+        "status": "cli_only",
+        "port": null
+    },
+    "nusyq_ultimate": {
+        "name": "NuSyQ_Ultimate",
+        "role": "core_intelligence",
+        "description": "Advanced agent systems, ChatDev integration, core AI architecture",
+        "root": "/home/runner/workspace/ecosystem/NuSyQ_Ultimate",
+        "bridge_target": "http://localhost:6400/api/bridge",
+        "capabilities": [
+            "chatdev",
+            "ai",
+            "architecture",
+            "agent_systems"
+        ],
+        "status": "cli_only",
+        "port": null
+    },
+    "awesome_vibe_coding": {
+        "name": "awesome-vibe-coding",
+        "role": "patterns_and_generators",
+        "description": "Patterns, generators, vibe coding resources",
+        "root": "/home/runner/workspace/ecosystem/awesome-vibe-coding",
+        "bridge_target": "http://localhost:6400/api/bridge",
+        "capabilities": [
+            "patterns",
+            "generators",
+            "resources"
+        ],
+        "status": "reference",
+        "port": null
+    }
 }
