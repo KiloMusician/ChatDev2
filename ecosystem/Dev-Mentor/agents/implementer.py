@@ -31,7 +31,7 @@ SCRIPTING_FILE = BASE_DIR / "app/game_engine/scripting.py"
 
 
 def _get(path: str) -> dict:
-    with urllib.request.urlopen("http://localhost:7337" + path, timeout=8) as r:
+    with urllib.request.urlopen("http://localhost:8008" + path, timeout=8) as r:
         return json.loads(r.read())
 
 

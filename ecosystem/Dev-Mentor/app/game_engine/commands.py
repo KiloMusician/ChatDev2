@@ -8490,7 +8490,7 @@ class CommandRegistry:
     def _ai_analyze_devlog(self) -> List[dict]:
         try:
             import requests as _req
-            r = _req.post("http://localhost:7337/api/llm/analyze-devlog", timeout=30)
+            r = _req.post("http://localhost:8008/api/llm/analyze-devlog", timeout=30)
             data = r.json()
         except Exception as e:
             return [_err(f"ai analyze: {e}")]
@@ -20706,13 +20706,13 @@ class CommandRegistry:
                                "proc probe(level: int): Future[Duration] {.async.} =\n"
                                "  let start = now()\n"
                                "  let resp = await newAsyncHttpClient().get(\n"
-                               "    \"http://localhost:7337/api/echo?level=\" & $level)\n"
+                               "    \"http://localhost:8008/api/echo?level=\" & $level)\n"
                                "  return now() - start"),
                 "crystal":    ("# Race condition — crash to dump memory\n"
                                "require \"http/client\"\n"
                                "fibers = (0..99).map do |i|\n"
                                "  spawn do\n"
-                               "    HTTP::Client.get(\"http://localhost:7337/api/chimera/alloc\")\n"
+                               "    HTTP::Client.get(\"http://localhost:8008/api/chimera/alloc\")\n"
                                "  end\n"
                                "end\n"
                                "# Simultaneous requests trigger race in chimera_lib.cr"),
@@ -21356,7 +21356,7 @@ class CommandRegistry:
         try:
             import urllib.request as _ur
             import json as _json
-            resp = _ur.urlopen("http://localhost:7337/api/swarm/status", timeout=3)
+            resp = _ur.urlopen("http://localhost:8008/api/swarm/status", timeout=3)
             data = _json.loads(resp.read())
         except Exception:
             return [
@@ -21600,7 +21600,7 @@ class CommandRegistry:
             import urllib.request as _ur
             import json as _json
             payload = _json.dumps({"role": role}).encode()
-            req = _ur.Request("http://localhost:7337/api/swarm/spawn", data=payload)
+            req = _ur.Request("http://localhost:8008/api/swarm/spawn", data=payload)
             req.add_header("Content-Type", "application/json")
             resp = _ur.urlopen(req, timeout=5)
             result = _json.loads(resp.read())
@@ -29471,7 +29471,7 @@ class CommandRegistry:
                 _dim(""),
                 _ok("  # GodotBridge.gd — planned integration"),
                 _dim("  extends Node"),
-                _dim("  var td_api = 'http://localhost:7337/api/game/command'"),
+                _dim("  var td_api = 'http://localhost:8008/api/game/command'"),
                 _dim("  var session_id = ''"),
                 _dim(""),
                 _ok("  func _ready():"),
@@ -29665,7 +29665,7 @@ class CommandRegistry:
                 import requests as _req
                 import os as _os
                 dev_domain = _os.environ.get("REPLIT_DEV_DOMAIN", "")
-                base = f"https://{dev_domain}" if dev_domain else "http://localhost:7337"
+                base = f"https://{dev_domain}" if dev_domain else "http://localhost:8008"
                 r = _req.post(
                     f"{base}/api/cultivator/analyze",
                     json={"context_hint": "In-game analysis request from player"},
@@ -29723,7 +29723,7 @@ class CommandRegistry:
                 _dim("    Plays Terminal Depths 24/7 via REST API"),
                 _dim("    Earns DP, triggers story beats, learns strategies"),
                 _dim("    Chronicle feeds cultivation signals directly"),
-                _dim(f"    API: {__import__('os').environ.get('GORDON_GAME_API', 'http://localhost:7337')}"),
+                _dim(f"    API: {__import__('os').environ.get('GORDON_GAME_API', 'http://localhost:8008')}"),
                 _dim(""),
                 _ok("  CHUG    ⟳     Perpetual Improvement Engine"),
                 _dim("    ASSESS → PLAN → EXECUTE → VERIFY → CONSOLIDATE → DOCUMENT → EXPORT"),
@@ -30665,7 +30665,7 @@ class CommandRegistry:
                     _dim("       ./scripts/cascade.sh core    — offline core stack"),
                     _dim("       ./scripts/cascade.sh full    — full AI stack"),
                     _line("  2. Check port status: python scripts/port_watcher.py", "info"),
-                    _line("  3. Play at http://localhost:7337", "info"),
+                    _line("  3. Play at http://localhost:8008", "info"),
                     _line("  4. Gordon autonomous player: python gordon_player.py --mode autonomous", "info"),
                 ]
             elif r_w.is_vscode:
@@ -31696,10 +31696,10 @@ class CommandRegistry:
         if not args:
             return [
                 _sys("  ═══ HTTP — IN-GAME REST CLIENT ═══"),
-                _dim("  http GET http://localhost:7337/api/health"),
+                _dim("  http GET http://localhost:8008/api/health"),
                 _dim("  http GET http://localhost:11434/api/tags"),
                 _dim("  http GET http://localhost:8002/health"),
-                _dim("  http POST http://localhost:7337/api/game/command {\"command\":\"status\"}"),
+                _dim("  http POST http://localhost:8008/api/game/command {\"command\":\"status\"}"),
                 _dim(""),
                 _dim("  Only localhost endpoints are accessible from the grid."),
             ]
@@ -31714,7 +31714,7 @@ class CommandRegistry:
         if not _reh.match(r'https?://(localhost|127\.0\.0\.1)(:\d+)?(/.*)?$', url):
             return [
                 _warn("  [SECURITY]: External URLs blocked. Only localhost endpoints accessible."),
-                _dim("  http GET http://localhost:7337/api/health  — game server"),
+                _dim("  http GET http://localhost:8008/api/health  — game server"),
                 _dim("  http GET http://localhost:11434/api/tags   — Ollama"),
             ]
 

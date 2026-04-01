@@ -77,7 +77,7 @@ def get_ecosystem_state() -> dict[str, Any]:
 
     # Check key endpoints
     endpoints = {
-        "dev_mentor": "http://localhost:7337/api/health",
+        "dev_mentor": "http://localhost:8008/api/manifest",
         "nusyq_hub": "http://localhost:8000/api/health",
         "simulatedverse": "http://localhost:5002/api/health",
         "ollama": "http://localhost:11434/api/tags",

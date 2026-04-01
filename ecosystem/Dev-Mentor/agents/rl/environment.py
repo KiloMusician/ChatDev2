@@ -134,7 +134,7 @@ class TerminalDepthsEnv(_GymEnv if _USE_GYM else object):
         if server_url is None:
             server_url = os.environ.get(
                 "TD_SERVER_URL",
-                "http://localhost:5000" if os.environ.get("REPL_ID") else "http://localhost:7337",
+                "http://localhost:5000" if os.environ.get("REPL_ID") else "http://localhost:8008",
             )
         self.server_url = server_url
         self.session_id = session_id

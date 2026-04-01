@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 ROOT = Path(__file__).parent.parent
-API_URL = "http://localhost:7337"
+API_URL = "http://localhost:8008"
 
 
 # ─────────────────────────────────────────────────────────────────────────────

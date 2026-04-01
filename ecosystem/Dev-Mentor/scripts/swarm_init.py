@@ -30,7 +30,7 @@ import urllib.request
 from pathlib import Path
 
 # ── Config ────────────────────────────────────────────────────────────────
-TD_URL = os.environ.get("TD_URL", "http://localhost:7337")
+TD_URL = os.environ.get("TD_URL", "http://localhost:8008")
 STATE_DIR = Path(__file__).parent.parent / "state"
 
 SEED_AGENTS = [

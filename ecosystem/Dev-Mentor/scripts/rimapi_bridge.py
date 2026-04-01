@@ -55,7 +55,7 @@ except Exception:
     _r = None
     REDIS_OK = False
 
-TD_URL = os.getenv("TERMINAL_DEPTHS_URL", "http://localhost:7337")
+TD_URL = os.getenv("TERMINAL_DEPTHS_URL", "http://localhost:8008")
 
 
 def _now() -> str:

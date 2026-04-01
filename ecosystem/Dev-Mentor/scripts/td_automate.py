@@ -6,7 +6,7 @@ Works with the public Replit URL or any local server.
 
 Usage:
     python scripts/td_automate.py
-    python scripts/td_automate.py --base-url http://localhost:7337
+    python scripts/td_automate.py --base-url http://localhost:8008
     python scripts/td_automate.py --start 50 --end 100
     python scripts/td_automate.py --commands-file my_commands.txt
     python scripts/td_automate.py --delay 0.2 --quiet

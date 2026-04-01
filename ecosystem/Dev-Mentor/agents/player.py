@@ -23,7 +23,7 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 
 # PPO policy — optional, falls back to scripted play if unavailable
 try:

@@ -93,7 +93,7 @@ def check_game_api() -> dict:
     try:
         import urllib.request
 
-        url = "http://localhost:7337/api/state"
+        url = "http://localhost:8008/api/state"
         req = urllib.request.Request(url, headers={"Accept": "application/json"})
         with urllib.request.urlopen(req, timeout=4) as r:
             data = json.loads(r.read())
@@ -113,7 +113,7 @@ def check_serena_status() -> dict:
         import urllib.request
 
         with urllib.request.urlopen(
-            "http://localhost:7337/api/serena/status", timeout=5
+            "http://localhost:8008/api/serena/status", timeout=5
         ) as r:
             envelope = json.loads(r.read())
         # Response: {"ok": true, "status": {..., "serena_version": "..."}}
@@ -144,7 +144,7 @@ def check_serena_drift() -> dict:
         import urllib.request
 
         with urllib.request.urlopen(
-            "http://localhost:7337/api/serena/drift", timeout=12
+            "http://localhost:8008/api/serena/drift", timeout=12
         ) as r:
             data = json.loads(r.read())
         critical = data.get("critical", 0)
@@ -172,7 +172,7 @@ def check_serena_align() -> dict:
         import urllib.request
 
         with urllib.request.urlopen(
-            "http://localhost:7337/api/serena/align", timeout=8
+            "http://localhost:8008/api/serena/align", timeout=8
         ) as r:
             data = json.loads(r.read())
         score = data.get("score", 0.0)
@@ -330,7 +330,7 @@ def check_scheduler() -> dict:
     try:
         import urllib.request
 
-        with urllib.request.urlopen("http://localhost:7337/api/state", timeout=4) as r:
+        with urllib.request.urlopen("http://localhost:8008/api/state", timeout=4) as r:
             data = json.loads(r.read())
         # Scheduler state is embedded in game state
         sched = data.get("scheduler", {})
@@ -490,7 +490,7 @@ SURFACE_TEMPLATE = [
     {
         "id": "terminal_depths",
         "name": "Terminal Depths (Game)",
-        "access": "http://localhost:7337/game/",
+        "access": "http://localhost:8008/game/",
         "command": "browser",
         "capabilities": [
             "ns_scripting",
@@ -559,7 +559,7 @@ SURFACE_TEMPLATE = [
     {
         "id": "serena_agno",
         "name": "Serena Agno Bridge",
-        "access": "http://localhost:7337/api/serena/toolkit",
+        "access": "http://localhost:8008/api/serena/toolkit",
         "command": "python agents/serena/agno_bridge.py",
         "capabilities": [
             "walk_repo",

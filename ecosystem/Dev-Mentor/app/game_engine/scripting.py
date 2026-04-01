@@ -226,7 +226,7 @@ class NS:
         try:
             import requests as _req
             r = _req.post(
-                "http://localhost:7337/api/llm/generate",
+                "http://localhost:8008/api/llm/generate",
                 json={"prompt": prompt, "system": system,
                       "max_tokens": max_tokens, "temperature": temperature},
                 timeout=30,
@@ -250,7 +250,7 @@ class NS:
         try:
             import requests as _req
             r = _req.post(
-                "http://localhost:7337/api/llm/chat",
+                "http://localhost:8008/api/llm/chat",
                 json={"messages": messages, "max_tokens": max_tokens},
                 timeout=30,
             )

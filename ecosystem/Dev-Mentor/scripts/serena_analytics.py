@@ -54,7 +54,7 @@ _REPLIT_NATIVE = bool(os.getenv("REPLIT_DEV_DOMAIN")) and not os.getenv(
     "GORDON_DOCKER_HOST"
 )
 TD_URL = os.getenv("TERMINAL_DEPTHS_URL") or (
-    "http://localhost:5000" if _REPLIT_NATIVE else "http://localhost:7337"
+    "http://localhost:5000" if _REPLIT_NATIVE else "http://localhost:8008"
 )
 
 logging.basicConfig(

@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).parent.parent
 CHALLENGES_DIR = BASE_DIR / "challenges"
 CHALLENGES_DIR.mkdir(exist_ok=True)
 
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 
 CATEGORIES = ["web", "crypto", "pwn", "forensics", "reverse", "osint", "networking", "steganography"]
 

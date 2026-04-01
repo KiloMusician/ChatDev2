@@ -32,7 +32,7 @@ from pathlib import Path
 from typing import Any
 
 BASE_DIR = Path(__file__).parent.parent
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 
 PASS = "PASS"
 FAIL = "FAIL"

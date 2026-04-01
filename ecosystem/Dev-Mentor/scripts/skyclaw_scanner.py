@@ -57,7 +57,7 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 SCAN_INTERVAL = int(os.getenv("SKYCLAW_SCAN_INTERVAL", "300"))
 PROCESS_STALE_SECONDS = int(os.getenv("SKYCLAW_PROCESS_STALE_SECONDS", "300"))
-TD_URL = os.getenv("TERMINAL_DEPTHS_URL", "http://localhost:7337")
+TD_URL = os.getenv("TERMINAL_DEPTHS_URL", "http://localhost:8008")
 
 logging.basicConfig(
     level=logging.INFO,

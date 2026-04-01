@@ -18,7 +18,7 @@ Usage (HTTP mode — for testing):
   python scripts/mcp_server.py --http 9999
 
 Environment:
-  TD_URL   — override server URL (default: http://localhost:7337)
+  TD_URL   — override server URL (default: http://localhost:8008)
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from typing import Any, Dict, Optional
 _default_td_url = (
     "http://localhost:5000"
     if os.environ.get("REPLIT_MODE") or os.environ.get("REPLIT_SLUG")
-    else "http://localhost:7337"
+    else "http://localhost:8008"
 )
 TD_URL = os.environ.get("TD_URL", _default_td_url).rstrip("/")
 TIMEOUT = int(os.environ.get("TD_TIMEOUT", "15"))

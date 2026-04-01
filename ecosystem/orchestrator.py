@@ -105,20 +105,28 @@ def _scan_system() -> Dict[str, Any]:
         "opportunities": [],
     }
 
-    # Probe services
-    import urllib.request
+    # Probe services — use threads to avoid blocking the event loop on self-probe
+    import urllib.request, concurrent.futures
     probes = {
         "chatdev_backend": "http://localhost:6400/health",
-        "dev_mentor": "http://localhost:8008/api/manifest",
+        "dev_mentor":      "http://localhost:8008/api/manifest",
+        "nusyq_hub":       "http://localhost:3003/api/status",
         "concept_samurai": "http://localhost:3002/",
     }
-    for name, url in probes.items():
+
+    def _probe(item):
+        name, url = item
         try:
-            with urllib.request.urlopen(url, timeout=2) as r:
-                scan["services"][name] = {"online": True, "code": r.status}
+            with urllib.request.urlopen(url, timeout=3) as r:
+                return name, {"online": True, "code": r.status}
         except Exception as e:
-            scan["services"][name] = {"online": False, "error": str(e)[:60]}
-            scan["issues"].append(f"{name} offline: {str(e)[:40]}")
+            return name, {"online": False, "error": str(e)[:60]}
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        for name, result in pool.map(_probe, probes.items()):
+            scan["services"][name] = result
+            if not result["online"]:
+                scan["issues"].append(f"{name} offline: {result.get('error','')[:40]}")
 
     # Check queued tasks
     queued = queue_stats().get("by_status", {}).get("queued", 0)
@@ -309,7 +317,7 @@ def run_cycle() -> Dict[str, Any]:
     try:
         # ASSESS
         scan = _scan_system()
-        _update_cycle(cycle, "CULTIVATE", scan_result=json.dumps(scan)[:1000])
+        _update_cycle(cycle, "CULTIVATE", scan_result=json.dumps(scan)[:8000])
 
         # CULTIVATE
         tasks = _cultivate(cycle, scan)

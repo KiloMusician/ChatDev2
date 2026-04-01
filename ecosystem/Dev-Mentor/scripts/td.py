@@ -18,7 +18,7 @@ Usage:
   td help              — this message
 
 Environment variables:
-  TD_SERVER_URL        — override server URL (default: http://localhost:7337)
+  TD_SERVER_URL        — override server URL (default: http://localhost:8008)
   TD_SESSION_ID        — reuse a specific session ID
   TD_NO_BROWSER        — set to 1 to skip browser, use terminal REPL
   TD_REPLIT_URL        — Replit Dev URL for browser launch
@@ -819,7 +819,7 @@ def main(argv: list[str] = None) -> int:
         if proc:
             ok = wait_for_server(5000, timeout=15.0)
             if ok:
-                server_url = "http://localhost:7337"
+                server_url = "http://localhost:8008"
                 _print("  ✓ Server started", "success")
             else:
                 _print("  ✗ Server failed to start within 15s", "error")

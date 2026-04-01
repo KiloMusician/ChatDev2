@@ -13,7 +13,7 @@ Training loop:
     3. update():           PPO clip update — gradient ascent on policy, MSE on value
 
 Usage:
-    env = TerminalDepthsEnv(server_url="http://localhost:7337")
+    env = TerminalDepthsEnv(server_url="http://localhost:8008")
     agent = PPO()
     agent.train(env, n_episodes=50, steps_per_episode=200)
 
@@ -472,6 +472,6 @@ if __name__ == "__main__":
     print("See the TODO block in ppo.py for guidance.")
     print()
     print("Then run:")
-    print("  env = TerminalDepthsEnv(server_url='http://localhost:7337')")
+    print("  env = TerminalDepthsEnv(server_url='http://localhost:8008')")
     print("  agent = PPO(hidden_size=128)  # or 64, 256")
     print("  agent.train(env, n_episodes=10, steps_per_episode=64)")

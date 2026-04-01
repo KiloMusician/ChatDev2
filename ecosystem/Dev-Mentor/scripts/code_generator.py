@@ -38,7 +38,7 @@ TESTS_DIR.mkdir(exist_ok=True)
 DOCS_DIR.mkdir(parents=True, exist_ok=True)
 GENERATED_DIR.mkdir(exist_ok=True)
 
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 
 _GAME_CONTEXT = """
 Terminal Depths is a Python-based browser terminal RPG. Commands are implemented as

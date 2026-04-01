@@ -5690,7 +5690,7 @@ def gordon_status():
             else "{}"
         )
         .get("endpoints", {})
-        .get("game_command", "http://localhost:7337/api/game/command"),
+        .get("game_command", "http://localhost:8008/api/game/command"),
     }
 
 
@@ -6535,7 +6535,7 @@ async def ws_td_stream(ws: WebSocket):
 # ── OpenAI-compatible LLM proxy ───────────────────────────────────────────────
 # Routes RimGPT / RimChat / any OpenAI-API client → Ollama (local, private).
 #
-# RimGPT:  Options → AI Provider → Custom → URL: http://localhost:7337/v1
+# RimGPT:  Options → AI Provider → Custom → URL: http://localhost:8008/v1
 #           API Key: any-string (ignored)
 # RimChat: same URL pattern
 # RimTalk: use the "Local" provider option in mod settings (Ollama native)

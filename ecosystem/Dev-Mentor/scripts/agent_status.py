@@ -11,7 +11,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-HEALTH_URL = os.getenv("TERMINAL_DEPTHS_HEALTH_URL", "http://localhost:7337/api/health")
+HEALTH_URL = os.getenv("TERMINAL_DEPTHS_HEALTH_URL", "http://localhost:8008/api/manifest")
 
 
 def sh(cmd):

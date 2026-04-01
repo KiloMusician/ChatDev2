@@ -42,7 +42,7 @@ def _detect_base_url() -> str:
         return _os.environ["TD_BASE_URL"].rstrip("/")
     if _os.environ.get("REPL_ID") or _os.environ.get("REPLIT_DEPLOYMENT"):
         return "http://localhost:5000"
-    return "http://localhost:7337"
+    return "http://localhost:8008"
 
 
 BASE_URL = _detect_base_url()

@@ -31,7 +31,7 @@ DOCS_DIR = BASE_DIR / "docs"
 MAN_DIR = DOCS_DIR / "commands"
 LORE_DIR = DOCS_DIR / "lore"
 DEV_DIR = DOCS_DIR / "development"
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 
 for d in (MAN_DIR, LORE_DIR, DEV_DIR):
     d.mkdir(parents=True, exist_ok=True)

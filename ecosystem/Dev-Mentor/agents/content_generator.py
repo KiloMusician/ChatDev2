@@ -24,7 +24,7 @@ import urllib.request
 from pathlib import Path
 from typing import List
 
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 BASE_DIR = Path(__file__).parent.parent
 KNOWLEDGE_DIR = BASE_DIR / "knowledge"
 KNOWLEDGE_DIR.mkdir(exist_ok=True)

@@ -51,12 +51,12 @@ def list_agents() -> List[dict]:
 def seed_defaults() -> None:
     defaults = [
         ("chatdev.backend", "ChatDev Backend", "ChatDev", "http://localhost:6400", ["workflow", "orchestration", "api"]),
-        ("devmentor.game", "Dev-Mentor Game Engine", "Dev-Mentor", "http://localhost:8008", ["game", "cli", "ml", "swarm", "llm"]),
+        ("devmentor.game", "Dev-Mentor Game Engine", "Dev-Mentor", "http://localhost:8008/api", ["game", "cli", "ml", "swarm", "llm"]),
         ("devmentor.serena", "Serena Analytics", "Dev-Mentor", None, ["indexing", "search", "qa"]),
         ("devmentor.gordon", "Gordon Self-Improver", "Dev-Mentor", None, ["self-improvement", "code-gen", "testing"]),
-        ("devmentor.swarm", "Swarm Controller", "Dev-Mentor", "http://localhost:8008/api/agent", ["multi-agent", "delegation"]),
+        ("devmentor.swarm", "Swarm Controller", "Dev-Mentor", "http://localhost:8008/api", ["multi-agent", "delegation"]),
         ("nusyq_hub.spine", "NuSyQ Hub Spine", "NuSyQ-Hub", None, ["orchestration", "routing", "memory"]),
-        ("concept_samurai.katana", "Katana Keeper", "CONCEPT_SAMURAI", "http://localhost:3002", ["meta", "logic", "abstraction"]),
+        ("concept_samurai.katana", "Katana Keeper", "CONCEPT_SAMURAI", None, ["meta", "logic", "abstraction"]),
     ]
     for d in defaults:
         try:

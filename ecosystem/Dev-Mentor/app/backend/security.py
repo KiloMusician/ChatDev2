@@ -154,8 +154,8 @@ def get_allowed_origins() -> list[str]:
     """
     # Include both the Replit container port (5000) and local VS Code dev port (7337).
     origins: list[str] = [
-        "http://localhost:7337", "http://127.0.0.1:5000",  # Replit container
-        "http://localhost:7337", "http://127.0.0.1:7337",  # local VS Code dev
+        "http://localhost:8008", "http://127.0.0.1:5000",  # Replit container
+        "http://localhost:8008", "http://127.0.0.1:7337",  # local VS Code dev
     ]
     if _REPLIT_DOMAIN:
         origins.append(f"https://{_REPLIT_DOMAIN}")

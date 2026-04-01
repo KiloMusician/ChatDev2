@@ -9,7 +9,10 @@ echo "[ecosystem] Starting NuSyQ ecosystem services..."
 # ── Dev-Mentor: Terminal Depths FastAPI backend ──────────────────────────
 echo "[ecosystem] Starting Dev-Mentor (Terminal Depths) on port 8008..."
 cd "$ECOSYSTEM_DIR/Dev-Mentor"
-python -m uvicorn app.backend.main:app \
+# AUTO_SLEEP_MINUTES=0 disables the 30-minute idle shutdown;
+# bridge keepalive pings every 20 min for belt-and-suspenders
+AUTO_SLEEP_MINUTES=0 \
+  python -m uvicorn app.backend.main:app \
   --host localhost \
   --port 8008 \
   --log-level warning \

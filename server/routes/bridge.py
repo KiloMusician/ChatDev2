@@ -113,22 +113,32 @@ async def ping():
 @router.get("/status")
 async def bridge_status():
     """Compact bridge status for UI panels — uptime, quest count, repo health."""
-    import urllib.request
+    import urllib.request, concurrent.futures
     quests = _load_quests()
     cached_synced = mem_read("devmentor.quests.synced")
 
-    online_repos: list = []
-    offline_repos: list = []
-    for repo in list_repos():
-        health_url = repo.get("health") or repo.get("api")
-        reachable = False
-        if health_url:
+    repos = list_repos()
+    repo_urls = {r["id"]: (r.get("health") or r.get("api")) for r in repos if r.get("id")}
+
+    def _probe_all():
+        result = {}
+        def _probe(item):
+            rid, url = item
+            if not url:
+                return rid, False
             try:
-                with urllib.request.urlopen(health_url, timeout=1) as r:
-                    reachable = r.status == 200
+                with urllib.request.urlopen(url, timeout=2) as r:
+                    return rid, r.status == 200
             except Exception:
-                pass
-        (online_repos if reachable else offline_repos).append(repo["id"])
+                return rid, False
+        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+            for rid, ok in pool.map(_probe, repo_urls.items()):
+                result[rid] = ok
+        return result
+
+    probe_results = await asyncio.to_thread(_probe_all)
+    online_repos = [rid for rid, ok in probe_results.items() if ok]
+    offline_repos = [rid for rid, ok in probe_results.items() if not ok]
 
     return {
         "status": "online",
@@ -172,6 +182,8 @@ async def manifest():
         "online_repos": len(online_repos),
         "total_repos": len(list_repos()),
         "sessions_active": len(_sessions),
+        "commands_available": sorted(_COMMAND_HANDLERS.keys()),
+        "command_count": len(_COMMAND_HANDLERS),
         "pages": {
             "home": "/",
             "ecosystem": "/ecosystem",
@@ -221,31 +233,37 @@ async def bridge_events(request: Request):
             except Exception:
                 pass
 
-            # ── health snapshot every 30s ──────────────────────────────────
+            # ── health snapshot every 30s (threaded to avoid blocking event loop) ──
             if now - last_health_check >= 30:
                 try:
-                    import urllib.request as _urllib
-                    probes = {
+                    import urllib.request as _urllib, concurrent.futures as _cf
+                    _probes = {
                         "chatdev":         "http://localhost:6400/health",
                         "dev_mentor":      "http://localhost:8008/api/manifest",
                         "nusyq_hub":       "http://localhost:3003/api/status",
                         "concept_samurai": "http://localhost:3002/",
                     }
-                    online = []
-                    for svc_name, url in probes.items():
-                        try:
-                            with _urllib.urlopen(url, timeout=1) as r:
-                                if r.status == 200:
-                                    online.append(svc_name)
-                        except Exception:
-                            pass
+
+                    def _do_probes():
+                        ok = []
+                        def _p(item):
+                            sn, url = item
+                            try:
+                                with _urllib.urlopen(url, timeout=2) as r:
+                                    return sn if r.status == 200 else None
+                            except Exception:
+                                return None
+                        with _cf.ThreadPoolExecutor(max_workers=4) as p:
+                            for r in p.map(_p, _probes.items()):
+                                if r:
+                                    ok.append(r)
+                        return ok
+
+                    online = await asyncio.to_thread(_do_probes)
                     payload = json.dumps({
                         "online": len(online),
                         "services": online,
-                        "repos": {
-                            "online": online,
-                            "total": len(probes),
-                        },
+                        "repos": {"online": online, "total": len(_probes)},
                     })
                     yield f"event: health\ndata: {payload}\n\n"
                     last_health_check = now
@@ -391,18 +409,24 @@ def _cmd_repo_list(ctx):
 
 @_register_cmd("repo status")
 def _cmd_repo_status(ctx):
-    import urllib.request
-    results = {}
-    for repo in list_repos():
-        health_url = repo.get("health") or repo.get("api")
-        if not health_url:
-            results[repo["id"]] = {"status": repo.get("status", "unknown"), "reachable": False}
-            continue
+    import urllib.request, concurrent.futures
+    repos = list_repos()
+
+    def _probe(repo):
+        rid = repo.get("id", "?")
+        url = repo.get("health") or repo.get("api")
+        if not url:
+            return rid, {"status": repo.get("status", "unknown"), "reachable": False}
         try:
-            with urllib.request.urlopen(health_url, timeout=2) as r:
-                results[repo["id"]] = {"status": "online", "reachable": True, "code": r.status}
+            with urllib.request.urlopen(url, timeout=3) as r:
+                return rid, {"status": "online", "reachable": True, "code": r.status}
         except Exception as e:
-            results[repo["id"]] = {"status": "offline", "reachable": False, "error": str(e)[:60]}
+            return rid, {"status": "offline", "reachable": False, "error": str(e)[:60]}
+
+    results = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+        for rid, info in pool.map(_probe, repos):
+            results[rid] = info
     return {"repo_status": results}
 
 

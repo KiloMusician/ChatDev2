@@ -54,7 +54,7 @@ if str(BASE) not in sys.path:
     sys.path.insert(0, str(BASE))
 
 SHIP_NAME = os.getenv("CULTURE_SHIP_NAME", "GSV Sublime Optimization")
-TD_URL = os.getenv("TERMINAL_DEPTHS_URL", "http://localhost:7337")
+TD_URL = os.getenv("TERMINAL_DEPTHS_URL", "http://localhost:8008")
 
 logging.basicConfig(
     level=logging.INFO,

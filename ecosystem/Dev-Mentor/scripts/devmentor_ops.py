@@ -260,13 +260,13 @@ class ZeroTokenOps:
                 "http://localhost:8002/",
             ],
             "DevMentor": [
-                "http://localhost:7337/health",
-                "http://localhost:7337/",
+                "http://localhost:8008/api/manifest",
+                "http://localhost:8008/",
             ],
             "SimulatedVerse": [
                 "http://localhost:5001/health",
                 "http://localhost:5001/",
-                "http://localhost:7337/",
+                "http://localhost:8008/",
             ],
         }
 

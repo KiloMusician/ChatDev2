@@ -32,7 +32,7 @@ FILE_TASKS_DIR = TASKS_DIR / "legacy_runtime"
 TASKS_DIR.mkdir(exist_ok=True)
 FILE_TASKS_DIR.mkdir(parents=True, exist_ok=True)
 
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 SWARM_ROLES = frozenset(
     {
         "scout",

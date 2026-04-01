@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).parent.parent
 LORE_DIR = BASE_DIR / "docs" / "lore"
 LORE_DIR.mkdir(parents=True, exist_ok=True)
 
-BASE_URL = "http://localhost:7337"
+BASE_URL = "http://localhost:8008"
 
 _WORLD_CONTEXT = """
 Terminal Depths is a cyberpunk browser hacking game set in a dystopian near-future.

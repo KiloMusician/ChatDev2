@@ -191,7 +191,7 @@ def run_local_script(rel_path: str, args: List[str] | None = None, timeout: int 
 def check_server() -> dict:
     """Check if the game server is running."""
     try:
-        with urllib.request.urlopen("http://localhost:7337/api/health", timeout=6) as r:
+        with urllib.request.urlopen("http://localhost:8008/api/health", timeout=6) as r:
             return json.loads(r.read())
     except Exception as e:
         return {"ok": False, "error": str(e)}
