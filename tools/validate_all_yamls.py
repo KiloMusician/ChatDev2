@@ -18,8 +18,9 @@ Usage:
 """
 
 import sys
-import subprocess
 from pathlib import Path
+
+from check.check import DesignError, load_config
 
 
 def validate_all():
@@ -35,9 +36,7 @@ def validate_all():
         print("No YAML files found.")
         return
 
-    print(
-        f"Found {len(files)} YAML files. Running FULL validation via check.check...\n"
-    )
+    print(f"Found {len(files)} YAML files. Running strict load_config validation...\n")
 
     passed = 0
     failed = 0
@@ -50,28 +49,13 @@ def validate_all():
         except ValueError:
             rel_path = yaml_file
 
-        # NOW we run check.check, which we just patched to have a main()
-        # This performs the stricter load_config() validation
-        cmd = [sys.executable, "-m", "check.check", "--path", str(yaml_file)]
-
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True)
-
-            if result.returncode == 0:
-                print(f"{rel_path}")
-                passed += 1
-            else:
-                print(f"{rel_path}")
-                # Indent error output
-                if result.stdout:
-                    print("  stdout:", result.stdout.strip().replace("\n", "\n  "))
-                # Validation errors usually print to stdout/stderr depending on impl
-                # Our new main prints to stdout for success/failure message
-                failed += 1
-                failed_files.append(str(rel_path))
-        except Exception as e:
-            print(f"{rel_path} (Execution Failed)")
-            print(f"  Error: {e}")
+            load_config(yaml_file)
+            print(f"{rel_path}")
+            passed += 1
+        except (DesignError, Exception) as exc:
+            print(f"{rel_path}")
+            print(f"  Error: {exc}")
             failed += 1
             failed_files.append(str(rel_path))
 
