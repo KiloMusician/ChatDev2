@@ -31,7 +31,7 @@ DEFAULT_ENDPOINTS = {
 }
 
 PROBE_PATHS = {
-    "chatdev_colony": ["/health", "/api/health", "/api/bridge/status", "/api/ecosystem/status"],
+    "chatdev_colony": ["/health", "/api/health", "/status", "/api/bridge/status", "/api/ecosystem/status"],
     "chatdev_local": ["/health", "/api/health", "/api/bridge/status", "/api/ecosystem/status"],
     "dev_mentor": ["/api/health", "/health"],
     "litellm": ["/v1/models"],
@@ -80,12 +80,19 @@ def _probe(url: str, timeout: float) -> dict[str, Any]:
         request = Request(url, headers={"User-Agent": "chatdev-colony-doctor/1"})
         with urlopen(request, timeout=timeout) as response:
             body = response.read(2048).decode("utf-8", errors="replace")
-            return {
+            payload = {
                 "ok": 200 <= response.status < 300,
                 "status": response.status,
                 "latency_ms": round((time.perf_counter() - started) * 1000, 1),
                 "body_preview": body[:240],
             }
+            try:
+                decoded = json.loads(body)
+            except Exception:
+                decoded = None
+            if isinstance(decoded, dict):
+                payload["json"] = decoded
+            return payload
     except URLError as exc:
         return {
             "ok": False,
@@ -176,16 +183,29 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
 
     local = _local_routes()
     colony_paths = probes["chatdev_colony"]["paths"]
+    colony_status = colony_paths.get("/status", {}).get("json") or {}
+    colony_surface = colony_status.get("surface") if isinstance(colony_status, dict) else {}
+    if not isinstance(colony_surface, dict):
+        colony_surface = {}
+    live_surface_id = colony_surface.get("service_id")
+    live_surface_kind = colony_surface.get("surface_kind")
+    live_is_devmentor_worker = live_surface_id == "devmentor-chatdev-worker"
     drift = []
+    surface_mismatches = []
     for path, present in local.get("important", {}).items():
         live = colony_paths.get(path)
         if present and live and not live.get("ok"):
-            drift.append({
+            item = {
                 "path": path,
                 "local_route_present": True,
                 "live_status": live.get("status"),
                 "live_error": live.get("error"),
-            })
+            }
+            if live_is_devmentor_worker and path not in {"/health", "/api/health"}:
+                item["reason"] = "live_service_is_devmentor_queue_worker"
+                surface_mismatches.append(item)
+            else:
+                drift.append(item)
 
     return {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -194,14 +214,19 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
             "chatdev_colony_health": probes["chatdev_colony"]["paths"]["/health"].get("ok") is True,
             "chatdev_local_health": probes["chatdev_local"]["paths"]["/health"].get("ok") is True,
             "local_app_loaded": local.get("loaded") is True,
+            "live_surface_id": live_surface_id,
+            "live_surface_kind": live_surface_kind,
+            "surface_mismatch_count": len(surface_mismatches),
             "route_drift_count": len(drift),
         },
         "probes": probes,
         "local_routes": local,
         "drift": drift,
+        "surface_mismatches": surface_mismatches,
         "notes": [
             "Use this instead of broad rg over ecosystem mirrors for first-pass ChatDev truth.",
             "A healthy :7338 service does not prove the local checkout routes are live in the container.",
+            "If :7338 reports service_id=devmentor-chatdev-worker, ChatDev2 app-only routes are surface mismatches rather than route drift.",
         ],
     }
 
@@ -222,8 +247,12 @@ def main() -> int:
         print(f"  colony health (:7338): {summary['chatdev_colony_health']}")
         print(f"  local health (:6400): {summary['chatdev_local_health']}")
         print(f"  local app loaded: {summary['local_app_loaded']}")
+        print(f"  live surface: {summary.get('live_surface_id') or 'unknown'} ({summary.get('live_surface_kind') or 'unknown'})")
         if not summary["local_app_loaded"]:
             print(f"  local app error: {report['local_routes'].get('error')}")
+        print(f"  surface mismatch count: {summary['surface_mismatch_count']}")
+        for item in report["surface_mismatches"]:
+            print(f"  mismatch: {item['path']} local=true live_surface={summary.get('live_surface_id')}")
         print(f"  route drift count: {summary['route_drift_count']}")
         for item in report["drift"]:
             print(f"  drift: {item['path']} local=true live={item.get('live_status') or item.get('live_error')}")
