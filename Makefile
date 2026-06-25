@@ -33,6 +33,10 @@ sync: ## Sync Vue graphs to the server database
 validate-yamls: ## Validate all YAML configuration files
 	@uv run python tools/validate_all_yamls.py
 
+.PHONY: doctor-colony
+doctor-colony: ## Probe live ChatDev colony service, local app imports, and route drift
+	@python tools/chatdev_colony_doctor.py
+
 # ==============================================================================
 # Help
 # ==============================================================================
