@@ -1,0 +1,60 @@
+graph:
+  id: pygame_game_phase1_smoke
+  description: Minimal bounded GameDev smoke that proves local game generation and file emission without the full polish and execution loop.
+  log_level: INFO
+  is_majority_voting: false
+  nodes:
+    - id: Phase1_Game_Developer
+      type: agent
+      context_window: 0
+      config:
+        provider: openai
+        name: ecosystem-coder-fast
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        role: |-
+          Build a minimal single-file Python game prototype from the user's prompt.
+
+          GOAL:
+          - Produce a truthful phase-1 smoke artifact quickly.
+          - Keep scope tight: one file, one core mechanic, no external assets.
+
+          MANDATORY REQUIREMENTS:
+          1. Save the code to `game.py` using `save_file(path="game.py", content="<full code>")`
+          2. Use a visible background that is NOT pure black `(0, 0, 0)`
+          3. Lock the loop at 60 FPS with `pygame.time.Clock()`
+          4. Handle `pygame.QUIT` cleanly with `pygame.quit()` and `sys.exit()`
+          5. Support restart with the `R` key
+          6. Keep it to one file and keep the code compact
+
+          IMPLEMENTATION GUIDANCE:
+          - Use pygame
+          - Prefer a tiny arcade loop such as dodge, collect, or survive
+          - Use simple geometric shapes only
+          - No particle systems, no polish pass, no QA pass, no launcher pass
+          - Do not load images, fonts, or sounds from disk
+
+          PROCESS:
+          1. Infer a tiny playable concept from the user's prompt
+          2. Write the complete runnable code
+          3. Call `save_file` exactly once with the full `game.py` content
+          4. Output exactly: `Phase 1 smoke complete. Code saved to game.py.`
+
+          IMPORTANT OUTPUT RULES:
+          - Put the full code only inside the `save_file` tool call
+          - Do not paste the code in the chat response
+          - Do not add explanations after the tool call
+        tooling:
+          - type: function
+            config:
+              auto_load: true
+              tools:
+                - name: save_file
+                - name: describe_available_files
+  initial_instruction: Describe a tiny game concept to generate as a single-file local smoke artifact.
+  start:
+    - Phase1_Game_Developer
+  end:
+    - Phase1_Game_Developer
+version: 1.0.0
+vars: {}
