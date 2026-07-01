@@ -202,6 +202,14 @@ make dev
     ```
     Uses `.venv-gamedev313` to run the bounded GameDev mechanic smoke with syntax and runtime validation.
 
+*   **Windows-native GameDev lane wrapper**:
+    ```powershell
+    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 doctor -Json
+    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 bootstrap
+    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
+    ```
+    Use this on Windows hosts that do not have `make`; it exposes the same bounded doctor/bootstrap/smoke path for the verified GameDev lane.
+
 ### 🐳 Run with Docker
 Alternatively, you can run the entire application using Docker Compose. This method simplifies dependency management and provides a consistent environment.
 

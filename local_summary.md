@@ -155,6 +155,17 @@ Expected proof shape:
 - `artifact_runtime_validation` shows the generated pygame artifact launched without an immediate crash
 - bootstraps `.venv-gamedev313` automatically if it is missing
 
+**Windows-native GameDev lane entry point:**
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 doctor -Json
+powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 bootstrap
+powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
+```
+Expected proof shape:
+- `doctor` returns the same bounded colony report plus `gamedev_env`
+- `bootstrap` creates or verifies `.venv-gamedev313`
+- `smoke` runs the proven repo-local mechanic smoke lane end-to-end
+
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
 python .\tools\litellm_raw_latency_probe.py `
