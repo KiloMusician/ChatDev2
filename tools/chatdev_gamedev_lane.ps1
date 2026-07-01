@@ -16,6 +16,8 @@ $Doctor = Join-Path $ScriptDir "chatdev_colony_doctor.ps1"
 $Bootstrapper = Join-Path $ScriptDir "bootstrap_gamedev_env.ps1"
 $Smoke = Join-Path $ScriptDir "run_gamedev_mechanic_smoke.ps1"
 $Latest = Join-Path $ScriptDir "latest_smoke_receipt.py"
+$DefaultSmokeRepoRoot = "C:\dev\_sandboxes\chatdev-factory-prototype-smoke"
+$DefaultSmokeSessionName = "gamedev_mechanic_smoke_repo_gamedev_local"
 
 switch ($Action) {
     "doctor" {
@@ -29,12 +31,29 @@ switch ($Action) {
         powershell -ExecutionPolicy Bypass -File $Bootstrapper
     }
     "smoke" {
+        $EffectiveSessionName = $SessionName
+        if ([string]::IsNullOrWhiteSpace($EffectiveSessionName)) {
+            $EffectiveSessionName = $DefaultSmokeSessionName
+        }
+        $EffectiveResultJson = $ResultJson
+        if ([string]::IsNullOrWhiteSpace($EffectiveResultJson)) {
+            $EffectiveResultJson = Join-Path $DefaultSmokeRepoRoot ("WareHouse\_smoke_receipts\" + $EffectiveSessionName + ".json")
+        }
+
         $argsList = @("-ExecutionPolicy", "Bypass", "-File", $Smoke, "-Prompt", $Prompt)
         if (-not [string]::IsNullOrWhiteSpace($SessionName)) {
             $argsList += @("-SessionName", $SessionName)
         }
-        if (-not [string]::IsNullOrWhiteSpace($ResultJson)) {
-            $argsList += @("-ResultJson", $ResultJson)
+        if (-not [string]::IsNullOrWhiteSpace($EffectiveResultJson)) {
+            $argsList += @("-ResultJson", $EffectiveResultJson)
+        }
+        if ($Json) {
+            & powershell @argsList *> $null
+            $exitCode = $LASTEXITCODE
+            if (Test-Path $EffectiveResultJson) {
+                Get-Content -Path $EffectiveResultJson
+            }
+            exit $exitCode
         }
         powershell @argsList
     }

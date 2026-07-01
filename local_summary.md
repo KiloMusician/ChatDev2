@@ -160,6 +160,7 @@ Expected proof shape:
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 doctor -Json
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 bootstrap
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
+powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke -Json
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 latest
 ```
 Expected proof shape:
@@ -168,6 +169,7 @@ Expected proof shape:
 - `smoke` runs the proven repo-local mechanic smoke lane end-to-end
 - `smoke` also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`
 - `smoke` refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a stable pointer to the newest receipt
+- `smoke -Json` returns the final receipt JSON from disk without interleaved workflow logs
 - `latest` returns the newest smoke receipt summary; add `-Json` to emit the full payload
 
 **Direct Ollama latency probe for the same GameDev prompt:**
