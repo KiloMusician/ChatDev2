@@ -84,11 +84,14 @@ python .\tools\workflow_smoke_runner.py `
   --poll-interval 2 `
   --grace-seconds 20 `
   --stop-on-first-artifact `
-  --validate-python-artifacts
+  --validate-python-artifacts `
+  --run-python-artifacts `
+  --python-run-timeout-seconds 5
 ```
 Expected proof shape:
 - `status: artifact_emitted` or `completed`
 - `artifact_validation` shows emitted `.py` files as syntactically valid
+- `artifact_runtime_validation` shows the emitted `.py` launched without an immediate runtime crash
 - output under `WareHouse\<session>_<timestamp>\code_workspace\game.py`
 - purpose is one-layer-deeper proof beyond window-only stub
 

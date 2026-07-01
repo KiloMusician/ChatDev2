@@ -1,7 +1,9 @@
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest import mock
 
 from tools.workflow_smoke_runner import (
     _list_workspace_artifacts,
@@ -9,6 +11,7 @@ from tools.workflow_smoke_runner import (
     _override_openai_node_models,
     _resolve_final_status,
     _resolve_yaml_path,
+    _runtime_validate_python_artifacts,
     _summarize_token_progress,
     _validate_python_artifacts,
 )
@@ -115,6 +118,84 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
                     },
                 ],
             )
+
+    @mock.patch("tools.workflow_smoke_runner.subprocess.run")
+    def test_runtime_validate_python_artifacts_accepts_timeout_as_launch_success(self, run_mock: mock.Mock) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output_dir = Path(tmp) / "WareHouse" / "smoke_run"
+            workspace = output_dir / "code_workspace"
+            workspace.mkdir(parents=True)
+            script = workspace / "game.py"
+            script.write_text("while True:\n    pass\n", encoding="utf-8")
+
+            timeout_exc = subprocess.TimeoutExpired(
+                cmd=["python", str(script)],
+                timeout=3.0,
+                output="boot ok",
+                stderr="",
+            )
+            run_mock.side_effect = timeout_exc
+
+            validations = _runtime_validate_python_artifacts(
+                output_dir,
+                [{"relative_path": "code_workspace/game.py"}],
+                timeout_seconds=3.0,
+            )
+
+            self.assertEqual(
+                validations,
+                [
+                    {
+                        "relative_path": "code_workspace/game.py",
+                        "valid": True,
+                        "outcome": "timed_out_after_launch",
+                        "timeout_seconds": 3.0,
+                        "stdout_tail": "boot ok",
+                        "stderr_tail": "",
+                    }
+                ],
+            )
+
+    @mock.patch("tools.workflow_smoke_runner.subprocess.run")
+    def test_runtime_validate_python_artifacts_reports_nonzero_exit(self, run_mock: mock.Mock) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output_dir = Path(tmp) / "WareHouse" / "smoke_run"
+            workspace = output_dir / "code_workspace"
+            workspace.mkdir(parents=True)
+            script = workspace / "broken.py"
+            script.write_text("raise SystemExit(1)\n", encoding="utf-8")
+
+            run_mock.return_value = subprocess.CompletedProcess(
+                args=["python", str(script)],
+                returncode=1,
+                stdout="",
+                stderr="Traceback...",
+            )
+
+            validations = _runtime_validate_python_artifacts(
+                output_dir,
+                [{"relative_path": "code_workspace/broken.py"}],
+                timeout_seconds=2.0,
+            )
+
+            self.assertEqual(
+                validations,
+                [
+                    {
+                        "relative_path": "code_workspace/broken.py",
+                        "valid": False,
+                        "outcome": "exited_nonzero",
+                        "returncode": 1,
+                        "stdout_tail": "",
+                        "stderr_tail": "Traceback...",
+                    }
+                ],
+            )
+            run_mock.assert_called_once()
+            invoked_cmd = run_mock.call_args.args[0]
+            invoked_kwargs = run_mock.call_args.kwargs
+            self.assertEqual(invoked_cmd[1], "broken.py")
+            self.assertEqual(invoked_kwargs["cwd"], str(script.parent))
 
     def test_node_progress_reached_matches_requested_thresholds(self) -> None:
         token_progress = {

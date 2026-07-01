@@ -11,6 +11,7 @@ import argparse
 import ast
 import json
 import os
+import subprocess
 import sys
 import threading
 import time
@@ -117,6 +118,70 @@ def _validate_python_artifacts(output_dir: Path, artifacts: Sequence[dict[str, A
     return validations
 
 
+def _runtime_validate_python_artifacts(
+    output_dir: Path,
+    artifacts: Sequence[dict[str, Any]],
+    *,
+    timeout_seconds: float,
+) -> list[dict[str, Any]]:
+    validations: list[dict[str, Any]] = []
+    for artifact in artifacts:
+        relative_path = artifact.get("relative_path")
+        if not isinstance(relative_path, str) or not relative_path.endswith(".py"):
+            continue
+
+        artifact_path = output_dir / Path(relative_path)
+        env = os.environ.copy()
+        env.setdefault("SDL_VIDEODRIVER", "dummy")
+        env.setdefault("SDL_AUDIODRIVER", "dummy")
+        env.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
+
+        try:
+            completed = subprocess.run(
+                [sys.executable, artifact_path.name],
+                cwd=str(artifact_path.parent),
+                env=env,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=timeout_seconds,
+            )
+            valid = completed.returncode == 0
+            outcome = "exited_0" if valid else "exited_nonzero"
+            validations.append(
+                {
+                    "relative_path": relative_path,
+                    "valid": valid,
+                    "outcome": outcome,
+                    "returncode": completed.returncode,
+                    "stdout_tail": completed.stdout[-500:],
+                    "stderr_tail": completed.stderr[-500:],
+                }
+            )
+        except subprocess.TimeoutExpired as exc:
+            validations.append(
+                {
+                    "relative_path": relative_path,
+                    "valid": True,
+                    "outcome": "timed_out_after_launch",
+                    "timeout_seconds": timeout_seconds,
+                    "stdout_tail": (exc.stdout or "")[-500:],
+                    "stderr_tail": (exc.stderr or "")[-500:],
+                }
+            )
+        except Exception as exc:
+            validations.append(
+                {
+                    "relative_path": relative_path,
+                    "valid": False,
+                    "outcome": "spawn_error",
+                    "error": str(exc),
+                }
+            )
+    return validations
+
+
 def _summarize_token_progress(token_usage: dict[str, Any] | None, current_node_id: str | None) -> dict[str, Any]:
     call_history = token_usage.get("call_history", []) if token_usage else []
     last_completed_node = call_history[-1]["node_id"] if call_history else None
@@ -210,6 +275,17 @@ def main() -> int:
         "--validate-python-artifacts",
         action="store_true",
         help="Compile emitted Python artifacts with ast.parse and fail if any are invalid",
+    )
+    parser.add_argument(
+        "--run-python-artifacts",
+        action="store_true",
+        help="Launch emitted Python artifacts with a short timeout and fail on immediate runtime errors",
+    )
+    parser.add_argument(
+        "--python-run-timeout-seconds",
+        type=float,
+        default=5.0,
+        help="Per-artifact timeout for --run-python-artifacts runtime validation",
     )
     parser.add_argument("--attachment", action="append", default=[], help="Optional attachment path")
     args = parser.parse_args()
@@ -349,6 +425,18 @@ def main() -> int:
         if artifact_validation and not all(item["valid"] for item in artifact_validation):
             status = "artifact_validation_failed"
 
+    artifact_runtime_validation = None
+    runtime_python = None
+    if args.run_python_artifacts:
+        runtime_python = sys.executable
+        artifact_runtime_validation = _runtime_validate_python_artifacts(
+            graph_context.directory,
+            state["artifacts"],
+            timeout_seconds=args.python_run_timeout_seconds,
+        )
+        if artifact_runtime_validation and not all(item["valid"] for item in artifact_runtime_validation):
+            status = "artifact_runtime_failed"
+
     result = {
         "status": status,
         "repo_root": str(repo_root),
@@ -367,6 +455,8 @@ def main() -> int:
         "exception": state["exception"],
         "final_message": final_message,
         "artifact_validation": artifact_validation,
+        "runtime_python": runtime_python,
+        "artifact_runtime_validation": artifact_runtime_validation,
         "token_usage": token_usage,
         "token_progress": token_progress,
         "elapsed_seconds": round((state["ended_at"] or time.time()) - state["started_at"], 2),
