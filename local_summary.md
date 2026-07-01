@@ -142,6 +142,8 @@ Current verified shape on 2026-06-25:
 - Live colony ChatDev `:7338` health is up.
 - Dev-Mentor `:7337`, LiteLLM `:4000`, and Ollama `:11434` are reachable.
 - Local checkout app imports after `fastmcp` is installed.
+- Sandbox smoke venv `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\.venv\Scripts\python.exe` is Python `3.13` and now has `pygame`.
+- Repo venv `C:\dev\active\ChatDev2\.venv\Scripts\python.exe` is Python `3.14`; `pygame` currently falls back to a source-build path there instead of the Windows wheel used by Python `3.13`.
 - Local checkout exposes bridge/ecosystem routes, but the live `:7338` service does not expose `/api/bridge/status` or `/api/ecosystem/status`; treat that as container/image drift until rebuilt or re-routed.
 - Avoid broad `rg` over this repo without excluding `ecosystem/`, `logs/`, `WareHouse/`, and generated reports.
 
