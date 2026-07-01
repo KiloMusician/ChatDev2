@@ -139,6 +139,7 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
             validations = _runtime_validate_python_artifacts(
                 output_dir,
                 [{"relative_path": "code_workspace/game.py"}],
+                runtime_python="python",
                 timeout_seconds=3.0,
             )
 
@@ -175,6 +176,7 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
             validations = _runtime_validate_python_artifacts(
                 output_dir,
                 [{"relative_path": "code_workspace/broken.py"}],
+                runtime_python="python",
                 timeout_seconds=2.0,
             )
 
@@ -194,6 +196,7 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
             run_mock.assert_called_once()
             invoked_cmd = run_mock.call_args.args[0]
             invoked_kwargs = run_mock.call_args.kwargs
+            self.assertEqual(invoked_cmd[0], "python")
             self.assertEqual(invoked_cmd[1], "broken.py")
             self.assertEqual(invoked_kwargs["cwd"], str(script.parent))
 

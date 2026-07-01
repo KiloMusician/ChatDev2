@@ -122,6 +122,7 @@ def _runtime_validate_python_artifacts(
     output_dir: Path,
     artifacts: Sequence[dict[str, Any]],
     *,
+    runtime_python: str,
     timeout_seconds: float,
 ) -> list[dict[str, Any]]:
     validations: list[dict[str, Any]] = []
@@ -138,7 +139,7 @@ def _runtime_validate_python_artifacts(
 
         try:
             completed = subprocess.run(
-                [sys.executable, artifact_path.name],
+                [runtime_python, artifact_path.name],
                 cwd=str(artifact_path.parent),
                 env=env,
                 capture_output=True,
@@ -287,6 +288,10 @@ def main() -> int:
         default=5.0,
         help="Per-artifact timeout for --run-python-artifacts runtime validation",
     )
+    parser.add_argument(
+        "--runtime-python",
+        help="Interpreter to use for --run-python-artifacts; defaults to the current Python executable",
+    )
     parser.add_argument("--attachment", action="append", default=[], help="Optional attachment path")
     args = parser.parse_args()
 
@@ -428,10 +433,11 @@ def main() -> int:
     artifact_runtime_validation = None
     runtime_python = None
     if args.run_python_artifacts:
-        runtime_python = sys.executable
+        runtime_python = args.runtime_python or sys.executable
         artifact_runtime_validation = _runtime_validate_python_artifacts(
             graph_context.directory,
             state["artifacts"],
+            runtime_python=runtime_python,
             timeout_seconds=args.python_run_timeout_seconds,
         )
         if artifact_runtime_validation and not all(item["valid"] for item in artifact_runtime_validation):
