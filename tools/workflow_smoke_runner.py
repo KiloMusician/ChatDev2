@@ -98,6 +98,35 @@ def _node_progress_reached(
     return False
 
 
+def _override_openai_node_models(graph_definition: dict[str, Any], model_name: str) -> int:
+    if hasattr(graph_definition, "nodes"):
+        nodes = getattr(graph_definition, "nodes", [])
+    elif isinstance(graph_definition, dict):
+        nodes = graph_definition.get("nodes", [])
+    else:
+        nodes = []
+
+    updated = 0
+    for node in nodes:
+        if hasattr(node, "config"):
+            config = getattr(node, "config")
+            provider = getattr(config, "provider", None)
+            if provider != "openai":
+                continue
+            setattr(config, "name", model_name)
+        elif isinstance(node, dict):
+            config = node.get("config")
+            if not isinstance(config, dict):
+                continue
+            if config.get("provider") != "openai":
+                continue
+            config["name"] = model_name
+        else:
+            continue
+        updated += 1
+    return updated
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a bounded ChatDev2 workflow smoke.")
     parser.add_argument("--repo-root", required=True, help="Target ChatDev2 checkout root")
@@ -110,6 +139,7 @@ def main() -> int:
     parser.add_argument("--stop-on-first-artifact", action="store_true", help="Cancel once the first artifact is written")
     parser.add_argument("--stop-on-active-node", help="Cancel once the named node becomes the current active node")
     parser.add_argument("--stop-on-completed-node", help="Cancel once the named node completes a model call")
+    parser.add_argument("--override-model", help="Override all openai-provider node model aliases for this run")
     parser.add_argument("--attachment", action="append", default=[], help="Optional attachment path")
     args = parser.parse_args()
 
@@ -133,6 +163,9 @@ def main() -> int:
         raise SystemExit(f"Workflow YAML not found: {yaml_path}")
 
     design = load_config(yaml_path)
+    overridden_node_count = 0
+    if args.override_model:
+        overridden_node_count = _override_openai_node_models(design.graph, args.override_model)
     graph_config = GraphConfig.from_definition(
         design.graph,
         name=args.session_name,
@@ -243,6 +276,8 @@ def main() -> int:
         "status": status,
         "repo_root": str(repo_root),
         "yaml_file": str(yaml_path),
+        "override_model": args.override_model,
+        "overridden_node_count": overridden_node_count,
         "session_name": args.session_name,
         "output_dir": str(graph_context.directory),
         "artifacts": state["artifacts"],

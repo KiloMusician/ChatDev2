@@ -1,10 +1,12 @@
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 from tools.workflow_smoke_runner import (
     _list_workspace_artifacts,
     _node_progress_reached,
+    _override_openai_node_models,
     _resolve_yaml_path,
     _summarize_token_progress,
 )
@@ -104,6 +106,37 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
                 stop_on_completed_node="Polish_Developer",
             )
         )
+
+    def test_override_openai_node_models_updates_only_openai_nodes(self) -> None:
+        graph_definition = {
+            "nodes": [
+                {"id": "A", "config": {"provider": "openai", "name": "old-a"}},
+                {"id": "B", "config": {"provider": "gemini", "name": "old-b"}},
+                {"id": "C", "config": {"provider": "openai", "name": "old-c"}},
+                {"id": "D", "config": "invalid"},
+            ]
+        }
+
+        updated = _override_openai_node_models(graph_definition, "ecosystem-qwen")
+
+        self.assertEqual(updated, 2)
+        self.assertEqual(graph_definition["nodes"][0]["config"]["name"], "ecosystem-qwen")
+        self.assertEqual(graph_definition["nodes"][1]["config"]["name"], "old-b")
+        self.assertEqual(graph_definition["nodes"][2]["config"]["name"], "ecosystem-qwen")
+
+    def test_override_openai_node_models_updates_object_graph_definitions(self) -> None:
+        graph_definition = SimpleNamespace(
+            nodes=[
+                SimpleNamespace(config=SimpleNamespace(provider="openai", name="old-a")),
+                SimpleNamespace(config=SimpleNamespace(provider="anthropic", name="old-b")),
+            ]
+        )
+
+        updated = _override_openai_node_models(graph_definition, "ecosystem-auto")
+
+        self.assertEqual(updated, 1)
+        self.assertEqual(graph_definition.nodes[0].config.name, "ecosystem-auto")
+        self.assertEqual(graph_definition.nodes[1].config.name, "old-b")
 
 
 if __name__ == "__main__":
