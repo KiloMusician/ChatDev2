@@ -37,6 +37,18 @@ validate-yamls: ## Validate all YAML configuration files
 doctor-colony: ## Probe live ChatDev colony service, local app imports, and route drift
 	@python tools/chatdev_colony_doctor.py
 
+.PHONY: doctor-gamedev
+doctor-gamedev: ## Print colony truth plus GameDev Python lane compatibility as JSON
+	@python tools/chatdev_colony_doctor.py --json
+
+.PHONY: bootstrap-gamedev-env
+bootstrap-gamedev-env: ## Create the repo-local Python 3.13 GameDev env with pygame support
+	@powershell -ExecutionPolicy Bypass -File .\tools\bootstrap_gamedev_env.ps1
+
+.PHONY: smoke-gamedev-mechanic
+smoke-gamedev-mechanic: ## Run the proven repo-local GameDev mechanic smoke lane
+	@powershell -ExecutionPolicy Bypass -File .\tools\run_gamedev_mechanic_smoke.ps1
+
 # ==============================================================================
 # Help
 # ==============================================================================

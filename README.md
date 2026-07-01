@@ -184,6 +184,24 @@ make dev
     ```
     Checks all YAML files for syntax and schema errors.
 
+*   **GameDev Python lane doctor**:
+    ```bash
+    make doctor-gamedev
+    ```
+    Prints the bounded colony report plus the `gamedev_env` interpreter matrix, including which Python lanes currently have `pygame`.
+
+*   **Bootstrap the repo-local GameDev env**:
+    ```bash
+    make bootstrap-gamedev-env
+    ```
+    Creates `.venv-gamedev313` from the current Python 3.13 lane and verifies `pygame`.
+
+*   **Run the proven mechanic smoke lane**:
+    ```bash
+    make smoke-gamedev-mechanic
+    ```
+    Uses `.venv-gamedev313` to run the bounded GameDev mechanic smoke with syntax and runtime validation.
+
 ### 🐳 Run with Docker
 Alternatively, you can run the entire application using Docker Compose. This method simplifies dependency management and provides a consistent environment.
 
