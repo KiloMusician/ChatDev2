@@ -130,6 +130,8 @@ To get started, follow these steps:
    pip3 install -r requirements.txt
    ```
 
+   > For local GameDev `pygame` workflows, the currently verified lane is Python `3.13`. The repo-local Python `3.14` venv can fall back to a source-build path for `pygame`, while Python `3.13` uses the working Windows wheel path.
+
 4. **Set OpenAI API Key:** Export your OpenAI API key as an environment variable. Replace `"your_OpenAI_API_key"` with
    your actual API key. Remember that this environment variable is session-specific, so you need to set it again if you
    open a new terminal session.

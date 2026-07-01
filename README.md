@@ -148,6 +148,8 @@ make dev
     uv run python server_main.py --port 6400 --reload
     ```
     > Remove `--reload` if output files (e.g., GameDev) trigger restarts, which interrupts tasks and loses progress.
+    >
+    > GameDev `pygame` workflows are currently verified on Python `3.13`. The repo-local Python `3.14` venv can fall back to a source-build path for `pygame`, while the sandbox smoke venv and system Python `3.13` use the working Windows wheel path.
 
 2.  **Start Frontend**:
     ```bash
