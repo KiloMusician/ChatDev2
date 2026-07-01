@@ -85,6 +85,19 @@ def _summarize_token_progress(token_usage: dict[str, Any] | None, current_node_i
     }
 
 
+def _node_progress_reached(
+    token_progress: dict[str, Any],
+    *,
+    stop_on_active_node: str | None,
+    stop_on_completed_node: str | None,
+) -> bool:
+    if stop_on_active_node and token_progress.get("last_active_node") == stop_on_active_node:
+        return True
+    if stop_on_completed_node and token_progress.get("last_completed_node") == stop_on_completed_node:
+        return True
+    return False
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a bounded ChatDev2 workflow smoke.")
     parser.add_argument("--repo-root", required=True, help="Target ChatDev2 checkout root")
@@ -95,6 +108,8 @@ def main() -> int:
     parser.add_argument("--poll-interval", type=float, default=2.0, help="Artifact polling interval")
     parser.add_argument("--grace-seconds", type=float, default=20.0, help="Cancel grace period after artifact")
     parser.add_argument("--stop-on-first-artifact", action="store_true", help="Cancel once the first artifact is written")
+    parser.add_argument("--stop-on-active-node", help="Cancel once the named node becomes the current active node")
+    parser.add_argument("--stop-on-completed-node", help="Cancel once the named node completes a model call")
     parser.add_argument("--attachment", action="append", default=[], help="Optional attachment path")
     args = parser.parse_args()
 
@@ -157,10 +172,17 @@ def main() -> int:
 
     deadline = time.time() + args.timeout_seconds
     artifact_stop_requested = False
+    node_progress_stop_requested = False
     last_artifacts: list[dict[str, Any]] = []
+    token_progress = _summarize_token_progress(None, None)
 
     while thread.is_alive() and time.time() < deadline:
         last_artifacts = _list_workspace_artifacts(graph_context.directory)
+        token_usage = executor.token_tracker.get_token_usage() if executor.token_tracker else None
+        token_progress = _summarize_token_progress(
+            token_usage,
+            getattr(executor.token_tracker, "current_node_id", None) if executor.token_tracker else None,
+        )
         if last_artifacts and args.stop_on_first_artifact and not artifact_stop_requested:
             artifact_stop_requested = True
             state["cancel_requested"] = True
@@ -168,9 +190,22 @@ def main() -> int:
             executor.request_cancel("Smoke threshold met: artifact emitted")
             thread.join(timeout=args.grace_seconds)
             break
+        if (
+            not node_progress_stop_requested
+            and _node_progress_reached(
+                token_progress,
+                stop_on_active_node=args.stop_on_active_node,
+                stop_on_completed_node=args.stop_on_completed_node,
+            )
+        ):
+            node_progress_stop_requested = True
+            state["cancel_requested"] = True
+            executor.request_cancel("Smoke threshold met: node progress reached")
+            thread.join(timeout=args.grace_seconds)
+            break
         time.sleep(args.poll_interval)
 
-    if thread.is_alive() and not artifact_stop_requested:
+    if thread.is_alive() and not artifact_stop_requested and not node_progress_stop_requested:
         state["cancel_requested"] = True
         executor.request_cancel("Smoke timeout reached")
         thread.join(timeout=args.grace_seconds)
@@ -182,6 +217,8 @@ def main() -> int:
     if status == "running":
         if artifact_stop_requested and state["artifacts"]:
             status = "artifact_emitted"
+        elif node_progress_stop_requested:
+            status = "node_progress_reached"
         else:
             status = "timeout_no_artifact" if not state["artifacts"] else "artifact_emitted_timeout"
 
@@ -211,6 +248,8 @@ def main() -> int:
         "artifacts": state["artifacts"],
         "first_artifact_path": str(first_artifact_path) if first_artifact_path else None,
         "first_artifact_text": first_artifact_text,
+        "stop_on_active_node": args.stop_on_active_node,
+        "stop_on_completed_node": args.stop_on_completed_node,
         "cancel_requested": state["cancel_requested"],
         "exception_type": state["exception_type"],
         "exception": state["exception"],
@@ -220,7 +259,7 @@ def main() -> int:
         "elapsed_seconds": round((state["ended_at"] or time.time()) - state["started_at"], 2),
     }
     print(json.dumps(result, indent=2, ensure_ascii=False))
-    return 0 if status in {"completed", "artifact_emitted", "artifact_emitted_timeout"} else 1
+    return 0 if status in {"completed", "artifact_emitted", "artifact_emitted_timeout", "node_progress_reached"} else 1
 
 
 if __name__ == "__main__":

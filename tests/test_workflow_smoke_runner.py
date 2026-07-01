@@ -4,6 +4,7 @@ from pathlib import Path
 
 from tools.workflow_smoke_runner import (
     _list_workspace_artifacts,
+    _node_progress_reached,
     _resolve_yaml_path,
     _summarize_token_progress,
 )
@@ -74,6 +75,34 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
                 "last_completed_node": "Planner",
                 "last_active_node": "Core_Developer",
             },
+        )
+
+    def test_node_progress_reached_matches_requested_thresholds(self) -> None:
+        token_progress = {
+            "last_completed_node": "Game Designer",
+            "last_active_node": "Planner",
+        }
+
+        self.assertTrue(
+            _node_progress_reached(
+                token_progress,
+                stop_on_active_node="Planner",
+                stop_on_completed_node=None,
+            )
+        )
+        self.assertTrue(
+            _node_progress_reached(
+                token_progress,
+                stop_on_active_node=None,
+                stop_on_completed_node="Game Designer",
+            )
+        )
+        self.assertFalse(
+            _node_progress_reached(
+                token_progress,
+                stop_on_active_node="Core_Developer",
+                stop_on_completed_node="Polish_Developer",
+            )
         )
 
 
