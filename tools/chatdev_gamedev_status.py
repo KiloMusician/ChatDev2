@@ -42,17 +42,64 @@ def _latest_receipt_payload(receipt_dir: Path, *, full: bool) -> dict[str, Any]:
     }
 
 
+def _build_assessment(doctor: dict[str, Any], latest: dict[str, Any]) -> dict[str, Any]:
+    summary = doctor.get("summary", {})
+    probes = doctor.get("probes", {})
+    litellm_ok = (
+        probes.get("litellm", {})
+        .get("paths", {})
+        .get("/v1/models", {})
+        .get("ok")
+        is True
+    )
+    colony_ok = summary.get("chatdev_colony_health") is True
+    runtime_labels = summary.get("gamedev_python_with_pygame") or []
+    repo_runtime_ok = "repo_gamedev_venv" in runtime_labels
+    latest_status = latest.get("status")
+    bounded_smoke_ok = latest_status in {"artifact_emitted", "completed", "node_progress_reached"}
+    live_surface_id = summary.get("live_surface_id")
+    live_surface_mode = "worker_only" if live_surface_id == "devmentor-chatdev-worker" else (live_surface_id or "unknown")
+
+    gaps: list[str] = []
+    if summary.get("chatdev_local_health") is not True:
+        gaps.append("chatdev_local_offline")
+    if live_surface_mode == "worker_only":
+        gaps.append("live_surface_is_queue_worker_not_devall_app")
+    if not bounded_smoke_ok:
+        gaps.append("bounded_smoke_not_proven")
+    if not litellm_ok:
+        gaps.append("litellm_unhealthy")
+    if not repo_runtime_ok:
+        gaps.append("repo_gamedev_runtime_missing")
+
+    overall_status = "ready" if not gaps else ("ready_with_gaps" if bounded_smoke_ok and litellm_ok and repo_runtime_ok else "degraded")
+
+    return {
+        "overall_status": overall_status,
+        "bounded_smoke_ok": bounded_smoke_ok,
+        "litellm_ok": litellm_ok,
+        "chatdev_colony_ok": colony_ok,
+        "repo_gamedev_runtime_ok": repo_runtime_ok,
+        "live_surface_mode": live_surface_mode,
+        "recommended_runtime_label": "repo_gamedev_venv" if repo_runtime_ok else (runtime_labels[0] if runtime_labels else None),
+        "gaps": gaps,
+    }
+
+
 def build_status(*, timeout: float, receipt_dir: Path, full: bool) -> dict[str, Any]:
     doctor = build_report(timeout=timeout)
     latest = _latest_receipt_payload(receipt_dir, full=full)
+    assessment = _build_assessment(doctor, latest)
     return {
         "generated_at": doctor.get("generated_at"),
         "root": doctor.get("root"),
         "doctor_summary": doctor.get("summary"),
         "latest_smoke": latest,
+        "assessment": assessment,
         "notes": [
             "doctor_summary reflects current live/local service truth",
             "latest_smoke reflects the freshest bounded smoke receipt under the selected receipt root",
+            "assessment turns those facts into an operator-facing readiness verdict",
         ],
         **({"doctor_report": doctor} if full else {}),
     }

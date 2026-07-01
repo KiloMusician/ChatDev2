@@ -4,8 +4,38 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tools.chatdev_gamedev_status import _build_assessment
+
 
 class ChatdevGamedevStatusTests(unittest.TestCase):
+    def test_build_assessment_marks_ready_with_gaps_for_worker_only_surface(self) -> None:
+        doctor = {
+            "summary": {
+                "chatdev_colony_health": True,
+                "chatdev_local_health": False,
+                "live_surface_id": "devmentor-chatdev-worker",
+                "gamedev_python_with_pygame": ["repo_gamedev_venv"],
+            },
+            "probes": {
+                "litellm": {
+                    "paths": {
+                        "/v1/models": {"ok": True},
+                    }
+                }
+            },
+        }
+        latest = {"status": "artifact_emitted"}
+
+        assessment = _build_assessment(doctor, latest)
+
+        self.assertEqual(assessment["overall_status"], "ready_with_gaps")
+        self.assertTrue(assessment["bounded_smoke_ok"])
+        self.assertTrue(assessment["litellm_ok"])
+        self.assertTrue(assessment["repo_gamedev_runtime_ok"])
+        self.assertEqual(assessment["live_surface_mode"], "worker_only")
+        self.assertIn("chatdev_local_offline", assessment["gaps"])
+        self.assertIn("live_surface_is_queue_worker_not_devall_app", assessment["gaps"])
+
     def test_status_json_honors_custom_receipt_dir(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             receipt_dir = Path(tmp)
@@ -43,6 +73,7 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
             self.assertEqual(payload["latest_smoke"]["status"], "artifact_emitted")
             self.assertEqual(payload["latest_smoke"]["bounded_stop_reason"], "artifact_threshold_reached")
             self.assertIn("doctor_summary", payload)
+            self.assertIn("assessment", payload)
 
 
 if __name__ == "__main__":

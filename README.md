@@ -216,7 +216,7 @@ make dev
     Each smoke run also refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a deterministic pointer to the newest receipt.
     `smoke -Json` suppresses the live workflow chatter and emits the final receipt payload from disk so automations can consume it directly.
     The `latest` action returns the newest bounded smoke receipt summary, or the full JSON payload when used with `-Json`.
-    The `status` action returns combined doctor summary plus latest smoke summary, or the full doctor-plus-receipt payload when used with `-Json`.
+    The `status` action returns combined doctor summary plus latest smoke summary, along with an `assessment` block that turns them into a readiness verdict. Use `-Json` for the full doctor-plus-receipt payload.
     `smoke`, `latest`, and `status` also accept `-ReceiptDir` when a sandbox uses a non-default receipt root.
 
 ### 🐳 Run with Docker
