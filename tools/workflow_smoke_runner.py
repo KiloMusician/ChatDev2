@@ -76,6 +76,15 @@ def _read_text(path: Path) -> str | None:
         return None
 
 
+def _summarize_token_progress(token_usage: dict[str, Any] | None, current_node_id: str | None) -> dict[str, Any]:
+    call_history = token_usage.get("call_history", []) if token_usage else []
+    last_completed_node = call_history[-1]["node_id"] if call_history else None
+    return {
+        "last_completed_node": last_completed_node,
+        "last_active_node": current_node_id,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a bounded ChatDev2 workflow smoke.")
     parser.add_argument("--repo-root", required=True, help="Target ChatDev2 checkout root")
@@ -177,6 +186,11 @@ def main() -> int:
             status = "timeout_no_artifact" if not state["artifacts"] else "artifact_emitted_timeout"
 
     final_message = None
+    token_usage = executor.token_tracker.get_token_usage() if executor.token_tracker else None
+    token_progress = _summarize_token_progress(
+        token_usage,
+        getattr(executor.token_tracker, "current_node_id", None) if executor.token_tracker else None,
+    )
     if status in {"completed", "artifact_emitted", "artifact_emitted_timeout"}:
         message = executor.get_final_output_message()
         if message is not None:
@@ -201,7 +215,8 @@ def main() -> int:
         "exception_type": state["exception_type"],
         "exception": state["exception"],
         "final_message": final_message,
-        "token_usage": executor.token_tracker.get_token_usage() if executor.token_tracker else None,
+        "token_usage": token_usage,
+        "token_progress": token_progress,
         "elapsed_seconds": round((state["ended_at"] or time.time()) - state["started_at"], 2),
     }
     print(json.dumps(result, indent=2, ensure_ascii=False))

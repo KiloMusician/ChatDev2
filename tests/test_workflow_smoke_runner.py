@@ -2,7 +2,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.workflow_smoke_runner import _list_workspace_artifacts, _resolve_yaml_path
+from tools.workflow_smoke_runner import (
+    _list_workspace_artifacts,
+    _resolve_yaml_path,
+    _summarize_token_progress,
+)
 
 
 class WorkflowSmokeRunnerTests(unittest.TestCase):
@@ -53,6 +57,24 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
                     "code_workspace/src/main.py",
                 ],
             )
+
+    def test_summarize_token_progress_reports_completed_and_active_nodes(self) -> None:
+        token_usage = {
+            "call_history": [
+                {"node_id": "Game Designer"},
+                {"node_id": "Planner"},
+            ]
+        }
+
+        progress = _summarize_token_progress(token_usage, "Core_Developer")
+
+        self.assertEqual(
+            progress,
+            {
+                "last_completed_node": "Planner",
+                "last_active_node": "Core_Developer",
+            },
+        )
 
 
 if __name__ == "__main__":
