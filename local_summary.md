@@ -22,6 +22,23 @@ Safe-mode tasks only (safe_mode: true in task envelope).
 pwsh -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_colony_doctor.ps1
 ```
 
+**Bounded local workflow smoke:**
+```powershell
+python .\tools\workflow_smoke_runner.py `
+  --repo-root C:\dev\_sandboxes\chatdev-factory-prototype-smoke `
+  --yaml-file ChatDev_v1.yaml `
+  --task-prompt "Create the smallest possible Python program that prints hello. Keep it one file and minimal." `
+  --session-name chatdev_smoke_runner_local `
+  --timeout-seconds 360 `
+  --poll-interval 2 `
+  --grace-seconds 20 `
+  --stop-on-first-artifact
+```
+Expected proof shape:
+- `status: artifact_emitted` or `completed`
+- output under `WareHouse\<session>_<timestamp>\code_workspace\`
+- real generated artifact such as `hello.py`, not bootstrap files under `.venv/` or `attachments/`
+
 Current verified shape on 2026-06-25:
 - Live colony ChatDev `:7338` health is up.
 - Dev-Mentor `:7337`, LiteLLM `:4000`, and Ollama `:11434` are reachable.
