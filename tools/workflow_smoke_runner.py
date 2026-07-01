@@ -91,6 +91,11 @@ def _read_text(path: Path) -> str | None:
         return None
 
 
+def _write_result_json(result: dict[str, Any], output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
 def _validate_python_artifacts(output_dir: Path, artifacts: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
     validations: list[dict[str, Any]] = []
     for artifact in artifacts:
@@ -349,6 +354,7 @@ def main() -> int:
         help="Interpreter to use for --run-python-artifacts; defaults to the current Python executable",
     )
     parser.add_argument("--attachment", action="append", default=[], help="Optional attachment path")
+    parser.add_argument("--result-json", help="Optional path to write the final smoke JSON receipt")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).expanduser().resolve()
@@ -541,6 +547,8 @@ def main() -> int:
         "token_progress": token_progress,
         "elapsed_seconds": round((state["ended_at"] or time.time()) - state["started_at"], 2),
     }
+    if args.result_json:
+        _write_result_json(result, Path(args.result_json).expanduser())
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0 if status in {"completed", "artifact_emitted", "artifact_emitted_timeout", "node_progress_reached"} else 1
 

@@ -4,6 +4,7 @@ param(
     [ValidateSet("doctor", "bootstrap", "smoke")]
     [string]$Action,
     [string]$SessionName = "",
+    [string]$ResultJson = "",
     [string]$Prompt = "Create the smallest possible playable pygame square-move demo. Keep it to one file.",
     [switch]$Json,
     [double]$Timeout = 2.0
@@ -30,6 +31,9 @@ switch ($Action) {
         $argsList = @("-ExecutionPolicy", "Bypass", "-File", $Smoke, "-Prompt", $Prompt)
         if (-not [string]::IsNullOrWhiteSpace($SessionName)) {
             $argsList += @("-SessionName", $SessionName)
+        }
+        if (-not [string]::IsNullOrWhiteSpace($ResultJson)) {
+            $argsList += @("-ResultJson", $ResultJson)
         }
         powershell @argsList
     }

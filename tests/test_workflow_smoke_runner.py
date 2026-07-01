@@ -1,3 +1,4 @@
+import json
 import subprocess
 import tempfile
 import unittest
@@ -17,6 +18,7 @@ from tools.workflow_smoke_runner import (
     _runtime_validate_python_artifacts,
     _summarize_token_progress,
     _validate_python_artifacts,
+    _write_result_json,
 )
 
 
@@ -136,6 +138,16 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
                     },
                 ],
             )
+
+    def test_write_result_json_creates_parent_and_writes_utf8(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "WareHouse" / "_smoke_receipts" / "demo.json"
+            payload = {"status": "artifact_emitted", "bounded_stop_reason": "artifact_threshold_reached"}
+
+            _write_result_json(payload, target)
+
+            self.assertTrue(target.exists())
+            self.assertEqual(json.loads(target.read_text(encoding="utf-8")), payload)
 
     @mock.patch("tools.workflow_smoke_runner.subprocess.run")
     def test_runtime_validate_python_artifacts_accepts_timeout_as_launch_success(self, run_mock: mock.Mock) -> None:

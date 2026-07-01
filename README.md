@@ -209,6 +209,7 @@ make dev
     powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
     ```
     Use this on Windows hosts that do not have `make`; it exposes the same bounded doctor/bootstrap/smoke path for the verified GameDev lane.
+    The smoke action now also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`, or you can override it with `-ResultJson`.
 
 ### 🐳 Run with Docker
 Alternatively, you can run the entire application using Docker Compose. This method simplifies dependency management and provides a consistent environment.

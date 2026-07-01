@@ -3,6 +3,7 @@ param(
     [string]$Prompt = "Create the smallest possible playable pygame square-move demo. Keep it to one file.",
     [string]$RepoRoot = "C:\dev\_sandboxes\chatdev-factory-prototype-smoke",
     [string]$SessionName = "",
+    [string]$ResultJson = "",
     [double]$TimeoutSeconds = 240,
     [double]$PollInterval = 2,
     [double]$GraceSeconds = 20,
@@ -30,6 +31,11 @@ if ([string]::IsNullOrWhiteSpace($SessionName)) {
     $SessionName = "gamedev_mechanic_smoke_repo_gamedev_local"
 }
 
+if ([string]::IsNullOrWhiteSpace($ResultJson)) {
+    $ReceiptDir = Join-Path $RepoRoot "WareHouse\_smoke_receipts"
+    $ResultJson = Join-Path $ReceiptDir ($SessionName + ".json")
+}
+
 & $RuntimePython $SmokeRunner `
     --repo-root $RepoRoot `
     --source-root $RepoPath `
@@ -42,5 +48,6 @@ if ([string]::IsNullOrWhiteSpace($SessionName)) {
     --stop-on-first-artifact `
     --validate-python-artifacts `
     --run-python-artifacts `
+    --result-json $ResultJson `
     --runtime-python $RuntimePython `
     --python-run-timeout-seconds $PythonRunTimeoutSeconds

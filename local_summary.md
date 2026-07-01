@@ -165,6 +165,7 @@ Expected proof shape:
 - `doctor` returns the same bounded colony report plus `gamedev_env`
 - `bootstrap` creates or verifies `.venv-gamedev313`
 - `smoke` runs the proven repo-local mechanic smoke lane end-to-end
+- `smoke` also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`
 
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
