@@ -25,16 +25,43 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
             },
         }
         latest = {"status": "artifact_emitted"}
+        yaml_validation = {"ok": True}
 
-        assessment = _build_assessment(doctor, latest)
+        assessment = _build_assessment(doctor, latest, yaml_validation)
 
         self.assertEqual(assessment["overall_status"], "ready_with_gaps")
         self.assertTrue(assessment["bounded_smoke_ok"])
+        self.assertTrue(assessment["yaml_validation_ok"])
         self.assertTrue(assessment["litellm_ok"])
         self.assertTrue(assessment["repo_gamedev_runtime_ok"])
         self.assertEqual(assessment["live_surface_mode"], "worker_only")
         self.assertIn("chatdev_local_offline", assessment["gaps"])
         self.assertIn("live_surface_is_queue_worker_not_devall_app", assessment["gaps"])
+
+    def test_build_assessment_marks_degraded_when_yaml_validation_is_not_proven(self) -> None:
+        doctor = {
+            "summary": {
+                "chatdev_colony_health": True,
+                "chatdev_local_health": True,
+                "live_surface_id": "devmentor-chatdev-worker",
+                "gamedev_python_with_pygame": ["repo_gamedev_venv"],
+            },
+            "probes": {
+                "litellm": {
+                    "paths": {
+                        "/v1/models": {"ok": True},
+                    }
+                }
+            },
+        }
+        latest = {"status": "artifact_emitted"}
+        yaml_validation = {"ok": False}
+
+        assessment = _build_assessment(doctor, latest, yaml_validation)
+
+        self.assertEqual(assessment["overall_status"], "degraded")
+        self.assertFalse(assessment["yaml_validation_ok"])
+        self.assertIn("yaml_validation_not_proven", assessment["gaps"])
 
     def test_status_json_honors_custom_receipt_dir(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -73,6 +100,7 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
             self.assertEqual(payload["latest_smoke"]["status"], "artifact_emitted")
             self.assertEqual(payload["latest_smoke"]["bounded_stop_reason"], "artifact_threshold_reached")
             self.assertIn("doctor_summary", payload)
+            self.assertIn("yaml_validation", payload)
             self.assertIn("assessment", payload)
 
 
