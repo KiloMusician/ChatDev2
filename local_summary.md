@@ -125,6 +125,15 @@ Expected proof shape:
 - same route, two prompt surfaces
 - helps separate “full game generation is too slow” from “backend is generally unhealthy”
 
+**Colony doctor with GameDev Python lane truth:**
+```powershell
+python .\tools\chatdev_colony_doctor.py --json
+```
+Expected proof shape:
+- one JSON report covering live service health, local route truth, and `gamedev_env`
+- `gamedev_env` reports which Python lanes currently have `pygame`
+- use this before assuming the active venv is valid for local GameDev smoke/runtime validation
+
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
 python .\tools\litellm_raw_latency_probe.py `

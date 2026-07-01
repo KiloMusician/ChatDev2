@@ -11,6 +11,7 @@ import contextlib
 import io
 import json
 import os
+import subprocess
 import socket
 import sys
 import time
@@ -37,6 +38,68 @@ PROBE_PATHS = {
     "litellm": ["/v1/models"],
     "ollama": ["/api/tags"],
 }
+
+
+def _python_capability_probe(command: list[str], timeout: float) -> dict[str, Any]:
+    started = time.perf_counter()
+    try:
+        completed = subprocess.run(
+            [
+                *command,
+                "-c",
+                "import sys, importlib.util, platform; "
+                "print(sys.executable); "
+                "print(importlib.util.find_spec('pygame') is not None); "
+                "print(platform.python_version())",
+            ],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=timeout,
+        )
+        lines = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+        return {
+            "ok": completed.returncode == 0 and len(lines) >= 3,
+            "command": command,
+            "returncode": completed.returncode,
+            "executable": lines[0] if len(lines) >= 1 else None,
+            "pygame": lines[1] == "True" if len(lines) >= 2 else None,
+            "python_version": lines[2] if len(lines) >= 3 else None,
+            "stderr_tail": completed.stderr[-300:],
+            "latency_ms": round((time.perf_counter() - started) * 1000, 1),
+        }
+    except Exception as exc:
+        return {
+            "ok": False,
+            "command": command,
+            "error": f"{type(exc).__name__}: {str(exc)[:200]}",
+            "latency_ms": round((time.perf_counter() - started) * 1000, 1),
+        }
+
+
+def _gamedev_python_candidates() -> list[dict[str, Any]]:
+    workspace_root = ROOT.parent.parent
+    sandbox_python = workspace_root / "_sandboxes" / "chatdev-factory-prototype-smoke" / ".venv" / "Scripts" / "python.exe"
+    repo_python = ROOT / ".venv" / "Scripts" / "python.exe"
+    candidates: list[dict[str, Any]] = [
+        {"label": "system_python", "command": ["python"]},
+        {"label": "py_launcher_3", "command": ["py", "-3"]},
+    ]
+    if sandbox_python.exists():
+        candidates.append({"label": "sandbox_venv", "command": [str(sandbox_python)]})
+    if repo_python.exists():
+        candidates.append({"label": "repo_venv", "command": [str(repo_python)]})
+    return candidates
+
+
+def _gamedev_env_probe(timeout: float) -> list[dict[str, Any]]:
+    results = []
+    for candidate in _gamedev_python_candidates():
+        result = _python_capability_probe(candidate["command"], timeout)
+        result["label"] = candidate["label"]
+        results.append(result)
+    return results
 
 
 def _tcp_reachable(base_url: str, timeout: float) -> dict[str, Any]:
@@ -182,6 +245,7 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
         }
 
     local = _local_routes()
+    gamedev_env = _gamedev_env_probe(timeout)
     colony_paths = probes["chatdev_colony"]["paths"]
     colony_status = colony_paths.get("/status", {}).get("json") or {}
     colony_surface = colony_status.get("surface") if isinstance(colony_status, dict) else {}
@@ -218,15 +282,18 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
             "live_surface_kind": live_surface_kind,
             "surface_mismatch_count": len(surface_mismatches),
             "route_drift_count": len(drift),
+            "gamedev_python_with_pygame": [item["label"] for item in gamedev_env if item.get("pygame") is True],
         },
         "probes": probes,
         "local_routes": local,
+        "gamedev_env": gamedev_env,
         "drift": drift,
         "surface_mismatches": surface_mismatches,
         "notes": [
             "Use this instead of broad rg over ecosystem mirrors for first-pass ChatDev truth.",
             "A healthy :7338 service does not prove the local checkout routes are live in the container.",
             "If :7338 reports service_id=devmentor-chatdev-worker, ChatDev2 app-only routes are surface mismatches rather than route drift.",
+            "GameDev pygame smoke truth depends on the selected Python lane; inspect gamedev_env before assuming the active venv is valid.",
         ],
     }
 
@@ -250,6 +317,7 @@ def main() -> int:
         print(f"  live surface: {summary.get('live_surface_id') or 'unknown'} ({summary.get('live_surface_kind') or 'unknown'})")
         if not summary["local_app_loaded"]:
             print(f"  local app error: {report['local_routes'].get('error')}")
+        print(f"  gamedev python lanes with pygame: {', '.join(summary['gamedev_python_with_pygame']) or 'none'}")
         print(f"  surface mismatch count: {summary['surface_mismatch_count']}")
         for item in report["surface_mismatches"]:
             print(f"  mismatch: {item['path']} local=true live_surface={summary.get('live_surface_id')}")
