@@ -102,6 +102,14 @@ def _write_latest_result_json(result: dict[str, Any], output_path: Path) -> Path
     return latest_path
 
 
+def _attach_result_paths(result: dict[str, Any], output_path: Path) -> tuple[dict[str, Any], Path]:
+    latest_path = output_path.with_name("latest.json")
+    enriched = dict(result)
+    enriched["result_json"] = str(output_path)
+    enriched["latest_result_json"] = str(latest_path)
+    return enriched, latest_path
+
+
 def _validate_python_artifacts(output_dir: Path, artifacts: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
     validations: list[dict[str, Any]] = []
     for artifact in artifacts:
@@ -280,8 +288,6 @@ def _normalize_expected_bounded_cancellation(
     final_message: str | None,
     bounded_stop_reason: str | None,
 ) -> tuple[str | None, str | None, str | None]:
-    if not cancel_requested or exception_type != "WorkflowCancelledError":
-        return exception_type, exception, final_message
     if bounded_stop_reason is None:
         return exception_type, exception, final_message
     if status not in {"artifact_emitted", "artifact_emitted_timeout", "node_progress_reached"}:
@@ -290,7 +296,11 @@ def _normalize_expected_bounded_cancellation(
     normalized_message = final_message
     if final_message in {None, "", "Workflow execution cancelled"}:
         normalized_message = bounded_stop_reason.replace("_", " ")
-    return None, None, normalized_message
+    if not cancel_requested:
+        return exception_type, exception, normalized_message
+    if exception_type == "WorkflowCancelledError":
+        return None, None, normalized_message
+    return exception_type, exception, normalized_message
 
 
 def _override_openai_node_models(graph_definition: dict[str, Any], model_name: str) -> int:
@@ -555,10 +565,9 @@ def main() -> int:
     }
     if args.result_json:
         result_output_path = Path(args.result_json).expanduser()
+        result, latest_result_path = _attach_result_paths(result, result_output_path)
         _write_result_json(result, result_output_path)
-        latest_result_path = _write_latest_result_json(result, result_output_path)
-        result["result_json"] = str(result_output_path)
-        result["latest_result_json"] = str(latest_result_path)
+        _write_result_json(result, latest_result_path)
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0 if status in {"completed", "artifact_emitted", "artifact_emitted_timeout", "node_progress_reached"} else 1
 

@@ -7,6 +7,7 @@ from types import SimpleNamespace
 from unittest import mock
 
 from tools.workflow_smoke_runner import (
+    _attach_result_paths,
     _configure_import_roots,
     _list_workspace_artifacts,
     _node_progress_reached,
@@ -161,6 +162,16 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
             self.assertTrue(latest_path.exists())
             self.assertEqual(json.loads(latest_path.read_text(encoding="utf-8")), payload)
 
+    def test_attach_result_paths_enriches_payload_before_write(self) -> None:
+        payload = {"status": "artifact_emitted", "session_name": "demo"}
+        target = Path(r"C:\tmp\demo.json")
+
+        enriched, latest_path = _attach_result_paths(payload, target)
+
+        self.assertEqual(enriched["result_json"], str(target))
+        self.assertEqual(enriched["latest_result_json"], str(target.with_name("latest.json")))
+        self.assertEqual(latest_path, target.with_name("latest.json"))
+
     @mock.patch("tools.workflow_smoke_runner.subprocess.run")
     def test_runtime_validate_python_artifacts_accepts_timeout_as_launch_success(self, run_mock: mock.Mock) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -300,6 +311,20 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
             exception_type="WorkflowCancelledError",
             exception="Smoke threshold met: artifact emitted",
             final_message="Workflow execution cancelled",
+            bounded_stop_reason="artifact_threshold_reached",
+        )
+
+        self.assertIsNone(exception_type)
+        self.assertIsNone(exception)
+        self.assertEqual(final_message, "artifact threshold reached")
+
+    def test_normalize_expected_bounded_cancellation_fills_final_message_without_exception_type(self) -> None:
+        exception_type, exception, final_message = _normalize_expected_bounded_cancellation(
+            status="artifact_emitted",
+            cancel_requested=True,
+            exception_type=None,
+            exception=None,
+            final_message=None,
             bounded_stop_reason="artifact_threshold_reached",
         )
 
