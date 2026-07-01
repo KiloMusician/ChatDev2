@@ -1,7 +1,7 @@
 #requires -Version 5.1
 param(
     [Parameter(Mandatory = $true, Position = 0)]
-    [ValidateSet("doctor", "bootstrap", "smoke")]
+    [ValidateSet("doctor", "bootstrap", "smoke", "latest")]
     [string]$Action,
     [string]$SessionName = "",
     [string]$ResultJson = "",
@@ -15,6 +15,7 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Doctor = Join-Path $ScriptDir "chatdev_colony_doctor.ps1"
 $Bootstrapper = Join-Path $ScriptDir "bootstrap_gamedev_env.ps1"
 $Smoke = Join-Path $ScriptDir "run_gamedev_mechanic_smoke.ps1"
+$Latest = Join-Path $ScriptDir "latest_smoke_receipt.py"
 
 switch ($Action) {
     "doctor" {
@@ -36,5 +37,16 @@ switch ($Action) {
             $argsList += @("-ResultJson", $ResultJson)
         }
         powershell @argsList
+    }
+    "latest" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        $argsList = @($Latest)
+        if (-not $Json) {
+            $argsList += "--summary"
+        }
+        & $Python @argsList
     }
 }

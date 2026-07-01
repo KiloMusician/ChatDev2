@@ -160,12 +160,14 @@ Expected proof shape:
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 doctor -Json
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 bootstrap
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
+powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 latest
 ```
 Expected proof shape:
 - `doctor` returns the same bounded colony report plus `gamedev_env`
 - `bootstrap` creates or verifies `.venv-gamedev313`
 - `smoke` runs the proven repo-local mechanic smoke lane end-to-end
 - `smoke` also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`
+- `latest` returns the newest smoke receipt summary; add `-Json` to emit the full payload
 
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
