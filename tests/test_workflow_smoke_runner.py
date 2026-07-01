@@ -10,6 +10,7 @@ from tools.workflow_smoke_runner import (
     _resolve_final_status,
     _resolve_yaml_path,
     _summarize_token_progress,
+    _validate_python_artifacts,
 )
 
 
@@ -79,6 +80,41 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
                 "last_active_node": "Core_Developer",
             },
         )
+
+    def test_validate_python_artifacts_reports_valid_and_invalid_files(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output_dir = Path(tmp) / "WareHouse" / "smoke_run"
+            workspace = output_dir / "code_workspace"
+            workspace.mkdir(parents=True)
+
+            valid_file = workspace / "game.py"
+            valid_file.write_text("print('ok')\n", encoding="utf-8")
+
+            invalid_file = workspace / "broken.py"
+            invalid_file.write_text("def nope(:\n    pass\n", encoding="utf-8")
+
+            validations = _validate_python_artifacts(
+                output_dir,
+                [
+                    {"relative_path": "code_workspace/game.py"},
+                    {"relative_path": "code_workspace/broken.py"},
+                    {"relative_path": "code_workspace/readme.md"},
+                ],
+            )
+
+            self.assertEqual(
+                validations,
+                [
+                    {"relative_path": "code_workspace/game.py", "valid": True},
+                    {
+                        "relative_path": "code_workspace/broken.py",
+                        "valid": False,
+                        "error": "invalid syntax",
+                        "line": 1,
+                        "offset": 10,
+                    },
+                ],
+            )
 
     def test_node_progress_reached_matches_requested_thresholds(self) -> None:
         token_progress = {

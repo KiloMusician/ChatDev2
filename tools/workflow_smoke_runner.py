@@ -8,6 +8,7 @@ tokens after the first useful artifact appears.
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import os
 import sys
@@ -74,6 +75,46 @@ def _read_text(path: Path) -> str | None:
         return path.read_text(encoding="utf-8-sig")
     except Exception:
         return None
+
+
+def _validate_python_artifacts(output_dir: Path, artifacts: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
+    validations: list[dict[str, Any]] = []
+    for artifact in artifacts:
+        relative_path = artifact.get("relative_path")
+        if not isinstance(relative_path, str) or not relative_path.endswith(".py"):
+            continue
+
+        artifact_path = output_dir / Path(relative_path)
+        source = _read_text(artifact_path)
+        if source is None:
+            validations.append(
+                {
+                    "relative_path": relative_path,
+                    "valid": False,
+                    "error": "unreadable",
+                }
+            )
+            continue
+
+        try:
+            ast.parse(source, filename=str(artifact_path))
+            validations.append(
+                {
+                    "relative_path": relative_path,
+                    "valid": True,
+                }
+            )
+        except SyntaxError as exc:
+            validations.append(
+                {
+                    "relative_path": relative_path,
+                    "valid": False,
+                    "error": exc.msg,
+                    "line": exc.lineno,
+                    "offset": exc.offset,
+                }
+            )
+    return validations
 
 
 def _summarize_token_progress(token_usage: dict[str, Any] | None, current_node_id: str | None) -> dict[str, Any]:
@@ -165,6 +206,11 @@ def main() -> int:
     parser.add_argument("--stop-on-active-node", help="Cancel once the named node becomes the current active node")
     parser.add_argument("--stop-on-completed-node", help="Cancel once the named node completes a model call")
     parser.add_argument("--override-model", help="Override all openai-provider node model aliases for this run")
+    parser.add_argument(
+        "--validate-python-artifacts",
+        action="store_true",
+        help="Compile emitted Python artifacts with ast.parse and fail if any are invalid",
+    )
     parser.add_argument("--attachment", action="append", default=[], help="Optional attachment path")
     args = parser.parse_args()
 
@@ -297,6 +343,12 @@ def main() -> int:
         first_artifact_path = graph_context.directory / Path(state["artifacts"][0]["relative_path"])
         first_artifact_text = _read_text(first_artifact_path)
 
+    artifact_validation = None
+    if args.validate_python_artifacts:
+        artifact_validation = _validate_python_artifacts(graph_context.directory, state["artifacts"])
+        if artifact_validation and not all(item["valid"] for item in artifact_validation):
+            status = "artifact_validation_failed"
+
     result = {
         "status": status,
         "repo_root": str(repo_root),
@@ -314,6 +366,7 @@ def main() -> int:
         "exception_type": state["exception_type"],
         "exception": state["exception"],
         "final_message": final_message,
+        "artifact_validation": artifact_validation,
         "token_usage": token_usage,
         "token_progress": token_progress,
         "elapsed_seconds": round((state["ended_at"] or time.time()) - state["started_at"], 2),

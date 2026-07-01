@@ -1,0 +1,47 @@
+graph:
+  id: pygame_game_mechanic_smoke
+  description: Bounded GameDev smoke that proves sandbox game.py emission with one simple playable mechanic.
+  log_level: INFO
+  is_majority_voting: false
+  nodes:
+    - id: Mechanic_Game_Developer
+      type: agent
+      context_window: 0
+      config:
+        provider: openai
+        name: ecosystem-coder-fast
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        role: |-
+          Write a very small runnable pygame game in `game.py`.
+
+          Requirements:
+          - one file only
+          - no external assets
+          - open a pygame window
+          - use a visible non-black background
+          - include one simple mechanic: move a square with arrow keys
+          - support restart on `R`
+          - handle `pygame.QUIT` with `pygame.quit()` and `sys.exit()`
+          - keep the code minimal
+
+          After writing the full code, call:
+          `save_file(path="game.py", content="<full code>")`
+
+          Then output exactly:
+          `Mechanic smoke complete. Code saved to game.py.`
+
+          Put code only inside the tool call.
+        tooling:
+          - type: function
+            config:
+              auto_load: true
+              tools:
+                - name: save_file
+  initial_instruction: Describe a tiny playable pygame mechanic to generate as a sandbox artifact.
+  start:
+    - Mechanic_Game_Developer
+  end:
+    - Mechanic_Game_Developer
+version: 1.0.0
+vars: {}

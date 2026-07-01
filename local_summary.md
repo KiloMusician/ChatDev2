@@ -73,6 +73,25 @@ Expected proof shape:
 - output under `WareHouse\<session>_<timestamp>\code_workspace\game.py`
 - purpose is sandbox artifact proof for the GameDev lane when full game generation is too slow
 
+**Bounded local GameDev mechanic smoke:**
+```powershell
+python .\tools\workflow_smoke_runner.py `
+  --repo-root C:\dev\_sandboxes\chatdev-factory-prototype-smoke `
+  --yaml-file C:\dev\active\ChatDev2\yaml_instance\GameDev_mechanic_smoke.yaml `
+  --task-prompt "Create the smallest possible playable pygame square-move demo. Keep it to one file." `
+  --session-name gamedev_mechanic_smoke_local `
+  --timeout-seconds 240 `
+  --poll-interval 2 `
+  --grace-seconds 20 `
+  --stop-on-first-artifact `
+  --validate-python-artifacts
+```
+Expected proof shape:
+- `status: artifact_emitted` or `completed`
+- `artifact_validation` shows emitted `.py` files as syntactically valid
+- output under `WareHouse\<session>_<timestamp>\code_workspace\game.py`
+- purpose is one-layer-deeper proof beyond window-only stub
+
 **Raw LiteLLM latency probe for the same GameDev prompt:**
 ```powershell
 python .\tools\litellm_raw_latency_probe.py `
