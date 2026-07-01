@@ -12,7 +12,7 @@ graph:
     - name: reflexion_blackboard
       type: blackboard
       config:
-      max_items: 500
+        max_items: 500
   nodes:
   - id: Task
     type: passthrough

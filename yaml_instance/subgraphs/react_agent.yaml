@@ -21,7 +21,7 @@ graph:
       name: gpt-4o
       input_mode: messages
       role: |
-        You are a ReAct controller, needing to make decisions between the toolbox (web_search, get_webpage_content, execute_code, get_city_num, get_weather) and the final answer.
+        You are a ReAct controller, needing to make decisions between the toolbox (web_search, read_webpage_content, execute_code, get_city_num, get_weather) and the final answer.
         - Organize the entire context into a rolling Thought/Observation process, ensuring references to the latest Observation.
         - Only when you need to call a tool, output Control: continue, and attach Action and ActionInput (JSON).
         - If you are ready to answer the user directly, output Final Answer and set Action=FINAL.
@@ -47,7 +47,7 @@ graph:
       role: |
         You are the tool executor.
         - Parse the Action and ActionInput fields from the previous node.
-        - Only when Action belongs to {web_search, get_webpage_content, execute_code, get_city_num, get_weather}, call the corresponding function tool; otherwise, reply directly with "Observation: No tool needed".
+        - Only when Action belongs to {web_search, read_webpage_content, execute_code, get_city_num, get_weather}, call the corresponding function tool; otherwise, reply directly with "Observation: No tool needed".
         - After a successful call, return using the following template:
           Tool: <called tool>
           Observation: <concise summary>
@@ -58,12 +58,12 @@ graph:
         - Do not include trigger in the output to avoid affecting upstream condition judgment.
         - Do not provide a final answer.
       tooling:
-        type: function
+      - type: function
         config:
           auto_load: true
           tools:
           - name: web_search
-          - name: get_webpage_content
+          - name: read_webpage_content
           - name: execute_code
           - name: get_city_num
           - name: get_weather
