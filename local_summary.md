@@ -134,6 +134,16 @@ Expected proof shape:
 - `gamedev_env` reports which Python lanes currently have `pygame`
 - use this before assuming the active venv is valid for local GameDev smoke/runtime validation
 
+**Bootstrap a repo-local GameDev Python 3.13 lane:**
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\bootstrap_gamedev_env.ps1
+```
+Expected proof shape:
+- creates `.venv-gamedev313` using the current `python` command
+- installs `requirements.txt`
+- final probe shows `pygame` available in the new env
+- `chatdev_colony_doctor.py --json` reports `repo_gamedev_venv` when the env exists
+
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
 python .\tools\litellm_raw_latency_probe.py `

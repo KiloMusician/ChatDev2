@@ -82,6 +82,7 @@ def _gamedev_python_candidates() -> list[dict[str, Any]]:
     workspace_root = ROOT.parent.parent
     sandbox_python = workspace_root / "_sandboxes" / "chatdev-factory-prototype-smoke" / ".venv" / "Scripts" / "python.exe"
     repo_python = ROOT / ".venv" / "Scripts" / "python.exe"
+    repo_gamedev_python = ROOT / ".venv-gamedev313" / "Scripts" / "python.exe"
     candidates: list[dict[str, Any]] = [
         {"label": "system_python", "command": ["python"]},
         {"label": "py_launcher_3", "command": ["py", "-3"]},
@@ -90,6 +91,8 @@ def _gamedev_python_candidates() -> list[dict[str, Any]]:
         candidates.append({"label": "sandbox_venv", "command": [str(sandbox_python)]})
     if repo_python.exists():
         candidates.append({"label": "repo_venv", "command": [str(repo_python)]})
+    if repo_gamedev_python.exists():
+        candidates.append({"label": "repo_gamedev_venv", "command": [str(repo_gamedev_python)]})
     return candidates
 
 
