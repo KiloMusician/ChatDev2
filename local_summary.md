@@ -171,6 +171,7 @@ Expected proof shape:
 - `smoke` refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a stable pointer to the newest receipt
 - `smoke -Json` returns the final receipt JSON from disk without interleaved workflow logs
 - `latest` returns the newest smoke receipt summary; add `-Json` to emit the full payload
+- `smoke` and `latest` accept `-ReceiptDir` for alternate sandbox receipt roots
 
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell

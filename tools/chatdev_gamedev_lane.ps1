@@ -5,6 +5,7 @@ param(
     [string]$Action,
     [string]$SessionName = "",
     [string]$ResultJson = "",
+    [string]$ReceiptDir = "",
     [string]$Prompt = "Create the smallest possible playable pygame square-move demo. Keep it to one file.",
     [switch]$Json,
     [double]$Timeout = 2.0
@@ -18,6 +19,7 @@ $Smoke = Join-Path $ScriptDir "run_gamedev_mechanic_smoke.ps1"
 $Latest = Join-Path $ScriptDir "latest_smoke_receipt.py"
 $DefaultSmokeRepoRoot = "C:\dev\_sandboxes\chatdev-factory-prototype-smoke"
 $DefaultSmokeSessionName = "gamedev_mechanic_smoke_repo_gamedev_local"
+$DefaultReceiptDir = Join-Path $DefaultSmokeRepoRoot "WareHouse\_smoke_receipts"
 
 switch ($Action) {
     "doctor" {
@@ -35,9 +37,13 @@ switch ($Action) {
         if ([string]::IsNullOrWhiteSpace($EffectiveSessionName)) {
             $EffectiveSessionName = $DefaultSmokeSessionName
         }
+        $EffectiveReceiptDir = $ReceiptDir
+        if ([string]::IsNullOrWhiteSpace($EffectiveReceiptDir)) {
+            $EffectiveReceiptDir = $DefaultReceiptDir
+        }
         $EffectiveResultJson = $ResultJson
         if ([string]::IsNullOrWhiteSpace($EffectiveResultJson)) {
-            $EffectiveResultJson = Join-Path $DefaultSmokeRepoRoot ("WareHouse\_smoke_receipts\" + $EffectiveSessionName + ".json")
+            $EffectiveResultJson = Join-Path $EffectiveReceiptDir ($EffectiveSessionName + ".json")
         }
 
         $argsList = @("-ExecutionPolicy", "Bypass", "-File", $Smoke, "-Prompt", $Prompt)
@@ -63,6 +69,11 @@ switch ($Action) {
             $Python = "python"
         }
         $argsList = @($Latest)
+        $EffectiveReceiptDir = $ReceiptDir
+        if ([string]::IsNullOrWhiteSpace($EffectiveReceiptDir)) {
+            $EffectiveReceiptDir = $DefaultReceiptDir
+        }
+        $argsList += @("--receipt-dir", $EffectiveReceiptDir)
         if (-not $Json) {
             $argsList += "--summary"
         }
