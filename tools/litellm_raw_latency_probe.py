@@ -33,6 +33,16 @@ Then output exactly:
 Put code only inside the tool call."""
 
 DEFAULT_USER_PROMPT = "Create the smallest possible Python game prototype. Keep it to one file and minimal."
+PROMPT_PRESETS = {
+    "gamedev-phase1-full": (
+        DEFAULT_SYSTEM_PROMPT,
+        DEFAULT_USER_PROMPT,
+    ),
+    "pygame-stub": (
+        "Write one short Python file named game.py that only opens a pygame window, shows a non-black background, handles quit, and exits cleanly. Return minimal code behavior only.",
+        "Make the smallest possible pygame stub.",
+    ),
+}
 
 
 def _probe_openai_compatible(
@@ -154,6 +164,17 @@ def _probe_ollama_generate(
         }
 
 
+def _resolve_prompts(
+    *,
+    preset: str | None,
+    system_prompt: str,
+    user_prompt: str,
+) -> tuple[str, str]:
+    if not preset:
+        return system_prompt, user_prompt
+    return PROMPT_PRESETS[preset]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Probe raw local model completion latency.")
     parser.add_argument(
@@ -169,11 +190,21 @@ def main() -> int:
     )
     parser.add_argument("--api-key", default="local", help="Bearer token for the OpenAI-compatible endpoint")
     parser.add_argument("--model", action="append", required=True, help="Model alias to probe; repeat for multiple models")
+    parser.add_argument(
+        "--preset",
+        choices=tuple(PROMPT_PRESETS.keys()),
+        help="Named prompt preset; overrides --system-prompt and --user-prompt",
+    )
     parser.add_argument("--system-prompt", default=DEFAULT_SYSTEM_PROMPT, help="System prompt to send")
     parser.add_argument("--user-prompt", default=DEFAULT_USER_PROMPT, help="User prompt to send")
     parser.add_argument("--max-tokens", type=int, default=700, help="Completion token cap")
     parser.add_argument("--timeout-seconds", type=float, default=190.0, help="Client-side request timeout")
     args = parser.parse_args()
+    system_prompt, user_prompt = _resolve_prompts(
+        preset=args.preset,
+        system_prompt=args.system_prompt,
+        user_prompt=args.user_prompt,
+    )
 
     for model in args.model:
         if args.mode == "openai-compatible":
@@ -181,8 +212,8 @@ def main() -> int:
                 base_url=args.base_url,
                 api_key=args.api_key,
                 model=model,
-                system_prompt=args.system_prompt,
-                user_prompt=args.user_prompt,
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
                 max_tokens=args.max_tokens,
                 timeout_seconds=args.timeout_seconds,
             )
@@ -190,11 +221,12 @@ def main() -> int:
             result = _probe_ollama_generate(
                 base_url=args.base_url,
                 model=model,
-                system_prompt=args.system_prompt,
-                user_prompt=args.user_prompt,
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
                 timeout_seconds=args.timeout_seconds,
             )
         result["mode"] = args.mode
+        result["preset"] = args.preset
         print(json.dumps(result, ensure_ascii=False))
 
     return 0

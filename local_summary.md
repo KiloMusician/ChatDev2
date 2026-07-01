@@ -69,6 +69,21 @@ Expected proof shape:
 - distinguishes raw completion latency from ChatDev workflow overhead
 - useful when GameDev smoke is timing out before `game.py`
 
+**Raw full-vs-stub comparison on the same route:**
+```powershell
+python .\tools\litellm_raw_latency_probe.py `
+  --model ecosystem-coder-fast `
+  --preset gamedev-phase1-full
+
+python .\tools\litellm_raw_latency_probe.py `
+  --model ecosystem-coder-fast `
+  --preset pygame-stub `
+  --max-tokens 180
+```
+Expected proof shape:
+- same route, two prompt surfaces
+- helps separate “full game generation is too slow” from “backend is generally unhealthy”
+
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
 python .\tools\litellm_raw_latency_probe.py `

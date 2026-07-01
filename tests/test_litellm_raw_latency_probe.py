@@ -2,7 +2,11 @@ import json
 import unittest
 from unittest.mock import patch
 
-from tools.litellm_raw_latency_probe import _probe_ollama_generate, _probe_openai_compatible
+from tools.litellm_raw_latency_probe import (
+    _probe_ollama_generate,
+    _probe_openai_compatible,
+    _resolve_prompts,
+)
 
 
 class _FakeResponse:
@@ -20,6 +24,16 @@ class _FakeResponse:
 
 
 class LiteLLMRawLatencyProbeTests(unittest.TestCase):
+    def test_resolve_prompts_uses_preset_when_requested(self) -> None:
+        system_prompt, user_prompt = _resolve_prompts(
+            preset="pygame-stub",
+            system_prompt="ignored-system",
+            user_prompt="ignored-user",
+        )
+
+        self.assertIn("short Python file named game.py", system_prompt)
+        self.assertEqual(user_prompt, "Make the smallest possible pygame stub.")
+
     @patch("tools.litellm_raw_latency_probe.urllib.request.urlopen")
     def test_probe_openai_compatible_success(self, mock_urlopen) -> None:
         mock_urlopen.return_value = _FakeResponse(
