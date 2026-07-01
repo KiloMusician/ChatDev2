@@ -144,6 +144,28 @@ Expected proof shape:
 - final probe shows `pygame` available in the new env
 - `chatdev_colony_doctor.py --json` reports `repo_gamedev_venv` when the env exists
 
+**Run the mechanic smoke through the repo-local GameDev lane:**
+```powershell
+.\.venv-gamedev313\Scripts\python.exe .\tools\workflow_smoke_runner.py `
+  --repo-root C:\dev\_sandboxes\chatdev-factory-prototype-smoke `
+  --yaml-file C:\dev\active\ChatDev2\yaml_instance\GameDev_mechanic_smoke.yaml `
+  --task-prompt "Create the smallest possible playable pygame square-move demo. Keep it to one file." `
+  --session-name gamedev_mechanic_smoke_repo_gamedev_local `
+  --timeout-seconds 240 `
+  --poll-interval 2 `
+  --grace-seconds 20 `
+  --stop-on-first-artifact `
+  --validate-python-artifacts `
+  --run-python-artifacts `
+  --runtime-python C:\dev\active\ChatDev2\.venv-gamedev313\Scripts\python.exe `
+  --python-run-timeout-seconds 5
+```
+Expected proof shape:
+- `status: artifact_emitted` or `completed`
+- `runtime_python` points at `.venv-gamedev313`
+- `artifact_validation` is syntactically valid
+- `artifact_runtime_validation` shows the generated pygame artifact launched without an immediate crash
+
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
 python .\tools\litellm_raw_latency_probe.py `
