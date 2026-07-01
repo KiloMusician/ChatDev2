@@ -211,6 +211,7 @@ make dev
     ```
     Use this on Windows hosts that do not have `make`; it exposes the same bounded doctor/bootstrap/smoke path for the verified GameDev lane.
     The smoke action now also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`, or you can override it with `-ResultJson`.
+    Each smoke run also refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a deterministic pointer to the newest receipt.
     The `latest` action returns the newest bounded smoke receipt summary, or the full JSON payload when used with `-Json`.
 
 ### 🐳 Run with Docker

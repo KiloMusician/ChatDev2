@@ -11,6 +11,9 @@ from typing import Any
 def _find_latest_receipt(receipt_dir: Path) -> Path | None:
     if not receipt_dir.exists():
         return None
+    latest_pointer = receipt_dir / "latest.json"
+    if latest_pointer.exists() and latest_pointer.is_file():
+        return latest_pointer
     candidates = [path for path in receipt_dir.glob("*.json") if path.is_file()]
     if not candidates:
         return None

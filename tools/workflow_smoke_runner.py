@@ -96,6 +96,12 @@ def _write_result_json(result: dict[str, Any], output_path: Path) -> None:
     output_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
+def _write_latest_result_json(result: dict[str, Any], output_path: Path) -> Path:
+    latest_path = output_path.with_name("latest.json")
+    _write_result_json(result, latest_path)
+    return latest_path
+
+
 def _validate_python_artifacts(output_dir: Path, artifacts: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
     validations: list[dict[str, Any]] = []
     for artifact in artifacts:
@@ -548,7 +554,11 @@ def main() -> int:
         "elapsed_seconds": round((state["ended_at"] or time.time()) - state["started_at"], 2),
     }
     if args.result_json:
-        _write_result_json(result, Path(args.result_json).expanduser())
+        result_output_path = Path(args.result_json).expanduser()
+        _write_result_json(result, result_output_path)
+        latest_result_path = _write_latest_result_json(result, result_output_path)
+        result["result_json"] = str(result_output_path)
+        result["latest_result_json"] = str(latest_result_path)
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0 if status in {"completed", "artifact_emitted", "artifact_emitted_timeout", "node_progress_reached"} else 1
 

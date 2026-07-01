@@ -18,6 +18,7 @@ from tools.workflow_smoke_runner import (
     _runtime_validate_python_artifacts,
     _summarize_token_progress,
     _validate_python_artifacts,
+    _write_latest_result_json,
     _write_result_json,
 )
 
@@ -148,6 +149,17 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
 
             self.assertTrue(target.exists())
             self.assertEqual(json.loads(target.read_text(encoding="utf-8")), payload)
+
+    def test_write_latest_result_json_uses_stable_latest_name(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "WareHouse" / "_smoke_receipts" / "demo.json"
+            payload = {"status": "artifact_emitted", "session_name": "demo"}
+
+            latest_path = _write_latest_result_json(payload, target)
+
+            self.assertEqual(latest_path.name, "latest.json")
+            self.assertTrue(latest_path.exists())
+            self.assertEqual(json.loads(latest_path.read_text(encoding="utf-8")), payload)
 
     @mock.patch("tools.workflow_smoke_runner.subprocess.run")
     def test_runtime_validate_python_artifacts_accepts_timeout_as_launch_success(self, run_mock: mock.Mock) -> None:

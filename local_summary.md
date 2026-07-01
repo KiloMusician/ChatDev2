@@ -167,6 +167,7 @@ Expected proof shape:
 - `bootstrap` creates or verifies `.venv-gamedev313`
 - `smoke` runs the proven repo-local mechanic smoke lane end-to-end
 - `smoke` also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`
+- `smoke` refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a stable pointer to the newest receipt
 - `latest` returns the newest smoke receipt summary; add `-Json` to emit the full payload
 
 **Direct Ollama latency probe for the same GameDev prompt:**
