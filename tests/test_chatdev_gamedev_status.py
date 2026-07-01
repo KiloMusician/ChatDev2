@@ -35,6 +35,7 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
         self.assertTrue(assessment["litellm_ok"])
         self.assertTrue(assessment["repo_gamedev_runtime_ok"])
         self.assertEqual(assessment["live_surface_mode"], "worker_only")
+        self.assertEqual(assessment["next_action"], "start_local_devall_app")
         self.assertIn("chatdev_local_offline", assessment["gaps"])
         self.assertIn("live_surface_is_queue_worker_not_devall_app", assessment["gaps"])
 
@@ -61,6 +62,7 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
 
         self.assertEqual(assessment["overall_status"], "degraded")
         self.assertFalse(assessment["yaml_validation_ok"])
+        self.assertEqual(assessment["next_action"], "run_validate_yamls")
         self.assertIn("yaml_validation_not_proven", assessment["gaps"])
 
     def test_status_json_honors_custom_receipt_dir(self) -> None:

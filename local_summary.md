@@ -172,7 +172,7 @@ Expected proof shape:
 - `smoke` refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a stable pointer to the newest receipt
 - `smoke -Json` returns the final receipt JSON from disk without interleaved workflow logs
 - `latest` returns the newest smoke receipt summary; add `-Json` to emit the full payload
-- `status` returns doctor summary plus latest smoke summary, the current `yaml_validation` gate result from `uv run python tools/validate_all_yamls.py`, and an `assessment` verdict; add `-Json` to emit the full payload
+- `status` returns doctor summary plus latest smoke summary, the current `yaml_validation` gate result from `uv run python tools/validate_all_yamls.py`, and an `assessment` verdict with `next_action` / `recommendation`; add `-Json` to emit the full payload
 - `smoke`, `latest`, and `status` accept `-ReceiptDir` for alternate sandbox receipt roots
 
 **Direct Ollama latency probe for the same GameDev prompt:**

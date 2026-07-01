@@ -125,6 +125,27 @@ def _build_assessment(doctor: dict[str, Any], latest: dict[str, Any], yaml_valid
         else "degraded"
     )
 
+    next_action = "none"
+    recommendation = "No immediate action required."
+    if not yaml_validation_ok:
+        next_action = "run_validate_yamls"
+        recommendation = "Run the YAML validation gate and fix any reported workflow errors before relying on this lane."
+    elif not bounded_smoke_ok:
+        next_action = "run_bounded_smoke"
+        recommendation = "Run the bounded GameDev mechanic smoke to refresh execution proof and receipts."
+    elif not litellm_ok:
+        next_action = "repair_litellm"
+        recommendation = "Restore LiteLLM /v1/models health before using the local ChatDev workflow lane."
+    elif not repo_runtime_ok:
+        next_action = "bootstrap_repo_gamedev_env"
+        recommendation = "Bootstrap the repo-local .venv-gamedev313 runtime before trusting pygame workflow execution."
+    elif summary.get("chatdev_local_health") is not True:
+        next_action = "start_local_devall_app"
+        recommendation = "Start the local DevAll app on :6400 if you need app-only routes instead of the worker-only colony surface."
+    elif live_surface_mode == "worker_only":
+        next_action = "decide_worker_vs_app_surface"
+        recommendation = "Decide whether worker-only :7338 is sufficient or whether the full ChatDev2 DevAll app should be brought online."
+
     return {
         "overall_status": overall_status,
         "bounded_smoke_ok": bounded_smoke_ok,
@@ -134,6 +155,8 @@ def _build_assessment(doctor: dict[str, Any], latest: dict[str, Any], yaml_valid
         "repo_gamedev_runtime_ok": repo_runtime_ok,
         "live_surface_mode": live_surface_mode,
         "recommended_runtime_label": "repo_gamedev_venv" if repo_runtime_ok else (runtime_labels[0] if runtime_labels else None),
+        "next_action": next_action,
+        "recommendation": recommendation,
         "gaps": gaps,
     }
 
