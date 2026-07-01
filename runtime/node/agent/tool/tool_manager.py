@@ -13,8 +13,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Sequence
 
 from fastmcp import Client
-from fastmcp.client.client import CallToolResult as FastMcpCallToolResult
-from fastmcp.client.transports import StreamableHttpTransport, StdioTransport
+from fastmcp.client.transports import SSETransport, StdioTransport
 from mcp import types
 
 from entity.configs import ToolingConfig, ConfigError
@@ -75,7 +74,7 @@ class ToolManager:
         for attempt in range(1, attempts + 1):
             try:
                 client = Client(
-                    transport=StreamableHttpTransport(server_url, headers=headers or None),
+                    transport=SSETransport(server_url, headers=headers or None),
                     timeout=timeout or DEFAULT_MCP_HTTP_TIMEOUT,
                 )
                 async with client:
@@ -284,7 +283,7 @@ class ToolManager:
         tool_context: Dict[str, Any] | None = None,
     ) -> Any:
         client = Client(
-            transport=StreamableHttpTransport(config.server, headers=config.headers or None),
+            transport=SSETransport(config.server, headers=config.headers or None),
             timeout=config.timeout or DEFAULT_MCP_HTTP_TIMEOUT,
         )
         async with client:
@@ -308,7 +307,7 @@ class ToolManager:
     def _normalize_mcp_result(
         self,
         tool_name: str,
-        result: FastMcpCallToolResult,
+        result: Any,
         tool_context: Dict[str, Any] | None,
     ) -> Any:
         attachment_store = self._extract_attachment_store(tool_context)
