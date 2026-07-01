@@ -209,12 +209,15 @@ make dev
     powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
     powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke -Json
     powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 latest
+    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 status
     ```
     Use this on Windows hosts that do not have `make`; it exposes the same bounded doctor/bootstrap/smoke path for the verified GameDev lane.
     The smoke action now also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`, or you can override it with `-ResultJson`.
     Each smoke run also refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a deterministic pointer to the newest receipt.
     `smoke -Json` suppresses the live workflow chatter and emits the final receipt payload from disk so automations can consume it directly.
-    The `latest` action returns the newest bounded smoke receipt summary, or the full JSON payload when used with `-Json`. Both `smoke` and `latest` also accept `-ReceiptDir` when a sandbox uses a non-default receipt root.
+    The `latest` action returns the newest bounded smoke receipt summary, or the full JSON payload when used with `-Json`.
+    The `status` action returns combined doctor summary plus latest smoke summary, or the full doctor-plus-receipt payload when used with `-Json`.
+    `smoke`, `latest`, and `status` also accept `-ReceiptDir` when a sandbox uses a non-default receipt root.
 
 ### 🐳 Run with Docker
 Alternatively, you can run the entire application using Docker Compose. This method simplifies dependency management and provides a consistent environment.

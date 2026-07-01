@@ -1,7 +1,7 @@
 #requires -Version 5.1
 param(
     [Parameter(Mandatory = $true, Position = 0)]
-    [ValidateSet("doctor", "bootstrap", "smoke", "latest")]
+    [ValidateSet("doctor", "bootstrap", "smoke", "latest", "status")]
     [string]$Action,
     [string]$SessionName = "",
     [string]$ResultJson = "",
@@ -17,6 +17,7 @@ $Doctor = Join-Path $ScriptDir "chatdev_colony_doctor.ps1"
 $Bootstrapper = Join-Path $ScriptDir "bootstrap_gamedev_env.ps1"
 $Smoke = Join-Path $ScriptDir "run_gamedev_mechanic_smoke.ps1"
 $Latest = Join-Path $ScriptDir "latest_smoke_receipt.py"
+$Status = Join-Path $ScriptDir "chatdev_gamedev_status.py"
 $DefaultSmokeRepoRoot = "C:\dev\_sandboxes\chatdev-factory-prototype-smoke"
 $DefaultSmokeSessionName = "gamedev_mechanic_smoke_repo_gamedev_local"
 $DefaultReceiptDir = Join-Path $DefaultSmokeRepoRoot "WareHouse\_smoke_receipts"
@@ -76,6 +77,22 @@ switch ($Action) {
         $argsList += @("--receipt-dir", $EffectiveReceiptDir)
         if (-not $Json) {
             $argsList += "--summary"
+        }
+        & $Python @argsList
+    }
+    "status" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        $argsList = @($Status, "--timeout", ([string]$Timeout))
+        $EffectiveReceiptDir = $ReceiptDir
+        if ([string]::IsNullOrWhiteSpace($EffectiveReceiptDir)) {
+            $EffectiveReceiptDir = $DefaultReceiptDir
+        }
+        $argsList += @("--receipt-dir", $EffectiveReceiptDir)
+        if ($Json) {
+            $argsList += "--json"
         }
         & $Python @argsList
     }

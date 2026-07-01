@@ -162,6 +162,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 bootst
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke -Json
 powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 latest
+powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 status
 ```
 Expected proof shape:
 - `doctor` returns the same bounded colony report plus `gamedev_env`
@@ -171,7 +172,8 @@ Expected proof shape:
 - `smoke` refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a stable pointer to the newest receipt
 - `smoke -Json` returns the final receipt JSON from disk without interleaved workflow logs
 - `latest` returns the newest smoke receipt summary; add `-Json` to emit the full payload
-- `smoke` and `latest` accept `-ReceiptDir` for alternate sandbox receipt roots
+- `status` returns doctor summary plus latest smoke summary; add `-Json` to emit the full payload
+- `smoke`, `latest`, and `status` accept `-ReceiptDir` for alternate sandbox receipt roots
 
 **Direct Ollama latency probe for the same GameDev prompt:**
 ```powershell
