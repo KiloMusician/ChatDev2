@@ -32,6 +32,7 @@ if ([string]::IsNullOrWhiteSpace($SessionName)) {
 
 & $RuntimePython $SmokeRunner `
     --repo-root $RepoRoot `
+    --source-root $RepoPath `
     --yaml-file $YamlFile `
     --task-prompt $Prompt `
     --session-name $SessionName `

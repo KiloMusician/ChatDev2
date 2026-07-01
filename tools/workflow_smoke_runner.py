@@ -29,6 +29,19 @@ def _resolve_yaml_path(repo_root: Path, yaml_file: str) -> Path:
     return repo_root / "yaml_instance" / candidate
 
 
+def _configure_import_roots(repo_root: Path, source_root: Path | None) -> Path:
+    effective_source_root = (source_root or repo_root).expanduser().resolve()
+    if not effective_source_root.exists():
+        raise SystemExit(f"Source root not found: {effective_source_root}")
+
+    # Keep the code import root first so sandbox output paths can differ from the
+    # authoritative checkout we want to execute.
+    sys.path.insert(0, str(effective_source_root))
+    if effective_source_root != repo_root:
+        sys.path.insert(1, str(repo_root))
+    return effective_source_root
+
+
 def _build_task_input(graph_context: Any, prompt: str, attachments: Sequence[str]) -> Any:
     if not attachments:
         return prompt
@@ -230,6 +243,45 @@ def _resolve_final_status(
     return state_status
 
 
+def _resolve_bounded_stop_reason(
+    *,
+    artifact_stop_requested: bool,
+    node_progress_stop_requested: bool,
+    cancel_requested: bool,
+    exception_type: str | None,
+    status: str,
+) -> str | None:
+    if artifact_stop_requested and status == "artifact_emitted":
+        return "artifact_threshold_reached"
+    if node_progress_stop_requested and status == "node_progress_reached":
+        return "node_progress_threshold_reached"
+    if cancel_requested and exception_type == "WorkflowCancelledError" and status == "artifact_emitted_timeout":
+        return "timeout_after_artifact_emission"
+    return None
+
+
+def _normalize_expected_bounded_cancellation(
+    *,
+    status: str,
+    cancel_requested: bool,
+    exception_type: str | None,
+    exception: str | None,
+    final_message: str | None,
+    bounded_stop_reason: str | None,
+) -> tuple[str | None, str | None, str | None]:
+    if not cancel_requested or exception_type != "WorkflowCancelledError":
+        return exception_type, exception, final_message
+    if bounded_stop_reason is None:
+        return exception_type, exception, final_message
+    if status not in {"artifact_emitted", "artifact_emitted_timeout", "node_progress_reached"}:
+        return exception_type, exception, final_message
+
+    normalized_message = final_message
+    if final_message in {None, "", "Workflow execution cancelled"}:
+        normalized_message = bounded_stop_reason.replace("_", " ")
+    return None, None, normalized_message
+
+
 def _override_openai_node_models(graph_definition: dict[str, Any], model_name: str) -> int:
     if hasattr(graph_definition, "nodes"):
         nodes = getattr(graph_definition, "nodes", [])
@@ -262,6 +314,10 @@ def _override_openai_node_models(graph_definition: dict[str, Any], model_name: s
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a bounded ChatDev2 workflow smoke.")
     parser.add_argument("--repo-root", required=True, help="Target ChatDev2 checkout root")
+    parser.add_argument(
+        "--source-root",
+        help="Optional checkout root to import workflow/runtime code from; defaults to --repo-root",
+    )
     parser.add_argument("--yaml-file", required=True, help="Workflow YAML path or name")
     parser.add_argument("--task-prompt", required=True, help="Prompt to feed into the workflow")
     parser.add_argument("--session-name", required=True, help="Deterministic session name for the run")
@@ -300,7 +356,7 @@ def main() -> int:
         raise SystemExit(f"Repo root not found: {repo_root}")
 
     os.chdir(repo_root)
-    sys.path.insert(0, str(repo_root))
+    source_root = _configure_import_roots(repo_root, Path(args.source_root) if args.source_root else None)
 
     from check.check import load_config
     from entity.graph_config import GraphConfig
@@ -418,6 +474,22 @@ def main() -> int:
         if message is not None:
             final_message = message.text_content()
 
+    bounded_stop_reason = _resolve_bounded_stop_reason(
+        artifact_stop_requested=artifact_stop_requested,
+        node_progress_stop_requested=node_progress_stop_requested,
+        cancel_requested=state["cancel_requested"],
+        exception_type=state["exception_type"],
+        status=status,
+    )
+    exception_type, exception, final_message = _normalize_expected_bounded_cancellation(
+        status=status,
+        cancel_requested=state["cancel_requested"],
+        exception_type=state["exception_type"],
+        exception=state["exception"],
+        final_message=final_message,
+        bounded_stop_reason=bounded_stop_reason,
+    )
+
     first_artifact_text = None
     first_artifact_path = None
     if state["artifacts"]:
@@ -446,6 +518,7 @@ def main() -> int:
     result = {
         "status": status,
         "repo_root": str(repo_root),
+        "source_root": str(source_root),
         "yaml_file": str(yaml_path),
         "override_model": args.override_model,
         "overridden_node_count": overridden_node_count,
@@ -456,9 +529,10 @@ def main() -> int:
         "first_artifact_text": first_artifact_text,
         "stop_on_active_node": args.stop_on_active_node,
         "stop_on_completed_node": args.stop_on_completed_node,
+        "bounded_stop_reason": bounded_stop_reason,
         "cancel_requested": state["cancel_requested"],
-        "exception_type": state["exception_type"],
-        "exception": state["exception"],
+        "exception_type": exception_type,
+        "exception": exception,
         "final_message": final_message,
         "artifact_validation": artifact_validation,
         "runtime_python": runtime_python,

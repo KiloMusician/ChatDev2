@@ -6,9 +6,12 @@ from types import SimpleNamespace
 from unittest import mock
 
 from tools.workflow_smoke_runner import (
+    _configure_import_roots,
     _list_workspace_artifacts,
     _node_progress_reached,
+    _normalize_expected_bounded_cancellation,
     _override_openai_node_models,
+    _resolve_bounded_stop_reason,
     _resolve_final_status,
     _resolve_yaml_path,
     _runtime_validate_python_artifacts,
@@ -33,6 +36,21 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
 
             self.assertEqual(_resolve_yaml_path(repo_root, "custom.yaml"), direct)
             self.assertEqual(_resolve_yaml_path(repo_root, "ChatDev_v1.yaml"), nested)
+
+    def test_configure_import_roots_prefers_explicit_source_root(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo_root = Path(tmp) / "sandbox"
+            source_root = Path(tmp) / "active"
+            repo_root.mkdir()
+            source_root.mkdir()
+
+            with mock.patch("tools.workflow_smoke_runner.sys.path", []):
+                effective_source_root = _configure_import_roots(repo_root, source_root)
+                patched_sys_path = list(_configure_import_roots.__globals__["sys"].path)
+
+            self.assertEqual(effective_source_root, source_root.resolve())
+            self.assertEqual(patched_sys_path[0], str(source_root.resolve()))
+            self.assertEqual(patched_sys_path[1], str(repo_root.resolve()))
 
     def test_list_workspace_artifacts_ignores_bootstrap_noise(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -239,6 +257,31 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
         )
 
         self.assertEqual(status, "artifact_emitted")
+
+    def test_resolve_bounded_stop_reason_labels_expected_artifact_threshold(self) -> None:
+        reason = _resolve_bounded_stop_reason(
+            artifact_stop_requested=True,
+            node_progress_stop_requested=False,
+            cancel_requested=True,
+            exception_type="WorkflowCancelledError",
+            status="artifact_emitted",
+        )
+
+        self.assertEqual(reason, "artifact_threshold_reached")
+
+    def test_normalize_expected_bounded_cancellation_clears_exception_fields(self) -> None:
+        exception_type, exception, final_message = _normalize_expected_bounded_cancellation(
+            status="artifact_emitted",
+            cancel_requested=True,
+            exception_type="WorkflowCancelledError",
+            exception="Smoke threshold met: artifact emitted",
+            final_message="Workflow execution cancelled",
+            bounded_stop_reason="artifact_threshold_reached",
+        )
+
+        self.assertIsNone(exception_type)
+        self.assertIsNone(exception)
+        self.assertEqual(final_message, "artifact threshold reached")
 
     def test_override_openai_node_models_updates_only_openai_nodes(self) -> None:
         graph_definition = {

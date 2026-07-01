@@ -34,6 +34,7 @@ from runtime.node.agent.memory.memory_base import (
 from runtime.node.agent import ThinkingPayload
 from runtime.node.agent import ModelProvider, ProviderRegistry, ModelResponse
 from tenacity import Retrying, retry_if_exception, stop_after_attempt, wait_random_exponential
+from utils.exceptions import WorkflowCancelledError
 
 
 class AgentNodeExecutor(NodeExecutor):
@@ -160,6 +161,17 @@ class AgentNodeExecutor(NodeExecutor):
                 source=node.id,
             )]
             
+        except WorkflowCancelledError as e:
+            self.log_manager.info(
+                f"[Node: {node.id}] Workflow cancelled during agent execution: {str(e)}",
+                node_id=node.id,
+            )
+            return [self._build_message(
+                role=MessageRole.ASSISTANT,
+                content=str(e),
+                source=node.id,
+                metadata={"cancelled": True},
+            )]
         except Exception as e:
             traceback.print_exc()
             error_msg = f"[Node: {node.id}] Error calling model: {str(e)}"
