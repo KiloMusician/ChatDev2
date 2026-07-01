@@ -1,7 +1,7 @@
-"""Probe raw LiteLLM chat completion latency for one or more model aliases.
+"""Probe raw chat completion latency for one or more local model routes.
 
 This is intentionally stdlib-only so future smoke passes can compare live local
-aliases without depending on the ChatDev workflow runtime.
+aliases and direct Ollama models without depending on the ChatDev workflow runtime.
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ Put code only inside the tool call."""
 DEFAULT_USER_PROMPT = "Create the smallest possible Python game prototype. Keep it to one file and minimal."
 
 
-def _probe_model(
+def _probe_openai_compatible(
     *,
     base_url: str,
     api_key: str,
@@ -98,9 +98,75 @@ def _probe_model(
         }
 
 
+def _probe_ollama_generate(
+    *,
+    base_url: str,
+    model: str,
+    system_prompt: str,
+    user_prompt: str,
+    timeout_seconds: float,
+) -> dict[str, Any]:
+    payload = {
+        "model": model,
+        "prompt": f"{system_prompt}\n\n{user_prompt}",
+        "stream": False,
+        "options": {
+            "temperature": 0,
+        },
+    }
+    request = urllib.request.Request(
+        f"{base_url.rstrip('/')}/api/generate",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+
+    started_at = time.time()
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            body = json.loads(response.read().decode("utf-8"))
+        elapsed = round(time.time() - started_at, 2)
+        content = body.get("response")
+        return {
+            "model": model,
+            "status": "ok",
+            "elapsed_seconds": elapsed,
+            "has_content": bool(content),
+            "content_preview": (content or "")[:200],
+            "done": body.get("done"),
+        }
+    except urllib.error.HTTPError as exc:
+        elapsed = round(time.time() - started_at, 2)
+        error_text = exc.read().decode("utf-8", errors="replace")
+        return {
+            "model": model,
+            "status": "http_error",
+            "elapsed_seconds": elapsed,
+            "error": error_text,
+        }
+    except Exception as exc:  # pragma: no cover - live probe helper
+        elapsed = round(time.time() - started_at, 2)
+        return {
+            "model": model,
+            "status": "error",
+            "elapsed_seconds": elapsed,
+            "error": str(exc),
+        }
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Probe raw LiteLLM completion latency.")
-    parser.add_argument("--base-url", default="http://127.0.0.1:4000/v1", help="OpenAI-compatible LiteLLM base URL")
+    parser = argparse.ArgumentParser(description="Probe raw local model completion latency.")
+    parser.add_argument(
+        "--mode",
+        choices=("openai-compatible", "ollama-generate"),
+        default="openai-compatible",
+        help="Request shape to use for the probe",
+    )
+    parser.add_argument(
+        "--base-url",
+        default="http://127.0.0.1:4000/v1",
+        help="Base URL for the selected mode: LiteLLM /v1 for openai-compatible, Ollama host root for ollama-generate",
+    )
     parser.add_argument("--api-key", default="local", help="Bearer token for the OpenAI-compatible endpoint")
     parser.add_argument("--model", action="append", required=True, help="Model alias to probe; repeat for multiple models")
     parser.add_argument("--system-prompt", default=DEFAULT_SYSTEM_PROMPT, help="System prompt to send")
@@ -110,15 +176,25 @@ def main() -> int:
     args = parser.parse_args()
 
     for model in args.model:
-        result = _probe_model(
-            base_url=args.base_url,
-            api_key=args.api_key,
-            model=model,
-            system_prompt=args.system_prompt,
-            user_prompt=args.user_prompt,
-            max_tokens=args.max_tokens,
-            timeout_seconds=args.timeout_seconds,
-        )
+        if args.mode == "openai-compatible":
+            result = _probe_openai_compatible(
+                base_url=args.base_url,
+                api_key=args.api_key,
+                model=model,
+                system_prompt=args.system_prompt,
+                user_prompt=args.user_prompt,
+                max_tokens=args.max_tokens,
+                timeout_seconds=args.timeout_seconds,
+            )
+        else:
+            result = _probe_ollama_generate(
+                base_url=args.base_url,
+                model=model,
+                system_prompt=args.system_prompt,
+                user_prompt=args.user_prompt,
+                timeout_seconds=args.timeout_seconds,
+            )
+        result["mode"] = args.mode
         print(json.dumps(result, ensure_ascii=False))
 
     return 0

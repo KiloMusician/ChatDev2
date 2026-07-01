@@ -69,6 +69,19 @@ Expected proof shape:
 - distinguishes raw completion latency from ChatDev workflow overhead
 - useful when GameDev smoke is timing out before `game.py`
 
+**Direct Ollama latency probe for the same GameDev prompt:**
+```powershell
+python .\tools\litellm_raw_latency_probe.py `
+  --mode ollama-generate `
+  --base-url http://127.0.0.1:11434 `
+  --model qwen3:8b `
+  --model qwen2.5-coder:14b `
+  --model devstral:24b
+```
+Expected proof shape:
+- one JSON line per direct Ollama model
+- separates LiteLLM routing effects from backend model behavior
+
 Current verified shape on 2026-06-25:
 - Live colony ChatDev `:7338` health is up.
 - Dev-Mentor `:7337`, LiteLLM `:4000`, and Ollama `:11434` are reachable.
