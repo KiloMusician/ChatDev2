@@ -98,6 +98,31 @@ def _node_progress_reached(
     return False
 
 
+def _resolve_final_status(
+    *,
+    state_status: str,
+    artifacts: list[dict[str, Any]],
+    artifact_stop_requested: bool,
+    node_progress_stop_requested: bool,
+    cancel_requested: bool,
+    exception_type: str | None,
+) -> str:
+    if artifact_stop_requested and artifacts:
+        return "artifact_emitted"
+    if node_progress_stop_requested:
+        return "node_progress_reached"
+    if (
+        state_status == "error"
+        and cancel_requested
+        and artifacts
+        and exception_type == "WorkflowCancelledError"
+    ):
+        return "artifact_emitted"
+    if state_status == "running":
+        return "timeout_no_artifact" if not artifacts else "artifact_emitted_timeout"
+    return state_status
+
+
 def _override_openai_node_models(graph_definition: dict[str, Any], model_name: str) -> int:
     if hasattr(graph_definition, "nodes"):
         nodes = getattr(graph_definition, "nodes", [])
@@ -246,14 +271,14 @@ def main() -> int:
     final_artifacts = _list_workspace_artifacts(graph_context.directory)
     state["artifacts"] = final_artifacts or last_artifacts
 
-    status = state["status"]
-    if status == "running":
-        if artifact_stop_requested and state["artifacts"]:
-            status = "artifact_emitted"
-        elif node_progress_stop_requested:
-            status = "node_progress_reached"
-        else:
-            status = "timeout_no_artifact" if not state["artifacts"] else "artifact_emitted_timeout"
+    status = _resolve_final_status(
+        state_status=state["status"],
+        artifacts=state["artifacts"],
+        artifact_stop_requested=artifact_stop_requested,
+        node_progress_stop_requested=node_progress_stop_requested,
+        cancel_requested=state["cancel_requested"],
+        exception_type=state["exception_type"],
+    )
 
     final_message = None
     token_usage = executor.token_tracker.get_token_usage() if executor.token_tracker else None

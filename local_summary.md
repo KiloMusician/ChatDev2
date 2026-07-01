@@ -56,6 +56,23 @@ Expected proof shape:
 - output under `WareHouse\<session>_<timestamp>\code_workspace\game.py`
 - purpose is phase-1 artifact proof, not full `GameDev_v1` polish, QA, or execution coverage
 
+**Bounded local GameDev stub smoke:**
+```powershell
+python .\tools\workflow_smoke_runner.py `
+  --repo-root C:\dev\_sandboxes\chatdev-factory-prototype-smoke `
+  --yaml-file C:\dev\active\ChatDev2\yaml_instance\GameDev_stub_smoke.yaml `
+  --task-prompt "Create the smallest possible pygame stub. Keep it to one file." `
+  --session-name gamedev_stub_smoke_local `
+  --timeout-seconds 240 `
+  --poll-interval 2 `
+  --grace-seconds 20 `
+  --stop-on-first-artifact
+```
+Expected proof shape:
+- `status: artifact_emitted` or `completed`
+- output under `WareHouse\<session>_<timestamp>\code_workspace\game.py`
+- purpose is sandbox artifact proof for the GameDev lane when full game generation is too slow
+
 **Raw LiteLLM latency probe for the same GameDev prompt:**
 ```powershell
 python .\tools\litellm_raw_latency_probe.py `

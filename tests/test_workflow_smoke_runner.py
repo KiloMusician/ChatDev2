@@ -7,6 +7,7 @@ from tools.workflow_smoke_runner import (
     _list_workspace_artifacts,
     _node_progress_reached,
     _override_openai_node_models,
+    _resolve_final_status,
     _resolve_yaml_path,
     _summarize_token_progress,
 )
@@ -106,6 +107,18 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
                 stop_on_completed_node="Polish_Developer",
             )
         )
+
+    def test_resolve_final_status_treats_cancelled_artifact_threshold_as_success(self) -> None:
+        status = _resolve_final_status(
+            state_status="error",
+            artifacts=[{"relative_path": "code_workspace/game.py"}],
+            artifact_stop_requested=True,
+            node_progress_stop_requested=False,
+            cancel_requested=True,
+            exception_type="WorkflowCancelledError",
+        )
+
+        self.assertEqual(status, "artifact_emitted")
 
     def test_override_openai_node_models_updates_only_openai_nodes(self) -> None:
         graph_definition = {

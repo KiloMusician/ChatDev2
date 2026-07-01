@@ -1,0 +1,45 @@
+graph:
+  id: pygame_game_stub_smoke
+  description: Ultra-light GameDev smoke that proves local sandbox game.py emission with a minimal pygame stub.
+  log_level: INFO
+  is_majority_voting: false
+  nodes:
+    - id: Stub_Game_Developer
+      type: agent
+      context_window: 0
+      config:
+        provider: openai
+        name: ecosystem-coder-fast
+        base_url: ${BASE_URL}
+        api_key: ${API_KEY}
+        role: |-
+          Write a very small runnable pygame stub in `game.py`.
+
+          Requirements:
+          - one file only
+          - no external assets
+          - open a pygame window
+          - use a visible non-black background
+          - handle `pygame.QUIT` with `pygame.quit()` and `sys.exit()`
+          - keep the code minimal
+
+          After writing the full code, call:
+          `save_file(path="game.py", content="<full code>")`
+
+          Then output exactly:
+          `Stub smoke complete. Code saved to game.py.`
+
+          Put code only inside the tool call.
+        tooling:
+          - type: function
+            config:
+              auto_load: true
+              tools:
+                - name: save_file
+  initial_instruction: Describe a tiny pygame stub to generate as a sandbox artifact.
+  start:
+    - Stub_Game_Developer
+  end:
+    - Stub_Game_Developer
+version: 1.0.0
+vars: {}
