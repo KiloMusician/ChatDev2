@@ -56,6 +56,19 @@ Expected proof shape:
 - output under `WareHouse\<session>_<timestamp>\code_workspace\game.py`
 - purpose is phase-1 artifact proof, not full `GameDev_v1` polish, QA, or execution coverage
 
+**Raw LiteLLM latency probe for the same GameDev prompt:**
+```powershell
+python .\tools\litellm_raw_latency_probe.py `
+  --model ecosystem-coder-fast `
+  --model ecosystem-qwen `
+  --model ecosystem-auto `
+  --model ecosystem-qwen35
+```
+Expected proof shape:
+- one JSON line per model
+- distinguishes raw completion latency from ChatDev workflow overhead
+- useful when GameDev smoke is timing out before `game.py`
+
 Current verified shape on 2026-06-25:
 - Live colony ChatDev `:7338` health is up.
 - Dev-Mentor `:7337`, LiteLLM `:4000`, and Ollama `:11434` are reachable.
