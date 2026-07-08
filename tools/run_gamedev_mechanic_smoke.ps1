@@ -17,10 +17,11 @@ $SmokeRunner = Join-Path $ScriptDir "workflow_smoke_runner.py"
 $Bootstrapper = Join-Path $ScriptDir "bootstrap_gamedev_env.ps1"
 $RuntimePython = Join-Path $RepoPath ".venv-gamedev313\Scripts\python.exe"
 $YamlFile = Join-Path $RepoPath "yaml_instance\GameDev_mechanic_smoke.yaml"
+$OverrideModel = "ecosystem-devstral"
 
 if (-not (Test-Path $RuntimePython)) {
     Write-Output "Missing repo-local GameDev env; bootstrapping .venv-gamedev313..."
-    powershell -ExecutionPolicy Bypass -File $Bootstrapper
+    powershell -NoProfile -ExecutionPolicy Bypass -File $Bootstrapper
 }
 
 if (-not (Test-Path $RuntimePython)) {
@@ -40,6 +41,7 @@ if ([string]::IsNullOrWhiteSpace($ResultJson)) {
     --repo-root $RepoRoot `
     --source-root $RepoPath `
     --yaml-file $YamlFile `
+    --override-model $OverrideModel `
     --task-prompt $Prompt `
     --session-name $SessionName `
     --timeout-seconds $TimeoutSeconds `

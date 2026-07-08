@@ -190,6 +190,20 @@ make dev
     ```
     Prints the bounded colony report plus the `gamedev_env` interpreter matrix, including which Python lanes currently have `pygame`.
 
+*   **Bounded local DevAll app proof**:
+    ```bash
+    make prove-local-app
+    ```
+    Runs a temporary local startup proof and returns whether the checkout can boot plus whether core and extended local routes respond during that bounded probe.
+
+*   **Managed local DevAll app lifecycle**:
+    ```bash
+    make start-local-app
+    make status-local-app
+    make stop-local-app
+    ```
+    Starts the local backend in the background, reports its managed status plus `/health`, and stops the managed instance when you are done.
+
 *   **Bootstrap the repo-local GameDev env**:
     ```bash
     make bootstrap-gamedev-env
@@ -202,21 +216,58 @@ make dev
     ```
     Uses `.venv-gamedev313` to run the bounded GameDev mechanic smoke with syntax and runtime validation.
 
+*   **Read the latest bounded smoke receipt**:
+    ```bash
+    make latest-gamedev-smoke
+    make latest-gamedev-smoke-full
+    ```
+    Prints either the compact latest receipt summary or the full latest receipt payload from the sandbox receipt root.
+
+*   **Read the GameDev lane status contract**:
+    ```bash
+    make status-gamedev
+    make status-gamedev-compact
+    ```
+    Prints either the combined live status report or the compact `automation_summary` contract for automations and later agents.
+    The compact contract now also separates the proven bounded-smoke model from the worker's preferred live model via `preferred_live_model_matches_smoke` and `preferred_live_model_proven_for_smoke`, so a healthy preferred route is not mistaken for a runtime-validated default smoke lane.
+    When those disagree, `advisories` now surfaces machine-readable warnings such as `preferred_live_model_differs_from_proven_smoke_model` without downgrading an otherwise proven bounded smoke.
+
 *   **Windows-native GameDev lane wrapper**:
     ```powershell
-    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 doctor -Json
-    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 bootstrap
-    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
-    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke -Json
-    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 latest
-    powershell -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 status
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 doctor -Json
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 local-proof
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 local-proof -Json
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 local-start
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 local-status
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 local-stop
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 bootstrap
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 smoke -Json
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 latest
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 latest-full
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 status-full
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\chatdev_gamedev_lane.ps1 status-compact
     ```
     Use this on Windows hosts that do not have `make`; it exposes the same bounded doctor/bootstrap/smoke path for the verified GameDev lane.
+    `local-proof` is the narrowest operator command for the local DevAll app itself: it runs the bounded startup probe and returns `chatdev_local_health`, `local_app_loaded`, `local_app_bootable`, `local_app_core_routes_ready`, `local_app_extended_routes_ready`, plus the underlying `local_startup_probe` details when used with `-Json`.
+    The temporary startup proof now chooses an ephemeral localhost port by default, so concurrent proofs do not collide on a hard-coded port.
+    `local-start`, `local-status`, and `local-stop` manage one explicit background app instance on `:6400`; use them when you want a real local app surface instead of a temporary startup proof.
     The smoke action now also writes a stable JSON receipt by default under `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\<session>.json`, or you can override it with `-ResultJson`.
     Each smoke run also refreshes `C:\dev\_sandboxes\chatdev-factory-prototype-smoke\WareHouse\_smoke_receipts\latest.json` as a deterministic pointer to the newest receipt.
     `smoke -Json` suppresses the live workflow chatter and emits the final receipt payload from disk so automations can consume it directly.
-    The `latest` action returns the newest bounded smoke receipt summary, or the full JSON payload when used with `-Json`.
-    The `status` action returns combined doctor summary, latest smoke summary, and a `yaml_validation` block for the current `uv run python tools/validate_all_yamls.py` gate, along with an `assessment` block that turns them into a readiness verdict plus a concrete `next_action` / `recommendation`. Use `-Json` for the full doctor-plus-receipt payload.
+    The runtime validation harness now patches `pygame.event.get()` under the dummy SDL driver to inject a synthetic `QUIT`, so well-behaved event-loop artifacts can produce `artifact_runtime_outcome: completed` instead of remaining stuck at launch-only proof.
+    The `latest` action returns the newest bounded smoke receipt summary, including `workflow_used`, `provider` / `model`, explicit `proven_smoke_model`, `attempted_model`, any auto-seeded local `env_defaults`, `output_path`, `result_json`, `artifact_runtime_outcome`, `runtime_proof_depth`, `runtime_launch_proven`, and `runtime_completion_proven`; `latest-full` returns the full latest receipt payload.
+    The `status-full` action returns combined doctor summary, latest smoke summary, and a `yaml_validation` block for the current `uv run python tools/validate_all_yamls.py` gate, along with an `assessment` block that turns them into a readiness verdict plus a concrete `next_action` / `recommendation`.
+    That `assessment` block now also exposes `preferred_live_model`, `proven_smoke_model`, `preferred_live_model_matches_smoke`, `preferred_live_model_proven_for_smoke`, machine-readable `advisories`, and explanatory `notes`, so the human-facing status makes the same model-routing distinction as the compact automation contract.
+    It also includes an `automation_summary` block that lifts `callable`, `callable_via`, `full_devall_ready`, `local_app_bootable`, `local_app_core_routes_ready`, `local_app_extended_routes_ready`, `artifact_runtime_outcome`, `runtime_proof_depth`, `runtime_launch_proven`, `runtime_completion_proven`, `current_proof`, `current_proof_blockers`, `runtime_launch_gate_ok`, `runtime_launch_gate_blockers`, `runtime_completion_gate_ok`, `runtime_completion_gate_blockers`, `workflow_gate_ok`, `workflow_gate_blockers`, `proof_scope`, `proof_generated_at`, `proof_age_seconds`, `proof_freshness`, `proof_stale_after_seconds`, `workflow_execution`, `workflow_used`, `provider`, `model`, `proven_smoke_model`, `attempted_model`, `env_defaults`, `smoke_attempted_without_model_call`, `output_path`, `result_json`, a compact `operator_commands` block including the cheaper `latest` receipt surfaces, the `proxy_health` split between the live worker surface and the local DevAll app, and a `backend_requirements` block that explicitly marks Ollama as optional for the current proven LiteLLM smoke lane.
+    The `status-compact` action returns only that `automation_summary` payload so automations and later agents can consume the proven contract without the larger nested doctor/receipt report.
+    When a smoke fails before the first model call records token usage, use `attempted_model`, `env_defaults`, and `smoke_attempted_without_model_call` to distinguish a routing/bootstrap failure from a later artifact/runtime failure.
+    Read the local DevAll fields narrowly:
+    `full_devall_ready` means the app is currently live on `:6400`,
+    `local_app_bootable` means the checkout can start locally,
+    `local_app_core_routes_ready` means `/health` plus `/api/health` responded during the bounded startup probe,
+    and `local_app_extended_routes_ready` means `/api/bridge/status` plus `/api/ecosystem/status` also responded during that same probe.
+    Use `-Json` for the full doctor-plus-receipt payload.
     `smoke`, `latest`, and `status` also accept `-ReceiptDir` when a sandbox uses a non-default receipt root.
 
 ### 🐳 Run with Docker

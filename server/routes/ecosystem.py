@@ -4,8 +4,8 @@ from __future__ import annotations
 import asyncio
 import os
 import subprocess
+import sys
 import time
-from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -74,7 +74,7 @@ SERVICES = [
 ]
 
 
-async def _probe(url: str, timeout: float = 2.0) -> Dict[str, Any]:
+async def _probe(url: str, timeout: float = 1.0) -> Dict[str, Any]:
     """Probe a URL and return status info."""
     try:
         async with httpx.AsyncClient(timeout=timeout) as client:
@@ -88,10 +88,11 @@ _REPO_INFO_CACHE: Dict[str, Any] = {}
 _REPO_INFO_TTL = 120  # seconds
 
 
-def _repo_info(repo_id: str) -> Dict[str, Any]:
+def _repo_info(repo_id: str, *, include_size: bool = True) -> Dict[str, Any]:
     """Get basic git info for a repo (cached for 2 minutes)."""
     now = time.time()
-    cached = _REPO_INFO_CACHE.get(repo_id)
+    cache_key = f"{repo_id}|size={int(include_size)}"
+    cached = _REPO_INFO_CACHE.get(cache_key)
     if cached and now - cached["_ts"] < _REPO_INFO_TTL:
         return {k: v for k, v in cached.items() if k != "_ts"}
 
@@ -101,25 +102,26 @@ def _repo_info(repo_id: str) -> Dict[str, Any]:
     try:
         branch = subprocess.check_output(
             ["git", "branch", "--show-current"],
-            cwd=repo_path, stderr=subprocess.DEVNULL, timeout=3
+            cwd=repo_path, stderr=subprocess.DEVNULL, timeout=1.5
         ).decode().strip()
         commit = subprocess.check_output(
             ["git", "log", "-1", "--format=%h %s"],
-            cwd=repo_path, stderr=subprocess.DEVNULL, timeout=3
+            cwd=repo_path, stderr=subprocess.DEVNULL, timeout=1.5
         ).decode().strip()
-        # Use `du` for fast disk usage (excludes .git)
-        du_out = subprocess.check_output(
-            ["du", "-s", "--exclude=.git", str(repo_path)],
-            stderr=subprocess.DEVNULL, timeout=5
-        ).decode().split()[0]
-        size_mb = round(int(du_out) / 1024, 1)
         result: Dict[str, Any] = {
             "cloned": True,
             "branch": branch,
             "latest_commit": commit,
-            "size_mb": size_mb,
         }
-        _REPO_INFO_CACHE[repo_id] = {**result, "_ts": now}
+        if include_size and sys.platform != "win32":
+            # `du` is fast on Unix-like environments, but it is unavailable on the
+            # Windows hosts used for bounded local status probes.
+            du_out = subprocess.check_output(
+                ["du", "-s", "--exclude=.git", str(repo_path)],
+                stderr=subprocess.DEVNULL, timeout=2
+            ).decode().split()[0]
+            result["size_mb"] = round(int(du_out) / 1024, 1)
+        _REPO_INFO_CACHE[cache_key] = {**result, "_ts": now}
         return result
     except Exception:
         return {"cloned": True}
@@ -145,14 +147,15 @@ async def ecosystem_status():
     probes = []
     for svc in SERVICES:
         if svc["url"]:
-            probes.append(_probe(svc["url"]))
+            probes.append(_probe(svc["url"], timeout=1.0))
         else:
             probes.append(asyncio.sleep(0, result={"online": None, "note": "cli/library mode"}))
 
     loop = asyncio.get_event_loop()
     repo_ids = [svc["repo"] if svc["repo"] != "current" else None for svc in SERVICES]
     repo_infos = await asyncio.gather(*[
-        loop.run_in_executor(None, _repo_info, rid) if rid else asyncio.sleep(0, result={"cloned": True, "note": "this repo"})
+        loop.run_in_executor(None, lambda repo_id=rid: _repo_info(repo_id, include_size=False))
+        if rid else asyncio.sleep(0, result={"cloned": True, "note": "this repo"})
         for rid in repo_ids
     ])
     results = await asyncio.gather(*probes)

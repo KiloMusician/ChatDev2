@@ -9,6 +9,7 @@ from unittest import mock
 from tools.workflow_smoke_runner import (
     _attach_result_paths,
     _configure_import_roots,
+    _ensure_local_openai_env,
     _list_workspace_artifacts,
     _node_progress_reached,
     _normalize_expected_bounded_cancellation,
@@ -25,6 +26,35 @@ from tools.workflow_smoke_runner import (
 
 
 class WorkflowSmokeRunnerTests(unittest.TestCase):
+    def test_ensure_local_openai_env_applies_litellm_defaults_when_missing(self) -> None:
+        with mock.patch.dict("tools.workflow_smoke_runner.os.environ", {}, clear=True):
+            defaults = _ensure_local_openai_env()
+
+            self.assertEqual(
+                defaults,
+                {
+                    "BASE_URL": "http://127.0.0.1:4000/v1",
+                    "API_KEY": "ollama-local-model",
+                },
+            )
+            self.assertEqual(_ensure_local_openai_env.__globals__["os"].environ["BASE_URL"], "http://127.0.0.1:4000/v1")
+            self.assertEqual(_ensure_local_openai_env.__globals__["os"].environ["API_KEY"], "ollama-local-model")
+
+    def test_ensure_local_openai_env_reuses_existing_openai_compat_env(self) -> None:
+        with mock.patch.dict(
+            "tools.workflow_smoke_runner.os.environ",
+            {
+                "OPENAI_BASE_URL": "http://127.0.0.1:4000/v1",
+                "OPENAI_API_KEY": "already-set",
+            },
+            clear=True,
+        ):
+            defaults = _ensure_local_openai_env()
+
+            self.assertEqual(defaults, {})
+            self.assertNotIn("BASE_URL", _ensure_local_openai_env.__globals__["os"].environ)
+            self.assertNotIn("API_KEY", _ensure_local_openai_env.__globals__["os"].environ)
+
     def test_resolve_yaml_path_prefers_repo_and_then_yaml_instance(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             repo_root = Path(tmp) / "repo"
@@ -250,8 +280,47 @@ class WorkflowSmokeRunnerTests(unittest.TestCase):
             invoked_cmd = run_mock.call_args.args[0]
             invoked_kwargs = run_mock.call_args.kwargs
             self.assertEqual(invoked_cmd[0], "python")
-            self.assertEqual(invoked_cmd[1], "broken.py")
+            self.assertEqual(invoked_cmd[1], "-c")
+            self.assertIn("pygame.event.get = _patched_event_get", invoked_cmd[2])
+            self.assertEqual(invoked_cmd[3], "broken.py")
             self.assertEqual(invoked_kwargs["cwd"], str(script.parent))
+
+    @mock.patch("tools.workflow_smoke_runner.subprocess.run")
+    def test_runtime_validate_python_artifacts_reports_clean_completion(self, run_mock: mock.Mock) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output_dir = Path(tmp) / "WareHouse" / "smoke_run"
+            workspace = output_dir / "code_workspace"
+            workspace.mkdir(parents=True)
+            script = workspace / "game.py"
+            script.write_text("print('ok')\n", encoding="utf-8")
+
+            run_mock.return_value = subprocess.CompletedProcess(
+                args=["python", str(script)],
+                returncode=0,
+                stdout="done",
+                stderr="",
+            )
+
+            validations = _runtime_validate_python_artifacts(
+                output_dir,
+                [{"relative_path": "code_workspace/game.py"}],
+                runtime_python="python",
+                timeout_seconds=2.0,
+            )
+
+            self.assertEqual(
+                validations,
+                [
+                    {
+                        "relative_path": "code_workspace/game.py",
+                        "valid": True,
+                        "outcome": "completed",
+                        "returncode": 0,
+                        "stdout_tail": "done",
+                        "stderr_tail": "",
+                    }
+                ],
+            )
 
     def test_node_progress_reached_matches_requested_thresholds(self) -> None:
         token_progress = {

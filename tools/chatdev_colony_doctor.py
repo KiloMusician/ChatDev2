@@ -14,6 +14,7 @@ import os
 import subprocess
 import socket
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -37,6 +38,13 @@ PROBE_PATHS = {
     "dev_mentor": ["/api/health", "/health"],
     "litellm": ["/v1/models"],
     "ollama": ["/api/tags"],
+}
+
+STARTUP_ROUTE_TIMEOUTS = {
+    "/health": 1.0,
+    "/api/health": 1.0,
+    "/api/bridge/status": 6.0,
+    "/api/ecosystem/status": 6.0,
 }
 
 
@@ -140,6 +148,15 @@ def _tcp_reachable(base_url: str, timeout: float) -> dict[str, Any]:
         }
 
 
+def _startup_probe_port() -> int:
+    configured = os.environ.get("CHATDEV_LOCAL_STARTUP_PORT")
+    if configured:
+        return int(configured)
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(("127.0.0.1", 0))
+        return int(sock.getsockname()[1])
+
+
 def _probe(url: str, timeout: float) -> dict[str, Any]:
     started = time.perf_counter()
     try:
@@ -224,6 +241,134 @@ def _walk_routes(routes: Any) -> list[Any]:
     return flattened
 
 
+def _local_app_startup_probe(timeout: float) -> dict[str, Any]:
+    startup_port = _startup_probe_port()
+    startup_paths = ["/health", "/api/health", "/api/bridge/status", "/api/ecosystem/status"]
+    startup_retry_paths = {"/api/bridge/status", "/api/ecosystem/status"}
+    process: subprocess.Popen[str] | None = None
+    log_handle: Any | None = None
+    captured_output = ""
+    started = time.perf_counter()
+    try:
+        env = os.environ.copy()
+        env.setdefault("PYTHONUNBUFFERED", "1")
+        log_dir = Path(tempfile.gettempdir()) / "chatdev-local-startup-smoke"
+        log_dir.mkdir(parents=True, exist_ok=True)
+        startup_log_path = log_dir / f"startup-{startup_port}.log"
+        log_handle = startup_log_path.open("w+", encoding="utf-8", errors="replace")
+        process = subprocess.Popen(
+            [
+                sys.executable,
+                "server_main.py",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                str(startup_port),
+                "--log-level",
+                "warning",
+            ],
+            cwd=str(ROOT),
+            stdout=log_handle,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            env=env,
+        )
+
+        health_url = f"http://127.0.0.1:{startup_port}/health"
+        deadline = time.perf_counter() + max(timeout, 5.0)
+
+        def _probe_startup_path(path: str) -> dict[str, Any]:
+            route_timeout = max(timeout, STARTUP_ROUTE_TIMEOUTS.get(path, 1.0))
+            attempts = 2 if path in startup_retry_paths else 1
+            last_result: dict[str, Any] = {"ok": False, "error": "startup_probe_not_run"}
+            for attempt in range(attempts):
+                last_result = _probe(f"http://127.0.0.1:{startup_port}{path}", route_timeout)
+                if last_result.get("ok") is True:
+                    return last_result
+                if attempt + 1 < attempts:
+                    time.sleep(0.2)
+            return last_result
+
+        while time.perf_counter() < deadline:
+            if process.poll() is not None:
+                break
+            try:
+                probe = _probe(health_url, min(1.0, timeout))
+                if probe.get("ok") is True:
+                    path_results = {
+                        path: _probe_startup_path(path)
+                        for path in startup_paths
+                    }
+                    return {
+                        "ok": True,
+                        "port": startup_port,
+                        "health_url": health_url,
+                        "paths": path_results,
+                        "log_path": str(startup_log_path),
+                        "latency_ms": round((time.perf_counter() - started) * 1000, 1),
+                        "output_tail": "",
+                    }
+            except Exception:
+                pass
+            time.sleep(0.2)
+
+        timed_out = process.poll() is None
+        if timed_out and process.poll() is None:
+            with contextlib.suppress(Exception):
+                process.terminate()
+            with contextlib.suppress(Exception):
+                process.wait(timeout=5)
+            if process.poll() is None:
+                with contextlib.suppress(Exception):
+                    process.kill()
+        if log_handle is not None:
+            try:
+                log_handle.flush()
+                captured_output = startup_log_path.read_text(encoding="utf-8", errors="replace")
+            except Exception:
+                captured_output = ""
+        return {
+            "ok": False,
+            "port": startup_port,
+            "health_url": health_url,
+            "error": "startup_timeout" if timed_out else f"startup_exit_{process.returncode}",
+            "paths": {
+                path: {"ok": False, "skipped": True, "reason": "startup_failed"}
+                for path in startup_paths
+            },
+            "log_path": str(startup_log_path),
+            "latency_ms": round((time.perf_counter() - started) * 1000, 1),
+            "output_tail": captured_output[-1000:],
+        }
+    except Exception as exc:
+        return {
+            "ok": False,
+            "port": startup_port,
+            "error": f"{type(exc).__name__}: {str(exc)[:200]}",
+            "paths": {
+                path: {"ok": False, "skipped": True, "reason": "startup_exception"}
+                for path in startup_paths
+            },
+            "log_path": str(startup_log_path) if 'startup_log_path' in locals() else None,
+            "latency_ms": round((time.perf_counter() - started) * 1000, 1),
+            "output_tail": captured_output[-1000:],
+        }
+    finally:
+        if log_handle is not None:
+            with contextlib.suppress(Exception):
+                log_handle.close()
+        if process is not None and process.poll() is None:
+            with contextlib.suppress(Exception):
+                process.terminate()
+            with contextlib.suppress(Exception):
+                process.wait(timeout=5)
+            if process.poll() is None:
+                with contextlib.suppress(Exception):
+                    process.kill()
+
+
 def build_report(timeout: float = 2.0) -> dict[str, Any]:
     probes: dict[str, Any] = {}
     for name, base_url in DEFAULT_ENDPOINTS.items():
@@ -248,6 +393,28 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
         }
 
     local = _local_routes()
+    local_startup_probe = (
+        _local_app_startup_probe(timeout)
+        if probes["chatdev_local"]["paths"]["/health"].get("ok") is not True and local.get("loaded") is True
+        else {
+            "ok": probes["chatdev_local"]["paths"]["/health"].get("ok") is True,
+            "skipped": probes["chatdev_local"]["paths"]["/health"].get("ok") is True,
+            "reason": "already_live" if probes["chatdev_local"]["paths"]["/health"].get("ok") is True else "local_app_not_loaded",
+            "paths": {
+                path: probes["chatdev_local"]["paths"].get(path, {"ok": False, "skipped": True, "reason": "missing_probe"})
+                for path in PROBE_PATHS["chatdev_local"]
+            },
+        }
+    )
+    startup_paths = local_startup_probe.get("paths", {})
+    local_core_routes_ready = all(
+        startup_paths.get(path, {}).get("ok") is True
+        for path in ("/health", "/api/health")
+    )
+    local_extended_routes_ready = all(
+        startup_paths.get(path, {}).get("ok") is True
+        for path in ("/api/bridge/status", "/api/ecosystem/status")
+    )
     gamedev_env = _gamedev_env_probe(timeout)
     colony_paths = probes["chatdev_colony"]["paths"]
     colony_status = colony_paths.get("/status", {}).get("json") or {}
@@ -281,6 +448,9 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
             "chatdev_colony_health": probes["chatdev_colony"]["paths"]["/health"].get("ok") is True,
             "chatdev_local_health": probes["chatdev_local"]["paths"]["/health"].get("ok") is True,
             "local_app_loaded": local.get("loaded") is True,
+            "local_app_bootable": local_startup_probe.get("ok") is True,
+            "local_app_core_routes_ready": local_core_routes_ready,
+            "local_app_extended_routes_ready": local_extended_routes_ready,
             "live_surface_id": live_surface_id,
             "live_surface_kind": live_surface_kind,
             "surface_mismatch_count": len(surface_mismatches),
@@ -289,6 +459,7 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
         },
         "probes": probes,
         "local_routes": local,
+        "local_startup_probe": local_startup_probe,
         "gamedev_env": gamedev_env,
         "drift": drift,
         "surface_mismatches": surface_mismatches,
@@ -301,32 +472,71 @@ def build_report(timeout: float = 2.0) -> dict[str, Any]:
     }
 
 
+def build_local_proof(timeout: float = 2.0) -> dict[str, Any]:
+    report = build_report(timeout=timeout)
+    summary = report.get("summary", {})
+    startup_probe = report.get("local_startup_probe", {})
+    return {
+        "generated_at": report.get("generated_at"),
+        "root": report.get("root"),
+        "summary": {
+            "chatdev_local_health": summary.get("chatdev_local_health") is True,
+            "local_app_loaded": summary.get("local_app_loaded") is True,
+            "local_app_bootable": summary.get("local_app_bootable") is True,
+            "local_app_core_routes_ready": summary.get("local_app_core_routes_ready") is True,
+            "local_app_extended_routes_ready": summary.get("local_app_extended_routes_ready") is True,
+        },
+        "local_startup_probe": startup_probe,
+        "next_action": (
+            "start_local_devall_app"
+            if summary.get("chatdev_local_health") is not True
+            else "none"
+        ),
+        "notes": [
+            "Use this bounded proof to distinguish a currently running :6400 app from a checkout that can boot and answer key routes locally.",
+            "local_app_extended_routes_ready reflects /api/bridge/status plus /api/ecosystem/status during the temporary startup probe.",
+        ],
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Probe ChatDev2 colony integration truth.")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON.")
+    parser.add_argument("--local-proof", action="store_true", help="Return only the bounded local DevAll app proof payload.")
     parser.add_argument("--timeout", type=float, default=2.0, help="Per-request timeout in seconds.")
     args = parser.parse_args()
 
-    report = build_report(timeout=args.timeout)
+    report = build_local_proof(timeout=args.timeout) if args.local_proof else build_report(timeout=args.timeout)
     if args.json:
         print(json.dumps(report, indent=2, sort_keys=True))
     else:
         summary = report["summary"]
-        print("ChatDev2 colony doctor")
-        print(f"  root: {report['root']}")
-        print(f"  colony health (:7338): {summary['chatdev_colony_health']}")
-        print(f"  local health (:6400): {summary['chatdev_local_health']}")
-        print(f"  local app loaded: {summary['local_app_loaded']}")
-        print(f"  live surface: {summary.get('live_surface_id') or 'unknown'} ({summary.get('live_surface_kind') or 'unknown'})")
-        if not summary["local_app_loaded"]:
-            print(f"  local app error: {report['local_routes'].get('error')}")
-        print(f"  gamedev python lanes with pygame: {', '.join(summary['gamedev_python_with_pygame']) or 'none'}")
-        print(f"  surface mismatch count: {summary['surface_mismatch_count']}")
-        for item in report["surface_mismatches"]:
-            print(f"  mismatch: {item['path']} local=true live_surface={summary.get('live_surface_id')}")
-        print(f"  route drift count: {summary['route_drift_count']}")
-        for item in report["drift"]:
-            print(f"  drift: {item['path']} local=true live={item.get('live_status') or item.get('live_error')}")
+        if args.local_proof:
+            print("ChatDev2 local DevAll proof")
+            print(f"  root: {report['root']}")
+            print(f"  local health (:6400): {summary['chatdev_local_health']}")
+            print(f"  local app loaded: {summary['local_app_loaded']}")
+            print(f"  local app bootable: {summary['local_app_bootable']}")
+            print(f"  local core routes ready: {summary['local_app_core_routes_ready']}")
+            print(f"  local extended routes ready: {summary['local_app_extended_routes_ready']}")
+            print(f"  next action: {report['next_action']}")
+        else:
+            print("ChatDev2 colony doctor")
+            print(f"  root: {report['root']}")
+            print(f"  colony health (:7338): {summary['chatdev_colony_health']}")
+            print(f"  local health (:6400): {summary['chatdev_local_health']}")
+            print(f"  local app loaded: {summary['local_app_loaded']}")
+            print(f"  local app bootable: {summary['local_app_bootable']}")
+            print(f"  live surface: {summary.get('live_surface_id') or 'unknown'} ({summary.get('live_surface_kind') or 'unknown'})")
+            if not summary["local_app_loaded"]:
+                print(f"  local app error: {report['local_routes'].get('error')}")
+            print(f"  gamedev python lanes with pygame: {', '.join(summary['gamedev_python_with_pygame']) or 'none'}")
+            print(f"  surface mismatch count: {summary['surface_mismatch_count']}")
+            for item in report["surface_mismatches"]:
+                print(f"  mismatch: {item['path']} local=true live_surface={summary.get('live_surface_id')}")
+            print(f"  route drift count: {summary['route_drift_count']}")
+            for item in report["drift"]:
+                print(f"  drift: {item['path']} local=true live={item.get('live_status') or item.get('live_error')}")
     return 0
 
 

@@ -1,7 +1,7 @@
 #requires -Version 5.1
 param(
     [Parameter(Mandatory = $true, Position = 0)]
-    [ValidateSet("doctor", "bootstrap", "smoke", "latest", "status")]
+    [ValidateSet("doctor", "local-proof", "local-start", "local-stop", "local-status", "bootstrap", "smoke", "latest", "latest-full", "status", "status-full", "status-compact")]
     [string]$Action,
     [string]$SessionName = "",
     [string]$ResultJson = "",
@@ -14,6 +14,8 @@ param(
 $ErrorActionPreference = "Stop"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Doctor = Join-Path $ScriptDir "chatdev_colony_doctor.ps1"
+$DoctorPy = Join-Path $ScriptDir "chatdev_colony_doctor.py"
+$LocalApp = Join-Path $ScriptDir "local_devall_app.py"
 $Bootstrapper = Join-Path $ScriptDir "bootstrap_gamedev_env.ps1"
 $Smoke = Join-Path $ScriptDir "run_gamedev_mechanic_smoke.ps1"
 $Latest = Join-Path $ScriptDir "latest_smoke_receipt.py"
@@ -24,14 +26,50 @@ $DefaultReceiptDir = Join-Path $DefaultSmokeRepoRoot "WareHouse\_smoke_receipts"
 
 switch ($Action) {
     "doctor" {
-        $argsList = @("-ExecutionPolicy", "Bypass", "-File", $Doctor, "-Timeout", ([string]$Timeout))
-        if ($Json) {
-            $argsList += "-Json"
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
         }
-        powershell @argsList
+        $argsList = @($DoctorPy, "--timeout", ([string]$Timeout))
+        if ($Json) {
+            $argsList += "--json"
+        }
+        & $Python @argsList
+    }
+    "local-proof" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        $argsList = @($DoctorPy, "--timeout", ([string]$Timeout), "--local-proof")
+        if ($Json) {
+            $argsList += "--json"
+        }
+        & $Python @argsList
+    }
+    "local-start" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        & $Python $LocalApp start --timeout ([string]([Math]::Max($Timeout, 20.0)))
+    }
+    "local-stop" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        & $Python $LocalApp stop --timeout ([string]([Math]::Max($Timeout, 10.0)))
+    }
+    "local-status" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        & $Python $LocalApp status
     }
     "bootstrap" {
-        powershell -ExecutionPolicy Bypass -File $Bootstrapper
+        powershell -NoProfile -ExecutionPolicy Bypass -File $Bootstrapper
     }
     "smoke" {
         $EffectiveSessionName = $SessionName
@@ -47,7 +85,7 @@ switch ($Action) {
             $EffectiveResultJson = Join-Path $EffectiveReceiptDir ($EffectiveSessionName + ".json")
         }
 
-        $argsList = @("-ExecutionPolicy", "Bypass", "-File", $Smoke, "-Prompt", $Prompt)
+        $argsList = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $Smoke, "-Prompt", $Prompt)
         if (-not [string]::IsNullOrWhiteSpace($SessionName)) {
             $argsList += @("-SessionName", $SessionName)
         }
@@ -80,6 +118,19 @@ switch ($Action) {
         }
         & $Python @argsList
     }
+    "latest-full" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        $argsList = @($Latest)
+        $EffectiveReceiptDir = $ReceiptDir
+        if ([string]::IsNullOrWhiteSpace($EffectiveReceiptDir)) {
+            $EffectiveReceiptDir = $DefaultReceiptDir
+        }
+        $argsList += @("--receipt-dir", $EffectiveReceiptDir)
+        & $Python @argsList
+    }
     "status" {
         $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
         if (-not (Test-Path $Python)) {
@@ -94,6 +145,32 @@ switch ($Action) {
         if ($Json) {
             $argsList += "--json"
         }
+        & $Python @argsList
+    }
+    "status-full" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        $argsList = @($Status, "--timeout", ([string]$Timeout), "--json")
+        $EffectiveReceiptDir = $ReceiptDir
+        if ([string]::IsNullOrWhiteSpace($EffectiveReceiptDir)) {
+            $EffectiveReceiptDir = $DefaultReceiptDir
+        }
+        $argsList += @("--receipt-dir", $EffectiveReceiptDir)
+        & $Python @argsList
+    }
+    "status-compact" {
+        $Python = Join-Path (Split-Path -Parent $ScriptDir) ".venv-gamedev313\Scripts\python.exe"
+        if (-not (Test-Path $Python)) {
+            $Python = "python"
+        }
+        $argsList = @($Status, "--timeout", ([string]$Timeout), "--automation-summary-only")
+        $EffectiveReceiptDir = $ReceiptDir
+        if ([string]::IsNullOrWhiteSpace($EffectiveReceiptDir)) {
+            $EffectiveReceiptDir = $DefaultReceiptDir
+        }
+        $argsList += @("--receipt-dir", $EffectiveReceiptDir)
         & $Python @argsList
     }
 }

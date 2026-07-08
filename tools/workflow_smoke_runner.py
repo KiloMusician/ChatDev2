@@ -19,6 +19,22 @@ from pathlib import Path
 from typing import Any, Sequence
 
 
+def _ensure_local_openai_env() -> dict[str, str]:
+    base_url = os.environ.get("BASE_URL") or os.environ.get("OPENAI_BASE_URL")
+    api_key = os.environ.get("API_KEY") or os.environ.get("OPENAI_API_KEY")
+
+    defaults_applied: dict[str, str] = {}
+    if not base_url:
+        defaults_applied["BASE_URL"] = "http://127.0.0.1:4000/v1"
+    if not api_key:
+        defaults_applied["API_KEY"] = "ollama-local-model"
+
+    for key, value in defaults_applied.items():
+        os.environ[key] = value
+
+    return defaults_applied
+
+
 def _resolve_yaml_path(repo_root: Path, yaml_file: str) -> Path:
     candidate = Path(yaml_file)
     if candidate.is_absolute():
@@ -168,10 +184,31 @@ def _runtime_validate_python_artifacts(
         env.setdefault("SDL_VIDEODRIVER", "dummy")
         env.setdefault("SDL_AUDIODRIVER", "dummy")
         env.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
+        quit_delay_seconds = min(1.0, max(0.25, timeout_seconds / 3))
+        wrapper = "\n".join(
+            [
+                "import runpy",
+                "import sys",
+                "import time",
+                "import pygame  # type: ignore",
+                "",
+                "quit_deadline = time.time() + " + repr(quit_delay_seconds),
+                "_orig_event_get = pygame.event.get",
+                "",
+                "def _patched_event_get(*args, **kwargs):",
+                "    events = list(_orig_event_get(*args, **kwargs))",
+                "    if time.time() >= quit_deadline:",
+                "        events.append(pygame.event.Event(pygame.QUIT))",
+                "    return events",
+                "",
+                "pygame.event.get = _patched_event_get",
+                "runpy.run_path(sys.argv[1], run_name='__main__')",
+            ]
+        )
 
         try:
             completed = subprocess.run(
-                [runtime_python, artifact_path.name],
+                [runtime_python, "-c", wrapper, artifact_path.name],
                 cwd=str(artifact_path.parent),
                 env=env,
                 capture_output=True,
@@ -181,7 +218,7 @@ def _runtime_validate_python_artifacts(
                 timeout=timeout_seconds,
             )
             valid = completed.returncode == 0
-            outcome = "exited_0" if valid else "exited_nonzero"
+            outcome = "completed" if valid else "exited_nonzero"
             validations.append(
                 {
                     "relative_path": relative_path,
@@ -377,6 +414,7 @@ def main() -> int:
     if not repo_root.exists():
         raise SystemExit(f"Repo root not found: {repo_root}")
 
+    env_defaults = _ensure_local_openai_env()
     os.chdir(repo_root)
     source_root = _configure_import_roots(repo_root, Path(args.source_root) if args.source_root else None)
 
@@ -541,6 +579,7 @@ def main() -> int:
         "status": status,
         "repo_root": str(repo_root),
         "source_root": str(source_root),
+        "env_defaults": env_defaults,
         "yaml_file": str(yaml_path),
         "override_model": args.override_model,
         "overridden_node_count": overridden_node_count,
