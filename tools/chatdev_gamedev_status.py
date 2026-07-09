@@ -301,6 +301,7 @@ def _build_automation_summary(
     )
     preferred_live_model = live_worker_status.get("model")
     preferred_live_backend = live_worker_status.get("backend")
+    local_startup_probe = doctor.get("local_startup_probe", {})
     proof_freshness = _build_proof_freshness(latest)
     runtime_summary = _runtime_proof_summary(latest)
     runtime_proof_depth = latest.get("runtime_proof_depth") or runtime_summary.get("runtime_proof_depth")
@@ -354,6 +355,20 @@ def _build_automation_summary(
         errors.append("chatdev_local_offline")
     if assessment.get("live_surface_mode") == "worker_only":
         errors.append("live_surface_is_queue_worker_not_devall_app")
+
+    operator_commands = _operator_commands()
+    local_devall_blockers: list[str] = []
+    if local_devall_ready is not True:
+        local_devall_blockers.append("local_devall_not_running_on_6400")
+    if summary.get("local_app_loaded") is not True:
+        local_devall_blockers.append("local_app_not_loaded_from_checkout")
+    if local_startup_probe.get("ok") is not True:
+        startup_error = local_startup_probe.get("error") or local_startup_probe.get("reason") or "startup_probe_not_proven"
+        local_devall_blockers.append(f"local_startup_probe_{startup_error}")
+    if local_core_routes_ready is not True:
+        local_devall_blockers.append("local_devall_core_routes_not_ready")
+    if local_extended_routes_ready is not True:
+        local_devall_blockers.append("local_devall_extended_routes_not_ready")
 
     return {
         "contract_version": 1,
@@ -421,7 +436,21 @@ def _build_automation_summary(
             "live_surface_kind": summary.get("live_surface_kind"),
             "mode": assessment.get("live_surface_mode"),
         },
-        "operator_commands": _operator_commands(),
+        "local_devall_proof": {
+            "currently_live_on_6400": local_devall_ready,
+            "loaded_from_checkout": summary.get("local_app_loaded") is True,
+            "startup_probe_ok": local_startup_probe.get("ok") is True,
+            "startup_probe_error": local_startup_probe.get("error") or local_startup_probe.get("reason"),
+            "startup_probe_port": local_startup_probe.get("port"),
+            "startup_probe_health_url": local_startup_probe.get("health_url"),
+            "startup_probe_log": local_startup_probe.get("log_path"),
+            "core_routes_ready": local_core_routes_ready,
+            "extended_routes_ready": local_extended_routes_ready,
+            "blockers": local_devall_blockers,
+            "operator_command": operator_commands["local_status"] if local_devall_ready else operator_commands["local_start"],
+            "proof_command": operator_commands["local_proof"],
+        },
+        "operator_commands": operator_commands,
         "yaml_validation_ok": yaml_validation.get("ok") is True,
         "next_action": assessment.get("next_action"),
         "advisories": alignment["advisories"],

@@ -8,7 +8,8 @@ param(
     [string]$ReceiptDir = "",
     [string]$Prompt = "Create the smallest possible playable pygame square-move demo. Keep it to one file.",
     [switch]$Json,
-    [double]$Timeout = 2.0
+    [double]$Timeout = 2.0,
+    [double]$SmokeTimeoutSeconds = 240.0
 )
 
 $ErrorActionPreference = "Stop"
@@ -85,7 +86,17 @@ switch ($Action) {
             $EffectiveResultJson = Join-Path $EffectiveReceiptDir ($EffectiveSessionName + ".json")
         }
 
-        $argsList = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $Smoke, "-Prompt", $Prompt)
+        $argsList = @(
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            $Smoke,
+            "-Prompt",
+            $Prompt,
+            "-TimeoutSeconds",
+            ([string]$SmokeTimeoutSeconds)
+        )
         if (-not [string]::IsNullOrWhiteSpace($SessionName)) {
             $argsList += @("-SessionName", $SessionName)
         }
