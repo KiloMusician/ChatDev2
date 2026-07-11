@@ -126,6 +126,59 @@ def _attach_result_paths(result: dict[str, Any], output_path: Path) -> tuple[dic
     return enriched, latest_path
 
 
+def _emit_progress_receipt(
+    *,
+    output_path: Path | None,
+    repo_root: Path,
+    source_root: Path,
+    env_defaults: dict[str, str],
+    yaml_path: Path,
+    override_model: str | None,
+    overridden_node_count: int,
+    session_name: str,
+    graph_directory: Path,
+    stop_on_active_node: str | None,
+    stop_on_completed_node: str | None,
+    state: dict[str, Any],
+    token_usage: dict[str, Any] | None,
+    token_progress: dict[str, Any],
+    artifacts: list[dict[str, Any]],
+) -> None:
+    if output_path is None:
+        return
+
+    payload = {
+        "status": state["status"],
+        "repo_root": str(repo_root),
+        "source_root": str(source_root),
+        "env_defaults": env_defaults,
+        "yaml_file": str(yaml_path),
+        "override_model": override_model,
+        "overridden_node_count": overridden_node_count,
+        "session_name": session_name,
+        "output_dir": str(graph_directory),
+        "artifacts": artifacts,
+        "first_artifact_path": None,
+        "first_artifact_text": None,
+        "stop_on_active_node": stop_on_active_node,
+        "stop_on_completed_node": stop_on_completed_node,
+        "bounded_stop_reason": None,
+        "cancel_requested": state["cancel_requested"],
+        "exception_type": state["exception_type"],
+        "exception": state["exception"],
+        "final_message": None,
+        "artifact_validation": None,
+        "runtime_python": None,
+        "artifact_runtime_validation": None,
+        "token_usage": token_usage,
+        "token_progress": token_progress,
+        "elapsed_seconds": round((state["ended_at"] or time.time()) - state["started_at"], 2),
+    }
+    payload, latest_result_path = _attach_result_paths(payload, output_path)
+    _write_result_json(payload, output_path)
+    _write_result_json(payload, latest_result_path)
+
+
 def _validate_python_artifacts(output_dir: Path, artifacts: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
     validations: list[dict[str, Any]] = []
     for artifact in artifacts:
@@ -476,6 +529,25 @@ def main() -> int:
     node_progress_stop_requested = False
     last_artifacts: list[dict[str, Any]] = []
     token_progress = _summarize_token_progress(None, None)
+    progress_output_path = Path(args.result_json).expanduser() if args.result_json else None
+
+    _emit_progress_receipt(
+        output_path=progress_output_path,
+        repo_root=repo_root,
+        source_root=source_root,
+        env_defaults=env_defaults,
+        yaml_path=yaml_path,
+        override_model=args.override_model,
+        overridden_node_count=overridden_node_count,
+        session_name=args.session_name,
+        graph_directory=graph_context.directory,
+        stop_on_active_node=args.stop_on_active_node,
+        stop_on_completed_node=args.stop_on_completed_node,
+        state=state,
+        token_usage=None,
+        token_progress=token_progress,
+        artifacts=last_artifacts,
+    )
 
     while thread.is_alive() and time.time() < deadline:
         last_artifacts = _list_workspace_artifacts(graph_context.directory)
@@ -483,6 +555,23 @@ def main() -> int:
         token_progress = _summarize_token_progress(
             token_usage,
             getattr(executor.token_tracker, "current_node_id", None) if executor.token_tracker else None,
+        )
+        _emit_progress_receipt(
+            output_path=progress_output_path,
+            repo_root=repo_root,
+            source_root=source_root,
+            env_defaults=env_defaults,
+            yaml_path=yaml_path,
+            override_model=args.override_model,
+            overridden_node_count=overridden_node_count,
+            session_name=args.session_name,
+            graph_directory=graph_context.directory,
+            stop_on_active_node=args.stop_on_active_node,
+            stop_on_completed_node=args.stop_on_completed_node,
+            state=state,
+            token_usage=token_usage,
+            token_progress=token_progress,
+            artifacts=last_artifacts,
         )
         if last_artifacts and args.stop_on_first_artifact and not artifact_stop_requested:
             artifact_stop_requested = True

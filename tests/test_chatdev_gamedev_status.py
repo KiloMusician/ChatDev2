@@ -16,6 +16,35 @@ from tests.chatdev_gamedev_test_helpers import build_smoke_receipt_payload
 
 
 class ChatdevGamedevStatusTests(unittest.TestCase):
+    def test_latest_receipt_payload_preserves_running_smoke_heartbeat(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            receipt_dir = Path(tmp)
+            (receipt_dir / "latest.json").write_text(
+                json.dumps(
+                    build_smoke_receipt_payload(
+                        session_name="status-running-summary",
+                        status="running",
+                        bounded_stop_reason=None,
+                        first_artifact_path=None,
+                        token_usage={
+                            "model_usages": {},
+                            "call_history": [],
+                        },
+                        artifact_runtime_validation=[],
+                    )
+                ),
+                encoding="utf-8",
+            )
+
+            payload = _latest_receipt_payload(receipt_dir, full=False)
+
+            self.assertEqual(payload["status"], "running")
+            self.assertEqual(payload["attempted_model"], "ecosystem-devstral")
+            self.assertIsNone(payload["model"])
+            self.assertEqual(payload["runtime_proof_depth"], "missing")
+            self.assertFalse(payload["runtime_launch_proven"])
+            self.assertFalse(payload["runtime_completion_proven"])
+
     def test_latest_receipt_payload_reuses_shared_latest_summary_contract(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             receipt_dir = Path(tmp)
@@ -218,6 +247,7 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
                 "summary": {
                     "chatdev_colony_health": True,
                     "chatdev_local_health": False,
+                    "local_app_loaded": True,
                     "local_app_bootable": True,
                     "local_app_core_routes_ready": True,
                     "local_app_extended_routes_ready": False,
@@ -238,6 +268,13 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
                             }
                         }
                     },
+                },
+                "local_startup_probe": {
+                    "ok": False,
+                    "port": 63687,
+                    "health_url": "http://127.0.0.1:63687/health",
+                    "error": "startup_timeout",
+                    "log_path": r"C:\Users\keath\AppData\Local\Temp\chatdev-local-startup-smoke\startup-63687.log",
                 },
             }
             latest = {
@@ -325,6 +362,16 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
                 summary["backend_requirements"]["ollama_optional_reason"],
                 "bounded_gamedev_smoke_is_currently_proven_via_litellm",
             )
+            self.assertFalse(summary["local_devall_proof"]["currently_live_on_6400"])
+            self.assertTrue(summary["local_devall_proof"]["loaded_from_checkout"])
+            self.assertFalse(summary["local_devall_proof"]["startup_probe_ok"])
+            self.assertEqual(summary["local_devall_proof"]["startup_probe_error"], "startup_timeout")
+            self.assertEqual(summary["local_devall_proof"]["startup_probe_port"], 63687)
+            self.assertFalse(summary["local_devall_proof"]["extended_routes_ready"])
+            self.assertIn("local_devall_not_running_on_6400", summary["local_devall_proof"]["blockers"])
+            self.assertIn("local_startup_probe_startup_timeout", summary["local_devall_proof"]["blockers"])
+            self.assertEqual(summary["local_devall_proof"]["operator_command"], summary["operator_commands"]["local_start"])
+            self.assertEqual(summary["local_devall_proof"]["proof_command"], summary["operator_commands"]["local_proof"])
             self.assertIn("local_start", summary["operator_commands"])
             self.assertIn("local_proof", summary["operator_commands"])
             self.assertIn("latest_summary", summary["operator_commands"])
@@ -640,6 +687,9 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
             self.assertIn("workflow_execution", payload["automation_summary"])
             self.assertIn("proxy_health", payload["automation_summary"])
             self.assertIn("backend_requirements", payload["automation_summary"])
+            self.assertIn("local_devall_proof", payload["automation_summary"])
+            self.assertIn("operator_command", payload["automation_summary"]["local_devall_proof"])
+            self.assertIn("proof_command", payload["automation_summary"]["local_devall_proof"])
             self.assertIn("operator_commands", payload["automation_summary"])
             self.assertIn("latest_summary", payload["automation_summary"]["operator_commands"])
             self.assertIn("status_compact", payload["automation_summary"]["operator_commands"])
@@ -702,6 +752,8 @@ class ChatdevGamedevStatusTests(unittest.TestCase):
             self.assertEqual(payload["contract_version"], 1)
             self.assertIn("callable", payload)
             self.assertIn("backend_requirements", payload)
+            self.assertIn("local_devall_proof", payload)
+            self.assertIn("currently_live_on_6400", payload["local_devall_proof"])
             self.assertIn("operator_commands", payload)
             self.assertIn("latest_summary", payload["operator_commands"])
             self.assertIn("status_compact", payload["operator_commands"])

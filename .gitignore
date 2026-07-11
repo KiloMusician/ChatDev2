@@ -14,3 +14,9 @@ WareHouse/*.log
 WareHouse/*/
 # Transient run artifacts (do not track)
 state/artifacts/*/
+
+# Machine-local assistant state and local app smoke logs
+.serena/
+logs/local_devall_app.stderr.log
+logs/local_devall_app.stdout.log
+logs/server.log
