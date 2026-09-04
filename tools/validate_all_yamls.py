@@ -132,8 +132,12 @@ def validate_all():
     files = sorted(list(base_dir.rglob("*.yaml")))
 
     if not files:
-        print("No YAML files found.")
-        return
+        # A gate handed nothing to check has not passed -- it has failed to run.
+        # Returning here exited 0, so an emptied/renamed/moved yaml_instance/
+        # (or a glob that drifted off "*.yaml") turned CI green while
+        # validating nothing.
+        print(f"No YAML files found under {base_dir}/ -- nothing was validated.")
+        sys.exit(1)
 
     _ensure_validation_registries_populated()
 
