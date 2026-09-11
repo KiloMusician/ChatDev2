@@ -15,7 +15,7 @@ Surfaces:
   GET  /api/bridge/repo/status
   GET  /api/bridge/repo/status/{name}
   POST /api/bridge/repo/open
-  POST /api/bridge/repo/exec
+  POST /api/bridge/repo/exec      — retired; always returns 410
   POST /api/bridge/agent/dispatch
   POST /api/bridge/session/open
   GET  /api/bridge/session/state/{session_id}
@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import json
 import os
-import subprocess
 import sys
 import time
 import uuid
@@ -32,7 +31,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 import asyncio
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 
 _ECO = Path(__file__).resolve().parents[2] / "ecosystem"
@@ -744,36 +743,20 @@ async def repo_open(body: dict):
     }
 
 
-@router.post("/repo/exec")
-async def repo_exec(body: dict):
-    """Execute a shell command in a repo's root directory."""
-    name = body.get("repo", "")
-    cmd = body.get("command", "")
-    if not name or not cmd:
-        return {"error": "repo and command required"}
-    r = get_repo(name)
-    if not r:
-        return {"error": f"repo '{name}' not found"}
-    root = r.get("root", ".")
-    if not Path(root).exists():
-        return {"error": f"repo root not found: {root}"}
-    try:
-        result = subprocess.run(
-            cmd, shell=True, cwd=root,
-            capture_output=True, text=True, timeout=15,
-        )
-        log_action(f"repo.exec:{name}", "success", repo=name, agent="bridge")
-        return {
-            "repo": name,
-            "command": cmd,
-            "returncode": result.returncode,
-            "stdout": result.stdout[-1000:],
-            "stderr": result.stderr[-500:],
-        }
-    except subprocess.TimeoutExpired:
-        return {"error": "command timed out"}
-    except Exception as e:
-        return {"error": str(e)}
+@router.post("/repo/exec", deprecated=True)
+async def repo_exec():
+    """Retired compatibility route: rejects before reading anything from the request.
+
+    The previous handler executed client-supplied text in the named repo root
+    with no authorization model. Removed 2026-09-11, same shape as Dev-Mentor
+    PRs #117/#118. Takes no parameters on purpose: nothing a caller sends can
+    reach this function, and there is no flag that re-enables it.
+    """
+    raise HTTPException(
+        status_code=410,
+        detail="Arbitrary repository execution is disabled. Use GET /api/bridge/repo/list "
+               "or GET /api/bridge/repo/status/{name} for read-only inspection.",
+    )
 
 
 # ── Agent ──────────────────────────────────────────────────────────────────
