@@ -82,8 +82,18 @@ class BridgeClient:
         return self._post("/repo/open", {"name": name})
 
     def repo_exec(self, name: str, cmd: str) -> dict:
-        """Execute a shell command in a repo's root directory."""
-        return self._post("/repo/exec", {"repo": name, "command": cmd})
+        """Retired: the bridge no longer executes client-supplied text (server answers 410).
+
+        Kept so callers get an explicit migration error instead of AttributeError.
+        Never issues an HTTP request. Use repo_list() / repo_status(name) for
+        inspection, or command() for the named, fixed-argv bridge commands.
+        """
+        del name, cmd
+        raise RuntimeError(
+            "BridgeClient.repo_exec is disabled: arbitrary shell execution is not a "
+            "bridge capability (the server answers 410). Use repo_list()/repo_status() "
+            "for inspection or command() for named bridge commands."
+        )
 
     def agent_dispatch(self, agent: str, task: str, payload: Any = None) -> dict:
         """Dispatch a task to a named agent."""
